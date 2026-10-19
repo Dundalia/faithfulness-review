@@ -1,0 +1,1316 @@
+{
+ "records": [
+  {
+   "tags": [
+    "object:cot",
+    "reveals:planted-cue",
+    "reveals:misbehavior",
+    "signal:planted-cf",
+    "signal:env-label",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "domain:logic",
+    "domain:math",
+    "scale:mid",
+    "scale:large",
+    "eval:specificity",
+    "eval:adversarial",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "factor:cot-necessity",
+    "factor:cot-length",
+    "model:qwen3.6-27b",
+    "model:glm-4.7-flash",
+    "model:qwen3.6-35b-a3b",
+    "model:qwen3.8-27b",
+    "model:gpt-oss-120b",
+    "model:gpt-5.6-terra",
+    "metric:g-mean-squared",
+    "metric:minimal-criterion-tpr",
+    "metric:hint-verbalization-rate"
+   ],
+   "problem": "Does higher CoT reliance on harder tasks make CoTs more monitorable, as the CoT-necessity argument predicts?",
+   "method": "2 (hint evals) / 7 (side-task evals) hybrid reasoning models; difficulty-scaled ZebraLogic, Chain Sum Terms, Count Bits; reliance = with-CoT minus no-CoT accuracy; grader-hacking hints (also list-index hints) and secret side tasks; gpt-oss-120b and GPT-5.6 Terra monitors; g-mean2.",
+   "findings": "Hint monitorability flat or down up to 30pp (larger with gpt-oss-120b monitor), partly from longer CoTs; keeping only the last 8k tokens recovers up to 16pp. Reliance stops no-CoT side-task evasion but not persuading the gpt-oss-120b monitor.",
+   "limits": "Toy arithmetic/logic tasks; evasion prompted, not trained; failed side tasks excluded; Terra monitor near-saturated; no code release reported; under review.",
+   "relations": [
+    {
+     "verb": "contradicts",
+     "key": "emmons2025chain",
+     "note": "Higher CoT reliance (task or hint difficulty) does not raise hint-usage monitorability; can drop 30pp"
+    },
+    {
+     "verb": "builds-on",
+     "key": "guan2025monitoring",
+     "note": "Implements its hint-based and side-task evals, TPRmc and g-mean2 metric"
+    },
+    {
+     "verb": "builds-on",
+     "key": "chen2025reasoning",
+     "note": "Uses its grader-hacking hint type, here leaking incorrect answers"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "model:gpt-5.6-terra",
+     "definition": "OpenAI GPT-5.6 Terra, closed frontier model used here as the strong CoT monitor (medium reasoning effort)."
+    },
+    {
+     "tag": "model:qwen3.8-27b",
+     "definition": "Qwen3.8 27B dense hybrid reasoning model (Qwen Team, 2026)."
+    },
+    {
+     "tag": "model:glm-4.7-flash",
+     "definition": "GLM-4.7-Flash hybrid reasoning MoE model from the GLM Team."
+    }
+   ],
+   "changes": [
+    "tags: eval:monitor-scope -> removed (the only comparison is full CoT vs last-8k-token CoT, which is the same channel at a different length; no CoT vs action or output comparison. Truncation is already covered by eval:confound-control and factor:cot-length)",
+    "method: '7 hybrid reasoning models' -> '2 (hint evals) / 7 (side-task evals) hybrid reasoning models' (hint-based experiments in Sections 4.1-4.3 use only Qwen3.6-27B and GLM-4.7-Flash; the other five models are added only in Section 4.4)",
+    "findings: 'flat or down up to 30pp' -> 'flat or down up to 30pp (larger with gpt-oss-120b monitor)' (the -29.7 and -28.3 drops are with gpt-oss-120b; GPT-5.6 Terra drops are at most -10.6 and stay perfect on Qwen3.6-27B)",
+    "findings: 'not persuading the monitor' -> 'not persuading the gpt-oss-120b monitor' (the paper says the persuasion strategies of Qwen3.8-27B fool gpt-oss-120b but not GPT-5.6 Terra)"
+   ],
+   "key": "anon2026chainofthought",
+   "uncertain": [
+    "factor:cot-length: vocabulary defines it as pressure toward shorter CoTs; here CoTs grow naturally with difficulty and the length effect is tested by truncating the monitor's input",
+    "eval:monitor-scope: last-8k-token vs full CoT is the same channel at different extents, not CoT vs actions",
+    "scale:large: the paper gives no size for DeepSeek-V4-Flash; assumed to be an open MoE over 100B total parameters",
+    "No lever or contribution:method tagged: the last-8k truncation heuristic is in the abstract but is a monitor-side tweak that mainly serves as a causal check on CoT length",
+    "contribution:negative-result not tagged: the headline refutes a hypothesis rather than showing that an intervention fails",
+    "signal:env-label vs by-construction: side-task positives come from programmatically checked correct side-task answers, and negatives exist by construction (no side task given)",
+    "duzan2026chainofthought omitted: the conclusion cites it as prior work saying reliance helps monitorability, but its headline claim is about implicit influence, so the conflict is weak",
+    "Model names (Qwen3.6, Qwen3.8, Gemma-4, GPT-5.6 Terra) are taken from the paper as written; the new model:glm-4.7-flash and model:qwen3.8-27b tags follow the family-size rule"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:internal-strategy",
+    "signal:interp-tool",
+    "lever:sft",
+    "lever:activation-loss",
+    "updates:behavior",
+    "contribution:method",
+    "contribution:metric",
+    "motivation:reasoning-quality",
+    "domain:math",
+    "domain:logic",
+    "scale:small",
+    "eval:ood",
+    "eval:measure-validation",
+    "eval:confound-control",
+    "model:qwen2.5-0.5b",
+    "model:gemma-2-2b",
+    "model:llama-3.3-70b",
+    "model:gpt-4.1-mini",
+    "model:grok-3-mini",
+    "model:llama-3.1-8b",
+    "metric:circuit-overlap",
+    "metric:sensitivity-discrepancy"
+   ],
+   "problem": "CoT distillation matches the student's CoT to the teacher's but never checks that the student's answer computation follows its own CoT steps (\"computation alignment\").",
+   "method": "Alignment = node overlap of reasoning vs. answer circuits from multi-step circuit tracing. CAD: an SFT regularizer that equalizes hidden-state shifts under typo perturbations at reasoning vs. answer tokens. Plugged into Classic CoT, DFT and GEM.",
+   "findings": "Proxy tracks circuit overlap (r=-0.90, Llama-3.1-8B); correct answers show lower proxy discrepancy. CAD raises accuracy in all settings but one (BoolExp, Classic CoT, -0.40), e.g. GSM8K 18.94 to 38.50; beats typo augmentation (65.4 vs 45.8 avg).",
+   "limits": "No alignment measure (circuit or proxy) reported after training, only accuracy; proxy validated only on Llama-3.1-8B, not the 0.5B/2B students. Math and Boolean tasks, single seed, extra hyperparameter search for CAD. Code promised on acceptance; under review.",
+   "relations": [],
+   "new_tags": [],
+   "changes": [
+    "findings: \"CAD raises accuracy across 3 distillers\" -> \"CAD raises accuracy in all settings but one (BoolExp, Classic CoT, -0.40)\" (overclaim: Table 1 shows Classic CoT on BoolExp dropping from 91.60 to 91.20)",
+    "findings: \"correct answers are more aligned\" -> \"correct answers show lower proxy discrepancy\" (Fig. 4 compares |rho-1| on Llama-3.1-8B-Instruct, not circuit overlap)",
+    "limits: \"Circuit overlap never re-measured after training, only accuracy. 0.5B/2B students,\" -> \"No alignment measure (circuit or proxy) reported after training, only accuracy; proxy validated only on Llama-3.1-8B, not the 0.5B/2B students.\" (Sec. 4 reports only accuracy for trained students, and the r=-0.90 validation in Sec. 3.2.2 uses CRV transcoders for Llama-3.1-8B only)",
+    "relations: builds-on lindsey2025biology -> removed (the paper attributes its single-step tracing operator to Ameisen et al. 2025, which is not in the corpus, and its validation transcoders to Zhao et al. 2026 CRV, also not in the corpus; Lindsey is cited only as background in the intro and related work, and none of its data, setup or findings is used)"
+   ],
+   "key": "anon2026computation",
+   "uncertain": [
+    "builds-on lindsey2025biology: the tracing operator actually comes from Ameisen et al. 2025, its companion methods paper, which is not in the corpus. Lindsey is cited as the standard approach in the intro and related work.",
+    "reveals:cot-reliance omitted: the authors call computation alignment orthogonal to CoT faithfulness, yet circuit overlap through reasoning tokens resembles answer reliance on the CoT.",
+    "contribution:metric: circuit overlap is formalized at abstract level but used only to validate the proxy; it is never reported for trained students.",
+    "eval:ood and eval:confound-control apply to accuracy gains (held-out benchmarks; typo-augmentation control for perturbation robustness), not to any faithfulness measurement.",
+    "lever:sft: the base distillation is SFT shared with the baselines; the new component is the hidden-state (activation) loss.",
+    "motivation:monitoring omitted: CoT monitorability appears only in the conclusion as a broader prospect; the paper's motivation is distillation accuracy.",
+    "model list includes the teachers (llama-3.3-70b, gpt-4.1-mini, grok-3-mini) and the proxy-validation model llama-3.1-8b, none of which are trained; scale:small reflects the trained students only.",
+    "metric names circuit-overlap (node Jaccard of reasoning and answer circuits) and sensitivity-discrepancy (|rho-1| of hidden-state shift ratio) are newly coined; no existing tags.csv metric measures the same quantity."
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:cot-reliance",
+    "signal:cot-intervention",
+    "lever:sft",
+    "updates:behavior",
+    "contribution:metric",
+    "contribution:meta-evaluation",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "motivation:explainability",
+    "domain:math",
+    "domain:mcq",
+    "domain:professional",
+    "scale:small",
+    "scale:mid",
+    "scale:large",
+    "eval:measure-validation",
+    "eval:confound-control",
+    "eval:scaling",
+    "eval:ood",
+    "factor:sft-data",
+    "factor:cot-necessity",
+    "factor:cot-length",
+    "model:deepseek-r1-distill-qwen-7b",
+    "model:deepseek-r1-distill-qwen-32b",
+    "model:qwen2.5-32b",
+    "model:gpt-oss-120b",
+    "model:gpt-oss-20b",
+    "model:qwen3.5-9b",
+    "metric:crisp-effect",
+    "metric:replay-consistency",
+    "metric:recovery-drop"
+   ],
+   "problem": "Teacher-forced CoT intervention estimates (truncation, mistakes) are uninterpretable when the replay misreproduces the model or the edit leaves the chain's implied answer unchanged.",
+   "method": "One generator writes a length/style-matched paraphrase control and a single-error perturbation; chance-normalized accuracy drop; replay-validity and LLM-evaluator intervention-validity checks; 15 open models, 9 math/clinical/science benchmarks; LoRA SFT of R1-Distill-Qwen-7B on 3 trace corpora.",
+   "findings": "30/135 pairs fail replay validity, 28 more fail intervention validity (perturbation effective on 30% vs 55% of checked items); truncation baseline negative on 6/29 replay-invalid, 0/70 valid pairs; CRISP-filtered traces give 0.337 higher held-out CRISP than answer-conditioned rationales (MedQA-driven); surface features inconsistent across families.",
+   "limits": "Generator-dependent (smaller generator 0.341 lower); teacher-forced replay only; single-seed 7B LoRA training; verifiable English QA only; under review; code promised.",
+   "relations": [
+    {
+     "verb": "extends",
+     "key": "lanham2023measuring",
+     "note": "adds validity criteria and chance normalization to its paraphrase and mistake-insertion primitives"
+    },
+    {
+     "verb": "compares-to",
+     "key": "lanham2023measuring",
+     "note": "truncation baseline on same base-correct items; Spearman 0.363 on replay-valid pairs"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "factor:sft-data",
+     "definition": "the source or format of supervised reasoning data (reasoning-model distillation vs instruction tuning; step-by-step traces vs answer-conditioned post-hoc rationales or shuffled steps), studied as a driver of (un)faithfulness"
+    }
+   ],
+   "changes": [
+    "findings: 'CRISP-selected SFT traces raise held-out CRISP by 0.337' -> 'CRISP-filtered traces give 0.337 higher held-out CRISP than answer-conditioned rationales (MedQA-driven)' (overclaim: 0.337 is a paired contrast against the post-hoc-rationale corpus on 285 shared items, not a gain over the base model; 0.439 on MedQA, 0.059 n.s. on MATH-500)",
+    "findings: added '(perturbation effective on 30% vs 55% of checked items)' (abstract-level evidence that failing pairs have uninterpretable estimates, not low faithfulness)",
+    "findings: 'truncation baseline negative on 6 replay-invalid pairs' -> 'negative on 6/29 replay-invalid, 0/70 valid pairs' (the paper's contrast; 29 of the 30 invalid pairs have a truncation grid)",
+    "method: added 'LoRA SFT of R1-Distill-Qwen-7B on 3 trace corpora' (the findings and lever:sft refer to this experiment, but the method line left it out)",
+    "tags: no change; checked the uncertain items against the paper: contribution:method stays out (the authors call it a secondary single-seed analysis comparing corpora, not a gain over a baseline); lever:sft/updates:behavior kept (the paper says it intervenes on the supervision format, and the target is the answer's reliance on the chain); factor:cot-length kept (gpt-oss low vs high effort is a reasoning budget, which the definition covers); factor:cot-necessity kept (MATH-500 difficulty sweep, a null result); eval:ood kept (MATH-500 and MedQA held out of all training corpora); signal:interp-tool and signal:judge stay out (probe is secondary; evaluator only gates validity)",
+    "relations: no change; Basu, Tutek, Turpin, Arcuschin, Chen, Chua, Somov, Parcalabescu and Young are cited only in related work or limitations, and the paper does not claim a conflict with Lanham's size trend (it says it cannot refute it)"
+   ],
+   "key": "anon2026crisp",
+   "uncertain": [
+    "contribution:method omitted: the CRISP-curated SFT result is in the abstract, but the paper calls it a secondary, single-seed analysis",
+    "lever:sft / updates:behavior: tagged for the one LoRA supervision experiment; it is unclear whether the training mainly changes the answer's reliance on the chain (behavior) or the chains themselves",
+    "factor:cot-length: the gpt-oss low vs high reasoning-effort switch is read as a budget; it is not a length penalty",
+    "factor:cot-necessity: rests only on the MATH-500 difficulty-level correlation (null result)",
+    "eval:ood: applies only to the finetuning experiment's 2 held-out benchmarks",
+    "signal:interp-tool omitted: the residual-stream answer probe on PubMedQA is a secondary analysis, not the faithfulness ground truth",
+    "signal:judge omitted: the LLM evaluator only gates validity (semantic overlap, answer recovery) and is not the faithfulness ground truth",
+    "basu2026measuring not linked: CRISP finds the reasoning budget changes the effect, while Basu reports thinking tokens do not, but the paper cites Basu only in related work and claims no conflict",
+    "metric names crisp-effect, replay-consistency, recovery-drop are newly coined; none of the existing metric names (e.g. early-answering-aoc, adding-mistakes-aoc) is the same quantity"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:cot-reliance",
+    "signal:cot-intervention",
+    "signal:generic-cf",
+    "lever:sft",
+    "lever:preference",
+    "lever:rl-reward",
+    "updates:behavior",
+    "contribution:method",
+    "contribution:negative-result",
+    "contribution:analysis",
+    "motivation:explainability",
+    "domain:math",
+    "scale:small",
+    "scale:mid",
+    "eval:confound-control",
+    "eval:held-out-evaluator",
+    "eval:ood",
+    "factor:outcome-rl",
+    "model:qwen2.5-7b",
+    "model:qwen2.5-3b",
+    "model:qwen2.5-14b",
+    "model:olmo-2-7b",
+    "model:olmo-2-13b",
+    "model:llama-3.1-8b",
+    "metric:causal-redundancy-of-reasoning",
+    "metric:causal-importance-of-reasoning",
+    "metric:span-substitution-sensitivity"
+   ],
+   "problem": "A correct answer with a plausible CoT can still bypass the CoT. Does accuracy RL or rationale-preference training lower the CoT's causal redundancy (CORD)?",
+   "method": "Qwen2.5-7B, GRPO on DAPO-Math. Arms: DPO preferring low-CORD rationales; scalar CORD/CIR/SR rewards; direct answer-likelihood gradients under corrupted or question-masked CoT. DCO adds bounded Huber suppression of early-prefix answer recovery and a budgeted KL on intact paths. Eval: CORD, CIR, all-layer donor patching.",
+   "findings": "RLVR (+10.1/+13.5pp accuracy) and DPO (changes CoTs) do not consistently lower held-out CORD; similar for Qwen 3B/14B and OLMo-2 on GSM8K (Llama inconclusive). Scalar credit fails. Naive direct training cuts CORD but costs 2.3 to 6.4pp accuracy. DCO: ∆CORD −0.197 to −0.347, accuracy −0.6 to +0.4pp, higher CIR, more CoT- and less question-sensitive. Over 20x fewer GPU-hours than reward-based GRPO.",
+   "limits": "Math only. DCO tested on Qwen2.5-7B only. Reward and direct routes start from different training stages. SR (verifier sufficiency) not improved. Patching measures source sensitivity, not mechanism. Code promised on acceptance. Under review, not yet peer-reviewed.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "yu2026outcome",
+     "note": "uses its CIR truncation metric and SR verifier metric as secondary measures"
+    },
+    {
+     "verb": "compares-to",
+     "key": "yu2026outcome",
+     "note": "CIR/SR auxiliary-reward GRPO arms as baselines; no consistent held-out CORD reduction"
+    },
+    {
+     "verb": "compares-to",
+     "key": "jia2026faithfulness",
+     "note": "reproduces update/gradient masking, CoT-gradient, FACT channels; no consistent CORD reduction"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "metric:causal-redundancy-of-reasoning",
+     "definition": "CORD (Kim & Lee 2026): harmonic mean of original-answer survival under CoT-suffix corruption and how early the answer is recovered from a CoT prefix with the question masked; lower means more reliance on the CoT"
+    },
+    {
+     "tag": "metric:span-substitution-sensitivity",
+     "definition": "absolute change in the original answer's log-likelihood when the whole question span or CoT span is replaced by a donor span from another problem (all-layer patching, equivalent to input substitution)"
+    }
+   ],
+   "changes": [
+    "tags: motivation:monitoring -> removed (only a passing clause about CoT as an interface for 'supervising' decisions, citing Korbak; the paper never discusses misbehavior, monitors or safety, so this is a mention, not a motivation)",
+    "findings: 'DPO (which rewrites CoTs)' -> 'DPO (changes CoTs)' (Table 10: DPO rewrites (similarity <0.5) only 7.7/13.8/35.0% of traces, fewer than RLVR seed variation; the paper says DPO changes the generated reasoning, mainly as fewer token-identical CoTs)",
+    "findings: 'leave held-out CORD flat' -> 'do not consistently lower held-out CORD' (RLVR raises CORD on MATH500 (+0.022) and significantly for Qwen 3B (+0.014*); the paper's claim is no consistent decrease)",
+    "findings: 'the same holds for Qwen 3B/14B, OLMo-2 and Llama' -> 'similar for Qwen 3B/14B and OLMo-2 on GSM8K (Llama inconclusive)' (the family extension covers GSM8K only; Llama shows significant CORD decreases (−0.018*, DPO −0.010*), which the paper discounts as less informative because accuracy drops and DPO has only 21 pairs)",
+    "findings: 'than GRPO' -> 'than reward-based GRPO' (Appendix A.5 compares the direct objectives with reward-based GRPO arms; DCO itself starts from the outcome-GRPO checkpoint)"
+   ],
+   "key": "anon2026generating",
+   "uncertain": [
+    "lever:sft for DCO: it is a teacher-forced counterfactual-likelihood loss with a KL budget on fixed triples, not standard SFT; chosen to match the SCOTT counterfactual-loss precedent in the corpus",
+    "signal:generic-cf rather than signal:interp-tool: the paper calls it all-layer activation patching but states it is equivalent to scoring the donor-substituted input",
+    "eval:ood: training is on DAPO-Math and tests are on GSM8K/MATH500 (other datasets, same math domain); DAPO-test is in-distribution",
+    "eval:behavior-control omitted: the KL budget limits drift on normal paths but behavior is not held fixed, and CoTs still change",
+    "motivation:monitoring: rests only on one intro line about CoT as an interface for 'supervising' decisions (Korbak et al.)",
+    "lever:rl-mechanics omitted: Jia et al.'s structural channels are only reproduced as appendix baselines",
+    "factor:outcome-rl and contribution:analysis: mainly a method paper, but Section 4 analyzes outcome RLVR as a driver of causal redundancy",
+    "possible contradicts jia2026faithfulness not added: its channels do not reduce CORD here, but Jia measured different quantities (hint verbalization, grad metrics)",
+    "possible contradicts yu2026outcome not added: here the CIR reward lowers accuracy and the SR reward does not raise held-out SR, unlike Yu; this is an appendix result on single-seed reward arms and different tasks",
+    "CORD source paper (Kim & Lee 2026) and FRIT (Swaroop et al.; same arXiv id as swaroop2025lift) are not linked: CORD is not in the corpus, and FRIT/Paul 2024 are cited only as related DPO work"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:cot-reliance",
+    "reveals:planted-cue",
+    "signal:cot-intervention",
+    "signal:interp-tool",
+    "signal:planted-cf",
+    "contribution:metric",
+    "contribution:meta-evaluation",
+    "motivation:monitoring",
+    "motivation:explainability",
+    "domain:mcq",
+    "scale:small",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "model:gemma-2-2b",
+    "model:qwen3-4b",
+    "metric:grace-divergence",
+    "metric:early-answering-aoc",
+    "metric:adding-mistakes-aoc"
+   ],
+   "problem": "Behavioural CoT perturbation tests cannot tell an answer that is robust to the edit from one produced by a different mechanism than the CoT claims. No mechanism-level faithfulness metric exists.",
+   "method": "GRACE: 1 minus the influence-weighted Jaccard of the top-64 position-pooled transcoder concepts in circuit-tracer attribution graphs, clean vs. perturbed run (CoT paraphrase, truncation, mistake injection; prompt hint). Tested on Gemma-2-2B and Qwen3-4B with BBH and MMLU.",
+   "findings": "Correlates with Lanham AOC (rho +0.44 and +0.41). Partial rho is +0.34 and +0.27 after controlling for edit distance, length and graph size. Tracks truncation but not mistake injection. Does not predict hint flips (Gemma AUROC 0.47).",
+   "limits": "Two small models, each needing a matched transcoder. MCQ only, since circuit-tracer attributes a single answer token. Correlational only: no causal tests on the flagged concepts. The Qwen sample was enriched for AOC-active items, and its mistake dissociation is underpowered (n=42). Under review at ARR.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "lanham2023measuring",
+     "note": "Validates against its AOC; splits it into truncation (necessity) and mistake-injection (error tolerance) axes"
+    },
+    {
+     "verb": "builds-on",
+     "key": "turpin2023language",
+     "note": "Regime C uses its biasing-hint injection protocol as a scope check"
+    }
+   ],
+   "new_tags": [],
+   "changes": [
+    "tags: reveals:internal-strategy -> removed (GRACE compares two attribution graphs to see whether the mechanism depends on the CoT; it never checks whether the CoT describes the model's internal algorithm, so this is CoT reliance, already tagged)",
+    "method: 'for the clean vs. perturbed CoT (paraphrase, truncation, mistake, hint)' -> 'clean vs. perturbed run (CoT paraphrase, truncation, mistake injection; prompt hint)' (paper: Regime C alters the prompt, not the CoT)",
+    "limits: added 'MCQ only, since circuit-tracer attributes a single answer token' (Sec. 3: numeric free-response tasks excluded for this reason)"
+   ],
+   "key": "anon2026grace",
+   "uncertain": [
+    "reveals:planted-cue / signal:planted-cf: the hint regime is only a scope check where GRACE fails (AUROC 0.47 / 0.20), but it is reported in the abstract",
+    "contribution:meta-evaluation: the main finding is that Lanham's AOC composite blends necessity and error tolerance. That reads as a validity critique of an existing metric, but it could just be analysis",
+    "reveals:internal-strategy: GRACE measures whether the attribution mechanism reorganises under CoT perturbation. That is mechanism-level, but it is still basically CoT reliance",
+    "signal:interp-tool vs cot-intervention: the validation ground truth is behavioural AOC, and the attribution graphs are the instrument being proposed. Both tagged",
+    "metric:early-answering-aoc / adding-mistakes-aoc: used as the behavioural reference that GRACE is validated against, not as the paper's own metric",
+    "domain: only mcq is tagged, though BBH and MMLU items include date, logic and math subtasks",
+    "No contradicts relation to lanham2023measuring: the paper critiques aggregating sub-protocols but does not refute Lanham's results"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:misbehavior",
+    "signal:env-label",
+    "signal:judge",
+    "contribution:meta-evaluation",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "domain:code",
+    "domain:agentic",
+    "domain:math",
+    "domain:mcq",
+    "scale:small",
+    "scale:mid",
+    "scale:large",
+    "scale:closed",
+    "eval:measure-validation",
+    "eval:confound-control",
+    "eval:specificity",
+    "eval:adversarial",
+    "model:claude-3.7-sonnet",
+    "model:deepseek-r1",
+    "model:gpt-oss-120b",
+    "model:qwen3-4b",
+    "model:kimi-k2-thinking",
+    "model:qwen3-8b",
+    "metric:binned-mse",
+    "metric:tpr-at-fixed-fpr",
+    "metric:ranking-swap-probability",
+    "metric:ci-distinguishability"
+   ],
+   "problem": "Monitorability evals differ in implementation details (proxy label, benign set, summary statistic, monitor prompt); unclear whether actor rankings are comparable or trustworthy.",
+   "method": "Formal eval definition; APPS-backdoor, bio-math, ImpossibleBench; 6 actors (2 on ImpossibleBench), 3 monitors, ~250 samples per triple; vary false-false-positive (FFP) correction, benign set, 13 summary statistics, monitor-prompt specificity, paired design; bootstrap CIs.",
+   "findings": "FFPs (monitor-caught attempts the proxy misses) up to ~70% (lower bound) on APPS-backdoor; LLM-judge correction reorders actors. Unelicited-benign statistics disagree with others (p_swap 0.27), separate actors better (0.80 vs 0.42). Prompt specificity, paired design barely change rankings. A few hundred samples may not separate actors.",
+   "limits": "Small (3 tasks, 6 actors, 3 monitors); prompt-elicited misbehavior only; FFP judge may share monitor failure modes; probes, confessions untested; code promised on publication; under review.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "guan2025monitoring",
+     "note": "tests its G-mean² statistic and no-benign-supplement design among alternative implementations"
+    }
+   ],
+   "new_tags": [],
+   "changes": [
+    "method: '...6 actors, 3 monitors, about 250 samples per triple; vary false-false-positive correction, benign set, 13 summary statistics; bootstrap CIs' -> adds '(2 on ImpossibleBench)', 'monitor-prompt specificity, paired design' (findings report results for both, but method left them out; ImpossibleBench uses only Claude-3.7 and Kimi-K2 per App. B.1); also tightened to cut words",
+    "findings: 'Attempted-but-failed misbehavior labeled benign: up to about 70% on APPS-backdoor' -> 'FFPs (monitor-caught attempts the proxy misses) up to ~70% (lower bound) on APPS-backdoor' (paper reports a lower-bound FFP rate, i.e. monitor flags while proxy says benign)",
+    "findings: (none) -> 'A few hundred samples may not separate actors.' (the paper's headline conclusion in the abstract and Sec. 1 was missing)",
+    "findings: 'Monitor-prompt specificity and paired design barely change rankings' -> 'Prompt specificity, paired design barely change rankings' (shortened; still states that specificity shifts absolute but not relative scores)",
+    "limits: (none) -> 'FFP judge may share monitor failure modes' (App. B.3 says P_FFP is an LLM that can share failure modes with M and bias monitorability upward)",
+    "limits: 'Small scale (3 tasks...)' -> 'Small (3 tasks...)'; summary shortened overall from ~107 to ~99 words (still over the ~60 target)"
+   ],
+   "key": "anon2026implementation",
+   "uncertain": [
+    "signal:judge: the base labels are rule-based (env-label), but the LLM judge P_FFP becomes part of the corrected ground truth max(P_out, P_FFP)",
+    "eval:adversarial: actors are only prompted to hide the backdoor or side task, not optimized to evade",
+    "eval:specificity: benign-transcript FPR calibration checks monitor false positives, not explanations claiming absent influences",
+    "scale:mid: only through the Qwen3-Next-80B-A3B monitor and FFP judge; no actor is mid-sized",
+    "object:output not tagged: monitors also see code, final answers and tool calls, but the paper frames itself as CoT monitoring",
+    "domain:mcq: bio-math's cover task is GPQA biology multiple choice; the misbehavior is the hidden math task",
+    "model:qwen3-4b: the paper says Qwen3-4B-Instruct without a version; it may be qwen3-4b-2507",
+    "contribution:metric not tagged: FFP correction, benign supplementation and paired design are proposed only as recommendations, not as headline contributions",
+    "eval:human-study not tagged: the human review of FFP clusters and the spot check appear to be done by the authors, not a participant study",
+    "factor: none tagged: the paper varies evaluation implementation details, not drivers of the models' own monitorability",
+    "relation to guan2025monitoring: builds-on vs compares-to; G-mean² is one of 13 statistics compared, not a baseline method"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:planted-cue",
+    "reveals:decision-factors",
+    "reveals:misbehavior",
+    "signal:planted-cf",
+    "lever:sft",
+    "lever:rl-reward",
+    "lever:on-policy-distillation",
+    "updates:explanation",
+    "contribution:theory",
+    "contribution:metric",
+    "contribution:meta-evaluation",
+    "contribution:method",
+    "contribution:benchmark",
+    "motivation:monitoring",
+    "domain:mcq",
+    "domain:open-qa",
+    "domain:math",
+    "domain:logic",
+    "domain:professional",
+    "scale:small",
+    "scale:mid",
+    "eval:held-out-evaluator",
+    "eval:ood",
+    "eval:specificity",
+    "eval:measure-validation",
+    "model:qwen3.5-4b",
+    "model:qwen3.5-9b",
+    "model:mistral-small-3.2-24b",
+    "model:qwen3-32b",
+    "model:llama-3.3-70b",
+    "model:gpt-oss-120b",
+    "metric:g-mean-squared",
+    "metric:g-mean-squared-lb",
+    "metric:minimal-criterion-tpr",
+    "metric:causal-recall-lower-bound"
+   ],
+   "problem": "TPRmc also counts target outcomes that would have occurred without the intervention, so it can overstate monitor recall. Can post-training raise CoT monitorability?",
+   "method": "Proves TPRmc is an upper bound on causal recall and derives an observable lower bound. Builds 3,810 paired cue/evidence/sandbag/deception tasks. Trains Qwen3.5-4B/9B and Mistral-24B with self-distilled SFT, monitor-reward GRPO and privileged-context OPSD. Evaluates on 12 MonitorBench tasks with 3 held-out monitors.",
+   "findings": "Per Tables 2-3, the upper-bound composite rises in 24/27 comparisons, the lower-bound one in 24/27. SFT raises both in all 9 (Mistral upper bound +7 to +19). RL and OPSD results are mixed for 9B and Mistral and sometimes flip between bounds. Code in supplement.",
+   "limits": "The bounds do not identify recall. Methods are not matched (SFT tuned more). Training data built automatically. Accuracy cost not reported. Text counts (23/27, 21/27) and some deltas contradict Tables 2-3. Under review, not yet peer reviewed.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "guan2025monitoring",
+     "note": "analyzes its TPRmc/g-mean² metric; proves TPRmc only upper-bounds causal recall"
+    },
+    {
+     "verb": "builds-on",
+     "key": "wang2026monitorbench",
+     "note": "evaluates all post-trained models on its 12 input-intervention tasks"
+    },
+    {
+     "verb": "builds-on",
+     "key": "turpin2025teaching",
+     "note": "follows VFT-style synthetic cue-disclosure supervision, broadened to more intervention families"
+    },
+    {
+     "verb": "builds-on",
+     "key": "hase2026counterfactual",
+     "note": "follows CST's paired counterfactual inputs with rewritten-trace supervision"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "lever:on-policy-distillation",
+     "definition": "trains the model on its own sampled outputs with token-level supervision (e.g. forward KL) toward a teacher's distribution, incl. a frozen self-teacher given privileged context; not offline SFT and not a scalar RL reward"
+    }
+   ],
+   "changes": [
+    "findings: 'The upper-bound composite rises in 23/27 comparisons, the lower-bound one in 21/27' -> 'Per Tables 2-3, the upper-bound composite rises in 24/27 comparisons, the lower-bound one in 24/27' (checked against the rendered PDF: Table 2 has only 3 declines (9B RL GPT-OSS -0.41, Mistral RL Llama -1.81, Mistral OPSD Llama -1.07), and Table 3 has only 3 (9B RL GPT-OSS -4.62, Mistral RL Qwen3-32B -0.38, Mistral OPSD Llama -0.07). The 23 and 21 in the text do not match the tables)",
+    "limits: added 'Text counts (23/27, 21/27) and some deltas contradict Tables 2-3.' (the paper contradicts itself: besides the counts, the text says 9B RL loses 3.56 lower-bound points under Llama where Table 3 shows +0.64, and gives Mistral SFT lower-bound gains of 4.95-14.00 where Table 3 shows 4.59-14.00)"
+   ],
+   "key": "anon2026improving",
+   "uncertain": [
+    "lever:on-policy-distillation is coined for OPSD; consolidation might fold it into lever:sft",
+    "metric:g-mean-squared: the paper's g-mean2_int drops control-arm specificity (TPRmc x TNR_X=1), so it is a variant of Guan's composite",
+    "metric:g-mean-squared-lb and metric:causal-recall-lower-bound are new free metric names for the lower-bound composite and its sensitivity term",
+    "reveals:decision-factors: contextual-evidence interventions restore withheld evidence, which is not a hint or bias, so planted-cue alone seemed too narrow",
+    "contribution:benchmark: the paired dataset is a headline contribution but serves as training data, not an evaluation suite",
+    "eval:ood: training sources exclude MonitorBench's source families, but the intervention families are the same",
+    "builds-on turpin2025teaching / hase2026counterfactual: the link is only 'following this direction' for data construction; neither is run as a baseline",
+    "updates: only explanation tagged; the RL reward (+4 for disclosed compliance vs 0 for non-compliance) may also push behavior toward intervention targets, which is not measured",
+    "Paper inconsistency: the text says Qwen3.5-9B RL loses 3.56 lower-bound points under Llama3.3-70B, but Table 3 shows +0.64; the summary avoids this number",
+    "signal: only planted-cf tagged; outcome labels Y come from deterministic verifiers or a Qwen3-32B verifier (env-label-like), but faithfulness ground truth is the control-vs-intervention contrast"
+   ]
+  },
+  {
+   "tags": [
+    "object:self-prediction",
+    "object:self-interpretation",
+    "reveals:own-uncertainty",
+    "reveals:internal-state",
+    "signal:interp-tool",
+    "signal:generic-cf",
+    "lever:sft",
+    "updates:explanation",
+    "contribution:analysis",
+    "contribution:meta-evaluation",
+    "contribution:negative-result",
+    "contribution:benchmark",
+    "motivation:explainability",
+    "domain:classification",
+    "domain:open-qa",
+    "domain:math",
+    "domain:mcq",
+    "domain:synthetic",
+    "scale:small",
+    "scale:mid",
+    "eval:privileged-access",
+    "eval:ood",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "eval:scaling",
+    "model:qwen3.5-9b",
+    "model:llama-3.1-8b",
+    "model:llama-3.3-70b",
+    "model:qwen3.5-27b",
+    "model:gemma-4-31b",
+    "model:ministral-3-8b",
+    "metric:self-cross-prediction-advantage",
+    "metric:cross-task-transfer-gain",
+    "metric:static-baseline-accuracy"
+   ],
+   "problem": "Introspection benchmarks score self-report accuracy, which cannot separate introspection, self-simulation and rationalization (causal bypassing).",
+   "method": "Other LLMs (ICL/LoRA) and static-embedding classifiers predict the source's probe-derived or behaviour labels; LoRA-train on each of 16 datasets (steering awareness, self-prediction, confidence), test cross-task; 8 models, 7-70B.",
+   "findings": "Activation labels: cross LLMs match self (commonsense 71.8 vs 71.4%), embeddings recover them from text. Behaviour labels: cross reporters recover 89% of self lift; residual +5.3 to +7.9 points only on own-generation tasks. In-task gains largely fail to transfer across families (median -0.01); not forgetting (IFEval within ~2 points).",
+   "limits": "Cannot separate introspection from self-simulation; at most 200 eval rows per source, 3 seeds, ~8B reporters on behaviour labels; Gemma LoRA reporters collapse; open models only; under review, not peer reviewed; code in supplement.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "binder2024looking",
+     "note": "reuses its self-prediction tasks and self-vs-cross reporter design; adds static baselines"
+    },
+    {
+     "verb": "contradicts",
+     "key": "binder2024looking",
+     "note": "self-prediction advantage mostly cross-recoverable (89% of lift); training builds task-specific, not privileged, routes"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "reveals:internal-state",
+     "definition": "the model's current internal activation state (e.g. an injected steering concept or whether a probe direction is active), which the report should causally depend on"
+    }
+   ],
+   "changes": [
+    "findings: 'External reporters match self (commonsense 71.8 vs 71.4%) and recover 89% of self lift' -> split into activation labels (ICL parity 71.8 vs 71.4%) and behaviour labels (89% of self lift) (the two numbers come from different label types and tests, Sec. 5.1)",
+    "findings: 'embeddings recover labels from text alone' -> limited to activation labels (on behaviour labels static classifiers match self on only 6 of 15 datasets and trail by 17-33 points on 1st char, 1st word, among, ethical stance)",
+    "findings: added residual self-advantage +5.3 to +7.9 points, present only on own-generation tasks (1st char, 1st word, among, ethical stance) and absent on confidence (the paper's only candidate for a privileged route; needed context for the Binder relation)",
+    "findings: 'In-task gains do not transfer across families' -> 'largely fail to transfer' (paper's wording; a few significant off-diagonal gains exist, mostly in confidence reporting)",
+    "limits: added '~8B reporters on behaviour labels; Gemma LoRA reporters collapse' (both acknowledged limitations: the residual comes from three ~8B reporters only, and both Gemma reporters are excluded from the LoRA averages after a majority-class collapse); 'not yet peer reviewed' -> 'not peer reviewed'",
+    "relations: contradicts binder2024looking note 'external reporters recover 89% of self lift; self-prediction accuracy not evidence of privileged access' -> 'self-prediction advantage mostly cross-recoverable (89% of lift); training builds task-specific, not privileged, routes' (Binder rests on the self-cross gap, not raw accuracy. The real conflict is that the gap is small and mostly rationalizable, and that introspection training does not build privileged access (abstract))"
+   ],
+   "key": "anon2026introspection",
+   "uncertain": [
+    "object:self-interpretation: activation-monitoring and steering-awareness reports state whether an activation is active or which concept was injected, not what a feature encodes",
+    "reveals:internal-state coined; no vocab value fits plain self-prediction of own next output (hidden-behavior not used since nothing is implanted)",
+    "contribution:benchmark: 16-dataset generalization suite mostly regenerates existing tasks (Binder, Cencerrado, Lindsey) per model",
+    "contribution:negative-result and lever:sft/updates:explanation: LoRA introspection training is a diagnostic probe, not a fix the authors propose",
+    "contradicts binder2024looking: paper explicitly does not claim models cannot introspect and finds a small residual self-advantage on Binder-style tasks; conflict is over interpretation and size of the gap",
+    "eval:scaling: size varies across 8 models (an 'ablation up to 70B'), not a controlled sweep",
+    "signal:generic-cf for behaviour-derived labels follows binder2024looking's tagging; confidence labels arguably env-label (answer-key correctness)",
+    "motivation: only explainability tagged; intro cites interpretability and alignment, and the ethics statement warns against trusting self-reported confidence (possible reliability)"
+   ]
+  },
+  {
+   "tags": [
+    "object:self-report",
+    "object:output",
+    "reveals:executed-actions",
+    "signal:env-label",
+    "contribution:metric",
+    "motivation:reliability",
+    "domain:agentic",
+    "scale:closed",
+    "scale:large",
+    "eval:measure-validation",
+    "eval:ood",
+    "eval:confound-control",
+    "eval:human-study",
+    "model:qwen-plus",
+    "model:gemini-3-flash",
+    "model:claude-sonnet-4.6",
+    "model:gpt-5.4",
+    "model:deepseek-v4-flash",
+    "model:glm-5.2",
+    "metric:over-promise-rate"
+   ],
+   "problem": "Tool-using agents' claims about their own actions can lack tool-execution backing; state-based and text-only evaluation miss this say-do gap.",
+   "method": "Criterion derived from tool registry and business rules; decision tree matches completive claims to tool-call logs; all 452 candidates human-adjudicated; 7 models, 3 insurance scenarios (1,799 trajectories); tau-bench replication (1,980).",
+   "findings": "182 over-promises (40.3% of candidates, 10.1% of trajectories), all fabricated capabilities; 78.6% on tool-policy-successful trajectories; dual-input judge without codebook flags 9/452, codebook-guided LLM 90.2% recall; tau-bench: 24 over-promise turns (~2.5% of passing turns), all on PASS trajectories.",
+   "limits": "Author-led annotation; codebook revised on analysis data (version kappa 0.21); write-operation domains only; LLM-selected candidate pool; pooled rate driven by two models (29.2% without Qwen-Plus); under review. Protocol, codebook, data released.",
+   "relations": [],
+   "new_tags": [
+    {
+     "tag": "reveals:executed-actions",
+     "definition": "the actions the agent actually executed in its environment (tool calls, arguments, result statuses), which its claims about its own conduct must match"
+    }
+   ],
+   "changes": [
+    "tags: eval:monitor-scope -> removed (no monitors with different views of the model are compared: the dual-input GLM-4-Flash judge and the codebook-guided LLM both see text plus tool record and differ only in criterion; the claims that text-only and tool-only views miss the gap are argued, not tested with such monitors)",
+    "tags: (none) -> eval:human-study (two external annotators' 80-item reliability study, three human annotation rounds compared with the LLM annotator, and an independent team's timed criterion derivation on an unseen HR domain; the corpus tags human annotation audits this way)",
+    "findings: 'dual-input judge without codebook flags 2%' -> 'flags 9/452' (2.0% is of candidates, not recall over the 182; the paper gives 9/452, 5% of 182)",
+    "findings: 'tau-bench: 24, all scored PASS' -> '24 over-promise turns (~2.5% of passing turns), all on PASS trajectories' (the 24 are turns on 18 trajectories; 24/956 passing direct-execution turns)",
+    "limits: added 'pooled rate driven by two models (29.2% without Qwen-Plus)' (Appendix F and Section 7: the absolute rate does not survive leave-one-model-out; only the strata, scenario and posture orderings do)"
+   ],
+   "key": "anon2026measuring",
+   "uncertain": [
+    "object:output added beside object:self-report: the claims are both the agent's main user-facing response and statements about its own past conduct",
+    "reveals:executed-actions coined because no v1 value covers claims matching actual tool execution; reveals:misbehavior is a possible alternative",
+    "signal:env-label (tool-call log as ground truth, following FLARE's tagging); signal:output-agreement could also fit, since text and tool calls are both model output; humans and LLM judges only map sentences to actions, so signal:judge was not tagged",
+    "contribution: only metric; analysis omitted because the authors say the contribution is the procedure, not the readings, although the abstract reports prevalence findings",
+    "eval:monitor-scope is loose: it rests on text-only judges, a dual-input judge and state-based grading being contrasted with the paired instrument, which differs in criterion as well as view",
+    "eval:ood is for transfer to unseen domains (finance, ITSM, HR by an external team) and to tau-bench models; eval:confound-control is for the within-model check and leave-one-model-out analysis",
+    "scale:large assumes DeepSeek-V4-Flash (tagged large elsewhere) and GLM-5.2 are open-weight and over 100B; the paper gives no sizes",
+    "model: claude-haiku-4.5 dropped to respect the 6-model cap; tau-bench replication also uses gpt-4o and claude-3.5-sonnet",
+    "No relations: the works it engages (Xu et al. 2025 word-deed, GPA, Mind the GAP, tau-bench) are not in the corpus; topically close corpus papers (dong2025say, wang2026doing, anon2026should, oota2026llm) are not cited",
+    "factor omitted: posture, escalation-path availability and verification cost are studied as drivers, but no factor value fits and the paper is a measurement paper"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:planted-cue",
+    "signal:planted-cf",
+    "contribution:metric",
+    "contribution:benchmark",
+    "contribution:meta-evaluation",
+    "motivation:monitoring",
+    "domain:mcq",
+    "domain:professional",
+    "scale:small",
+    "scale:mid",
+    "eval:measure-validation",
+    "eval:confound-control",
+    "model:nemotron-nano-9b-v2",
+    "model:qwen3-8b",
+    "model:qwen3.5-9b",
+    "model:olmo-3-7b",
+    "model:gemma-4-12b",
+    "metric:hint-verbalization-rate",
+    "metric:label-survival-rate"
+   ],
+   "problem": "Cue-based unfaithfulness labels rest on one uncued and one cued draw, so a switch may be sampling noise. The alpha correction only fixes aggregate rates.",
+   "method": "CueBall: 8 baseline samples, 4 re-rolls per switch; pair persistent if at least 3/4 hit the cue target. 5 open reasoning models, 4 MCQ sets (incl. MedQA), 8 cues, T=0.7. LLM role judge, audited by a second LLM plus human review.",
+   "findings": "About 40% of positive-case single-sample unfaithful labels fail persistence (survival 59.7%). 1-alpha (median 0.4%) is closer to non-recurrence than to non-persistence (median 21%). Incoherent traces persist less (39.4% vs 81.0%). Aggregate rates and model rankings mostly similar. Costs 3.8-5.7x the tokens. Releases 20,000 traces and code.",
+   "limits": "T=0.7 only, no greedy decoding; open models of 12B or less; 4 re-rolls give a coarse estimate; uncued and cued decoding unmatched; judge audit covers one model and dataset, incoherence label unvalidated; post_hoc cue is 45% of the release; persistence does not prove cue causation; not yet peer reviewed.",
+   "relations": [
+    {
+     "verb": "compares-to",
+     "key": "chen2025reasoning",
+     "note": "Its single-sample labels and alpha normalization are baselines; 1-alpha sits closer to non-recurrence"
+    },
+    {
+     "verb": "builds-on",
+     "key": "turpin2023language",
+     "note": "Uses its cued-vs-uncued answer-switch test, which underlies both labeling protocols"
+    },
+    {
+     "verb": "builds-on",
+     "key": "walden2026reasoning",
+     "note": "Maps its role labels onto that paper's hint-use scheme, applied under default prompting"
+    },
+    {
+     "verb": "extends",
+     "key": "angdembay2026two",
+     "note": "Scales resampling checks of flip labels to five models, four datasets, eight cues"
+    }
+   ],
+   "new_tags": [],
+   "changes": [
+    "tags: signal:output-agreement -> removed (the incoherent label is a pre-check by the LLM judge inside cued rollouts, not used on its own without intervention; the paper says it is 'not a cue-use claim' and never validates it; the ground truth is planted-cf)",
+    "findings: '1-alpha tracks non-recurrence (median 0.4%), not non-persistence (21%)' -> '1-alpha (median 0.4%) is closer to non-recurrence than to non-persistence (median 21%)' (0.4% is the median of 1-alpha, not of non-recurrence; the paper says 'closer to', median gap 1.1 points)",
+    "findings: 'Aggregate rates and model rankings barely move' -> 'mostly similar' (gaps per model x dataset x case range from -6.1 to +5.7 points, and rankings differ on GPQA-Extended; the paper says 'similar')",
+    "limits: added 'incoherence label unvalidated' (incoherent re-rolls count as unfaithful, but the paper states that neither incoherence nor the binary judge was validated); trimmed wording ('open weights only' merged, 'under review' folded into 'not yet peer reviewed') to save length",
+    "relations: chen2025reasoning note 'alpha tracks non-recurrence' -> '1-alpha sits closer to non-recurrence' (the paper compares 1-alpha and claims only that it is closer)"
+   ],
+   "key": "anon2026one",
+   "uncertain": [
+    "signal:output-agreement: rests on the incoherent label (trace concludes an option other than its answer), a secondary label counted as unfaithful and never validated independently",
+    "eval:confound-control: sampling noise is the paper's subject itself; the actual controls are missing-answer bounds and a sensitivity analysis excluding post_hoc, while the decoding confound stays uncontrolled",
+    "contribution:metric: the resampled protocol refines labeling rather than adding a new faithfulness quantity; contribution:analysis left out as covered by meta-evaluation",
+    "compares-to vs builds-on for chen2025reasoning: the paper both adopts its verbalization criterion and evaluates its single-sample protocol and alpha correction against resampling",
+    "extends angdembay2026two: rests on the 'we extend this line of work' sentence in related work plus motivation in the intro; that record has no summary yet to confirm how close the methods are",
+    "model:olmo-3-7b used for OLMo-3-7B-Think, following the existing tag name",
+    "metric:label-survival-rate is newly coined (share of single-sample unfaithful labels whose question-cue pair returns the cued answer in at least 3 of 4 re-rolls)",
+    "metric:hint-verbalization-rate: the paper reports an unfaithful rate, the complement of the existing metric",
+    "domain:professional rests on MedQA-USMLE, one of the four datasets"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:misbehavior",
+    "reveals:hidden-behavior",
+    "signal:env-label",
+    "signal:implanted-behavior",
+    "lever:rl-mechanics",
+    "updates:explanation",
+    "contribution:analysis",
+    "contribution:method",
+    "contribution:benchmark",
+    "motivation:monitoring",
+    "domain:code",
+    "domain:chat",
+    "scale:mid",
+    "scale:large",
+    "eval:specificity",
+    "eval:scaling",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "factor:outcome-rl",
+    "factor:reward-misspecification",
+    "model:gpt-oss-20b",
+    "model:gpt-oss-120b",
+    "model:nemotron-3-nano-30b-a3b",
+    "model:gpt-5.6-luna",
+    "model:gpt-4.1-mini",
+    "metric:g-mean-squared",
+    "metric:reward-intent-g-mean-squared",
+    "metric:monitor-recall"
+   ],
+   "problem": "Complex RL rewards can't be verified perfectly. Does a misspecified outcome reward alone, with no monitor pressure, hide learned reward hacking from CoT monitors?",
+   "method": "Testbed pairs a true and a misspecified reward on 3 tasks: exceed word limit, favor Gemini when judging, pass only some tests. GRPO-LoRA misaligned vs control models; CoT-only LM monitor; intervention and reward-intent g-mean². Fix: an LM infers a reward description from training rollouts; it is injected into half the rollouts of a new RL run and the model is updated without it.",
+   "findings": "Misaligned models hack 0.87 on average (control 0.05), but the monitor flags only 18% of hacks; g-mean² at most 0.34, because CoTs reason about the stated intent (coding: CoTs collapse). Still low with the word limit unstated, except gpt-oss-120b. A stronger monitor adds only 0.09/0.12. Description training raises g-mean² by 0.26/0.43 and TPR from 0.18 to 0.82, and CoTs name the hack; more control-model false positives, most on the judge task.",
+   "limits": "Synthetic misspecifications, 3 tasks, 10 tests per coding problem; needs a second RL run; description generator is told which output aspect the reward concerns; description-trained gpt-oss-120b stops hacking on length (0.15), which muddies gains; true-task cost not reported; code promised, not released; under review.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "guan2025monitoring",
+     "note": "adopts its intervention g-mean² as the monitorability metric"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "factor:reward-misspecification",
+     "definition": "the RL outcome reward pays for behavior that differs from or contradicts the task intent (stated in the prompt or implicit), e.g. compared with a true-reward control, studied as a driver of unmonitorable or unfaithful CoT"
+    }
+   ],
+   "changes": [
+    "tags: (none) -> +eval:measure-validation (the paper swaps monitors, gpt-5.6-luna vs gpt-4.1-mini, and the tags.yaml definition explicitly names monitor swaps; it also stress-tests its own intervention g-mean² by showing the Y-label artifact on Coding; li2026monitorability uses the same precedent. eval:scaling is kept for the training-checkpoint curves in Figs 3-11)",
+    "findings: '...because CoTs reason about the stated intent.' -> '...because CoTs reason about the stated intent (coding: CoTs collapse).' (Sec 3.5: on coding, low monitorability comes from CoTs collapsing to phrases like 'Output code', not from reasoning about the intent)",
+    "findings: (none) -> 'Still low with the word limit unstated, except gpt-oss-120b.' (Sec 5.1/Table 3: removing the stated limit lowers the average to 0.19/0.23, but gpt-oss-120b rises to 0.37/0.51; this result also supports the eval:confound-control tag)",
+    "findings: 'more false positives on control models (judge task)' -> 'more control-model false positives, most on the judge task' (Sec 4.2: TNR_X=0 drops on control models in general and drops most on LM judge)",
+    "method: 'injected into half the rollouts and the model is trained without it' -> 'injected into half the rollouts of a new RL run and the model is updated without it' (Sec 4.1: RL restarts from the base model)",
+    "limits: 'description-trained gpt-oss-120b mostly stops hacking' -> 'description-trained gpt-oss-120b stops hacking on length (0.15)' (overclaim: its hack rate is still 0.82 on judge and 0.68 on coding, Table 2)",
+    "limits: (none) -> 'description generator is told which output aspect the reward concerns' (App. C.1: the prompt says the reward relates to response length, the score split, or test-case performance; this is partial prior knowledge, despite the 'no prior knowledge' claim)",
+    "new_tags: factor:reward-misspecification definition '...task intent stated in the prompt (vs. a true-reward control)...' -> '...task intent (stated in the prompt or implicit), e.g. compared with a true-reward control...' (the paper's own underspecified-intent run in Sec 5.1 and the implicit intent in the judge and coding tasks fall outside 'stated in the prompt')"
+   ],
+   "key": "anon2026reward",
+   "uncertain": [
+    "factor:reward-misspecification is newly coined and partly overlaps factor:outcome-rl (training is outcome-only RL). Consolidation may merge the two.",
+    "lever:rl-mechanics: the fix samples rollouts with the inferred description in context and updates without it (context distillation inside RL). It could also count as lever:prompt-pipeline, or justify a new context-distillation lever.",
+    "reveals:hidden-behavior: added because the reward-intent g-mean² asks whether the CoT reveals which reward the model was trained on. That may be seen as already covered by reveals:misbehavior.",
+    "domain:chat covers the length task (Helpful Instructions) and the LM-judge task (Arena prompts, pairwise preference scoring). No vocabulary value fits LLM-as-judge tasks exactly.",
+    "eval:confound-control is light: an underspecified-intent run on the length task and an explicit check that CoT length does not explain the gap.",
+    "eval:measure-validation omitted although monitors are swapped (gpt-5.6-luna vs gpt-4.1-mini) and the paper discusses an artifact of the Y label in the coding task. I read the swap as monitor-capability scaling instead.",
+    "signal:cot-intervention omitted: prefilling the base model with misaligned CoTs (prefill hack rate) is a side analysis, not the ground truth.",
+    "contribution:benchmark: the paper claims the testbed as a contribution, but the data and code are not yet released.",
+    "model tags include the monitors gpt-5.6-luna and gpt-4.1-mini, following the baker2025monitoring precedent. nemotron-3-nano-30b-a3b is my normalization of NVIDIA-Nemotron-3-Nano-30B-A3B.",
+    "kaufmann2026aligned not linked: the paper sets its 'output-only misspecification degrades monitorability' claim against Kaufmann's in-conflict CoT reward, but only in related work."
+   ]
+  },
+  {
+   "tags": [
+    "object:self-prediction",
+    "object:cot",
+    "reveals:hidden-behavior",
+    "reveals:decision-factors",
+    "signal:generic-cf",
+    "signal:judge",
+    "signal:interp-tool",
+    "contribution:benchmark",
+    "contribution:analysis",
+    "motivation:alignment",
+    "motivation:auditing",
+    "domain:agentic",
+    "domain:ethics",
+    "scale:small",
+    "scale:mid",
+    "scale:large",
+    "scale:closed",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "factor:elicitation-format",
+    "factor:instruction-pressure",
+    "model:qwen3.5-27b",
+    "model:deepseek-v4-flash",
+    "model:qwen3-14b",
+    "model:qwen3-8b",
+    "model:llama-3.1-8b",
+    "model:qwen3.5-9b",
+    "metric:directed-reference-loss",
+    "metric:absolute-choice-rate-difference",
+    "metric:load-bearing-consideration-share",
+    "metric:mismatch-repair-rate"
+   ],
+   "problem": "Do an LLM's moral judgments and the choices it states in role predict the tool actions it actually takes as an agent?",
+   "method": "2,000 matched synthetic cases (temptations with a reference answer, dilemmas without one). Each is run three ways: observer judgment (Should), in-role written choice (Say), simulated tool call (Do). 14 models. Kimi-K3 codes whether Qwen3.5-27B's Should considerations carry weight in its Say and Do rationales. Probes and steering on 4 open models.",
+   "findings": "Should-Do reference-agreement gap reaches 22.3 pp. Say-Do exceeds Should-Say in 13 of 14 models. 85.2% of Should considerations stay load-bearing in Say vs 69.3% in Do. Probes repair at most 3.7% of mismatches; action-trained directions repair 54.4-100%, with model-dependent retention loss. Operator instructions widen the gap.",
+   "limits": "Synthetic cases, simulated two-option tools. Perspective, information access and interface vary together. Rationale coding is not causal. Steering is exploratory, on a simplified no-reasoning task. Under review. Code released.",
+   "relations": [],
+   "new_tags": [
+    {
+     "tag": "domain:ethics",
+     "definition": "moral or ethical decision scenarios (temptations, right-vs-right dilemmas, value conflicts) where the outcome of interest is which morally loaded option the model chooses"
+    },
+    {
+     "tag": "factor:elicitation-format",
+     "definition": "how a decision is elicited and submitted (observer judgment vs in-role written statement vs tool call, incl. interface and information access), studied as a driver of gaps between stated and enacted choices"
+    },
+    {
+     "tag": "factor:instruction-pressure",
+     "definition": "operator or system instructions pushing toward an option that the model's own stated principles reject, studied as a driver of gaps between stated and enacted choices"
+    }
+   ],
+   "changes": [
+    "tags: reveals:actual-action -> reveals:hidden-behavior (an existing tag fits: the corpus already uses it when a self-prediction or stated principle must match the model's own behavior, e.g. binder2024looking, pres2026selfctrl)",
+    "tags: lever:steering, updates:behavior -> removed (Sec. 6 uses steering only as an exploratory test of whether a direction is sufficient or necessary, not as a proposed fix. That makes this a measurement paper, and the probes and steering are already covered by signal:interp-tool; cox2026posthoc, which also uses steering only as a test, carries no lever tag)",
+    "method: 'An LLM codes whether Should considerations carry weight in Say and Do rationales' -> 'Kimi-K3 codes whether Qwen3.5-27B's Should considerations carry weight in its Say and Do rationales' (the annotation covers one model's temptation rationales only, not all 14 models)",
+    "findings: 'Considerations stay load-bearing in 85.2% of Say rationales vs 69.3% of Do' -> '85.2% of Should considerations stay load-bearing in Say vs 69.3% in Do' (the paper reports pooled shares of 2,809 considerations, not shares of rationales)",
+    "findings: 'action-trained directions repair 54.4-100%' -> '... 54.4-100%, with model-dependent retention loss' (the paper reports that retention costs vary by model: on Qwen3.5-9B, lost reference choices outnumber repaired mismatches)",
+    "new_tags: removed reveals:actual-action definition (tag replaced by vocabulary tag reveals:hidden-behavior)"
+   ],
+   "key": "anon2026should",
+   "uncertain": [
+    "object:self-prediction: the paper frames Say as a stated choice in role, not an explicit prediction of the tool action",
+    "reveals:actual-action (coined): reveals:hidden-behavior (the self-prediction convention, e.g. binder2024looking) or reveals:stated-plan might be preferred at consolidation; the paper says Say and Do are not successive steps of one decision",
+    "signal:generic-cf vs signal:output-agreement: the conditions are independently elicited protocols on the same case, not edited inputs or parts of one output",
+    "object:cot and signal:judge: they apply to the rationale analysis (Kimi-K3 coding, 96.3% confirmed by a human ethics scholar). The paper says this coding does not establish faithfulness to computation",
+    "lever:steering / updates:behavior: steering is an exploratory test of causal sufficiency (it 'repairs' mismatches), not a proposed method. The appendix prompt controls (hierarchy reminder, code of conduct shown) also shrink the gap but are not tagged lever:prompt-pipeline",
+    "scale:large: the paper gives no parameter counts. Large is inferred for DeepSeek-V4-Flash, GLM-5.2 and MiniMax-M2.7 as >100B open-weight models; Qwen3.7-Flash is assumed closed",
+    "motivation:auditing: the paper argues for deployment audits of tool actions rather than finding hidden model properties",
+    "factor:instruction-pressure: comes from an appendix extension (C.3, C.4) mentioned in one sentence of the main text",
+    "No relations: Turpin et al. 2023 appears only in related work. The cited Agent-ValueBench (Dong et al., 2026) is not dong2025say. The paper does not cite anon2026measuring or the other say-do papers in the corpus"
+   ]
+  },
+  {
+   "tags": [
+    "object:self-report",
+    "object:output",
+    "reveals:hidden-behavior",
+    "reveals:misbehavior",
+    "signal:implanted-behavior",
+    "signal:judge",
+    "lever:sft",
+    "lever:architecture",
+    "lever:inference-time",
+    "updates:explanation",
+    "contribution:method",
+    "contribution:benchmark",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "motivation:auditing",
+    "domain:chat",
+    "domain:code",
+    "scale:mid",
+    "eval:ood",
+    "eval:adversarial",
+    "eval:specificity",
+    "eval:behavior-control",
+    "eval:measure-validation",
+    "eval:confound-control",
+    "model:qwen3-14b",
+    "model:llama-3.3-70b",
+    "metric:monitor-auc",
+    "metric:tpr-at-fixed-fpr",
+    "metric:judge-similarity-score"
+   ],
+   "problem": "Deception probes trained on off-policy data often fail to generalize to on-policy deception, and model organisms deny their hidden behaviors when asked.",
+   "method": "Honesty adapter: a rank-16 LoRA stacked on frozen organism LoRAs, trained with SFT on MO-533 (on-policy transcripts from 533 organisms, judge-labeled admissions plus honest negatives). Score = per-token log-probability of a forced admission minus a forced denial. Qwen3-14B and Llama-3.3-70B.",
+   "findings": "AuditBench AUROC 0.90/0.96 vs 0.74/0.75 for a probe on the same data; MO-35 0.99/0.98 vs bare organism 0.73/0.57. Matches probes in AUROC off-policy, except on Diverse Deception, the probe's own distribution. Describes behavior in a transcript better than the IA. Negatives are essential, and logit readout beats judging sampled answers.",
+   "limits": "On-policy deception comes only from model organisms. Two models, LoRA only, scale not studied. Off-policy results rely on per-benchmark calibration of the follow-up question; conspiracy scores are an upper bound. Dispositional (no-transcript) reports stay weak. Code promised after acceptance; under review.",
+   "relations": [
+    {
+     "verb": "extends",
+     "key": "shenoy2026introspection",
+     "note": "applies its stacked-LoRA recipe and organism zoo to in-context deception reports"
+    },
+    {
+     "verb": "compares-to",
+     "key": "shenoy2026introspection",
+     "note": "IA baseline: honesty adapter verbalizes better in context, comparable or better dispositionally"
+    },
+    {
+     "verb": "compares-to",
+     "key": "taufeeque2026obfuscation",
+     "note": "its axial-attention Diverse Deception probe is a baseline; reuses its benchmarks"
+    }
+   ],
+   "new_tags": [],
+   "changes": [
+    "problem: \"Deception probes trained on off-policy data fail on on-policy deception\" -> \"...often fail to generalize to on-policy deception\" (the abstract says \"often fail to generalize\"; the off-policy probe still gets 0.94/0.92 on the conspiracy organisms)",
+    "findings: \"Matches probes on off-policy benchmarks.\" -> \"Matches probes in AUROC off-policy, except on Diverse Deception, the probe's own distribution.\" (on Diverse Deception the probe gets 0.99 vs the adapter's 0.90/0.92; Sec. 5.1 says the adapter is 'not consistently better than the best probe' off-policy)",
+    "limits: \"Results need per-benchmark calibration of the follow-up question.\" -> \"Off-policy results rely on per-benchmark calibration of the follow-up question; conspiracy scores are an upper bound.\" (the adapter keeps its trained question on MO-35 and AuditBench, so the headline organism results are uncalibrated; App. A.5 says the conspiracy column uses behavior-naming questions and is an upper bound)"
+   ],
+   "key": "anon2026traininghonesty",
+   "uncertain": [
+    "object:output: the monitor scores whether the transcript's response is deceptive, but the faithful object is mainly the self-report",
+    "signal:judge: Claude Sonnet 5 decides per transcript whether the implanted behavior fired (it defines the detection labels); off-policy benchmark labels come from the datasets themselves, and signal:by-construction was not added for them",
+    "lever:inference-time: the forced admit-vs-deny logit readout is a scoring procedure rather than a change to the model",
+    "eval:behavior-control: the organism LoRA is frozen and the adapter scores fixed transcripts, but the paper does not frame this as a behavior control",
+    "contribution:benchmark: MO-533 is mainly a training dataset; the MO-35 and conspiracy organisms serve as new evaluation sets",
+    "domain: Liars' Bench includes a multi-turn insider-trading scenario that could count as agentic; the 26 Diverse Deception sources are not itemized in the main text",
+    "taufeeque2026obfuscation could also be builds-on, since the paper uses its Diverse Deception and MBPP-Honeypot data",
+    "no contradicts relation for shenoy2026introspection: the paper says IAs hallucinate and do not transfer to in-context deception, but that is a different setting from Shenoy's claim"
+   ]
+  },
+  {
+   "tags": [
+    "object:self-report",
+    "object:self-prediction",
+    "reveals:misbehavior",
+    "reveals:planted-cue",
+    "reveals:decision-factors",
+    "signal:planted-cf",
+    "signal:wild-cf",
+    "signal:generic-cf",
+    "signal:judge",
+    "signal:env-label",
+    "lever:sft",
+    "lever:rl-reward",
+    "lever:architecture",
+    "updates:explanation",
+    "contribution:method",
+    "motivation:monitoring",
+    "domain:chat",
+    "domain:code",
+    "domain:agentic",
+    "domain:mcq",
+    "domain:open-qa",
+    "scale:mid",
+    "scale:large",
+    "eval:ood",
+    "eval:privileged-access",
+    "eval:behavior-control",
+    "eval:specificity",
+    "eval:scaling",
+    "model:qwen3.6-27b",
+    "model:nemotron-3-super-120b-a12b",
+    "model:inkling-small",
+    "model:glm-5.3",
+    "metric:monitor-auc"
+   ],
+   "problem": "Asked directly, assistants misreport their own misbehavior; transcript monitors see only outputs; activation oracles confabulate.",
+   "method": "Separate observer role (LoRA) on Qwen3.6-27B: SFT on Haiku-written QA about sampled behavior, then GRPO on verifiable counterfactual (Brier) and multiple-choice self-prediction; on-policy distillation preserves the assistant.",
+   "findings": "Held-out mean AUROC 0.907 vs honesty training 0.864, transcript monitor 0.828, activation oracle 0.788; same-data cross-model observers 0.684/0.647; with reasoning, RL lifts 0.719 to 0.823 (≈GLM-5.3 monitor); baselines improve on the trained assistant.",
+   "limits": "One model, non-reasoning transcripts, no CoT-monitor baseline, 40 reward-hack items, binary tasks only; introspection vs. behavior modeling untested; capabilities mostly preserved; no code release; desk-rejected, not peer reviewed.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "karvonen2026would",
+     "note": "uses its CHIVE pipeline to generate counterfactual-prediction RL data"
+    },
+    {
+     "verb": "compares-to",
+     "key": "wang2025evaluating",
+     "note": "generic honesty fine-tuning baseline (0.864; 0.884 with honest-persona prompt)"
+    },
+    {
+     "verb": "builds-on",
+     "key": "li2025training",
+     "note": "adopts its privileged-access test: same-data explainers lacking the target's weights"
+    }
+   ],
+   "new_tags": [],
+   "changes": [
+    "tags: metric:self-prediction-accuracy -> removed (paper names prefill AUROC as its primary metric, with reasoning AUROC second; behavior-prediction MCQ accuracy appears only in Appendix A.1, where the activation oracle beats the observer 0.71 vs 0.63)",
+    "tags: + eval:specificity (the evals pair each positive with a cue-present control: sycophancy cases where the user opinion does not move the answer, honest harm-pressure controls, 'none' value-leakage items. WeirdChat negatives are screened for other lies, so the observer is scored on false claims of influence)",
+    "method: 'SFT on judge-written QA' -> 'SFT on Haiku-written QA' (Claude Haiku 4.5 generates the question-answer pairs from sampled responses; it is not acting as a judge)",
+    "findings: 'RL reasoning only 0.823' -> 'with reasoning, RL lifts 0.719 to 0.823 (≈GLM-5.3 monitor)' (the old wording reads like an RL-only ablation; the paper says reasoning AUROC goes from 0.719 after SFT to 0.823 after RL and matches GLM-5.3 at 0.822)",
+    "findings: 'cross-model observers' -> 'same-data cross-model observers' (the point of the comparison is that they get identical training data but not Qwen's weights)",
+    "limits: + 'introspection vs. behavior modeling untested' (Discussion: the observer is trained only on outputs, and the weight-access advantage does not show that it verbalizes internal states)"
+   ],
+   "key": "anon2026trainingoversight",
+   "uncertain": [
+    "eval:behavior-control: main evals use fixed transcripts from the original assistant and OPD limits drift, but the assistant still shifts slightly (Appendix H)",
+    "signal:env-label: reward-hack positives come from trajectories passing impossible tests, but the final label is a GPT-5.5 verifier (judge)",
+    "reveals:decision-factors: supported only by CHIVE counterfactual training and value-leakage queries, not the main misbehavior evals",
+    "builds-on li2025training: cited as the framing for the privileged-access comparison, not as a reused method",
+    "zeng2026evaluating left out: the own-model advantage conflicts with its mixed results, but it is cited only in related work",
+    "Activation oracle AUROC: the abstract gives 0.788, the intro list gives 0.796",
+    "scale: Inkling-Small size is not stated (only called 'larger' than 27B); scale:large rests on Nemotron 3 Super 120B-A12B",
+    "domain:open-qa: only the Fermi-estimation value-leakage eval",
+    "eval:monitor-scope not tagged, although monitors with transcript, activation and shared-weight access are compared; privileged-access seemed the closer fit"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:stated-plan",
+    "reveals:cot-reliance",
+    "signal:env-label",
+    "signal:output-agreement",
+    "signal:cot-intervention",
+    "lever:sft",
+    "lever:rl-reward",
+    "lever:rl-mechanics",
+    "lever:inference-time",
+    "lever:architecture",
+    "updates:behavior",
+    "updates:explanation",
+    "contribution:method",
+    "contribution:metric",
+    "motivation:reasoning-quality",
+    "motivation:explainability",
+    "domain:scientific-editing",
+    "scale:small",
+    "scale:mid",
+    "eval:later-rl",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "eval:scaling",
+    "model:qwen3-1.7b",
+    "model:qwen3-4b",
+    "model:qwen3-8b",
+    "model:llama-3.1-8b",
+    "model:gemma-3-12b",
+    "metric:say-do-consistency",
+    "metric:claim-correctness",
+    "metric:contract-completeness"
+   ],
+   "problem": "Reasoning traces state edits the final output does not perform (say–do gap); free-form edit claims are hard to check against the realized change.",
+   "method": "TRACE: SFT on tool-built typed Goal–Local Edit–Safeguard contracts, then outcome-only GRPO; a replay verifier scores say–do D, also reused as a process reward and a Best-of-N selector. Molecule, codon and reaction editing.",
+   "findings": "On TOMG with Qwen3-1.7B, SR×Sim is 0.576 vs 0.517 for answer-only, with D=0.49. Additive process reward lifts MolOpt D from 0.34 to 0.83 while SR×Sim dips slightly. D-based Best-of-N recovers 97% of the oracle gain. Forced-prefix ablations show the answer relies on the Local Edit.",
+   "limits": "D checks execution consistency, not full causal faithfulness. Relies on domain tools; LLM-built contracts are a weaker fallback. One training seed per arm; outcome-only GRPO lowers MolOpt D at 1.7B and 8B. Code promised on acceptance; under review.",
+   "relations": [],
+   "new_tags": [
+    {
+     "tag": "domain:scientific-editing",
+     "definition": "constrained editing of structured scientific objects (molecules as SMILES, RNA coding sequences, biochemical reactions) whose validity and realized change are checked by domain tools"
+    }
+   ],
+   "changes": [
+    "tags: eval:ood -> removed (MUMO unseen-instruction split, Table 28, reports only SR/Sim, no C/K/D, so it does not test faithfulness on held-out data)",
+    "findings: 'The process reward lifts MolOpt D from 0.34 to 0.83 while outcome stays flat' -> 'Additive process reward lifts MolOpt D from 0.34 to 0.83 while SR×Sim dips slightly' (the gain is from the additive variant; Table 12 SR×Sim 0.6079 -> 0.5986, which the paper calls slightly lower; token-split only reaches D 0.42)",
+    "limits: 'Needs domain tools to build the contracts' -> 'Relies on domain tools; LLM-built contracts are a weaker fallback' (Sec. 3.3/C.4.3: Opus-4.8-built contracts still beat answer-only, 0.532 vs 0.5165, but with lower K/D 0.074/0.377)",
+    "limits: 'outcome-only GRPO lowers MolOpt D' -> 'outcome-only GRPO lowers MolOpt D at 1.7B and 8B' (Table 9: D rises at 4B, 0.622 -> 0.756)"
+   ],
+   "key": "anon2026what",
+   "uncertain": [
+    "reveals:cot-reliance / signal:cot-intervention: the forced-prefix remove/swap of contract fields is framed as explaining performance gains, not as a faithfulness test",
+    "signal:output-agreement alongside env-label: D compares the trace's declared edit with the answer's realized edit (output agreement), but domain-tool checkers compute it (env-label)",
+    "lever:architecture: the typed contract is an output-format change, but SFT teaches it rather than it being a structural constraint",
+    "lever:rl-mechanics: rests only on the token-split process-reward variant, which routes the process advantage to <think> tokens",
+    "updates:explanation: rests mainly on the token-split variant and the contract format; the headline framing ('do what you say') is updates:behavior",
+    "eval:later-rl: tagged because D is tracked from SFT through outcome-only GRPO (Table 9, Fig. 9), not tested as a dedicated persistence experiment",
+    "eval:ood: MUMO unseen-instruction split tests task generalization rather than faithfulness transfer",
+    "eval:optimization-pressure omitted: D is used as the process reward and scored with the same verifier, but the paper does not check for gaming",
+    "signal:interp-tool omitted: the attention-density analysis is explicitly descriptive supporting evidence",
+    "contribution:metric: the C/K/D verifier is arguably part of the method rather than a separate headline contribution",
+    "motivation: explainability chosen over monitoring/scalable-oversight; paper speaks of auditing and process supervision but no misbehavior or weak overseers",
+    "relations empty: yu2026outcome, lanham2023measuring, turpin2023language, lyu2023faithful, chen2025reasoning, korbak2025chain, baker2025monitoring, arcuschin2025chain and jacovi2020towards are cited only in intro/related work; main baseline RePO is not in the corpus"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:cot-reliance",
+    "signal:cot-intervention",
+    "contribution:metric",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "domain:agentic",
+    "scale:mid",
+    "scale:large",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "factor:preference-conflict",
+    "model:qwen3-30b-a3b",
+    "model:gpt-oss-120b",
+    "model:glm-4.5-air",
+    "model:glm-4.7-flash",
+    "metric:plan-binding-rate",
+    "metric:conflict-override-rate",
+    "metric:seed-invariance"
+   ],
+   "problem": "Plan- and CoT-based oversight of tool-using agents assumes stated plans govern irreversible actions; no black-box causal test of this exists.",
+   "method": "τ²-bench retail tasks rewritten so the customer is indifferent between two outcomes; one template plan per outcome, gated by ratification and forced execution (under Qwen3-30B); plan A or B seeded as the agent's own; score which write succeeds; unseeded rollouts give revealed preference. 62 tasks, 4 open models.",
+   "findings": "Seeded plan shifts outcome in all models: binding 0.75–0.93 (Qwen3-30B P(A) 0.97→0.11). Overrides 0–8% when plan agrees with revealed preference vs 12–49% when it conflicts. Overrides are silent and uncorrelated with the model's own validity judgments. 5–7 tasks per model are seed-invariant. Harness and data released.",
+   "limits": "Ratified template plans, not self-authored; constructed indifference and manufactured conflicts; open models only; one main domain (airline n=5 gated tasks); temperature 0; original raw logs lost, so results come from a regeneration; workshop paper.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "guan2025monitoring",
+     "note": "instantiates its 'intervention' archetype for validating monitorability, at the action level"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "factor:preference-conflict",
+     "definition": "conflict between what the stated reasoning or plan prescribes and the model's own revealed preference over outcomes (measured without the plan), studied as a driver of plan or CoT overrides"
+    }
+   ],
+   "changes": [
+    "tags: reveals:stated-plan -> removed (the definition covers later reasoning following a plan the model itself wrote earlier. Here the plan is a seeded template, and the target is whether actions causally depend on it, which reveals:cot-reliance already covers)",
+    "tags: signal:env-label -> removed (the ground truth about faithfulness is the A/B plan swap plus unseeded rollouts. The environment only records which write succeeded, the way an answer string would in a QA intervention paper, so it is not a faithfulness label)",
+    "method: 'both template plans ratified by the model and force-executed' -> 'one template plan per outcome, gated by ratification and forced execution (under Qwen3-30B)' (the 62 tasks pass the gates under Qwen3-30B only. For the other three models the gates are recorded as covariates, and gpt-oss and the GLM models refuse to ratify some plans)"
+   ],
+   "key": "fareed2026plan",
+   "uncertain": [
+    "reveals:stated-plan: here actions, not later reasoning, must follow a plan seeded as the model's own; cot-reliance is the closer fit",
+    "signal:env-label: the ground truth is the plan swap, and the environment only says which write succeeded",
+    "scale:mid for GLM-4.7-Flash: the paper gives no size; I assumed a 30B MoE. GLM-4.5-Air is tagged large (106B total)",
+    "eval:ood not tagged: the airline second domain is a small replication of the protocol, not a held-out test of a trained intervention",
+    "contribution:benchmark not tagged: the paper releases its task rewrites and harness, but its headline is the test and the findings",
+    "builds-on guan2025monitoring: it borrows the conceptual archetype, not a method or data; khanzadeh2026project and han2026rfeval appear only in related work and are skipped",
+    "metric:plan-binding-rate is close to the existing counterfactual-swap-following but specific to plans and agents, so it was coined separately",
+    "venue: the PDF header says 'conference paper at COLM 2026', while the metadata says Lifelong Agents workshop"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:planted-cue",
+    "signal:planted-cf",
+    "contribution:analysis",
+    "motivation:explainability",
+    "motivation:reliability",
+    "domain:math",
+    "scale:small",
+    "factor:self-distillation",
+    "model:qwen3-1.7b",
+    "metric:biased-context-accuracy-drop",
+    "metric:biased-reasoning-rate",
+    "metric:hint-verbalization-rate",
+    "metric:composite-faithfulness-score"
+   ],
+   "problem": "Self-distillation (OPSD) is adopted for accuracy gains. Does it erode CoT faithfulness and robustness to misleading context compared with SFT?",
+   "method": "Qwen3-1.7B base, SFT and OPSD (teacher sees verified solution), 100 steps each. 998 paired GSM8K prompts: clean, correct, wrong and authority-escalated hints, distractor, biased few-shot; plus a sycophancy test.",
+   "findings": "OPSD has the best clean accuracy (92%), but wrong-hint accuracy drops to 46% vs 70-73%. Hint-following at 'MIT professor' authority 90% vs 66-70%. Composite score 80.2% vs 89.8% for SFT. All three models emit self-check tokens; OPSD more often sides with the hint. Unverbalized-hint error rate is lower for OPSD (37% vs 44-47%).",
+   "limits": "One 1.7B model, GSM8K only, 100 steps, no variance reported. Headline metrics mostly measure hint susceptibility. Conflict detection is keyword-based. Composite's early-answering and counterfactual terms undefined; training data described inconsistently. Mechanism untested. No code mentioned.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "turpin2023language",
+     "note": "takes its Unfaithful CoT Rate; hint and biased few-shot cues follow its biasing features"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "factor:self-distillation",
+     "definition": "on-policy self-distillation, where the same model as teacher conditions on privileged context (e.g. a verified solution) and the student is trained toward the teacher's distribution on its own rollouts"
+    }
+   ],
+   "changes": [
+    "method: '...six conditions: wrong, correct and authority-escalated hints, a distractor, sycophancy, biased few-shot' -> 'clean, correct, wrong and authority-escalated hints, distractor, biased few-shot; plus a sycophancy test' (Sec. 3 lists Clean as one of the six conditions and treats sycophancy as a separate test; the record dropped the clean baseline that SC2W is computed from)",
+    "method: added 'teacher sees verified solution' (this is the OPSD feature the paper's hypothesis rests on, Sec. 1 and 3)",
+    "findings: added 'Hint-following at MIT professor authority 90% vs 66-70%' (headline contribution (i), Fig. 1c and lines 107-108; the record left it out)",
+    "limits: added 'Composite's early-answering and counterfactual terms undefined; training data described inconsistently' (Eq. 4 uses Acc_early and Acc_cf, which are never described; the intro says the variants were trained on Openthoughts_math_30k_opsd, but Sec. 3 says SFT used GSM8K question-solution pairs)",
+    "relations: turpin2023language note 'adopts its misleading-hint and biased few-shot setup and unfaithful-CoT-rate metric' -> 'takes its Unfaithful CoT Rate; hint and biased few-shot cues follow its biasing features' (the paper credits only UCR to Turpin; its 10%-inflated few-shot and authority hints are not Turpin's exact setup)"
+   ],
+   "key": "imrankhan2026better",
+   "uncertain": [
+    "metric:biased-reasoning-rate for the paper's hint-following rate (HFR): same quantity (share of answers adopting the planted wrong value) as Chua's BRR, under a different name",
+    "metric:hint-verbalization-rate for UCR: UCR is its complement and is computed over wrong-hint errors, not over hint-followers",
+    "metric:composite-faithfulness-score: newly named free metric. Its six terms (including undescribed 'early-answering' and 'counterfactual' accuracies) do not cleanly match the radar-chart axes",
+    "No lever/updates tags: SFT and OPSD are trained, but as objects of study, not as faithfulness interventions (follows the little2026length and lewislim2026efficient convention)",
+    "factor:self-distillation is coined. No existing factor covers a training-method comparison, and the SFT baseline gets no factor tag",
+    "motivation:reliability vs reasoning-quality: the paper frames 'epistemic robustness' to untrustworthy context, which could fit either",
+    "signal:cot-intervention omitted: the composite includes an 'early-answering' accuracy, but the paper never describes it as a CoT truncation",
+    "No relation to lanham2023measuring: cited only as inspiration ('follow this spirit'); the early-answering control is not attributed to it",
+    "contribution:negative-result omitted: OPSD backfires on robustness, but it is a capability method, not a faithfulness intervention",
+    "Claim that OPSD is 'less faithful' rests on hint susceptibility (SC2W, HFR); the verbalization metric (UCR) actually favors OPSD"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "object:self-prediction",
+    "reveals:planted-cue",
+    "signal:planted-cf",
+    "contribution:metric",
+    "contribution:meta-evaluation",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "domain:open-qa",
+    "domain:mcq",
+    "domain:synthetic",
+    "scale:small",
+    "scale:mid",
+    "eval:ood",
+    "eval:behavior-control",
+    "eval:confound-control",
+    "eval:measure-validation",
+    "eval:monitor-scope",
+    "eval:scaling",
+    "factor:cue-strength",
+    "model:mistral-7b",
+    "model:gemma-2-9b",
+    "model:llama-3.1-8b",
+    "model:qwen3-14b",
+    "model:qwen3-32b",
+    "model:qwq-32b",
+    "metric:probe-auc",
+    "metric:monitor-auc"
+   ],
+   "problem": "Results where probes beat CoT monitors may track answer identity or candidate priors, not hidden hint provenance.",
+   "method": "Same-answer label: keep traces giving the hinted wrong answer; dependent if a matched-control hint changes it. Prompt-end probes vs Sonnet-4 judges (incl. CoT+self-report); prior/text baselines, control-state probes, patching. 3 models (7-9B), 4 QA sets.",
+   "findings": "Probes AUROC 0.61-0.65 vs judges 0.51-0.62 (Llama tie); no-hidden-state baseline 0.76-0.84, adding states gives no lift. Control-state probes match; W−G probes and patching null; prior-matched candidates drop probes to chance. Under prompt injection (N=45-78), judges win. On a synthetic role-swap, state differences win.",
+   "limits": "Artificial soft hint. Larger-model slices only 35-54 rows. Independent class scarce. Positive result synthetic only. Code not released.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "boppana2026reasoning",
+     "note": "Adopts its probe-vs-CoT-monitor comparison; reads its early answer decoding as non-provenance signal"
+    }
+   ],
+   "new_tags": [
+    {
+     "tag": "factor:cue-strength",
+     "definition": "strength or explicitness of the planted influence (caveated note vs. authoritative claim or injected instruction), varied as a driver of verbalization or monitor ranking"
+    }
+   ],
+   "changes": [
+    "findings: 'Probes AUROC 0.61-0.65 beat judges (0.51-0.62)' -> 'Probes AUROC 0.61-0.65 vs judges 0.51-0.62 (Llama tie)' (overclaim: Table 1 has the Llama CoT judge at 0.62 vs probe 0.61, which the paper calls statistically indistinguishable)",
+    "findings: 'a baseline without hidden states reaches 0.76-0.84' -> 'no-hidden-state baseline 0.76-0.84, adding states gives no lift' (abstract-level result missing: stacking the W probe on the baseline changes AUROC by +0.002/-0.002/-0.007)",
+    "findings: added 'prior-matched candidates drop probes to chance' (abstract-level audit result missing; Table 25 gives 0.42/0.48/0.52)",
+    "findings: 'Under prompt injection, judges win' -> 'Under prompt injection (N=45-78), judges win' (the paper treats the reversal as a regime boundary on small slices with no bootstrap intervals)",
+    "method: 'Prompt-end probes vs Sonnet-4 judges' -> 'Prompt-end probes vs Sonnet-4 judges (incl. CoT+self-report)' (names the follow-up self-report view that object:self-prediction rests on)"
+   ],
+   "key": "shiromani2026necessary",
+   "uncertain": [
+    "contribution:metric: the same-answer label is a new labeling design, but the paper concludes it is necessary, not sufficient",
+    "contribution:benchmark omitted: the role-swapped synthetic benchmark is in the intro contributions list but not the abstract",
+    "eval:behavior-control: same-answer filtering holds the final answer fixed, not a KL- or fixed-behavior control on explanations",
+    "object:self-prediction: rests only on the CoT+follow-up judge, which reads the model's answer to 'would your answer have been the same without the note?'",
+    "signal:interp-tool omitted: probes and patching are instruments scored against the planted-cf label, not ground truth",
+    "eval:scaling: larger-model replications (Qwen2.5-7B to QwQ-32B) are pilot-scale, 35-54 rows",
+    "scale:mid: based on Qwen3-14B/32B and QwQ-32B probing and patching runs",
+    "factor:cue-strength coined from one boundary experiment (soft note vs prompt injection); the paper is mainly a meta-evaluation, not a factor study",
+    "builds-on boppana2026reasoning: the paper reproduces its comparison shape but says it does not re-run that setup and calls the results consistent",
+    "chen2025reasoning and turpin2023language not linked: they are cited as the motivating hint paradigm, not as a reused setup"
+   ]
+  },
+  {
+   "tags": [
+    "object:cot",
+    "reveals:planted-cue",
+    "reveals:hidden-behavior",
+    "signal:planted-cf",
+    "signal:implanted-behavior",
+    "signal:interp-tool",
+    "lever:rl-reward",
+    "contribution:analysis",
+    "motivation:monitoring",
+    "motivation:auditing",
+    "domain:mcq",
+    "scale:small",
+    "eval:adversarial",
+    "eval:optimization-pressure",
+    "eval:measure-validation",
+    "eval:confound-control",
+    "eval:scaling",
+    "model:gemma-3-1b",
+    "metric:hint-verbalization-rate",
+    "metric:clt-fvu-differential"
+   ],
+   "problem": "Unknown what internal computation a model builds when RL teaches it to use MCQ hints while hiding them from its CoT.",
+   "method": "Model organism: Gemma 3 1B, SFT then GRPO (LoRA) with a -3.0 penalty for mentioning the hint. Gemma Scope 2 CLTs pretrained on the base model act as anomaly detectors: per-layer FVU differential and new-feature counts over with-hint, no-hint and non-MCQ prompts, correct vs wrong hints, and 6 checkpoints.",
+   "findings": "98% accuracy with hints vs 38% without, 0% leakage. Added computation peaks at layers 20-23. Two features (L15/f478, L12/f317) new in all 10 tested prompts. Correct- vs wrong-hint differentials correlate at r=0.971, read as content-agnostic concealment. Differential present from step 50 and roughly flat over training: no phase transition.",
+   "limits": "Hint-specific signal ~10x smaller than total GRPO change, so CLTs cannot separate hiding from format changes. Single 1B model, MCQ only, 20 prompts per condition. Features not functionally characterized. No code release mentioned.",
+   "relations": [
+    {
+     "verb": "builds-on",
+     "key": "baker2025monitoring",
+     "note": "organism mirrors obfuscation from penalizing CoT mentions of exploited behavior"
+    },
+    {
+     "verb": "builds-on",
+     "key": "chen2025reasoning",
+     "note": "reuses the hint-in-MCQ-prompt verbalization setup"
+    }
+   ],
+   "new_tags": [],
+   "changes": [
+    "tags: (none) -> +eval:confound-control (Sec. 2.2 says the with-hint vs no-hint comparison isolates hint-specific computation from the named confound 'general format changes'; a non-MCQ sanity condition is added too. This is an explicit confound control, separate from measure-validation)",
+    "method: 'with correct- vs wrong-hint prompts and 6 checkpoints compared' -> 'over with-hint, no-hint and non-MCQ prompts, correct vs wrong hints, and 6 checkpoints' (the three-condition comparison behind the paper's main limitation was missing)",
+    "findings: 'new in 100% of tested prompts' -> 'new in all 10 tested prompts' (the feature analysis uses only 10 prompts, Sec. 3.2)",
+    "findings: 'Hiding emerges gradually, with no phase transition.' -> 'Differential present from step 50 and roughly flat over training: no phase transition.' (Sec. 3.4 tracks only the CLT differential, total 1.19-1.42 and late-layer signal stable from step 50, not hiding behavior over checkpoints, so 'hiding emerges gradually' overclaims)"
+   ],
+   "key": "singhal2026believe",
+   "uncertain": [
+    "lever:rl-reward: GRPO leakage penalty builds the unfaithful organism; it is not a fix. updates:explanation omitted because training induces mismatch, though skaf2025large used it in a similar case",
+    "eval:optimization-pressure and eval:adversarial: the organism is trained against a keyword hint-mention penalty, but the CLT detector itself is never optimized against",
+    "reveals:hidden-behavior vs reveals:internal-strategy: the CoT should reveal hint use (planted cue), and the CLTs audit fine-tuning changes; internal-strategy not tagged",
+    "contribution:metric not tagged: reconstruction differential is the paper's anomaly-detection tool, but the abstract frames the work as findings plus a limitation",
+    "eval:confound-control not tagged: no-hint and non-MCQ conditions control for format changes, which measure-validation already covers",
+    "builds-on chen2025reasoning: the hint paradigm matches, but the paper never says it adopts Chen's setup; it may be only motivation",
+    "r=0.971 'proves' content-agnostic concealment is the authors' claim, based on correlating per-layer aggregates",
+    "Venue: PDF header says ICML 2026 proceedings (PMLR 306), but metadata lists the mech-interp workshop"
+   ]
+  }
+ ],
+ "missing": []
+}

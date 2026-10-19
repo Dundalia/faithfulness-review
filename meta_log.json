@@ -17,6 +17,13 @@
   "confident": true,
   "evidence": "OpenReview 5u0qcGGkoc (earlier title 'Inducing Faithfulness in Structured Reasoning via Counterfactual Sensitivity', same authors): 'ICLR 2026 Conference Withdrawn Submission'. No later acceptance found."
  },
+ "algaba2026reasoning": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no venue, and Semantic Scholar shows no venue. The B6 report links ICLR 2027 OpenReview j4DwPiEECX, but the API was challenge-blocked.",
+  "list": "measurement"
+ },
  "alon2026faithfulness": {
   "changed": "url (added v1)",
   "checked": "2026-10-15",
@@ -28,6 +35,118 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'Accepted to the ICML 2026 AI4Math Workshop as a poster'; OpenReview BAxBfSCKyj 'ICML 2026 AI4Math Workshop Poster'. Not in NeurIPS 2026 list."
+ },
+ "angdembay2026two": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 title (v1 said 'Behavioral Detection'); comment only page counts, no journal_ref; Semantic Scholar shows no venue.",
+  "list": "measurement"
+ },
+ "anon2026chainofthought": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview blocked (403 challenge), so the abstract is unverified. A similar thesis appears in arXiv 2610.18105 (Bürger et al., not in the map), but the reported results differ, so probably a distinct paper.",
+  "list": "measurement"
+ },
+ "anon2026computation": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview search API: venue 'ICLR 2027 Conference Submission', created 2026-09-18. Abstract read there. No arXiv version found by web search.",
+  "list": "improvement"
+ },
+ "anon2026crisp": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "The OpenReview API returned 403 challenge pages, so the abstract was not read. Title and venue come from the B5 citation. No arXiv or web match; no corpus title match.",
+  "list": "measurement"
+ },
+ "anon2026generating": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview API notes/search: venueid ICLR.cc/2027/Conference/Submission, keywords 'Reasoning faithfulness', abstract read; no arXiv version found; distinct from yu2026outcome (different metric, method).",
+  "list": "improvement"
+ },
+ "anon2026grace": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview search API: venue 'ACL ARR 2026 May Submission', created 2026-05-26. Not found in the EMNLP 2026 program sheet (main or Findings). No arXiv version found.",
+  "list": "measurement"
+ },
+ "anon2026implementation": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview API and forum blocked by a 403 challenge, and no arXiv or S2 match. Scope inferred from the title and L3's summary (sample and monitor counts may not separate models).",
+  "list": "measurement"
+ },
+ "anon2026improving": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview note (from this session's cached API response; live API now behind a challenge): venueid ICLR.cc/2027/Conference/Submission, created Sept 2026. No arXiv version found.",
+  "list": "improvement"
+ },
+ "anon2026introspection": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Abstract and venue ('ICLR 2027 Conference Submission') read via the OpenReview notes/search API. Not a duplicate of any corpus title.",
+  "list": "measurement"
+ },
+ "anon2026measuring": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview API and forum blocked by a browser challenge. The title and the ICLR 2027 status come from the citing report and are unverified. Web search found no arXiv version.",
+  "list": "measurement"
+ },
+ "anon2026one": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview notes/search API: venue 'ICLR 2027 Conference Submission', posted 2026-09-18; abstract read. Not in corpus.",
+  "list": "measurement"
+ },
+ "anon2026reward": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview notes/search API: venue 'ICLR 2027 Conference Submission', posted 2026-09-19; abstract read. Not in corpus; no arXiv/S2 version found.",
+  "list": "improvement"
+ },
+ "anon2026should": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview API and forum blocked by a browser challenge. The title and the ICLR 2027 status come from the citing report and are unverified. Web search found no arXiv version.",
+  "list": "measurement"
+ },
+ "anon2026traininghonesty": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview notes/search API: venue 'ICLR 2027 Conference Submission', posted 2026-09-19; abstract read. Builds on, but differs from, shenoy2026introspection.",
+  "list": "improvement"
+ },
+ "anon2026trainingoversight": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview notes/search API: venue 'ICLR 2027 Conference Desk Rejected Submission', posted 2026-09-19; abstract read. Distinct from dietz2026split in corpus.",
+  "list": "improvement"
+ },
+ "anon2026what": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "The OpenReview API and forum returned 403 bot-challenge pages all session, and web search found nothing. Title, venue and list come only from the B5 report citation. Re-check the abstract.",
+  "list": "improvement"
  },
  "anthropic2025paraphrases": {
   "changed": "authors 'Anthropic Alignment Science' -> 'Roger' (named author on crosspost; blog page itself lists no byline); venue 'blog, 2025' -> 'blog'",
@@ -59,6 +178,27 @@
   "confident": true,
   "evidence": "arXiv comment 'Published at ICML 2026'; ICML 2026 accepted-papers list: Accept (regular), id 64450."
  },
+ "arcuschin2026biases": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "The arXiv v5 comment says 'Published at the 43rd International Conference on Machine Learning (ICML 2026)'. Semantic Scholar lists arXiv only.",
+  "list": "measurement"
+ },
+ "arike2026information": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "PMLR v306 page arike26a: citation_conference_title 'International Conference on Machine Learning', pp. 3473–3526. ICML 2026 poster 62038 also exists.",
+  "list": "measurement"
+ },
+ "arora2025training": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Listed in the NeurIPS 2025 main-conference proceedings (papers.nips.cc vol38). The arXiv comment says NeurIPS 2025, S2 agrees, and the v4 HTML has §5.3.2 'Effects on Faithfulness of CoT'.",
+  "list": "measurement"
+ },
  "atkinson2026identifying": {
   "changed": "url (added v1)",
   "checked": "2026-10-15",
@@ -70,6 +210,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "No arXiv comment/journal_ref; S2 venue arXiv only; no OpenReview match; absent from ICLR 2026, ICML/NeurIPS 2025-2026 accepted lists; web search found none."
+ },
+ "basani2026brittle": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Full post read via GreaterWrong. LessWrong post dated 22 Jun 2026, a SPAR Spring 2026 project, with original SSC, SRFT and GHT experiments.",
+  "list": "improvement"
  },
  "basu2026measuring": {
   "changed": "venue null -> preprint; url (added v3)",
@@ -89,6 +236,13 @@
   "confident": true,
   "evidence": "NeurIPS 2026 accepted list: Accept (poster), neurips.cc/virtual/2026/poster/156026 (retitled 'NeuroFaith: ...at the Concept Level'); also ICML 2026 Mech Interp workshop; ICLR 2026 rejected."
  },
+ "bhupatiraju2026stated": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment 'NeurIPS 2026, Interpretability as a Science'; neurips.cc lists this as a NeurIPS 2026 workshop.",
+  "list": "measurement"
+ },
  "binder2024looking": {
   "changed": "venue: null -> ICLR 2025; url: added v1",
   "checked": "2026-10-15",
@@ -101,17 +255,52 @@
   "confident": true,
   "evidence": "neurips.cc/virtual/2026/165307: 'Poster in Workshop: Trustworthy AI for Good (AI4GOOD)'; OpenReview ZGSqtQ39U8 same. ICLR 2027 submission still under review; no main venue."
  },
+ "boppana2026reasoning": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "PMLR v306 boppana26a (International Conference on Machine Learning) links OpenReview 1lyagkzogH; arXiv 2603.05488 first posted March 2026, latest v4.",
+  "list": "measurement"
+ },
+ "bu2026spadebench": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 (28 Jun 2026): no comment or journal_ref. Semantic Scholar venue is arXiv.org. Web search found no OpenReview entry or acceptance notice.",
+  "list": "measurement"
+ },
+ "burger2026chain": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 (13 Oct 2026) has no comments or journal_ref; Semantic Scholar shows no venue; web search found no acceptance.",
+  "list": "measurement"
+ },
  "cahlik2025reasoninggrounded": {
   "changed": "url: added v2",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv journal_ref: xAI 2025, Springer CCIS vol 2578; DBLP key conf/xai/CahlikAK25 via Semantic Scholar."
  },
+ "chang2026catalyzing": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 (Oct 15, 2026), comments '9 pages, 6 figures', no journal_ref. Semantic Scholar has no venue. Web search found no acceptance.",
+  "list": "improvement"
+ },
  "cheah2026training": {
   "changed": "venue: reformatted 'ICLR 2026 Re-Align workshop' -> 'ICLR 2026 workshop (Re-Align)'; url: added v1",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'To appear at the ICLR 2026 Workshop on Representational Alignment (Re-Align)'; OpenReview ylkkt58DwF. Not in ICML/NeurIPS 2026 main lists."
+ },
+ "chen2022rev": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment 'ACL 2023'; Semantic Scholar ACL id 2023.acl-long.112 (pp. 2007-2030); first version Oct 2022.",
+  "list": "measurement"
  },
  "chen2025consistent": {
   "changed": "url: ACL Anthology -> arXiv 2401.13986v1 (preprint exists); year: 2025 -> 2024 (arXiv v1 2024-01-25)",
@@ -124,6 +313,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "No arXiv comment/journal_ref; Semantic Scholar venue arXiv.org; OpenReview only CoRR record; absent from NeurIPS 2025, ICLR 2026, ICML/NeurIPS 2026 lists; web search found none."
+ },
+ "chidambaram2026corrupted": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "NeurIPS 2026 poster page 152688 (OpenReview RBKPrjv13C) lists the same authors under this title. arXiv v1 is titled 'Corrupt Plans, Clean Traces: Evading CoT Monitoring with Plan Injection'.",
+  "list": "measurement"
  },
  "chua2024biasaugmented": {
   "changed": "venue: null -> withdrawn (ICLR 2025 submission); url: added v3",
@@ -167,11 +363,25 @@
   "confident": true,
   "evidence": "neurips.cc/virtual/2026/169849: Poster in Workshop 'Managing Agents that Manage Agents: Workshop on Responsible Use of Meta-Agents'. ICLR 2027 submission under review."
  },
+ "dai2025legaldelta": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Semantic Scholar venue is ICASSP. The v3 (Feb 2026) uses the ICASSP template with Index Terms. There is no arXiv comment and no IEEE Xplore hit. Read the HTML (Sec. 2.2, 4.3).",
+  "list": "improvement"
+ },
  "dehghanighobadi2025can": {
   "changed": "url: added v2",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "ACL Anthology EMNLP 2025 main volume lists it as 2025.emnlp-main.396; OpenReview Eo08ytDOik 'EMNLP 2025'."
+ },
+ "dhoot2026hintfollowing": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Read the full post through the LessWrong GraphQL API: posted 2026-07-24 by Arav Dhoot with co-author Yixiong Hao, with original checkpoint experiments judged by Gemini.",
+  "list": "measurement"
  },
  "dietz2026split": {
   "changed": "venue: null -> ICML 2026; url: added v1",
@@ -185,11 +395,32 @@
   "confident": true,
   "evidence": "ACL Anthology 2025.ijcnlp-srw.17 (IJCNLP-AACL 2025, 2025/12); arXiv 2512.07288v1 comment: to appear in AACL-SRW 2025."
  },
+ "dong2025say": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 only: no comment or journal_ref. Semantic Scholar venue is arXiv.org. Web search found no acceptance notice.",
+  "list": "measurement"
+ },
  "drori2025output": {
   "changed": "venue: null -> ICLR 2026; url: added v1",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview forum JTX0iqxBjk venue 'ICLR 2026 Poster'; ICLR virtual poster 10010196."
+ },
+ "duzan2026chainofthought": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no comment or journal_ref. Semantic Scholar shows no venue, and searches of neurips.cc, iclr.cc and openreview found no acceptance.",
+  "list": "measurement"
+ },
+ "egan2026hint": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "LessWrong GraphQL: posted 2026-07-30 by user 'egan' (no full name listed); post reports new hint-following/faithfulness experiments on MMLU and GPQA with code and transcripts.",
+  "list": "measurement"
  },
  "emmons2025chain": {
   "changed": "venue: null -> preprint; url: added v1",
@@ -203,17 +434,38 @@
   "confident": true,
   "evidence": "arXiv comment only equal contribution; S2 venue arXiv.org; OpenReview has only an Archive direct upload (TfQA1JDpS0); web search found no venue."
  },
+ "fareed2026plan": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview venue 'LLA 2026 Poster'. Group colmweb.org/COLM/2026/Workshop/LLA is the 2nd Workshop on Lifelong Agents. No arXiv version found.",
+  "list": "measurement"
+ },
  "farquhar2025mona": {
   "changed": "url: added v2",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview forum fyi34BxCwq venue 'ICML 2025 poster'; Semantic Scholar venue International Conference on Machine Learning; DBLP ICML 2025."
  },
+ "ferreira2026outofsight": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv abs v1 (Aug 2026): comments '23 pages', no journal_ref; Semantic Scholar no venue; web search shows only arXiv/HF listings.",
+  "list": "measurement"
+ },
  "ferreira2026truthful": {
   "changed": "year: 2026 -> 2025 (arXiv v1 2025-04-07); url: added v3",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'ICLR 2026 Camera-ready'; OpenReview forum nkdPLuKoL5 venue 'ICLR 2026 Poster'."
+ },
+ "gema2026chainofthought": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 has no venue comment or journal_ref. Semantic Scholar gives no venue. A web search found only a news alert, no acceptance.",
+  "list": "measurement"
  },
  "goel2025learning": {
   "changed": "venue: null -> ICLR 2026; url: added v4",
@@ -227,6 +479,13 @@
   "confident": true,
   "evidence": "arXiv no comment; S2 no venue; OpenReview iiBsKDpYkd is 'ICLR 2027 Conference Submission' (under review); web search found only blog/LessWrong posts."
  },
+ "golechha2026preliminary": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "LessWrong GraphQL: posted 2026-06-30 by Golechha with coauthors Black, Bloom (UK AISI); post reports Olmo-32B/Qwen-2.5-32B RL runs measuring unfaithful-CoT reward hacking.",
+  "list": "measurement"
+ },
  "guan2025monitoring": {
   "changed": "venue: null -> ICML 2026; url: added v1",
   "checked": "2026-10-15",
@@ -239,11 +498,32 @@
   "confident": true,
   "evidence": "OpenReview 6J25xPearK 'CompLearn 2026 Poster' (ICML.cc/2026/Workshop/CompLearn); icml.cc/virtual/2026/69383 workshop poster. No main venue found."
  },
+ "gurarieh2026faithfulness": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 (May 2026) has no comments/journal_ref; Semantic Scholar lists arXiv only; web search shows only preprint mirrors.",
+  "list": "measurement"
+ },
+ "han2026correct": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview notes/search: pfeaZPFUAI is 'ICLR 2027 Conference Submission' with the same title and abstract as arXiv 2605.03862v4 (no comment). S2 lists arXiv only.",
+  "list": "improvement"
+ },
  "han2026rfeval": {
   "changed": "url: added v3",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'Accepted in ICLR 2026 Poster'; OpenReview forum 2Gc8aj0afg venue 'ICLR 2026 Poster'."
+ },
+ "hase2020leakageadjusted": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment says EMNLP 2020 Findings. Semantic Scholar gives ACL Anthology id 2020.findings-emnlp.390 (pp. 4351-4367). Read the abstract.",
+  "list": "measurement"
  },
  "hase2026counterfactual": {
   "changed": "url: added v2",
@@ -263,6 +543,13 @@
   "confident": true,
   "evidence": "arXiv comment 'ACL 2023 main'; Semantic Scholar venue Annual Meeting of the ACL, pages 3944-3965."
  },
+ "hong2026llm": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no comment or journal_ref. Semantic Scholar venue is arXiv. A web search found no ACL Anthology or EACL listing.",
+  "list": "measurement"
+ },
  "hong2026making": {
   "changed": "venue: null -> ICML 2026 workshop (Mech Interp); url: added v2",
   "checked": "2026-10-15",
@@ -275,17 +562,38 @@
   "confident": true,
   "evidence": "OpenReview ZjonyGJIgB: venue 'ICLR 2026 Workshop LLM Reasoning' (ICLR.cc/2026/Workshop/LLM_Reasoning); S2 gives only arXiv; no main venue found"
  },
+ "hu2026faithful": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "ICML 2026 main-conference poster page (icml.cc/virtual/2026/poster/63413, Hall A, Jul 8). Read the abstract and Table 10 on thought–action consistency.",
+  "list": "improvement"
+ },
  "imran2026consistency": {
   "changed": "venue: null -> preprint; url: added version v1",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "No arXiv comment; S2 venue arXiv.org; OpenReview lists only 'CoRR 2026'; web search found only arXiv and LessWrong"
  },
+ "imrankhan2026better": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview notes/search API: venue 'NeurIPS 2026 Workshop MusIML Poster', sole author Imrankhan (M.A.M. School of Engineering); abstract read.",
+  "list": "measurement"
+ },
  "jacovi2020towards": {
   "changed": "url: added version v3",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'Accepted to ACL 2020'; Semantic Scholar venue: Annual Meeting of the ACL 2020, pages 4198-4205"
+ },
+ "jia2026decorative": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment 'Accepted to TMLR, September 2026' and journal_ref 'Transactions on Machine Learning Research (TMLR), 2026'.",
+  "list": "measurement"
  },
  "jia2026faithfulness": {
   "changed": "venue: null -> preprint; url: added version v1",
@@ -305,6 +613,13 @@
   "confident": true,
   "evidence": "No arXiv comment; S2 venue arXiv.org; no OpenReview match; web search found only arXiv/OpenAI coverage"
  },
+ "jose2025reasoning": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Listed in the NeurIPS 2025 main-conference proceedings (papers.nips.cc vol38) and as NeurIPS 2025 poster 115367. arXiv has only v1.",
+  "list": "measurement"
+ },
  "jose2026strategic": {
   "changed": "none",
   "checked": "2026-10-15",
@@ -322,6 +637,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "No arXiv comment; S2 venue arXiv.org; no OpenReview match; web search found only arXiv/alphaxiv"
+ },
+ "khanzadeh2026project": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no comment or journal_ref. Semantic Scholar lists arXiv only, and web search found no venue.",
+  "list": "measurement"
  },
  "kim2026mitigating": {
   "changed": "venue: 'ICLR 2026 workshop' -> 'ICLR 2026 workshop (Trustworthy AI)'; url: added version v2",
@@ -341,6 +663,13 @@
   "confident": true,
   "evidence": "No arXiv comment/journal_ref; S2 venue arXiv.org; OpenReview lists only 'CoRR 2025'; web search found no venue"
  },
+ "kudo2024llms": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "ACL Anthology 2026.findings-eacl.59: 'Findings of the ACL: EACL 2026'; S2 DOI 10.18653/v1/2026.findings-eacl.59; arXiv v1 Dec 2024, latest v4.",
+  "list": "measurement"
+ },
  "kutsyk2026revealing": {
   "changed": "venue: null -> preprint; url: added version v2",
   "checked": "2026-10-15",
@@ -352,6 +681,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "No arXiv comment/journal_ref; S2 venue arXiv.org; no OpenReview match; web search shows only arXiv/Anthropic PDF"
+ },
+ "lee2026beyond": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no comment or journal_ref; Semantic Scholar says arXiv. The same title is an ICLR 2027 submission on OpenReview (forum 4VQacZlySN). Read the abstract and HTML.",
+  "list": "improvement"
  },
  "lee2026training": {
   "changed": "url: added version v1",
@@ -395,17 +731,45 @@
   "confident": true,
   "evidence": "OpenReview sWs0cCuM8I venue 'ICLR 2026 Poster' (venueid ICLR.cc/2026/Conference)."
  },
+ "li2026when": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 comments give only the page count, and web search found no venue (Semantic Scholar was rate-limited). Read the abstract, the introduction, §5.3, §6 (positioned against faithfulness metrics) and Appendix E.",
+  "list": "measurement"
+ },
+ "lin2025clarity": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Listed in the ACL Anthology as 2026.acl-long.1358. arXiv comment says ACL 2026 Main Conference; Semantic Scholar DBLP key is conf/acl/LinJWSF26. Read the HTML (Sec. 5.4, related work).",
+  "list": "improvement"
+ },
  "lin2026reason": {
   "changed": "venue: null -> preprint; url: added v1",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview KbH6dznmlO is an 'ACL ARR 2026 October Submission' (not accepted); Semantic Scholar shows arXiv.org; arXiv comment empty."
  },
+ "lindsey2025biology": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Fetched transformer-circuits.pub page: published March 27, 2025, Anthropic; table of contents includes 'Chain-of-thought Faithfulness' section. Self-published Transformer Circuits Thread, no conference venue.",
+  "list": "measurement"
+ },
  "little2026length": {
   "changed": "venue: null -> preprint; url: added v4",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview bDRNeSJYL0 is an 'ICLR 2027 Conference Submission'; Semantic Scholar shows arXiv.org; arXiv comment empty."
+ },
+ "lobo2024impact": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "ACL Anthology 2025.naacl-long.584 (NAACL 2025 long papers); Semantic Scholar venue NAACL; arXiv v1 Nov 2024, latest v2.",
+  "list": "measurement"
  },
  "luo2026removal": {
   "changed": "venue: null -> NeurIPS 2026 workshop (AI4GOOD); url: added v1",
@@ -424,6 +788,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'IJCNLP-AACL 2023 camera-ready version'; ACL Anthology 2023.ijcnlp-main.20 (IJCNLP-AACL 2023, Volume 1: Long Papers)."
+ },
+ "macar2025thought": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "ICLR 2026 main-conference poster page iclr.cc/virtual/2026/poster/10008605. ML Anthology also lists ICLR 2026. arXiv v2 has no venue comment.",
+  "list": "measurement"
  },
  "macdermott2025reasoning": {
   "changed": "venue: null -> preprint; url: added v2",
@@ -448,6 +819,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview 8fAh8C27Hj venue 'ICML 2026 regular' (ICML.cc/2026/Conference); ICML 2026 poster page 65940. No arXiv version found."
+ },
+ "maniyar2026measuring": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 comment: 'Accepted at the AI Measurement Science Workshop, COLM 2026'; Stanford AIMS lab page confirms the workshop at COLM 2026.",
+  "list": "measurement"
  },
  "mao2026taming": {
   "changed": "venue (null -> NeurIPS 2026); url (added v1)",
@@ -479,11 +857,32 @@
   "confident": true,
   "evidence": "arXiv comment on v2: 'ICML 2026'."
  },
+ "meek2025measuring": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment gives only a project page; Semantic Scholar lists arXiv; the MATS page gives no venue. Absent from the ICLR/ICML/NeurIPS 2026 and ACL 2026 lists.",
+  "list": "measurement"
+ },
  "mohammadi2025evaluating": {
   "changed": "venue (null -> preprint); url (added v1)",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "No arXiv comment/journal_ref; Semantic Scholar arXiv.org only; OpenReview only DBLP CoRR record; Utrecht portal lists it as preprint; web search found no venue."
+ },
+ "naphade2026me": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment names ICLR 2026 Workshop 'From Human Cognition to AI Reasoning'; OpenReview venueid ICLR.cc/2026/Workshop/HCAIR. S2 shows arXiv only.",
+  "list": "measurement"
+ },
+ "nguyen2026can": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v5 comment: 'EMNLP 2026 (Main)'. Semantic Scholar and DBLP list only arXiv. Anthology proceedings not yet indexed.",
+  "list": "measurement"
  },
  "nguyen2026generalization": {
   "changed": "venue (COLM 2026 workshop -> COLM 2026 workshop (AIW)); url (added v1)",
@@ -496,6 +895,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview rI25kpkOIB venue 'ICLR 2026 Re-Align Workshop'; also TTU@ICLR 2026 (oral) and ICBINB workshops; no arXiv version or main venue found."
+ },
+ "oota2026llm": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 (29 Sep 2026): the comment gives only a page count and there is no journal_ref. Semantic Scholar has no venue. Web search found only aggregator pages.",
+  "list": "measurement"
  },
  "pan2023logiclm": {
   "changed": "url (added v2)",
@@ -581,11 +987,25 @@
   "confident": true,
   "evidence": "arXiv has no journal_ref; S2 venue arXiv only; OpenReview shows only CoRR 2023 record."
  },
+ "roytburg2026measuring": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 comment: 'Accepted to Trustworthy AI4GOOD Workshop @ ICML 2026'; icml.cc lists the Trustworthy AI for Good workshop. S2 shows no other venue.",
+  "list": "measurement"
+ },
  "sanyal2022fairr": {
   "changed": "url adds v1",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'Accepted in ACL 2022'; S2 ACL Anthology id 2022.acl-long.77."
+ },
+ "schoen2025stress": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no comment or journal_ref. Semantic Scholar lists arXiv only. A web search found no venue. Read Section 4 and Appendices G and H of the HTML.",
+  "list": "measurement"
  },
  "schulz2026monitor": {
   "changed": "venue 'COLM 2026 workshop' -> adds workshop name; url adds v1",
@@ -599,6 +1019,13 @@
   "confident": true,
   "evidence": "No arXiv comment; S2 no venue; OpenReview shows only ACL ARR 2026 March/May/October submissions (under review)."
  },
+ "shen2026detecting": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 no comment/journal_ref; OpenReview search: same title C63r0Oufg7 as ICLR.cc/2027/Conference/Submission; S2 venue arXiv only.",
+  "list": "measurement"
+ },
  "shenoy2026introspection": {
   "changed": "url adds v2",
   "checked": "2026-10-15",
@@ -611,6 +1038,27 @@
   "confident": true,
   "evidence": "arXiv has no comment/journal_ref; S2 venue arXiv only; OpenReview only CoRR 2024; web search found no venue."
  },
+ "shiromani2026false": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "neurips.cc/virtual/2026/168277: Poster in Workshop, Third Workshop on Agents in the Wild: Safety, Security, and Beyond. arXiv v3 title confirmed.",
+  "list": "measurement"
+ },
+ "shiromani2026necessary": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "NeurIPS 2026 virtual page 165246 shows a 'Poster in Workshop: Trustworthy AI for Good (AI4GOOD)' with authors and abstract and links this forum. No arXiv version found by title search.",
+  "list": "measurement"
+ },
+ "singhal2026believe": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "OpenReview venueid ICML.cc/2026/Workshop/Mech_Interp (virtual poster). The icml.cc/virtual/2026/79331 page confirms a workshop paper. No arXiv version found.",
+  "list": "measurement"
+ },
  "sivakumaran2026balancing": {
   "changed": "venue null -> Findings of EMNLP 2026; url adds v1",
   "checked": "2026-10-15",
@@ -622,6 +1070,27 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'accepted at NeurIPS 2025'; Semantic Scholar venue 'Neural Information Processing Systems'."
+ },
+ "somov2026breaking": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 (Jun 2026): the comment gives only page counts and there is no journal_ref. Semantic Scholar venue is arXiv.org. Web search found no EMNLP or ACL acceptance.",
+  "list": "measurement"
+ },
+ "song2025language": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v3 comment 'COLM 2025 camera ready'; OpenReview record venueid colmweb.org/COLM/2025/Conference. Not in corpus.",
+  "list": "measurement"
+ },
+ "sullivan2026language": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv abs v1 (Oct 2026): comments only '22 pages', no journal_ref; Semantic Scholar shows no venue; web search found no acceptance.",
+  "list": "measurement"
  },
  "sun2026investigating": {
   "changed": "venue null -> preprint; url adds v2",
@@ -646,6 +1115,13 @@
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment 'accepted at EMNLP 2022'; S2 ACL Anthology id 2022.emnlp-main.134."
+ },
+ "tang2026unlearning": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 (2026-09-30), no comment/journal_ref; Semantic Scholar no venue. Full text: 'trace verbalization (Chen et al., 2025)' metric, contrasts Imran et al. 2026.",
+  "list": "improvement"
  },
  "tanneru2024hardness": {
   "changed": "venue null->ICML 2024 workshop (TiFA); url adds v2",
@@ -683,6 +1159,13 @@
   "confident": true,
   "evidence": "arXiv comment 'Accepted at ICLR 2026'; OpenReview OMjcX1Z6Uu venue 'ICLR 2026 Poster'."
  },
+ "walden2026reasoning": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v4 has no comment or journal_ref; Semantic Scholar shows no venue. Absent from the ICLR/ICML/NeurIPS 2026 and ACL 2026 lists. v1 was titled '...Will Blatantly Lie...'.",
+  "list": "measurement"
+ },
  "wang2023pinto": {
   "changed": "year 2023->2022 (arXiv v1 2022-11-03); url adds v3",
   "checked": "2026-10-15",
@@ -707,6 +1190,13 @@
   "confident": true,
   "evidence": "arXiv comment 'Accepted to NeurIPS 2025'; OpenReview cGkfMGQdCy 'NeurIPS 2025 poster'."
  },
+ "wang2025evaluating": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Anthropic Alignment Science Blog post dated Nov 25, 2025, also cross-posted to LessWrong and AF. Web search found no arXiv version.",
+  "list": "improvement"
+ },
  "wang2025selfcritique": {
   "changed": "url adds v2",
   "checked": "2026-10-15",
@@ -719,11 +1209,39 @@
   "confident": true,
   "evidence": "arXiv v1 (2026-07-21) has no comment or journal_ref; S2 venue arXiv only; no OpenReview match; web search found no acceptance."
  },
+ "wang2026concept": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment 'In submission' (v3); OpenReview search finds same title WZBavPTogb, venueid ICLR.cc/2027/Conference/Submission; S2 shows no venue.",
+  "list": "measurement"
+ },
+ "wang2026doing": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "Listed under Accepted Papers on the Social Sim'26 workshop site (sites.google.com/view/social-sims-with-llms/social-sim26). The arXiv comment says it was submitted to that COLM workshop.",
+  "list": "measurement"
+ },
  "wang2026monitorbench": {
   "changed": "url: version v4 added",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment on v4: \"COLM 2026\". Semantic Scholar lists only arXiv.org."
+ },
+ "wang2026verbalising": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 (16 Oct 2026) no comment; OpenReview search: same title JQdpG0zZx6, venueid ICLR.cc/2027/Conference/Submission; S2 no venue.",
+  "list": "measurement"
+ },
+ "xiao2026bootstrapped": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 has no comment or journal_ref. Semantic Scholar lists arXiv only. Read the abstract and Sec. 4.2 (raw vs. summarized CoT).",
+  "list": "measurement"
  },
  "xiong2026monitorability": {
   "changed": "url: version v1 added",
@@ -737,17 +1255,45 @@
   "confident": true,
   "evidence": "arXiv comment: \"Accepted by ACL 2024 (main proceeding)\". Semantic Scholar gives venue ACL, pages 13326-13365."
  },
+ "yang2025investigating": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "No comment or journal_ref on arXiv v3; Semantic Scholar lists arXiv only. Not found in the ICLR/ICML/NeurIPS 2026 or ACL 2026 lists, and web search shows no venue.",
+  "list": "measurement"
+ },
  "yoshida2026introspecting": {
   "changed": "venue: null -> preprint; url: version v2 added",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview pCBz41FHGN shows only \"ICLR 2027 Conference Submission\" (under review). arXiv comment is empty and Semantic Scholar has no venue."
  },
+ "young2026measuring": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v2 comment only gives page counts, no journal_ref; Semantic Scholar lists arXiv only; web search found no acceptance.",
+  "list": "measurement"
+ },
+ "young2026why": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv v1 comment only gives page counts, no journal_ref; Semantic Scholar lists arXiv only; web search found no venue.",
+  "list": "measurement"
+ },
  "yu2026outcome": {
   "changed": "venue: null -> ICML 2026; url: version v1 added",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "OpenReview forum VrY5x2smAd: venue \"ICML 2026 regular\", venueid ICML.cc/2026/Conference, has a camera-ready revision; bibtex booktitle is Forty-third ICML."
+ },
+ "zaman2025causal": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment 'Published at EMNLP 2025' (v1 Feb 2025, v3 Dec 2025); ACL Anthology 2025.emnlp-main.1496 confirms main conference.",
+  "list": "measurement"
  },
  "zaman2025chainofthought": {
   "changed": "url: version v2 added",
@@ -773,10 +1319,24 @@
   "confident": true,
   "evidence": "arXiv comment: \"EMNLP 2025\". Semantic Scholar venue is EMNLP, DBLP key conf/emnlp/ZhaoD25."
  },
+ "zhao2026robustness": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comment 'ICML 2026'; ICML 2026 virtual poster page icml.cc/virtual/2026/poster/65763; latest arXiv v3 (May 2026).",
+  "list": "measurement"
+ },
  "zhou2026conceptual": {
   "changed": "venue: null -> preprint; url: version v1 added",
   "checked": "2026-10-15",
   "confident": true,
   "evidence": "arXiv comment and journal_ref are empty and Semantic Scholar lists only arXiv.org. OpenReview title search and web search find no venue."
+ },
+ "zhou2026nearzero": {
+  "changed": "new",
+  "checked": "2026-10-19",
+  "confident": true,
+  "evidence": "arXiv comments: 'Accepted as a poster at the NeurIPS 2026 Workshop on Foundations of LLM Post-Training in Changing Environments (FLLMPT)'.",
+  "list": "measurement"
  }
 }

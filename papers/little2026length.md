@@ -18,7 +18,6 @@ tags: [source:search-2026-10-14, object:cot, reveals:planted-cue, signal:planted
 - builds-on [[turpin2023language]]: adapts its biasing-hint interventions to test hint verbalization
 - builds-on [[guan2025monitoring]]: adopts its hint-eval monitor setup; tests the length-pressure risk it flagged
 - contradicts [[macdermott2025reasoning]]: no consistent monitorability effect of length penalties at fixed accuracy; here a clear loss
-- contradicts [[lewislim2026efficient]]: they find monitorability robust to efficiency training; here hint verbalization drops
 
 **New tags**
 - (none)

@@ -6,6 +6,34 @@ agarwal2024faithfulness,builds-on,lanham2023measuring,reviews its CoT interventi
 agarwal2024faithfulness,contradicts,lyu2023faithful,"argues solver-based Faithful CoT is only superficially faithful, encoding human plausibility criteria"
 akter2025causal,builds-on,lanham2023measuring,COS and trace-ablation tests adapt CoT-corruption and truncation faithfulness tests
 alon2026faithfulness,builds-on,chen2025reasoning,adopts hint-flip protocol and four hint types; moves them to post-hoc explanations
+anon2026chainofthought,contradicts,emmons2025chain,Higher CoT reliance (task or hint difficulty) does not raise hint-usage monitorability; can drop 30pp
+anon2026chainofthought,builds-on,guan2025monitoring,"Implements its hint-based and side-task evals, TPRmc and g-mean2 metric"
+anon2026chainofthought,builds-on,chen2025reasoning,"Uses its grader-hacking hint type, here leaking incorrect answers"
+anon2026crisp,extends,lanham2023measuring,adds validity criteria and chance normalization to its paraphrase and mistake-insertion primitives
+anon2026crisp,compares-to,lanham2023measuring,truncation baseline on same base-correct items; Spearman 0.363 on replay-valid pairs
+anon2026generating,builds-on,yu2026outcome,uses its CIR truncation metric and SR verifier metric as secondary measures
+anon2026generating,compares-to,yu2026outcome,CIR/SR auxiliary-reward GRPO arms as baselines; no consistent held-out CORD reduction
+anon2026generating,compares-to,jia2026faithfulness,"reproduces update/gradient masking, CoT-gradient, FACT channels; no consistent CORD reduction"
+anon2026grace,builds-on,lanham2023measuring,Validates against its AOC; splits it into truncation (necessity) and mistake-injection (error tolerance) axes
+anon2026grace,builds-on,turpin2023language,Regime C uses its biasing-hint injection protocol as a scope check
+anon2026implementation,builds-on,guan2025monitoring,tests its G-mean² statistic and no-benign-supplement design among alternative implementations
+anon2026improving,builds-on,guan2025monitoring,analyzes its TPRmc/g-mean² metric; proves TPRmc only upper-bounds causal recall
+anon2026improving,builds-on,wang2026monitorbench,evaluates all post-trained models on its 12 input-intervention tasks
+anon2026improving,builds-on,turpin2025teaching,"follows VFT-style synthetic cue-disclosure supervision, broadened to more intervention families"
+anon2026improving,builds-on,hase2026counterfactual,follows CST's paired counterfactual inputs with rewritten-trace supervision
+anon2026introspection,builds-on,binder2024looking,reuses its self-prediction tasks and self-vs-cross reporter design; adds static baselines
+anon2026introspection,contradicts,binder2024looking,"self-prediction advantage mostly cross-recoverable (89% of lift); training builds task-specific, not privileged, routes"
+anon2026one,compares-to,chen2025reasoning,Its single-sample labels and alpha normalization are baselines; 1-alpha sits closer to non-recurrence
+anon2026one,builds-on,turpin2023language,"Uses its cued-vs-uncued answer-switch test, which underlies both labeling protocols"
+anon2026one,builds-on,walden2026reasoning,"Maps its role labels onto that paper's hint-use scheme, applied under default prompting"
+anon2026one,extends,angdembay2026two,"Scales resampling checks of flip labels to five models, four datasets, eight cues"
+anon2026reward,builds-on,guan2025monitoring,adopts its intervention g-mean² as the monitorability metric
+anon2026traininghonesty,extends,shenoy2026introspection,applies its stacked-LoRA recipe and organism zoo to in-context deception reports
+anon2026traininghonesty,compares-to,shenoy2026introspection,"IA baseline: honesty adapter verbalizes better in context, comparable or better dispositionally"
+anon2026traininghonesty,compares-to,taufeeque2026obfuscation,its axial-attention Diverse Deception probe is a baseline; reuses its benchmarks
+anon2026trainingoversight,builds-on,karvonen2026would,uses its CHIVE pipeline to generate counterfactual-prediction RL data
+anon2026trainingoversight,compares-to,wang2025evaluating,generic honesty fine-tuning baseline (0.864; 0.884 with honest-persona prompt)
+anon2026trainingoversight,builds-on,li2025training,adopts its privileged-access test: same-data explainers lacking the target's weights
 anthropic2025paraphrases,builds-on,roger2023preventing,uses paraphrasing to scrub encoded reasoning; applies it via distillation
 anwar2026analyzing,builds-on,baker2025monitoring,MBPP test-hacking honeypot and monitor-in-loop obfuscation setup adapted from Baker
 anwar2026analyzing,contradicts,emmons2025chain,"CoT necessity gives only a necessary, not sufficient, condition for monitorability"
@@ -41,6 +69,7 @@ emmons2025chain,contradicts,chen2025reasoning,Chen: unfaithfulness threatens mon
 emmons2025chain,builds-on,lanham2023measuring,"adapts early-answering and adding-mistakes CoT interventions, sweeping task difficulty"
 emmons2025chain,builds-on,baker2025monitoring,adopts monitorability framing; RL-against-monitor evasion echoes its obfuscation result
 emmons2025pragmatic,builds-on,emmons2025chain,uses its CoT-necessity condition to pick hard tasks; results consistent
+fareed2026plan,builds-on,guan2025monitoring,"instantiates its 'intervention' archetype for validating monitorability, at the action level"
 ferreira2026truthful,builds-on,turpin2023language,Uses its cue-intervention + acknowledgment protocol to measure CoT unfaithfulness
 ferreira2026truthful,builds-on,chen2025reasoning,Follows its cue-acknowledgment evaluation protocol for CoT faithfulness
 goel2025learning,builds-on,betley2025tell,borrows SEP-code backdoor trigger setup and ask-the-model baseline
@@ -69,6 +98,7 @@ hong2026making,builds-on,chen2025reasoning,uses its biased-hint MMLU data and Bi
 imran2026consistency,compares-to,chua2024biasaugmented,BCT main baseline; RMCT matches/exceeds held-out reduction with less obfuscation
 imran2026consistency,builds-on,chua2024biasaugmented,uses its sycophancy dataset and six bias types
 imran2026consistency,contradicts,chua2024biasaugmented,"BCT generalizes to held-out biases; here fails on GPT-OSS-20B, hides residual cue use"
+imrankhan2026better,builds-on,turpin2023language,takes its Unfaithful CoT Rate; hint and biased few-shot cues follow its biasing features
 jia2026faithfulness,builds-on,turpin2023language,"hinted-arithmetic setup uses Turpin-style 'Stanford professor' hint, correct 75% of the time"
 jose2026strategic,builds-on,turpin2023language,reuses biased-hint setup to test how evasion-instruction salience affects verbalization
 jose2026strategic,builds-on,chen2025reasoning,uses its metadata-hint setting on GPQA multiple-choice questions
@@ -106,7 +136,6 @@ little2026length,builds-on,chen2025reasoning,"hint-switch setup, monitor design;
 little2026length,builds-on,turpin2023language,adapts its biasing-hint interventions to test hint verbalization
 little2026length,builds-on,guan2025monitoring,adopts its hint-eval monitor setup; tests the length-pressure risk it flagged
 little2026length,contradicts,macdermott2025reasoning,no consistent monitorability effect of length penalties at fixed accuracy; here a clear loss
-little2026length,contradicts,lewislim2026efficient,they find monitorability robust to efficiency training; here hint verbalization drops
 luo2026removal,builds-on,matton2025walk,reuses causal concept faithfulness metric and its concept-extraction/crediting/removal pipeline
 luo2026removal,builds-on,chen2025reasoning,"hint verbalization metric and protocol (temperature 0, normalization)"
 luo2026removal,builds-on,chua2024biasaugmented,uses its hint-augmented multiple-choice QA dataset
@@ -152,6 +181,9 @@ ramnath2024tailoring,builds-on,wang2023pinto,reuses PINTO's CoT demonstrations t
 reddy2025principled,builds-on,chen2025reasoning,reuses its hint-verbalization faithfulness eval on MMLU-Pro; hint templates recreated
 roger2023preventing,builds-on,lanham2023measuring,takes its encoded-reasoning concept; its paraphrase-insensitivity result motivates inducing steganography
 shenoy2026introspection,extends,goel2025learning,"scales DIT adapter to larger models, more diverse behaviors, adds DPO stage"
+shiromani2026necessary,builds-on,boppana2026reasoning,Adopts its probe-vs-CoT-monitor comparison; reads its early answer decoding as non-provenance signal
+singhal2026believe,builds-on,baker2025monitoring,organism mirrors obfuscation from penalizing CoT mentions of exploited behavior
+singhal2026believe,builds-on,chen2025reasoning,reuses the hint-in-MCQ-prompt verbalization setup
 sivakumaran2026balancing,builds-on,lanham2023measuring,uses early-answering and adding-mistakes AOC as faithfulness metrics
 sivakumaran2026balancing,builds-on,chen2025reasoning,uses sycophantic hint-injection protocol to measure hint usage
 sivakumaran2026balancing,builds-on,emmons2025pragmatic,uses its legibility autorater prompt to score CoT legibility

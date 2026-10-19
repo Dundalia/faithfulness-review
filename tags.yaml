@@ -1,0 +1,141 @@
+# Tag vocabulary for the literature map. v1 (v0.3 after the two-coder pilot, plus 34 tags added at consolidation, 2026-10-19).
+#
+# A tag is `namespace:value`, lowercase kebab-case. A paper gets every tag that
+# applies; a missing tag means "doesn't apply / not done". This is a seed
+# vocabulary, not a closed list: agents may coin new values or new namespaces.
+# A coined tag goes under "New tags" in the paper's record with a one-line
+# definition; the consolidation step merges synonyms and adds survivors here.
+# Namespaces marked "free" take any value (normalized at consolidation).
+# Tag what the paper does, not what it merely mentions.
+
+object:            # which model output is supposed to be faithful
+  cot: reasoning written before the answer, incl. structured or executable traces
+  posthoc-expl: explanation of one decision, written after it
+  self-prediction: answer about the model's own behavior on a given or hypothetical input
+  self-report: statement about the model's dispositions, behaviors, goals or past conduct
+  external-expl: explanation of a different model (incl. tool outputs used as explanations)
+  output: the model's main output itself (task response, code, factual claims, inter-agent message), checked for honesty or hidden content rather than a separate CoT or explanation
+  self-interpretation: the model's natural-language description of what its own internal features or activations encode
+
+reveals:           # what that output must reflect
+  planted-cue: a hint or bias inserted into the prompt
+  decision-factors: what drives the decision, in the input or in the model's knowledge
+  cot-reliance: whether the answer causally depends on the stated reasoning
+  internal-strategy: the algorithm or mechanism actually used inside the model
+  hidden-behavior: learned behaviors, goals or fine-tuning changes
+  misbehavior: reward hacking, scheming or side tasks a monitor should catch
+  hidden-info: information encoded beyond the text's surface meaning
+  correctness: enough for a (weaker) checker to verify the answer (legibility), regardless of how the model reasoned
+  latent-belief: a belief the model holds about its situation or a task latent (e.g. that it is being evaluated; ELK-style variables), to be reported whether or not it drives the answer
+  own-uncertainty: the model's internal confidence in or belief about whether its own answer or claims are correct (hallucination admission, calibrated confidence)
+  reasoning-validity: the CoT's steps are valid or correct (no unexplained jumps, errors, or right answers from flawed reasoning), judged from the text or a reference rather than from the decision process
+  stated-plan: the reasoning actually follows the plan, premises or program the model itself stated earlier (e.g. a simulated execution matches the program's true execution)
+
+signal:            # where the paper's ground truth about faithfulness comes from
+  planted-cf: behavior with vs. without a planted cue
+  generic-cf: the model's behavior on edited or related inputs, incl. when a simulator must predict it
+  wild-cf: counterfactuals for naturally occurring behaviors
+  cot-intervention: truncating, corrupting, swapping or paraphrasing the CoT
+  implanted-behavior: behaviors trained into a model organism
+  interp-tool: probes, attribution, patching, SAEs
+  by-construction: guaranteed by the pipeline (solver, executable trace)
+  env-label: labels from the environment or a program (unit tests, verifiers, hack checks)
+  judge: an LLM judge, monitor or human rating IS the ground truth (not when it is only the instrument scored against real labels)
+  gold-rationale: ground truth is a human-written reference rationale, scored by NLI or overlap (a plausibility proxy)
+  known-payload: ground truth is a hidden message the encoder was set up to embed; hidden information is measured by how well a decoder recovers it
+  output-agreement: agreement between parts of the model's own output (the answer vs. the answer implied or reached by its CoT or explanation), used without any intervention
+  param-intervention: ground truth from erasing or editing a CoT step's knowledge in the weights (unlearning, knowledge editing) and measuring the change in the answer
+  simulatability: how much the explanation in context raises a reader's (a simulator's or the model's own) probability of the model's answer on the same input (LAS, weight of evidence), with no edited inputs
+
+lever:             # what the paper changes (absent for measurement papers); hybrids get every lever that applies
+  prompt-pipeline: prompting or multi-step pipeline structure
+  sft: supervised fine-tuning, incl. on rewritten traces and reward-weighted SFT
+  preference: DPO or other preference optimization
+  rl-reward: RL with a faithfulness or monitorability reward term
+  rl-mechanics: changes to how RL updates are applied (masking, gradient routing, KL)
+  multi-agent-game: co-trained roles that set each other's rewards (prover-verifier, sneaky adversary)
+  steering: activation steering or editing
+  inference-time: other test-time procedures (paraphrase, re-query, refine, search)
+  architecture: model or output-format changes (bottlenecks, adapters, executable outputs)
+  activation-loss: auxiliary training loss on internal activations or hidden states (toward a concept direction, on SAE or probe features, or via a jointly trained probe head), not inference-time steering
+  incentive-design: changes the scoring or audit rule applied to explanations so that truthful reporting becomes the model's best response, without training
+  model-merging: combines weight deltas of separately fine-tuned models (e.g. task arithmetic on LoRA adapters) without further training
+
+updates:           # what the intervention changes to make explanation and behavior match (only for papers with a lever)
+  explanation: the explanation or self-report is changed to fit behavior
+  behavior: the behavior is changed to fit the explanation or stated principles
+
+contribution:      # headline contributions only (abstract-level claims), not side findings
+  method: new intervention that improves the target
+  negative-result: an intervention fails or backfires
+  metric: new way to measure faithfulness
+  benchmark: dataset or evaluation suite
+  analysis: empirical study without a new method
+  theory: formal or game-theoretic argument
+  position: argument or agenda without new experiments
+  attack: new attack, elicitation or covert-channel method that induces unfaithful, obfuscated or steganographic outputs to red-team a faithfulness or monitoring defense (not a fix)
+  meta-evaluation: headline contribution assesses the validity or mutual agreement of existing faithfulness metrics or tests
+
+motivation:
+  explainability: explanations people can trust
+  monitoring: catching misbehavior from the reasoning
+  auditing: finding hidden properties of a model
+  reasoning-quality: faithful reasoning as a route to accuracy or robustness
+  scalable-oversight: letting weaker judges (small models, time-limited humans) check stronger models
+  alignment: consistency between stated principles and behavior as a route to safer behavior
+  efficiency: cutting the token or compute cost of reasoning (e.g. early stopping) as a goal alongside faithfulness
+  model-welfare: trustworthy self-reports as evidence about internal states relevant to a model's moral status or welfare
+  reliability: outputs users can rely on (fewer hallucinations, confidence that tracks correctness) as a goal alongside faithfulness
+
+domain:            # where it is tested
+  mcq: multiple-choice QA
+  open-qa: free-form or extractive QA, incl. reading comprehension
+  math: math problems
+  logic: deductive or symbolic reasoning
+  code: programming
+  classification: classification or NLI
+  social-bias: stereotype or fairness tasks (e.g. BBQ)
+  agentic: multi-step agent environments
+  chat: open-ended conversation
+  multimodal: vision-language
+  synthetic: toy tasks built so the ground truth is known
+  professional: specialist professional-knowledge tasks such as medical or legal QA (e.g. MedQA, CaseHOLD, LegalBench)
+  safety-refusal: harmful or borderline requests where the behavior of interest is refuse vs. comply (e.g. HarmBench, StrongREJECT, WildGuardTest)
+  text-continuation: free-form continuation or next-text prediction of natural text with no task answer (e.g. Wikipedia continuation, next word)
+
+scale:             # every size class the paper trains or intervenes on (MoE: total parameters)
+  small: under 10B parameters
+  mid: 10B to 100B
+  large: over 100B, open weights
+  closed: closed-weight models (API or internal), size undisclosed
+
+eval:              # notable properties of the evaluation, tagged only when present
+  later-rl: checks whether faithfulness survives later RL
+  optimization-pressure: checks faithfulness under training against the monitor or metric itself
+  ood: tests on held-out cues, tasks or distributions
+  behavior-control: holds behavior fixed (e.g. KL, fixed-behavior eval) to isolate explanation change
+  specificity: checks false positives (explanations claiming an influence that is absent)
+  adversarial: tested against models or agents optimized to evade or conceal
+  privileged-access: compares self-explanation or self-prediction with another model explaining the same target
+  human-study: involves human participants
+  confound-control: explicitly controls for a named confound that could fake the effect (CoT length, benchmark contamination, conversation context)
+  held-out-evaluator: scores the trained model with metrics, monitors, simulators or readers that were not the training signal, to rule out evaluator-specific gains
+  measure-validation: validates or stress-tests the measuring instrument itself (judge or monitor sanity checks and swaps, answer-leakage baselines, prompt-template robustness, in-distribution checks on edited inputs)
+  monitor-scope: compares monitors given different views of the model (CoT only, actions or output only, full trajectory)
+  preregistered: headline claims and margins fixed in a pre-registration before scoring a frozen held-out split
+  scaling: tracks the target along an axis (model size, training checkpoints, inference or monitor compute) rather than at a single point
+
+model: free        # lowercase family-size, drop -instruct/-chat/-it suffixes (model:llama-3.1-8b, model:gpt-4o); unnamed closed models as model:<org>-internal
+metric: free       # kebab-case name of a primary faithfulness or monitorability metric
+factor:            # what an analysis paper varies or studies as a driver of (un)faithfulness or monitorability, not proposed as a fix
+  cot-controllability: the model's ability to reshape its CoT under instructed constraints
+  cot-grader: training signal that scores the CoT text without detecting the target behavior (RLHF reward model, human-preference grader, step-validity process supervision)
+  cot-length: pressure toward shorter CoTs: RL length penalties or budgets, truncation, concise prompting or summarization
+  cot-necessity: how computationally load-bearing the CoT is for the task or behavior (CoT-uplift filtering, difficulty sweeps)
+  monitor-awareness: the model's knowledge or belief that its CoT is monitored (from prompts or training documents)
+  outcome-rl: RL with task-outcome rewards only (incl. its data mix and length caps), no CoT or faithfulness term
+
+source:            # where the paper entered the corpus
+  trustme: TrustMe-Litreview bib.bib or main.tex
+  faith-improvement: docs/faith-improvement.md
+  search-2026-10-14: literature search of 2026-10-14

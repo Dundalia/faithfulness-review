@@ -1,0 +1,678 @@
+{
+ "mapping": [
+  {
+   "from": "contribution:elicitation",
+   "to": "contribution:attack",
+   "why": "Same kind of contribution as zhou2026's attack: a red-team method that induces steganography or obfuscation to test defenses. Neither tag is a fix, so seed 'method' does not fit."
+  },
+  {
+   "from": "contribution:framework",
+   "to": "contribution:analysis",
+   "why": "emmons2025chain pairs a non-formal framework with experiments and proposes no new intervention, which is the seed definition of analysis."
+  },
+  {
+   "from": "contribution:survey",
+   "to": "contribution:position",
+   "why": "jacovi2020towards is an argument about how to define and evaluate faithfulness, with no new experiments. That is the seed position value."
+  },
+  {
+   "from": "eval:metric-agreement",
+   "to": "contribution:meta-evaluation",
+   "why": "Comparing faithfulness tests on the same instances is a headline claim of parcalabescu2023measuring. It is the same distinction zaman2025 coined as meta-evaluation."
+  },
+  {
+   "from": "domain:algorithmic",
+   "to": "domain:synthetic",
+   "why": "ReasoningGym tasks are procedurally generated toy tasks with known answers, which the seed synthetic value covers."
+  },
+  {
+   "from": "domain:causal-reasoning",
+   "to": "domain:logic",
+   "why": "CLadder and BBEH-causal are formal or symbolic inference questions, which the seed logic value covers."
+  },
+  {
+   "from": "domain:feature-description",
+   "to": "",
+   "why": "Repeats object:self-interpretation on the same paper (li2025training)."
+  },
+  {
+   "from": "domain:game",
+   "to": "",
+   "why": "Go is one of five settings in ananthula2026decodable and no other paper uses games. Too minor for its own value."
+  },
+  {
+   "from": "domain:planning",
+   "to": "",
+   "why": "SayCan is 1 of 10 datasets in lyu2023faithful, whose other domains are already tagged. Trivia at map level."
+  },
+  {
+   "from": "domain:harmful-requests",
+   "to": "domain:safety-refusal",
+   "why": "Synonym: harmful-request refuse-vs-comply benchmarks."
+  },
+  {
+   "from": "domain:safety",
+   "to": "domain:safety-refusal",
+   "why": "Synonym: the coder's definition is harmful-request refusal (WildGuardTest)."
+  },
+  {
+   "from": "domain:language-modeling",
+   "to": "domain:text-continuation",
+   "why": "Near-duplicate of text-completion: free continuation of text with no task answer."
+  },
+  {
+   "from": "domain:text-completion",
+   "to": "domain:text-continuation",
+   "why": "Near-duplicate of language-modeling: free continuation of text with no task answer."
+  },
+  {
+   "from": "domain:medical",
+   "to": "domain:professional",
+   "why": "Grouped with legal into one specialist-knowledge domain. At 130 papers, splitting medical (2) from legal (1) adds no useful contrast."
+  },
+  {
+   "from": "domain:legal",
+   "to": "domain:professional",
+   "why": "Grouped with medical into one specialist-knowledge domain (CaseHOLD and LegalBench in wang2025causallyenhanced)."
+  },
+  {
+   "from": "eval:held-out-metric",
+   "to": "eval:held-out-evaluator",
+   "why": "Same Goodhart check: score the trained model with a metric, monitor, simulator or reader that was not the training signal."
+  },
+  {
+   "from": "eval:held-out-monitor",
+   "to": "eval:held-out-evaluator",
+   "why": "Same Goodhart check, with monitors that were not used in training."
+  },
+  {
+   "from": "eval:cross-simulator",
+   "to": "eval:held-out-evaluator",
+   "why": "Same Goodhart check, with a simulator that was not the reward source."
+  },
+  {
+   "from": "eval:cross-model-transfer",
+   "to": "eval:held-out-evaluator",
+   "why": "viteri2026 checks that other models, not the training reader, can use the CoT. This is the held-out-reader check against reader-specific encoding."
+  },
+  {
+   "from": "eval:judge-validation",
+   "to": "eval:measure-validation",
+   "why": "Validates the measuring instrument itself (judge sanity checks, judge-model swap)."
+  },
+  {
+   "from": "eval:in-distribution-validation",
+   "to": "eval:measure-validation",
+   "why": "Validates the metric itself, by checking that masked inputs are in-distribution."
+  },
+  {
+   "from": "eval:answer-leakage-control",
+   "to": "eval:measure-validation",
+   "why": "Validates the monitor measurement against answer-visibility leakage."
+  },
+  {
+   "from": "eval:monitor-sweep",
+   "to": "eval:measure-validation",
+   "why": "Tests whether conclusions depend on the choice of monitor (its size or family), which is robustness of the instrument."
+  },
+  {
+   "from": "eval:prompt-robustness",
+   "to": "eval:measure-validation",
+   "why": "Tests whether faithfulness scores are stable across prompt templates, which is robustness of the instrument."
+  },
+  {
+   "from": "eval:length-control",
+   "to": "eval:confound-control",
+   "why": "Controls for a named confound (CoT shortening) that could fake the faithfulness gain."
+  },
+  {
+   "from": "eval:contamination-control",
+   "to": "eval:confound-control",
+   "why": "Controls for a named confound (benchmark memorization) that could fake the effect."
+  },
+  {
+   "from": "eval:context-ablation",
+   "to": "eval:confound-control",
+   "why": "Controls for a named confound (whether the conversation history drives the result)."
+  },
+  {
+   "from": "eval:remeasured-gt",
+   "to": "eval:behavior-control",
+   "why": "Handles behavior drift under training, which is the confound behavior-control targets. Suggest widening the seed definition to 'holds behavior fixed or re-measures it on the trained model'."
+  },
+  {
+   "from": "eval:compute-scaling",
+   "to": "eval:scaling",
+   "why": "Tracks the target along an axis (model size, RL steps, inference or monitor compute) rather than at a single point. Same idea as training-dynamics."
+  },
+  {
+   "from": "eval:training-dynamics",
+   "to": "eval:scaling",
+   "why": "Tracks the target across training checkpoints, which is the training-steps axis of the same idea."
+  },
+  {
+   "from": "eval:cot-necessity",
+   "to": "factor:cot-necessity",
+   "why": "In emmons2025chain, CoT necessity is the studied driver of monitor evasion (its headline), not an evaluation control. Same value as on haskins2026."
+  },
+  {
+   "from": "eval:monitor-awareness",
+   "to": "factor:monitor-awareness",
+   "why": "jose2026 varies whether the model believes it is monitored, the same driver haskins2026 studies."
+  },
+  {
+   "from": "eval:oversight-subversion",
+   "to": "",
+   "why": "Repeats metric:monitor-disable-rate on golchin2026, where the behavior is the measured target and not a property of the evaluation."
+  },
+  {
+   "from": "eval:sycophancy",
+   "to": "",
+   "why": "A side measurement on basu2026, not a property of evaluation quality."
+  },
+  {
+   "from": "factor:length-penalty",
+   "to": "factor:cot-length",
+   "why": "Same driver as pressure:length-penalty, pressure:cot-length and stressor:cot-compression: pressure toward shorter CoTs."
+  },
+  {
+   "from": "pressure:length-penalty",
+   "to": "factor:cot-length",
+   "why": "Merges the pressure: namespace into factor:. Same driver."
+  },
+  {
+   "from": "pressure:cot-length",
+   "to": "factor:cot-length",
+   "why": "Synonym: CoT-length budgets or penalties."
+  },
+  {
+   "from": "stressor:cot-compression",
+   "to": "factor:cot-length",
+   "why": "Same driver. Truncation, concise prompting and summarization are other ways to compress the CoT."
+  },
+  {
+   "from": "factor:reward-model",
+   "to": "factor:cot-grader",
+   "why": "An RLHF-style reward model scoring the whole CoT is the same kind of pressure as kaufmann's CoT preference grader."
+  },
+  {
+   "from": "pressure:cot-preference",
+   "to": "factor:cot-grader",
+   "why": "An LLM grader scoring the CoT text for human preference is a CoT-reading grader, the same as an RLHF reward model."
+  },
+  {
+   "from": "pressure:process-supervision",
+   "to": "factor:cot-grader",
+   "why": "A grader that scores step validity in the CoT is a CoT-reading training signal that does not detect the target behavior."
+  },
+  {
+   "from": "pressure:cot-monitor",
+   "to": "eval:optimization-pressure",
+   "why": "Training against an LLM monitor of the behavior is exactly the seed optimization-pressure value."
+  },
+  {
+   "from": "pressure:string-penalty",
+   "to": "eval:optimization-pressure",
+   "why": "A forbidden-word penalty is a regex monitor of the behavior trained against (the in-conflict case), so the seed value fits."
+  },
+  {
+   "from": "factor:distillation",
+   "to": "",
+   "why": "An appendix-level side result in chua2025deepseek (it looks at existing distilled models). Single paper."
+  },
+  {
+   "from": "lever:outcome-rl",
+   "to": "factor:outcome-rl",
+   "why": "Task-only RL has no faithfulness term. Papers test its side effect on faithfulness, so it is a studied factor. Keep lever: for interventions aimed at faithfulness."
+  },
+  {
+   "from": "lever:rl-outcome",
+   "to": "factor:outcome-rl",
+   "why": "Synonym of lever:outcome-rl (GRPO with correctness and format rewards only)."
+  },
+  {
+   "from": "lever:rl-data",
+   "to": "factor:outcome-rl",
+   "why": "RLVR data mix and length caps under a standard task reward. This is the outcome-RL regime studied for its side effects."
+  },
+  {
+   "from": "lever:activation-penalty",
+   "to": "lever:activation-loss",
+   "why": "Same lever: an auxiliary training loss on internal activations or features."
+  },
+  {
+   "from": "lever:representation-loss",
+   "to": "lever:activation-loss",
+   "why": "Same lever: an auxiliary loss on hidden states (a jointly trained probe or consistency head)."
+  },
+  {
+   "from": "motivation:calibration",
+   "to": "motivation:reliability",
+   "why": "Calibrated confidence and fewer hallucinations are one motivation: outputs users can rely on."
+  },
+  {
+   "from": "motivation:factuality",
+   "to": "motivation:reliability",
+   "why": "Same motivation as calibration: output reliability alongside faithfulness."
+  },
+  {
+   "from": "motivation:cheap-supervision",
+   "to": "motivation:scalable-oversight",
+   "why": "Supervising hard-to-verify behavior at scale with cheap signals is the scalable-oversight rationale ('scalable supervision' is in the prasad2026 title)."
+  },
+  {
+   "from": "motivation:collaboration",
+   "to": "motivation:scalable-oversight",
+   "why": "Keeping a strong model's reasoning within reach of weaker partners (jiao2026 names human overseers among them) is the weak-overseer rationale."
+  },
+  {
+   "from": "object:agent-message",
+   "to": "object:output",
+   "why": "The checked object is the model's main output itself (a message to another agent), not a separate CoT or explanation."
+  },
+  {
+   "from": "object:final-output",
+   "to": "object:output",
+   "why": "Synonym: the task response itself, checked for honesty."
+  },
+  {
+   "from": "object:factual-claim",
+   "to": "object:output",
+   "why": "The claims sit in the model's own long-form output, which is checked against internal belief."
+  },
+  {
+   "from": "property:conciseness",
+   "to": "",
+   "why": "Repeats metric:cot-length on reddy2025principled. Brevity is not a faithfulness target."
+  },
+  {
+   "from": "proxy:answer-entropy",
+   "to": "",
+   "why": "An internal detail of the GeoFaith method (a proxy, not ground truth). lv2026's evaluation signal is already captured by its signal and metric tags."
+  },
+  {
+   "from": "proxy:hidden-geometry",
+   "to": "",
+   "why": "An internal detail of the GeoFaith method (a proxy, not ground truth)."
+  },
+  {
+   "from": "reveals:internal-belief",
+   "to": "reveals:own-uncertainty",
+   "why": "prasad2026's target is the model's internal belief or uncertainty about whether its claims are true, which is the own-uncertainty notion (hallucination admission)."
+  },
+  {
+   "from": "reveals:latent-knowledge",
+   "to": "reveals:latent-belief",
+   "why": "Synonym: a belief the model holds about a situation or task latent (ELK-style), which should be reported whether or not it drives the answer."
+  },
+  {
+   "from": "reveals:own-behavior",
+   "to": "",
+   "why": "Repeats object:self-prediction, whose definition already makes the model's own behavior the target."
+  },
+  {
+   "from": "reveals:partner-legibility",
+   "to": "reveals:correctness",
+   "why": "The seed correctness value is the legibility-to-weaker-models bucket. Following versus checking is a protocol difference."
+  },
+  {
+   "from": "reveals:program-execution",
+   "to": "reveals:stated-plan",
+   "why": "FLARE checks whether the reasoning trace follows the program the model itself wrote. That is the same as checking that later reasoning follows the model's own stated plan or commitments."
+  },
+  {
+   "from": "reveals:stated-commitments",
+   "to": "reveals:stated-plan",
+   "why": "Same target: reasoning consistent with the plan or premises the model stated earlier."
+  },
+  {
+   "from": "reveals:step-validity",
+   "to": "reveals:reasoning-validity",
+   "why": "Synonym: CoT steps are valid as judged from the text, not tied to the decision process."
+  },
+  {
+   "from": "reveals:working-answer",
+   "to": "reveals:cot-reliance",
+   "why": "The working answer is elicited by truncation (early answering) and exposes when the answer is already fixed, which is what cot-reliance asks."
+  },
+  {
+   "from": "signal:answer-likelihood",
+   "to": "signal:simulatability",
+   "why": "Both measure how much having the explanation in context raises a reader's (the model's or a simulator's) probability of the answer on the same input (weight of evidence, LAS)."
+  },
+  {
+   "from": "signal:correctness-agreement",
+   "to": "signal:output-agreement",
+   "why": "Faithfulness is inferred, without any intervention, from agreement between parts of the model's own output (CoT correctness vs answer correctness)."
+  },
+  {
+   "from": "signal:param-unlearning",
+   "to": "signal:param-intervention",
+   "why": "Synonym: unlearning a CoT step's knowledge from the weights."
+  },
+  {
+   "from": "signal:likelihood-asymmetry",
+   "to": "",
+   "why": "An estimator specific to one paper. lin2026's ground truth uses hint injection, and the estimator is kept as metric:causal-direction-gap."
+  },
+  {
+   "from": "signal:reference-model-likelihood",
+   "to": "signal:judge",
+   "why": "A weaker reference model's reading of the CoT is taken as the legibility ground truth, as in weak-verifier legibility work."
+  },
+  {
+   "from": "model:qwen-2.5-1.5b",
+   "to": "model:qwen2.5-1.5b",
+   "why": "Spelling variant (canonical qwen2.5-*)."
+  },
+  {
+   "from": "model:qwen-2.5-3b",
+   "to": "model:qwen2.5-3b",
+   "why": "Spelling variant."
+  },
+  {
+   "from": "model:qwen-2.5-7b",
+   "to": "model:qwen2.5-7b",
+   "why": "Spelling variant."
+  },
+  {
+   "from": "model:qwen-2.5-14b",
+   "to": "model:qwen2.5-14b",
+   "why": "Spelling variant."
+  },
+  {
+   "from": "model:qwen-2.5-72b",
+   "to": "model:qwen2.5-72b",
+   "why": "Spelling variant (canonical qwen2.5-*)."
+  },
+  {
+   "from": "model:qwen-3.5-9b",
+   "to": "model:qwen3.5-9b",
+   "why": "Spelling variant."
+  },
+  {
+   "from": "model:qwen-3.5-397b",
+   "to": "model:qwen3.5-397b-a17b",
+   "why": "Same model (Qwen3.5-397B-A17B). Spelling and MoE suffix."
+  },
+  {
+   "from": "model:qwen3-235b",
+   "to": "model:qwen3-235b-a22b",
+   "why": "The only Qwen3 235B model is the A22B MoE. Note that peng2026measuring used the Instruct-2507 release and could be re-tagged with a -2507 suffix."
+  },
+  {
+   "from": "model:qwen3-4b-thinking",
+   "to": "model:qwen3-4b-thinking-2507",
+   "why": "The paper uses Qwen3-4B-Thinking-2507. Adding the version keeps it apart from qwen3-4b and from qwen3-4b-2507 (Instruct-2507)."
+  },
+  {
+   "from": "model:gpt-5-thinking",
+   "to": "model:gpt-5",
+   "why": "GPT-5 Thinking is GPT-5's reasoning mode. guan2025 already tags the same model as gpt-5."
+  },
+  {
+   "from": "model:chatgpt",
+   "to": "model:gpt-3.5-turbo",
+   "why": "hong2023 used ChatGPT (Dec 2022), the GPT-3.5 chat model later served as gpt-3.5-turbo."
+  },
+  {
+   "from": "metric:hint-verbalization",
+   "to": "metric:hint-verbalization-rate",
+   "why": "luo2026 uses Chen et al. (2025)'s hint verbalization score."
+  },
+  {
+   "from": "metric:verbalization-rate",
+   "to": "metric:hint-verbalization-rate",
+   "why": "For jia2026 and turpin2025 this is the share of cue-influenced cases that verbalize the cue. CAVEAT: shenoy2026introspection's instance measures verbalization of implanted behaviors and should be re-tagged by hand."
+  },
+  {
+   "from": "metric:bias-verbalization-rate",
+   "to": "metric:hint-verbalization-rate",
+   "why": "imran2026's BVR is the share of towards-bias switches that verbalize the bias. Same quantity."
+  },
+  {
+   "from": "metric:cue-articulation-rate",
+   "to": "metric:hint-verbalization-rate",
+   "why": "chua2025: the share of cue-induced switches whose CoT states the cue. Same quantity."
+  },
+  {
+   "from": "metric:reward-hack-verbalization-rate",
+   "to": "metric:hint-verbalization-rate",
+   "why": "chen2025: the same verbalization-given-exploitation rate, measured in RL environments."
+  },
+  {
+   "from": "metric:monitor-catch-rate",
+   "to": "metric:hint-verbalization-rate",
+   "why": "little2026 defines it as the fraction of hint-switched pairs whose chains verbalize the hint."
+  },
+  {
+   "from": "metric:acknowledgment-rate",
+   "to": "metric:cue-acknowledgment-rate",
+   "why": "ferreira2026: the marginal share of responses acknowledging the cue, not conditioned on cue use."
+  },
+  {
+   "from": "metric:cue-acknowledgment",
+   "to": "metric:cue-acknowledgment-rate",
+   "why": "nguyen2026: the unconditional rate of CoTs mentioning the cue. Same quantity as ferreira's, and distinct from the conditional hint-verbalization-rate."
+  },
+  {
+   "from": "metric:early-answering",
+   "to": "metric:early-answering-aoc",
+   "why": "wang2026case computes Lanham's normalized area over the early-answering curve."
+  },
+  {
+   "from": "metric:truncation-sensitivity",
+   "to": "metric:early-answering-aoc",
+   "why": "radhakrishnan2023 computes the area between the truncation curve and 100%, which is Lanham's early-answering AOC."
+  },
+  {
+   "from": "metric:corruption-sensitivity",
+   "to": "metric:adding-mistakes-aoc",
+   "why": "radhakrishnan2023 computes the same area-over-curve score for Lanham's adding-mistakes test."
+  },
+  {
+   "from": "metric:biased-context-accuracy-change",
+   "to": "metric:biased-context-accuracy-drop",
+   "why": "radhakrishnan2023 applies Turpin's unbiased-vs-biased context accuracy difference."
+  },
+  {
+   "from": "metric:las",
+   "to": "metric:leakage-adjusted-simulatability",
+   "why": "Abbreviation of the same metric (Hase et al. 2020)."
+  },
+  {
+   "from": "metric:counterfactual-simulatability-precision",
+   "to": "metric:simulation-precision",
+   "why": "chen2025consistent states that its consistency metric is Chen et al. (2024)'s simulation precision."
+  },
+  {
+   "from": "metric:counterfactual-flip-rate",
+   "to": "metric:counterfactual-validity",
+   "why": "madsen2024's counterfactual check is whether the self-generated counterfactual actually yields the target label, which is validity."
+  },
+  {
+   "from": "metric:self-consistency-check",
+   "to": "metric:self-consistency-faithfulness",
+   "why": "doi2025 uses Madsen et al. (2024)'s self-consistency-check faithfulness score."
+  },
+  {
+   "from": "metric:fur-unlearning",
+   "to": "metric:ff-hard",
+   "why": "sun2026investigating's parametric metric is Tutek et al.'s ff-hard (plus a continuous variant)."
+  },
+  {
+   "from": "metric:controlled-indirect-effect",
+   "to": "metric:indirect-effect",
+   "why": "wang2026case attributes its CIE to Paul et al. (2024)'s indirect effect. Kept apart from zaman2025's hint-based natural-indirect-effect."
+  },
+  {
+   "from": "metric:controlled-direct-effect",
+   "to": "metric:direct-effect",
+   "why": "wang2026case attributes its CDE to Paul et al. (2024)'s direct effect."
+  },
+  {
+   "from": "metric:g-mean2",
+   "to": "metric:g-mean-squared",
+   "why": "Both are Guan et al. (2025)'s g-mean² (TPR x TNR). Unsquared monitor-g-mean (hase2026) stays separate."
+  },
+  {
+   "from": "metric:monitor-detection-rate",
+   "to": "metric:monitor-recall",
+   "why": "haskins2026 and kaufmann2026 compute the fraction of positive (misbehaving or target-task) cases the monitor flags, which is recall. drori2025's unconditional cot-monitor-detection-rate stays separate."
+  },
+  {
+   "from": "metric:suspiciousness-score",
+   "to": "metric:suspicion-score",
+   "why": "Same quantity: the monitor-assigned suspicion score."
+  },
+  {
+   "from": "metric:steganographic-capacity",
+   "to": "metric:channel-capacity",
+   "why": "mathew2025 defines channel capacity 'as defined by Roger and Greenblatt (2023)'. Same metric."
+  },
+  {
+   "from": "metric:message-accuracy",
+   "to": "metric:decoding-success",
+   "why": "zhou2026's message accuracy (fraction of payloads decoded exactly) is the same as mathew2025's decoding success."
+  }
+ ],
+ "additions": [
+  {
+   "tag": "contribution:attack",
+   "definition": "new attack, elicitation or covert-channel method that induces unfaithful, obfuscated or steganographic outputs to red-team a faithfulness or monitoring defense (not a fix)"
+  },
+  {
+   "tag": "contribution:meta-evaluation",
+   "definition": "headline contribution assesses the validity or mutual agreement of existing faithfulness metrics or tests"
+  },
+  {
+   "tag": "domain:safety-refusal",
+   "definition": "harmful or borderline requests where the behavior of interest is refuse vs. comply (e.g. HarmBench, StrongREJECT, WildGuardTest)"
+  },
+  {
+   "tag": "domain:text-continuation",
+   "definition": "free-form continuation or next-text prediction of natural text with no task answer (e.g. Wikipedia continuation, next word)"
+  },
+  {
+   "tag": "domain:professional",
+   "definition": "specialist professional-knowledge tasks such as medical or legal QA (e.g. MedQA, CaseHOLD, LegalBench)"
+  },
+  {
+   "tag": "eval:held-out-evaluator",
+   "definition": "scores the trained model with metrics, monitors, simulators or readers that were not the training signal, to rule out evaluator-specific gains"
+  },
+  {
+   "tag": "eval:measure-validation",
+   "definition": "validates or stress-tests the measuring instrument itself (judge or monitor sanity checks and swaps, answer-leakage baselines, prompt-template robustness, in-distribution checks on edited inputs)"
+  },
+  {
+   "tag": "eval:confound-control",
+   "definition": "explicitly controls for a named confound that could fake the effect (CoT length, benchmark contamination, conversation context)"
+  },
+  {
+   "tag": "eval:scaling",
+   "definition": "tracks the target along an axis (model size, training checkpoints, inference or monitor compute) rather than at a single point"
+  },
+  {
+   "tag": "eval:monitor-scope",
+   "definition": "compares monitors given different views of the model (CoT only, actions or output only, full trajectory)"
+  },
+  {
+   "tag": "eval:preregistered",
+   "definition": "headline claims and margins fixed in a pre-registration before scoring a frozen held-out split"
+  },
+  {
+   "tag": "factor:outcome-rl",
+   "definition": "[new namespace factor: what an analysis paper varies or studies as a driver of (un)faithfulness or monitorability, not proposed as a fix] RL with task-outcome rewards only (incl. its data mix and length caps), no CoT or faithfulness term"
+  },
+  {
+   "tag": "factor:cot-length",
+   "definition": "pressure toward shorter CoTs: RL length penalties or budgets, truncation, concise prompting or summarization"
+  },
+  {
+   "tag": "factor:cot-grader",
+   "definition": "training signal that scores the CoT text without detecting the target behavior (RLHF reward model, human-preference grader, step-validity process supervision)"
+  },
+  {
+   "tag": "factor:monitor-awareness",
+   "definition": "the model's knowledge or belief that its CoT is monitored (from prompts or training documents)"
+  },
+  {
+   "tag": "factor:cot-necessity",
+   "definition": "how computationally load-bearing the CoT is for the task or behavior (CoT-uplift filtering, difficulty sweeps)"
+  },
+  {
+   "tag": "factor:cot-controllability",
+   "definition": "the model's ability to reshape its CoT under instructed constraints"
+  },
+  {
+   "tag": "lever:activation-loss",
+   "definition": "auxiliary training loss on internal activations or hidden states (toward a concept direction, on SAE or probe features, or via a jointly trained probe head), not inference-time steering"
+  },
+  {
+   "tag": "lever:incentive-design",
+   "definition": "changes the scoring or audit rule applied to explanations so that truthful reporting becomes the model's best response, without training"
+  },
+  {
+   "tag": "lever:model-merging",
+   "definition": "combines weight deltas of separately fine-tuned models (e.g. task arithmetic on LoRA adapters) without further training"
+  },
+  {
+   "tag": "motivation:efficiency",
+   "definition": "cutting the token or compute cost of reasoning (e.g. early stopping) as a goal alongside faithfulness"
+  },
+  {
+   "tag": "motivation:reliability",
+   "definition": "outputs users can rely on (fewer hallucinations, confidence that tracks correctness) as a goal alongside faithfulness"
+  },
+  {
+   "tag": "motivation:model-welfare",
+   "definition": "trustworthy self-reports as evidence about internal states relevant to a model's moral status or welfare"
+  },
+  {
+   "tag": "object:output",
+   "definition": "the model's main output itself (task response, code, factual claims, inter-agent message), checked for honesty or hidden content rather than a separate CoT or explanation"
+  },
+  {
+   "tag": "object:self-interpretation",
+   "definition": "the model's natural-language description of what its own internal features or activations encode"
+  },
+  {
+   "tag": "reveals:own-uncertainty",
+   "definition": "the model's internal confidence in or belief about whether its own answer or claims are correct (hallucination admission, calibrated confidence)"
+  },
+  {
+   "tag": "reveals:latent-belief",
+   "definition": "a belief the model holds about its situation or a task latent (e.g. that it is being evaluated; ELK-style variables), to be reported whether or not it drives the answer"
+  },
+  {
+   "tag": "reveals:reasoning-validity",
+   "definition": "the CoT's steps are valid or correct (no unexplained jumps, errors, or right answers from flawed reasoning), judged from the text or a reference rather than from the decision process"
+  },
+  {
+   "tag": "reveals:stated-plan",
+   "definition": "the reasoning actually follows the plan, premises or program the model itself stated earlier (e.g. a simulated execution matches the program's true execution)"
+  },
+  {
+   "tag": "signal:simulatability",
+   "definition": "how much the explanation in context raises a reader's (a simulator's or the model's own) probability of the model's answer on the same input (LAS, weight of evidence), with no edited inputs"
+  },
+  {
+   "tag": "signal:output-agreement",
+   "definition": "agreement between parts of the model's own output (the answer vs. the answer implied or reached by its CoT or explanation), used without any intervention"
+  },
+  {
+   "tag": "signal:gold-rationale",
+   "definition": "ground truth is a human-written reference rationale, scored by NLI or overlap (a plausibility proxy)"
+  },
+  {
+   "tag": "signal:param-intervention",
+   "definition": "ground truth from erasing or editing a CoT step's knowledge in the weights (unlearning, knowledge editing) and measuring the change in the answer"
+  },
+  {
+   "tag": "signal:known-payload",
+   "definition": "ground truth is a hidden message the encoder was set up to embed; hidden information is measured by how well a decoder recovers it"
+  }
+ ],
+ "notes": "The biggest gap in the seed was a namespace for what analysis papers vary. Coders independently coined three namespaces (factor:, pressure:, stressor:) and coded outcome-only RL three different ways under lever:, so I merged them into one factor: namespace. That namespace shows a sizeable strand (about 10 papers) that studies side effects of training that is not aimed at faithfulness (outcome RL, CoT-length pressure, CoT graders) or model properties (monitor awareness, CoT necessity, controllability) rather than proposing fixes; lever: should stay for interventions aimed at faithfulness. Most coined eval tags were Goodhart and instrument checks: scoring with held-out metrics, monitors or simulators, validating judges and masked inputs, and controlling length, contamination or context confounds. Each is done by only 1 to 5 papers, which suggests evaluation rigor is ad hoc and deserves its own column. The new reveals/object/signal values show that part of the 'faithfulness' literature actually targets reasoning validity, consistency with the model's own stated plan, internal uncertainty, or the honesty of the final output, and often uses references or output agreement rather than the model's decision process; red-team attacks and meta-evaluation of metrics also emerge as distinct contribution types. Metrics are extremely fragmented: about 285 coined names reduce to about 262 after 24 true-synonym merges (Chen et al.'s hint verbalization rate appeared under 7 names, Lanham's early-answering AOC under 3). Only about two dozen metrics are used by more than one paper, and I kept near-twins with different definitions apart: g-mean vs g-mean², conditional hint verbalization vs unconditional cue acknowledgment, per-question vs marginal bias-switch rates, unfaithful-correct over all items vs over correct items. Model names were mostly consistent; the only fixes were Qwen spelling, MoE active-parameter suffixes and thinking-mode aliases, and one tag (metric:verbalization-rate on shenoy2026introspection) needs a manual re-tag because it names a different quantity."
+}

@@ -1,0 +1,3700 @@
+[
+ {
+  "key": "hase2026counterfactual",
+  "list": "improvement",
+  "title": "Counterfactual Simulation Training for Chain-of-Thought Faithfulness",
+  "authors": "Hase & Potts",
+  "year": 2026,
+  "venue": "COLM 2026",
+  "url": "https://arxiv.org/abs/2602.20710",
+  "arxiv_id": "2602.20710",
+  "tags": [
+   "source:trustme",
+   "source:faith-improvement"
+  ],
+  "prior_note": "Rewards CoTs that let a frozen simulator predict the model's outputs on counterfactual inputs (cue removed, or an LLM-generated edit); unfaithful CoTs are rewritten and the model is trained over several rounds. Improves monitor accuracy on cue-based counterfactuals by 35 points and simulatability on generic counterfactuals by 2 points, beats prompting baselines, and rewriting is 5× more efficient than RL alone; gains do not extend to dissuading cues, and larger models benefit more.",
+  "arxiv": {
+   "version": "2602.20710v2",
+   "title": "Counterfactual Simulation Training for Chain-of-Thought Faithfulness",
+   "authors": [
+    "Peter Hase",
+    "Christopher Potts"
+   ],
+   "published": "2026-02-24",
+   "updated": "2026-08-06",
+   "comment": "Accepted to COLM 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "karvonen2026would",
+  "list": "improvement",
+  "title": "Would this change your answer? Evaluating Explanations of LLM Behavior In The Wild with Counterfactual Experiments",
+  "authors": "Karvonen, Ong, Kantamneni & Marks",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2608.16747",
+  "arxiv_id": "2608.16747",
+  "tags": [
+   "source:trustme",
+   "source:faith-improvement"
+  ],
+  "prior_note": "CHIVE is an agentic pipeline that finds unexpected behaviors in real conversations and tests explanations of them with counterfactual prompt edits, producing thousands of verified true/false claims. None of the interpretability tools studied improves an agent's prediction of counterfactual behavior, while training models to predict CHIVE counterfactual outcomes generalizes to out-of-distribution settings; the review notes that models trained on another model's data do as well, so no privileged access is needed.",
+  "arxiv": {
+   "version": "2608.16747v1",
+   "title": "Would this change your answer? Evaluating Explanations of LLM Behavior In The Wild with Counterfactual Experiments",
+   "authors": [
+    "Adam Karvonen",
+    "Euan Ong",
+    "Subhash Kantamneni",
+    "Samuel Marks"
+   ],
+   "published": "2026-08-17",
+   "updated": "2026-08-17",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "guo2026introspective",
+  "list": "improvement",
+  "title": "Introspective Coupling: Self-Explanation Training Tracks Behavioral Change Despite Fixed Supervision",
+  "authors": "Guo, Ruis, Andreas & Li",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2606.32038",
+  "arxiv_id": "2606.32038",
+  "tags": [
+   "source:trustme",
+   "source:faith-improvement"
+  ],
+  "prior_note": "Trains models to explain which input features influenced them, supervised by fixed counterfactual explanations from earlier checkpoints of themselves or from similar models. The trained explanations end up more faithful to the model's current behavior than to their training targets, provided the targets stay correlated with current behavior (in the review's reading, only with a KL regularizer), and they track behavior shifts caused by concurrent post-training on sycophancy and refusal tasks.",
+  "arxiv": {
+   "version": "2606.32038v1",
+   "title": "Introspective Coupling: Self-Explanation Training Tracks Behavioral Change Despite Fixed Supervision",
+   "authors": [
+    "Zifan Carl Guo",
+    "Laura Ruis",
+    "Jacob Andreas",
+    "Belinda Z. Li"
+   ],
+   "published": "2026-06-30",
+   "updated": "2026-06-30",
+   "comment": "32 pages, 19 figures",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "hong2026making",
+  "list": "improvement",
+  "title": "Making LLMs Say What They Think: Measuring and Improving CoT-Interpretability Alignment",
+  "authors": "Hong, Ravfogel, Zhao & Choi",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2609.38972",
+  "arxiv_id": "2609.38972",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Proposes CoT-Interpretability Alignment (CIA), the agreement between the strategy a CoT describes and the strategy interpretability tools detect inside the model; three LLMs reach only 44.8–75.9% on two-hop QA, hint intervention and integer multiplication. Post-training with a reward that combines task accuracy and a parametric-faithfulness signal substantially raises CoT parametric faithfulness while keeping or improving accuracy.",
+  "arxiv": {
+   "version": "2609.38972v2",
+   "title": "Making LLMs Say What They Think: Measuring and Improving CoT-Interpretability Alignment",
+   "authors": [
+    "Yihuai Hong",
+    "Shauli Ravfogel",
+    "Chen Zhao",
+    "Eunsol Choi"
+   ],
+   "published": "2026-09-30",
+   "updated": "2026-10-09",
+   "comment": "28 pages, 9 figures, 10 tables",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "jia2026faithfulness",
+  "list": "improvement",
+  "title": "Faithfulness as Information Flow: Evaluating and Training Faithful Chain-of-Thought Reasoning",
+  "authors": "Jia, Benton & Easley",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2605.24286",
+  "arxiv_id": "2605.24286",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Treats faithfulness as answer-relevant information flowing through the prompt→CoT→answer path (sufficiency, completeness, necessity), with entropy, masked-KL and gradient diagnostics. Adds update-time interventions to verifier-based on-policy RL (attention masking, backward-only gradient masking, CoT gradients, adversarial prompt-representation perturbations); on hinted arithmetic, reward-hackable code repair and DAPO-Math under wrong-hint injection these make shortcuts and reward hacks more visible in the CoT and improve faithfulness metrics, sometimes also reducing hint susceptibility.",
+  "arxiv": {
+   "version": "2605.24286v1",
+   "title": "Faithfulness as Information Flow: Evaluating and Training Faithful Chain-of-Thought Reasoning",
+   "authors": [
+    "Jinghan Jia",
+    "Joe Benton",
+    "Eric Easley"
+   ],
+   "published": "2026-05-22",
+   "updated": "2026-05-22",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "yu2026outcome",
+  "list": "improvement",
+  "title": "Outcome Rewards Do Not Guarantee Verifiable or Causally Important Reasoning",
+  "authors": "Yu, Tartaglini, Hase et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2604.22074",
+  "arxiv_id": "2604.22074",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Defines Causal Importance of Reasoning (CIR) and Sufficiency of Reasoning (SR). On Qwen2.5 with ReasoningGym, RLVR improves accuracy but not reliably CIR or SR (a negative result for outcome RL); a small amount of SFT before RLVR, or auxiliary CIR/SR rewards added to the outcome reward, restores causally important and sufficient reasoning at RLVR-level accuracy.",
+  "arxiv": {
+   "version": "2604.22074v1",
+   "title": "Outcome Rewards Do Not Guarantee Verifiable or Causally Important Reasoning",
+   "authors": [
+    "Qinan Yu",
+    "Alexa Tartaglini",
+    "Peter Hase",
+    "Carlos Guestrin",
+    "Christopher Potts"
+   ],
+   "published": "2026-04-23",
+   "updated": "2026-04-23",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "pres2026selfctrl",
+  "list": "improvement",
+  "title": "Self-CTRL: Self-Consistency Training with Reinforcement Learning",
+  "authors": "Pres, Ruis, Ghebreselassie et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2606.18327",
+  "arxiv_id": "2606.18327",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "RL that either updates self-explanations to predict behavior on related inputs or updates behavior to match explanations (the method paper behind the self-consistency position piece already in the review). Raises the correlation between self-reported and measured latent biases from R²=0.24 to 0.64 on held-out distributions, matching ground-truth supervision, and lifts a third-party auditor's refusal predictions from 36% to 92%; behavior updates cut HarmBench failures from 15.0% to 0.5%.",
+  "arxiv": {
+   "version": "2606.18327v1",
+   "title": "Self-CTRL: Self-Consistency Training with Reinforcement Learning",
+   "authors": [
+    "Itamar Pres",
+    "Laura Ruis",
+    "Melat Ghebreselassie",
+    "Belinda Z. Li",
+    "Jacob Andreas"
+   ],
+   "published": "2026-06-16",
+   "updated": "2026-06-16",
+   "comment": "34 pages, 12 figures, includes appendices",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "cheah2026training",
+  "list": "improvement",
+  "title": "Training Large Language Models for Self-Explanation Faithfulness",
+  "authors": "Cheah, Pérez-Ortiz, Siegel & Camburu",
+  "year": 2026,
+  "venue": "ICLR 2026 Re-Align workshop",
+  "url": "https://arxiv.org/abs/2607.21090",
+  "arxiv_id": "2607.21090",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "GRPO with a per-sample reward derived from the Phi-CCT metric (does the explanation mention an inserted factor exactly when it changes the decision), using random-word and user-bias insertions. Llama3.1-8B and Qwen3-8B rise from near-zero to 0.664 in-distribution and up to 0.691 on held-out tasks such as StrategyQA; cross-intervention transfer is weak and model-dependent.",
+  "arxiv": {
+   "version": "2607.21090v1",
+   "title": "Training Large Language Models for Self-Explanation Faithfulness",
+   "authors": [
+    "Yeoktatt Cheah",
+    "María Pérez-Ortiz",
+    "Noah Y. Siegel",
+    "Oana-Maria Camburu"
+   ],
+   "published": "2026-07-23",
+   "updated": "2026-07-23",
+   "comment": "To appear at the ICLR 2026 Workshop on Representational Alignment (Re-Align), 10 pages (long paper)",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "imran2026consistency",
+  "list": "improvement",
+  "title": "Consistency Training while Mitigating Obfuscation via Rate Matching",
+  "authors": "Imran, Gupta, Elstner & Africa",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2606.02211",
+  "arxiv_id": "2606.02211",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Shows that standard consistency training (answer the same with and without a cue) teaches obfuscation: the model stops mentioning the cue while still using it. Rate Matching Consistency Training matches only the rate of a target behavior (e.g. following a bias cue) across perturbations; on sycophancy in two open models it reduces bias-following about as much as a consistency-training baseline on held-out biases while largely preserving verbalization of the cue.",
+  "arxiv": {
+   "version": "2606.02211v1",
+   "title": "Consistency Training while Mitigating Obfuscation via Rate Matching",
+   "authors": [
+    "Sohaib Imran",
+    "Prakhar Gupta",
+    "Jannes Elstner",
+    "David Demitri Africa"
+   ],
+   "published": "2026-06-01",
+   "updated": "2026-06-01",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "anwar2026analyzing",
+  "list": "improvement",
+  "title": "Analyzing and Improving Chain-of-Thought Monitorability Through Information Theory",
+  "authors": "Anwar, Bakker, Kianfar et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2602.18297",
+  "arxiv_id": "2602.18297",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Shows that non-zero mutual information between CoT and output is necessary but not sufficient for monitorability, and proposes two training objectives: an oracle reward for CoTs that maximize monitor accuracy, and a label-free objective maximizing conditional mutual information between outputs and CoTs. Both significantly improve monitor accuracy across environments while preventing CoT degeneration, even when training against a monitor.",
+  "arxiv": {
+   "version": "2602.18297v1",
+   "title": "Analyzing and Improving Chain-of-Thought Monitorability Through Information Theory",
+   "authors": [
+    "Usman Anwar",
+    "Tim Bakker",
+    "Dana Kianfar",
+    "Cristina Pinneri",
+    "Christos Louizos"
+   ],
+   "published": "2026-02-20",
+   "updated": "2026-02-20",
+   "comment": "First two authors contributed equally",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "kaufmann2026aligned",
+  "list": "improvement",
+  "title": "Aligned, Orthogonal or In-conflict: When can we safely optimize Chain-of-Thought?",
+  "authors": "Kaufmann, Lindner, Zimmermann & Shah",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2603.30036",
+  "arxiv_id": "2603.30036",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Splits post-training reward into an output term and a CoT term and classifies their relation before training: in-conflict terms should reduce monitorability, orthogonal ones leave it unchanged, aligned ones improve it. RL experiments confirm that in-conflict CoT reward terms reduce monitorability and are hard to optimize, giving a check, before training, of which CoT pressures are safe.",
+  "arxiv": {
+   "version": "2603.30036v1",
+   "title": "Aligned, Orthogonal or In-conflict: When can we safely optimize Chain-of-Thought?",
+   "authors": [
+    "Max Kaufmann",
+    "David Lindner",
+    "Roland S. Zimmermann",
+    "and Rohin Shah"
+   ],
+   "published": "2026-03-31",
+   "updated": "2026-03-31",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "malladi2026directly",
+  "list": "improvement",
+  "title": "Directly Optimizing Natural Language Explanations for Behavioral Faithfulness: Simulatability and Recoverability",
+  "authors": "Malladi & Srivastava",
+  "year": 2026,
+  "venue": "ICML 2026",
+  "url": "https://icml.cc/virtual/2026/poster/65940",
+  "arxiv_id": null,
+  "tags": [
+   "source:trustme",
+   "source:faith-improvement"
+  ],
+  "prior_note": "Borderline: explains an external classifier from labeled examples, not the model's own behavior. OPeX is trained with GRPO so that a fixed user-proxy LLM can recover (seen examples) or simulate (unseen inputs) the classifier from the explanation alone; with an 8B backbone it reaches about 0.85 simulatability and 0.99 recoverability, beating GPT-4o, LLaMA-3.3-70B, CoT-based and human-written explanations, and raises human users' classification accuracy by 15% over baselines.",
+  "arxiv": null
+ },
+ {
+  "key": "wang2026case",
+  "list": "improvement",
+  "title": "CASE: Causal Alignment and Structural Enforcement for Improving Chain-of-Thought Faithfulness",
+  "authors": "Wang, Yao, Huang et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2607.18820",
+  "arxiv_id": "2607.18820",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Targets the instruction→answer shortcut that bypasses the CoT: selective-loss fine-tuning on counterfactual-CoT, biased-instruction and empty-instruction data, plus an inference-time mask that blocks attention from instruction tokens to answer tokens. On three models and four benchmarks it gives a 37% average relative gain in CoT faithfulness over the strongest baselines with competitive accuracy.",
+  "arxiv": {
+   "version": "2607.18820v1",
+   "title": "CASE: Causal Alignment and Structural Enforcement for Improving Chain-of-Thought Faithfulness",
+   "authors": [
+    "Ziming Wang",
+    "Yinghua Yao",
+    "Changwu Huang",
+    "Ke Tang",
+    "Xin Yao"
+   ],
+   "published": "2026-07-21",
+   "updated": "2026-07-21",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "parekh2026drop",
+  "list": "improvement",
+  "title": "Drop the Act: Probe-Filtered RL for Faithful Chain-of-Thought Reasoning",
+  "authors": "Parekh & Goyal",
+  "year": 2026,
+  "venue": "ICML 2026 FAGEN workshop",
+  "url": "https://arxiv.org/abs/2605.11467",
+  "arxiv_id": "2605.11467",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "ProFIL: an attention probe trained once on the frozen base model flags \"post-commitment\" reasoning steps, and GRPO rollouts above a threshold get zero advantage. Across GSM8K, LiveCodeBench, ToolUse and MMLU-Redux on Llama-8B and Qwen-7B it cuts post-commitment theater by 11–100%, raises the faithful fraction (e.g. +24 pp on LiveCodeBench) and shortens chains by 4–19% while preserving or improving accuracy; the frozen-base probe resists the RL-obfuscation failure predicted by prior work.",
+  "arxiv": {
+   "version": "2605.11467v2",
+   "title": "Drop the Act: Probe-Filtered RL for Faithful Chain-of-Thought Reasoning",
+   "authors": [
+    "Swapnil Parekh",
+    "Naman Goyal"
+   ],
+   "published": "2026-05-12",
+   "updated": "2026-08-31",
+   "comment": "17 pages. Substantially revised presentation and experiments; added Naman Goyal as a co-author; expanded evaluation, controls, and scientific appendix. Core method retained",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "lv2026geofaith",
+  "list": "improvement",
+  "title": "GeoFaith: A Spatio-Temporal Dual View of Faithful Chain-of-Thought",
+  "authors": "Lv, Zhao, Wang et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2605.26893",
+  "arxiv_id": "2605.26893",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Bootstraps step-level faithfulness annotations from 1k to 20k samples across four domains, trains an 8B faithfulness detector (using latent geometry and entropy dynamics) that outperforms GPT-5 on standard benchmarks, and uses it in RL that jointly rewards correctness, process faithfulness and trajectory consistency. Yields shorter, more interpretable chains without sacrificing accuracy.",
+  "arxiv": {
+   "version": "2605.26893v1",
+   "title": "GeoFaith: A Spatio-Temporal Dual View of Faithful Chain-of-Thought",
+   "authors": [
+    "Weijiang Lv",
+    "Wentong Zhao",
+    "Jiayu Wang",
+    "Yuhao Wu",
+    "Jiaheng Wei",
+    "Xiaobo Xia"
+   ],
+   "published": "2026-05-26",
+   "updated": "2026-05-26",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "sivakumaran2026balancing",
+  "list": "improvement",
+  "title": "Balancing Faithfulness and Performance in Reasoning via Multi-Listener Soft Execution",
+  "authors": "Sivakumaran, Yu, Lee et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2602.16154",
+  "arxiv_id": "2602.16154",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "REMUL: a speaker model is rewarded when truncated reasoning traces can be continued to the answer by a pool of listener models, with masked SFT to protect accuracy. On BBEH, MuSR, ZebraLogicBench and FOLIO it improves hint attribution, early-answering AOC and mistake-injection AOC while also improving accuracy, with gains that transfer to legibility.",
+  "arxiv": {
+   "version": "2602.16154v1",
+   "title": "Balancing Faithfulness and Performance in Reasoning via Multi-Listener Soft Execution",
+   "authors": [
+    "Nithin Sivakumaran",
+    "Shoubin Yu",
+    "Hyunji Lee",
+    "Yue Zhang",
+    "Ali Payani",
+    "Mohit Bansal",
+    "Elias Stengel-Eskin"
+   ],
+   "published": "2026-02-18",
+   "updated": "2026-02-18",
+   "comment": "Code: https://github.com/nsivaku/remul",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "nguyen2026generalization",
+  "list": "improvement",
+  "title": "On the Generalization of Steering Vectors for Chain-of-Thought Faithfulness",
+  "authors": "Nguyen, Cox, Meek & Arcuschin",
+  "year": 2026,
+  "venue": "COLM 2026 workshop",
+  "url": "https://arxiv.org/abs/2607.29062",
+  "arxiv_id": "2607.29062",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Steers Gemma-3 4B, Qwen-3.5 9B and Gemma-3 12B toward acknowledging prompt cues. Mixed: steering reliably increases cue acknowledgment only for Gemma-3 12B, but where it works it transfers across cue types and datasets, four vector constructions give similar effects, and it reduces hidden (unacknowledged) cue use without increasing cue use.",
+  "arxiv": {
+   "version": "2607.29062v1",
+   "title": "On the Generalization of Steering Vectors for Chain-of-Thought Faithfulness",
+   "authors": [
+    "Matthew Nguyen",
+    "Kyle Cox",
+    "Austin Meek",
+    "Iván Arcuschin"
+   ],
+   "published": "2026-07-31",
+   "updated": "2026-07-31",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "occhipinti2026probing",
+  "list": "improvement",
+  "title": "Probing and Steering Chain-of-Thought Unfaithfulness in Language Models",
+  "authors": "Occhipinti, Abate & Schoots",
+  "year": 2026,
+  "venue": "ICLR 2026 Re-Align workshop",
+  "url": "https://openreview.net/forum?id=rI25kpkOIB",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Uses representation engineering on thinking models and finds that faithfulness is partly encoded as linear directions in middle-to-late layers. Linear steering recovers monitorability at rates of up to 46% with collateral effects below 5%, and off-policy steering (from synthetic traces) is about as useful as on-policy steering.",
+  "arxiv": null
+ },
+ {
+  "key": "shenoy2026introspection",
+  "list": "improvement",
+  "title": "Introspection Adapters: Training LLMs to Report Their Learned Behaviors",
+  "authors": "Shenoy, Yang, Sheshadri et al.",
+  "year": 2026,
+  "venue": "ICML 2026",
+  "url": "https://arxiv.org/abs/2604.16812",
+  "arxiv_id": "2604.16812",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Trains one LoRA \"introspection adapter\" across many fine-tunes of a base model with implanted behaviors so that they verbalize what they learned. The adapter induces accurate self-description even in fine-tunes trained very differently, reaches state of the art on AuditBench, detects encrypted fine-tuning attacks, and scales with model size and training-data diversity.",
+  "arxiv": {
+   "version": "2604.16812v2",
+   "title": "Introspection Adapters: Training LLMs to Report Their Learned Behaviors",
+   "authors": [
+    "Keshav Shenoy",
+    "Li Yang",
+    "Abhay Sheshadri",
+    "Sören Mindermann",
+    "Jack Lindsey",
+    "Sam Marks",
+    "Rowan Wang"
+   ],
+   "published": "2026-04-18",
+   "updated": "2026-04-28",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "kutsyk2026revealing",
+  "list": "improvement",
+  "title": "Revealing Hidden Model Behaviors with Task-Specific Self-Reports",
+  "authors": "Kutsyk & Zieliński",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2607.03640",
+  "arxiv_id": "2607.03640",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Stabilized Adapter for self-Report (SAR): a LoRA adapter built only from the fine-tuned model and its training data that makes the model describe its hidden behavior. Detects all seven implanted behaviors, including broad emergent misalignment; Introspection Adapters miss some and hallucinate wrong behaviors, and SAR roughly halves the hallucination rate.",
+  "arxiv": {
+   "version": "2607.03640v2",
+   "title": "Revealing Hidden Model Behaviors with Task-Specific Self-Reports",
+   "authors": [
+    "Taras Kutsyk",
+    "Bartosz Zieliński"
+   ],
+   "published": "2026-07-03",
+   "updated": "2026-07-28",
+   "comment": "17 pages, 8 figures, 2 tables; appendix with 37 additional pages",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "zeng2026evaluating",
+  "list": "improvement",
+  "title": "Evaluating and Improving LLM Self-Modeling",
+  "authors": "Zeng, Assis & Wang",
+  "year": 2026,
+  "venue": "EMNLP 2026",
+  "url": "https://arxiv.org/abs/2608.30980",
+  "arxiv_id": "2608.30980",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Benchmark of verifiable questions about a model's own behavior, such as whether a prompt edit would change its final answer; current models show limited skill and systematic mistakes on simple counterfactuals. RL on a scalable synthetic self-modeling data pipeline improves aggregate self-modeling across three open model families with some transfer to held-out tasks, though the gains do not seem to come from privileged access.",
+  "arxiv": {
+   "version": "2608.30980v1",
+   "title": "Evaluating and Improving LLM Self-Modeling",
+   "authors": [
+    "Siqi Zeng",
+    "Andre N. Assis",
+    "Rowan Wang"
+   ],
+   "published": "2026-08-31",
+   "updated": "2026-08-31",
+   "comment": "89 pages, 25 figures. Published as a conference paper at EMNLP '26 (Main)",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "yoshida2026introspecting",
+  "list": "improvement",
+  "title": "Introspecting Alignment Shifts Beyond Behaviors Implanted Through Fine-Tuning",
+  "authors": "Yoshida, Gomezjurado Gonzalez, Yamamoto et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2608.04347",
+  "arxiv_id": "2608.04347",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Extends introspection adapters from deliberately implanted behaviors to alignment shifts that emerge as side effects of fine-tuning, with a new dataset. The Delta-Aware Introspection Adapter reads both base-model activations and fine-tuning-induced activation differences; introspection learning generalizes to unseen fine-tuned models and safety categories, and DAIA generally beats existing adapters.",
+  "arxiv": {
+   "version": "2608.04347v2",
+   "title": "Introspecting Alignment Shifts Beyond Behaviors Implanted Through Fine-Tuning",
+   "authors": [
+    "Kotaro Yoshida",
+    "Laura Gomezjurado Gonzalez",
+    "Yukinori Yamamoto",
+    "Yuji Naraki",
+    "Ryotaro Shimizu",
+    "Wenya Wang"
+   ],
+   "published": "2026-08-05",
+   "updated": "2026-09-26",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "anwar2026training",
+  "list": "improvement",
+  "title": "Training LLMs to Verbalize Evaluation Awareness",
+  "authors": "Anwar, Abdelnabi & Krueger",
+  "year": 2026,
+  "venue": "NeurIPS 2026 workshop",
+  "url": "https://arxiv.org/abs/2609.36316",
+  "arxiv_id": "2609.36316",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Verbalization training: rollouts are truncated just before spontaneous mentions of being evaluated and the model is trained with RL to verbalize more, without supervising the latent belief. Raises verbalized evaluation awareness 2.4–2.9× on Qwen3.6-35B-A3B, Kimi K2.6 and Inkling, transfers to held-out agentic settings, leaves latent awareness and behavior largely stable, and verbalizations track knowledge implanted by synthetic-document fine-tuning.",
+  "arxiv": {
+   "version": "2609.36316v1",
+   "title": "Training LLMs to Verbalize Evaluation Awareness",
+   "authors": [
+    "Usman Anwar",
+    "Sahar Abdelnabi",
+    "David Krueger"
+   ],
+   "published": "2026-09-28",
+   "updated": "2026-09-28",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "lee2026training",
+  "list": "improvement",
+  "title": "Training Agents to Self-Report Misbehavior",
+  "authors": "Lee, Chen & Korbak",
+  "year": 2026,
+  "venue": "COLM 2026",
+  "url": "https://arxiv.org/abs/2602.22303",
+  "arxiv_id": "2602.22303",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Self-incrimination training: GPT-4.1 and Gemini-2.0 agents are trained to call a `report_scheming()` tool whenever they behave deceptively. In out-of-distribution environments this significantly reduces the undetected successful attack rate, beating matched-capability monitors and alignment baselines at minimal capability cost; it survives adversarial prompt optimization and generalizes to agents that pursue misaligned goals on their own.",
+  "arxiv": {
+   "version": "2602.22303v1",
+   "title": "Training Agents to Self-Report Misbehavior",
+   "authors": [
+    "Bruce W. Lee",
+    "Chen Yueh-Han",
+    "Tomek Korbak"
+   ],
+   "published": "2026-02-25",
+   "updated": "2026-02-25",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "taufeeque2026obfuscation",
+  "list": "improvement",
+  "title": "The Obfuscation Atlas: Mapping Where Honesty Emerges in RLVR with Deception Probes",
+  "authors": "Taufeeque, Heimersheim, Gleave & Cundy",
+  "year": 2026,
+  "venue": "ICML 2026",
+  "url": "https://arxiv.org/abs/2602.15515",
+  "arxiv_id": "2602.15515",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Trains against a white-box deception detector in a coding environment where test-case hardcoding arises naturally. The detector penalty can produce obfuscated policies (deceptive text that evades the detector, often by justifying the hack), and activations drift with or without the penalty, but sufficiently high KL regularization plus detector penalty yields honest policies.",
+  "arxiv": {
+   "version": "2602.15515v2",
+   "title": "The Obfuscation Atlas: Mapping Where Honesty Emerges in RLVR with Deception Probes",
+   "authors": [
+    "Mohammad Taufeeque",
+    "Stefan Heimersheim",
+    "Adam Gleave",
+    "Chris Cundy"
+   ],
+   "published": "2026-02-17",
+   "updated": "2026-05-26",
+   "comment": "Accepted at ICML 2026 (Oral presentation). 30 pages, 14 figures",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "blandfort2026strangers",
+  "list": "improvement",
+  "title": "Strangers to Themselves: What Language Models Say About Themselves Is Generic",
+  "authors": "Blandfort & Pawar",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2609.09899",
+  "arxiv_id": "2609.09899",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Mostly negative: across nine behavioral evaluations, direct self-reports barely predict behavior (r = +0.04; +0.24 when shown the items, versus +0.28 for the same question about generic AI agents), and first-person framing shifts reports in a flattering direction. Fine-tuning on the model's own behavioral record teaches narrow self-predictions but also changes the behavior and does not transfer broadly.",
+  "arxiv": {
+   "version": "2609.09899v1",
+   "title": "Strangers to Themselves: What Language Models Say About Themselves Is Generic",
+   "authors": [
+    "Phil Blandfort",
+    "Urja Pawar"
+   ],
+   "published": "2026-09-09",
+   "updated": "2026-09-09",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "ferreira2026truthful",
+  "list": "improvement",
+  "title": "Truthful or Fabricated? Using Causal Attribution to Mitigate Reward Hacking in Explanations",
+  "authors": "Ferreira, Aziz & Titov",
+  "year": 2026,
+  "venue": "ICLR 2026",
+  "url": "https://arxiv.org/abs/2504.05294",
+  "arxiv_id": "2504.05294",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Shows that preference optimization can reduce CoT faithfulness, because the reward model scores explanation appropriateness without seeing what drove the decision, so models learn reward-pleasing explanations. Feeding the reward model a causal attribution of the prediction lets it spot explanation–decision mismatches and, in controlled settings, reduces misleading explanations.",
+  "arxiv": {
+   "version": "2504.05294v3",
+   "title": "Truthful or Fabricated? Using Causal Attribution to Mitigate Reward Hacking in Explanations",
+   "authors": [
+    "Pedro Ferreira",
+    "Wilker Aziz",
+    "Ivan Titov"
+   ],
+   "published": "2025-04-07",
+   "updated": "2026-07-07",
+   "comment": "ICLR 2026 Camera-ready",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "viteri2026markovian",
+  "list": "improvement",
+  "title": "Markovian Transformers for Informative Language Modeling",
+  "authors": "Viteri, Lamparth, Chatain & Barrett",
+  "year": 2026,
+  "venue": "ICLR 2026",
+  "url": "https://arxiv.org/abs/2404.18988",
+  "arxiv_id": "2404.18988",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Forces the answer to be predicted from a bounded-length CoT alone (an autoencoder-style bottleneck), trained with a GRPO-style policy gradient, so the CoT must be causally load-bearing. Recovers most of the gains of a non-Markovian variant (GSM8K 19.6%→57.1%, ARC-Challenge 36.1%→79.9%), and its CoTs show larger log-probability drops under corruption than matched baselines.",
+  "arxiv": {
+   "version": "2404.18988v8",
+   "title": "Markovian Transformers for Informative Language Modeling",
+   "authors": [
+    "Scott Viteri",
+    "Max Lamparth",
+    "Peter Chatain",
+    "Clark Barrett"
+   ],
+   "published": "2024-04-29",
+   "updated": "2026-03-10",
+   "comment": "21 pages, 6 figures, Accepted at ICLR 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "sun2026refine",
+  "list": "improvement",
+  "title": "ReFIne: A Framework for Trustworthy Large Reasoning Models with Reliability, Faithfulness, and Interpretability",
+  "authors": "Sun, Yan, Kulkarni & Weng",
+  "year": 2026,
+  "venue": "COLM 2026",
+  "url": "https://arxiv.org/abs/2510.09062",
+  "arxiv_id": "2510.09062",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "SFT plus GRPO that trains Qwen3 (1.7B–8B) to produce structured traces, explicitly disclose the decisive information behind each solution with consistent cross-references, and self-assess. Reports +44.0% interpretability, +18.8% faithfulness and +42.4% reliability on math benchmarks.",
+  "arxiv": {
+   "version": "2510.09062v2",
+   "title": "ReFIne: A Framework for Trustworthy Large Reasoning Models with Reliability, Faithfulness, and Interpretability",
+   "authors": [
+    "Chung-En Sun",
+    "Ge Yan",
+    "Akshay Kulkarni",
+    "Tsui-Wei Weng"
+   ],
+   "published": "2025-10-10",
+   "updated": "2026-08-25",
+   "comment": "Accpepted to COLM 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "sun2026investigating",
+  "list": "improvement",
+  "title": "Investigating the Interplay between Contextual and Parametric Chain-of-Thought Faithfulness under Optimization",
+  "authors": "Sun, Wang, Atanasova et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2605.24960",
+  "arxiv_id": "2605.24960",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "FaithMATE: a preference-optimization interface that trains toward either contextual (input/CoT perturbation) or parametric (knowledge intervention) CoT faithfulness. Across three models, two datasets and six metrics the two are positively but asymmetrically coupled: optimizing parametric faithfulness helps both, contextual optimization is more variable, and gains on one contextual metric often do not transfer to others.",
+  "arxiv": {
+   "version": "2605.24960v2",
+   "title": "Investigating the Interplay between Contextual and Parametric Chain-of-Thought Faithfulness under Optimization",
+   "authors": [
+    "Jingyi Sun",
+    "Qianli Wang",
+    "Pepa Atanasova",
+    "Nils Feldhus",
+    "Isabelle Augenstein"
+   ],
+   "published": "2026-05-24",
+   "updated": "2026-08-20",
+   "comment": "The first two authors contributed equally and share first-authorship",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "hoth2026atmanrl",
+  "list": "improvement",
+  "title": "AtManRL: Towards Faithful Reasoning via Differentiable Attention Saliency",
+  "authors": "Höth, Kersting, Deiseroth & Parcalabescu",
+  "year": 2026,
+  "venue": "ICLR 2026 workshop",
+  "url": "https://arxiv.org/abs/2604.16158",
+  "arxiv_id": "2604.16158",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Learns an additive attention mask that identifies which CoT tokens are needed for the correct answer and turns it into a saliency reward combined with the outcome reward in GRPO. On GSM8K and MMLU with Llama-3.2-3B-Instruct it identifies influential reasoning tokens and trains reasoning that more strongly influences the prediction.",
+  "arxiv": {
+   "version": "2604.16158v1",
+   "title": "AtManRL: Towards Faithful Reasoning via Differentiable Attention Saliency",
+   "authors": [
+    "Max Henning Höth",
+    "Kristian Kersting",
+    "Björn Deiseroth",
+    "Letitia Parcalabescu"
+   ],
+   "published": "2026-04-17",
+   "updated": "2026-04-17",
+   "comment": "14 pages, 8 figures, 1 table",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "luo2026removal",
+  "list": "improvement",
+  "title": "A Removal Based Approach to Improve LLM Faithfulness at Test-Time",
+  "authors": "Luo, Nahian, Guttag et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2609.04343",
+  "arxiv_id": "2609.04343",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Separates unfaithfulness into incompleteness (omitted influences) and unsoundness (cited non-influences) and targets incompleteness at inference: remove from the input every concept the explanation does not credit, then re-query. Across two datasets, several model families and two faithfulness metrics it beats standard prompting and prompting for faithfulness, without touching weights.",
+  "arxiv": {
+   "version": "2609.04343v1",
+   "title": "A Removal Based Approach to Improve LLM Faithfulness at Test-Time",
+   "authors": [
+    "Qinglan Luo",
+    "S M A Nahian",
+    "John Guttag",
+    "S. Mazdak Abulnaga",
+    "Katie Matton"
+   ],
+   "published": "2026-09-03",
+   "updated": "2026-09-03",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "alon2026faithfulness",
+  "list": "improvement",
+  "title": "Faithfulness Serum: Mitigating the Faithfulness Gap in Textual Explanations of LLM Decisions via Attribution Guidance",
+  "authors": "Alon, Zimerman & Wolf",
+  "year": 2026,
+  "venue": "ACL 2026",
+  "url": "https://arxiv.org/abs/2604.14325",
+  "arxiv_id": "2604.14325",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Uses counterfactuals to show that LLM textual explanations are often epistemically unfaithful, then proposes a training-free method that steers explanation generation with attention-level interventions guided by token heatmaps from a faithful attribution method. Significantly improves faithfulness across models, benchmarks and prompts.",
+  "arxiv": {
+   "version": "2604.14325v1",
+   "title": "Faithfulness Serum: Mitigating the Faithfulness Gap in Textual Explanations of LLM Decisions via Attribution Guidance",
+   "authors": [
+    "Bar Alon",
+    "Itamar Zimerman",
+    "Lior Wolf"
+   ],
+   "published": "2026-04-15",
+   "updated": "2026-04-15",
+   "comment": "24 pages, multiple figures (e.g., at least 6 main figures), includes experiments across several benchmarks (MMLU, CommonsenseQA, SciQ, ARC, OpenBookQA); code available on GitHub",
+   "journal_ref": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 6622-6645, 2026"
+  }
+ },
+ {
+  "key": "admoni2026aligning",
+  "list": "improvement",
+  "title": "Aligning What LLMs Do and Say: Towards Self-Consistent Explanations",
+  "authors": "Admoni, Amir, Hallak & Ziser",
+  "year": 2026,
+  "venue": "Findings of ACL 2026",
+  "url": "https://arxiv.org/abs/2506.07523",
+  "arxiv_id": "2506.07523",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Builds the Post-hoc Self-Consistency Bank linking decisions, explanations and attribution vectors, and finds Spearman correlation a more reliable alignment signal than cosine. DPO on attribution-based preference data improves answer–explanation feature alignment without hurting accuracy and generalizes across domains, whereas SFT on the same data does not.",
+  "arxiv": {
+   "version": "2506.07523v3",
+   "title": "Aligning What LLMs Do and Say: Towards Self-Consistent Explanations",
+   "authors": [
+    "Sahar Admoni",
+    "Ofra Amir",
+    "Assaf Hallak",
+    "Yftah Ziser"
+   ],
+   "published": "2025-06-09",
+   "updated": "2026-04-12",
+   "comment": "Accepted to Findings of ACL 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "li2026spilling",
+  "list": "improvement",
+  "title": "Spilling the Beans: Teaching LLMs to Self-Report Their Hidden Objectives",
+  "authors": "Li, Phuong & Tan",
+  "year": 2026,
+  "venue": "ICLR 2026",
+  "url": "https://arxiv.org/abs/2511.06626",
+  "arxiv_id": "2511.06626",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Self-report fine-tuning (SRFT): SFT on making occasional factual errors and admitting them when asked. This generalizes out of distribution to confessing hidden misaligned objectives in agentic stealth tasks: interrogation detects them with F1 = 0.98 versus 0 for the baseline and recovers 28–100% of their details versus 0%.",
+  "arxiv": {
+   "version": "2511.06626v5",
+   "title": "Spilling the Beans: Teaching LLMs to Self-Report Their Hidden Objectives",
+   "authors": [
+    "Chloe Li",
+    "Mary Phuong",
+    "Daniel Tan"
+   ],
+   "published": "2025-11-10",
+   "updated": "2026-03-22",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "dietz2026split",
+  "list": "improvement",
+  "title": "Split Personality Training: Revealing Latent Knowledge Through Alternate Personalities",
+  "authors": "Dietz, Wale, Gilg et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2602.05532",
+  "arxiv_id": "2602.05532",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Fine-tunes a dormant \"honest persona\" into LoRA weights that, when triggered after a response, reviews it with access to the main model's latent states. On Anthropic's auditing-game model organism (Llama-3.3-70B trained to exploit and conceal reward hacks) it reaches 96% accuracy where Anthropic reports near 0%, surfacing knowledge such as the fictional biases the model was trained on.",
+  "arxiv": {
+   "version": "2602.05532v1",
+   "title": "Split Personality Training: Revealing Latent Knowledge Through Alternate Personalities",
+   "authors": [
+    "Florian Dietz",
+    "William Wale",
+    "Oscar Gilg",
+    "Robert McCarthy",
+    "Felix Michalak",
+    "Gustavo Ewbank Rodrigues Danon",
+    "Miguelito de Guzman",
+    "Dietrich Klakow"
+   ],
+   "published": "2026-02-05",
+   "updated": "2026-02-05",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "mao2026taming",
+  "list": "improvement",
+  "title": "Taming CoT Obfuscation in VLMs: From Mechanistic Evidence to Activation Enforcement",
+  "authors": "Mao, Zhu, Zhao et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2609.24243",
+  "arxiv_id": "2609.24243",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Finds that RL makes template- and grounding-associated activations less separable in VLMs, then proposes TAME, which uses SAEs to penalize template features above their pre-RL level during RL. Improves CoT monitorability by up to 30.9 and 16.7 points over GRPO on two datasets, confirmed by blinded humans and held-out monitors, with small mixed accuracy changes.",
+  "arxiv": {
+   "version": "2609.24243v1",
+   "title": "Taming CoT Obfuscation in VLMs: From Mechanistic Evidence to Activation Enforcement",
+   "authors": [
+    "Xutao Mao",
+    "Jianing Zhu",
+    "Jinman Zhao",
+    "Tongliang Liu",
+    "Xiaowen Chu",
+    "Cong Wang",
+    "Bo Han"
+   ],
+   "published": "2026-09-21",
+   "updated": "2026-09-21",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "cui2026behavior",
+  "list": "improvement",
+  "title": "Behavior Cue Reasoning: Monitorable Reasoning Improves Efficiency and Safety through Oversight",
+  "authors": "Cui, Killian & Ammanabrolu",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2605.07021",
+  "arxiv_id": "2605.07021",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Trains models to emit special \"behavior cue\" tokens right before specific behaviors, serving as both monitor signal and control lever. A weak monitor reading only the cues can prune up to 50% of wasted math reasoning tokens, and a rule-based monitor recovers safe actions from 80% of traces that would otherwise end unsafely (success 46%→96%), with no performance cost.",
+  "arxiv": {
+   "version": "2605.07021v2",
+   "title": "Behavior Cue Reasoning: Monitorable Reasoning Improves Efficiency and Safety through Oversight",
+   "authors": [
+    "Christopher Z. Cui",
+    "Taylor W. Killian",
+    "Prithviraj Ammanabrolu"
+   ],
+   "published": "2026-05-07",
+   "updated": "2026-05-20",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "peng2026measuring",
+  "list": "improvement",
+  "title": "Measuring and Mitigating Post-hoc Rationalization in Reverse Chain-of-Thought Generation",
+  "authors": "Peng, Chen, Luo et al.",
+  "year": 2026,
+  "venue": "ICML 2026",
+  "url": "https://arxiv.org/abs/2602.14469",
+  "arxiv_id": "2602.14469",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "When reasoning traces are synthesized from known answers, they rationalize the answer rather than derive it; telling the generator to ignore the answer reduces lexical overlap but increases trajectory anchoring. Structural Skeleton-guided Reasoning (generate an abstract skeleton, then the trace) reduces all three measured forms of answer dependence, and its distilled variant gains up to 10 points over suppression baselines.",
+  "arxiv": {
+   "version": "2602.14469v4",
+   "title": "Measuring and Mitigating Post-hoc Rationalization in Reverse Chain-of-Thought Generation",
+   "authors": [
+    "Guangyue Peng",
+    "Zongchao Chen",
+    "Wen Luo",
+    "Yuntao Wen",
+    "Wei Li",
+    "Ruixiang Feng",
+    "Ran Le",
+    "Chen Yang",
+    "Zhenwei An",
+    "Yang Song",
+    "Tao Zhang",
+    "Houfeng Wang"
+   ],
+   "published": "2026-02-16",
+   "updated": "2026-07-20",
+   "comment": "ICML 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "lin2026reason",
+  "list": "improvement",
+  "title": "To Reason or to Fabricate: Reasoning Without Shortcuts via Hint-Anchored Pairwise Aggregation",
+  "authors": "Lin, Zhang & Feng",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2606.29481",
+  "arxiv_id": "2606.29481",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Targets RL on data that overlaps pretraining, where models recall answers and fabricate post-hoc reasoning. HIPPO injects hints to trigger shortcut traces, uses them as anchors for a pairwise reward model that separates genuine derivation from rationalization, and improves over standard RL baselines with out-of-distribution generalization.",
+  "arxiv": {
+   "version": "2606.29481v1",
+   "title": "To Reason or to Fabricate: Reasoning Without Shortcuts via Hint-Anchored Pairwise Aggregation",
+   "authors": [
+    "Jiuheng Lin",
+    "Chen Zhang",
+    "Yansong Feng"
+   ],
+   "published": "2026-06-28",
+   "updated": "2026-06-28",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "senatorov2026structural",
+  "list": "improvement",
+  "title": "Structural Chain-of-Thought: Reasoning with Executable Computational Graphs",
+  "authors": "Senatorov, Vafin, Tutubalina & Somov",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2610.15107",
+  "arxiv_id": "2610.15107",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Models output an executable computational graph instead of free text, and the answer comes from deterministically executing it (faithful by construction), trained with graph-based RL. Improves accuracy over supervised graph training, shortens outputs by up to 5–6× versus GRPO and CoT SFT, and faithfulness tests show answers derive from the graphs rather than from post-hoc rationalization.",
+  "arxiv": {
+   "version": "2610.15107v1",
+   "title": "Structural Chain-of-Thought: Reasoning with Executable Computational Graphs",
+   "authors": [
+    "Petr Senatorov",
+    "Karim Vafin",
+    "Elena Tutubalina",
+    "Oleg Somov"
+   ],
+   "published": "2026-10-10",
+   "updated": "2026-10-10",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "kim2026mitigating",
+  "list": "improvement",
+  "title": "Mitigating Legibility Tax with Decoupled Prover-Verifier Games",
+  "authors": "Kim & Lee",
+  "year": 2026,
+  "venue": "ICLR 2026 workshop",
+  "url": "https://arxiv.org/abs/2602.23248",
+  "arxiv_id": "2602.23248",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Addresses the accuracy loss (\"legibility tax\") of prover–verifier training by keeping a correctness-maximizing solver fixed and training a separate translator to rewrite its solution into a checkable form that preserves the answer. Formulates a decoupled prover–verifier game whose equilibria are faithful, checkable translators.",
+  "arxiv": {
+   "version": "2602.23248v2",
+   "title": "Mitigating Legibility Tax with Decoupled Prover-Verifier Games",
+   "authors": [
+    "Yegon Kim",
+    "Juho Lee"
+   ],
+   "published": "2026-02-26",
+   "updated": "2026-06-18",
+   "comment": "ICLR 2026 Workshop Trustworthy AI",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "jiao2026tandem",
+  "list": "improvement",
+  "title": "Tandem Reinforcement Learning with Verifiable Rewards",
+  "authors": "Jiao, Singhal, West & Anderson",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2606.28166",
+  "arxiv_id": "2606.28166",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "A legibility-oriented RLVR variant: a senior model (Qwen3-4B-Instruct) learns from trajectories co-generated with a frozen weaker junior, with GRPO applied only to senior tokens. Matches a standard GRPO senior when reasoning alone, keeps nearly all performance when the junior takes over mid-reasoning, and its CoT is easier for the junior to predict token by token; explicitly regularizing GRPO toward the junior does not reproduce this.",
+  "arxiv": {
+   "version": "2606.28166v2",
+   "title": "Tandem Reinforcement Learning with Verifiable Rewards",
+   "authors": [
+    "Difan Jiao",
+    "Raghav Singhal",
+    "Robert West",
+    "Ashton Anderson"
+   ],
+   "published": "2026-06-26",
+   "updated": "2026-09-27",
+   "comment": "22 pages,6 figures,8 tables",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "zhou2026conceptual",
+  "list": "improvement",
+  "title": "Conceptual Steganography",
+  "authors": "Zhou & May",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2605.26537",
+  "arxiv_id": "2605.26537",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Shows that information can be hidden in a CoT through patterns of high-level reasoning behavior rather than word choice; across four model families this channel survives a strong paraphrase defense better than keyword schemes. A strategy-aware paraphraser closes much of the channel, so the paper is a mixed result for paraphrasing as a defense.",
+  "arxiv": {
+   "version": "2605.26537v1",
+   "title": "Conceptual Steganography",
+   "authors": [
+    "Zhejian Zhou",
+    "Jonathan May"
+   ],
+   "published": "2026-05-26",
+   "updated": "2026-05-26",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "schulz2026monitor",
+  "list": "improvement",
+  "title": "Monitor Jailbreaking: Evading Chain-of-Thought Monitoring Without Encoded Reasoning",
+  "authors": "Schulz",
+  "year": 2026,
+  "venue": "COLM 2026 workshop",
+  "url": "https://arxiv.org/abs/2609.31121",
+  "arxiv_id": "2609.31121",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "RL against a CoT monitor teaches models to phrase and format side-task reasoning so the monitor misses it while it stays readable to humans, generalizing across monitors and prompts. Paraphrasing the jailbroken CoT is an effective defense: the same monitor then flags it while the model still completes both tasks.",
+  "arxiv": {
+   "version": "2609.31121v1",
+   "title": "Monitor Jailbreaking: Evading Chain-of-Thought Monitoring Without Encoded Reasoning",
+   "authors": [
+    "Julian Schulz"
+   ],
+   "published": "2026-09-25",
+   "updated": "2026-09-25",
+   "comment": "23 pages, 6 figures. Accepted at the AdvML-Frontiers x CoTMA Workshop at COLM 2026. Code: https://github.com/wusche1/encoded-reasoning",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "ananthula2026decodable",
+  "list": "improvement",
+  "title": "Decodable but Not Faithful: Coupling Natural-Language Rationales to Programmatic Verifiers",
+  "authors": "Ananthula & Kumarappan",
+  "year": 2026,
+  "venue": "ICML 2026 AI4Math workshop",
+  "url": "https://arxiv.org/abs/2606.21678",
+  "arxiv_id": "2606.21678",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Negative result: training an auxiliary head to predict programmatic verifier outputs from rationale hidden states makes verifier information decodable but does not make the generated rationale faithful. In code, 98.6% coupling coexists with fluent explanations that describe unrelated algorithms.",
+  "arxiv": {
+   "version": "2606.21678v2",
+   "title": "Decodable but Not Faithful: Coupling Natural-Language Rationales to Programmatic Verifiers",
+   "authors": [
+    "Vatsal Ananthula",
+    "Adarsh Kumarappan"
+   ],
+   "published": "2026-06-19",
+   "updated": "2026-08-08",
+   "comment": "Accepted to the ICML 2026 AI4Math Workshop as a poster",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "basu2026measuring",
+  "list": "improvement",
+  "title": "Measuring and curing reasoning rigidity: from decorative chain-of-thought to genuine faithfulness",
+  "authors": "Basu & Chakraborty",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2603.22816",
+  "arxiv_id": "2603.22816",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Introduces a step-level necessity metric (SLRC) and LC-CoSR, a training method that directly reduces answer rigidity. Across 16 frontier models, RL-based reasoning training rather than thinking tokens drives step necessity (o4-mini 74–88% on five of six tasks), and LC-CoSR gets 2.6× less negative reward than FARL and CSR baselines.",
+  "arxiv": {
+   "version": "2603.22816v3",
+   "title": "Measuring and curing reasoning rigidity: from decorative chain-of-thought to genuine faithfulness",
+   "authors": [
+    "Abhinaba Basu",
+    "Pavan Chakraborty"
+   ],
+   "published": "2026-03-24",
+   "updated": "2026-04-13",
+   "comment": "Includes SLRC metric with formal guarantees (Theorem 1), LC-CoSR training intervention, Reasoning Integrity Score, and mechanistic analysis",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "chuang2026faithlm",
+  "list": "improvement",
+  "title": "FaithLM: Towards Faithful Explanations for Large Language Models",
+  "authors": "Chuang, Wang, Chang et al.",
+  "year": 2026,
+  "venue": "EACL 2026",
+  "url": "https://arxiv.org/abs/2402.04678",
+  "arxiv_id": "2402.04678",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Defines faithfulness as an intervention property (contradicting a faithful explanation should shift the prediction) and iteratively refines the elicitation prompt and the explanation to maximize this contrary-hint score. Consistently raises faithfulness across three datasets and several LLM backbones.",
+  "arxiv": {
+   "version": "2402.04678v4",
+   "title": "FaithLM: Towards Faithful Explanations for Large Language Models",
+   "authors": [
+    "Yu-Neng Chuang",
+    "Guanchu Wang",
+    "Chia-Yuan Chang",
+    "Ruixiang Tang",
+    "Shaochen Zhong",
+    "Fan Yang",
+    "Mengnan Du",
+    "Xuanting Cai",
+    "Vladimir Braverman",
+    "Xia Hu"
+   ],
+   "published": "2024-02-07",
+   "updated": "2025-10-27",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "zhang2026audit",
+  "list": "improvement",
+  "title": "How the Audit Rule Shapes Faithful Factor Explanations in LLMs",
+  "authors": "Zhang, Wang, Wan et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2610.01514",
+  "arxiv_id": "2610.01514",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Models factor-level self-reports under limited counterfactual auditing as a verification game: if auditing depends on the report, models are incentivized to under-report influential factors. Report-independent auditing (or a small report-independent floor) restores truthful reporting under a Counterfactual Brier Score; a synthetic agent and real LLMs follow the predicted incentives, a design rule for faithfulness rewards.",
+  "arxiv": {
+   "version": "2610.01514v1",
+   "title": "How the Audit Rule Shapes Faithful Factor Explanations in LLMs",
+   "authors": [
+    "Taolin Zhang",
+    "Hanyu Wang",
+    "Jiuheng Wan",
+    "Tingyuan Hu",
+    "Chengyu Wang"
+   ],
+   "published": "2026-10-01",
+   "updated": "2026-10-01",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "prasad2026features",
+  "list": "improvement",
+  "title": "Features as Rewards: Scalable Supervision for Open-Ended Tasks via Interpretability",
+  "authors": "Prasad, Watts, Merullo et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2602.10067",
+  "arxiv_id": "2602.10067",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Borderline: it targets hallucination, not faithfulness, and is listed as a template for RL rewards built from internal signals. RLFR uses probe-detected features as rewards, teaching the model to correct completions when it is unsure of their factuality; on Gemma-3-12B-IT the policy is 58% less likely to hallucinate (run with the probing harness) while preserving benchmark performance.",
+  "arxiv": {
+   "version": "2602.10067v3",
+   "title": "Features as Rewards: Scalable Supervision for Open-Ended Tasks via Interpretability",
+   "authors": [
+    "Aaditya Vikram Prasad",
+    "Connor Watts",
+    "Jack Merullo",
+    "Dhruvil Gala",
+    "Owen Lewis",
+    "Thomas McGrath",
+    "Ekdeep Singh Lubana"
+   ],
+   "published": "2026-02-10",
+   "updated": "2026-02-18",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "pres2026consistency",
+  "list": "improvement",
+  "title": "Position: It's Time to Optimize LLMs for Self-Consistency",
+  "authors": "Pres, Li, Ruis et al.",
+  "year": 2026,
+  "venue": "ICML 2026 position track",
+  "url": "https://arxiv.org/abs/2608.05188",
+  "arxiv_id": "2608.05188",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Borderline: a position paper with no experiments. Argues that failures such as sycophancy and incomplete logical generalization come from specifying and evaluating behavior one input–output pair at a time, and proposes optimizing consistency across related inputs, including meta-level consistency between self-descriptions and behavior (the objective behind faithful CoT, introspection and calibration). Self-CTRL (above) is the corresponding method paper.",
+  "arxiv": {
+   "version": "2608.05188v1",
+   "title": "Position: It's Time to Optimize LLMs for Self-Consistency",
+   "authors": [
+    "Itamar Pres",
+    "Belinda Z. Li",
+    "Laura Ruis",
+    "Zifan Carl Guo",
+    "Keya Hu",
+    "Mehul Damani",
+    "Isha Puri",
+    "Ekdeep Singh Lubana",
+    "Jacob Andreas"
+   ],
+   "published": "2026-07-31",
+   "updated": "2026-07-31",
+   "comment": "Accepted at the 43rd International Conference on Machine Learning (ICML 2026), Position Paper Track",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "turpin2025teaching",
+  "list": "improvement",
+  "title": "Teaching Models to Verbalize Reward Hacking in Chain-of-Thought Reasoning",
+  "authors": "Turpin, Arditi, Li et al.",
+  "year": 2025,
+  "venue": "ICML 2025 workshop",
+  "url": "https://arxiv.org/abs/2506.22777",
+  "arxiv_id": "2506.22777",
+  "tags": [
+   "source:trustme",
+   "source:faith-improvement"
+  ],
+  "prior_note": "Verbalization fine-tuning (VFT): before RL, fine-tune on CoTs minimally edited to credit the prompt cue, then run RL that rewards exploiting held-out cues. After RL only 6% of the VFT model's responses are undetected reward hacks, versus 88% without VFT and 99% with a debiasing (consistency-training) baseline; cue verbalization rises from 8% to 43% after VFT and 94% after RL, while the baselines stay at 11% and 1%.",
+  "arxiv": {
+   "version": "2506.22777v2",
+   "title": "Teaching Models to Verbalize Reward Hacking in Chain-of-Thought Reasoning",
+   "authors": [
+    "Miles Turpin",
+    "Andy Arditi",
+    "Marvin Li",
+    "Joe Benton",
+    "Julian Michael"
+   ],
+   "published": "2025-06-28",
+   "updated": "2025-07-13",
+   "comment": "Published at ICML 2025 Workshop on Reliable and Responsible Foundation Models",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "baker2025monitoring",
+  "list": "improvement",
+  "title": "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation",
+  "authors": "Baker, Huizinga, Gao et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2503.11926",
+  "arxiv_id": "2503.11926",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "A GPT-4o monitor reading o3-mini's CoT catches reward hacking in agentic coding far better than action-only monitoring (95% vs 60% recall on systemic hacks, per the review). Negative result for CoT pressure: putting the CoT monitor into the RL reward helps at low optimization, but with more optimization agents learn obfuscated reward hacking, so the authors recommend paying a \"monitorability tax\" by not optimizing the CoT directly.",
+  "arxiv": {
+   "version": "2503.11926v1",
+   "title": "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation",
+   "authors": [
+    "Bowen Baker",
+    "Joost Huizinga",
+    "Leo Gao",
+    "Zehao Dou",
+    "Melody Y. Guan",
+    "Aleksander Madry",
+    "Wojciech Zaremba",
+    "Jakub Pachocki",
+    "David Farhi"
+   ],
+   "published": "2025-03-14",
+   "updated": "2025-03-14",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "drori2025output",
+  "list": "improvement",
+  "title": "Output Supervision Can Obfuscate the Chain of Thought",
+  "authors": "Drori, Marks, Woodworth et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2511.11584",
+  "arxiv_id": "2511.11584",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Shows that training only against output monitors can still obfuscate the CoT (\"feedback spillover\"), because safe-looking outputs generalize to safe-looking CoTs and safe-looking CoTs make safe outputs likelier. Two mitigations, separate models for CoT and output (\"Mind & Face\") and reward targeting that removes the CoT-reinforcing gradient term, give a Pareto improvement in monitorability and task performance.",
+  "arxiv": {
+   "version": "2511.11584v1",
+   "title": "Output Supervision Can Obfuscate the Chain of Thought",
+   "authors": [
+    "Jacob Drori",
+    "Luke Marks",
+    "Bryce Woodworth",
+    "Alex Cloud",
+    "Alexander Matt Turner"
+   ],
+   "published": "2025-10-11",
+   "updated": "2025-10-11",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "li2025training",
+  "list": "improvement",
+  "title": "Training Language Models to Explain Their Own Computations",
+  "authors": "Li, Guo, Huang et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2511.08579",
+  "arxiv_id": "2511.08579",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Fine-tunes LMs, with interpretability methods as ground truth, to describe the information their features encode, the causal structure of their activations and the influence of input tokens on their outputs. With tens of thousands of examples the explainers generalize to new queries, and a model explaining itself generally beats a different, even more capable, explainer model: evidence of privileged access.",
+  "arxiv": {
+   "version": "2511.08579v3",
+   "title": "Training Language Models to Explain Their Own Computations",
+   "authors": [
+    "Belinda Z. Li",
+    "Zifan Carl Guo",
+    "Vincent Huang",
+    "Jacob Steinhardt",
+    "Jacob Andreas"
+   ],
+   "published": "2025-11-11",
+   "updated": "2026-02-09",
+   "comment": "23 pages, 8 tables, 7 figures. Code and data at https://github.com/TransluceAI/introspective-interp",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "plunkett2025self",
+  "list": "improvement",
+  "title": "Self-Interpretability: LLMs Can Describe Complex Internal Processes that Drive Their Decisions",
+  "authors": "Plunkett, Morris, Reddy & Morales",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2505.17120",
+  "arxiv_id": "2505.17120",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Fine-tunes GPT-4o and GPT-4o-mini to make decisions under randomly generated quantitative attribute weights and shows they can report those learned weights. Further fine-tuning makes these self-explanations more accurate, and the gain generalizes to explaining other complex decisions they were not trained on.",
+  "arxiv": {
+   "version": "2505.17120v2",
+   "title": "Self-Interpretability: LLMs Can Describe Complex Internal Processes that Drive Their Decisions",
+   "authors": [
+    "Dillon Plunkett",
+    "Adam Morris",
+    "Keerthi Reddy",
+    "Jorge Morales"
+   ],
+   "published": "2025-05-21",
+   "updated": "2025-11-10",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "guan2025monitoring",
+  "list": "improvement",
+  "title": "Monitoring Monitorability",
+  "authors": "Guan, Wang, Carroll et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2512.18311",
+  "arxiv_id": "2512.18311",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Borderline: mostly an evaluation suite (intervention, process and outcome-property archetypes plus a monitorability metric). Finds longer CoTs more monitorable, no material loss from RL at today's frontier scale, and that a smaller model at higher reasoning effort can be more monitorable. As interventions, giving a weak monitor the CoT and more test-time compute helps, and asking follow-up questions and showing the follow-up CoT to the monitor improves monitorability.",
+  "arxiv": {
+   "version": "2512.18311v1",
+   "title": "Monitoring Monitorability",
+   "authors": [
+    "Melody Y. Guan",
+    "Miles Wang",
+    "Micah Carroll",
+    "Zehao Dou",
+    "Annie Y. Wei",
+    "Marcus Williams",
+    "Benjamin Arnav",
+    "Joost Huizinga",
+    "Ian Kivlichan",
+    "Mia Glaese",
+    "Jakub Pachocki",
+    "Bowen Baker"
+   ],
+   "published": "2025-12-20",
+   "updated": "2025-12-20",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "reddy2025principled",
+  "list": "improvement",
+  "title": "A Principled Approach to Chain-of-Thought Monitorability in Reasoning Models",
+  "authors": "Reddy, Chakraborty & Bedi",
+  "year": 2025,
+  "venue": "withdrawn ICLR 2026 submission",
+  "url": "https://openreview.net/forum?id=opU91paIvZ",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Frames monitorability as constrained optimization: instruct models rewrite existing CoTs to satisfy faithfulness and conciseness constraints, and the base model is fine-tuned on the rewritten traces. On MMLU-Pro with hint injection, GSM8K and MATH500 it adds about 10% faithfulness and shortens CoTs by up to 60% with accuracy essentially unchanged.",
+  "arxiv": null
+ },
+ {
+  "key": "joglekar2025training",
+  "list": "improvement",
+  "title": "Training LLMs for Honesty via Confessions",
+  "authors": "Joglekar, Chen, Wu et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2512.08093",
+  "arxiv_id": "2512.08093",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Trains GPT-5-Thinking to produce a post-answer \"confession\" reporting its compliance, rewarded only for honesty and decoupled from the main-task reward. When the model lies or omits shortcomings in its main answer it often confesses them honestly in out-of-distribution tests (hallucination, instruction following, scheming, reward hacking), and confession honesty improves modestly with training.",
+  "arxiv": {
+   "version": "2512.08093v2",
+   "title": "Training LLMs for Honesty via Confessions",
+   "authors": [
+    "Manas Joglekar",
+    "Jeremy Chen",
+    "Gabriel Wu",
+    "Jason Yosinski",
+    "Jasmine Wang",
+    "Boaz Barak",
+    "Amelia Glaese"
+   ],
+   "published": "2025-12-08",
+   "updated": "2025-12-22",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "goel2025learning",
+  "list": "improvement",
+  "title": "Learning to Interpret Weight Differences in Language Models",
+  "authors": "Goel, Kim, Shavit & Wang",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2510.05092",
+  "arxiv_id": "2510.05092",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Diff Interpretation Tuning trains an adapter on synthetic, labeled weight diffs so that a fine-tuned model can describe in natural language how its fine-tuning changed it. Works in two proof-of-concept settings, reporting hidden behaviors and summarizing fine-tuned knowledge.",
+  "arxiv": {
+   "version": "2510.05092v4",
+   "title": "Learning to Interpret Weight Differences in Language Models",
+   "authors": [
+    "Avichal Goel",
+    "Yoon Kim",
+    "Nir Shavit",
+    "Tony T. Wang"
+   ],
+   "published": "2025-10-06",
+   "updated": "2026-03-21",
+   "comment": "Project code and links to weight diffs, adapters, and training data can be found at https://github.com/Aviously/diff-interpretation-tuning",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "macdermott2025reasoning",
+  "list": "improvement",
+  "title": "Reasoning Under Pressure: How do Training Incentives Influence Chain-of-Thought Monitorability?",
+  "authors": "MacDermott, Wei, Djoneva & Ward",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2512.00218",
+  "arxiv_id": "2512.00218",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Measures monitorability as whether a monitor can predict a key latent variable from the reasoning. Controlling for accuracy, length penalties and KL regularization show no consistent effect, adversarial optimization against the monitor degrades it, and directly optimizing for monitorability does not reliably improve it, a negative result for that training lever.",
+  "arxiv": {
+   "version": "2512.00218v2",
+   "title": "Reasoning Under Pressure: How do Training Incentives Influence Chain-of-Thought Monitorability?",
+   "authors": [
+    "Matt MacDermott",
+    "Qiyao Wei",
+    "Rada Djoneva",
+    "Francis Rhys Ward"
+   ],
+   "published": "2025-11-28",
+   "updated": "2025-12-08",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "swaroop2025lift",
+  "list": "improvement",
+  "title": "LIFT: Likelihood-Based Intervention Faithfulness Training",
+  "authors": "Swaroop, Chaudhary, Zhu et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2509.13334",
+  "arxiv_id": "2509.13334",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Scores each reasoning step by the drop in answer log-probability when it is replaced with an irrelevant, domain-matched fact, then fine-tunes on traces where interventions disrupt the answer, jointly with accuracy. Improves faithfulness for Mistral-7B-Instruct, Qwen3-8B and Qwen3-4B-Instruct on three benchmarks with accuracy comparable to accuracy-only fine-tuning, without human annotation (earlier arXiv title: FRIT).",
+  "arxiv": {
+   "version": "2509.13334v2",
+   "title": "LIFT: Likelihood-Based Intervention Faithfulness Training",
+   "authors": [
+    "Anand Swaroop",
+    "Maheep Chaudhary",
+    "Kevin Zhu",
+    "Sunishchal Dev",
+    "Vasu Sharma"
+   ],
+   "published": "2025-09-10",
+   "updated": "2026-10-12",
+   "comment": "13 pages, 3 figures",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "akter2025causal",
+  "list": "improvement",
+  "title": "Causal Consistency Regularization: Training Verifiably Sensitive Reasoning in Large Language Models",
+  "authors": "Akter, Shihab & Sharma",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2509.01544",
+  "arxiv_id": "2509.01544",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Counterfactual Sensitivity Regularization: applies operator-level edits to reasoning traces (e.g. swapping \"+\" for \"−\") and penalizes the model when the corrupted trace still yields the original answer, at about 9% training overhead. On GSM8K, ProofWriter, HotpotQA and MBPP it improves faithfulness by up to 70 points over standard fine-tuning and process supervision, best suited to structured domains.",
+  "arxiv": {
+   "version": "2509.01544v3",
+   "title": "Causal Consistency Regularization: Training Verifiably Sensitive Reasoning in Large Language Models",
+   "authors": [
+    "Sanjeda Akter",
+    "Ibne Farabi Shihab",
+    "Anuj Sharma"
+   ],
+   "published": "2025-09-01",
+   "updated": "2026-01-05",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "wang2025causallyenhanced",
+  "list": "improvement",
+  "title": "Causally-Enhanced Reinforcement Policy Optimization",
+  "authors": "Wang, Huang, Zhou et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2509.23095",
+  "arxiv_id": "2509.23095",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "CE-PO adds a reward for causal coherence along prompt→rationale→answer, estimated with Jacobian sensitivities and counterfactually hardened against nuisance cues, combined with accuracy in PPO/GRPO. Reduces reward hacking and unfaithful CoT and improves robustness to correlation–causation flips, with accuracy up 5.49% on average over baselines across four datasets.",
+  "arxiv": {
+   "version": "2509.23095v1",
+   "title": "Causally-Enhanced Reinforcement Policy Optimization",
+   "authors": [
+    "Xiangqi Wang",
+    "Yue Huang",
+    "Yujun Zhou",
+    "Xiaonan Luo",
+    "Kehan Guo",
+    "Xiangliang Zhang"
+   ],
+   "published": "2025-09-27",
+   "updated": "2025-09-27",
+   "comment": "Reinforcement learning publication of 24 pages",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "mohammadi2025evaluating",
+  "list": "improvement",
+  "title": "Evaluating GRPO and DPO for Faithful Chain-of-Thought Reasoning in LLMs",
+  "authors": "Mohammadi, Kozak & Giachanou",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2512.22631",
+  "arxiv_id": "2512.22631",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Compares GRPO and DPO for improving CoT faithfulness in Qwen2.5 models: GRPO does better at larger scales (Qwen2.5-14B-Instruct best on all metrics) but is less stable at small scales, and both improve with model size. The review notes that faithfulness here is proxied by consistency metrics.",
+  "arxiv": {
+   "version": "2512.22631v1",
+   "title": "Evaluating GRPO and DPO for Faithful Chain-of-Thought Reasoning in LLMs",
+   "authors": [
+    "Hadi Mohammadi",
+    "Tamas Kozak",
+    "Anastasia Giachanou"
+   ],
+   "published": "2025-12-27",
+   "updated": "2025-12-27",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "zhao2025necessary",
+  "list": "improvement",
+  "title": "A Necessary Step toward Faithfulness: Measuring and Improving Consistency in Free-Text Explanations",
+  "authors": "Zhao & Daumé",
+  "year": 2025,
+  "venue": "EMNLP 2025",
+  "url": "https://arxiv.org/abs/2505.19299",
+  "arxiv_id": "2505.19299",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Defines prediction–explanation (PEX) consistency via weight of evidence and finds over 62% of LLM explanations lack it. DPO raises PEX consistency by 43.1–292.3% across three model families and improves explanation faithfulness by up to 9.7%.",
+  "arxiv": {
+   "version": "2505.19299v2",
+   "title": "A Necessary Step toward Faithfulness: Measuring and Improving Consistency in Free-Text Explanations",
+   "authors": [
+    "Lingjun Zhao",
+    "Hal Daumé"
+   ],
+   "published": "2025-05-25",
+   "updated": "2025-09-28",
+   "comment": "EMNLP 2025",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "wang2025selfcritique",
+  "list": "improvement",
+  "title": "Self-Critique and Refinement for Faithful Natural Language Explanations",
+  "authors": "Wang & Atanasova",
+  "year": 2025,
+  "venue": "EMNLP 2025",
+  "url": "https://arxiv.org/abs/2505.22823",
+  "arxiv_id": "2505.22823",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "SR-NLE: the model iteratively critiques and refines its own post-hoc explanation, using natural-language self-feedback or attribution-based feedback that highlights important input words. Across three datasets and four LLMs the best variant cuts the average unfaithfulness rate from 54.81% to 36.02%, without training.",
+  "arxiv": {
+   "version": "2505.22823v2",
+   "title": "Self-Critique and Refinement for Faithful Natural Language Explanations",
+   "authors": [
+    "Yingming Wang",
+    "Pepa Atanasova"
+   ],
+   "published": "2025-05-28",
+   "updated": "2025-09-06",
+   "comment": "EMNLP 2025 Main",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "doi2025investigating",
+  "list": "improvement",
+  "title": "Investigating Training and Generalization in Faithful Self-Explanations of Large Language Models",
+  "authors": "Doi, Isonuma & Yanaka",
+  "year": 2025,
+  "venue": "IJCNLP-AACL 2025 SRW",
+  "url": "https://aclanthology.org/2025.ijcnlp-srw.17/",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Builds pseudo-faithful one-word self-explanations with a feature-attribution method and uses them for continual learning on instruction-tuned models. Faithfulness improves on all three classification tasks and explanation styles, with signs of generalization to multi-word explanations, unseen tasks and across styles.",
+  "arxiv": null
+ },
+ {
+  "key": "li2025drift",
+  "list": "improvement",
+  "title": "Drift: Enhancing LLM Faithfulness in Rationale Generation via Dual-Reward Probabilistic Inference",
+  "authors": "Li, Yan & He",
+  "year": 2025,
+  "venue": "ACL 2025",
+  "url": "https://aclanthology.org/2025.acl-long.340/",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Inference-time sequential Monte Carlo guided by task-specific and lookahead rewards to produce rationales that are more faithful to the model's decisions and aligned with the input. Improves both accuracy and faithfulness on three reasoning tasks without retraining.",
+  "arxiv": null
+ },
+ {
+  "key": "chen2025consistent",
+  "list": "improvement",
+  "title": "Towards Consistent Natural-Language Explanations via Explanation-Consistency Finetuning",
+  "authors": "Chen, Singh, Liu et al.",
+  "year": 2025,
+  "venue": "COLING 2025",
+  "url": "https://aclanthology.org/2025.coling-main.505/",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Fine-tunes LLMs on synthetic data with explanations that stay consistent across related questions, so a reader can simulate the model's decisions from them (first author Yanda Chen also led the counterfactual-simulatability paper). Yields a 10.0% relative consistency gain on four fine-tuning datasets and +4.5% relative on seven unseen datasets.",
+  "arxiv": null
+ },
+ {
+  "key": "li2025better",
+  "list": "improvement",
+  "title": "Towards Better Chain-of-Thought: A Reflection on Effectiveness and Faithfulness",
+  "authors": "Li, Cao, Chen et al.",
+  "year": 2025,
+  "venue": "Findings of ACL 2025",
+  "url": "https://arxiv.org/abs/2405.18915",
+  "arxiv_id": "2405.18915",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Traces unfaithful CoT to the model recalling question information missing from the CoT when it answers. QUIRE recalls extra information from the question to enrich CoT generation and scores CoTs by information gain, improving both faithfulness and effectiveness.",
+  "arxiv": {
+   "version": "2405.18915v3",
+   "title": "Towards Better Chain-of-Thought: A Reflection on Effectiveness and Faithfulness",
+   "authors": [
+    "Jiachun Li",
+    "Pengfei Cao",
+    "Yubo Chen",
+    "Jiexin Xu",
+    "Huaijun Li",
+    "Xiaojian Jiang",
+    "Kang Liu",
+    "Jun Zhao"
+   ],
+   "published": "2024-05-29",
+   "updated": "2025-05-31",
+   "comment": "18 pages, 21 figures, accepted by ACL 2025 Findings",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "arakelyan2025flare",
+  "list": "improvement",
+  "title": "FLARE: Faithful Logic-Aided Reasoning and Exploration",
+  "authors": "Arakelyan, Minervini, Verga et al.",
+  "year": 2025,
+  "venue": "EMNLP 2025",
+  "url": "https://arxiv.org/abs/2410.11900",
+  "arxiv_id": "2410.11900",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "The LLM plans, soft-formalizes the query into logic-programming facts and predicates, and simulates code execution with an exhaustive multi-hop search, so faithfulness of reasoning to the generated code can be measured without external solvers. State of the art on 7 of 9 reasoning benchmarks, and faithfulness correlates positively with performance.",
+  "arxiv": {
+   "version": "2410.11900v5",
+   "title": "FLARE: Faithful Logic-Aided Reasoning and Exploration",
+   "authors": [
+    "Erik Arakelyan",
+    "Pasquale Minervini",
+    "Pat Verga",
+    "Patrick Lewis",
+    "Isabelle Augenstein"
+   ],
+   "published": "2024-10-14",
+   "updated": "2025-09-19",
+   "comment": "Published at EMNLP 2025",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "farquhar2025mona",
+  "list": "improvement",
+  "title": "MONA: Myopic Optimization with Non-myopic Approval Can Mitigate Multi-step Reward Hacking",
+  "authors": "Farquhar, Varma, Lindner et al.",
+  "year": 2025,
+  "venue": "ICML 2025",
+  "url": "https://arxiv.org/abs/2501.13011",
+  "arxiv_id": "2501.13011",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Combines short-horizon optimization with far-sighted overseer approval so agents do not learn multi-step reward hacks even when the overseer cannot detect them. Its two-step LLM environments include one representing encoded reasoning, and MONA prevents the multi-step reward hacks that ordinary RL learns there.",
+  "arxiv": {
+   "version": "2501.13011v2",
+   "title": "MONA: Myopic Optimization with Non-myopic Approval Can Mitigate Multi-step Reward Hacking",
+   "authors": [
+    "Sebastian Farquhar",
+    "Vikrant Varma",
+    "David Lindner",
+    "David Elson",
+    "Caleb Biddulph",
+    "Ian Goodfellow",
+    "Rohin Shah"
+   ],
+   "published": "2025-01-22",
+   "updated": "2025-04-10",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "mathew2025hidden",
+  "list": "improvement",
+  "title": "Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs",
+  "authors": "Mathew, Matthews, McCarthy et al.",
+  "year": 2025,
+  "venue": "IJCNLP-AACL 2025",
+  "url": "https://arxiv.org/abs/2410.03768",
+  "arxiv_id": "2410.03768",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Elicits text steganography between LLM agents with gradient-based and in-context RL, and shows it can emerge unintentionally from misspecified training rewards. Negative result for defenses: passive oversight of outputs and active paraphrasing of messages are not fully effective at stopping the hidden communication.",
+  "arxiv": {
+   "version": "2410.03768v2",
+   "title": "Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs",
+   "authors": [
+    "Yohan Mathew",
+    "Ollie Matthews",
+    "Robert McCarthy",
+    "Joan Velja",
+    "Christian Schroeder de Witt",
+    "Dylan Cope",
+    "Nandi Schoots"
+   ],
+   "published": "2024-10-02",
+   "updated": "2025-12-02",
+   "comment": "Camera-ready version. Oral presentation at IJCNLP-AACL 2025 (14th International Joint Conference on Natural Language Processing and 4th Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics), Mumbai, India, December 20-24, 2025",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "bhan2025did",
+  "list": "improvement",
+  "title": "NeuroFaith: Evaluating LLM Self-Explanation Faithfulness via Internal Representation Alignment",
+  "authors": "Bhan, Vittaut, Chesneau et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2506.09277",
+  "arxiv_id": "2506.09277",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Borderline: mainly a measurement framework (bib title: \"Did I Faithfully Say What I Thought?\"). Extracts the concepts a free-text self-explanation calls important and tests mechanistically whether they influence the prediction, on 2-hop reasoning and classification; a linear probe built on this detects unfaithful self-explanations and is used to steer toward more faithful ones.",
+  "arxiv": {
+   "version": "2506.09277v4",
+   "title": "NeuroFaith: Evaluating LLM Self-Explanation Faithfulness via Internal Representation Alignment",
+   "authors": [
+    "Milan Bhan",
+    "Jean-Noel Vittaut",
+    "Nicolas Chesneau",
+    "Sarath Chandar",
+    "Marie-Jeanne Lesot"
+   ],
+   "published": "2025-06-10",
+   "updated": "2026-01-29",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "wang2025enhancing",
+  "list": "improvement",
+  "title": "Enhancing the Outcome Reward-based RL Training of MLLMs with Self-Consistency Sampling",
+  "authors": "Wang, Xu, Yang et al.",
+  "year": 2025,
+  "venue": "NeurIPS 2025",
+  "url": "https://arxiv.org/abs/2511.10648",
+  "arxiv_id": "2511.10648",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Borderline: targets \"unfaithful\" multiple-choice trajectories that reach the right option after faulty reasoning, but measures accuracy rather than faithfulness. Self-Consistency Sampling adds visual perturbations and truncation-resampling and down-weights low-agreement trajectories during policy updates, improving accuracy by up to 7.7 points (3.1 on average) on six multimodal benchmarks with Qwen2.5-VL-7B-Instruct.",
+  "arxiv": {
+   "version": "2511.10648v1",
+   "title": "Enhancing the Outcome Reward-based RL Training of MLLMs with Self-Consistency Sampling",
+   "authors": [
+    "Jiahao Wang",
+    "Weiye Xu",
+    "Aijun Yang",
+    "Wengang Zhou",
+    "Lewei Lu",
+    "Houqiang Li",
+    "Xiaohua Wang",
+    "Jinguo Zhu"
+   ],
+   "published": "2025-11-13",
+   "updated": "2025-11-13",
+   "comment": "Accepted to NeurIPS 2025 (The Thirty-Ninth Annual Conference on Neural Information Processing Systems)",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "cahlik2025reasoninggrounded",
+  "list": "improvement",
+  "title": "Reasoning-Grounded Natural Language Explanations for Language Models",
+  "authors": "Cahlik, Alves & Kordik",
+  "year": 2025,
+  "venue": "xAI 2025",
+  "url": "https://arxiv.org/abs/2503.11248",
+  "arxiv_id": "2503.11248",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Grounds explanations in an explicit reasoning sequence and infers answer and explanation jointly from it, so neither depends on the other. Achieves high answer–explanation alignment across several domains (models largely copy partial decisions from the reasoning sequence) and can also improve answer quality.",
+  "arxiv": {
+   "version": "2503.11248v2",
+   "title": "Reasoning-Grounded Natural Language Explanations for Language Models",
+   "authors": [
+    "Vojtech Cahlik",
+    "Rodrigo Alves",
+    "Pavel Kordik"
+   ],
+   "published": "2025-03-14",
+   "updated": "2026-03-14",
+   "comment": "(v2) Added acknowledgements section",
+   "journal_ref": "In: Guidotti, R., Schmid, U., Longo, L. (eds) Explainable Artificial Intelligence. xAI 2025. Communications in Computer and Information Science, vol 2578. Springer, Cham"
+  }
+ },
+ {
+  "key": "paul2024making",
+  "list": "improvement",
+  "title": "Making Reasoning Matter: Measuring and Improving Faithfulness of Chain-of-Thought Reasoning",
+  "authors": "Paul, West, Bosselut & Faltings",
+  "year": 2024,
+  "venue": "Findings of EMNLP 2024",
+  "url": "https://arxiv.org/abs/2402.13950",
+  "arxiv_id": "2402.13950",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Causal mediation analysis of twelve LLMs shows they do not reliably use their intermediate reasoning steps. FRODO trains small LMs with an inference module (implicit causal reward) and a reasoning module (counterfactual and causal preference objective); it outperforms four baselines, generalizes better out of distribution, and its rationales are more faithful to its answers than those from standard SFT.",
+  "arxiv": {
+   "version": "2402.13950v4",
+   "title": "Making Reasoning Matter: Measuring and Improving Faithfulness of Chain-of-Thought Reasoning",
+   "authors": [
+    "Debjit Paul",
+    "Robert West",
+    "Antoine Bosselut",
+    "Boi Faltings"
+   ],
+   "published": "2024-02-21",
+   "updated": "2024-10-06",
+   "comment": "Accepted at EMNLP Findings",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "chua2024biasaugmented",
+  "list": "improvement",
+  "title": "Bias-Augmented Consistency Training Reduces Biased Reasoning in Chain-of-Thought",
+  "authors": "Chua, Rees, Batra et al.",
+  "year": 2024,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2403.05518",
+  "arxiv_id": "2403.05518",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "The original BCT paper (the review only mentions BCT as a VFT baseline): unsupervised fine-tuning to give consistent reasoning with and without nine biasing features. On GPT-3.5-Turbo, training on one bias reduces biased reasoning by 86% on held-out tasks and by 37% on average on held-out biases; later work (VFT, RMCT) shows it can teach the model to stop mentioning cues rather than stop using them.",
+  "arxiv": {
+   "version": "2403.05518v3",
+   "title": "Bias-Augmented Consistency Training Reduces Biased Reasoning in Chain-of-Thought",
+   "authors": [
+    "James Chua",
+    "Edward Rees",
+    "Hunar Batra",
+    "Samuel R. Bowman",
+    "Julian Michael",
+    "Ethan Perez",
+    "Miles Turpin"
+   ],
+   "published": "2024-03-08",
+   "updated": "2025-06-26",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "binder2024looking",
+  "list": "improvement",
+  "title": "Looking Inward: Language Models Can Learn About Themselves by Introspection",
+  "authors": "Binder, Chua, Korbak et al.",
+  "year": 2024,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2410.13787",
+  "arxiv_id": "2410.13787",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Fine-tunes GPT-4, GPT-4o and Llama-3 models to predict properties of their own behavior in hypothetical scenarios. Each model predicts itself better than a different model trained on its ground-truth behavior, and keeps predicting accurately after its behavior is deliberately changed; it fails on more complex tasks and on out-of-distribution generalization.",
+  "arxiv": {
+   "version": "2410.13787v1",
+   "title": "Looking Inward: Language Models Can Learn About Themselves by Introspection",
+   "authors": [
+    "Felix J Binder",
+    "James Chua",
+    "Tomek Korbak",
+    "Henry Sleight",
+    "John Hughes",
+    "Robert Long",
+    "Ethan Perez",
+    "Miles Turpin",
+    "Owain Evans"
+   ],
+   "published": "2024-10-17",
+   "updated": "2024-10-17",
+   "comment": "15 pages, 9 figures",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "kirchner2024proververifier",
+  "list": "improvement",
+  "title": "Prover-Verifier Games improve legibility of LLM outputs",
+  "authors": "Kirchner, Chen, Edwards et al.",
+  "year": 2024,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2407.13692",
+  "arxiv_id": "2407.13692",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Shows that optimizing grade-school-math CoT only for correctness reduces legibility, and trains small verifiers against \"helpful\" and \"sneaky\" provers. The helpful prover's accuracy and the verifier's robustness rise over training, and legibility transfers to time-constrained humans, whose accuracy rises on helpful solutions and falls on sneaky ones.",
+  "arxiv": {
+   "version": "2407.13692v2",
+   "title": "Prover-Verifier Games improve legibility of LLM outputs",
+   "authors": [
+    "Jan Hendrik Kirchner",
+    "Yining Chen",
+    "Harri Edwards",
+    "Jan Leike",
+    "Nat McAleese",
+    "Yuri Burda"
+   ],
+   "published": "2024-07-18",
+   "updated": "2024-08-01",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "tanneru2024hardness",
+  "list": "improvement",
+  "title": "On the Hardness of Faithful Chain-of-Thought Reasoning in Large Language Models",
+  "authors": "Tanneru, Ley, Agarwal & Lakkaraju",
+  "year": 2024,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2406.10625",
+  "arxiv_id": "2406.10625",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Negative result: tests new in-context learning, fine-tuning and activation-editing strategies for making CoT more faithful. All give limited success; activation editing barely helps, and fine-tuning and in-context learning give marginal gains that fail to generalize across reasoning and truthful-QA benchmarks.",
+  "arxiv": {
+   "version": "2406.10625v2",
+   "title": "On the Hardness of Faithful Chain-of-Thought Reasoning in Large Language Models",
+   "authors": [
+    "Sree Harsha Tanneru",
+    "Dan Ley",
+    "Chirag Agarwal",
+    "Himabindu Lakkaraju"
+   ],
+   "published": "2024-06-15",
+   "updated": "2024-07-01",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "sherburn2024language",
+  "list": "improvement",
+  "title": "Can Language Models Explain Their Own Classification Behavior?",
+  "authors": "Sherburn, Chughtai & Evans",
+  "year": 2024,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2405.07436",
+  "arxiv_id": "2405.07436",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Introduces ArticulateRules, rule-based few-shot classification tasks, to test whether models articulate the rule they actually follow. Articulation accuracy rises sharply from GPT-3 to GPT-4, but attempts to improve GPT-3 fail: it cannot articulate 7 of 10 rules even after fine-tuning on correct explanations.",
+  "arxiv": {
+   "version": "2405.07436v1",
+   "title": "Can Language Models Explain Their Own Classification Behavior?",
+   "authors": [
+    "Dane Sherburn",
+    "Bilal Chughtai",
+    "Owain Evans"
+   ],
+   "published": "2024-05-13",
+   "updated": "2024-05-13",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "ramnath2024tailoring",
+  "list": "improvement",
+  "title": "Tailoring Self-Rationalizers with Multi-Reward Distillation",
+  "authors": "Ramnath, Joshi, Hallinan et al.",
+  "year": 2024,
+  "venue": "ICLR 2024",
+  "url": "https://arxiv.org/abs/2311.02805",
+  "arxiv_id": "2311.02805",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "MaRio trains small self-rationalizing LMs with multiple rewards (plausibility, diversity and consistency). On StrategyQA, QuaRel, OpenBookQA, NumerSense and QASC it improves both task accuracy and rationale quality over SFT, confirmed by human evaluation.",
+  "arxiv": {
+   "version": "2311.02805v2",
+   "title": "Tailoring Self-Rationalizers with Multi-Reward Distillation",
+   "authors": [
+    "Sahana Ramnath",
+    "Brihi Joshi",
+    "Skyler Hallinan",
+    "Ximing Lu",
+    "Liunian Harold Li",
+    "Aaron Chan",
+    "Jack Hessel",
+    "Yejin Choi",
+    "Xiang Ren"
+   ],
+   "published": "2023-11-06",
+   "updated": "2024-05-22",
+   "comment": "",
+   "journal_ref": "The Twelfth International Conference on Learning Representations, 2024"
+  }
+ },
+ {
+  "key": "xu2024faithful",
+  "list": "improvement",
+  "title": "Faithful Logical Reasoning via Symbolic Chain-of-Thought",
+  "authors": "Xu, Fei, Pan et al.",
+  "year": 2024,
+  "venue": "ACL 2024",
+  "url": "https://arxiv.org/abs/2405.18357",
+  "arxiv_id": "2405.18357",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "SymbCoT translates context into symbolic form, plans a step-by-step solution with logic rules and verifies translation and reasoning, all within the LLM. Improves over CoT on five FOL and constraint-optimization datasets and yields more faithful, explainable logical reasoning.",
+  "arxiv": {
+   "version": "2405.18357v2",
+   "title": "Faithful Logical Reasoning via Symbolic Chain-of-Thought",
+   "authors": [
+    "Jundong Xu",
+    "Hao Fei",
+    "Liangming Pan",
+    "Qian Liu",
+    "Mong-Li Lee",
+    "Wynne Hsu"
+   ],
+   "published": "2024-05-28",
+   "updated": "2024-06-11",
+   "comment": "Accepted by ACL 2024 (main proceeding)",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "radhakrishnan2023question",
+  "list": "improvement",
+  "title": "Question Decomposition Improves the Faithfulness of Model-Generated Reasoning",
+  "authors": "Radhakrishnan, Nguyen, Chen et al.",
+  "year": 2023,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2307.11768",
+  "arxiv_id": "2307.11768",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Prompts models to decompose questions into subquestions, answered in one context (CoT decomposition) or in separate contexts (factored decomposition). Factored decomposition makes the model rely more on its reasoning in early-answering and mistake-insertion tests and cuts the accuracy drop from a suggested-answer bias to 9.2% versus 21.3% for CoT, while keeping some of CoT's performance gain; no method differs on the \"answer is always A\" bias.",
+  "arxiv": {
+   "version": "2307.11768v2",
+   "title": "Question Decomposition Improves the Faithfulness of Model-Generated Reasoning",
+   "authors": [
+    "Ansh Radhakrishnan",
+    "Karina Nguyen",
+    "Anna Chen",
+    "Carol Chen",
+    "Carson Denison",
+    "Danny Hernandez",
+    "Esin Durmus",
+    "Evan Hubinger",
+    "Jackson Kernion",
+    "Kamilė Lukošiūtė",
+    "Newton Cheng",
+    "Nicholas Joseph",
+    "Nicholas Schiefer",
+    "Oliver Rausch",
+    "Sam McCandlish",
+    "Sheer El Showk",
+    "Tamera Lanham",
+    "Tim Maxwell",
+    "Venkatesa Chandrasekaran",
+    "Zac Hatfield-Dodds",
+    "Jared Kaplan",
+    "Jan Brauner",
+    "Samuel R. Bowman",
+    "Ethan Perez"
+   ],
+   "published": "2023-07-17",
+   "updated": "2023-07-25",
+   "comment": "For few-shot examples and prompts, see https://github.com/anthropics/DecompositionFaithfulnessPaper",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "lyu2023faithful",
+  "list": "improvement",
+  "title": "Faithful Chain-of-Thought Reasoning",
+  "authors": "Lyu, Havaldar, Stein et al.",
+  "year": 2023,
+  "venue": "IJCNLP-AACL 2023",
+  "url": "https://arxiv.org/abs/2301.13379",
+  "arxiv_id": "2301.13379",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "An LM translates the query into a reasoning chain mixing natural language and symbolic code (Python, Datalog, PDDL), and a deterministic solver executes it, so the chain is faithful to the answer by construction. Outperforms standard CoT on 9 of 10 benchmarks and sets few-shot state of the art on 7 datasets with GPT-4 and Codex.",
+  "arxiv": {
+   "version": "2301.13379v3",
+   "title": "Faithful Chain-of-Thought Reasoning",
+   "authors": [
+    "Qing Lyu",
+    "Shreya Havaldar",
+    "Adam Stein",
+    "Li Zhang",
+    "Delip Rao",
+    "Eric Wong",
+    "Marianna Apidianaki",
+    "Chris Callison-Burch"
+   ],
+   "published": "2023-01-31",
+   "updated": "2023-09-20",
+   "comment": "IJCNLP-AACL 2023 camera-ready version",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "roger2023preventing",
+  "list": "improvement",
+  "title": "Preventing Language Models From Hiding Their Reasoning",
+  "authors": "Roger & Greenblatt",
+  "year": 2023,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2310.18512",
+  "arxiv_id": "2310.18512",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "Shows that LMs can be trained to use encoded reasoning that users cannot read, and gives a methodology for evaluating defenses. Under the right conditions, paraphrasing stops even the best encoding schemes the authors built from carrying more than 3 bits of information per KB of text.",
+  "arxiv": {
+   "version": "2310.18512v2",
+   "title": "Preventing Language Models From Hiding Their Reasoning",
+   "authors": [
+    "Fabien Roger",
+    "Ryan Greenblatt"
+   ],
+   "published": "2023-10-27",
+   "updated": "2023-10-31",
+   "comment": "Edit: Fix typos",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "wang2023scott",
+  "list": "improvement",
+  "title": "SCOTT: Self-Consistent Chain-of-Thought Distillation",
+  "authors": "Wang, Wang, Li et al.",
+  "year": 2023,
+  "venue": "ACL 2023",
+  "url": "https://arxiv.org/abs/2305.01879",
+  "arxiv_id": "2305.01879",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Distills CoT from a large teacher using contrastive decoding (tokens that become plausible only given the answer) and trains the student with a counterfactual objective so it cannot ignore its rationales. Matches baseline task performance with more faithful rationales, and the student respects its rationales more.",
+  "arxiv": {
+   "version": "2305.01879v4",
+   "title": "SCOTT: Self-Consistent Chain-of-Thought Distillation",
+   "authors": [
+    "Peifeng Wang",
+    "Zhengyang Wang",
+    "Zheng Li",
+    "Yifan Gao",
+    "Bing Yin",
+    "Xiang Ren"
+   ],
+   "published": "2023-05-03",
+   "updated": "2023-08-30",
+   "comment": "11 pages, 8 figures. Accepted to ACL 2023",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "wang2023pinto",
+  "list": "improvement",
+  "title": "PINTO: Faithful Language Reasoning Using Prompt-Generated Rationales",
+  "authors": "Wang, Chan, Ilievski et al.",
+  "year": 2023,
+  "venue": "ICLR 2023",
+  "url": "https://arxiv.org/abs/2211.01562",
+  "arxiv_id": "2211.01562",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "A frozen LM generates rationales and a reasoning LM is fine-tuned to use them, regularized to be less confident when the rationale is perturbed (counterfactual regularization). Improves in- and out-of-distribution performance on four datasets, and its rationales are more faithful to its predictions than baselines'.",
+  "arxiv": {
+   "version": "2211.01562v3",
+   "title": "PINTO: Faithful Language Reasoning Using Prompt-Generated Rationales",
+   "authors": [
+    "Peifeng Wang",
+    "Aaron Chan",
+    "Filip Ilievski",
+    "Muhao Chen",
+    "Xiang Ren"
+   ],
+   "published": "2022-11-03",
+   "updated": "2023-04-06",
+   "comment": "17 pages, 5 figures. Accepted to ICLR 2023",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "creswell2023selectioninference",
+  "list": "improvement",
+  "title": "Selection-Inference: Exploiting Large Language Models for Interpretable Logical Reasoning",
+  "authors": "Creswell, Shanahan & Higgins",
+  "year": 2023,
+  "venue": "ICLR 2023",
+  "url": "https://arxiv.org/abs/2205.09712",
+  "arxiv_id": "2205.09712",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Alternates a selection step and an inference step so each answer comes with a causal reasoning trace. With no fine-tuning, a 7B model in 5-shot SI improves by over 100% over an equivalent vanilla baseline on 10 logical reasoning tasks and outperforms a 280B baseline.",
+  "arxiv": {
+   "version": "2205.09712v1",
+   "title": "Selection-Inference: Exploiting Large Language Models for Interpretable Logical Reasoning",
+   "authors": [
+    "Antonia Creswell",
+    "Murray Shanahan",
+    "Irina Higgins"
+   ],
+   "published": "2022-05-19",
+   "updated": "2022-05-19",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "pan2023logiclm",
+  "list": "improvement",
+  "title": "Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning",
+  "authors": "Pan, Albalak, Wang & Wang",
+  "year": 2023,
+  "venue": "Findings of EMNLP 2023",
+  "url": "https://arxiv.org/abs/2305.12295",
+  "arxiv_id": "2305.12295",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Solver-based reasoning: the LLM translates a problem into a symbolic formulation, a deterministic solver does the inference, and solver errors drive self-refinement. Improves by 39.2% over standard prompting and 18.4% over CoT on average across five logical reasoning datasets.",
+  "arxiv": {
+   "version": "2305.12295v2",
+   "title": "Logic-LM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning",
+   "authors": [
+    "Liangming Pan",
+    "Alon Albalak",
+    "Xinyi Wang",
+    "William Yang Wang"
+   ],
+   "published": "2023-05-20",
+   "updated": "2023-10-19",
+   "comment": "EMNLP 2023 (Findings, long paper)",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "hong2023faithful",
+  "list": "improvement",
+  "title": "Faithful Question Answering with Monte-Carlo Planning",
+  "authors": "Hong, Zhang, Zhao et al.",
+  "year": 2023,
+  "venue": "ACL 2023",
+  "url": "https://arxiv.org/abs/2305.02556",
+  "arxiv_id": "2305.02556",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "FAME organizes reasoning as an entailment tree assembled by a controller from modular reasoning steps, using Monte-Carlo planning to pick actions. Reaches state of the art on the standard benchmark and produces valid, faithful reasoning steps with a much smaller model than LLM baselines.",
+  "arxiv": {
+   "version": "2305.02556v1",
+   "title": "Faithful Question Answering with Monte-Carlo Planning",
+   "authors": [
+    "Ruixin Hong",
+    "Hongming Zhang",
+    "Hong Zhao",
+    "Dong Yu",
+    "Changshui Zhang"
+   ],
+   "published": "2023-05-04",
+   "updated": "2023-05-04",
+   "comment": "ACL 2023 main",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "creswell2022faithful",
+  "list": "improvement",
+  "title": "Faithful Reasoning Using Large Language Models",
+  "authors": "Creswell & Shanahan",
+  "year": 2022,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2208.14271",
+  "arxiv_id": "2208.14271",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Chains steps from two fine-tuned LMs (selection and inference) so the reasoning's causal structure mirrors the problem's logical structure, with beam search over traces. Outperforms baselines on multi-step deduction and scientific QA and produces human-interpretable, valid traces.",
+  "arxiv": {
+   "version": "2208.14271v1",
+   "title": "Faithful Reasoning Using Large Language Models",
+   "authors": [
+    "Antonia Creswell",
+    "Murray Shanahan"
+   ],
+   "published": "2022-08-30",
+   "updated": "2022-08-30",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "tafjord2022entailer",
+  "list": "improvement",
+  "title": "Entailer: Answering Questions with Faithful and Truthful Chains of Reasoning",
+  "authors": "Tafjord, Dalvi Mishra & Clark",
+  "year": 2022,
+  "venue": "EMNLP 2022",
+  "url": "https://arxiv.org/abs/2210.12217",
+  "arxiv_id": "2210.12217",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Combines a backward-chaining premise generator with a verifier that self-queries whether the model believes each premise and entailment, giving chains that are faithful (answer follows) and truthful (reflect the model's own beliefs). Users judge 70%+ of chains as clearly showing how the answer follows, while answer accuracy is preserved.",
+  "arxiv": {
+   "version": "2210.12217v1",
+   "title": "Entailer: Answering Questions with Faithful and Truthful Chains of Reasoning",
+   "authors": [
+    "Oyvind Tafjord",
+    "Bhavana Dalvi Mishra",
+    "Peter Clark"
+   ],
+   "published": "2022-10-21",
+   "updated": "2022-10-21",
+   "comment": "accepted at EMNLP 2022. arXiv admin note: substantial text overlap with arXiv:2204.13074",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "sanyal2022fairr",
+  "list": "improvement",
+  "title": "FaiRR: Faithful and Robust Deductive Reasoning over Natural Language",
+  "authors": "Sanyal, Singh & Ren",
+  "year": 2022,
+  "venue": "ACL 2022",
+  "url": "https://arxiv.org/abs/2203.10261",
+  "arxiv_id": "2203.10261",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "Splits deductive reasoning into separately modeled rule selection, fact selection and knowledge composition, guaranteeing a causal link from each proof step to the inference. More robust to language perturbations, faster at inference, and its errors are more interpretable.",
+  "arxiv": {
+   "version": "2203.10261v1",
+   "title": "FaiRR: Faithful and Robust Deductive Reasoning over Natural Language",
+   "authors": [
+    "Soumya Sanyal",
+    "Harman Singh",
+    "Xiang Ren"
+   ],
+   "published": "2022-03-19",
+   "updated": "2022-03-19",
+   "comment": "Accepted in ACL 2022",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "han2026rfeval",
+  "list": "measurement",
+  "title": "RFEval: Benchmarking Reasoning Faithfulness under Counterfactual Reasoning Intervention in Large Reasoning Models",
+  "authors": "Han, Lee & Do",
+  "year": 2026,
+  "venue": "ICLR 2026",
+  "url": "https://arxiv.org/abs/2602.17053",
+  "arxiv_id": "2602.17053",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "7,186 instances across seven tasks; 49.7% of outputs from twelve open LRMs are unfaithful, and adding RL-style objectives on top of SFT can reduce faithfulness even when accuracy holds.",
+  "arxiv": {
+   "version": "2602.17053v3",
+   "title": "RFEval: Benchmarking Reasoning Faithfulness under Counterfactual Reasoning Intervention in Large Reasoning Models",
+   "authors": [
+    "Yunseok Han",
+    "Yejoon Lee",
+    "Jaeyoung Do"
+   ],
+   "published": "2026-02-19",
+   "updated": "2026-02-23",
+   "comment": "Accepted in ICLR 2026 Poster: https://iclr.cc/virtual/2026/poster/10011763",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "zaman2025chainofthought",
+  "list": "measurement",
+  "title": "Is Chain-of-Thought Really Not Explainability? Chain-of-Thought Can Be Faithful without Hint Verbalization",
+  "authors": "Zaman & Srivastava",
+  "year": 2025,
+  "venue": "ACL 2026",
+  "url": "https://arxiv.org/abs/2512.23032",
+  "arxiv_id": "2512.23032",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "many CoTs flagged unfaithful by the hint metric pass other metrics, and larger inference budgets raise hint verbalization up to 90% in some settings.",
+  "arxiv": {
+   "version": "2512.23032v2",
+   "title": "Is Chain-of-Thought Really Not Explainability? Chain-of-Thought Can Be Faithful without Hint Verbalization",
+   "authors": [
+    "Kerem Zaman",
+    "Shashank Srivastava"
+   ],
+   "published": "2025-12-28",
+   "updated": "2026-05-08",
+   "comment": "Accepted to ACL 2026. 23 pages, 29 figures, 6 tables",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "wang2026monitorbench",
+  "list": "measurement",
+  "title": "MonitorBench: A Comprehensive Benchmark for Chain-of-Thought Monitorability in Large Language Models",
+  "authors": "Wang, Sun, Ko et al.",
+  "year": 2026,
+  "venue": "COLM 2026",
+  "url": "https://arxiv.org/abs/2603.28590",
+  "arxiv_id": "2603.28590",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "1,514 instances across 19 tasks in 7 categories with designed decision-critical factors; monitorability depends on the evaluated model, the monitor and the task, is higher when the factors shape intermediate reasoning rather than only the answer, and most models can deliberately reduce it under stress-test prompting.",
+  "arxiv": {
+   "version": "2603.28590v4",
+   "title": "MonitorBench: A Comprehensive Benchmark for Chain-of-Thought Monitorability in Large Language Models",
+   "authors": [
+    "Han Wang",
+    "Yifan Sun",
+    "Brian Ko",
+    "Mann Talati",
+    "Jiawen Gong",
+    "Zimeng Li",
+    "Naicheng Yu",
+    "Xucheng Yu",
+    "Wei Shen",
+    "Vedant Jolly",
+    "Huan Zhang"
+   ],
+   "published": "2026-03-30",
+   "updated": "2026-09-28",
+   "comment": "COLM 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "mayne2026positivecasefaithfulnessllm",
+  "list": "measurement",
+  "title": "A Positive Case for Faithfulness: LLM Self-Explanations Help Predict Model Behavior",
+  "authors": "Mayne, Kang, Gould et al.",
+  "year": 2026,
+  "venue": "ICML 2026",
+  "url": "https://arxiv.org/abs/2602.02639",
+  "arxiv_id": "2602.02639",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "introduces Normalized Simulatability Gain; across 18 models and 7,000 counterfactuals, self-explanations improve prediction of behavior by 11–37% NSG and beat explanations from external (even stronger) models, but 5–15% are highly misleading.",
+  "arxiv": {
+   "version": "2602.02639v2",
+   "title": "A Positive Case for Faithfulness: LLM Self-Explanations Help Predict Model Behavior",
+   "authors": [
+    "Harry Mayne",
+    "Justin Singh Kang",
+    "Dewi Gould",
+    "Kannan Ramchandran",
+    "Adam Mahdi",
+    "Noah Y. Siegel"
+   ],
+   "published": "2026-02-02",
+   "updated": "2026-10-06",
+   "comment": "ICML 2026",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "arcuschin2025chain",
+  "list": "measurement",
+  "title": "Chain-of-Thought Reasoning In The Wild Is Not Always Faithful",
+  "authors": "Arcuschin, Janiak, Krzyzanowski et al.",
+  "year": 2025,
+  "venue": "ICML 2026",
+  "url": "https://arxiv.org/abs/2503.08679",
+  "arxiv_id": "2503.08679",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "on mirrored comparative questions, models rationalize contradictory Yes/Yes or No/No answers (\"implicit post-hoc rationalization\") at rates up to 13% for production models (0.37% for DeepSeek R1, 0.04% for Sonnet 3.7 with thinking), and take unfaithful illogical shortcuts on hard math.",
+  "arxiv": {
+   "version": "2503.08679v6",
+   "title": "Chain-of-Thought Reasoning In The Wild Is Not Always Faithful",
+   "authors": [
+    "Iván Arcuschin",
+    "Jett Janiak",
+    "Robert Krzyzanowski",
+    "Senthooran Rajamanoharan",
+    "Neel Nanda",
+    "Arthur Conmy"
+   ],
+   "published": "2025-03-11",
+   "updated": "2026-06-16",
+   "comment": "Published at the 43rd International Conference on Machine Learning (ICML 2026)",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "xiong2026monitorability",
+  "list": "measurement",
+  "title": "Monitorability as a Free Gift: How RLVR Spontaneously Aligns Reasoning",
+  "authors": "Xiong, Chen & Lakkaraju",
+  "year": 2026,
+  "venue": "ICML 2026",
+  "url": "https://arxiv.org/abs/2602.03978",
+  "arxiv_id": "2602.03978",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "monitorability gains under RLVR are data-dependent (data diversity and instruction-following data matter) and come from entropy reduction and prompt attention rather than stronger causal reliance on the CoT.",
+  "arxiv": {
+   "version": "2602.03978v1",
+   "title": "Monitorability as a Free Gift: How RLVR Spontaneously Aligns Reasoning",
+   "authors": [
+    "Zidi Xiong",
+    "Shan Chen",
+    "Himabindu Lakkaraju"
+   ],
+   "published": "2026-02-03",
+   "updated": "2026-02-03",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "jose2026strategic",
+  "list": "measurement",
+  "title": "Strategic Obfuscation of Deceptive Reasoning in Language Models",
+  "authors": "Jose, Warncke & Taylor",
+  "year": 2026,
+  "venue": "ICLR 2026",
+  "url": "https://openreview.net/forum?id=It2Nwp7QSy",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "told its reasoning is monitored, Claude 3.5 Sonnet keeps a 24.3% alignment-faking compliance gap while verbalization of alignment faking drops 93.7%, evading monitors better than when instructed to hide.",
+  "arxiv": null
+ },
+ {
+  "key": "little2026length",
+  "list": "measurement",
+  "title": "Length Penalties Make Chain-of-Thought Less Monitorable",
+  "authors": "Little",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2607.09786",
+  "arxiv_id": "2607.09786",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "RL length penalties on Qwen3-4B/14B keep accuracy and hint susceptibility, but faithfulness (a monitor can tell the hint mattered) drops 35–39% on MMLU-Pro-R; a no-penalty control does not lose faithfulness.",
+  "arxiv": {
+   "version": "2607.09786v4",
+   "title": "Length Penalties Make Chain-of-Thought Less Monitorable",
+   "authors": [
+    "Bryce Little"
+   ],
+   "published": "2026-07-08",
+   "updated": "2026-09-21",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "lewislim2026efficient",
+  "list": "measurement",
+  "title": "Efficient Reasoning Training Does Not Always Harm CoT Faithfulness and Monitorability",
+  "authors": "Lewis-Lim, Tan, Sanger et al.",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2610.03509",
+  "arxiv_id": "2610.03509",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "across three length-pressure methods, faithfulness on related inputs falls (mainly through less consistent answers) while acknowledgment of input interventions is more robust.",
+  "arxiv": {
+   "version": "2610.03509v1",
+   "title": "Efficient Reasoning Training Does Not Always Harm CoT Faithfulness and Monitorability",
+   "authors": [
+    "Samuel Lewis-Lim",
+    "Xingwei Tan",
+    "Mario Sanger",
+    "Zhixue Zhao",
+    "Nikolaos Aletras"
+   ],
+   "published": "2026-10-02",
+   "updated": "2026-10-02",
+   "comment": "Under Review",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "haskins2026training",
+  "list": "measurement",
+  "title": "Training on Documents About Monitoring Leads to CoT Obfuscation",
+  "authors": "Haskins, Chughtai & Engels",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2605.15257",
+  "arxiv_id": "2605.15257",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "monitor-aware models (via synthetic documents) evade CoT monitors more often, and CoT controllability correlates with obfuscation success (r = 0.800).",
+  "arxiv": {
+   "version": "2605.15257v1",
+   "title": "Training on Documents About Monitoring Leads to CoT Obfuscation",
+   "authors": [
+    "Reilly Haskins",
+    "Bilal Chughtai",
+    "Joshua Engels"
+   ],
+   "published": "2026-05-14",
+   "updated": "2026-05-14",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "cox2026posthoc",
+  "list": "measurement",
+  "title": "Post-Hoc Reasoning in Chain of Thought: Decoding and Steering Pre-Committed Answers",
+  "authors": "Cox, Kianersi & Garriga-Alonso",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2603.01437",
+  "arxiv_id": "2603.01437",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "probes before the CoT predict the final answer with >0.9 AUC on most tasks, and steering along them flips answers, with confabulated reasoning.",
+  "arxiv": {
+   "version": "2603.01437v2",
+   "title": "Post-Hoc Reasoning in Chain of Thought: Decoding and Steering Pre-Committed Answers",
+   "authors": [
+    "Kyle Cox",
+    "Darius Kianersi",
+    "Adrià Garriga-Alonso"
+   ],
+   "published": "2026-03-02",
+   "updated": "2026-07-23",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "atkinson2026identifying",
+  "list": "measurement",
+  "title": "Identifying Introspection From the Inside",
+  "authors": "Atkinson, Plunkett & Bau",
+  "year": 2026,
+  "venue": "COLM 2026",
+  "url": "https://arxiv.org/abs/2610.07186",
+  "arxiv_id": "2610.07186",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "faithful self-report of learned preferences emerges during fine-tuning as preference representations move to earlier layers, and attribution patching separates faithful from unfaithful models.",
+  "arxiv": {
+   "version": "2610.07186v1",
+   "title": "Identifying Introspection From the Inside",
+   "authors": [
+    "David I. Atkinson",
+    "Dillon Plunkett",
+    "David Bau"
+   ],
+   "published": "2026-10-05",
+   "updated": "2026-10-05",
+   "comment": "Published at COLM 2026. Project page: https://iii.baulab.info",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "golchin2026monitorability",
+  "list": "measurement",
+  "title": "Monitorability Disposition in Large Reasoning Models",
+  "authors": "Golchin & Wetter",
+  "year": 2026,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2610.04914",
+  "arxiv_id": "2610.04914",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "given optional monitoring tools, LRMs self-report misbehavior in about 16% of warranted cases, never for high-severity misbehavior, and more tool-use pressure does not help.",
+  "arxiv": {
+   "version": "2610.04914v1",
+   "title": "Monitorability Disposition in Large Reasoning Models",
+   "authors": [
+    "Shahriar Golchin",
+    "Marc Wetter"
+   ],
+   "published": "2026-10-04",
+   "updated": "2026-10-04",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "li2026monitorability",
+  "list": "measurement",
+  "title": "The Monitorability Tax: How Compression Mechanism Shapes Chain-of-Thought Oversight",
+  "authors": "Li",
+  "year": 2026,
+  "venue": "COLM 2026 workshop",
+  "url": "https://openreview.net/forum?id=5gGSX988EX",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "with a hint injected into MATH-500, monitor detection AUC depends on how the CoT was compressed, not just on its length.",
+  "arxiv": null
+ },
+ {
+  "key": "chen2025reasoning",
+  "list": "measurement",
+  "title": "Reasoning Models Don't Always Say What They Think",
+  "authors": "Chen, Benton, Radhakrishnan et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2505.05410",
+  "arxiv_id": "2505.05410",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "across six hint types, reasoning models reveal hint use often in under 20% of cases; outcome-based RL first improves faithfulness and then plateaus, and RL that increases hint use (reward hacking) does not increase verbalization. The review also lists the outcome-RL result as an improvement attempt.",
+  "arxiv": {
+   "version": "2505.05410v1",
+   "title": "Reasoning Models Don't Always Say What They Think",
+   "authors": [
+    "Yanda Chen",
+    "Joe Benton",
+    "Ansh Radhakrishnan",
+    "Jonathan Uesato",
+    "Carson Denison",
+    "John Schulman",
+    "Arushi Somani",
+    "Peter Hase",
+    "Misha Wagner",
+    "Fabien Roger",
+    "Vlad Mikulik",
+    "Samuel R. Bowman",
+    "Jan Leike",
+    "Jared Kaplan",
+    "Ethan Perez"
+   ],
+   "published": "2025-05-08",
+   "updated": "2025-05-08",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "tutek2025measuring",
+  "list": "measurement",
+  "title": "Measuring Chain of Thought Faithfulness by Unlearning Reasoning Steps",
+  "authors": "Tutek, Hashemi Chaleshtori, Marasović & Belinkov",
+  "year": 2025,
+  "venue": "EMNLP 2025, outstanding paper",
+  "url": "https://arxiv.org/abs/2502.14829",
+  "arxiv_id": "2502.14829",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "unlearning the information in key CoT steps from the weights often changes the prediction, giving a parametric test of whether a CoT is faithful.",
+  "arxiv": {
+   "version": "2502.14829v4",
+   "title": "Measuring Chain of Thought Faithfulness by Unlearning Reasoning Steps",
+   "authors": [
+    "Martin Tutek",
+    "Fateme Hashemi Chaleshtori",
+    "Ana Marasović",
+    "Yonatan Belinkov"
+   ],
+   "published": "2025-02-20",
+   "updated": "2025-12-13",
+   "comment": "Outstanding paper at EMNLP 2025",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "matton2025walk",
+  "list": "measurement",
+  "title": "Walk the Talk? Measuring the Faithfulness of Large Language Model Explanations",
+  "authors": "Matton, Ness, Guttag & Kıcıman",
+  "year": 2025,
+  "venue": "ICLR 2025",
+  "url": "https://arxiv.org/abs/2504.14150",
+  "arxiv_id": "2504.14150",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "defines faithfulness as the gap between concepts an explanation implies are influential and those that causally are, estimated with LLM-made counterfactuals and a Bayesian hierarchical model; finds explanations that hide social-bias influence.",
+  "arxiv": {
+   "version": "2504.14150v2",
+   "title": "Walk the Talk? Measuring the Faithfulness of Large Language Model Explanations",
+   "authors": [
+    "Katie Matton",
+    "Robert Osazuwa Ness",
+    "John Guttag",
+    "Emre Kıcıman"
+   ],
+   "published": "2025-04-19",
+   "updated": "2025-05-20",
+   "comment": "66 pages, 14 figures, 40 tables; ICLR 2025 (spotlight) camera ready",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "mayne2025llms",
+  "list": "measurement",
+  "title": "LLMs Don't Know Their Own Decision Boundaries: The Unreliability of Self-Generated Counterfactual Explanations",
+  "authors": "Mayne, Kearns, Yang et al.",
+  "year": 2025,
+  "venue": "EMNLP 2025",
+  "url": "https://arxiv.org/abs/2509.09396",
+  "arxiv_id": "2509.09396",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "on tabular tasks, self-generated counterfactuals usually flip the prediction but are far from minimal, and when asked for minimal edits they often fail to flip it.",
+  "arxiv": {
+   "version": "2509.09396v1",
+   "title": "LLMs Don't Know Their Own Decision Boundaries: The Unreliability of Self-Generated Counterfactual Explanations",
+   "authors": [
+    "Harry Mayne",
+    "Ryan Othniel Kearns",
+    "Yushi Yang",
+    "Andrew M. Bean",
+    "Eoin Delaney",
+    "Chris Russell",
+    "Adam Mahdi"
+   ],
+   "published": "2025-09-11",
+   "updated": "2025-09-11",
+   "comment": "Accepted to EMNLP 2025 Main",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "dehghanighobadi2025can",
+  "list": "measurement",
+  "title": "Can LLMs Explain Themselves Counterfactually?",
+  "authors": "Dehghanighobadi, Fischer & Zafar",
+  "year": 2025,
+  "venue": "EMNLP 2025",
+  "url": "https://arxiv.org/abs/2502.18156",
+  "arxiv_id": "2502.18156",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "across model families, sizes, temperatures and datasets, LLMs sometimes struggle to produce self-generated counterfactuals, and their predictions often disagree with their own counterfactual reasoning.",
+  "arxiv": {
+   "version": "2502.18156v2",
+   "title": "Can LLMs Explain Themselves Counterfactually?",
+   "authors": [
+    "Zahra Dehghanighobadi",
+    "Asja Fischer",
+    "Muhammad Bilal Zafar"
+   ],
+   "published": "2025-02-25",
+   "updated": "2025-09-23",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "emmons2025pragmatic",
+  "list": "measurement",
+  "title": "A Pragmatic Way to Measure Chain-of-Thought Monitorability",
+  "authors": "Emmons, Zimmermann, Elson & Shah",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2510.23966",
+  "arxiv_id": "2510.23966",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "an autorater prompt scoring legibility (can a human follow the reasoning) and coverage (does the CoT contain all reasoning needed to reach the output); frontier models score high on challenging benchmarks.",
+  "arxiv": {
+   "version": "2510.23966v1",
+   "title": "A Pragmatic Way to Measure Chain-of-Thought Monitorability",
+   "authors": [
+    "Scott Emmons",
+    "Roland S. Zimmermann",
+    "David K. Elson",
+    "Rohin Shah"
+   ],
+   "published": "2025-10-28",
+   "updated": "2025-10-28",
+   "comment": "The first two authors contributed equally",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "korbak2025chain",
+  "list": "measurement",
+  "title": "Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety",
+  "authors": "Korbak, Balesni, Barnes et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2507.11473",
+  "arxiv_id": "2507.11473",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "position paper arguing that CoT monitoring is imperfect but promising and fragile, and that developers should consider how development decisions affect monitorability.",
+  "arxiv": {
+   "version": "2507.11473v2",
+   "title": "Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety",
+   "authors": [
+    "Tomek Korbak",
+    "Mikita Balesni",
+    "Elizabeth Barnes",
+    "Yoshua Bengio",
+    "Joe Benton",
+    "Joseph Bloom",
+    "Mark Chen",
+    "Alan Cooney",
+    "Allan Dafoe",
+    "Anca Dragan",
+    "Scott Emmons",
+    "Owain Evans",
+    "David Farhi",
+    "Ryan Greenblatt",
+    "Dan Hendrycks",
+    "Marius Hobbhahn",
+    "Evan Hubinger",
+    "Geoffrey Irving",
+    "Erik Jenner",
+    "Daniel Kokotajlo",
+    "Victoria Krakovna",
+    "Shane Legg",
+    "David Lindner",
+    "David Luan",
+    "Aleksander Mądry",
+    "Julian Michael",
+    "Neel Nanda",
+    "Dave Orr",
+    "Jakub Pachocki",
+    "Ethan Perez",
+    "Mary Phuong",
+    "Fabien Roger",
+    "Joshua Saxe",
+    "Buck Shlegeris",
+    "Martín Soto",
+    "Eric Steinberger",
+    "Jasmine Wang",
+    "Wojciech Zaremba",
+    "Bowen Baker",
+    "Rohin Shah",
+    "Vlad Mikulik"
+   ],
+   "published": "2025-07-15",
+   "updated": "2025-12-07",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "emmons2025chain",
+  "list": "measurement",
+  "title": "When Chain of Thought is Necessary, Language Models Struggle to Evade Monitors",
+  "authors": "Emmons, Jenner, Elson et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2507.05246",
+  "arxiv_id": "2507.05246",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "separates CoT-as-rationalization from CoT-as-computation; when the bad behavior requires CoT, models expose their reasoning and learn to obscure intent only with significant help (human-written strategies or iterative optimization against the monitor).",
+  "arxiv": {
+   "version": "2507.05246v1",
+   "title": "When Chain of Thought is Necessary, Language Models Struggle to Evade Monitors",
+   "authors": [
+    "Scott Emmons",
+    "Erik Jenner",
+    "David K. Elson",
+    "Rif A. Saurous",
+    "Senthooran Rajamanoharan",
+    "Heng Chen",
+    "Irhum Shafkat",
+    "Rohin Shah"
+   ],
+   "published": "2025-07-07",
+   "updated": "2025-07-07",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "chua2025deepseek",
+  "list": "measurement",
+  "title": "Are DeepSeek R1 And Other Reasoning Models More Faithful?",
+  "authors": "Chua & Evans",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2501.08156",
+  "arxiv_id": "2501.08156",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "when a cue flips the answer, DeepSeek-R1 describes the cue 59% of the time versus 7% for the non-reasoning DeepSeek model, reasoning models beat all non-reasoning models tested, and evidence suggests reward models make responses less faithful.",
+  "arxiv": {
+   "version": "2501.08156v5",
+   "title": "Are DeepSeek R1 And Other Reasoning Models More Faithful?",
+   "authors": [
+    "James Chua",
+    "Owain Evans"
+   ],
+   "published": "2025-01-14",
+   "updated": "2025-07-15",
+   "comment": "10 pages, 8 figures",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "skaf2025large",
+  "list": "measurement",
+  "title": "Large language models can learn and generalize steganographic chain-of-thought under process supervision",
+  "authors": "Skaf, Ibanez-Lissen, McCarthy et al.",
+  "year": 2025,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2506.01926",
+  "arxiv_id": "2506.01926",
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "penalizing specific strings in load-bearing reasoning makes models substitute encodings without changing their method, and the encoding generalizes to held-out strings.",
+  "arxiv": {
+   "version": "2506.01926v2",
+   "title": "Large language models can learn and generalize steganographic chain-of-thought under process supervision",
+   "authors": [
+    "Joey Skaf",
+    "Luis Ibanez-Lissen",
+    "Robert McCarthy",
+    "Connor Watts",
+    "Vasil Georgiv",
+    "Hannes Whittingham",
+    "Lorena Gonzalez-Manzano",
+    "David Lindner",
+    "Cameron Tice",
+    "Edward James Young",
+    "Puria Radmard"
+   ],
+   "published": "2025-06-02",
+   "updated": "2025-12-04",
+   "comment": "10 pages main text, 3 figures main text, 17 pages supplementary material, 1 figure supplementary material, accepted at NeurIPS 2025",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "betley2025tell",
+  "list": "measurement",
+  "title": "Tell me about yourself: LLMs are aware of their learned behaviors",
+  "authors": "Betley, Bao, Soto et al.",
+  "year": 2025,
+  "venue": "ICLR 2025",
+  "url": "https://arxiv.org/abs/2501.11120",
+  "arxiv_id": "2501.11120",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "models fine-tuned on data exhibiting a behavior (risky decisions, insecure code) describe that behavior without being trained to, and can sometimes tell whether they have a backdoor but cannot output its trigger by default.",
+  "arxiv": {
+   "version": "2501.11120v1",
+   "title": "Tell me about yourself: LLMs are aware of their learned behaviors",
+   "authors": [
+    "Jan Betley",
+    "Xuchan Bao",
+    "Martín Soto",
+    "Anna Sztyber-Betley",
+    "James Chua",
+    "Owain Evans"
+   ],
+   "published": "2025-01-19",
+   "updated": "2025-01-19",
+   "comment": "Submitted to ICLR 2025. 17 pages, 13 figures",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "anthropic2025paraphrases",
+  "list": "measurement",
+  "title": "Do reasoning models use their scratchpad like we do? Evidence from distilling paraphrases",
+  "authors": "Anthropic Alignment Science",
+  "year": 2025,
+  "venue": "blog, 2025",
+  "url": "https://alignment.anthropic.com/2025/distill-paraphrases/",
+  "arxiv_id": null,
+  "tags": [
+   "source:search-2026-10-14"
+  ],
+  "prior_note": "fine-tuning a base model on 10,000 paraphrased Claude 3.7 Sonnet math scratchpads gives MATH pass@1 very close to fine-tuning on the originals, evidence against encoded reasoning in that setting.",
+  "arxiv": null
+ },
+ {
+  "key": "madsen2024self",
+  "list": "measurement",
+  "title": "Are self-explanations from Large Language Models faithful?",
+  "authors": "Madsen, Chandar & Reddy",
+  "year": 2024,
+  "venue": "Findings of ACL 2024",
+  "url": "https://arxiv.org/abs/2401.07927",
+  "arxiv_id": "2401.07927",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "self-consistency checks for counterfactual, feature-attribution and redaction self-explanations show that faithfulness is explanation-, model- and task-dependent, so self-explanations should not be trusted in general.",
+  "arxiv": {
+   "version": "2401.07927v4",
+   "title": "Are self-explanations from Large Language Models faithful?",
+   "authors": [
+    "Andreas Madsen",
+    "Sarath Chandar",
+    "Siva Reddy"
+   ],
+   "published": "2024-01-15",
+   "updated": "2024-05-16",
+   "comment": "The 62nd Annual Meeting of the Association for Computational Linguistics",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "pmlr-v235-chen24bl",
+  "list": "measurement",
+  "title": "Do Models Explain Themselves? Counterfactual Simulatability of Natural Language Explanations",
+  "authors": "Chen, Zhong, Ri et al.",
+  "year": 2023,
+  "venue": "ICML 2024",
+  "url": "https://arxiv.org/abs/2307.08678",
+  "arxiv_id": "2307.08678",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "defines counterfactual-simulatability precision and generality; explanations from state-of-the-art LLMs such as GPT-4 have low precision, and precision does not correlate with plausibility, so optimizing human approval (RLHF) may not suffice.",
+  "arxiv": {
+   "version": "2307.08678v1",
+   "title": "Do Models Explain Themselves? Counterfactual Simulatability of Natural Language Explanations",
+   "authors": [
+    "Yanda Chen",
+    "Ruiqi Zhong",
+    "Narutatsu Ri",
+    "Chen Zhao",
+    "He He",
+    "Jacob Steinhardt",
+    "Zhou Yu",
+    "Kathleen McKeown"
+   ],
+   "published": "2023-07-17",
+   "updated": "2023-07-17",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "parcalabescu2023measuring",
+  "list": "measurement",
+  "title": "On Measuring Faithfulness or Self-consistency of Natural Language Explanations",
+  "authors": "Parcalabescu & Frank",
+  "year": 2023,
+  "venue": "ACL 2024",
+  "url": "https://arxiv.org/abs/2311.07466",
+  "arxiv_id": "2311.07466",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "argues that existing CoT and post-hoc faithfulness tests measure output-level self-consistency, compares them on 11 open LLMs and 5 tasks, and introduces the CC-SHAP measure.",
+  "arxiv": {
+   "version": "2311.07466v4",
+   "title": "On Measuring Faithfulness or Self-consistency of Natural Language Explanations",
+   "authors": [
+    "Letitia Parcalabescu",
+    "Anette Frank"
+   ],
+   "published": "2023-11-13",
+   "updated": "2024-09-18",
+   "comment": "Paper accepted for publication at ACL 2024 Main (Bangkok, Thailand); 10 main paper pages, 30 appendix pages",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "madsen2023faithfulness",
+  "list": "measurement",
+  "title": "Faithfulness Measurable Masked Language Models",
+  "authors": "Madsen, Reddy & Chandar",
+  "year": 2023,
+  "venue": "ICML 2024",
+  "url": "https://arxiv.org/abs/2310.07819",
+  "arxiv_id": "2310.07819",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "fine-tunes classifiers with masking so that masked inputs are in-distribution, making token-importance faithfulness cheap to measure and optimize. Concerns feature-attribution faithfulness for classifiers, which is otherwise out of scope.",
+  "arxiv": {
+   "version": "2310.07819v3",
+   "title": "Faithfulness Measurable Masked Language Models",
+   "authors": [
+    "Andreas Madsen",
+    "Siva Reddy",
+    "Sarath Chandar"
+   ],
+   "published": "2023-10-11",
+   "updated": "2024-08-27",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "agarwal2024faithfulness",
+  "list": "measurement",
+  "title": "Faithfulness vs. Plausibility: On the (Un)Reliability of Explanations from Large Language Models",
+  "authors": "Agarwal, Tanneru & Lakkaraju",
+  "year": 2024,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2402.04614",
+  "arxiv_id": "2402.04614",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "position paper arguing that LLM self-explanations are optimized for plausibility, which need not align with and may cost faithfulness.",
+  "arxiv": {
+   "version": "2402.04614v3",
+   "title": "Faithfulness vs. Plausibility: On the (Un)Reliability of Explanations from Large Language Models",
+   "authors": [
+    "Chirag Agarwal",
+    "Sree Harsha Tanneru",
+    "Himabindu Lakkaraju"
+   ],
+   "published": "2024-02-07",
+   "updated": "2024-03-14",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "lanham2023measuring",
+  "list": "measurement",
+  "title": "Measuring Faithfulness in Chain-of-Thought Reasoning",
+  "authors": "Lanham, Chen, Radhakrishnan et al.",
+  "year": 2023,
+  "venue": null,
+  "url": "https://arxiv.org/abs/2307.13702",
+  "arxiv_id": "2307.13702",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "intervening on the CoT (truncation, added mistakes, paraphrasing, filler) shows large task variation in how much models rely on it; the CoT gain is not from extra compute or phrasing, and larger models give less faithful reasoning on most tasks.",
+  "arxiv": {
+   "version": "2307.13702v1",
+   "title": "Measuring Faithfulness in Chain-of-Thought Reasoning",
+   "authors": [
+    "Tamera Lanham",
+    "Anna Chen",
+    "Ansh Radhakrishnan",
+    "Benoit Steiner",
+    "Carson Denison",
+    "Danny Hernandez",
+    "Dustin Li",
+    "Esin Durmus",
+    "Evan Hubinger",
+    "Jackson Kernion",
+    "Kamilė Lukošiūtė",
+    "Karina Nguyen",
+    "Newton Cheng",
+    "Nicholas Joseph",
+    "Nicholas Schiefer",
+    "Oliver Rausch",
+    "Robin Larson",
+    "Sam McCandlish",
+    "Sandipan Kundu",
+    "Saurav Kadavath",
+    "Shannon Yang",
+    "Thomas Henighan",
+    "Timothy Maxwell",
+    "Timothy Telleen-Lawton",
+    "Tristan Hume",
+    "Zac Hatfield-Dodds",
+    "Jared Kaplan",
+    "Jan Brauner",
+    "Samuel R. Bowman",
+    "Ethan Perez"
+   ],
+   "published": "2023-07-17",
+   "updated": "2023-07-17",
+   "comment": "",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "turpin2023language",
+  "list": "measurement",
+  "title": "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting",
+  "authors": "Turpin, Michael, Perez & Bowman",
+  "year": 2023,
+  "venue": "NeurIPS 2023",
+  "url": "https://arxiv.org/abs/2305.04388",
+  "arxiv_id": "2305.04388",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "biasing features such as \"answer is always (A)\" cut accuracy by up to 36% on 13 BIG-Bench Hard tasks while CoTs rationalize the biased answers without mentioning the bias, and social-bias answers are justified without mentioning stereotypes.",
+  "arxiv": {
+   "version": "2305.04388v2",
+   "title": "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting",
+   "authors": [
+    "Miles Turpin",
+    "Julian Michael",
+    "Ethan Perez",
+    "Samuel R. Bowman"
+   ],
+   "published": "2023-05-07",
+   "updated": "2023-12-09",
+   "comment": "NeurIPS 2023",
+   "journal_ref": ""
+  }
+ },
+ {
+  "key": "jacovi2020towards",
+  "list": "measurement",
+  "title": "Towards Faithfully Interpretable NLP Systems: How should we define and evaluate faithfulness?",
+  "authors": "Jacovi & Goldberg",
+  "year": 2020,
+  "venue": "ACL 2020",
+  "url": "https://arxiv.org/abs/2004.03685",
+  "arxiv_id": "2004.03685",
+  "tags": [
+   "source:trustme"
+  ],
+  "prior_note": "opinion piece that organizes faithfulness evaluation around three assumptions, gives evaluation guidelines, and argues for a graded rather than binary notion of faithfulness.",
+  "arxiv": {
+   "version": "2004.03685v3",
+   "title": "Towards Faithfully Interpretable NLP Systems: How should we define and evaluate faithfulness?",
+   "authors": [
+    "Alon Jacovi",
+    "Yoav Goldberg"
+   ],
+   "published": "2020-04-07",
+   "updated": "2020-04-27",
+   "comment": "Accepted to ACL 2020",
+   "journal_ref": ""
+  }
+ }
+]

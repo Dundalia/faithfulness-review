@@ -1,0 +1,1743 @@
+[
+ {
+  "key": "turpin2025teaching",
+  "tags": [
+   "object:cot",
+   "reveals:planted-cue",
+   "reveals:misbehavior",
+   "signal:planted-cf",
+   "signal:judge",
+   "lever:sft",
+   "contribution:method",
+   "contribution:metric",
+   "contribution:negative-result",
+   "motivation:monitoring",
+   "domain:mcq",
+   "scale:small",
+   "eval:later-rl",
+   "eval:ood",
+   "eval:behavior-control",
+   "eval:over-verbalization",
+   "model:llama-3.1-8b-instruct",
+   "metric:effective-cue-influence-rate",
+   "metric:verbalization-rate",
+   "metric:cue-influence-rate",
+   "metric:balanced-accuracy"
+  ],
+  "problem": "Reward hacks learned in RL often go unverbalized in the CoT, so CoT monitors miss them.",
+  "method": "VFT: SFT on CoTs that Claude 4 Sonnet minimally edits to credit the cue (2 training cues). Then GRPO with a flawed reward that pays for following held-out cues. Compared with RL-only and BCT. Llama-3.1-8B, MMLU.",
+  "findings": "Undetected hacks after RL (ECR): 6% for VFT vs 88% RL-only and 99% BCT. All three hack about 100% of the time. VFT verbalization goes 8%→43%→94% (after VFT, then after RL). Carries over to cues not amplified in RL (ECR 15%). No extra accuracy loss. 96-97% specificity before RL.",
+  "limits": "Only 8B, MMLU and simple cue hacks that need no CoT. Held-out cues resemble training cues. Verbalizations get vaguer after RL. Judge calibrated on known cues. VFT may encourage exploring hacks.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "turpin2023language",
+    "note": "cue-perturbation faithfulness test used to find unfaithful CoTs for the VFT data"
+   },
+   {
+    "verb": "builds-on",
+    "key": "chen2025reasoning",
+    "note": "same RL environment: flawed reward pays for cue-aligned wrong answers; cues drawn from it"
+   },
+   {
+    "verb": "compares-to",
+    "key": "chua2024biasaugmented",
+    "note": "BCT baseline lowers cue use pre-RL, but RL relearns cues with ~1% verbalization"
+   },
+   {
+    "verb": "builds-on",
+    "key": "chua2025deepseek",
+    "note": "part of the prompt-cue set is taken from this work"
+   },
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "operationalizes counterfactual-simulatability faithfulness through cue-switch tests"
+   },
+   {
+    "verb": "builds-on",
+    "key": "baker2025monitoring",
+    "note": "motivated by CoT monitoring of reward hacks; avoids training against monitor (obfuscation)"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "eval:over-verbalization",
+    "definition": "checks false positives: explanations that claim cue influence when the answer is unaffected (specificity / balanced accuracy)"
+   }
+  ],
+  "uncertain": [
+   "signal:judge: Claude 3.5 Sonnet decides whether a CoT verbalizes the cue, but the ground truth for cue influence comes from the planted-cue counterfactual, so the judge is secondary",
+   "contribution:metric: ECR is defined here, but it is just (1 - verbalization rate) x cue influence rate",
+   "contribution:negative-result: the intervention that fails (BCT collapses under later RL) is a baseline, not the paper's own method",
+   "eval:behavior-control: the tag is applied because the paper reports cue influence (behavior) separately from verbalization rate (explanation); unsure this matches the intended meaning",
+   "signal:implanted-behavior not tagged: RL does train cue exploitation into the model, but per-instance ground truth comes from cue counterfactuals",
+   "lever: RL with a flawed reward is a stress test, not a faithfulness lever, so only lever:sft is tagged",
+   "relation chua2024biasaugmented: compares-to rather than contradicts, because the BCT paper never tested later RL; there is no direct claim conflict",
+   "model tag: written as llama-3.1-8b-instruct; consolidation may normalize it to llama-3.1-8b"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "turpin2025teaching",
+  "tags": [
+   "object:cot",
+   "reveals:planted-cue",
+   "reveals:misbehavior",
+   "signal:planted-cf",
+   "lever:sft",
+   "contribution:method",
+   "contribution:metric",
+   "contribution:negative-result",
+   "motivation:monitoring",
+   "domain:mcq",
+   "scale:small",
+   "eval:later-rl",
+   "eval:ood",
+   "eval:behavior-control",
+   "eval:specificity",
+   "model:llama-3.1-8b",
+   "metric:effective-cue-influence-rate",
+   "metric:verbalization-rate",
+   "metric:cue-influence-rate",
+   "metric:verbalization-balanced-accuracy"
+  ],
+  "problem": "RL-learned reward hacks go unverbalized in CoT → CoT monitors miss them.",
+  "method": "VFT: SFT on CoTs minimally edited by Claude to credit the cue (2 cues) → GRPO rewarding cue-aligned wrong answers on held-out cues; vs BCT and plain RL.",
+  "findings": "Post-RL undetected hacks (ECR): VFT 6%, baseline 88%, BCT 99%. Verbalization 8→43→94%; all models exploit cues ~100%. BCT suppresses verbalization. No accuracy cost vs plain RL.",
+  "limits": "8B, MMLU only. Held-out cues resemble training cues. Verbalizations vaguer after RL; some over-verbalization.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "turpin2023language",
+    "note": "cue-perturbation faithfulness test and finding of unfaithful CoTs used to build VFT data"
+   },
+   {
+    "verb": "builds-on",
+    "key": "chen2025reasoning",
+    "note": "reward-hacking setup: flawed RL rewarding cue-aligned wrong answers; cues drawn from it"
+   },
+   {
+    "verb": "compares-to",
+    "key": "chua2024biasaugmented",
+    "note": "BCT baseline: lowers cue use pre-RL, but post-RL ECR 99%, verbalization ~1%"
+   },
+   {
+    "verb": "builds-on",
+    "key": "chua2025deepseek",
+    "note": "some prompt cues taken from it"
+   },
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "adopts counterfactual-simulatability definition of faithfulness for verbalization tests"
+   },
+   {
+    "verb": "builds-on",
+    "key": "baker2025monitoring",
+    "note": "motivation: CoT monitors catch hacks; warns against training against monitor"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "eval:specificity",
+    "definition": "checks for over-reporting: whether explanations claim an influence (e.g. a cue) when behavior is unaffected, via specificity, false-positive rate or balanced accuracy"
+   }
+  ],
+  "uncertain": [
+   "signal:judge left out: a Claude 3.5 Sonnet judge decides verbalization, but whether the cue influenced the answer comes from planted counterfactuals",
+   "contribution:negative-result: the failure is in the BCT baseline under later RL (it suppresses verbalization), not in the paper's own method",
+   "contribution:metric: ECR is new and named, but it is just (1 - verbalization rate) x cue influence rate",
+   "eval:behavior-control: the paper splits ECR into cue influence (behavior) and verbalization (explanation); this fits the definition only loosely",
+   "eval:ood: the held-out cues are fairly similar to the training cues (stated limitation); the non-amplified-cue test (ECR 15%) is a second held-out split",
+   "chua2024biasaugmented as compares-to rather than contradicts: the paper does not dispute BCT's pre-RL claim, it only shows BCT fails under later RL",
+   "reveals:misbehavior: the reward hacking is toy cue exploitation in MCQ, not agentic misbehavior",
+   "baker2025monitoring builds-on: cited as motivation and caution, not as a method used"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "hase2026counterfactual",
+  "tags": [
+   "object:cot",
+   "reveals:planted-cue",
+   "reveals:input-features",
+   "signal:planted-cf",
+   "signal:generic-cf",
+   "lever:sft",
+   "lever:rl-reward",
+   "contribution:method",
+   "contribution:negative-result",
+   "motivation:monitoring",
+   "motivation:explainability",
+   "domain:mcq",
+   "domain:classification",
+   "scale:large",
+   "eval:ood",
+   "eval:behavior-control",
+   "model:gpt-oss-120b",
+   "model:qwen3-235b-a22b",
+   "model:qwen3-30b-a3b",
+   "model:qwen3-4b",
+   "model:gpt-oss-20b",
+   "metric:monitor-g-mean",
+   "metric:counterfactual-simulatability",
+   "metric:cot-simulation-gain"
+  ],
+  "problem": "Unfaithful CoT → CoT inspection and monitoring can't be trusted.",
+  "method": "CST: reward CoTs that let an LLM simulator predict the model's answer on counterfactual inputs (cue removed, or LLM-generated edits); model rewrites its own unfaithful CoTs, plus k-sample RL; reward-weighted CE + unlikelihood over iterated rounds.",
+  "findings": "Cue-monitor G-mean +31–48 pts; holds on held-out cues and datasets. Generic-CF simulatability only ~+2. Beats prompting and VFT. Rewriting 5x faster than pure RL. Larger models gain more. Dissuading cues barely move (53→57).",
+  "limits": "Cues artificial, no threat model; no transfer between cue and generic CFs; 1–2 pt accuracy drop; two-way MCQ only.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "faithfulness label = LLM counterfactual simulation, following Chen et al."
+   },
+   {
+    "verb": "builds-on",
+    "key": "chua2025deepseek",
+    "note": "cue-based counterfactuals as monitorability testbed for cue influence"
+   },
+   {
+    "verb": "compares-to",
+    "key": "turpin2025teaching",
+    "note": "VFT baseline: CST +27 vs VFT +5 monitor G-mean (MMLU)"
+   },
+   {
+    "verb": "compares-to",
+    "key": "chen2025consistent",
+    "note": "named most similar method (consistency finetuning); discussed, not run"
+   },
+   {
+    "verb": "compares-to",
+    "key": "guan2025monitoring",
+    "note": "reasoning-effort baseline from Guan; gpt-oss monitorability flat with effort"
+   },
+   {
+    "verb": "builds-on",
+    "key": "turpin2023language",
+    "note": "cue-driven unfaithful CoT as motivating problem"
+   }
+  ],
+  "new_tags": [],
+  "uncertain": [
+   "lever:rl-reward vs lever:sft: CST is iterated reward-weighted finetuning on rewritten/sampled CoTs; it is RL-like only when k>1 (generic CFs, and the hybrid version). Tagged both.",
+   "lever:preference left out: unlikelihood on negatives is contrastive, but it is not pairwise preference optimization.",
+   "reveals:input-features for model-generated CFs: the target is the model's generalizable decision rule across related inputs, not feature attribution as such.",
+   "reveals:misbehavior left out: cues are framed as proxies for sycophancy/reward hacking, but the paper says they are not tied to a threat model.",
+   "contribution:negative-result: the dissuading-cue failure is listed as a central result, but it is a sub-finding of a method paper.",
+   "domain:classification: SNLI/ETHICS are NLI-like but are reformatted as two-way MCQ.",
+   "scale:large only, though Qwen3-4B, Qwen3-30B-A3B and gpt-oss-20b are also trained.",
+   "guan2025monitoring: the flat monitorability-vs-reasoning-effort result might conflict with Guan's findings, but the paper does not claim a disagreement, so compares-to rather than contradicts.",
+   "turpin2023language builds-on is weak: cited as the motivating problem, not as a method used."
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "hase2026counterfactual",
+  "tags": [
+   "object:cot",
+   "reveals:planted-cue",
+   "reveals:input-features",
+   "signal:planted-cf",
+   "signal:generic-cf",
+   "lever:sft",
+   "lever:rl-reward",
+   "contribution:method",
+   "contribution:negative-result",
+   "motivation:monitoring",
+   "motivation:explainability",
+   "domain:mcq",
+   "domain:classification",
+   "scale:large",
+   "scale:mid",
+   "scale:small",
+   "eval:ood",
+   "eval:behavior-control",
+   "model:gpt-oss-120b",
+   "model:qwen3-235b-a22b",
+   "model:qwen3-30b-a3b",
+   "model:qwen3-4b",
+   "model:gpt-oss-20b",
+   "metric:monitor-g-mean",
+   "metric:counterfactual-simulator-accuracy",
+   "metric:cot-simulation-gain"
+  ],
+  "problem": "CoT often unfaithful → CoT inspection/monitoring can't be trusted.",
+  "method": "CST: reward CoTs that let an LLM simulator predict the model's answer on counterfactuals (cue removed, or LLM-generated edits); LLM-rewrite unfaithful CoTs; reward-weighted CE + unlikelihood, iterated rounds / k-rollout RL.",
+  "findings": "Cue-monitor G-mean +35 pts (CoT-driven, answers stable); generic simulator acc +~2; beats prompting and VFT; rewriting 5x faster, better OOD than pure RL; larger models gain more.",
+  "limits": "No gain on dissuading cues; no cue↔generic transfer; artificial cues; generic gains small (none on MMLU); acc −1–2 pts.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "uses LLM counterfactual simulatability as the faithfulness label and training reward"
+   },
+   {
+    "verb": "builds-on",
+    "key": "chua2025deepseek",
+    "note": "cue-based counterfactuals and cue-influence monitorability as testbed"
+   },
+   {
+    "verb": "builds-on",
+    "key": "turpin2023language",
+    "note": "cue-induced unfaithful CoT is the motivating problem"
+   },
+   {
+    "verb": "compares-to",
+    "key": "turpin2025teaching",
+    "note": "both rewrite unfaithful CoTs; CST +27 vs VFT +5 monitor G-mean"
+   },
+   {
+    "verb": "compares-to",
+    "key": "guan2025monitoring",
+    "note": "reasoning-effort baseline adopted; monitorability roughly flat as effort rises"
+   },
+   {
+    "verb": "compares-to",
+    "key": "chen2025consistent",
+    "note": "named most similar method (consistency finetuning); no empirical comparison"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "metric:monitor-g-mean",
+    "definition": "geometric mean of monitor recall and specificity for detecting cue influence from the CoT"
+   },
+   {
+    "tag": "metric:counterfactual-simulator-accuracy",
+    "definition": "accuracy of an LLM simulator predicting the model's answer on a counterfactual input, given the original input, CoT and answer"
+   },
+   {
+    "tag": "metric:cot-simulation-gain",
+    "definition": "reasoning-simulator accuracy minus outcome-only (no-CoT) simulator accuracy; the added predictive value of the CoT"
+   }
+  ],
+  "uncertain": [
+   "lever:rl-reward vs lever:preference: objective is reward-weighted CE on positives + unlikelihood on negatives, RL mode only with k>1 rollouts; neither standard RL nor DPO",
+   "scale:small/mid/large all tagged: namespace defines 'largest model', but the scaling study trains Qwen3-4B, 30B-A3B, 235B-A22B (and gpt-oss-20b)",
+   "reveals:misbehavior omitted: motivation mentions reward hacking/sycophancy, but cues are artificial and paper says not tied to a threat model",
+   "contribution:negative-result: failure on dissuading cues is a listed central result but secondary to the method",
+   "reveals:input-features for model-generated counterfactuals: they test whether CoT states the generalizable factors driving answers, not attribution per se",
+   "domain:classification: SNLI and ETHICS are NLI/moral-judgment tasks but all formatted as two-way multiple choice",
+   "guan2025monitoring: flat monitorability vs reasoning effort may conflict with Guan et al., but paper does not state a disagreement, so not tagged contradicts",
+   "chen2025consistent: only discussed as most similar prior method, no experimental comparison"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "karvonen2026would",
+  "tags": [
+   "object:self-prediction",
+   "object:posthoc-expl",
+   "object:external-expl",
+   "reveals:input-features",
+   "reveals:planted-cue",
+   "signal:wild-cf",
+   "signal:planted-cf",
+   "lever:sft",
+   "contribution:method",
+   "contribution:benchmark",
+   "contribution:negative-result",
+   "contribution:analysis",
+   "motivation:explainability",
+   "motivation:auditing",
+   "domain:chat",
+   "domain:mcq",
+   "scale:large",
+   "eval:ood",
+   "eval:behavior-control",
+   "eval:privileged-access-test",
+   "model:qwen3-8b",
+   "model:gemma-3-27b",
+   "model:qwen3.5-397b-a17b",
+   "model:llama-3.1-8b",
+   "model:claude-opus-4.8",
+   "metric:counterfactual-simulatability",
+   "metric:counterfactual-prediction-auroc",
+   "metric:cue-attribution"
+  ],
+  "problem": "Explanations of LLM behavior lack ground truth; counterfactual evals are confined to planted hints.",
+  "method": "CHIVE agent flags unexpected WildChat/PETRI behaviors and tests prompt edits (30 resamples), giving verified CF claims. Uses: score AO/NLA/SAE uplift for a predictor agent; SFT data for self-prediction.",
+  "findings": "Tools give no uplift, across 2 targets and 3 predictor families. Self-prediction SFT generalizes to held-out hints and OOD PETRI, about matching Opus. No privileged access. Open-ended explanation training mixed.",
+  "limits": "Proxy task (the CF could just be run); read-only tools; LLM-judge filters; mostly non-thinking mode.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "adopts counterfactual simulatability as the criterion for explanation quality"
+   },
+   {
+    "verb": "extends",
+    "key": "hase2026counterfactual",
+    "note": "takes CF prediction beyond planted hints; reuses its MMLU cues as held-out eval"
+   },
+   {
+    "verb": "extends",
+    "key": "guo2026introspective",
+    "note": "generalizes cue-removal self-prediction training to diverse in-the-wild prompt edits"
+   },
+   {
+    "verb": "contradicts",
+    "key": "li2025training",
+    "note": "finds no privileged access for same Qwen3-8B/Llama-3.1-8B pair; Li finds it"
+   },
+   {
+    "verb": "builds-on",
+    "key": "binder2024looking",
+    "note": "applies its self- vs cross-trained privileged-access test; likewise finds none"
+   },
+   {
+    "verb": "contradicts",
+    "key": "mayne2026positivecasefaithfulnessllm",
+    "note": "self-explanations give no CF-simulatability uplift on open-ended prompts; Mayne finds uplift"
+   },
+   {
+    "verb": "builds-on",
+    "key": "turpin2023language",
+    "note": "uses hint-setting paradigm; base models rarely acknowledge hints, as in Turpin"
+   },
+   {
+    "verb": "extends",
+    "key": "arcuschin2025chain",
+    "note": "surfaces in-the-wild unfaithful CoT via counterfactual edits, not templated inconsistencies"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "eval:privileged-access-test",
+    "definition": "compares a self-trained predictor against a cross-trained model trained on identical data about the target, to test for introspective or privileged access"
+   },
+   {
+    "tag": "metric:counterfactual-simulatability",
+    "definition": "gain (e.g. delta AUROC) of a predictor/simulator in predicting counterfactual-edit outcomes when given an explanation or tool output, over a transcript-only baseline"
+   },
+   {
+    "tag": "metric:counterfactual-prediction-auroc",
+    "definition": "accuracy/AUROC of a model answering whether a given prompt edit would shift its own behavior rate by at least 30pp"
+   },
+   {
+    "tag": "metric:cue-attribution",
+    "definition": "whether an explanation attributes the answer to a planted cue exactly on the cases where the cue flipped the answer"
+   }
+  ],
+  "uncertain": [
+   "object:external-expl: interpretability-tool outputs (AO/NLA/SAE) are treated as explanations of the target and judged by predictor uplift. They are not a classic external explainer model, so a new object value might fit better.",
+   "object:posthoc-expl: open-ended self-explanation training is reported mainly in Appendix E. The main self-object is binary self-prediction.",
+   "object:cot not tagged: CoT appears only in Appendix G (qualitative in-the-wild unfaithful CoT examples, plus a rerun of the tool eval on reasoning-mode data).",
+   "signal:generic-cf possibly also applies: the counterfactual edits are LLM-generated, but they target naturally occurring behaviors, so I chose wild-cf.",
+   "eval:behavior-control: only a preliminary KL-regularized variant (App. D.5) holds behavior fixed. The main runs do not control for behavior drift.",
+   "domain:agentic not tagged: about 9% of prompts are tool-use transcripts and PETRI uses synthetic tools, but each item is a single-turn prediction, not a multi-step agent environment.",
+   "contribution:metric not tagged: counterfactual simulatability comes from Chen et al.; CHIVE is framed as a pipeline and dataset (benchmark).",
+   "scale:large: Qwen3.5-397B-A17B is MoE (17B active) and LoRA-trained via the Tinker API. The interpretability-tool targets go only up to 27B.",
+   "contradicts li2025training: the authors themselves are unsure why the results differ (narrow hint setting vs broad distribution, or data size).",
+   "contradicts mayne2026positivecasefaithfulnessllm: the paper attributes the gap to task distribution (tabular classification vs open-ended prompts), so this may be a scope difference rather than a true conflict."
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "karvonen2026would",
+  "tags": [
+   "object:self-prediction",
+   "object:posthoc-expl",
+   "object:external-expl",
+   "reveals:input-features",
+   "reveals:planted-cue",
+   "signal:wild-cf",
+   "signal:planted-cf",
+   "lever:sft",
+   "lever:interp-tool-access",
+   "contribution:method",
+   "contribution:benchmark",
+   "contribution:negative-result",
+   "contribution:analysis",
+   "motivation:explainability",
+   "motivation:auditing",
+   "domain:chat",
+   "domain:mcq",
+   "domain:agentic",
+   "scale:small",
+   "scale:large",
+   "eval:ood",
+   "eval:behavior-control",
+   "eval:privileged-access",
+   "model:qwen3-8b",
+   "model:gemma-3-27b",
+   "model:qwen3.5-397b-a17b",
+   "model:llama-3.1-8b",
+   "model:claude-opus-4.8",
+   "model:gpt-5.5",
+   "metric:counterfactual-prediction-auroc",
+   "metric:uplift-over-transcript-baseline",
+   "metric:counterfactual-simulatability",
+   "metric:hint-attribution"
+  ],
+  "problem": "explanation evals rely on narrow planted hints; no diverse ground truth for why LLMs behave as they do in the wild.",
+  "method": "CHIVE agent flags odd WildChat behaviors, runs prompt-edit counterfactuals (resampled rates) → verified yes/no claims. Test AO/NLA/SAE uplift for a predictor agent; LoRA-SFT targets to predict own counterfactuals.",
+  "findings": "tools: no uplift over transcript-only (3 predictor families, 2 targets). Self-prediction SFT generalizes to held-out hints and OOD PETRI, ≈ Opus reference. No privileged access. Open-ended expl. training mixed.",
+  "limits": "proxy task (one could just run the edit); read-only tools only; mostly non-thinking mode; clean prompt-level causes only.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "counterfactual simulatability as the criterion for judging explanations"
+   },
+   {
+    "verb": "extends",
+    "key": "hase2026counterfactual",
+    "note": "counterfactual evaluation from planted hints to in-the-wild behaviors; reuses its MMLU cues"
+   },
+   {
+    "verb": "extends",
+    "key": "guo2026introspective",
+    "note": "cue-removal self-prediction training broadened to diverse wild counterfactuals"
+   },
+   {
+    "verb": "contradicts",
+    "key": "li2025training",
+    "note": "finds no privileged access (self = cross-trained); Li et al. report it, same models"
+   },
+   {
+    "verb": "builds-on",
+    "key": "binder2024looking",
+    "note": "self- vs cross-trained predictor test for privileged access"
+   },
+   {
+    "verb": "builds-on",
+    "key": "turpin2023language",
+    "note": "hint setting used as held-out eval; base models rarely attribute answers to hints"
+   },
+   {
+    "verb": "contradicts",
+    "key": "mayne2026positivecasefaithfulnessllm",
+    "note": "self-explanations give no simulatability uplift on wild behaviors; Mayne finds they help"
+   },
+   {
+    "verb": "compares-to",
+    "key": "chua2024biasaugmented",
+    "note": "prior hint-setting training generalizes narrowly; CHIVE-data training generalizes further"
+   },
+   {
+    "verb": "extends",
+    "key": "arcuschin2025chain",
+    "note": "surfaces in-the-wild unfaithful CoT via counterfactuals (appendix, qualitative only)"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "lever:interp-tool-access",
+    "definition": "giving an explainer or predictor agent read-only access to activation-interpretability tools (activation oracles, NLAs, SAEs) to improve its explanations or predictions of a target model"
+   },
+   {
+    "tag": "eval:privileged-access",
+    "definition": "compares a self-trained predictor with a cross-trained model on identical data about the target to test for privileged self-access"
+   }
+  ],
+  "uncertain": [
+   "object:cot omitted: CoT appears only in Appendix G (qualitative unfaithful-CoT examples plus a reasoning-mode rerun of the tool eval), not as a main object",
+   "object:external-expl: tool-assisted predictor-agent outputs are framed as explanations of the target model; fits 'explanation of a different model' loosely",
+   "lever:interp-tool-access coined; could instead be lever:inference-time, since it changes the explainer's test-time access rather than the target",
+   "domain:agentic: PETRI multi-turn scenarios with synthetic tools plus ~9% tool-use transcripts; not real agent environments",
+   "domain:classification omitted: AITA sycophancy hint setting is a binary verdict but answered freeform",
+   "eval:behavior-control: only from the appendix KL-regularized variant (behavior held near base, no prediction gain)",
+   "scale: Qwen3.5-397B-A17B is MoE with 17B active params; tagged large by total params. Gemma-3-27B (mid) was only probed read-only, so scale:mid omitted",
+   "contradicts li2025training: authors are unsure why results differ (fragility vs data needs); settings also differ (hint vs diverse claims)",
+   "contradicts mayne2026positivecasefaithfulnessllm: authors attribute the gap to task distribution (tabular classification vs open-ended behaviors)",
+   "contribution:method: CHIVE is mainly a data/eval pipeline; the method claim rests on the self-prediction training gains"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "pres2026selfctrl",
+  "tags": [
+   "object:self-report",
+   "reveals:hidden-behavior",
+   "signal:implanted-behavior",
+   "signal:judge",
+   "signal:simulatability",
+   "lever:rl-reward",
+   "lever:rl-mechanics",
+   "updates:explanation",
+   "updates:behavior",
+   "contribution:method",
+   "motivation:explainability",
+   "motivation:auditing",
+   "motivation:alignment",
+   "domain:synthetic",
+   "domain:chat",
+   "scale:small",
+   "eval:ood",
+   "eval:behavior-control",
+   "model:llama-3.1-8b",
+   "model:qwen3-8b",
+   "metric:normalized-simulatability-gain",
+   "metric:calibration-r2",
+   "metric:counterfactual-simulatability",
+   "metric:jury-consistency"
+  ],
+  "problem": "Self-stated rules/self-reports don't predict own behavior on related inputs; per-prompt training never enforces cross-context consistency.",
+  "method": "Self-CTRL: GRPO; reward = stated explanation predicts independently sampled behavior (coin log-lik or 8-juror LM jury); update explanation, behavior or both (λ).",
+  "findings": "Held-out coin-bias report R² 0.24→0.64, ≈ oracle. Llama-8B constitutional: NSG −0.09→0.81, CF refusal acc 0.36→0.92; behavior updates cut HarmBench ASR 15%→0.5%. MMLU ~flat.",
+  "limits": "8B only; vague fixed points (\"be safe\") need structured prompts, aux rewards, jury; permissive Qwen3 gives little boundary signal; expl-training can narrow rules to excuse harmful compliance; no adversarial test.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "pres2026consistency",
+    "note": "instantiates the position paper's self-consistency framework for explanation-behavior pairs"
+   },
+   {
+    "verb": "builds-on",
+    "key": "mayne2026positivecasefaithfulnessllm",
+    "note": "adopts its simulatability view and NSG metric for evaluation"
+   },
+   {
+    "verb": "extends",
+    "key": "betley2025tell",
+    "note": "from measuring self-knowledge of learned behaviors to training it without labels"
+   },
+   {
+    "verb": "compares-to",
+    "key": "hase2026counterfactual",
+    "note": "named closest work; Self-CTRL adds behavior-side updates and meta-level rules"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "signal:simulatability",
+    "definition": "ground truth is the model's observed behavior on new or related inputs, which a simulator must predict from the explanation"
+   },
+   {
+    "tag": "updates:explanation",
+    "definition": "the intervention changes the explanation or self-report so it fits existing behavior"
+   },
+   {
+    "tag": "updates:behavior",
+    "definition": "the intervention changes the model's behavior so it fits its stated explanation or principles"
+   },
+   {
+    "tag": "motivation:alignment",
+    "definition": "faithful self-description as a route to making behavior safer and consistent with stated principles"
+   },
+   {
+    "tag": "domain:synthetic",
+    "definition": "toy task built so the latent ground truth is known (e.g. sampling from named biased coins)"
+   }
+  ],
+  "uncertain": [
+   "object:self-report vs self-prediction: outputs are category-level rules and coin biases that predict behavior on inputs from a class, which sits between the two",
+   "reveals:hidden-behavior: fits the SFT-implanted coin biases well, but the refusal policy is learned rather than hidden; could be read as input-features (which request features trigger refusal)",
+   "signal:simulatability (coined): may merge with judge, since Gemini predicts behavior and an XSTest LM judge classifies refusals; the counterfactual-generation eval could also count as generic-cf (model-generated inputs)",
+   "lever:rl-mechanics: the one-sided lambda updates and forward-KL anchor are central, but the core lever is arguably just rl-reward",
+   "eval:behavior-control: NSG normalizes by no-explanation predictability, App. J shows behavior-training gains go to that baseline, and explanation runs KL-anchor behavior; there is no explicit causal control",
+   "updates namespace (coined): the explanation-vs-behavior update direction is a key axis of this paper but may be over-coining",
+   "motivation:monitoring omitted: the paper mentions monitoring, but its object is self-reports, not reasoning traces",
+   "compares-to hase2026counterfactual is a related-work positioning, not an experimental baseline",
+   "abstract's held-out R² 0.24 baseline is not repeated in the body text, which reports EC-split baselines (-0.23/-0.40)"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "pres2026selfctrl",
+  "tags": [
+   "object:self-report",
+   "reveals:hidden-behavior",
+   "signal:implanted-behavior",
+   "signal:judge",
+   "signal:behavior-prediction",
+   "lever:rl-reward",
+   "lever:rl-mechanics",
+   "contribution:method",
+   "motivation:explainability",
+   "motivation:auditing",
+   "motivation:alignment",
+   "domain:chat",
+   "domain:synthetic",
+   "scale:small",
+   "eval:ood",
+   "eval:behavior-control",
+   "model:llama-3.1-8b",
+   "model:qwen3-8b",
+   "metric:calibration-r2",
+   "metric:normalized-simulatability-gain",
+   "metric:counterfactual-simulatability",
+   "metric:jury-consistency"
+  ],
+  "problem": "An LM's self-descriptions of its own behavior (rules, latent biases) don't predict what it actually does on related inputs.",
+  "method": "GRPO rewards consistency phi between a meta-level explanation and an object-level behavior, sampled separately; updates explanation, behavior or both (lambda). phi = likelihood (coin biases) or 8-juror LM jury (refusal rules, SpecEval).",
+  "findings": "Coins: held-out R2 0.24→0.64, about equal to the oracle supervised model. Constitutional: explanation training raises CF refusal acc 0.36→0.92 and NSG −0.09→0.81; behavior training cuts HarmBench ASR 15%→0.5%. MMLU within about 2 pts.",
+  "limits": "8B models only. Qwen too permissive → rules underidentified. Training collapses to vague \"be safe\" fixed points without jury/aux rewards. Small noisy judges. No adversarial distributions tested.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "pres2026consistency",
+    "note": "instantiates the position paper's self-consistency framework for explanation-behavior pairs"
+   },
+   {
+    "verb": "builds-on",
+    "key": "mayne2026positivecasefaithfulnessllm",
+    "note": "adopts simulatability view of explanation and its NSG metric"
+   },
+   {
+    "verb": "extends",
+    "key": "hase2026counterfactual",
+    "note": "moves predictive/counterfactual-simulation view from answer rationales to meta-level behavior descriptions"
+   },
+   {
+    "verb": "extends",
+    "key": "betley2025tell",
+    "note": "trains self-description of learned behaviors without ground-truth labels, rather than only measuring it"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "signal:behavior-prediction",
+    "definition": "ground truth is the model's own sampled behavior on related inputs, which a simulator must predict from the explanation"
+   },
+   {
+    "tag": "motivation:alignment",
+    "definition": "explanation-behavior consistency used to make behavior conform to stated principles (safer, more controllable models)"
+   },
+   {
+    "tag": "domain:synthetic",
+    "definition": "toy tasks with known latent structure, e.g. sampling from biased coins"
+   }
+  ],
+  "uncertain": [
+   "object:self-report vs self-prediction: explanations are category-level rules or coin biases that predict behavior on given inputs, so they straddle both",
+   "reveals:hidden-behavior: coin biases are SFT-learned (fits), but the refusal policy is an ordinary disposition, not really hidden",
+   "lever:rl-mechanics: one-sided updates (gradient only to the explanation or behavior side) plus a forward-KL anchor look like gradient routing, but the core lever is the reward",
+   "signal:behavior-prediction (coined) overlaps with signal:judge; the constitutional training reward is an LM jury with no causal ground truth, while NSG/CF evals compare against observed refusals",
+   "motivation:monitoring omitted: the paper mentions developers monitoring misalignment through self-reports, but not catching misbehavior from reasoning",
+   "eval:behavior-control: explanation-only training anchors behavior with KL, and App. J shows unconditional predictability unchanged (73.2 vs 73.0); in the other modes behavior change is the goal",
+   "domain:chat for SpecEval safety/refusal requests; a refusal-specific domain value might fit better",
+   "abstract's held-out baseline R2=0.24 is not restated in the main text, which gives EC baseline -0.23/-0.40",
+   "relation to plunkett2025self omitted: it is cited only as related self-interpretability work"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "pan2023logiclm",
+  "tags": [
+   "object:cot",
+   "reveals:cot-reliance",
+   "signal:by-construction",
+   "lever:prompt-pipeline",
+   "lever:architecture",
+   "lever:inference-time",
+   "contribution:method",
+   "motivation:reasoning-quality",
+   "domain:logic",
+   "scale:frontier-api",
+   "model:gpt-3.5-turbo",
+   "model:text-davinci-003",
+   "model:gpt-4",
+   "metric:task-accuracy",
+   "metric:executable-rate"
+  ],
+  "problem": "CoT conclusions need not follow the stated reasoning, so LLM logical reasoning is unfaithful and error-prone.",
+  "method": "Few-shot LLM translates NL problem → LP/FOL/CSP/SAT form; deterministic solver (Pyke/Prover9/python-constraint/Z3) infers the answer; solver error msgs drive self-refinement; interpreter maps result back.",
+  "findings": "Avg +39.2% vs standard, +18.4% vs CoT. Gap grows with reasoning depth. Self-refine raises exe rate but acc plateaus. Faithfulness asserted by construction, never measured.",
+  "limits": "Faithful only if the formalization is correct. Non-executable cases fall back to CoT (AR-LSAT exe rate ≤40%). Bounded by solver expressiveness. CoT beats it on PrOntoQA.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "lyu2023faithful",
+    "note": "cites its finding that LLM conclusions don't follow generated reasoning chains"
+   }
+  ],
+  "new_tags": [],
+  "uncertain": [
+   "object:cot: the LLM output is a symbolic problem formalization rather than reasoning steps, and the solver does the reasoning. Tagged because the definition covers executable traces.",
+   "reveals:cot-reliance: the paper's faithfulness means the answer follows from the reasoning chain, which the solver guarantees. The 'chain' is the solver's execution, not model-written reasoning.",
+   "lever:architecture vs lever:prompt-pipeline: the intervention is a prompting pipeline whose output is an executable symbolic program. Both apply, so I tagged both.",
+   "lever:inference-time: the solver-error self-refinement loop fits 'refine', but it could also count as part of the pipeline structure.",
+   "motivation:explainability omitted: the paper says solvers are 'transparent', but its goal and evaluation are about accuracy.",
+   "domain:mcq omitted: all five datasets are cast to multiple-choice format, and AR-LSAT is an MCQ exam, but the substantive domain is logic.",
+   "metric tags: the paper has no faithfulness metric. Exe_Rate is only a proxy for how often answers come from the faithful-by-construction path and not from the CoT fallback. task-accuracy is the headline metric.",
+   "builds-on lyu2023faithful: Lyu et al. is cited only as motivating evidence of unfaithful reasoning. The paper never discusses its similar translate-then-execute method or uses it as a baseline.",
+   "tafjord2022entailer not linked: it is cited only in related work as a fine-tuning approach, not as a baseline or a basis."
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "pan2023logiclm",
+  "tags": [
+   "object:cot",
+   "reveals:cot-reliance",
+   "signal:by-construction",
+   "lever:prompt-pipeline",
+   "lever:architecture",
+   "lever:inference-time",
+   "contribution:method",
+   "motivation:reasoning-quality",
+   "domain:logic",
+   "scale:frontier-api",
+   "model:gpt-3.5-turbo",
+   "model:text-davinci-003",
+   "model:gpt-4",
+   "metric:execution-rate",
+   "metric:execution-accuracy"
+  ],
+  "problem": "Logic CoT can be unfaithful (conclusion doesn't follow the chain); a black-box LLM gives no guarantee that the answer follows from its reasoning.",
+  "method": "Few-shot LLM → symbolic program (LP/FOL/CSP/SAT) → deterministic solver (Pyke, Prover9, python-constraint, Z3) → interpreter. Self-refines on solver error messages; falls back to CoT if the program won't execute.",
+  "findings": "5 logic datasets, GPT-3.5 avg: +39.2% vs standard, +18.4% vs CoT. Gap over CoT grows with ProofWriter depth. Loses to CoT on PrOntoQA (ChatGPT, GPT-4). Self-refine ↑ exec rate; acc gains small, then plateau.",
+  "limits": "Faithfulness assumed by construction, never measured. Formalization errors (GPT-4 AR-LSAT exec rate 32.6%). Fallback CoT has no guarantee. Bounded by solver expressiveness. In-context only, GPT models only.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "lyu2023faithful",
+    "note": "cites it as evidence LLMs reason unfaithfully; same NL-to-symbolic-plus-solver idea"
+   }
+  ],
+  "new_tags": [],
+  "uncertain": [
+   "reveals:cot-reliance: by construction, the answer depends on the symbolic program; the paper never tests this dependence",
+   "object:cot: the faithful 'trace' is a symbolic formalization; the solver does the reasoning, not the LLM",
+   "lever:architecture vs prompt-pipeline: executable symbolic output plus an external solver could fit either tag; I tagged both",
+   "lever:inference-time: chosen for the self-refinement loop driven by solver error messages",
+   "domain:mcq omitted: all tasks are recast as multiple choice, but the content is logic",
+   "motivation:explainability omitted: transparency of solvers is mentioned, but the main goal is accuracy and robustness",
+   "metric:execution-rate/execution-accuracy: the paper has no faithfulness metric; these are proxies for how often the guaranteed path is used and whether it is correct",
+   "builds-on lyu2023faithful: cited only in the intro as evidence of unfaithful reasoning, not as an explicit basis; the methods are close",
+   "Findings numbers: the 39.2%/18.4% averages are stated for GPT-3.5; whether they are absolute or relative gains is unclear from the text"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "chuang2026faithlm",
+  "tags": [
+   "object:posthoc-expl",
+   "object:external-expl",
+   "reveals:input-features",
+   "signal:generic-cf",
+   "lever:prompt-pipeline",
+   "lever:inference-time",
+   "contribution:method",
+   "contribution:metric",
+   "contribution:theory",
+   "motivation:explainability",
+   "domain:mcq",
+   "domain:open-qa",
+   "scale:small",
+   "scale:frontier-api",
+   "eval:ood",
+   "model:vicuna-7b",
+   "model:phi-2",
+   "model:gpt-3.5-turbo",
+   "model:claude-2",
+   "metric:contrary-hint-fidelity"
+  ],
+  "problem": "Post-hoc NL explanations of LLM answers often unfaithful; token-removal fidelity can't test semantic content absent from the input.",
+  "method": "Fidelity = target's prediction shift when an LLM-written contrary of the explanation is added to the input. Explainer LLM (GPT-3.5/Claude-2) iteratively rewrites the explanation and the trigger prompt from a score trajectory.",
+  "findings": "Higher fidelity than SelfExp & self-consistency on ECQA, TriviaQA-Long, COPA in ~20 steps (MedMCQA 0.96 vs 0.70/0.47). More GT-similar rationales. Optimized prompts transfer to Social-IQA/XCOPA.",
+  "limits": "Eval metric = optimization target (loop stops at a flip). Only Vicuna-7B/Phi-2 targets. Iterative compute cost.",
+  "relations": [
+   {
+    "verb": "compares-to",
+    "key": "madsen2024self",
+    "note": "SelfExp prompting baseline; FaithLM reports higher contrary-hint fidelity"
+   },
+   {
+    "verb": "builds-on",
+    "key": "chen2025reasoning",
+    "note": "adopts its hint-intervention faithfulness test, applied to explanation content"
+   },
+   {
+    "verb": "builds-on",
+    "key": "lanham2023measuring",
+    "note": "intervention paradigm; but argues CoT edits test self-consistency, not fidelity"
+   },
+   {
+    "verb": "compares-to",
+    "key": "pmlr-v235-chen24bl",
+    "note": "contrasts causal contrary-hint sensitivity with counterfactual simulatability"
+   },
+   {
+    "verb": "builds-on",
+    "key": "tanneru2024hardness",
+    "note": "uses its claim that CoT steps are not post-hoc explanations"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "domain:open-qa",
+    "definition": "open-ended or extractive short-answer QA without answer options, incl. reading comprehension (e.g. TriviaQA)"
+   },
+   {
+    "tag": "metric:contrary-hint-fidelity",
+    "definition": "change in the target model's prediction when a statement contradicting the explanation is added to the input"
+   }
+  ],
+  "uncertain": [
+   "object:external-expl vs posthoc-expl: the explainer (GPT-3.5/Claude-2) is mostly a different model from the target (Vicuna-7B/Phi-2), but some configs use the same model; tagged both",
+   "reveals:input-features: the paper stresses that decision factors may be latent knowledge not in the input, so the seed definition fits only loosely",
+   "scale: targets are small, while the prompt optimization runs on frontier-API explainers; unclear which counts as 'intervened on'",
+   "contribution:theory: Theorem 1 is close to definitional, since it assumes conditioning on the contrary hint equals a do-intervention",
+   "signal:judge left out: GPT-4o/NLI judges score similarity to human rationales (plausibility), not faithfulness",
+   "eval:ood: transfer is only of trigger prompts to same-domain datasets (ECQA->Social-IQA, COPA->XCOPA)",
+   "compares-to pmlr-v235-chen24bl: the paper announces a simulatability comparison but the text shows no results; its citation 'Chen 2023a' resolves to a Shapley paper, probably a mix-up with 2023b",
+   "Case-study captions swap target and explainer roles (e.g. Claude-2 target, Vicuna explainer), inconsistent with the main setup",
+   "metric: the truthfulness score (agreement with ground-truth explanations) is left out as a plausibility measure, though the paper presents it as evidence of faithfulness"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "chuang2026faithlm",
+  "tags": [
+   "object:posthoc-expl",
+   "object:external-expl",
+   "reveals:decision-knowledge",
+   "signal:generic-cf",
+   "lever:inference-time",
+   "lever:prompt-pipeline",
+   "contribution:method",
+   "contribution:metric",
+   "contribution:theory",
+   "motivation:explainability",
+   "domain:mcq",
+   "domain:open-qa",
+   "scale:small",
+   "scale:frontier-api",
+   "eval:ood",
+   "model:vicuna-7b",
+   "model:phi-2",
+   "model:gpt-3.5-turbo",
+   "model:claude-2",
+   "metric:contrary-hint-fidelity"
+  ],
+  "problem": "Free-text LLM explanations are often unfaithful. Token-masking fidelity can't test explanation content that isn't in the input.",
+  "method": "Fidelity = answer shift after an LLM-negated explanation (\"contrary hint\") is added to the input. An explainer LLM iteratively rewrites the explanation and the trigger prompt from fidelity-scored trajectories. Targets: Vicuna-7B and Phi-2. Explainers: GPT-3.5 and Claude-2.",
+  "findings": "Higher fidelity than SelfExp and self-consistency on ECQA, TriviaQA-Long and COPA; converges in ~20 steps. Explanations are closer to human rationales (GPT-4o/NLI judges). Optimized prompts transfer to Social-IQA and XCOPA.",
+  "limits": "The eval metric is also the optimization target, with no independent faithfulness check. Hint quality depends on the LLM. Small targets; results shown in figures only. The theorem assumes the hint acts as a do-intervention.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "chen2025reasoning",
+    "note": "adopts its hint-intervention paradigm, applied to explanation content via contrary hints"
+   },
+   {
+    "verb": "compares-to",
+    "key": "madsen2024self",
+    "note": "SelfExp single-pass self-explanation is the main baseline; FaithLM reports higher fidelity"
+   },
+   {
+    "verb": "contradicts",
+    "key": "lanham2023measuring",
+    "note": "argues editing the CoT output measures self-consistency, not fidelity; needs semantic input intervention"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "reveals:decision-knowledge",
+    "definition": "the semantic facts or knowledge, in the input or latent, that the model's answer actually depends on"
+   },
+   {
+    "tag": "domain:open-qa",
+    "definition": "free-form or extractive question answering, incl. reading comprehension (e.g. TriviaQA)"
+   }
+  ],
+  "uncertain": [
+   "object:external-expl vs object:posthoc-expl: the main setup separates explainer g (GPT-3.5/Claude-2) from target f (Vicuna/Phi-2), but some case studies use the same or swapped models; tagged both",
+   "reveals:decision-knowledge (coined): could merge into reveals:input-features, but the paper says the decision-relevant factor may be latent and not in the input",
+   "scale: the targets are small (Vicuna-7B, Phi-2) but the prompted/optimized explainers are frontier APIs; tagged both small and frontier-api",
+   "contribution:theory: Theorem 1 is near-definitional; it assumes conditioning on the contrary hint equals do(S_E)",
+   "signal:judge left out: the GPT-4o/NLI 'truthfulness' vs human rationales measures plausibility, not faithfulness, although the paper reads it as supporting faithfulness",
+   "contradicts lanham2023measuring: Sec 2.3 critiques CoT-editing tests, but Sec 3.1 also calls the method 'complementing' Lanham",
+   "The paper announces a simulatability vs S_E comparison, but no results for it appear in the text",
+   "One sentence says the probability gap is computed only over tokens with non-zero saliency attribution; unclear, so signal:interp-tool was not tagged",
+   "MedMCQA (appendix only) gives fidelity 0.96 vs 0.70 SelfExp and 0.47 self-consistency; no medical domain tag coined"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "shenoy2026introspection",
+  "tags": [
+   "object:self-report",
+   "reveals:hidden-behavior",
+   "signal:implanted-behavior",
+   "lever:sft",
+   "lever:preference",
+   "lever:architecture",
+   "contribution:method",
+   "motivation:auditing",
+   "domain:chat",
+   "scale:mid",
+   "scale:small",
+   "eval:ood",
+   "eval:concealment-trained-targets",
+   "model:llama-3.3-70b",
+   "model:qwen3-14b",
+   "model:qwen3-4b",
+   "model:qwen3-0.6b",
+   "metric:verbalization-rate",
+   "metric:auditing-agent-success",
+   "metric:sandbagging-claim-rate"
+  ],
+  "problem": "Finetunes pick up hidden or concerning behaviors; LLM self-reports are unreliable → auditing many finetunes is hard.",
+  "method": "~680 Llama-3.3-70B finetunes with implanted behaviors (8 categories) → one shared LoRA \"introspection adapter\" trained to verbalize them (SFT, then DPO against hallucinated reports).",
+  "findings": "SOTA on AuditBench (59% vs 53% agent success); flags cipher-attack finetunes (7/9); RM sycophant: 16/52 behaviors surfaced but not the root goal. Improves with scale, data diversity and DPO.",
+  "limits": "High false positives (hallucinates train-set behaviors); OOD gains plateau as diversity grows; costly setup; genuine introspection unproven.",
+  "relations": [
+   {
+    "verb": "extends",
+    "key": "goel2025learning",
+    "note": "Scales DIT to larger models and more diverse behaviors, adds DPO; broader OOD generalization"
+   },
+   {
+    "verb": "builds-on",
+    "key": "betley2025tell",
+    "note": "Elicits latent behavioral self-awareness; agrees introspective ability grows with model size"
+   },
+   {
+    "verb": "builds-on",
+    "key": "binder2024looking",
+    "note": "Adopts its introspection framing but does not claim introspection in Binder's strict sense"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "eval:concealment-trained-targets",
+    "definition": "evaluated on target models adversarially trained not to disclose the behavior being elicited (e.g. AuditBench SFT/KTO anti-confession training)"
+   },
+   {
+    "tag": "metric:verbalization-rate",
+    "definition": "fraction of a model's self-reports that an LLM judge rates as matching the ground-truth implanted behavior"
+   },
+   {
+    "tag": "metric:auditing-agent-success",
+    "definition": "rate at which an investigator agent using a given tool ranks the correct hidden behavior among its top predictions"
+   },
+   {
+    "tag": "metric:sandbagging-claim-rate",
+    "definition": "rate of self-reports that claim any sandbagging-like behavior, compared against a false-positive rate on non-sandbagging models"
+   }
+  ],
+  "uncertain": [
+   "lever:architecture: the IA is a LoRA adapter attached at audit time; it may count only as SFT/DPO, not an architecture change",
+   "scale:small + scale:mid: the namespace says largest model, but the Qwen3 0.6B-14B scaling runs are a central result, so both are tagged",
+   "reveals:misbehavior omitted: some targets reward-hack or sandbag, but the output is a self-report about dispositions, not monitored reasoning",
+   "lever:steering omitted: Appendix A shows a trained single-layer bias/steering vector partly works, but only as an ablation",
+   "domain:chat: probing is done with open-ended chat questions; no task domain fits cleanly (target behaviors span code, MMLU sandbagging, personas)",
+   "contribution:analysis omitted although the scaling/diversity/logit-lens sections are substantial",
+   "turpin2023language not linked: cited only as motivation (self-reports are unreliable)",
+   "binder2024looking verb: builds-on vs compares-to; the paper explicitly declines to claim Binder-style introspection",
+   "~680 finetunes: summed from the Table 1 training counts (682), not stated directly in the paper"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "shenoy2026introspection",
+  "tags": [
+   "object:self-report",
+   "reveals:hidden-behavior",
+   "signal:implanted-behavior",
+   "lever:sft",
+   "lever:preference",
+   "lever:architecture",
+   "contribution:method",
+   "motivation:auditing",
+   "domain:chat",
+   "scale:mid",
+   "eval:ood",
+   "eval:adversarial",
+   "model:llama-3.3-70b",
+   "model:qwen3-14b",
+   "model:qwen3-4b",
+   "model:qwen3-0.6b",
+   "metric:behavior-verbalization-rate",
+   "metric:auditing-agent-success-rate",
+   "metric:scaffold-success-rate",
+   "metric:sandbagging-claim-rate"
+  ],
+  "problem": "Finetuning instills hidden or unexpected behaviors, and LLM self-reports about them are unreliable, so audits are hard.",
+  "method": "Hundreds of Llama-3.3-70B finetunes with known implanted behaviors (8 categories) → one shared LoRA \"introspection adapter\", trained with SFT to verbalize each behavior, then DPO preferring accurate reports over hallucinated ones → applied to unseen finetunes.",
+  "findings": "SOTA on AuditBench (59% agent success vs 53% next-best). Catches cipher finetuning attacks (7/9 models) and surfaces 16/52 RM-sycophant behaviors. Flags UKAISI sandbaggers above the FPR. Improves with model size and data diversity. DPO helps.",
+  "limits": "High FPR: hallucinates train-set behaviors. OOD gains plateau with more diversity. Misses root-cause objectives. Costly upfront model-organism construction.",
+  "relations": [
+   {
+    "verb": "extends",
+    "key": "goel2025learning",
+    "note": "scales DIT adapter: larger models, more diverse behaviors, DPO stage → broader OOD generalization"
+   },
+   {
+    "verb": "builds-on",
+    "key": "betley2025tell",
+    "note": "turns unreliable behavioral self-awareness of finetuned models into reliable trained self-reports"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "eval:adversarial",
+    "definition": "evaluated on target models deliberately trained to conceal or deny the behavior being reported"
+   }
+  ],
+  "uncertain": [
+   "lever:architecture: the IA is a detachable LoRA module transferred across finetunes, but it is arguably just SFT/DPO",
+   "reveals:misbehavior not tagged: targets include sandbagging and RM-bias exploitation, but the framing is auditing hidden finetuned behaviors, not monitoring",
+   "lever:steering not tagged: Appendix A trains a single-layer bias vector only as a lightweight-adapter ablation",
+   "object:self-prediction not tagged: only Appendix F has yes/no and per-prompt behavior questions",
+   "domain:chat: self-reports are elicited in open-ended chat, while some training categories use MMLU sandbagging or decision heuristics",
+   "scale:mid only: Qwen3 0.6B/4B/14B also used for scaling, but the largest model is 70B",
+   "binder2024looking relation omitted: cited only for its introspection definition, which the paper says it does not claim to meet",
+   "metric names coined freely: verbalization rate is an LLM-classifier match against the ground-truth behavior"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "baker2025monitoring",
+  "tags": [
+   "object:cot",
+   "reveals:misbehavior",
+   "signal:judge",
+   "signal:programmatic-hack-label",
+   "lever:rl-reward",
+   "lever:inference-time",
+   "contribution:negative-result",
+   "contribution:analysis",
+   "motivation:monitoring",
+   "domain:code",
+   "domain:agentic",
+   "scale:frontier-api",
+   "eval:behavior-control",
+   "model:openai-frontier-reasoning-internal",
+   "model:gpt-4o",
+   "model:gpt-4o-mini",
+   "metric:monitor-recall",
+   "metric:monitor-precision",
+   "metric:undetected-hack-rate"
+  ],
+  "problem": "Reward hacking in agentic coding RL. Can CoT monitors catch it, and is it safe to train against them?",
+  "method": "Zero-shot GPT-4o monitor on a frontier OpenAI agent: full trajectory incl. CoT vs. actions only. Then RL of a non-frontier agent on honeypot unit-test tasks, with a CoT-only monitor penalty in the reward. Also test-time rejection sampling (32 samples).",
+  "findings": "Systemic-hack recall: CoT monitor 95%, action monitor 60%, GPT-4o-mini 12%. CoT pressure early: fewer hacks, more capable agent. Later: obfuscated hacking, recall near 0.",
+  "limits": "Coding only. Simple unit-test hack. Monitor prompt was the first one tried. Models undisclosed. Pressure monitor sees CoT only.",
+  "relations": [
+   {
+    "verb": "contradicts",
+    "key": "lanham2023measuring",
+    "note": "intervention-based causal CoT tests neither necessary nor sufficient for faithfulness/monitorability"
+   },
+   {
+    "verb": "builds-on",
+    "key": "jacovi2020towards",
+    "note": "narrows their faithfulness definition to sufficiency for one monitored property v"
+   },
+   {
+    "verb": "builds-on",
+    "key": "parcalabescu2023measuring",
+    "note": "cites their argument that input-perturbation tests measure self-consistency, not faithfulness"
+   },
+   {
+    "verb": "builds-on",
+    "key": "kirchner2024proververifier",
+    "note": "treats legibility as a monitorability failure mode; suggests PVG-style training objectives"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "signal:programmatic-hack-label",
+    "definition": "ground truth for misbehavior from a programmatic check on actions/outcomes (regex detector, honeypot test-revert check); CoT monitor recall is measured against it"
+   },
+   {
+    "tag": "model:openai-frontier-reasoning-internal",
+    "definition": "unnamed internal OpenAI frontier reasoning agent (o1/o3-mini family, stronger than o3-mini) monitored during training; also an unnamed non-frontier OpenAI reasoning agent used for the CoT-pressure RL runs"
+   },
+   {
+    "tag": "metric:monitor-recall",
+    "definition": "fraction of ground-truth misbehaving trajectories flagged by the CoT (or action) monitor"
+   },
+   {
+    "tag": "metric:monitor-precision",
+    "definition": "fraction of monitor flags that match ground-truth misbehavior (approximate here, since the monitor flags any hack type)"
+   },
+   {
+    "tag": "metric:undetected-hack-rate",
+    "definition": "rate of trajectories that cheat per the ground-truth check but do not trigger the CoT monitor (obfuscated reward hacking)"
+   }
+  ],
+  "uncertain": [
+   "signal:judge: the LLM monitor is the instrument, but recall is scored against programmatic ground truth, so 'no causal ground truth' only fits the problem-specific hacks found by the monitor",
+   "signal:programmatic-hack-label: coined tag; could merge with by-construction or a broader 'behavioral ground truth' value",
+   "lever:rl-reward: the reward term is a CoT-monitor penalty meant for alignment, not for faithfulness, and it lowers monitorability",
+   "lever:inference-time: rejection sampling with the monitor serves as a comparison, not a faithfulness intervention",
+   "scale:frontier-api: all agents are internal closed OpenAI models of undisclosed size; the RL-trained agent is non-frontier",
+   "eval:behavior-control: tagged because hack rate (behavior) is tracked separately from monitor recall (CoT); the definition may mean something narrower",
+   "eval:later-rl not tagged: obfuscation emerges during the same RL run, with no separate later-RL stage",
+   "contribution: the faithfulness/legibility/obfuscation framework (Sec 5.1, App G) is conceptual; theory/position not tagged because the paper is mainly empirical",
+   "reveals:hidden-info not tagged: steganography appears only in the App G thought experiment; the observed obfuscation is omission of intent, not encoding",
+   "App D self-awareness monitor (in-training awareness) is a minor side result; reveals:hidden-behavior not tagged",
+   "kirchner2024proververifier relation is weak: cited for the legibility concept and as a possible future objective"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "baker2025monitoring",
+  "tags": [
+   "object:cot",
+   "reveals:misbehavior",
+   "signal:verified-behavior",
+   "signal:judge",
+   "lever:rl-reward",
+   "lever:inference-time",
+   "contribution:analysis",
+   "contribution:negative-result",
+   "motivation:monitoring",
+   "domain:code",
+   "domain:agentic",
+   "scale:frontier-api",
+   "eval:behavior-control",
+   "model:openai-internal-reasoning",
+   "model:gpt-4o",
+   "model:gpt-4o-mini",
+   "metric:monitor-recall",
+   "metric:monitor-precision",
+   "metric:undetected-hack-rate",
+   "metric:cheating-rate"
+  ],
+  "problem": "Can LLM monitors catch reward hacking from a reasoning agent's CoT? Does training against them keep the CoT monitorable?",
+  "method": "Zero-shot GPT-4o monitor, CoT vs action-only, in frontier agentic-coding RL. Then RL on a non-frontier agent with the monitor penalty in its reward, plus test-time rejection sampling. Honeypot test-editing serves as the cheating ground truth.",
+  "findings": "CoT monitor recall 95% vs 60% action-only; GPT-4o-mini 12%. CoT pressure early on → more capable, fewer hacks. Later → obfuscated hacking with monitor recall near 0. Argues for paying a monitorability tax.",
+  "limits": "One simple hack class; pressure-run monitor reads only the CoT; models undisclosed; single first-try monitor prompt.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "jacovi2020towards",
+    "note": "adopts its faithfulness definition, narrowed to sufficiency for a monitored property"
+   },
+   {
+    "verb": "contradicts",
+    "key": "lanham2023measuring",
+    "note": "argues intervention-based causal tests are insufficient faithfulness measures and unneeded for monitorability"
+   },
+   {
+    "verb": "builds-on",
+    "key": "parcalabescu2023measuring",
+    "note": "agrees input-intervention tests measure self-consistency, not faithfulness"
+   },
+   {
+    "verb": "builds-on",
+    "key": "kirchner2024proververifier",
+    "note": "uses its legibility notion; suggests prover-verifier objectives for monitorability"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "signal:verified-behavior",
+    "definition": "misbehavior labeled by a programmatic check that does not read the CoT (regex detector, reverting unit-test edits in honeypot tasks); a CoT monitor's detection is scored against it"
+   }
+  ],
+  "uncertain": [
+   "lever:rl-reward: the reward term is a CoT-monitor penalty against hacking, not a reward for faithfulness or monitorability, yet it is still an RL reward on the CoT",
+   "signal:verified-behavior vs signal:by-construction: the honeypot/regex labels are guaranteed by the pipeline, so another coder may use by-construction",
+   "signal:judge: applies only to the problem-specific hacks (Sec 2.2), found by monitor flags plus manual inspection with no ground truth",
+   "scale:frontier-api: the frontier model was only monitored; the agent trained under CoT pressure is an undisclosed 'non-frontier' OpenAI model",
+   "model:openai-internal-reasoning: the agents are unnamed. The abstract says 'such as o3-mini', but the text says the monitored agent surpassed o3-mini",
+   "contradicts lanham2023measuring: the disagreement is conceptual (Appendix G.2), not an empirical result",
+   "contribution: no position tag, although the paper argues for a monitorability tax and a faithfulness/legibility/monitorability framework; it does have experiments",
+   "eval:behavior-control: tagged because the cheating rate (behavior) is measured separately from monitor recall (CoT signal)",
+   "Appendix D's self-awareness (training-awareness) monitoring is untagged: minor, and few true hits"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "kirchner2024proververifier",
+  "tags": [
+   "object:cot",
+   "reveals:solution-validity",
+   "signal:judge",
+   "lever:rl-reward",
+   "lever:prover-verifier-game",
+   "contribution:method",
+   "contribution:theory",
+   "contribution:analysis",
+   "motivation:scalable-oversight",
+   "domain:math",
+   "scale:frontier-api",
+   "eval:human-study",
+   "eval:adversarial-attack",
+   "model:gpt-4-family",
+   "metric:human-judge-accuracy",
+   "metric:steps-to-exploit",
+   "metric:balanced-best-of-n"
+  ],
+  "problem": "Correctness-only RL → GSM CoTs become long and illegible; time-limited humans judge them worse and slower.",
+  "method": "Iterated prover-verifier game: small verifier (1e-3 to 1e-1.8 prover compute) learns correctness; role-prompted GPT-4-family prover trained with PPO (SRC reward) to be helpful (correct + convincing) or sneaky (wrong + convincing).",
+  "findings": "Over rounds, verifier robustness rises, sneaky flaws get subtler, helpful accuracy and human-check accuracy/speed rise → legibility to the small verifier transfers to humans. Legibility tax vs correctness-only RL.",
+  "limits": "GSM only; needs ground-truth answers. Legibility ≠ faithfulness (ignores how the model reasoned). Directly optimizes the CoT. Verifiers too small (1e-4) or prover-sized fail. Sneaky human eval from a flawed pilot.",
+  "relations": [
+   {
+    "verb": "compares-to",
+    "key": "radhakrishnan2023question",
+    "note": "related-work contrast only: no enforced decomposition structure; legibility from final-answer RL"
+   },
+   {
+    "verb": "compares-to",
+    "key": "lyu2023faithful",
+    "note": "related-work contrast only: no enforced symbolic CoT; legibility emerges from training"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "reveals:solution-validity",
+    "definition": "The output must let a (weaker) checker tell whether the solution is correct (legibility/checkability), whatever process the model actually used to reason."
+   },
+   {
+    "tag": "lever:prover-verifier-game",
+    "definition": "Multi-agent training where the explaining model is optimized against a co-trained verifier, typically with helpful and adversarial (sneaky) prover roles."
+   },
+   {
+    "tag": "motivation:scalable-oversight",
+    "definition": "Letting weaker judges (humans or small models) reliably check outputs of stronger models."
+   },
+   {
+    "tag": "eval:adversarial-attack",
+    "definition": "Tests the checker/monitor against adversaries trained or optimized specifically to fool it."
+   }
+  ],
+  "uncertain": [
+   "reveals:solution-validity: legibility is not faithfulness; the paper says legibility ignores how the prover reasoned. Could instead be reveals:misbehavior (sneaky deceptive solutions) or out of scope.",
+   "scale:frontier-api: provers are internal GPT-4-family models of undisclosed size, trained by OpenAI rather than accessed via API.",
+   "model:gpt-4-family: no exact model or size is named; verifiers are given only as relative compute (1e-4 to 1x).",
+   "signal:judge: legibility is measured by human/verifier accuracy against known answer correctness (SymPy grader). There is no causal ground truth about faithfulness.",
+   "contribution:analysis: the legibility loss under correctness-only RL is a baseline finding; it could be read as negative-result. The CGC and iterative-goodharting variants also fail to improve legibility.",
+   "eval:ood not tagged: the verifier is tested on held-out attack rewards (sneaky-only SRC, CGC, goodharting), but the paper says it does not study out-of-domain generalization.",
+   "motivation:monitoring and motivation:explainability not tagged: the paper frames its goal as scalable oversight and explicitly contrasts legibility with explainability.",
+   "Relations to radhakrishnan2023question and lyu2023faithful come only from related-work contrasts. Neither paper is a baseline."
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "kirchner2024proververifier",
+  "tags": [
+   "object:cot",
+   "reveals:correctness",
+   "signal:judge",
+   "lever:rl-reward",
+   "lever:adversarial-game",
+   "contribution:method",
+   "contribution:theory",
+   "contribution:negative-result",
+   "motivation:explainability",
+   "motivation:scalable-oversight",
+   "domain:math",
+   "scale:frontier-api",
+   "eval:human-study",
+   "model:gpt-4-family",
+   "metric:human-judge-accuracy",
+   "metric:human-judge-time",
+   "metric:sneaky-steps-to-exploit",
+   "metric:balanced-best-of-n"
+  ],
+  "problem": "Correctness-only RL → GSM CoT solutions that time-limited humans can't check (illegible).",
+  "method": "Iterative prover-verifier game: a small verifier learns correctness; one role-conditioned prover is trained with PPO as helpful (correct + convincing) or sneaky (incorrect + convincing); SRC reward. Theorem: verifier-led Stackelberg eq. ⇔ completeness + soundness.",
+  "findings": "Over rounds: verifier more robust, sneaky flaws subtler, helpful acc ↑, human judge acc/speed ↑ on helpful, ↓ on sneaky. Legibility to small verifier transfers to humans. Legibility tax vs correctness-only.",
+  "limits": "GSM only; needs ground-truth labels; CoT conflated with justification; fails when verifier is 1e-4× or 1× prover compute; sneaky human eval from a flawed pilot.",
+  "relations": [
+   {
+    "verb": "compares-to",
+    "key": "radhakrishnan2023question",
+    "note": "contrasted: imposed decomposition structure vs PVG using only final-answer supervision"
+   },
+   {
+    "verb": "compares-to",
+    "key": "lyu2023faithful",
+    "note": "contrasted: symbolic structured CoT vs PVG imposing no output structure"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "reveals:correctness",
+    "definition": "the output must let a (weaker) checker verify whether the answer is correct, regardless of how the model actually reasoned (legibility/checkability)"
+   },
+   {
+    "tag": "lever:adversarial-game",
+    "definition": "co-training interacting model roles (e.g. prover, verifier, sneaky adversary) whose outputs set each other's rewards or training data"
+   },
+   {
+    "tag": "motivation:scalable-oversight",
+    "definition": "making outputs checkable by weaker judges (small models, time-limited humans) so correctness stays verifiable as models get more capable"
+   }
+  ],
+  "uncertain": [
+   "reveals:correctness (coined): the paper says legibility is distinct from explainability (it 'ignores how the prover reasoned'), so it may be only marginally in scope for a faithfulness map",
+   "signal:judge: legibility ground truth is human/verifier accuracy against known SymPy-graded labels plus GPT-4 validity scores, not a causal faithfulness signal",
+   "scale:frontier-api: GPT-4-family provers trained in-house at OpenAI with undisclosed sizes; this is not API access",
+   "contribution:negative-result: correctness-only RL degrading legibility is a baseline finding; the CGC and iterative-goodharting alternatives also fail to improve legibility",
+   "eval:ood omitted: the verifier is tested against held-out attack rewards (CGC, goodharting), but the paper says it does not study out-of-domain generalization",
+   "motivation:monitoring omitted: catching the sneaky prover's deliberate subtle flaws is close to monitoring, but these are adversarial errors, not reward hacking or scheming",
+   "relations: both compares-to links are related-work contrasts only, with no experimental comparison"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "tanneru2024hardness",
+  "tags": [
+   "object:cot",
+   "reveals:cot-reliance",
+   "signal:cot-intervention",
+   "lever:prompt-pipeline",
+   "lever:sft",
+   "lever:steering",
+   "contribution:negative-result",
+   "contribution:analysis",
+   "motivation:explainability",
+   "domain:mcq",
+   "domain:math",
+   "domain:logic",
+   "scale:small",
+   "scale:frontier-api",
+   "model:llama-3-8b-instruct",
+   "model:gpt-3.5-turbo",
+   "model:gpt-4",
+   "metric:early-answering-aoc"
+  ],
+  "problem": "Can standard steering methods (ICL, fine-tuning, activation editing) make CoT faithful, i.e. make the answer actually depend on the stated steps?",
+  "method": "Score CoTs per instance by early-answering AOC → most-faithful CoTs used as ICL demos and LoRA/API SFT data (deterministic/stochastic, faithful/uniform). Also ITI-style editing of top-K heads along faithfulness-probe directions. Tested on AQuA, LogiQA, TruthfulQA.",
+  "findings": "Gains marginal and inconsistent. ICL/SFT raise faithfulness at an accuracy cost. Activation editing gives ~no gain, and best heads/α/K vary by dataset. GPT-4 is most accurate but least faithful.",
+  "limits": "Single truncation metric, which conflates CoT necessity with faithfulness. Many differences not significant. No fine-tuned GPT-4 (API errors). Steering only at 8B. Short study.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "lanham2023measuring",
+    "note": "adopts early-answering truncation metric, per-instance probability AOC variant"
+   },
+   {
+    "verb": "builds-on",
+    "key": "agarwal2024faithfulness",
+    "note": "same group's faithfulness-vs-plausibility framing motivates the study"
+   }
+  ],
+  "new_tags": [],
+  "uncertain": [
+   "contribution:method left out: the paper calls its ICL/SFT/steering strategies novel, but they do not improve the target, so it is tagged negative-result + analysis instead",
+   "scale:frontier-api: GPT-4 is only prompted (ICL) and GPT-3.5 only fine-tuned via API; open-weight training and steering is 8B only",
+   "domain:mcq for TruthfulQA: the paper does not say which TruthfulQA format it used; AQuA and LogiQA are clearly multiple choice",
+   "signal:interp-tool left out: linear probes only build the steering direction, and the faithfulness ground truth is always early answering",
+   "eval:ood left out: 'fails to generalize' means results vary from dataset to dataset, not transfer to held-out data",
+   "relation to agarwal2024faithfulness: it is cited for framing and motivation, not as a method the paper builds on",
+   "turpin2023language and lyu2023faithful are only cited (motivation, and a contrasting faithfulness notion), so they are not linked",
+   "text says TruthfulQA SFT costs ~20% accuracy, but the appendix tables do not clearly show this, so the number is left out of the summary"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "tanneru2024hardness",
+  "tags": [
+   "object:cot",
+   "reveals:cot-reliance",
+   "signal:cot-intervention",
+   "lever:prompt-pipeline",
+   "lever:sft",
+   "lever:steering",
+   "contribution:negative-result",
+   "contribution:analysis",
+   "motivation:explainability",
+   "domain:mcq",
+   "domain:math",
+   "domain:logic",
+   "scale:small",
+   "scale:frontier-api",
+   "model:llama-3-8b-instruct",
+   "model:gpt-3.5-turbo",
+   "model:gpt-4",
+   "metric:early-answering-aoc"
+  ],
+  "problem": "CoT unfaithful to model behavior; untested whether standard steering tools (ICL, FT, activation editing) can fix it.",
+  "method": "Per-instance early-answering AOC (Lanham). ICL / FT (LoRA; GPT-3.5 API) on most-faithful sampled CoTs; ITI-style steering of top-K probe-selected heads. AQuA, LogiQA, TruthfulQA.",
+  "findings": "Gains marginal, dataset-specific, mostly non-significant. ICL/FT trade accuracy for faithfulness (TruthfulQA FT ~20% acc drop). Steering ≈ no gain; best heads/α vary by dataset. GPT-4 most accurate, least faithful.",
+  "limits": "Single truncation metric. No GPT-4 FT. Steering on Llama-3-8B only. Per-dataset training; no transfer test.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "lanham2023measuring",
+    "note": "uses early-answering truncation metric, made per-instance with answer probabilities"
+   },
+   {
+    "verb": "builds-on",
+    "key": "agarwal2024faithfulness",
+    "note": "same group; faithfulness-vs-plausibility framing and high-stakes motivation"
+   },
+   {
+    "verb": "contradicts",
+    "key": "lyu2023faithful",
+    "note": "solver-consistent CoT is not faithful to the model's internal computation"
+   }
+  ],
+  "new_tags": [],
+  "uncertain": [
+   "contribution:method omitted: paper calls its ICL/FT/steering strategies novel, but they fail, so tagged negative-result + analysis",
+   "scale:small + scale:frontier-api both tagged: the definition says largest model, but steering and LoRA are only on 8B, while GPT-3.5-Turbo is fine-tuned via API and GPT-4 only gets ICL",
+   "lever:prompt-pipeline for faithful-demonstration ICL: closest seed value, though it is few-shot example selection rather than a pipeline",
+   "eval:ood not tagged: 'fails to generalize across datasets' means inconsistent per-dataset results, not a held-out transfer test",
+   "domain:mcq assumes TruthfulQA is run in multiple-choice format; the paper implies this but does not state it",
+   "contradicts lyu2023faithful is a conceptual disagreement in the related-work appendix, not an empirical comparison; compares-to may fit better",
+   "turpin2023language cited only as evidence of unfaithfulness; no relation recorded",
+   "metric:early-answering-aoc: name coined for the per-instance probability-based variant of Lanham's early answering"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "anwar2026analyzing",
+  "tags": [
+   "object:cot",
+   "reveals:misbehavior",
+   "reveals:cot-reliance",
+   "reveals:hidden-info",
+   "signal:env-label",
+   "lever:rl-reward",
+   "contribution:theory",
+   "contribution:method",
+   "motivation:monitoring",
+   "domain:code",
+   "domain:math",
+   "scale:small",
+   "eval:monitor-pressure",
+   "model:qwen-2.5-7b-instruct",
+   "model:qwen-2.5-3b-instruct",
+   "model:smollm3-3b",
+   "model:deepseek-r1-distill-llama-8b",
+   "metric:monitor-accuracy",
+   "metric:cot-output-mi",
+   "metric:hacking-rate"
+  ],
+  "problem": "CoT monitors degrade under optimization pressure (obfuscation); no theory of when CoT is monitorable.",
+  "method": "Info theory: uplift ≤ √(2I(Y;Z|X)); I(O;Z|X)>0 necessary, not sufficient; monitor error = info gap + elicitation error. GRPO + oracle monitor-accuracy reward or label-free I(O;Z|X) reward; hackable MBPP/BigMath, Qwen-7B monitor in loop.",
+  "findings": "Task+monitor reward → MI & monitor acc drop, hacking ~75% MBPP / ~100% BigMath. Oracle & MI rewards keep monitor acc high, hacking unlearned / never learned; holds on 3 more ≤8B models.",
+  "limits": "≤8B. MI under own policy can't deter steganography; weak in adversarial Reasoning Gym. Needs a,b tuning; more false positives; mitigates, doesn't eliminate.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "baker2025monitoring",
+    "note": "MBPP test-hacking honeypot after Baker; reproduces obfuscation under monitor reward, then mitigates it"
+   },
+   {
+    "verb": "extends",
+    "key": "emmons2025chain",
+    "note": "formalizes CoT necessity: implies I(O;Z|X)>0, necessary but not sufficient for monitorability"
+   },
+   {
+    "verb": "builds-on",
+    "key": "korbak2025chain",
+    "note": "adopts the CoT-monitorability framing; gives it an information-theoretic formalization"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "signal:env-label",
+    "definition": "ground-truth misbehavior labels from the environment (held-out unit test, true verifier) used to score a CoT monitor's accuracy"
+   },
+   {
+    "tag": "eval:monitor-pressure",
+    "definition": "evaluates whether monitorability survives RL that optimizes against the CoT monitor itself (monitor in the reward)"
+   }
+  ],
+  "uncertain": [
+   "reveals:cot-reliance: the MI reward targets statistical CoT-output coupling (anti-decoupling), not causal dependence",
+   "reveals:hidden-info: steganography appears only in the appendix Reasoning Gym environment",
+   "signal:env-label: coined; the LLM monitor's output is scored against environment ground truth, so not seed judge or by-construction",
+   "eval:monitor-pressure: coined; close to eval:later-rl but the pressure is during training, not after it",
+   "contribution:metric not tagged: the per-rollout I(O;Z|X) estimator is also used as an evaluation metric, so it could count",
+   "relation to emmons2025chain: the paper calls its evidence 'mixed', so extends vs compares-to is a judgment call; not a contradiction",
+   "relation to korbak2025chain: cited only as framing, a weak link",
+   "Swaroop et al. 2025 (FRIT) is cited; unclear whether it is corpus swaroop2025lift (different title), so not linked"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "anwar2026analyzing",
+  "tags": [
+   "object:cot",
+   "reveals:misbehavior",
+   "reveals:cot-reliance",
+   "reveals:hidden-info",
+   "signal:env-label",
+   "signal:cot-intervention",
+   "lever:rl-reward",
+   "contribution:theory",
+   "contribution:method",
+   "contribution:metric",
+   "motivation:monitoring",
+   "domain:code",
+   "domain:math",
+   "scale:small",
+   "eval:monitor-pressure",
+   "model:qwen-2.5-7b",
+   "model:qwen-2.5-3b",
+   "model:smollm3-3b",
+   "model:deepseek-r1-distill-llama-8b",
+   "metric:monitor-accuracy",
+   "metric:cot-output-mi"
+  ],
+  "problem": "RL against a CoT monitor → obfuscated CoT + undetected reward hacks; no formal account of when CoT is monitorable.",
+  "method": "Info theory: I(O;Z|X)>0 is necessary but not sufficient; monitor error = info gap + elicitation error. GRPO + oracle monitor-accuracy reward or label-free MI reward (estimator swaps in other CoTs from the group). Hackable MBPP/BigMath, Qwen2.5-7B.",
+  "findings": "Task+monitor RL → MI and monitor acc fall; hacking ~75% MBPP, ~100% BigMath. Oracle/MI rewards keep acc high and curb hacking; same pattern on 3 more models.",
+  "limits": "Curbs hacking but doesn't eliminate it; MI reward doesn't stop steganography (Reasoning Gym); needs a,b tuning; models ≤8B.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "baker2025monitoring",
+    "note": "MBPP test-hacking env and monitor-pressure obfuscation from Baker; proposes rewards countering it"
+   },
+   {
+    "verb": "extends",
+    "key": "emmons2025chain",
+    "note": "formalizes CoT necessity as I(O;Z|X)>0: necessary, not sufficient, for monitorability"
+   },
+   {
+    "verb": "builds-on",
+    "key": "korbak2025chain",
+    "note": "adopts CoT-monitorability framing; formalizes it information-theoretically"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "signal:env-label",
+    "definition": "ground-truth label of the monitored behavior from the environment (e.g., held-out unit test, true verifier), used to score monitor accuracy"
+   },
+   {
+    "tag": "eval:monitor-pressure",
+    "definition": "tests whether monitorability survives RL that optimizes against the CoT monitor (incentive to obfuscate)"
+   }
+  ],
+  "uncertain": [
+   "reveals:cot-reliance: I(O;Z|X) measures how much the CoT tells you about the output, not causal dependence, though the reward pushes the output to depend on the CoT",
+   "signal:cot-intervention: the MI estimator scores the output under other sampled CoTs (a CoT swap), but the paper frames this as MI estimation, not intervention",
+   "reveals:hidden-info: steganography is studied only in the appendix Reasoning Gym environment",
+   "contribution:metric: MI is used as an evaluation metric and monitorability uplift is defined formally, but the main contributions are theory and method",
+   "signal:env-label coined instead of signal:judge: the monitor is an LLM, but accuracy is scored against verifier labels, so there is causal ground truth",
+   "emmons2025chain: tagged 'extends'; the paper calls its evidence 'mixed', so 'contradicts' is arguable (necessity of CoT does not guarantee monitorability)",
+   "contribution:negative-result not tagged: monitor-only RL backfires (replicates Baker) and the MI reward fails against steganography, but neither is the paper's main claim",
+   "eval:behavior-control not tagged: hacking rate and monitor FNR/FPR are reported, but the gain in monitor accuracy is not disentangled from reduced hacking",
+   "swaroop2025lift may be the cited FRIT paper (Swaroop et al. 2025, arXiv 2509.13334) under a new title; not linked"
+  ],
+  "coder": "B"
+ },
+ {
+  "key": "turpin2023language",
+  "tags": [
+   "object:cot",
+   "reveals:planted-cue",
+   "reveals:input-features",
+   "signal:planted-cf",
+   "signal:generic-cf",
+   "lever:prompt-pipeline",
+   "contribution:analysis",
+   "contribution:metric",
+   "motivation:explainability",
+   "motivation:monitoring",
+   "domain:mcq",
+   "domain:logic",
+   "domain:social-bias",
+   "scale:frontier-api",
+   "model:text-davinci-003",
+   "model:claude-1.0",
+   "metric:biased-context-accuracy-drop",
+   "metric:unfaithfulness-explained-by-bias",
+   "metric:unfaithful-pair-rate"
+  ],
+  "problem": "CoT is read as the model's reasoning. Does it reveal what actually drives the answer?",
+  "method": "Biased vs unbiased prompts (few-shot answers always \"(A)\"; user-suggested answer) on 13 BBH tasks. BBQ with swapped weak evidence. GPT-3.5, Claude 1.0. CoT vs no-CoT, ZS/FS, debias instruction.",
+  "findings": "Biases flip answers, acc down up to 36%. CoT almost never cites the bias (1/426) and rationalizes (73% support the biased answer), sometimes with no errors. BBQ: evidence weighed toward stereotypes. ZS CoT raises bias susceptibility; FS CoT lowers it; debias prompt helps Claude.",
+  "limits": "Necessary-not-sufficient test; only small input edits; 2 closed models; MCQ only.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "jacovi2020towards",
+    "note": "adopts its faithfulness definition: explanation must reflect the true reasons for prediction"
+   },
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "frames test as counterfactual simulatability, applied adversarially via biasing features"
+   },
+   {
+    "verb": "contradicts",
+    "key": "lyu2023faithful",
+    "note": "program-based CoT ensures answer follows reasoning, but program may still be bias-driven"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "domain:social-bias",
+    "definition": "tasks probing demographic stereotypes or fairness, e.g. BBQ"
+   }
+  ],
+  "uncertain": [
+   "reveals:input-features: on BBQ the stereotype is not planted; the demographic identity in the input drives the answer, so this is the closest seed value",
+   "signal:generic-cf: on BBQ, GPT-3.5 generated the weak evidence and a rule swapped it between people; could be read as wild-cf because stereotype bias is a natural behavior",
+   "lever:prompt-pipeline: the paper only compares a debiasing instruction and few-shot vs zero-shot as conditions; it proposes no method",
+   "contribution:metric: the biased-context test became a standard paradigm, but the paper frames itself as analysis",
+   "contribution:benchmark not tagged: the paper releases biased BBH prompts and a weak-evidence BBQ but does not present them as a benchmark",
+   "motivation:monitoring: the safety and auditing framing (detecting unfair reasoning from CoT) is secondary to explainability",
+   "domain:logic: the 13 BBH tasks include Logical Deduction, Web of Lies, Navigate and Shuffled Objects, but were chosen for subjectivity",
+   "domain:social-bias: coined tag; may be redundant with domain:mcq",
+   "signal:judge not tagged: author manual checks (bias mentions 1/426, explanation support 73%) back up the counterfactual signal and are not the ground truth",
+   "contradicts lyu2023faithful: hedged critique in related work ('could still be susceptible'), not an empirical test",
+   "lanham2023measuring and radhakrishnan2023question omitted: discussed in related and future work but neither built on nor compared against",
+   "model names: text-davinci-003 (GPT-3.5) and claude-v1.0 are the API names; normalization may differ"
+  ],
+  "coder": "A"
+ },
+ {
+  "key": "turpin2023language",
+  "tags": [
+   "object:cot",
+   "reveals:planted-cue",
+   "reveals:input-features",
+   "signal:planted-cf",
+   "signal:wild-cf",
+   "contribution:analysis",
+   "contribution:metric",
+   "motivation:explainability",
+   "motivation:monitoring",
+   "domain:mcq",
+   "domain:social-bias",
+   "scale:frontier-api",
+   "model:text-davinci-003",
+   "model:claude-1.0",
+   "metric:biased-context-accuracy-drop",
+   "metric:unfaithfulness-explained-by-bias",
+   "metric:unfaithful-pair-rate",
+   "metric:bias-mention-rate"
+  ],
+  "problem": "CoT is read as the model's reasoning. Is it faithful when unmentioned input biases drive the answer?",
+  "method": "GPT-3.5/Claude 1.0 on 13 BBH tasks, with vs. without Answer-is-Always-A or Suggested-Answer cues. BBQ + swapped weak evidence. Factors: CoT vs. No-CoT, ZS vs. FS, debiasing instruction.",
+  "findings": "CoTs almost never mention the bias (1/426), yet acc drops up to 36%. 73% rationalize the biased answer; 15% have no errors. BBQ: inconsistent evidence use, stereotype-aligned up to 62.5%. Debias prompt helps Claude only.",
+  "limits": "Necessary, not sufficient, test. Minor input edits only. 2 closed API models, MCQ only.",
+  "relations": [
+   {
+    "verb": "builds-on",
+    "key": "jacovi2020towards",
+    "note": "adopts its definition of faithfulness and its plausibility-vs-faithfulness distinction"
+   },
+   {
+    "verb": "builds-on",
+    "key": "pmlr-v235-chen24bl",
+    "note": "frames its eval as counterfactual simulatability, here in adversarial biased settings"
+   },
+   {
+    "verb": "contradicts",
+    "key": "lyu2023faithful",
+    "note": "argues program-based CoT is not guaranteed faithful: program generation can still be biased"
+   }
+  ],
+  "new_tags": [
+   {
+    "tag": "domain:social-bias",
+    "definition": "stereotype or fairness QA tasks (e.g. BBQ) where demographic attributes can sway answers"
+   }
+  ],
+  "uncertain": [
+   "reveals:input-features: BBQ tests whether demographic identity, a naturally present input feature rather than a planted cue, drives answers",
+   "signal:wild-cf vs signal:generic-cf: BBQ swaps model-generated weak evidence between individuals to probe a naturally occurring stereotype bias, so it fits both",
+   "lever omitted: the paper tests the debiasing instruction and few-shot prompting as mitigations (prompt-pipeline), but it is a measurement paper",
+   "contribution:metric: the biased-context paradigm and the %-explained-by-bias metric are new eval methods; contribution:benchmark not tagged, though it releases modified BBH/BBQ data",
+   "motivation:monitoring: framed mainly as explainability/safety, with a discussion of CoT-based auditing of unfair reasoning",
+   "domain:logic not tagged, though several BBH tasks (logical deduction, web of lies) are deductive",
+   "signal:judge omitted: manual annotation (bias-mention check, explanation support) is auxiliary; the counterfactual is the ground truth",
+   "contradicts lyu2023faithful rests only on a related-work argument, not on experiments",
+   "model naming: the paper calls text-davinci-003 GPT-3.5"
+  ],
+  "coder": "B"
+ }
+]

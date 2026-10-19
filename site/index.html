@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faithfulness Literature Map</title>
+  <meta name="description" content="A filterable map of research on making LLM chains of thought and self-explanations faithful.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to results</a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <div class="title-block">
+        <h1>Faithfulness literature map</h1>
+        <p class="lede" id="lede">Research on making LLM chains of thought and self-explanations reflect what actually drives the answer.</p>
+      </div>
+      <div class="controls">
+        <label class="search">
+          <span class="visually-hidden">Search papers</span>
+          <input id="q" type="search" placeholder="Search titles, authors, findings" autocomplete="off">
+        </label>
+        <div class="years" role="group" aria-label="Year range">
+          <label><span class="visually-hidden">From year</span><select id="y0"></select></label>
+          <span aria-hidden="true">to</span>
+          <label><span class="visually-hidden">To year</span><select id="y1"></select></label>
+        </div>
+        <div class="venue-types" id="venueTypes" role="group" aria-label="Publication status"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="rail" id="rail" aria-label="Filters">
+      <div class="rail-head">
+        <h2>Filter by tag</h2>
+        <button class="link-button" id="clearAll" type="button">Clear all</button>
+      </div>
+      <p class="rail-note">Within a group, any checked tag matches. Across groups, a paper must match every group.</p>
+      <div id="facets"></div>
+    </aside>
+
+    <main id="main">
+      <div class="toolbar">
+        <button class="filters-toggle" id="filtersToggle" type="button" aria-controls="rail" aria-expanded="false">Filters</button>
+        <div class="tabs" role="tablist" aria-label="Views">
+          <button role="tab" id="tab-papers" aria-controls="view-papers" data-tab="papers">Papers</button>
+          <button role="tab" id="tab-coverage" aria-controls="view-coverage" data-tab="coverage">Coverage</button>
+          <button role="tab" id="tab-links" aria-controls="view-links" data-tab="links">Links between papers</button>
+        </div>
+        <p class="count" id="count" aria-live="polite"></p>
+      </div>
+      <div class="active" id="active" aria-label="Active filters"></div>
+
+      <section id="view-papers" role="tabpanel" aria-labelledby="tab-papers">
+        <div class="list-head">
+          <label class="sort">Sort by
+            <select id="sort">
+              <option value="year">Newest first</option>
+              <option value="year-asc">Oldest first</option>
+              <option value="title">Title</option>
+              <option value="links">Most linked</option>
+            </select>
+          </label>
+          <button class="link-button" id="expandAll" type="button">Expand all</button>
+        </div>
+        <ol class="papers" id="papers"></ol>
+      </section>
+
+      <section id="view-coverage" role="tabpanel" aria-labelledby="tab-coverage" hidden>
+        <div class="matrix-head">
+          <p class="matrix-intro">Count the papers that carry both tags. Hatched cells are combinations no paper in the current selection covers. Select a cell to list its papers.</p>
+          <div class="axis-pickers">
+            <label>Rows <select id="rowNs"></select></label>
+            <label>Columns <select id="colNs"></select></label>
+          </div>
+        </div>
+        <div class="matrix-wrap" id="matrixWrap"></div>
+        <div class="legend" id="legend" aria-hidden="true"></div>
+      </section>
+
+      <section id="view-links" role="tabpanel" aria-labelledby="tab-links" hidden>
+        <div class="verb-pickers" id="verbs" role="group" aria-label="Link types"></div>
+        <ol class="links" id="links"></ol>
+      </section>
+    </main>
+  </div>
+
+  <footer class="colophon">
+    <p>Each record was written by a Claude agent from the paper's full text and checked against it by a second agent. Tags follow <a href="https://github.com/Dundalia/faithfulness-review/blob/main/tags.yaml">tags.yaml</a>; the method is in <a href="https://github.com/Dundalia/faithfulness-review/blob/main/PLAN.md">PLAN.md</a>. <span id="generated"></span></p>
+    <p><a href="https://github.com/Dundalia/faithfulness-review">Source and data on GitHub</a></p>
+  </footer>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

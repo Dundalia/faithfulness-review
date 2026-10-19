@@ -6,7 +6,7 @@ year: 2026
 venue: "ICLR 2027 submission (under review)"
 url: https://openreview.net/forum?id=BMWwHYA6YI
 checked: 2026-10-19
-tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, signal:cot-intervention, lever:sft, updates:behavior, contribution:metric, contribution:meta-evaluation, contribution:analysis, motivation:monitoring, motivation:explainability, domain:math, domain:mcq, domain:professional, scale:small, scale:mid, scale:large, eval:measure-validation, eval:confound-control, eval:scaling, eval:ood, factor:sft-data, factor:cot-necessity, factor:cot-length, model:deepseek-r1-distill-qwen-7b, model:deepseek-r1-distill-qwen-32b, model:qwen2.5-32b, model:gpt-oss-120b, model:gpt-oss-20b, model:qwen3.5-9b, metric:crisp-effect, metric:replay-consistency, metric:recovery-drop]
+tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, signal:cot-intervention, lever:sft, updates:behavior, contribution:metric, contribution:meta-evaluation, contribution:analysis, motivation:monitoring, motivation:explainability, domain:math, domain:mcq, domain:professional, scale:small, scale:mid, scale:large, eval:measure-validation, eval:confound-control, eval:scaling, eval:ood, factor:post-training, factor:cot-necessity, factor:cot-length, model:deepseek-r1-distill-qwen-7b, model:deepseek-r1-distill-qwen-32b, model:qwen2.5-32b, model:gpt-oss-120b, model:gpt-oss-20b, model:qwen3.5-9b, metric:crisp-effect, metric:replay-consistency, metric:recovery-drop]
 ---
 **Problem** Teacher-forced CoT intervention estimates (truncation, mistakes) are uninterpretable when the replay misreproduces the model or the edit leaves the chain's implied answer unchanged.
 **Method** One generator writes a length/style-matched paraphrase control and a single-error perturbation; chance-normalized accuracy drop; replay-validity and LLM-evaluator intervention-validity checks; 15 open models, 9 math/clinical/science benchmarks; LoRA SFT of R1-Distill-Qwen-7B on 3 trace corpora.
@@ -18,4 +18,4 @@ tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, signal:
 - compares-to [[lanham2023measuring]]: truncation baseline on same base-correct items; Spearman 0.363 on replay-valid pairs
 
 **New tags**
-- factor:sft-data: the source or format of supervised reasoning data (reasoning-model distillation vs instruction tuning; step-by-step traces vs answer-conditioned post-hoc rationales or shuffled steps), studied as a driver of (un)faithfulness
+- (none)

@@ -6,7 +6,7 @@ year: 2026
 venue: "ICLR 2027 submission (under review)"
 url: https://openreview.net/forum?id=USa4hbQ5lF
 checked: 2026-10-19
-tags: [source:idea-reports-2026-10-19, object:self-prediction, object:cot, reveals:hidden-behavior, reveals:decision-factors, signal:generic-cf, signal:judge, signal:interp-tool, contribution:benchmark, contribution:analysis, motivation:alignment, motivation:auditing, domain:agentic, domain:ethics, scale:small, scale:mid, scale:large, scale:closed, eval:confound-control, eval:measure-validation, factor:elicitation-format, factor:instruction-pressure, model:qwen3.5-27b, model:deepseek-v4-flash, model:qwen3-14b, model:qwen3-8b, model:llama-3.1-8b, model:qwen3.5-9b, metric:directed-reference-loss, metric:absolute-choice-rate-difference, metric:load-bearing-consideration-share, metric:mismatch-repair-rate]
+tags: [source:idea-reports-2026-10-19, object:self-prediction, object:cot, reveals:hidden-behavior, reveals:decision-factors, signal:generic-cf, signal:judge, signal:interp-tool, contribution:benchmark, contribution:analysis, motivation:alignment, motivation:auditing, domain:agentic, domain:ethics, scale:small, scale:mid, scale:large, scale:closed, eval:confound-control, eval:measure-validation, factor:elicitation, factor:prompt-instructions, model:qwen3.5-27b, model:deepseek-v4-flash, model:qwen3-14b, model:qwen3-8b, model:llama-3.1-8b, model:qwen3.5-9b, metric:directed-reference-loss, metric:absolute-choice-rate-difference, metric:load-bearing-consideration-share, metric:mismatch-repair-rate]
 ---
 **Problem** Do an LLM's moral judgments and the choices it states in role predict the tool actions it actually takes as an agent?
 **Method** 2,000 matched synthetic cases (temptations with a reference answer, dilemmas without one). Each is run three ways: observer judgment (Should), in-role written choice (Say), simulated tool call (Do). 14 models. Kimi-K3 codes whether Qwen3.5-27B's Should considerations carry weight in its Say and Do rationales. Probes and steering on 4 open models.
@@ -17,6 +17,4 @@ tags: [source:idea-reports-2026-10-19, object:self-prediction, object:cot, revea
 - (none)
 
 **New tags**
-- domain:ethics: moral or ethical decision scenarios (temptations, right-vs-right dilemmas, value conflicts) where the outcome of interest is which morally loaded option the model chooses
-- factor:elicitation-format: how a decision is elicited and submitted (observer judgment vs in-role written statement vs tool call, incl. interface and information access), studied as a driver of gaps between stated and enacted choices
-- factor:instruction-pressure: operator or system instructions pushing toward an option that the model's own stated principles reject, studied as a driver of gaps between stated and enacted choices
+- (none)

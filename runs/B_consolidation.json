@@ -1,5 +1,162 @@
 {
- "mapping": [],
- "additions": [],
- "notes": ""
+ "mapping": [
+  {
+   "from": "factor:cue-strength",
+   "to": "factor:cue-design",
+   "why": "merge"
+  },
+  {
+   "from": "factor:cue-type",
+   "to": "factor:cue-design",
+   "why": "merge"
+  },
+  {
+   "from": "factor:cue-delivery",
+   "to": "factor:cue-design",
+   "why": "merge"
+  },
+  {
+   "from": "factor:cue-correctness",
+   "to": "factor:cue-design",
+   "why": "merge"
+  },
+  {
+   "from": "factor:monitor-resources",
+   "to": "factor:monitor-choice",
+   "why": "merge"
+  },
+  {
+   "from": "factor:post-training-stage",
+   "to": "factor:post-training",
+   "why": "merge"
+  },
+  {
+   "from": "factor:sft-training",
+   "to": "factor:post-training",
+   "why": "merge"
+  },
+  {
+   "from": "factor:task-sft",
+   "to": "factor:post-training",
+   "why": "merge"
+  },
+  {
+   "from": "factor:sft-data",
+   "to": "factor:post-training",
+   "why": "merge"
+  },
+  {
+   "from": "factor:secondary-finetuning",
+   "to": "factor:post-training",
+   "why": "merge"
+  },
+  {
+   "from": "factor:self-distillation",
+   "to": "factor:post-training",
+   "why": "merge"
+  },
+  {
+   "from": "factor:kl-penalty",
+   "to": "factor:cot-grader",
+   "why": "merge"
+  },
+  {
+   "from": "factor:task-novelty",
+   "to": "factor:outcome-rl",
+   "why": "merge"
+  },
+  {
+   "from": "factor:eval-awareness",
+   "to": "factor:monitor-awareness",
+   "why": "merge"
+  },
+  {
+   "from": "factor:model-size",
+   "to": "eval:scaling",
+   "why": "merge"
+  },
+  {
+   "from": "factor:elicitation-format",
+   "to": "factor:elicitation",
+   "why": "merge"
+  },
+  {
+   "from": "factor:elicitation-framing",
+   "to": "factor:elicitation",
+   "why": "merge"
+  },
+  {
+   "from": "factor:instruction-pressure",
+   "to": "factor:prompt-instructions",
+   "why": "merge"
+  },
+  {
+   "from": "factor:guidance-prompt",
+   "to": "factor:prompt-instructions",
+   "why": "merge"
+  },
+  {
+   "from": "factor:preference-conflict",
+   "to": "factor:model-preference",
+   "why": "merge"
+  },
+  {
+   "from": "factor:hedging-prior",
+   "to": "factor:model-preference",
+   "why": "merge"
+  },
+  {
+   "from": "eval:relearning",
+   "to": "eval:later-rl",
+   "why": "merge"
+  },
+  {
+   "from": "model:t5-base",
+   "to": "model:t5",
+   "why": "merge"
+  }
+ ],
+ "additions": [
+  {
+   "tag": "domain:ethics",
+   "definition": "moral or ethical decision scenarios (temptations, dilemmas, value conflicts)"
+  },
+  {
+   "tag": "object:reasoning-summary",
+   "definition": "a short model-written summary of the model's own hidden reasoning, shown in place of the full CoT"
+  },
+  {
+   "tag": "factor:cue-design",
+   "definition": "properties of a planted cue (type, strength, delivery channel, correctness) studied as a driver of verbalization or monitorability"
+  },
+  {
+   "tag": "factor:monitor-choice",
+   "definition": "the reader or monitor (model class, prompt, budget, access to inputs) studied as a determinant of measured monitorability"
+  },
+  {
+   "tag": "factor:post-training",
+   "definition": "post-training stage or data not aimed at faithfulness (SFT data or format, preference tuning, secondary fine-tuning, distillation) studied as a driver"
+  },
+  {
+   "tag": "factor:reward-misspecification",
+   "definition": "an RL reward that pays for behavior differing from the task intent, studied as a driver of (un)verbalized exploitation"
+  },
+  {
+   "tag": "factor:latent-reasoning",
+   "definition": "reasoning carried in continuous latent states instead of decoded tokens, studied as a driver of monitorability or faithfulness"
+  },
+  {
+   "tag": "factor:elicitation",
+   "definition": "how a decision or self-report is elicited (format, framing, interface), studied as a driver of its faithfulness or accuracy"
+  },
+  {
+   "tag": "factor:prompt-instructions",
+   "definition": "system or operator instructions (benign guidance or pressure toward an option) studied as a driver of faithfulness or of stated-vs-enacted gaps"
+  },
+  {
+   "tag": "factor:model-preference",
+   "definition": "the model's own prior preferences or default behaviors that conflict with its stated reasoning or plan"
+  }
+ ],
+ "notes": "Consolidated by hand on 2026-10-19 for the 80 papers added from the idea reports."
 }

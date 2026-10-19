@@ -6,7 +6,7 @@ year: 2026
 venue: "COLM 2026 workshop (Lifelong Agents)"
 url: https://openreview.net/forum?id=2ptkLSaok8
 checked: 2026-10-19
-tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, signal:cot-intervention, contribution:metric, contribution:analysis, motivation:monitoring, domain:agentic, scale:mid, scale:large, eval:confound-control, eval:measure-validation, factor:preference-conflict, model:qwen3-30b-a3b, model:gpt-oss-120b, model:glm-4.5-air, model:glm-4.7-flash, metric:plan-binding-rate, metric:conflict-override-rate, metric:seed-invariance]
+tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, signal:cot-intervention, contribution:metric, contribution:analysis, motivation:monitoring, domain:agentic, scale:mid, scale:large, eval:confound-control, eval:measure-validation, factor:model-preference, model:qwen3-30b-a3b, model:gpt-oss-120b, model:glm-4.5-air, model:glm-4.7-flash, metric:plan-binding-rate, metric:conflict-override-rate, metric:seed-invariance]
 ---
 **Problem** Plan- and CoT-based oversight of tool-using agents assumes stated plans govern irreversible actions; no black-box causal test of this exists.
 **Method** τ²-bench retail tasks rewritten so the customer is indifferent between two outcomes; one template plan per outcome, gated by ratification and forced execution (under Qwen3-30B); plan A or B seeded as the agent's own; score which write succeeds; unseeded rollouts give revealed preference. 62 tasks, 4 open models.
@@ -17,4 +17,4 @@ tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, signal:
 - builds-on [[guan2025monitoring]]: instantiates its 'intervention' archetype for validating monitorability, at the action level
 
 **New tags**
-- factor:preference-conflict: conflict between what the stated reasoning or plan prescribes and the model's own revealed preference over outcomes (measured without the plan), studied as a driver of plan or CoT overrides
+- (none)

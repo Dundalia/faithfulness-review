@@ -16,6 +16,7 @@ object:            # which model output is supposed to be faithful
   external-expl: explanation of a different model (incl. tool outputs used as explanations)
   output: the model's main output itself (task response, code, factual claims, inter-agent message), checked for honesty or hidden content rather than a separate CoT or explanation
   self-interpretation: the model's natural-language description of what its own internal features or activations encode
+  reasoning-summary: a short model-written summary of the model's own hidden reasoning, shown in place of the full CoT
 
 reveals:           # what that output must reflect
   planted-cue: a hint or bias inserted into the prompt
@@ -102,6 +103,7 @@ domain:            # where it is tested
   professional: specialist professional-knowledge tasks such as medical or legal QA (e.g. MedQA, CaseHOLD, LegalBench)
   safety-refusal: harmful or borderline requests where the behavior of interest is refuse vs. comply (e.g. HarmBench, StrongREJECT, WildGuardTest)
   text-continuation: free-form continuation or next-text prediction of natural text with no task answer (e.g. Wikipedia continuation, next word)
+  ethics: moral or ethical decision scenarios (temptations, dilemmas, value conflicts)
 
 scale:             # every size class the paper trains or intervenes on (MoE: total parameters)
   small: under 10B parameters
@@ -110,7 +112,7 @@ scale:             # every size class the paper trains or intervenes on (MoE: to
   closed: closed-weight models (API or internal), size undisclosed
 
 eval:              # notable properties of the evaluation, tagged only when present
-  later-rl: checks whether faithfulness survives later RL
+  later-rl: checks whether faithfulness or the intervention's effect survives later RL or fine-tuning
   optimization-pressure: checks faithfulness under training against the monitor or metric itself
   ood: tests on held-out cues, tasks or distributions
   behavior-control: holds behavior fixed (e.g. KL, fixed-behavior eval) to isolate explanation change
@@ -132,8 +134,16 @@ factor:            # what an analysis paper varies or studies as a driver of (un
   cot-grader: training signal that scores the CoT text without detecting the target behavior (RLHF reward model, human-preference grader, step-validity process supervision)
   cot-length: pressure toward shorter CoTs: RL length penalties or budgets, truncation, concise prompting or summarization
   cot-necessity: how computationally load-bearing the CoT is for the task or behavior (CoT-uplift filtering, difficulty sweeps)
-  monitor-awareness: the model's knowledge or belief that its CoT is monitored (from prompts or training documents)
+  monitor-awareness: the model's knowledge or belief that its CoT is monitored or that it is being evaluated (from prompts, training documents or its own recognition)
   outcome-rl: RL with task-outcome rewards only (incl. its data mix and length caps), no CoT or faithfulness term
+  cue-design: properties of a planted cue (type, strength, delivery channel, correctness) studied as a driver of verbalization or monitorability
+  elicitation: how a decision or self-report is elicited (format, framing, interface), studied as a driver of its faithfulness or accuracy
+  latent-reasoning: reasoning carried in continuous latent states instead of decoded tokens, studied as a driver of monitorability or faithfulness
+  model-preference: the model's own prior preferences or default behaviors that conflict with its stated reasoning or plan
+  monitor-choice: the reader or monitor (model class, prompt, budget, access to inputs) studied as a determinant of measured monitorability
+  post-training: post-training stage or data not aimed at faithfulness (SFT data or format, preference tuning, secondary fine-tuning, distillation) studied as a driver
+  prompt-instructions: system or operator instructions (benign guidance or pressure toward an option) studied as a driver of faithfulness or of stated-vs-enacted gaps
+  reward-misspecification: an RL reward that pays for behavior differing from the task intent, studied as a driver of (un)verbalized exploitation
 
 source:            # where the paper entered the corpus
   trustme: TrustMe-Litreview bib.bib or main.tex

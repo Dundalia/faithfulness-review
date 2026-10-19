@@ -17,4 +17,4 @@ tags: [source:idea-reports-2026-10-19, object:cot, reveals:misbehavior, reveals:
 - builds-on [[guan2025monitoring]]: adopts its intervention g-mean² as the monitorability metric
 
 **New tags**
-- factor:reward-misspecification: the RL outcome reward pays for behavior that differs from or contradicts the task intent (stated in the prompt or implicit), e.g. compared with a true-reward control, studied as a driver of unmonitorable or unfaithful CoT
+- (none)

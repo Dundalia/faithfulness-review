@@ -6,7 +6,7 @@ year: 2026
 venue: "NeurIPS 2026 workshop (MusIML)"
 url: https://openreview.net/forum?id=WTcy60M8eb
 checked: 2026-10-19
-tags: [source:idea-reports-2026-10-19, object:cot, reveals:planted-cue, signal:planted-cf, contribution:analysis, motivation:explainability, motivation:reliability, domain:math, scale:small, factor:self-distillation, model:qwen3-1.7b, metric:biased-context-accuracy-drop, metric:biased-reasoning-rate, metric:hint-verbalization-rate, metric:composite-faithfulness-score]
+tags: [source:idea-reports-2026-10-19, object:cot, reveals:planted-cue, signal:planted-cf, contribution:analysis, motivation:explainability, motivation:reliability, domain:math, scale:small, factor:post-training, model:qwen3-1.7b, metric:biased-context-accuracy-drop, metric:biased-reasoning-rate, metric:hint-verbalization-rate, metric:composite-faithfulness-score]
 ---
 **Problem** Self-distillation (OPSD) is adopted for accuracy gains. Does it erode CoT faithfulness and robustness to misleading context compared with SFT?
 **Method** Qwen3-1.7B base, SFT and OPSD (teacher sees verified solution), 100 steps each. 998 paired GSM8K prompts: clean, correct, wrong and authority-escalated hints, distractor, biased few-shot; plus a sycophancy test.
@@ -17,4 +17,4 @@ tags: [source:idea-reports-2026-10-19, object:cot, reveals:planted-cue, signal:p
 - builds-on [[turpin2023language]]: takes its Unfaithful CoT Rate; hint and biased few-shot cues follow its biasing features
 
 **New tags**
-- factor:self-distillation: on-policy self-distillation, where the same model as teacher conditions on privileged context (e.g. a verified solution) and the student is trained toward the teacher's distribution on its own rollouts
+- (none)

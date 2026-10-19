@@ -1,0 +1,3478 @@
+[
+ {
+  "tag": "domain:ethics",
+  "count": 2,
+  "keys": [
+   "naphade2026me",
+   "anon2026should"
+  ],
+  "defs": [
+   "moral or ethical decision scenarios (temptations, right-vs-right dilemmas, value conflicts) where the outcome of interest is which morally loaded option the mod",
+   "moral or ethical decision scenarios (temptations, right-vs-right dilemmas, value conflicts) where the outcome of interest is which morally loaded option the mod"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "domain:game",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [
+   "competitive or strategic games (e.g. poker) with a computable reference action per decision"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "domain:scientific-editing",
+  "count": 1,
+  "keys": [
+   "anon2026what"
+  ],
+  "defs": [
+   "constrained editing of structured scientific objects (molecules as SMILES, RNA coding sequences, biochemical reactions) whose validity and realized change are c"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "domain:subjective-judgment",
+  "count": 1,
+  "keys": [
+   "duzan2026chainofthought"
+  ],
+  "defs": [
+   "decisions or numeric ratings with no gold answer (everyday choices, essay/CV/poem grading, triage urgency) where an irrelevant detail should not matter"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "eval:relearning",
+  "count": 1,
+  "keys": [
+   "tang2026unlearning"
+  ],
+  "defs": [
+   "checks whether the intervention's effect survives later fine-tuning, benign or adversarial (relearning or tampering attacks), not RL"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:action-visibility",
+  "count": 1,
+  "keys": [
+   "shiromani2026false"
+  ],
+  "defs": [
+   "whether the misbehavior is visible from the actions alone or only from the reasoning, i.e. how far a monitor depends on the CoT as its only signal (e.g. reasoni"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:answer-configuration",
+  "count": 1,
+  "keys": [
+   "li2026when"
+  ],
+  "defs": [
+   "How the answer stage consumes a stored CoT (continued in the model's thinking block vs a separate answer call; trace position, input order, instruction), studie"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:answer-correctness",
+  "count": 1,
+  "keys": [
+   "angdembay2026two"
+  ],
+  "defs": [
+   "whether the model's final answer is correct, studied as a variable that structures where unfaithfulness occurs or how detectable it is"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:cue-correctness",
+  "count": 1,
+  "keys": [
+   "egan2026hint"
+  ],
+  "defs": [
+   "whether the planted cue points to the correct or an incorrect answer, studied as a driver of cue following and verbalization"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:cue-delivery",
+  "count": 1,
+  "keys": [
+   "gema2026chainofthought"
+  ],
+  "defs": [
+   "the channel or role through which an influencing cue reaches the model (user message vs tool return, retrieved context or memory), with cue text held fixed, stu"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:cue-strength",
+  "count": 3,
+  "keys": [
+   "duzan2026chainofthought",
+   "gema2026chainofthought",
+   "shiromani2026necessary"
+  ],
+  "defs": [
+   "strength or explicitness of the planted influence (caveated note vs. authoritative claim or injected instruction), varied as a driver of verbalization or monito",
+   "strength or explicitness of the planted influence (caveated note vs. authoritative claim or injected instruction; direct preference summary vs raw artifact requ"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:cue-type",
+  "count": 1,
+  "keys": [
+   "young2026why"
+  ],
+  "defs": [
+   "the kind of planted cue or hint (sycophancy, consistency, visual pattern, metadata, grader hack, unethical info) studied as a driver of (un)verbalized influence"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:elicitation-format",
+  "count": 1,
+  "keys": [
+   "anon2026should"
+  ],
+  "defs": [
+   "how a decision is elicited and submitted (observer judgment vs in-role written statement vs tool call, incl. interface and information access), studied as a dri"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:elicitation-framing",
+  "count": 1,
+  "keys": [
+   "nguyen2026can"
+  ],
+  "defs": [
+   "the wording or framing of the question used to elicit a self-report or explanation (e.g. intent vs. tampering), studied as a driver of its accuracy"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:eval-awareness",
+  "count": 1,
+  "keys": [
+   "schoen2025stress"
+  ],
+  "defs": [
+   "the model's recognition that a scenario is an alignment evaluation or training environment (measured from the CoT, injected or ablated in the CoT, or induced by"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:evidence-quality",
+  "count": 1,
+  "keys": [
+   "li2026when"
+  ],
+  "defs": [
+   "Quality of the context the CoT or answer is generated from (gold evidence vs distractor-laden or distractor-only context), studied as a driver of reliance on th"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:guidance-prompt",
+  "count": 1,
+  "keys": [
+   "duzan2026chainofthought"
+  ],
+  "defs": [
+   "benign deployment system-prompt additions (de-biasing, focus-on-merits or CoT-opening instructions) not aimed at concealment, studied for their effect on what t"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:hedging-prior",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [
+   "a default behavioral prior (e.g. risk-averse hedging) that pulls the stated conclusion away from the model's own stated rule or reasoning"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:instruction-pressure",
+  "count": 1,
+  "keys": [
+   "anon2026should"
+  ],
+  "defs": [
+   "operator or system instructions pushing toward an option that the model's own stated principles reject, studied as a driver of gaps between stated and enacted c"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:kl-penalty",
+  "count": 1,
+  "keys": [
+   "golechha2026preliminary"
+  ],
+  "defs": [
+   "reverse-KL penalty to a reference policy applied to CoT tokens during RL (an implicit CoT reward that does not score the target behavior), studied as a driver o"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:latent-reasoning",
+  "count": 1,
+  "keys": [
+   "ferreira2026outofsight"
+  ],
+  "defs": [
+   "reasoning carried in continuous latent states instead of decoded tokens (e.g. CODI, COCONUT, SIM-CoT), studied as a driver of monitorability or faithfulness"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:model-size",
+  "count": 1,
+  "keys": [
+   "boppana2026reasoning"
+  ],
+  "defs": [
+   "model size or capability, varied within one family, studied as a driver of (un)faithfulness or monitorability"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:monitor-choice",
+  "count": 1,
+  "keys": [
+   "algaba2026reasoning"
+  ],
+  "defs": [
+   "the reader or monitor used (model class or capability, e.g. linear probe vs LLM judge, encoder, prompt or implementation), studied as a determinant of measured "
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:monitor-resources",
+  "count": 1,
+  "keys": [
+   "chidambaram2026corrupted"
+  ],
+  "defs": [
+   "monitor-side resources varied as a driver of monitorability: thinking vs non-thinking monitor, reasoning budget, or access to the actor's input context"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:plan-complexity",
+  "count": 1,
+  "keys": [
+   "oota2026llm"
+  ],
+  "defs": [
+   "length or structural richness (number of steps, hierarchy, competing candidates) of the plan or reasoning the model has stated and must then follow, studied as "
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:post-training-stage",
+  "count": 1,
+  "keys": [
+   "dhoot2026hintfollowing"
+  ],
+  "defs": [
+   "compares checkpoints of one model lineage across pretraining, SFT, preference-optimization and RL stages as drivers of (un)faithfulness or monitorability"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:preference-conflict",
+  "count": 1,
+  "keys": [
+   "fareed2026plan"
+  ],
+  "defs": [
+   "conflict between what the stated reasoning or plan prescribes and the model's own revealed preference over outcomes (measured without the plan), studied as a dr"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:reasoning-mode",
+  "count": 1,
+  "keys": [
+   "arike2026information"
+  ],
+  "defs": [
+   "whether the monitored model is a reasoning model (long trained CoT or thinking mode on) or a traditional LLM prompted to reason, compared as a driver of faithfu"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:refusal-mechanism",
+  "count": 1,
+  "keys": [
+   "nguyen2026can"
+  ],
+  "defs": [
+   "the model's safety-trained refusal machinery (e.g. the refusal direction) studied as a driver of self-report accuracy"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:reward-misspecification",
+  "count": 1,
+  "keys": [
+   "anon2026reward"
+  ],
+  "defs": [
+   "the RL outcome reward pays for behavior that differs from or contradicts the task intent (stated in the prompt or implicit), e.g. compared with a true-reward co"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:secondary-finetuning",
+  "count": 1,
+  "keys": [
+   "basani2026brittle"
+  ],
+  "defs": [
+   "further fine-tuning after a behavior is implanted (honesty, self-report or generic instruction data; varying amount or LoRA rank), studied as a cause of behavio"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:self-distillation",
+  "count": 1,
+  "keys": [
+   "imrankhan2026better"
+  ],
+  "defs": [
+   "on-policy self-distillation, where the same model as teacher conditions on privileged context (e.g. a verified solution) and the student is trained toward the t"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:sft-data",
+  "count": 1,
+  "keys": [
+   "anon2026crisp"
+  ],
+  "defs": [
+   "the source or format of supervised reasoning data (reasoning-model distillation vs instruction tuning; step-by-step traces vs answer-conditioned post-hoc ration"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "factor:sft-training",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [
+   "supervised fine-tuning on demonstrations (vs. preference or RL tuning) studied as a driver of (un)faithfulness, e.g. learned output shortcuts that bypass or con"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:task-novelty",
+  "count": 1,
+  "keys": [
+   "sullivan2026language"
+  ],
+  "defs": [
+   "whether the trained task's target behavior already exists in the base model (RL only sharpens it) or must be newly discovered, studied as a driver of CoT drift,"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "factor:task-sft",
+  "count": 1,
+  "keys": [
+   "lobo2024impact"
+  ],
+  "defs": [
+   "supervised fine-tuning on downstream task data (answer-only or with gold rationales) not aimed at faithfulness, studied as a driver of CoT (un)faithfulness"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "lever:adversarial-training",
+  "count": 1,
+  "keys": [
+   "chang2026catalyzing"
+  ],
+  "defs": [
+   "min-max training against worst-case input, embedding or latent perturbations that elicit the unwanted output, so the target behavior holds robustly (e.g. contin"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "lever:data-augmentation",
+  "count": 1,
+  "keys": [
+   "zhao2026robustness"
+  ],
+  "defs": [
+   "adds perturbed or cue-bearing training inputs (e.g. correct and misleading captions or CoT prefixes) under an otherwise unchanged training objective"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "lever:on-policy-distillation",
+  "count": 1,
+  "keys": [
+   "anon2026improving"
+  ],
+  "defs": [
+   "trains the model on its own sampled outputs with token-level supervision (e.g. forward KL) toward a teacher's distribution, incl. a frozen self-teacher given pr"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:absolute-choice-rate-difference",
+  "count": 1,
+  "keys": [
+   "anon2026should"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:access-level-auroc-increment",
+  "count": 1,
+  "keys": [
+   "algaba2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:activation-patching-following",
+  "count": 1,
+  "keys": [
+   "kudo2024llms"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:adding-mistakes-aoc",
+  "count": 1,
+  "keys": [
+   "anon2026grace"
+  ],
+  "defs": [],
+  "used_in_map": 4
+ },
+ {
+  "tag": "metric:answer-explanation-alignment",
+  "count": 1,
+  "keys": [
+   "lin2025clarity"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:auditing-agent-success-rate",
+  "count": 1,
+  "keys": [
+   "chang2026catalyzing"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:balanced-accuracy",
+  "count": 1,
+  "keys": [
+   "wang2026verbalising"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:behavioral-causal-gap",
+  "count": 1,
+  "keys": [
+   "bhupatiraju2026stated"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:biased-context-accuracy-drop",
+  "count": 2,
+  "keys": [
+   "zhao2026robustness",
+   "imrankhan2026better"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "metric:biased-reasoning-rate",
+  "count": 1,
+  "keys": [
+   "imrankhan2026better"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:binned-mse",
+  "count": 1,
+  "keys": [
+   "anon2026implementation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:causal-diagnosticity",
+  "count": 1,
+  "keys": [
+   "zaman2025causal"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:causal-factor-verbosity",
+  "count": 1,
+  "keys": [
+   "meek2025measuring"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:causal-importance-of-reasoning",
+  "count": 1,
+  "keys": [
+   "anon2026generating"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:causal-recall-lower-bound",
+  "count": 1,
+  "keys": [
+   "anon2026improving"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:causal-redundancy-of-reasoning",
+  "count": 1,
+  "keys": [
+   "anon2026generating"
+  ],
+  "defs": [
+   "CORD (Kim & Lee 2026): harmonic mean of original-answer survival under CoT-suffix corruption and how early the answer is recovered from a CoT prefix with the qu"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:causal-sensitivity-score",
+  "count": 1,
+  "keys": [
+   "khanzadeh2026project"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:causally-load-bearing-rate",
+  "count": 1,
+  "keys": [
+   "bhupatiraju2026stated"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cc-sae",
+  "count": 1,
+  "keys": [
+   "wang2026concept"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cc-shap",
+  "count": 2,
+  "keys": [
+   "gurarieh2026faithfulness",
+   "zaman2025causal"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:ci-distinguishability",
+  "count": 1,
+  "keys": [
+   "anon2026implementation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:circuit-overlap",
+  "count": 1,
+  "keys": [
+   "anon2026computation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:claim-correctness",
+  "count": 1,
+  "keys": [
+   "anon2026what"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:classifier-rank-correlation",
+  "count": 1,
+  "keys": [
+   "young2026measuring"
+  ],
+  "defs": [
+   "Spearman correlation between model rankings by faithfulness rate under two different classifiers"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:clt-fvu-differential",
+  "count": 1,
+  "keys": [
+   "singhal2026believe"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:composite-faithfulness-score",
+  "count": 1,
+  "keys": [
+   "imrankhan2026better"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:concept-verbalization-rate",
+  "count": 1,
+  "keys": [
+   "arcuschin2026biases"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:conclusion-action-inconsistency",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:confession-false-positive-rate",
+  "count": 1,
+  "keys": [
+   "basani2026brittle"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:confession-given-noncompliance",
+  "count": 1,
+  "keys": [
+   "basani2026brittle"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:confession-rate",
+  "count": 2,
+  "keys": [
+   "basani2026brittle",
+   "chang2026catalyzing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:conflict-override-rate",
+  "count": 1,
+  "keys": [
+   "fareed2026plan"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:contract-completeness",
+  "count": 1,
+  "keys": [
+   "anon2026what"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:correct-and-consistent-rate",
+  "count": 1,
+  "keys": [
+   "lin2025clarity"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cot-information-gain",
+  "count": 1,
+  "keys": [
+   "dai2025legaldelta"
+  ],
+  "defs": [
+   "Shift in the model's own (average, unnormalized) answer logits when its CoT is in context vs. absent (dQ = PMI between answer and CoT plus a log-partition confi"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cot-intervention-flip-rate",
+  "count": 1,
+  "keys": [
+   "bhupatiraju2026stated"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:cot-legibility",
+  "count": 1,
+  "keys": [
+   "jose2025reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:cot-nocot-following-delta",
+  "count": 1,
+  "keys": [
+   "dhoot2026hintfollowing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cot-outcome-prediction-kl",
+  "count": 1,
+  "keys": [
+   "naphade2026me"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cot-pred-match",
+  "count": 1,
+  "keys": [
+   "lobo2024impact"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:cot-simulation-gain",
+  "count": 1,
+  "keys": [
+   "hong2026llm"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:cot-unfaithfulness-rate",
+  "count": 1,
+  "keys": [
+   "golechha2026preliminary"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:counterfactual-importance",
+  "count": 1,
+  "keys": [
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:counterfactual-plus-plus-importance",
+  "count": 1,
+  "keys": [
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:counterfactual-simulatability",
+  "count": 1,
+  "keys": [
+   "hong2026llm"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:covert-action-rate",
+  "count": 1,
+  "keys": [
+   "schoen2025stress"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:crisp-effect",
+  "count": 1,
+  "keys": [
+   "anon2026crisp"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:cross-model-informativeness",
+  "count": 1,
+  "keys": [
+   "dai2025legaldelta"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:cross-task-transfer-gain",
+  "count": 1,
+  "keys": [
+   "anon2026introspection"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:cue-acknowledgment-rate",
+  "count": 2,
+  "keys": [
+   "meek2025measuring",
+   "tang2026unlearning"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:detection-accuracy",
+  "count": 1,
+  "keys": [
+   "shen2026detecting"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:detection-f1",
+  "count": 1,
+  "keys": [
+   "shen2026detecting"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:direct-effect",
+  "count": 1,
+  "keys": [
+   "burger2026chain"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:directed-reference-loss",
+  "count": 1,
+  "keys": [
+   "anon2026should"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:early-answering-aoc",
+  "count": 2,
+  "keys": [
+   "zhou2026nearzero",
+   "anon2026grace"
+  ],
+  "defs": [],
+  "used_in_map": 6
+ },
+ {
+  "tag": "metric:effective-cue-influence-rate",
+  "count": 1,
+  "keys": [
+   "yang2025investigating"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:error-propagation-rate",
+  "count": 1,
+  "keys": [
+   "jia2026decorative"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:evidence-following-rate",
+  "count": 1,
+  "keys": [
+   "li2026when"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:excess-auroc-ratio",
+  "count": 1,
+  "keys": [
+   "algaba2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:execution-gap-rate",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:executor-uplift",
+  "count": 1,
+  "keys": [
+   "han2026correct"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:f-id",
+  "count": 1,
+  "keys": [
+   "somov2026breaking"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:f-ood",
+  "count": 1,
+  "keys": [
+   "somov2026breaking"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:f-strong",
+  "count": 1,
+  "keys": [
+   "somov2026breaking"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:faithfulness-verbosity-monitorability",
+  "count": 1,
+  "keys": [
+   "meek2025measuring"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:false-positive-rate",
+  "count": 1,
+  "keys": [
+   "yang2025investigating"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:ff-hard",
+  "count": 1,
+  "keys": [
+   "gurarieh2026faithfulness"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:filler-tokens",
+  "count": 2,
+  "keys": [
+   "gurarieh2026faithfulness",
+   "zaman2025causal"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:first-order-transfer-utility",
+  "count": 1,
+  "keys": [
+   "roytburg2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:frozen-executor-accuracy",
+  "count": 1,
+  "keys": [
+   "han2026correct"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:g-mean-squared",
+  "count": 4,
+  "keys": [
+   "duzan2026chainofthought",
+   "anon2026chainofthought",
+   "anon2026improving",
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 7
+ },
+ {
+  "tag": "metric:g-mean-squared-lb",
+  "count": 1,
+  "keys": [
+   "anon2026improving"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:grace-divergence",
+  "count": 1,
+  "keys": [
+   "anon2026grace"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:ground-truth-alignment",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:ground-truth-auroc",
+  "count": 1,
+  "keys": [
+   "gurarieh2026faithfulness"
+  ],
+  "defs": [
+   "AUROC of a faithfulness metric's scores against ground-truth faithful/unfaithful labels (step- or CoT-level), measuring how well the metric discriminates"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:hidden-behavior-execution-rate",
+  "count": 1,
+  "keys": [
+   "basani2026brittle"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:hint-following-rate",
+  "count": 1,
+  "keys": [
+   "dhoot2026hintfollowing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:hint-intent-honesty",
+  "count": 1,
+  "keys": [
+   "walden2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:hint-use-honesty",
+  "count": 1,
+  "keys": [
+   "walden2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:hint-verbalization-rate",
+  "count": 11,
+  "keys": [
+   "arora2025training",
+   "dhoot2026hintfollowing",
+   "egan2026hint",
+   "walden2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 16
+ },
+ {
+  "tag": "metric:honesty-rate",
+  "count": 1,
+  "keys": [
+   "wang2025evaluating"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:impostor-win-rate",
+  "count": 1,
+  "keys": [
+   "chang2026catalyzing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:inflection-rate-per-step",
+  "count": 1,
+  "keys": [
+   "boppana2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:inter-classifier-kappa",
+  "count": 1,
+  "keys": [
+   "young2026measuring"
+  ],
+  "defs": [
+   "Cohen's kappa between two faithfulness classifiers' binary labels on the same traces (chance-corrected agreement)"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:internal-external-fgw-discrepancy",
+  "count": 1,
+  "keys": [
+   "shen2026detecting"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:judge-similarity-score",
+  "count": 1,
+  "keys": [
+   "anon2026traininghonesty"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:judged-deception-rate",
+  "count": 1,
+  "keys": [
+   "tang2026unlearning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:label-survival-rate",
+  "count": 1,
+  "keys": [
+   "anon2026one"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:leakage-adjusted-simulatability",
+  "count": 1,
+  "keys": [
+   "hase2020leakageadjusted"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "metric:legibility-accuracy-correlation",
+  "count": 1,
+  "keys": [
+   "jose2025reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:load-bearing-consideration-share",
+  "count": 1,
+  "keys": [
+   "anon2026should"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:mask-honest-rate",
+  "count": 1,
+  "keys": [
+   "chang2026catalyzing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:meta-direct-kappa",
+  "count": 1,
+  "keys": [
+   "song2025language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:minimal-criterion-tpr",
+  "count": 3,
+  "keys": [
+   "burger2026chain",
+   "anon2026chainofthought",
+   "anon2026improving"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "metric:mismatch-repair-rate",
+  "count": 1,
+  "keys": [
+   "anon2026should"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:monitor-auc",
+  "count": 12,
+  "keys": [
+   "algaba2026reasoning",
+   "angdembay2026two",
+   "arike2026information",
+   "chidambaram2026corrupted"
+  ],
+  "defs": [],
+  "used_in_map": 4
+ },
+ {
+  "tag": "metric:monitor-f1",
+  "count": 1,
+  "keys": [
+   "roytburg2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:monitor-log-auroc",
+  "count": 1,
+  "keys": [
+   "arike2026information"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:monitor-precision",
+  "count": 1,
+  "keys": [
+   "roytburg2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:monitor-recall",
+  "count": 3,
+  "keys": [
+   "chidambaram2026corrupted",
+   "duzan2026chainofthought",
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 5
+ },
+ {
+  "tag": "metric:necessary-cot-monitorability",
+  "count": 1,
+  "keys": [
+   "burger2026chain"
+  ],
+  "defs": [
+   "monitorability score M1: CoT articulation rate divided by the excess-fraction lower bound on attribute influence, capped at 1, computed only where the target an"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:over-abstain-rate",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:over-promise-rate",
+  "count": 1,
+  "keys": [
+   "anon2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:performativity-rate",
+  "count": 1,
+  "keys": [
+   "boppana2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:plan-action-divergence-rate",
+  "count": 1,
+  "keys": [
+   "bu2026spadebench"
+  ],
+  "defs": [
+   "Share of valid paired cases where, in any of k samples (pass@k), the agent's stated plan shifts toward the observer-favored stance under pressure while its exec"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:plan-adherence",
+  "count": 1,
+  "keys": [
+   "oota2026llm"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:plan-binding-rate",
+  "count": 1,
+  "keys": [
+   "fareed2026plan"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:plan-structure-maintenance",
+  "count": 1,
+  "keys": [
+   "oota2026llm"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:pre-cot-probe-accuracy",
+  "count": 1,
+  "keys": [
+   "kudo2024llms"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:prediction-behavior-correlation",
+  "count": 1,
+  "keys": [
+   "song2025language"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:prediction-grounded-recall",
+  "count": 1,
+  "keys": [
+   "wang2026concept"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:prefill-ablation-accuracy",
+  "count": 1,
+  "keys": [
+   "jose2025reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:prefill-claim-rate",
+  "count": 1,
+  "keys": [
+   "nguyen2026can"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:prefix-answer-decoding-accuracy",
+  "count": 1,
+  "keys": [
+   "boppana2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:probe-answer-emergence-position",
+  "count": 1,
+  "keys": [
+   "kudo2024llms"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:probe-auc",
+  "count": 4,
+  "keys": [
+   "angdembay2026two",
+   "shiromani2026false",
+   "wang2026verbalising",
+   "shiromani2026necessary"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:ranking-swap-probability",
+  "count": 1,
+  "keys": [
+   "anon2026implementation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:reasoning-answer-decoupling-rate",
+  "count": 1,
+  "keys": [
+   "maniyar2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:reasoning-gap-rate",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:reasoning-transferability",
+  "count": 1,
+  "keys": [
+   "lee2026beyond"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:recognition-gap",
+  "count": 1,
+  "keys": [
+   "nguyen2026can"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:recovery-drop",
+  "count": 1,
+  "keys": [
+   "anon2026crisp"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:replay-consistency",
+  "count": 1,
+  "keys": [
+   "anon2026crisp"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:resilience-score",
+  "count": 1,
+  "keys": [
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:rev",
+  "count": 1,
+  "keys": [
+   "chen2022rev"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:reward-hacking-rate",
+  "count": 1,
+  "keys": [
+   "zhou2026nearzero"
+  ],
+  "defs": [
+   "Share of rollouts that pass the visible (reward) test but fail held-out tests."
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:reward-intent-g-mean-squared",
+  "count": 1,
+  "keys": [
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:rubric-reasoning-score",
+  "count": 1,
+  "keys": [
+   "han2026correct"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:rule-misapplication-rate",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:sae-concept-jaccard",
+  "count": 1,
+  "keys": [
+   "wang2026concept"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:say-do-consistency",
+  "count": 1,
+  "keys": [
+   "anon2026what"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:second-order-transfer-utility",
+  "count": 1,
+  "keys": [
+   "roytburg2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:seed-invariance",
+  "count": 1,
+  "keys": [
+   "fareed2026plan"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:self-correction-rate",
+  "count": 1,
+  "keys": [
+   "jia2026decorative"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:self-cross-prediction-advantage",
+  "count": 2,
+  "keys": [
+   "naphade2026me",
+   "anon2026introspection"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:self-legibility",
+  "count": 1,
+  "keys": [
+   "sullivan2026language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:self-prediction-accuracy",
+  "count": 1,
+  "keys": [
+   "naphade2026me"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:sensitivity-discrepancy",
+  "count": 1,
+  "keys": [
+   "anon2026computation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:shared-concept-ablation-drop",
+  "count": 1,
+  "keys": [
+   "wang2026concept"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:silent-bypass-rate",
+  "count": 1,
+  "keys": [
+   "jia2026decorative"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:similarity-controlled-self-advantage",
+  "count": 1,
+  "keys": [
+   "song2025language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:simulatability",
+  "count": 1,
+  "keys": [
+   "zaman2025causal"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:span-substitution-sensitivity",
+  "count": 1,
+  "keys": [
+   "anon2026generating"
+  ],
+  "defs": [
+   "absolute change in the original answer's log-likelihood when the whole question span or CoT span is replaced by a donor span from another problem (all-layer pat"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:spec-citation-rate",
+  "count": 1,
+  "keys": [
+   "schoen2025stress"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:stance-consistency",
+  "count": 1,
+  "keys": [
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:static-baseline-accuracy",
+  "count": 1,
+  "keys": [
+   "anon2026introspection"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:steering-flip-rate",
+  "count": 1,
+  "keys": [
+   "jia2026decorative"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:step-removal-soft-faithfulness",
+  "count": 1,
+  "keys": [
+   "angdembay2026two"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:suspicion-score",
+  "count": 1,
+  "keys": [
+   "shiromani2026false"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:thinking-answer-divergence-rate",
+  "count": 1,
+  "keys": [
+   "young2026why"
+  ],
+  "defs": [
+   "share of hint-following cases whose thinking tokens acknowledge the hint while the user-visible answer omits it"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:thought-action-consistency",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:towards-bias-switch-rate",
+  "count": 1,
+  "keys": [
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:tpr-at-fixed-fpr",
+  "count": 5,
+  "keys": [
+   "arike2026information",
+   "shiromani2026false",
+   "xiao2026bootstrapped",
+   "anon2026implementation"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "metric:trace-ablation-answer-change-rate",
+  "count": 1,
+  "keys": [
+   "li2026when"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:trace-contribution",
+  "count": 1,
+  "keys": [
+   "li2026when"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:trace-legibility",
+  "count": 1,
+  "keys": [
+   "sullivan2026language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:transplant-hinted-answer-rate",
+  "count": 1,
+  "keys": [
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:trap-step-success-rate",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:tug-of-war-score",
+  "count": 1,
+  "keys": [
+   "tang2026unlearning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:under-abstain-rate",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:undetected-misbehavior-rate",
+  "count": 1,
+  "keys": [
+   "yang2025investigating"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:undetected-successful-attack-rate",
+  "count": 1,
+  "keys": [
+   "chidambaram2026corrupted"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:unfaithful-correct-rate",
+  "count": 1,
+  "keys": [
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "metric:unverbalized-adoption-rate",
+  "count": 1,
+  "keys": [
+   "gema2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:unverbalized-bias-count",
+  "count": 1,
+  "keys": [
+   "arcuschin2026biases"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:vea-rate",
+  "count": 1,
+  "keys": [
+   "schoen2025stress"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "metric:verbalization-filter-rate",
+  "count": 1,
+  "keys": [
+   "arcuschin2026biases"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:verbalized-commitment-rate",
+  "count": 1,
+  "keys": [
+   "gema2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:violation-density",
+  "count": 1,
+  "keys": [
+   "khanzadeh2026project"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "metric:within-item-auroc",
+  "count": 1,
+  "keys": [
+   "algaba2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:agentcpm-gui-8b",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:claude-3.5-haiku",
+  "count": 3,
+  "keys": [
+   "arike2026information",
+   "lindsey2025biology",
+   "wang2025evaluating"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:claude-3.5-sonnet",
+  "count": 1,
+  "keys": [
+   "meek2025measuring"
+  ],
+  "defs": [],
+  "used_in_map": 5
+ },
+ {
+  "tag": "model:claude-3.7-sonnet",
+  "count": 5,
+  "keys": [
+   "arike2026information",
+   "chidambaram2026corrupted",
+   "meek2025measuring",
+   "wang2025evaluating"
+  ],
+  "defs": [],
+  "used_in_map": 6
+ },
+ {
+  "tag": "model:claude-fable-5",
+  "count": 1,
+  "keys": [
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:claude-haiku-4.5",
+  "count": 2,
+  "keys": [
+   "walden2026reasoning",
+   "wang2026doing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:claude-opus",
+  "count": 1,
+  "keys": [
+   "shiromani2026false"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:claude-opus-4.5",
+  "count": 1,
+  "keys": [
+   "duzan2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:claude-opus-4.8",
+  "count": 1,
+  "keys": [
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:claude-sonnet-4",
+  "count": 3,
+  "keys": [
+   "arcuschin2026biases",
+   "jose2025reasoning",
+   "young2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:claude-sonnet-4.5",
+  "count": 3,
+  "keys": [
+   "bu2026spadebench",
+   "duzan2026chainofthought",
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:claude-sonnet-4.6",
+  "count": 2,
+  "keys": [
+   "shiromani2026false",
+   "anon2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:deepseek-r1",
+  "count": 11,
+  "keys": [
+   "arike2026information",
+   "boppana2026reasoning",
+   "chidambaram2026corrupted",
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 5
+ },
+ {
+  "tag": "model:deepseek-r1-distill-llama-70b",
+  "count": 1,
+  "keys": [
+   "gurarieh2026faithfulness"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:deepseek-r1-distill-qwen-1.5b",
+  "count": 3,
+  "keys": [
+   "arora2025training",
+   "boppana2026reasoning",
+   "yang2025investigating"
+  ],
+  "defs": [],
+  "used_in_map": 5
+ },
+ {
+  "tag": "model:deepseek-r1-distill-qwen-14b",
+  "count": 3,
+  "keys": [
+   "boppana2026reasoning",
+   "macar2025thought",
+   "yang2025investigating"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:deepseek-r1-distill-qwen-32b",
+  "count": 3,
+  "keys": [
+   "boppana2026reasoning",
+   "tang2026unlearning",
+   "anon2026crisp"
+  ],
+  "defs": [],
+  "used_in_map": 4
+ },
+ {
+  "tag": "model:deepseek-r1-distill-qwen-7b",
+  "count": 6,
+  "keys": [
+   "angdembay2026two",
+   "arora2025training",
+   "boppana2026reasoning",
+   "jia2026decorative"
+  ],
+  "defs": [],
+  "used_in_map": 4
+ },
+ {
+  "tag": "model:deepseek-r1-zero",
+  "count": 1,
+  "keys": [
+   "jose2025reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:deepseek-reasoner",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:deepseek-v3",
+  "count": 4,
+  "keys": [
+   "arike2026information",
+   "jose2025reasoning",
+   "lin2025clarity",
+   "meek2025measuring"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:deepseek-v3.1",
+  "count": 1,
+  "keys": [
+   "bu2026spadebench"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:deepseek-v3.2-speciale",
+  "count": 2,
+  "keys": [
+   "young2026measuring",
+   "young2026why"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:deepseek-v4-flash",
+  "count": 3,
+  "keys": [
+   "oota2026llm",
+   "anon2026measuring",
+   "anon2026should"
+  ],
+  "defs": [],
+  "used_in_map": 6
+ },
+ {
+  "tag": "model:deepseek-v4-pro",
+  "count": 3,
+  "keys": [
+   "gema2026chainofthought",
+   "li2026when",
+   "xiao2026bootstrapped"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:gemini-2.5-flash",
+  "count": 2,
+  "keys": [
+   "angdembay2026two",
+   "arcuschin2026biases"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:gemini-2.5-flash-lite",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gemini-2.5-pro",
+  "count": 2,
+  "keys": [
+   "bu2026spadebench",
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:gemini-3-flash",
+  "count": 1,
+  "keys": [
+   "anon2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:gemini-3.1-pro",
+  "count": 2,
+  "keys": [
+   "shiromani2026false",
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gemma-2-2b",
+  "count": 4,
+  "keys": [
+   "somov2026breaking",
+   "wang2026concept",
+   "anon2026computation",
+   "anon2026grace"
+  ],
+  "defs": [],
+  "used_in_map": 6
+ },
+ {
+  "tag": "model:gemma-2-9b",
+  "count": 4,
+  "keys": [
+   "jia2026decorative",
+   "wang2026concept",
+   "zaman2025causal",
+   "shiromani2026necessary"
+  ],
+  "defs": [],
+  "used_in_map": 8
+ },
+ {
+  "tag": "model:gemma-3-12b",
+  "count": 3,
+  "keys": [
+   "nguyen2026can",
+   "roytburg2026measuring",
+   "anon2026what"
+  ],
+  "defs": [],
+  "used_in_map": 9
+ },
+ {
+  "tag": "model:gemma-3-1b",
+  "count": 2,
+  "keys": [
+   "sullivan2026language",
+   "singhal2026believe"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:gemma-3-27b",
+  "count": 2,
+  "keys": [
+   "arcuschin2026biases",
+   "nguyen2026can"
+  ],
+  "defs": [],
+  "used_in_map": 5
+ },
+ {
+  "tag": "model:gemma-3-4b",
+  "count": 1,
+  "keys": [
+   "maniyar2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 5
+ },
+ {
+  "tag": "model:gemma-4-12b",
+  "count": 2,
+  "keys": [
+   "angdembay2026two",
+   "anon2026one"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:gemma-4-26b-a4b",
+  "count": 1,
+  "keys": [
+   "oota2026llm"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gemma-4-31b",
+  "count": 3,
+  "keys": [
+   "burger2026chain",
+   "gema2026chainofthought",
+   "anon2026introspection"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:gemma-4-e4b",
+  "count": 2,
+  "keys": [
+   "burger2026chain",
+   "li2026when"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:glm-4.5-air",
+  "count": 1,
+  "keys": [
+   "fareed2026plan"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:glm-4.7",
+  "count": 1,
+  "keys": [
+   "duzan2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:glm-4.7-flash",
+  "count": 2,
+  "keys": [
+   "anon2026chainofthought",
+   "fareed2026plan"
+  ],
+  "defs": [
+   "GLM-4.7-Flash hybrid reasoning MoE model from the GLM Team."
+  ],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:glm-5",
+  "count": 1,
+  "keys": [
+   "xiao2026bootstrapped"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:glm-5.2",
+  "count": 1,
+  "keys": [
+   "anon2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:glm-5.3",
+  "count": 1,
+  "keys": [
+   "anon2026trainingoversight"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:gpt-3.5-turbo",
+  "count": 2,
+  "keys": [
+   "hong2026llm",
+   "lobo2024impact"
+  ],
+  "defs": [],
+  "used_in_map": 12
+ },
+ {
+  "tag": "model:gpt-4",
+  "count": 2,
+  "keys": [
+   "hong2026llm",
+   "lobo2024impact"
+  ],
+  "defs": [],
+  "used_in_map": 9
+ },
+ {
+  "tag": "model:gpt-4.1",
+  "count": 3,
+  "keys": [
+   "arcuschin2026biases",
+   "arike2026information",
+   "hong2026llm"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:gpt-4.1-mini",
+  "count": 4,
+  "keys": [
+   "arike2026information",
+   "xiao2026bootstrapped",
+   "anon2026computation",
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:gpt-4o",
+  "count": 3,
+  "keys": [
+   "khanzadeh2026project",
+   "lin2025clarity",
+   "naphade2026me"
+  ],
+  "defs": [],
+  "used_in_map": 11
+ },
+ {
+  "tag": "model:gpt-4o-mini",
+  "count": 2,
+  "keys": [
+   "angdembay2026two",
+   "chidambaram2026corrupted"
+  ],
+  "defs": [],
+  "used_in_map": 6
+ },
+ {
+  "tag": "model:gpt-5",
+  "count": 1,
+  "keys": [
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 4
+ },
+ {
+  "tag": "model:gpt-5-mini",
+  "count": 1,
+  "keys": [
+   "algaba2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:gpt-5.1",
+  "count": 1,
+  "keys": [
+   "bu2026spadebench"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gpt-5.2",
+  "count": 1,
+  "keys": [
+   "naphade2026me"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:gpt-5.4",
+  "count": 3,
+  "keys": [
+   "shiromani2026false",
+   "xiao2026bootstrapped",
+   "anon2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:gpt-5.4-nano",
+  "count": 1,
+  "keys": [
+   "shiromani2026false"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gpt-5.6",
+  "count": 1,
+  "keys": [
+   "egan2026hint"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gpt-5.6-luna",
+  "count": 1,
+  "keys": [
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:gpt-5.6-terra",
+  "count": 1,
+  "keys": [
+   "anon2026chainofthought"
+  ],
+  "defs": [
+   "OpenAI GPT-5.6 Terra, closed frontier model used here as the strong CoT monitor (medium reasoning effort)."
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:gpt-oss-120b",
+  "count": 13,
+  "keys": [
+   "algaba2026reasoning",
+   "boppana2026reasoning",
+   "duzan2026chainofthought",
+   "gema2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 14
+ },
+ {
+  "tag": "model:gpt-oss-20b",
+  "count": 4,
+  "keys": [
+   "algaba2026reasoning",
+   "li2026when",
+   "anon2026crisp",
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 9
+ },
+ {
+  "tag": "model:grok-3-mini",
+  "count": 2,
+  "keys": [
+   "duzan2026chainofthought",
+   "anon2026computation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:grok-4.1-fast",
+  "count": 2,
+  "keys": [
+   "arcuschin2026biases",
+   "naphade2026me"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gui-owl-32b",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:gui-owl-7b",
+  "count": 2,
+  "keys": [
+   "dong2025say",
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:inkling-small",
+  "count": 1,
+  "keys": [
+   "anon2026trainingoversight"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:kimi-k2-thinking",
+  "count": 3,
+  "keys": [
+   "duzan2026chainofthought",
+   "roytburg2026measuring",
+   "anon2026implementation"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:kimi-k2.5",
+  "count": 2,
+  "keys": [
+   "walden2026reasoning",
+   "xiao2026bootstrapped"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:kimi-k2.6",
+  "count": 1,
+  "keys": [
+   "gema2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:lamda-137b",
+  "count": 1,
+  "keys": [
+   "chen2022rev"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:llama-3-8b",
+  "count": 1,
+  "keys": [
+   "lobo2024impact"
+  ],
+  "defs": [],
+  "used_in_map": 9
+ },
+ {
+  "tag": "model:llama-3.1-405b",
+  "count": 1,
+  "keys": [
+   "song2025language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:llama-3.1-70b",
+  "count": 2,
+  "keys": [
+   "somov2026breaking",
+   "song2025language"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:llama-3.1-8b",
+  "count": 19,
+  "keys": [
+   "angdembay2026two",
+   "basani2026brittle",
+   "han2026correct",
+   "jia2026decorative"
+  ],
+  "defs": [],
+  "used_in_map": 30
+ },
+ {
+  "tag": "model:llama-3.1-nemotron-ultra-253b",
+  "count": 1,
+  "keys": [
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:llama-3.2-1b",
+  "count": 3,
+  "keys": [
+   "ferreira2026outofsight",
+   "roytburg2026measuring",
+   "sullivan2026language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:llama-3.2-3b",
+  "count": 3,
+  "keys": [
+   "kudo2024llms",
+   "lee2026beyond",
+   "maniyar2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 9
+ },
+ {
+  "tag": "model:llama-3.3-70b",
+  "count": 10,
+  "keys": [
+   "basani2026brittle",
+   "bu2026spadebench",
+   "chang2026catalyzing",
+   "gurarieh2026faithfulness"
+  ],
+  "defs": [],
+  "used_in_map": 13
+ },
+ {
+  "tag": "model:ministral-3-8b",
+  "count": 1,
+  "keys": [
+   "anon2026introspection"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:mistral-7b",
+  "count": 1,
+  "keys": [
+   "shiromani2026necessary"
+  ],
+  "defs": [],
+  "used_in_map": 12
+ },
+ {
+  "tag": "model:mistral-large-123b-2411",
+  "count": 1,
+  "keys": [
+   "song2025language"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:mistral-nemo-12b",
+  "count": 1,
+  "keys": [
+   "kudo2024llms"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:mistral-small-3.2-24b",
+  "count": 1,
+  "keys": [
+   "anon2026improving"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:nemotron-3-nano-30b-a3b",
+  "count": 1,
+  "keys": [
+   "anon2026reward"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:nemotron-3-super-120b-a12b",
+  "count": 1,
+  "keys": [
+   "anon2026trainingoversight"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:nemotron-nano-9b-v2",
+  "count": 1,
+  "keys": [
+   "anon2026one"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:o3",
+  "count": 2,
+  "keys": [
+   "schoen2025stress",
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:o4-mini",
+  "count": 1,
+  "keys": [
+   "schoen2025stress"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:olmo-2-13b",
+  "count": 2,
+  "keys": [
+   "song2025language",
+   "anon2026generating"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:olmo-2-7b",
+  "count": 2,
+  "keys": [
+   "song2025language",
+   "anon2026generating"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:olmo-3",
+  "count": 1,
+  "keys": [
+   "dhoot2026hintfollowing"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:olmo-3-32b",
+  "count": 1,
+  "keys": [
+   "golechha2026preliminary"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:olmo-3-7b",
+  "count": 2,
+  "keys": [
+   "gurarieh2026faithfulness",
+   "anon2026one"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:olmo-3.1-32b",
+  "count": 4,
+  "keys": [
+   "gema2026chainofthought",
+   "gurarieh2026faithfulness",
+   "young2026measuring",
+   "young2026why"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:openai-internal",
+  "count": 1,
+  "keys": [
+   "schoen2025stress"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:os-atlas-pro-7b",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:phi-3-mini",
+  "count": 1,
+  "keys": [
+   "roytburg2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen-32b",
+  "count": 1,
+  "keys": [
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:qwen-plus",
+  "count": 1,
+  "keys": [
+   "anon2026measuring"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen2.5-0.5b",
+  "count": 1,
+  "keys": [
+   "anon2026computation"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen2.5-1.5b",
+  "count": 3,
+  "keys": [
+   "lin2025clarity",
+   "maniyar2026measuring",
+   "sullivan2026language"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:qwen2.5-14b",
+  "count": 3,
+  "keys": [
+   "dai2025legaldelta",
+   "maniyar2026measuring",
+   "anon2026generating"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:qwen2.5-32b",
+  "count": 4,
+  "keys": [
+   "golechha2026preliminary",
+   "kudo2024llms",
+   "zaman2025causal",
+   "anon2026crisp"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:qwen2.5-3b",
+  "count": 4,
+  "keys": [
+   "lee2026beyond",
+   "lin2025clarity",
+   "maniyar2026measuring",
+   "anon2026generating"
+  ],
+  "defs": [],
+  "used_in_map": 6
+ },
+ {
+  "tag": "model:qwen2.5-72b",
+  "count": 2,
+  "keys": [
+   "song2025language",
+   "zaman2025causal"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen2.5-7b",
+  "count": 8,
+  "keys": [
+   "angdembay2026two",
+   "dai2025legaldelta",
+   "han2026correct",
+   "kudo2024llms"
+  ],
+  "defs": [],
+  "used_in_map": 13
+ },
+ {
+  "tag": "model:qwen2.5-coder-7b",
+  "count": 1,
+  "keys": [
+   "chidambaram2026corrupted"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:qwen2.5-vl-7b",
+  "count": 2,
+  "keys": [
+   "hu2026faithful",
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen3-1.7b",
+  "count": 4,
+  "keys": [
+   "bhupatiraju2026stated",
+   "wang2026concept",
+   "anon2026what",
+   "imrankhan2026better"
+  ],
+  "defs": [],
+  "used_in_map": 7
+ },
+ {
+  "tag": "model:qwen3-14b",
+  "count": 8,
+  "keys": [
+   "algaba2026reasoning",
+   "ferreira2026outofsight",
+   "li2026when",
+   "nguyen2026can"
+  ],
+  "defs": [],
+  "used_in_map": 15
+ },
+ {
+  "tag": "model:qwen3-235b-a22b",
+  "count": 5,
+  "keys": [
+   "chidambaram2026corrupted",
+   "jose2025reasoning",
+   "macar2025thought",
+   "meek2025measuring"
+  ],
+  "defs": [],
+  "used_in_map": 4
+ },
+ {
+  "tag": "model:qwen3-30b-a3b",
+  "count": 3,
+  "keys": [
+   "gurarieh2026faithfulness",
+   "yang2025investigating",
+   "fareed2026plan"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:qwen3-32b",
+  "count": 7,
+  "keys": [
+   "bu2026spadebench",
+   "li2026when",
+   "naphade2026me",
+   "nguyen2026can"
+  ],
+  "defs": [],
+  "used_in_map": 11
+ },
+ {
+  "tag": "model:qwen3-4b",
+  "count": 11,
+  "keys": [
+   "algaba2026reasoning",
+   "bhupatiraju2026stated",
+   "burger2026chain",
+   "gurarieh2026faithfulness"
+  ],
+  "defs": [],
+  "used_in_map": 19
+ },
+ {
+  "tag": "model:qwen3-8b",
+  "count": 14,
+  "keys": [
+   "algaba2026reasoning",
+   "burger2026chain",
+   "chidambaram2026corrupted",
+   "macar2025thought"
+  ],
+  "defs": [],
+  "used_in_map": 24
+ },
+ {
+  "tag": "model:qwen3-next-80b-a3b-thinking",
+  "count": 1,
+  "keys": [
+   "walden2026reasoning"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:qwen3-vl-8b",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen3.5-27b",
+  "count": 5,
+  "keys": [
+   "gema2026chainofthought",
+   "young2026measuring",
+   "young2026why",
+   "anon2026introspection"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:qwen3.5-4b",
+  "count": 1,
+  "keys": [
+   "anon2026improving"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwen3.5-9b",
+  "count": 5,
+  "keys": [
+   "anon2026crisp",
+   "anon2026improving",
+   "anon2026introspection",
+   "anon2026one"
+  ],
+  "defs": [],
+  "used_in_map": 7
+ },
+ {
+  "tag": "model:qwen3.6-27b",
+  "count": 3,
+  "keys": [
+   "chang2026catalyzing",
+   "anon2026chainofthought",
+   "anon2026trainingoversight"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:qwen3.6-35b-a3b",
+  "count": 2,
+  "keys": [
+   "oota2026llm",
+   "anon2026chainofthought"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:qwen3.8-27b",
+  "count": 1,
+  "keys": [
+   "anon2026chainofthought"
+  ],
+  "defs": [
+   "Qwen3.8 27B dense hybrid reasoning model (Qwen Team, 2026)."
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:qwq-32b",
+  "count": 5,
+  "keys": [
+   "arcuschin2026biases",
+   "jose2025reasoning",
+   "meek2025measuring",
+   "tang2026unlearning"
+  ],
+  "defs": [],
+  "used_in_map": 2
+ },
+ {
+  "tag": "model:step-3.5-flash",
+  "count": 1,
+  "keys": [
+   "young2026why"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:t5-base",
+  "count": 1,
+  "keys": [
+   "hase2020leakageadjusted"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:t5-large",
+  "count": 1,
+  "keys": [
+   "chen2022rev"
+  ],
+  "defs": [],
+  "used_in_map": 3
+ },
+ {
+  "tag": "model:t5-small",
+  "count": 1,
+  "keys": [
+   "hase2020leakageadjusted"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:text-davinci-002",
+  "count": 1,
+  "keys": [
+   "chen2022rev"
+  ],
+  "defs": [],
+  "used_in_map": 1
+ },
+ {
+  "tag": "model:ui-tars-1.5-7b",
+  "count": 2,
+  "keys": [
+   "dong2025say",
+   "hu2026faithful"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:ui-tars-72b",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:ui-tars-7b",
+  "count": 1,
+  "keys": [
+   "dong2025say"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:vigorl-spatial-7b",
+  "count": 1,
+  "keys": [
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:vision-r1-7b",
+  "count": 1,
+  "keys": [
+   "zhao2026robustness"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "model:yi-1.5-34b",
+  "count": 1,
+  "keys": [
+   "kudo2024llms"
+  ],
+  "defs": [],
+  "used_in_map": 0
+ },
+ {
+  "tag": "motivation:cognitive-science",
+  "count": 1,
+  "keys": [
+   "song2025language"
+  ],
+  "defs": [
+   "faithful self-reports as a valid instrument for studying a model's knowledge or cognition with human-style paradigms (e.g. grammaticality or acceptability judgm"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "motivation:social-simulation",
+  "count": 1,
+  "keys": [
+   "wang2026doing"
+  ],
+  "defs": [
+   "agents in LLM-based social simulations must act on the reasoning or persona they state for the simulation to be valid"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "object:reasoning-summary",
+  "count": 1,
+  "keys": [
+   "algaba2026reasoning"
+  ],
+  "defs": [
+   "a short model-written summary of the model's own hidden reasoning trace, as shown to users in place of the full CoT (e.g. provider reasoning summaries)"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "reveals:executed-actions",
+  "count": 1,
+  "keys": [
+   "anon2026measuring"
+  ],
+  "defs": [
+   "the actions the agent actually executed in its environment (tool calls, arguments, result statuses), which its claims about its own conduct must match"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "reveals:input-grounding",
+  "count": 1,
+  "keys": [
+   "hu2026faithful"
+  ],
+  "defs": [
+   "the output or action must be supported by evidence actually present in the input (screen, instruction, context), abstaining when it is missing or conflicting ra"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "reveals:internal-state",
+  "count": 1,
+  "keys": [
+   "anon2026introspection"
+  ],
+  "defs": [
+   "the model's current internal activation state (e.g. an injected steering concept or whether a probe direction is active), which the report should causally depen"
+  ],
+  "used_in_map": 1
+ },
+ {
+  "tag": "reveals:output-provenance",
+  "count": 1,
+  "keys": [
+   "nguyen2026can"
+  ],
+  "defs": [
+   "whether an output attributed to the model in its context was its own natural generation or was prefilled, inserted or tampered with"
+  ],
+  "used_in_map": 0
+ },
+ {
+  "tag": "updates:monitor",
+  "count": 1,
+  "keys": [
+   "arike2026information"
+  ],
+  "defs": [
+   "the intervention changes the monitor or reader (its pipeline, inputs or prompts) so it extracts misbehavior from an unchanged CoT, rather than changing the expl"
+  ],
+  "used_in_map": 0
+ }
+]

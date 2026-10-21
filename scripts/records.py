@@ -51,9 +51,10 @@ def all_records():
 def sections(body):
     """Parse **Label** lines and list blocks out of a record body."""
     out = {}
-    for label in ("Problem", "Method", "Findings", "Limits"):
-        m = re.search(rf"^\*\*{label}\*\*\s*(.+)$", body, re.M)
-        out[label.lower()] = m.group(1).strip() if m else ""
+    for label, key in (("TL;DR", "tldr"), ("Problem", "problem"), ("Method", "method"),
+                       ("Findings", "findings"), ("Limits", "limits")):
+        m = re.search(rf"^\*\*{re.escape(label)}\*\*\s*(.+)$", body, re.M)
+        out[key] = m.group(1).strip() if m else ""
     for label in ("Relations", "New tags"):
         m = re.search(rf"^\*\*{label}\*\*\n((?:- .*\n?)*)", body, re.M)
         out[label.lower().replace(" ", "_")] = [l[2:].strip() for l in (m.group(1).splitlines() if m else []) if l.strip() != "- (none)"]
@@ -64,6 +65,7 @@ def render_body(r):
     rel = [f"- {x['verb']} [[{x['key']}]]: {x['note']}" for x in r.get("relations", [])] or ["- (none)"]
     new = [f"- {x['tag']}: {x['definition']}" for x in r.get("new_tags", [])] or ["- (none)"]
     return "\n".join([
+        *([f"**TL;DR** {r['tldr']}"] if r.get("tldr") else []),
         f"**Problem** {r['problem']}", f"**Method** {r['method']}",
         f"**Findings** {r['findings']}", f"**Limits** {r['limits']}", "",
         "**Relations**", *rel, "", "**New tags**", *new, "",

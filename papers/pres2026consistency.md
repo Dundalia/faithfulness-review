@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2608.05188v1
 checked: 2026-10-15
 tags: [source:trustme, object:cot, object:self-prediction, object:self-report, object:posthoc-expl, reveals:decision-factors, reveals:internal-strategy, reveals:hidden-behavior, reveals:own-uncertainty, signal:generic-cf, signal:interp-tool, contribution:position, motivation:explainability, motivation:auditing, motivation:alignment, motivation:reasoning-quality, metric:meta-level-consistency]
 ---
+**TL;DR** Argues LLMs should be optimized for self-consistency across related inputs and between self-descriptions and behavior, proposing a unified objective that subsumes existing methods (position paper, no experiments).
 **Problem** Pointwise SFT/RL objectives can't express relational desiderata → sycophancy, logical inconsistency, overconfidence, unfaithful CoT & self-descriptions persist.
 **Method** Position. Unified objective φ over related input–output sets (hard/soft constraint, posterior reg.); instance-level invariance/equivariance vs meta-level self-description↔behavior; 8 case studies incl. counterfactual φ_CoT.
 **Findings** No experiments. Recasts BCT, introspection training, calibration, CoT-faithfulness tests, RLAIF as special cases. Argues training both directions (fix description / fix behavior) is mutually reinforcing.

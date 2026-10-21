@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2505.17120v2
 checked: 2026-10-15
 tags: [source:trustme, object:self-report, reveals:decision-factors, reveals:hidden-behavior, signal:implanted-behavior, signal:generic-cf, lever:sft, updates:explanation, contribution:analysis, contribution:method, motivation:explainability, motivation:auditing, domain:synthetic, scale:closed, eval:ood, model:gpt-4o, model:gpt-4o-mini, metric:reported-weight-correlation]
 ---
+**TL;DR** Shows GPT-4o models can moderately report the attribute weights fine-tuned into their choices, and that introspection training sharpens these reports and generalizes to native preferences.
 **Problem** Can LLMs report quantitative features of their internal decision processes (attribute weights in multi-attribute choice), and can training improve this?
 **Method** SFT GPT-4o/4o-mini on choices of 100 agents with random attribute weights; logistic regression on choices → learned weights; prompt for weight reports without deciding. Then SFT on target-weight reports (2-fold, held-out contexts); test on native weights in 100 new contexts.
 **Findings** Reports track learned weights r=.54/.50; off-the-shelf r=.10/−.01. Introspection training → r=.74/.75 on held-out contexts; generalizes to native weights (.46→.71, .40→.70). Code + data released.

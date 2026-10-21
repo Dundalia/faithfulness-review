@@ -39,7 +39,7 @@ async function init() {
   PAPERS = data.papers.map(p => ({
     ...p,
     tagset: new Set(p.tags),
-    text: [p.key, p.title, p.authors, p.venue, p.problem, p.method, p.findings, p.limits].join(' ').toLowerCase(),
+    text: [p.key, p.title, p.authors, p.venue, p.tldr, p.problem, p.method, p.findings, p.limits].join(' ').toLowerCase(),
   }));
   PAPERS.forEach(p => BYKEY.set(p.key, p));
   PAPERS.forEach(p => p.relations.forEach(r => {
@@ -216,6 +216,15 @@ function setupStatic() {
   ['mouseover', 'focusin'].forEach(ev => wrap.addEventListener(ev, e => { const b = e.target.closest('button[data-r]'); if (b) showTip(b); }));
   ['mouseout', 'focusout'].forEach(ev => wrap.addEventListener(ev, e => { if (e.target.closest('button[data-r]')) hideTip(); }));
 
+  const themeBtn = $('themeToggle');
+  const setTheme = t => {
+    document.documentElement.setAttribute('data-theme', t);
+    themeBtn.textContent = t === 'dark' ? 'Light mode' : 'Dark mode';
+    try { localStorage.setItem('theme', t); } catch (e) { /* storage unavailable: theme lasts for this visit */ }
+  };
+  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+  themeBtn.addEventListener('click', () => setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
   const rail = $('rail'), toggle = $('filtersToggle');
   toggle.addEventListener('click', () => { const open = rail.classList.toggle('open'); toggle.setAttribute('aria-expanded', open); });
   document.addEventListener('click', e => {
@@ -324,6 +333,7 @@ function renderPapers(list) {
     const extra = p.tags.filter(t => t.startsWith('model:') || t.startsWith('metric:'));
     const incoming = INCOMING.get(p.key) || [];
     const detail = open ? `<div class="detail" id="d-${esc(p.key)}">
+        <div class="chips">${tags.map(chip).join('')}</div>
         <dl class="summary">
           <dt>Problem</dt><dd>${esc(p.problem)}</dd><dt>Method</dt><dd>${esc(p.method)}</dd>
           <dt>Findings</dt><dd>${esc(p.findings)}</dd><dt>Limits</dt><dd>${esc(p.limits)}</dd>
@@ -338,8 +348,7 @@ function renderPapers(list) {
         <h3><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a></h3>
         <button class="expand" type="button" data-key="${esc(p.key)}" aria-expanded="${open}" aria-controls="d-${esc(p.key)}">${open ? 'Hide summary' : 'Show summary'}</button>
         <p class="byline">${esc(p.authors)} ${p.year}. <span class="venue ${p.venue_type}">${esc(p.venue === 'preprint' ? 'Preprint' : p.venue)}</span>.</p>
-        <p class="findings">${esc(p.findings)}</p>
-        <div class="chips">${tags.map(chip).join('')}</div>
+        <p class="tldr">${esc(p.tldr || p.findings)}</p>
       </div>${detail}</li>`;
   }).join('');
 }

@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2405.18357v2
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:cot, reveals:correctness, signal:judge, lever:prompt-pipeline, updates:behavior, contribution:method, motivation:reasoning-quality, motivation:explainability, domain:logic, domain:mcq, scale:closed, model:gpt-3.5-turbo, model:gpt-4, metric:unfaithful-correct-rate]
 ---
+**TL;DR** Introduces SymbCoT, an LLM-only pipeline that translates logic problems to symbolic form, reasons with rules and verifies each step: beats CoT and solver baselines, with fewer flawed-but-correct answers.
 **Problem** NL CoT imprecise for logic; solver offloading (Logic-LM) brittle to translation errors and info loss, and gives little explanation.
 **Method** Few-shot, LLM-only pipeline: translate to FOL/CO → plan → solve with symbolic rules over hybrid NL+symbolic premises → verifier checks translation & each step, refines.
 **Findings** GPT-4: beats CoT & Logic-LM on all 5 logic sets; 100% execution rate. Human-judged correct-but-flawed answers (FOLIO): CoT 6%, SymbCoT w/o verifier 2%, full SymbCoT 0%. Code released.

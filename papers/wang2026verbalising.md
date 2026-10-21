@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2610.23275v1
 checked: 2026-10-19
 tags: [source:idea-reports-2026-10-19, object:cot, reveals:planted-cue, reveals:cot-reliance, signal:planted-cf, signal:judge, contribution:metric, motivation:explainability, domain:mcq, domain:open-qa, domain:math, domain:logic, domain:professional, scale:small, eval:ood, model:qwen3-4b, model:llama-3.1-8b, metric:balanced-accuracy, metric:probe-auc]
 ---
+**TL;DR** Introduces VERITAS, which maps layer-wise residual states to faithful and unfaithful token anchors to detect unfaithful CoT: beats judge and probe baselines and transfers across subsets and models.
 **Problem** LLM judges and static activation probes flag unfaithful CoTs but cannot show how unfaithfulness develops across layers and generation.
 **Method** VERITAS: J-lens maps layer-by-phase residual states to token anchors mined from within-question faithful/unfaithful pairs; Map, Profile and Dynamics features feed a logistic regression; tested on BonaFide and FaithCoT-Bench.
 **Findings** Mean balanced accuracy 0.749 (Qwen3) and 0.737 (Llama3.1), against best baselines of 0.655 and 0.644. Anchors transfer across subsets (97-99% retained); cross-model transfer retains 81-89%.

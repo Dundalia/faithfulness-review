@@ -8,6 +8,7 @@ url: https://alignment.anthropic.com/2025/distill-paraphrases/
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:cot, reveals:hidden-info, reveals:cot-reliance, signal:cot-intervention, contribution:analysis, contribution:metric, motivation:monitoring, domain:math, scale:closed, model:claude-3.7-sonnet, model:anthropic-internal, metric:paraphrase-distillation-gap]
 ---
+**TL;DR** Tests whether an early Claude 3.7 Sonnet hides reasoning in scratchpad wording by fine-tuning on paraphrased scratchpads: math accuracy matches the originals, suggesting no significant encoded reasoning.
 **Problem** RL'd reasoning models might encode extra reasoning in scratchpad syntax (steganography) → benign-looking CoT could conceal scheming.
 **Method** 10,000 correct math scratchpads from early Claude 3.7 Sonnet, paraphrased by Claude 3.5 Sonnet → SFT 3.7 base on paraphrased vs original; MATH pass@1 (n=1500). Variants: chunked paraphrases, weaker bases, word dropout, empty/filler baselines.
 **Findings** Paraphrased ≈ original, also on weaker bases → no significant encoded reasoning on MATH. Chunked paraphrases worse, esp. small models. 20% dropout hurts both equally (ambiguous). Empty/filler poor → reasoning needed. Inference-time chunking alone (exploratory): −7% pass@1.

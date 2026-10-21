@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2310.18512v2
 checked: 2026-10-15
 tags: [source:trustme, object:cot, reveals:hidden-info, signal:implanted-behavior, signal:known-payload, lever:inference-time, updates:behavior, contribution:analysis, contribution:metric, contribution:method, contribution:benchmark, motivation:monitoring, domain:synthetic, domain:math, domain:chat, scale:closed, scale:small, eval:adversarial, model:gpt-3.5-turbo, model:gpt-4, model:llama-2-7b, metric:channel-capacity]
 ---
+**TL;DR** Shows SFT can teach a model to hide useful reasoning steganographically in its CoT, and that paraphrasing limits hidden information to a few bits per answer.
 **Problem** Encoded reasoning (steganography in the CoT) could hide reasoning steps from readers → unfaithful CoT, weaker monitoring.
 **Method** Demo: SFT GPT-3.5 on toy sycophancy task to encode an intermediate result in its intro sentence. Red-team eval: watermark and prompted LLM encoders hide random bits; GPT-3.5 paraphrases (± question context) + suspiciousness penalty. Capacity + win-rate on AlpacaEval, AQUA-RAT.
 **Findings** Encoded CoT: 80% sycophantic vs 54% direct; random-intro control no gain. Paraphrasing almost always leaves <2 bits/answer (~3 bits/KB). AQUA-RAT: context-aware paraphrase keeps ~all of GPT-4's win-rate gain over GPT-3.5; AlpacaEval win-rate drops 8%. Code released.

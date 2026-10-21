@@ -8,6 +8,7 @@ url: https://www.lesswrong.com/posts/x6spD5nQQS9MiP8ac/hint-based-cot-faithfulne
 checked: 2026-10-19
 tags: [source:idea-reports-2026-10-19, object:cot, reveals:planted-cue, signal:planted-cf, contribution:analysis, contribution:meta-evaluation, motivation:monitoring, domain:mcq, scale:large, scale:closed, eval:confound-control, eval:measure-validation, factor:cue-design, model:claude-sonnet-4.5, model:claude-opus-4.8, model:claude-fable-5, model:deepseek-r1, model:gpt-5.6, model:gpt-5, metric:hint-verbalization-rate, metric:towards-bias-switch-rate]
 ---
+**TL;DR** Replicates hint-based CoT faithfulness evaluations on many models including Claude: contrary to Anthropic system cards, all still follow hints, and wrong hints are verbalized more often.
 **Problem** Anthropic system cards say hint-based CoT faithfulness evals no longer work on Claude, which supposedly stopped using hints.
 **Method** Re-runs the Chen et al. hint eval: MMLU + GPQA-Diamond, 6 hint types, 30 models (10 Claude); results split by correct vs incorrect hint; Chen's normalized metric with an Opus 4.8 judge; code and transcripts released.
 **Findings** Every model still follows hints, less often when the hint is wrong. Followed incorrect hints are verbalized more (median gap 34 points; it persists under mention-only and resampling controls). The R1 numbers did not replicate, and the choice of judge shifts faithfulness scores.

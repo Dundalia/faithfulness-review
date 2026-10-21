@@ -38,6 +38,7 @@ url: https://arxiv.org/abs/2506.22777v2       # latest version
 checked: 2026-10-15                           # last metadata check
 tags: [source:trustme, object:cot, reveals:planted-cue, signal:planted-cf, lever:sft, ...]
 ---
+**TL;DR** Trains models to mention planted cues in their CoT before RL (VFT): after RL that rewards exploiting cues, most hacks are verbalized.
 **Problem** RL-learned reward hacks go unverbalized in CoT → CoT monitors miss them.
 **Method** VFT: SFT on CoTs minimally edited to credit planted cues → GRPO rewarding cue-aligned wrong answers.
 **Findings** Post-RL undetected hacks 6% vs 88% RL-only, 99% BCT. ...
@@ -52,6 +53,7 @@ tags: [source:trustme, object:cot, reveals:planted-cue, signal:planted-cf, lever
 ```
 
 Rules:
+- **TL;DR:** one plain-English sentence of at most 28 words: what the paper does and its headline result, stated qualitatively (no numbers). The dashboard shows it on collapsed cards.
 - **Summary:** four labeled lines, about 60 words, telegraphic. Use numbers only if they appear in the paper. For measurement papers, "Method" describes the setup.
 - **Tags:** every `namespace:value` from `tags.yaml` that applies; tag what the paper does, not what it mentions. `model:` and `metric:` take free values.
 - **Relations:** one line each, as `- <verb> [[key]]: note`. Only link papers that are in the corpus, and skip papers that are only mentioned in related work. The verbs:

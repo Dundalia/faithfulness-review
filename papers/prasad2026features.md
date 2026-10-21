@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2602.10067v3
 checked: 2026-10-15
 tags: [source:trustme, object:output, reveals:own-uncertainty, signal:judge, lever:rl-reward, lever:inference-time, updates:explanation, contribution:method, motivation:reliability, motivation:scalable-oversight, domain:open-qa, scale:mid, model:gemma-3-12b, eval:optimization-pressure, eval:specificity, metric:hallucination-reduction-rate, metric:fixed-rate, metric:correct-retract-rate, metric:detection-precision-recall]
 ---
+**TL;DR** Introduces RLFR, which turns activation probes for hallucinated entities into RL rewards: cuts hallucinations, mostly through probe-scored best-of-n sampling, far more cheaply than LLM judges.
 **Problem** Open-ended behaviors such as hallucination have no cheap verifiers, and LLM-judge + web-search rewards cost too much for RL.
 **Method** RLFR: attention probes on frozen Gemma-3-12B flag hallucinated entities → policy chooses maintain/retract/correct → retraction/correction probes (trained on Gemini 2.5 Pro labels) supply the RL reward (CISPO); probe-scored BoN at test time.
 **Findings** 58% fewer hallucinations (BoN-32, inline) vs base, 10% from the policy alone; at n=256 probe BoN beats Gemma self-judge by ~15pp; ~90× cheaper than judge; beats SFT; benchmarks roughly preserved; no probe evasion observed.

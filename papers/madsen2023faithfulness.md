@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2310.07819v3
 checked: 2026-10-15
 tags: [source:trustme, object:external-expl, reveals:decision-factors, signal:generic-cf, lever:sft, updates:behavior, contribution:method, contribution:metric, motivation:explainability, domain:classification, domain:open-qa, scale:small, eval:measure-validation, model:roberta-base, model:roberta-large, metric:racu, metric:acu]
 ---
+**TL;DR** Introduces masked fine-tuning so masked inputs stay in-distribution, enabling erasure tests of token-importance explanations without performance loss: occlusion methods prove most faithful, input-times-gradient least.
 **Problem** Erasure metrics for token-importance expls → masked inputs OOD; ROAR-style retraining is costly, leaks gold label, measures a proxy model.
 **Method** Masked FT of RoBERTa (half of each batch masked at rate ~U[0,100%]) → model where masking is in-distribution; MaSF OOD test validates; recursive erasure vs random baseline (RACU/ACU); 9 IMs, 16 classification datasets.
 **Findings** No unmasked perf loss; masked inputs consistently in-distribution (MaSF) only w/ masked FT; occlusion IMs (LOO, Beam) most faithful; gradient IMs beat Recursive-ROAR (imperfect cmp.); x⊙grad worst.

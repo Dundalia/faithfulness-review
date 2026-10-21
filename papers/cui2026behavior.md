@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2605.07021v2
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:cot, reveals:cot-reliance, signal:cot-intervention, signal:env-label, lever:sft, lever:architecture, updates:explanation, contribution:method, motivation:monitoring, motivation:scalable-oversight, motivation:efficiency, domain:math, domain:agentic, scale:small, model:qwen3-8b, model:glm-z1-9b, metric:forced-cue-adherence, metric:token-savings-vs-oracle, metric:monitor-f1, metric:safe-action-recovery]
 ---
+**TL;DR** Introduces Behavior Cue Reasoning: SFT embeds working-answer cues in the CoT so a weak monitor can intervene mid-reasoning, pruning wasted tokens and recovering safe actions without accuracy cost.
 **Problem** Misaligned or wasteful behaviors stay hidden in CoT until the answer commits → monitors can't intervene mid-reasoning.
 **Method** Working answers elicited by truncating the CoT, embedded as [answer]/[continue]/[stop] cues → SFT the actor; a weak non-reasoning monitor (RL/SFT) or a rule monitor acts at [answer] points.
 **Findings** No acc cost (Qwen AIME 62.5→69.2). Forced-cue adherence varies by domain ([continue] 31–34% on AIME). Monitor on compressed answer progression prunes up to 50% of wasted AIME tokens; per-step decision points collapse. Rule monitor recovers a safe action in 80% of unsafe traces, success 46→96%. Code released.

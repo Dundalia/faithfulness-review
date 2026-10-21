@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2004.03685v3
 checked: 2026-10-15
 tags: [source:trustme, object:external-expl, reveals:decision-factors, signal:generic-cf, contribution:position, motivation:explainability]
 ---
+**TL;DR** Argues that faithfulness must be separated from plausibility and evaluated without human judgment or gold labels, proposing graded rather than binary faithfulness since strict faithfulness is likely unattainable.
 **Problem** Interpretability evals conflate faithfulness w/ plausibility; no formal def of faithfulness; binary faithful/unfaithful verdicts via counter-example.
 **Method** Opinion piece: surveys NLP faithfulness evals (fidelity, robustness, erasure, comprehensiveness/sufficiency) → 3 implicit assumptions (model, prediction, linearity) + evaluation guidelines.
 **Findings** Faithfulness ≠ plausibility. Evals should avoid human judgment, gold labels, user-performance proxies, and untested "inherent interpretability" claims. Strict faithfulness likely unattainable (interpretation = lossy approximation, pigeonhole) → graded faithfulness across models/tasks and input subspaces.

@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2410.11900v5
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:cot, reveals:stated-plan, signal:env-label, lever:prompt-pipeline, updates:behavior, contribution:method, contribution:metric, motivation:reasoning-quality, motivation:explainability, domain:math, domain:logic, domain:open-qa, domain:mcq, scale:small, scale:mid, scale:large, scale:closed, model:llama-3.1-8b, model:command-r, model:command-r-plus, model:gpt-3.5-turbo, model:gpt-4o, metric:sim-vs-exec-trace-rouge, metric:code-search-relation-overlap, metric:hallucinated-search-facts, metric:unused-code-relations]
 ---
+**TL;DR** Introduces FLARE, which has an LLM write Prolog and simulate its execution instead of a solver, leading on most QA sets, with trace faithfulness correlating with accuracy.
 **Problem** CoT answers unfaithful to reasoning; solver-based F-CoT/Logic-LM need code-tuned models, fail on fuzzy commonsense queries.
 **Method** Few-shot plan → Prolog code → LLM-simulated execution trace (no solver) → answer. Faithfulness = ROUGE-Lsum of simulated vs. real Prolog trace; code-trace fact/relation matching flags hallucinated and unused relations.
 **Findings** SOTA on 7/9 QA sets (avg +28% over CoT), 3/3 logic sets with self-refinement. Faithfulness correlates with accuracy. Correct-answer traces: +18.1pp unique emergent facts, +8.6pp code-trace relation overlap, −3.6pp unused relations.

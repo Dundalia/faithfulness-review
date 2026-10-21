@@ -8,6 +8,7 @@ url: https://openreview.net/forum?id=b8pliYFlF3
 checked: 2026-10-19
 tags: [source:idea-reports-2026-10-19, object:cot, reveals:cot-reliance, reveals:planted-cue, signal:cot-intervention, signal:interp-tool, signal:planted-cf, contribution:metric, contribution:meta-evaluation, motivation:monitoring, motivation:explainability, domain:mcq, scale:small, eval:confound-control, eval:measure-validation, model:gemma-2-2b, model:qwen3-4b, metric:grace-divergence, metric:early-answering-aoc, metric:adding-mistakes-aoc]
 ---
+**TL;DR** Introduces GRACE, a CoT faithfulness metric comparing attribution-graph concepts across clean and perturbed runs, correlating moderately with intervention tests, tracking truncation but not mistake injection or hint flips.
 **Problem** Behavioural CoT perturbation tests cannot tell an answer that is robust to the edit from one produced by a different mechanism than the CoT claims. No mechanism-level faithfulness metric exists.
 **Method** GRACE: 1 minus the influence-weighted Jaccard of the top-64 position-pooled transcoder concepts in circuit-tracer attribution graphs, clean vs. perturbed run (CoT paraphrase, truncation, mistake injection; prompt hint). Tested on Gemma-2-2B and Qwen3-4B with BBH and MMLU.
 **Findings** Correlates with Lanham AOC (rho +0.44 and +0.41). Partial rho is +0.34 and +0.27 after controlling for edit distance, length and graph size. Tracks truncation but not mistake injection. Does not predict hint flips (Gemma AUROC 0.47).

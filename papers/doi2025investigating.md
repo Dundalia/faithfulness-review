@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2512.07288v1
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:posthoc-expl, reveals:decision-factors, signal:generic-cf, lever:sft, updates:explanation, contribution:method, contribution:analysis, motivation:explainability, domain:classification, scale:small, scale:mid, eval:ood, model:tulu-2-7b, model:tulu-2-13b, metric:self-consistency-faithfulness]
 ---
+**TL;DR** Trains LLMs with SFT on pseudo-faithful one-word self-explanations built from erasure attribution: faithfulness rises in most settings and partly transfers across explanation styles, but task accuracy can drop.
 **Problem** Self-explanations (attribution/redaction/counterfactual) are often unfaithful; how can they be improved, and do gains transfer across styles?
 **Method** Erasure attribution → most influential word → one-word pseudo-faithful explanation per style → LoRA continual SFT mixed with Tulu-2 instruct data; scored by Madsen self-consistency check on Sent140/SNLI/AGNews.
 **Findings** Faithfulness ↑ in most task×style cells (13B Sent140 +0.115/+0.094/+0.292); prediction-only SFT mostly <0.01 or ↓. Cross-style transfer (13B, up to 0.781); unseen-task and per-word-count multi-word gains consistent only for attribution.

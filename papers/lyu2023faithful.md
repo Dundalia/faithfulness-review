@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2301.13379v3
 checked: 2026-10-15
 tags: [source:trustme, object:cot, reveals:cot-reliance, signal:by-construction, lever:prompt-pipeline, lever:architecture, updates:behavior, contribution:method, motivation:explainability, motivation:reasoning-quality, domain:math, domain:open-qa, domain:logic, scale:closed, eval:human-study, model:code-davinci-002, model:gpt-4, model:code-davinci-001, model:text-davinci-002, model:text-davinci-003]
 ---
+**TL;DR** Introduces Faithful CoT, which translates questions into symbolic programs run by a deterministic solver so answers follow from the chain: beats standard CoT accuracy on most datasets.
 **Problem** Standard CoT: answer need not follow from chain → CoT can misrepresent how answer was reached.
 **Method** Few-shot LM translates query → NL subquestions + symbolic program (Python/Datalog/PDDL); deterministic solver executes it → answer faithful to chain by construction.
 **Findings** Codex beats CoT on 9/10 datasets (+21.4% rel. on CLUTRR); GPT-4/Codex few-shot SOTA on 7. No accuracy cost. Removing solver hurts 3/4 tasks. Humans rate most correct-answer chains valid. Code released.

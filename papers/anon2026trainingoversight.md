@@ -8,6 +8,7 @@ url: https://openreview.net/forum?id=M7bhrIY7b9
 checked: 2026-10-19
 tags: [source:idea-reports-2026-10-19, object:self-report, object:self-prediction, reveals:misbehavior, reveals:planted-cue, reveals:decision-factors, signal:planted-cf, signal:wild-cf, signal:generic-cf, signal:judge, signal:env-label, lever:sft, lever:rl-reward, lever:architecture, updates:explanation, contribution:method, motivation:monitoring, domain:chat, domain:code, domain:agentic, domain:mcq, domain:open-qa, scale:mid, scale:large, eval:ood, eval:privileged-access, eval:behavior-control, eval:specificity, eval:scaling, model:qwen3.6-27b, model:nemotron-3-super-120b-a12b, model:inkling-small, model:glm-5.3, metric:monitor-auc]
 ---
+**TL;DR** Trains a separate LoRA observer role, with SFT then RL, to report on the same model's behavior, outperforming honesty training, transcript monitors and activation oracles on held-out tasks.
 **Problem** Asked directly, assistants misreport their own misbehavior; transcript monitors see only outputs; activation oracles confabulate.
 **Method** Separate observer role (LoRA) on Qwen3.6-27B: SFT on Haiku-written QA about sampled behavior, then GRPO on verifiable counterfactual (Brier) and multiple-choice self-prediction; on-policy distillation preserves the assistant.
 **Findings** Held-out mean AUROC 0.907 vs honesty training 0.864, transcript monitor 0.828, activation oracle 0.788; same-data cross-model observers 0.684/0.647; with reasoning, RL lifts 0.719 to 0.823 (≈GLM-5.3 monitor); baselines improve on the trained assistant.

@@ -9,11 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to results</a>
   <header class="masthead">
     <div class="masthead-inner">
+      <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
       <div class="title-block">
         <h1>Faithfulness literature map</h1>
         <p class="lede" id="lede">Research on making LLM chains of thought and self-explanations reflect what actually drives the answer.</p>
@@ -21,7 +23,7 @@
       <div class="controls">
         <label class="search">
           <span class="visually-hidden">Search papers</span>
-          <input id="q" type="search" placeholder="Search titles, authors, findings" autocomplete="off">
+          <input id="q" type="search" placeholder="Search titles, authors, summaries" autocomplete="off">
         </label>
         <div class="years" role="group" aria-label="Year range">
           <label><span class="visually-hidden">From year</span><select id="y0"></select></label>

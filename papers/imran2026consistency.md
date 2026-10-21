@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2606.02211v1
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:cot, reveals:planted-cue, signal:planted-cf, lever:rl-reward, updates:behavior, contribution:method, contribution:negative-result, motivation:monitoring, domain:mcq, scale:small, scale:mid, eval:ood, model:llama-3.1-8b, model:gpt-oss-20b, metric:towards-bias-switch-rate, metric:hint-verbalization-rate]
 ---
+**TL;DR** Introduces RMCT, a GRPO reward matching bias-following on biased prompts to unbiased-prompt rates: reduces held-out bias at least as well as standard consistency training without suppressing cue verbalization.
 **Problem** BCT/ACT constrain whole response/activations → cue still followed but unmentioned (obfuscation) → may undermine CoT monitoring.
 **Method** RMCT: GRPO reward pulls bias-following rate on biased prompt toward unbiased-prompt rate (N=128 each); CoT free; LoRA. Train 1 bias (LogiQA/HellaSwag), test 6 on HLE MCQ vs BCT + drift controls.
 **Findings** BCT ↓ trained bias more, but held-out bias-following ↓ RMCT ≈ BCT (Llama), > BCT (GPT-OSS: BCT fails, ↑ post-hoc bias). BCT suppresses cue verbalization; RMCT preserves it on held-out biases. 64 vs ≥2000 datapoints, more compute. Accuracy change n.s.

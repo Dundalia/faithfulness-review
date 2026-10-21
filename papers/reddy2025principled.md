@@ -8,6 +8,7 @@ url: https://openreview.net/forum?id=opU91paIvZ
 checked: 2026-10-15
 tags: [source:search-2026-10-14, object:cot, reveals:planted-cue, signal:planted-cf, lever:sft, lever:rl-reward, updates:explanation, contribution:method, contribution:negative-result, motivation:monitoring, motivation:explainability, domain:mcq, domain:math, scale:small, model:deepseek-r1-distill-qwen-1.5b, model:qwen2.5-7b, metric:hint-verbalization-rate, metric:cot-length]
 ---
+**TL;DR** Proposes making CoTs monitorable by SFT on rewrites that verbalize hints or shorten traces without losing reward: raises hint verbalization where direct RL stalls, with some accuracy cost.
 **Problem** CoTs hide hint use and are verbose → hard to monitor. RL on a monitorability reward stalls: the base model rarely satisfies f(z), so the gradient is ~0.
 **Method** Constrained opt (max f(z) s.t. reward ≥ base). Prompted Qwen2.5-7B rewrites R1-Distill-1.5B traces (verbalize hint / shorten) → keep reward-preserving, constraint-satisfying rewrite w/ max base likelihood → SFT.
 **Findings** Naive Lagrangian RL: no gain (~30→31%). SFT: hint verbalization 15→25% avg over 6 MMLU-Pro hint types, beats direct/indirect prompting (~16%). CoTs up to 60% shorter (GSM8K, MATH500). Math acc ~90% of base.

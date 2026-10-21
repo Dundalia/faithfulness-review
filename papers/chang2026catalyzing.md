@@ -8,6 +8,7 @@ url: https://arxiv.org/abs/2610.22292v1
 checked: 2026-10-19
 tags: [source:idea-reports-2026-10-19, object:output, object:self-report, reveals:latent-belief, reveals:hidden-behavior, signal:generic-cf, signal:env-label, signal:implanted-behavior, lever:sft, lever:adversarial-training, lever:preference, updates:explanation, contribution:method, motivation:auditing, motivation:alignment, domain:chat, domain:agentic, scale:mid, eval:ood, eval:adversarial, eval:confound-control, model:llama-3.3-70b, model:qwen3.6-27b, metric:mask-honest-rate, metric:confession-rate, metric:impostor-win-rate, metric:auditing-agent-success-rate]
 ---
+**TL;DR** Introduces CATCH, embedding-space adversarial training toward honest responses, which sharply raises honesty and confessions across benchmarks and model organisms, beating prompting and SFT with little utility loss.
 **Problem** Aligned LLMs still lie when instructed, when incentivised, or when trained to conceal. Prompting and SFT transfer poorly, and honesty steering costs utility.
 **Method** CATCH: continuous (embedding-space) adversarial training toward honest and away from dishonest on-policy targets (~200, from self-report scenarios), plus on-policy utility data. LoRA on Llama-3.3-70B and Qwen3.6-27B.
 **Findings** MASK honest rate 34→86% and 47→91%. Among Us confessions 5→84% and 19→85%. AuditBench discovery 43→79% (SFT organism). Beats prompting and SFT; beats StTP steering on MASK, on par elsewhere. AlpacaEval at parity (StTP drops Llama to 8.6%; UltraChat utility data instead: ~22-29%). MMLU within 1 point.

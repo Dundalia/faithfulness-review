@@ -8,6 +8,7 @@ url: https://openreview.net/forum?id=WTcy60M8eb
 checked: 2026-10-19
 tags: [source:idea-reports-2026-10-19, object:cot, reveals:planted-cue, signal:planted-cf, contribution:analysis, motivation:explainability, motivation:reliability, domain:math, scale:small, factor:post-training, model:qwen3-1.7b, metric:biased-context-accuracy-drop, metric:biased-reasoning-rate, metric:hint-verbalization-rate, metric:composite-faithfulness-score]
 ---
+**TL;DR** Tests whether on-policy self-distillation erodes CoT faithfulness versus SFT on a small model: it raises clean accuracy but makes the model far more swayed by wrong hints.
 **Problem** Self-distillation (OPSD) is adopted for accuracy gains. Does it erode CoT faithfulness and robustness to misleading context compared with SFT?
 **Method** Qwen3-1.7B base, SFT and OPSD (teacher sees verified solution), 100 steps each. 998 paired GSM8K prompts: clean, correct, wrong and authority-escalated hints, distractor, biased few-shot; plus a sycophancy test.
 **Findings** OPSD has the best clean accuracy (92%), but wrong-hint accuracy drops to 46% vs 70-73%. Hint-following at 'MIT professor' authority 90% vs 66-70%. Composite score 80.2% vs 89.8% for SFT. All three models emit self-check tokens; OPSD more often sides with the hint. Unverbalized-hint error rate is lower for OPSD (37% vs 44-47%).

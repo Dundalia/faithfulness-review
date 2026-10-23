@@ -131,6 +131,7 @@ main { min-width: 0; }
 .byline { color: var(--ink-2); font-size: 0.9375rem; grid-column: 1; }
 .byline .venue { color: var(--ink); }
 .byline .venue.preprint, .byline .venue.withdrawn, .byline .venue.blog { color: var(--ink-3); font-style: italic; }
+.byline .venue.model-card { color: var(--accent); font-weight: 600; }
 .expand {
   grid-column: 2; grid-row: 1 / span 2; align-self: start; border: 1px solid var(--rule-strong); background: none;
   border-radius: var(--radius-s); padding: 4px 10px; cursor: pointer; color: var(--ink-2); white-space: nowrap;

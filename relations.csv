@@ -104,6 +104,8 @@ gema2026chainofthought,contradicts,korbak2025chain,Korbak: monitor-awareness dis
 goel2025learning,builds-on,betley2025tell,borrows SEP-code backdoor trigger setup and ask-the-model baseline
 golchin2026monitorability,builds-on,guan2025monitoring,"takes misbehavior types, data subsets and GPT-5 judge setup from its suite"
 golechha2026preliminary,builds-on,kaufmann2026aligned,applies its in-conflict reward framework; casts reverse-KL penalty as implicit in-conflict CoT reward
+google2026gemini4argon,builds-on,emmons2025pragmatic,adapts its legibility and coverage autorater to multi-turn agent transcripts
+google2026gemini4argon,builds-on,guan2025monitoring,models its internal-codebase sabotage eval on Guan et al.'s repo-sabotage eval; tried its default-informativeness evals and dropped them as too simplistic
 guan2025monitoring,extends,chen2025reasoning,"generalizes single toy hint eval to stochastic agents, many realistic environments"
 guan2025monitoring,builds-on,emmons2025chain,reuses encoded-hint GPQA variant; CoT-necessity framing
 guan2025monitoring,builds-on,turpin2023language,Scruples user-opinion interventions modeled on its sycophancy cues
@@ -212,6 +214,7 @@ naphade2026me,extends,binder2024looking,"applies its self-vs-cross-model predict
 nguyen2026generalization,extends,occhipinti2026probing,"tests their faithfulness steering across models, cues, datasets and vector constructions"
 occhipinti2026probing,builds-on,chen2025reasoning,reuses its professor/metadata/grader-hacking hints and its faithfulness (verbalization) definition
 occhipinti2026probing,builds-on,turpin2023language,"faithfulness operationalized as biased-hint counterfactual simulatability, following Turpin"
+openai2026gpt6astra,builds-on,guan2025monitoring,evaluated with its monitorability suite and g-mean² metric
 parcalabescu2023measuring,compares-to,turpin2023language,Biasing Features test rerun in CCB vs. CC-SHAP; argued to measure only self-consistency
 parcalabescu2023measuring,compares-to,lanham2023measuring,Four CoT-corruption tests rerun in CCB vs. CC-SHAP; deemed self-consistency tests
 parcalabescu2023measuring,builds-on,jacovi2020towards,Adopts its faithfulness definition; argues existing tests fall short of it

@@ -25,6 +25,8 @@ def venue_type(v):
     v = (v or "preprint").lower()
     if v.startswith("withdrawn"):
         return "withdrawn"
+    if v.startswith("model card"):
+        return "model-card"
     if v in ("preprint", "blog"):
         return v
     return "workshop" if "workshop" in v else "venue"

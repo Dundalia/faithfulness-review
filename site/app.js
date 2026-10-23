@@ -10,7 +10,7 @@ const NS_LABEL = {
   model: 'Models', metric: 'Metrics',
 };
 const MATRIX_EXCLUDE = new Set(['model', 'metric']);
-const VENUE_LABEL = { venue: 'Main venue', workshop: 'Workshop', preprint: 'Preprint', withdrawn: 'Withdrawn', blog: 'Blog' };
+const VENUE_LABEL = { venue: 'Main venue', workshop: 'Workshop', preprint: 'Preprint', withdrawn: 'Withdrawn', blog: 'Blog', 'model-card': 'Model card' };
 const VERB_LABEL = { contradicts: 'contradicts', 'builds-on': 'builds on', extends: 'extends', 'compares-to': 'compares to' };
 const CHIP_HIDE = ['model:', 'metric:', 'source:'];
 const FREE_LIMIT = 12;

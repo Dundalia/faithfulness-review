@@ -3,63 +3,71 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Faithfulness Literature Map</title>
-  <meta name="description" content="A filterable map of research on making LLM chains of thought and self-explanations faithful.">
+  <title>CoT Faithfulness and Monitorability</title>
+  <meta name="description" content="An annotated index of research on chain-of-thought faithfulness and monitorability, with a summary and tags for every paper and model card.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}</script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to results</a>
-  <header class="masthead">
-    <div class="masthead-inner">
-      <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
-      <div class="title-block">
-        <h1>Faithfulness literature map</h1>
-        <p class="lede" id="lede">Research on making LLM chains of thought and self-explanations reflect what actually drives the answer.</p>
+  <a class="skip" href="#results">Skip to results</a>
+
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <h1>CoT Faithfulness and Monitorability</h1>
+        <p class="meta" id="meta"></p>
       </div>
-      <div class="controls">
-        <label class="search">
-          <span class="visually-hidden">Search papers</span>
-          <input id="q" type="search" placeholder="Search titles, authors, summaries" autocomplete="off">
-        </label>
-        <div class="years" role="group" aria-label="Year range">
-          <label><span class="visually-hidden">From year</span><select id="y0"></select></label>
-          <span aria-hidden="true">to</span>
-          <label><span class="visually-hidden">To year</span><select id="y1"></select></label>
-        </div>
-        <div class="venue-types" id="venueTypes" role="group" aria-label="Publication status"></div>
-      </div>
+      <nav class="top-links" aria-label="Site">
+        <a href="https://github.com/Dundalia/faithfulness-review/blob/main/PLAN.md">Method</a>
+        <a href="https://github.com/Dundalia/faithfulness-review">Source</a>
+        <button class="text-button" id="themeToggle" type="button">Dark</button>
+      </nav>
     </div>
+    <div class="collections" id="collections" role="group" aria-label="Collections"></div>
   </header>
 
-  <div class="layout">
+  <div class="shell">
     <aside class="rail" id="rail" aria-label="Filters">
       <div class="rail-head">
-        <h2>Filter by tag</h2>
-        <button class="link-button" id="clearAll" type="button">Clear all</button>
+        <h2>Filters</h2>
+        <button class="text-button" id="clearAll" type="button">Clear all</button>
       </div>
-      <p class="rail-note">Within a group, any checked tag matches. Across groups, a paper must match every group.</p>
+      <section class="facet-block">
+        <h3 class="facet-title">Publication</h3>
+        <ul class="checks" id="venueTypes"></ul>
+        <div class="years" role="group" aria-label="Year range">
+          <label><span class="visually-hidden">From year</span><select id="y0"></select></label>
+          <span>to</span>
+          <label><span class="visually-hidden">To year</span><select id="y1"></select></label>
+        </div>
+      </section>
       <div id="facets"></div>
+      <p class="rail-note">Within a group any checked value matches. Across groups an entry must match every group.</p>
     </aside>
 
-    <main id="main">
+    <main class="results" id="results">
       <div class="toolbar">
         <button class="filters-toggle" id="filtersToggle" type="button" aria-controls="rail" aria-expanded="false">Filters</button>
-        <div class="tabs" role="tablist" aria-label="Views">
-          <button role="tab" id="tab-papers" aria-controls="view-papers" data-tab="papers">Papers</button>
+        <label class="search">
+          <span class="visually-hidden">Search</span>
+          <input id="q" type="search" placeholder="Search titles, authors, summaries" autocomplete="off">
+          <kbd aria-hidden="true">/</kbd>
+        </label>
+        <div class="views" role="tablist" aria-label="Views">
+          <button role="tab" id="tab-list" aria-controls="view-list" data-tab="list">List</button>
+          <button role="tab" id="tab-table" aria-controls="view-table" data-tab="table">Table</button>
           <button role="tab" id="tab-coverage" aria-controls="view-coverage" data-tab="coverage">Coverage</button>
-          <button role="tab" id="tab-links" aria-controls="view-links" data-tab="links">Links between papers</button>
+          <button role="tab" id="tab-links" aria-controls="view-links" data-tab="links">Links</button>
         </div>
-        <p class="count" id="count" aria-live="polite"></p>
       </div>
-      <div class="active" id="active" aria-label="Active filters"></div>
-
-      <section id="view-papers" role="tabpanel" aria-labelledby="tab-papers">
-        <div class="list-head">
-          <label class="sort">Sort by
+      <div class="subbar">
+        <p class="count" id="count" aria-live="polite"></p>
+        <div class="active" id="active" aria-label="Active filters"></div>
+        <div class="subbar-right">
+          <label class="sort" id="sortWrap">Sort
             <select id="sort">
               <option value="year">Newest first</option>
               <option value="year-asc">Oldest first</option>
@@ -67,14 +75,19 @@
               <option value="links">Most linked</option>
             </select>
           </label>
-          <button class="link-button" id="expandAll" type="button">Expand all</button>
+          <span class="export">Export <button class="text-button" id="exportCsv" type="button">CSV</button> <button class="text-button" id="exportBib" type="button">BibTeX</button></span>
         </div>
-        <ol class="papers" id="papers"></ol>
-      </section>
+      </div>
 
+      <section id="view-list" role="tabpanel" aria-labelledby="tab-list">
+        <ol class="rows" id="rows"></ol>
+      </section>
+      <section id="view-table" role="tabpanel" aria-labelledby="tab-table" hidden>
+        <div class="table-wrap"><table class="grid" id="grid"></table></div>
+      </section>
       <section id="view-coverage" role="tabpanel" aria-labelledby="tab-coverage" hidden>
         <div class="matrix-head">
-          <p class="matrix-intro">Count the papers that carry both tags. Hatched cells are combinations no paper in the current selection covers. Select a cell to list its papers.</p>
+          <p class="matrix-intro">How many entries carry both tags. Hatched cells are combinations nothing in the current selection covers. Select a cell to list its entries.</p>
           <div class="axis-pickers">
             <label>Rows <select id="rowNs"></select></label>
             <label>Columns <select id="colNs"></select></label>
@@ -83,17 +96,17 @@
         <div class="matrix-wrap" id="matrixWrap"></div>
         <div class="legend" id="legend" aria-hidden="true"></div>
       </section>
-
       <section id="view-links" role="tabpanel" aria-labelledby="tab-links" hidden>
         <div class="verb-pickers" id="verbs" role="group" aria-label="Link types"></div>
         <ol class="links" id="links"></ol>
       </section>
     </main>
+
+    <aside class="pane" id="pane" aria-label="Selected entry" aria-live="polite"></aside>
   </div>
 
   <footer class="colophon">
-    <p>Each record was written by a Claude agent from the paper's full text and checked against it by a second agent. Tags follow <a href="https://github.com/Dundalia/faithfulness-review/blob/main/tags.yaml">tags.yaml</a>; the method is in <a href="https://github.com/Dundalia/faithfulness-review/blob/main/PLAN.md">PLAN.md</a>. <span id="generated"></span></p>
-    <p><a href="https://github.com/Dundalia/faithfulness-review">Source and data on GitHub</a></p>
+    <p>Each record was written by a Claude agent from the paper's full text and checked against it by a second agent; model cards were summarized from the official documents. Tags follow <a href="https://github.com/Dundalia/faithfulness-review/blob/main/tags.yaml">tags.yaml</a>. <span id="generated"></span></p>
   </footer>
   <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
   <script src="app.js"></script>

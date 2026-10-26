@@ -376,7 +376,8 @@ function render() {
 function renderCollections() {
   const active = activeCollection();
   $('collections').innerHTML = COLLECTIONS.map(c =>
-    `<button type="button" data-c="${c.id}" aria-pressed="${active === c.id}">${esc(c.label)}<span class="n">${collectionCount(c)}</span></button>`).join('');
+    `<button type="button" data-c="${c.id}" aria-pressed="${active === c.id}">${esc(c.label)}<span class="n">${collectionCount(c)}</span></button>`).join('') +
+    `<span class="sep" aria-hidden="true"></span>` + PAGES.map(p => `<a href="page.html?doc=${p.id}">${esc(p.label)}</a>`).join('');
 }
 
 function renderVenueTypes() {

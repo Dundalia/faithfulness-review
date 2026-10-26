@@ -12,6 +12,8 @@ The dashboard has collections at the top (training methods, monitorability, meas
 
 Every view's state is in the URL, each entry has a permalink, and the current selection exports as CSV or BibTeX. Keyboard: `/` search, `j`/`k` next and previous entry, `o` open the paper, `Esc` close.
 
+Standalone pages are linked after the collections. Each one is a Markdown file in [`site/pages/`](site/pages), rendered with LaTeX math by `site/page.html`. To add a page, put the file there and list it in [`site/pages.js`](site/pages.js). The first is a chapter-by-chapter summary of Halpern's *Actual Causality* (MIT Press, 2016).
+
 ## What's in a record
 
 Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis.

@@ -57,13 +57,15 @@ h1 { font: 600 28px/1.15 var(--serif); letter-spacing: -0.012em; margin: 0; }
 .top-links .text-button { color: var(--ink-2); text-decoration: none; }
 .top-links .text-button:hover { color: var(--ink); text-decoration: underline; }
 .collections { display: flex; gap: 22px; padding: 0 28px; overflow-x: auto; }
-.collections button {
+.collections button, .collections a {
   background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 0 9px; cursor: pointer;
-  color: var(--ink-2); font-size: 13.5px; white-space: nowrap;
+  color: var(--ink-2); font-size: 13.5px; white-space: nowrap; text-decoration: none;
 }
-.collections button:hover { color: var(--ink); }
-.collections button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
+.collections button:hover, .collections a:hover { color: var(--ink); }
+.collections button[aria-pressed="true"], .collections a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
 .collections .n { font: 12px var(--mono); color: var(--ink-3); margin-left: 6px; }
+.collections .sep { flex: none; width: 1px; margin: 9px 0 11px; background: var(--rule-strong); }
+.brand h1 a { color: inherit; text-decoration: none; }
 
 /* Three-column shell */
 .shell { display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr) var(--pane-w); align-items: start; }
@@ -221,6 +223,27 @@ table.matrix { border-collapse: separate; border-spacing: 2px; }
 .colophon { border-top: 1px solid var(--rule); padding: 14px 28px 32px; color: var(--ink-3); font-size: 12.5px; }
 .colophon p { margin: 0; max-width: 100ch; }
 
+/* Markdown pages (page.html) */
+.doc { max-width: 776px; margin: 0 auto; padding: 28px 28px 72px; font: 16.5px/1.65 var(--serif); }
+.doc h1 { font: 600 30px/1.2 var(--serif); letter-spacing: -0.012em; margin: 6px 0 16px; }
+.doc h2 { font: 600 23px/1.25 var(--serif); letter-spacing: -0.01em; margin: 44px 0 10px; padding-top: 18px; border-top: 1px solid var(--rule); }
+.doc h3 { font: 600 16.5px/1.35 var(--sans); margin: 28px 0 8px; }
+.doc h1, .doc h2, .doc h3 { scroll-margin-top: 16px; }
+.doc p, .doc ul, .doc ol { margin: 0 0 14px; }
+.doc ul, .doc ol { padding-left: 1.4em; }
+.doc li { margin: 4px 0; }
+.doc li > ul, .doc li > ol { margin: 4px 0 0; }
+.doc hr { border: 0; border-top: 1px solid var(--rule-strong); margin: 32px 0; }
+.doc hr + h2 { border-top: 0; padding-top: 0; margin-top: 0; }
+.doc code { font: 0.86em var(--mono); background: var(--hover); padding: 1px 4px; border-radius: 3px; }
+.doc .table-scroll { overflow-x: auto; margin: 0 0 18px; }
+.doc table { width: 100%; border-collapse: collapse; font: 14px/1.45 var(--sans); }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--rule); }
+.doc th { font-weight: 600; border-bottom-color: var(--rule-strong); }
+.doc .katex { font-size: 1.04em; }
+.doc .katex-display { overflow-x: auto; overflow-y: hidden; margin: 12px 0; padding: 4px 0; }
+.doc-status { color: var(--ink-3); font: 14px/1.5 var(--sans); }
+
 @media (max-width: 1280px) { :root { --rail-w: 220px; --pane-w: 400px; } }
 @media (max-width: 1060px) {
   .shell { grid-template-columns: minmax(0, 1fr) var(--pane-w); }
@@ -242,5 +265,7 @@ table.matrix { border-collapse: separate; border-spacing: 2px; }
   .pane .close { display: inline-block; margin-bottom: 14px; }
   .subbar-right { margin-left: 0; }
   .colophon { padding: 14px 16px 28px; }
+  .doc { padding: 20px 16px 48px; font-size: 16px; }
+  .doc h1 { font-size: 25px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

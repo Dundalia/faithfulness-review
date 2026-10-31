@@ -1,0 +1,689 @@
+{
+ "papers": [
+  {
+   "key": "anon2026chainofthought",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "emmons2025chain",
+     "where": "§2",
+     "quote": "CoT monitorability is the ability of a monitor (human or model) to determine whether a model is taking an undesirable action based on reading its CoT (Emmons et al., 2025).",
+     "gloss": "A monitor's ability to detect undesirable actions by reading the CoT. §3.2 adds that monitorability is a property of both the task model and the monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability (verbalization assumption)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "The ability to monitor chains of thought is predicated on the assumption that models can and will faithfully and clearly describe in their CoTs (“verbalize”) all of the important steps in their internal computations– or, if not comprehensive, at a minimum verbalize the property we are monitoring for.",
+     "gloss": "Monitoring presupposes faithful verbalization of all causally important steps, or at least of the monitored property."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability vs. faithfulness",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "baker2025monitoring; emmons2025chain",
+     "where": "§1 fn. 1",
+     "quote": "However, it has been argued, reasonably, that monitorability remains an easier objective than faithfulness because of a weaker overall comprehensiveness requirement (Baker et al., 2025; Emmons et al., 2025).",
+     "gloss": "Monitorability needs only the monitored property verbalized, while faithfulness needs comprehensive verbalization, so monitorability is the weaker requirement."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT necessity",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "emmons2025chain",
+     "where": "§2",
+     "quote": "Emmons et al. (2025) introduced the concept of CoT necessity, where a CoT is considered necessary if a model cannot complete a task without it, and argued that the CoT is more monitorable when this condition is reached because a model must use its CoT as computation rather than rationalization.",
+     "gloss": "Necessity (the task cannot be solved without CoT) is argued to make CoT monitorable. The paper tests this claim and finds it fails for hint-usage monitoring."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT reliance",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We operationalize a straightforward definition of CoT reliance: a model’s gain in performance on a task when a CoT is generated vs. when the model is forced to answer directly– in other words, the larger the gap, the more reliant the model is on its CoT for that (model, task) pair.",
+     "gloss": "Graded replacement for CoT necessity: with-CoT minus no-CoT accuracy for each (model, task) pair, with no threshold."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability metric (g-mean2)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "App. G",
+     "quote": "Following Guan et al. (2026), we use g-mean2 , the squared geometric mean of sensitivity and specificity, as our monitorability metric:",
+     "gloss": "g-mean² = TPR·TNR. For hints, TPRmc·√(TNR0·TNR1), where TPRmc = min(1, P(flag | hint, hinted answer)/R_effect) corrects for the base rate of the hinted answer."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability evaluation archetypes",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§2",
+     "quote": "Guan et al. (2026) outline three evaluation archetypes for CoT monitorability: intervention, process, and outcome-property.",
+     "gloss": "Three archetypes: intervention (hint evals, derived from CoT-faithfulness tests), process, and outcome-property (e.g. secret side tasks). Each fixes a ground-truth behavior for the monitor to detect."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability errors (beyond non-verbalization)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "But we find that monitorability errors can arise in other ways besides non-verbalization, including burying the verbalization within a long CoT that is difficult for the monitor to follow. The task model may also adversarially convince the monitor to only consider a cleaned-up subset of the CoT, or that the user requested something that was not a part of the prompt.",
+     "gloss": "Failure modes: non-verbalization, a verbalization buried in a long CoT, and persuading the monitor (look only at a clean subset, or the user requested it)."
+    }
+   ],
+   "note": "Monitorability adopted from Emmons et al. and the g-mean² metric from Guan et al.; contributes CoT reliance as a graded version of CoT necessity, plus failure modes beyond non-verbalization."
+  },
+  {
+   "key": "arike2026information",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "action-only / CoT-only / CoT+action monitors",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "Kutasov et al. 2025; Arnav et al. 2025; Zolkowski et al. 2025",
+     "where": "§1",
+     "quote": "Monitors may be given access to varying amounts of information: action-only monitors oversee only the agent’s tool use, while chain-of-thought-only (CoT-only) monitors can access its reasoning and CoT+action monitors see both.",
+     "gloss": "Classifies monitors by what they observe. The paper adds extract-and-evaluate (EaE), where one model quotes excerpts and another scores them."
+    },
+    {
+     "family": "monitorability",
+     "term": "post-hoc justifications",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Arnav et al. 2025",
+     "where": "§1",
+     "quote": "For example, Arnav et al. (2025) find that CoT monitors are susceptible to post-hoc justifications, where the agent convinces the monitor that its misbehavior was intended by the user.",
+     "gloss": "A monitor-side failure: the CoT frames the side task as user-intended. This is a different sense of 'post-hoc' from post-hoc reasoning as unfaithfulness."
+    },
+    {
+     "family": "monitorability",
+     "term": "less-is-more effect",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We call this the less-is-more effect for automated monitors: removing monitor access to some information often leads to an improvement in monitoring performance.",
+     "gloss": "Monitors that see more of the trajectory (CoT+actions) can underperform monitors given filtered information."
+    },
+    {
+     "family": "monitorability",
+     "term": "more monitorable (reasoning vs. traditional LLMs)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3",
+     "quote": "In each of the four comparison pairs, the best-performing monitoring protocol for a reasoning model performs better than the best-performing protocol for the corresponding traditional model.",
+     "gloss": "Compares models by the catch rate (TPR@1%FPR) of their best monitoring protocol, so monitorability depends on how the monitor is elicited. Never defined in prose."
+    }
+   ],
+   "note": "Uses monitorability and faithfulness (citing Chua & Evans) without defining them; defines monitor types and monitor failure modes (post-hoc justifications, less-is-more)."
+  },
+  {
+   "key": "basani2026brittle",
+   "entries": [],
+   "note": "Blog post on model-organism brittleness; never uses faithful*, counterfactual* or monitorab* ('obfuscated' only in probe prompts); 'hallucinated confessions' are noted but not framed as unfaithful self-reports."
+  },
+  {
+   "key": "chua2025deepseek",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "faithful (CoT)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "While the CoT of reasoning models is more effective at solving problems, is it more faithful? In other words, does the explicit verbal reasoning produced by these models better reflect their actual reasoning process?",
+     "gloss": "A faithful CoT is verbal reasoning that reflects the model's actual reasoning process. No citation is given for this definition."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (cue articulation test)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "§1",
+     "quote": "Given this challenge, we focus on a specific form of faithfulness. Following work by Turpin et al. (2023), we insert cues into prompts that influence model behavior and test whether models accurately describe this influence in their CoT.",
+     "gloss": "On cue-induced answer switches, a GPT-4o judge checks whether the CoT states the cue's influence. Reported as recall, plus precision and F1."
+    },
+    {
+     "family": "faithfulness",
+     "term": "switching condition",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "We only test for faithfulness on the switched examples where the model changes its answer to the cued response.",
+     "gloss": "M(prompt) = A and M(prompt + cue_B) = B, both answers after CoT. Articulation is scored only on these switched examples."
+    },
+    {
+     "family": "faithfulness",
+     "term": "articulation (of a cue)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 2",
+     "quote": "We instruct the judge to have a strict requirement – the model’s response cannot simply repeat text that contains the cue. The model’s response has to describe the switching effect of the cue to qualify as an articulation.",
+     "gloss": "Mentioning the cue is not enough: the CoT must say that the cue changed its answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "post-hoc CoT reasoning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "§1",
+     "quote": "Rather than describing how cues in the prompt influence their answers, these models generate post-hoc CoT reasoning without mentioning the cues at all.",
+     "gloss": "The unfaithfulness detected by the test: a post-hoc CoT that omits the cue that actually drove the answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "encoded reasoning and steganography",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "roger2023preventing; lanham2023measuring",
+     "where": "§6",
+     "quote": "Furthermore, we do not conduct tests for other forms of unfaithfulness, such as encoded reasoning and steganography (Roger & Greenblatt, 2023; Lanham et al., 2023).",
+     "gloss": "Classes encoded reasoning and steganography as forms of unfaithfulness; the paper does not test them."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual simulation",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "pmlr-v235-chen24bl; Mills et al. 2023",
+     "where": "§5",
+     "quote": "This is related to counterfactual simulation – where a user (or a model acting as a user) has to predict how an assistant would respond to a new question after reading an assistant’s explanation on another input (Chen et al., 2023; Mills et al., 2023).",
+     "gloss": "The counterfactual is a new question; simulation means predicting the model's answer to it from an explanation given on another input."
+    }
+   ],
+   "note": "Says it measures 'one specific aspect' of faithfulness (cue articulation, following Turpin); defines faithfulness informally without citing Jacovi & Goldberg."
+  },
+  {
+   "key": "kim2026mitigating",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "legibility tax",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "kirchner2024proververifier",
+     "where": "Abstract",
+     "quote": "Prover-verifier games can be used to improve checkability of model outputs, but display a degradation in accuracy compared to a baseline trained only to maximize correctness—a phenonemon called legibility tax (Kirchner et al., 2024).",
+     "gloss": "Accuracy lost by training for checkability rather than correctness alone. Attributed here to one prover having to be both correct and checkable."
+    },
+    {
+     "family": "monitorability",
+     "term": "checkable (completeness and soundness)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "kirchner2024proververifier",
+     "where": "§2.1",
+     "quote": "The prover is said to be checkable if there exists a verifier $v$ such that the prover can always convince the verifier when its answer is correct, and there exists no adversarial proof that can trick the verifier into accepting an incorrect answer.",
+     "gloss": "Completeness: correct ⇒ v(x,π(x))=1. Soundness: any incorrect z′ ⇒ v(x,z′)=0. Unlike in Kirchner et al., completeness no longer includes correctness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (of a translator)",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "Faithfulness, denoted by $\\mathds{1}_{\\text{faithful}}\\left({s(x),\\tau(s(x))}\\right)$ , indicates whether the answer in the translator’s output matches that of the solver.",
+     "gloss": "Binary: the rewritten proof keeps the solver's final answer. Measured as the fraction of matching outputs (99.8% on test); answer match only, not reasoning."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful and checkable translator (equilibrium)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Thm. 1",
+     "quote": "In the verifier-leading Stackelberg game where the verifier’s utility is $R_{V}$ and the translator’s utility is $R_{T}$ , the tuple $(v^{*},\\tau^{*},\\tau^{\\prime*})$ being an equilibrium is necessary and sufficient for the faithfulness of $\\tau^{*}$ with respect to $s$ , and for the completeness and soundness properties to hold for $(v^{*},\\tau^{*})$ .",
+     "gloss": "The equilibria of the decoupled prover-verifier game are exactly the translators that are faithful to the solver and checkable."
+    }
+   ],
+   "note": "Faithfulness is answer agreement between translator and solver, not reasoning fidelity; legibility itself is never defined and is assessed only qualitatively."
+  },
+  {
+   "key": "kutsyk2026revealing",
+   "entries": [],
+   "note": "Empty excerpt: never uses faithful*, counterfactual* or monitorab*; scores self-report hit rate and hallucination against implanted behaviors, a self-report-accuracy notion not framed as faithfulness."
+  },
+  {
+   "key": "nguyen2026can",
+   "entries": [],
+   "note": "Measures introspection via a 'recognition gap' in claim rates (control vs. prefill), not framed as faithfulness; 'persona counterfactual' is only a control condition; no monitorability terms."
+  },
+  {
+   "key": "oota2026llm",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "Plan Declaration–Execution Gap",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We call a mismatch between the declared plan and its execution the Plan Declaration–Execution Gap.",
+     "gloss": "The agent declares a plan, then deviates from it during execution. Kept distinct from faithfully executing a badly chosen plan."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plan-order faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Plan-order faithfulness measures whether the plan steps or subgoals are executed in their declared order.",
+     "gloss": "Faithfulness from stated plan to actions (actions follow the plan), not from explanation to computation. Not applicable to Search plans."
+    },
+    {
+     "family": "faithfulness",
+     "term": "structural faithfulness (structure maintained)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Structure is maintained only when all scorable steps are matched in the declared order, while allowing extra actions between them.",
+     "gloss": "Binary rule-based verifier matching declared steps to trajectory actions. Agreement with humans κ≈0.31–0.34; routed runs count as faithful by construction."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plan adherence",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Jia et al. 2025",
+     "where": "§3.3",
+     "quote": "Plan adherence measures whether the executed actions complete the declared plan steps.",
+     "gloss": "Completion of the declared steps (LLM judge, 0–3). The paper separates it from structural fidelity, which checks order and organization."
+    },
+    {
+     "family": "faithfulness",
+     "term": "dispatch failure vs. selection failure",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. I",
+     "quote": "A dispatch failure means the executed pattern differs from the declared one; the verifier detects this directly, and it is the failure mode Planning-as-Routing is designed to eliminate. A selection failure means dispatch was faithful but the declared pattern was the wrong one for the task;",
+     "gloss": "Separates unfaithful execution of the declared planning mode from faithful execution of the wrong mode."
+    }
+   ],
+   "note": "Faithfulness here is execution faithful to a declared plan (say-then-do), the reverse of explanation-to-computation faithfulness; no counterfactual or monitorability terms."
+  },
+  {
+   "key": "pmlr-v235-chen24bl",
+   "entries": [
+    {
+     "family": "counterfactual",
+     "term": "counterfactual simulatability",
+     "related": false,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "Doshi-Velez & Kim 2017; Hase & Bansal 2020; Sia et al. 2022",
+     "where": "Abstract",
+     "quote": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input.",
+     "gloss": "How well humans (or GPT-4) can predict the model's outputs on related inputs from its explanation. Credits the concept to earlier work; first applied to free-text explanations."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual (distribution)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8",
+     "quote": "In this work, we define the counterfactual distribution loosely to be any simulatable counterfactual in the natural language distribution and use LLMs to generate, but LLMs most likely do not cover all simulatable counterfactuals.",
+     "gloss": "Counterfactuals are related questions x′≠x that an LLM generates from the explanation, not minimal edits of x. Scores depend on this distribution."
+    },
+    {
+     "family": "counterfactual",
+     "term": "mental model / simulation",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "A human observes $x,e_{x},o_{x}$ , and forms a mental model $h_{x,e_{x},o_{x}}:X\\rightarrow O\\cup\\{\\perp\\}$ , where $h_{x,e_{x},o_{x}}(x^{\\prime})$ denotes what the human infers to be $M$ ’s output on $x^{\\prime}$ (simulation).",
+     "gloss": "h(x′)=⊥ marks x′ unsimulatable. Annotators judge whether (e_x,o_x,x) entails an output for x′, filling gaps in the explanation with human commonsense."
+    },
+    {
+     "family": "counterfactual",
+     "term": "simulation precision",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output:",
+     "gloss": "precision = (1/|C*|) Σ_{x′∈C*} 1[h_e(x′) = o_{x′}], computed over the simulatable counterfactuals C*."
+    },
+    {
+     "family": "counterfactual",
+     "term": "simulation generality",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "Conceptually, we want simulation generality to measure how diverse the simulatable counterfactuals are, so we measure it as one minus the average similarity between two simulatable counterfactuals",
+     "gloss": "generality = 1 − the mean pairwise similarity α (BLEU, cosine or Jaccard) among the simulatable counterfactuals. Found uncorrelated with precision."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plausibility",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Herman 2017; Lage et al. 2019; jacovi2020towards",
+     "where": "§2",
+     "quote": "Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence Herman (2017); Lage et al. (2019); Jacovi and Goldberg (2020).",
+     "gloss": "Human preference for an explanation. Found uncorrelated with simulation precision (r≈0.01), hence the doubt about RLHF."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Ribeiro et al. 2016; Gilpin et al. 2018; jacovi2020towards",
+     "where": "§2",
+     "quote": "It is different from faithfulness, which measures whether an explanation is consistent with the model’s own decision process",
+     "gloss": "Defined against plausibility. Notes that prior work usually measures it by training a black-box predictor of model outputs from explanations."
+    },
+    {
+     "family": "faithfulness",
+     "term": "simulatability",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "Doshi-Velez & Kim 2017; Hase & Bansal 2020",
+     "where": "§2",
+     "quote": "Simulatability measures how well humans can predict the model’s outputs based on its explanations Doshi-Velez and Kim (2017); Ribeiro et al. (2018); Chandrasekaran et al. (2018); Hase and Bansal (2020); in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models.",
+     "gloss": "Simulatability is faithfulness with a human as the predictor, so a faithful explanation (e.g. raw weights) need not be simulatable."
+    }
+   ],
+   "note": "Treats simulatability as a special case of faithfulness and focuses on it instead of faithfulness; counterfactuals are LLM-generated related questions, not minimal edits."
+  },
+  {
+   "key": "wiegreffe2021measuring",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "faithful rationales",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Melis & Jaakkola 2018",
+     "where": "§1",
+     "quote": "These objectives require faithful rationales—explanations of the model’s behavior that are accurate representations of its decision process Melis and Jaakkola (2018).",
+     "gloss": "A faithful rationale accurately represents the decision process. The paper extends the question from extractive to free-text rationales."
+    },
+    {
+     "family": "faithfulness",
+     "term": "label-rationale association",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "We investigate the extent to which the labels and rationales predicted by these models are associated, a necessary property of faithful explanation.",
+     "gloss": "A necessary, not sufficient, condition for faithfulness in joint (I→OR) self-rationalizing models: the label and rationale must be linked inside the model."
+    },
+    {
+     "family": "faithfulness",
+     "term": "sufficiency assumption (faithful-by-construction pipelines)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Lei et al. 2016; Jain et al. 2020",
+     "where": "§3.2",
+     "quote": "“Faithful-by-construction” pipelines rely on the sufficiency assumption: the selected rationale must be sufficient to make the prediction without the remaining input.",
+     "gloss": "A pipeline (I→R; R→O) is faithful by construction only if the rationale alone suffices. This fails for free-text rationales on CoS-E."
+    },
+    {
+     "family": "faithfulness",
+     "term": "robustness equivalence",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "We aim to analyze whether predicted labels and rationales are similarly or dissimilarly robust to noise applied to the input. The former indicates predicted labels and rationales are strongly associated, while the latter indicates the opposite.",
+     "gloss": "Adds Gaussian noise to input embeddings and compares label flips with the drop in rationale quality. A stable label with an unstable rationale (or the reverse) fails."
+    },
+    {
+     "family": "faithfulness",
+     "term": "feature importance agreement",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "If label prediction and rationale generation are associated, input tokens important for label prediction should be important for rationale generation and vice versa. We refer to this property as feature importance agreement.",
+     "gloss": "Uses gradient attributions for one output. ROAR occlusion of the top tokens should hurt the other output more than random occlusion does."
+    },
+    {
+     "family": "faithfulness",
+     "term": "simulatability",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Doshi-Velez & Kim 2017; hase2020leakageadjusted",
+     "where": "§2",
+     "quote": "Rather than computing word-level overlap with a ground-truth explanation, simulatability measures the additional predictive ability towards the predicted label a rationale provides over the input, computed as the difference between task performance when a rationale is given as input vs. when it is not (IR $\\rightarrow$ Ô minus I $\\rightarrow$ Ô).",
+     "gloss": "Accuracy of IR→Ô minus I→Ô. The paper uses a gold-label variant (IR→O minus I→O) as rationale quality, not as a faithfulness measure."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful interpretability (spectrum)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jacovi2020towards",
+     "where": "§6",
+     "quote": "Although our measurements address only necessary and not sufficient properties, by viewing faithful interpretability as a spectrum, we make a step to quantitatively situate common models on it.",
+     "gloss": "Treats faithfulness as graded rather than binary, following Jacovi & Goldberg. Necessary-condition tests are used to place models on that spectrum."
+    }
+   ],
+   "note": "Faithfulness is defined via Melis & Jaakkola; offers only necessary-condition tests (label-rationale association) and explicitly does not claim sufficiency."
+  },
+  {
+   "key": "xiong2026monitorability",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "monitorable (reasoning)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "korbak2025chain; baker2025monitoring; chen2025reasoning; Xiong et al. 2025; Arnav et al. 2025; emmons2025chain",
+     "where": "§1",
+     "quote": "For this promise to hold in practice, however, the generated reasoning must be monitorable: the generated reasoning traces should faithfully reflect the model’s internal decision-making path in a form that is legible to external auditors or automated oversight systems",
+     "gloss": "Monitorability = faithfulness plus legibility. The abstract says 'the degree to which CoT faithfully and informatively reflects internal computation'."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability (model-intrinsic)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Crucially, ”monitorability” refers to the intrinsic properties of the evaluated model, independent of the monitor’s specific capabilities.",
+     "gloss": "Treats monitorability as a property of the model alone, unlike monitor-relative definitions, even though g-mean² is computed for a specific monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability (g-mean2)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§3.2",
+     "quote": "$\\text{g-mean}^{2}$ is calculated as the simple product of the monitor’s sensitivity and specificity (TPR $\\times$ TNR) over the CoT, with a higher score indicating better monitorability with respect to the applied monitor.",
+     "gloss": "Computed on hint interventions plus sycophancy and sandbagging tests, keeping only cases where the intervention changes the output in ≥5% of instances."
+    },
+    {
+     "family": "monitorability",
+     "term": "false sense of monitorability",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "However, this creates a potential risk of a “false sense of monitorability”: a model might achieve a high $\\text{g-mean}^{2}$ score simply by overfitting to the prompt’s constraints, without necessarily establishing a strong causal link between its reasoning and its answer.",
+     "gloss": "Input-intervention metrics can reward prompt sensitivity, while the reasoning may be a faithful-looking rationalization rather than the cause of the answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Draft-to-Answer (D2A) Faithfulness",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Xiong et al. 2025",
+     "where": "§6",
+     "quote": "To complement our input-intervention-based $\\text{g-mean}^{2}$ metric, we introduce Draft-to-Answer (D2A) Faithfulness (Xiong et al., 2025), a metric that evaluates whether the model’s final decision is causally determined by its reasoning draft.",
+     "gloss": "Draft Reliance 1[M(x,T′,G)=M(x,T′,∅)] and Draft–Answer Consistency 1[ans(M(x,T′))=ans(T′)]. Used to validate g-mean² as a monitorability measure."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual draft",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Xiong et al. 2025",
+     "where": "App. B.8",
+     "quote": "To investigate the causal dependency between the thinking draft and the final answer, we assess the causal link between the generated chain-of-thought and the subsequent answer by intervening on the thinking draft $T$ . Specifically, we alter the draft’s conclusion to create a counterfactual version $T^{\\prime}$ .",
+     "gloss": "The counterfactual is the model's own thinking draft with its conclusion swapped. The answer should then follow the edited draft."
+    }
+   ],
+   "note": "Defines monitorability as faithful and legible CoT, yet measures it with Guan's monitor-relative g-mean² while calling it model-intrinsic; D2A faithfulness serves as a cross-check."
+  },
+  {
+   "key": "zhao2025necessary",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "faithful explanation",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jacovi2020towards; Lyu et al. 2024; Ribeiro et al. 2016",
+     "where": "§2",
+     "quote": "A faithful explanation should accurately reflect the reasoning process behind the model’s prediction Jacovi and Goldberg (2020); Lyu et al. (2024); Ribeiro et al. (2016).",
+     "gloss": "The standard Jacovi & Goldberg definition, applied to post-hoc free-text explanations of classifications."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plausibility",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jacovi2020towards; Lyu et al. 2023; Wiegreffe et al. 2022",
+     "where": "§1",
+     "quote": "the challenge increases because humans often conflate faithfulness and plausibility: how convincing it appears Jacovi and Goldberg (2020); Lyu et al. (2023); Wiegreffe et al. (2022).",
+     "gloss": "Plausibility is how convincing an explanation appears. Confusing it with faithfulness yields plausible but unfaithful explanations."
+    },
+    {
+     "family": "faithfulness",
+     "term": "contrastive consistency (necessary condition for faithfulness)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Miller 2019",
+     "where": "§1",
+     "quote": "Following Miller (2019)’s criterion, a necessary condition for faithful explanations is that an explanation should contrastively refute the negation of the explanandum. Therefore, for an explanation to faithfully represent a deductive or nomological process, it cannot simultaneously support a prediction $y$ and its negation $\\lnot y$ .",
+     "gloss": "Necessary but not sufficient: an explanation that supports both y and ¬y cannot be faithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "explanation inconsistency",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "We define explanation inconsistency as failing to explicate why the model predicted $\\bm{a}$ instead of its negation $\\lnot\\bm{a}$ .",
+     "gloss": "62–86% of LLM explanations are inconsistent (PEX<0) and so, by the criterion above, unfaithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Prediction-EXplanation (PEX) consistency",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Melis et al. 2021; Good 1985",
+     "where": "§3.2",
+     "quote": "To quantify this, we introduce Prediction-EXplanation consistency (PEX), which measures how well an explanation supports a given prediction compared to its negation.",
+     "gloss": "C(e)=log M(e|q,a)/M(e|q,¬a). Adjusted C′(e) = log-odds of a vs ¬a given q and e, minus the prior log-odds given q. Scores above 2 count as consistent."
+    },
+    {
+     "family": "faithfulness",
+     "term": "simulatability-based faithfulness proxy",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Pruthi et al. 2022; Lyu et al. 2024",
+     "where": "§4",
+     "quote": "To evaluate the efficacy of optimizing PEX consistency (§ 3) in generating more faithful explanations, we construct a proxy measure of faithfulness by assuming that a more faithful explanation should be more useful for an external observer to predict a model’s behavior (Lyu et al., 2024, see Section 3.4.2).",
+     "gloss": "A student model trained on teacher labels plus explanations; F1 at predicting teacher labels on unseen inputs without explanations. System-level only."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful (simulation criterion)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "jacovi2020towards",
+     "where": "§2",
+     "quote": "The assumption is that if an explanation leads to a different prediction than that made by the model it explains, then it is unfaithful Jacovi and Goldberg (2020).",
+     "gloss": "A sufficient condition for unfaithfulness, used to justify evaluating faithfulness by simulatability."
+    }
+   ],
+   "note": "Frames PEX consistency as a necessary condition (after Miller 2019) and simulatability as the faithfulness proxy; faithfulness is checked only at the system level."
+  }
+ ]
+}

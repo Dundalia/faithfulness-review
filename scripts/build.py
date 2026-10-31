@@ -41,6 +41,23 @@ def relations(body):
     return out
 
 
+def definitions():
+    """definitions.csv and the clusters in runs/D_definitions/synth_<family>.json (built by definitions.py)."""
+    path = MAP / "definitions.csv"
+    if not path.exists():
+        return [], []
+    with open(path, newline="") as f:
+        defs = [{k: r[k] for k in ("id", "key", "family", "term", "kind", "stance", "source", "where", "quote", "gloss", "cluster")}
+                for r in csv.DictReader(f)]
+    clusters = []
+    for fam in ("faithfulness", "counterfactual", "monitorability"):
+        synth = MAP / "runs" / "D_definitions" / f"synth_{fam}.json"
+        if synth.exists():
+            clusters += [{"family": fam, **{k: c[k] for k in ("id", "name", "description")}}
+                         for c in json.loads(synth.read_text())["clusters"]]
+    return defs, clusters
+
+
 def main():
     recs = all_records()
     rows = []
@@ -83,9 +100,11 @@ def main():
                        "relations": relations(r["body"]),
                        "new_tags": [dict(zip(("tag", "definition"), (l.split(": ", 1) + [""])[:2])) for l in s["new_tags"]]})
     (MAP / "site").mkdir(exist_ok=True)
-    data = {"generated": datetime.date.today().isoformat(), "namespaces": vocabulary(), "papers": papers}
+    defs, clusters = definitions()
+    data = {"generated": datetime.date.today().isoformat(), "namespaces": vocabulary(), "papers": papers,
+            "definitions": defs, "clusters": clusters}
     (MAP / "site" / "data.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
-    print(f"built views and site/data.json for {len(recs)} papers")
+    print(f"built views and site/data.json for {len(recs)} papers and {len(defs)} definitions")
 
 
 main()

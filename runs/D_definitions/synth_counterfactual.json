@@ -1,0 +1,221 @@
+{
+ "clusters": [
+  {
+   "id": "cf-explanation",
+   "name": "Counterfactual explanation: an edited input that changes the decision",
+   "description": "An alternative input that would change the model's decision, offered as the explanation (often written by the model itself) and judged by validity and minimality.",
+   "entries": [
+    "chuang2026faithlm#9",
+    "madsen2024self#3",
+    "madsen2024self#4",
+    "dehghanighobadi2025can#1",
+    "dehghanighobadi2025can#2",
+    "dehghanighobadi2025can#3",
+    "dehghanighobadi2025can#5",
+    "dehghanighobadi2025can#6",
+    "mayne2025llms#1",
+    "mayne2025llms#2",
+    "mayne2025llms#3",
+    "mayne2025llms#4",
+    "mayne2025llms#5",
+    "mayne2025llms#6",
+    "mayne2025llms#7",
+    "doi2025investigating#5",
+    "cahlik2025reasoninggrounded#5",
+    "zeng2026evaluating#2",
+    "agarwal2024faithfulness#3",
+    "guo2026introspective#2",
+    "pres2026consistency#6"
+   ]
+  },
+  {
+   "id": "simulatability",
+   "name": "Counterfactual simulatability",
+   "description": "An explanation is good insofar as an observer who reads it can predict the model's output on other (counterfactual) inputs or the effect of a named edit.",
+   "entries": [
+    "pmlr-v235-chen24bl#1",
+    "pmlr-v235-chen24bl#3",
+    "pmlr-v235-chen24bl#4",
+    "pmlr-v235-chen24bl#5",
+    "chen2025consistent#5",
+    "pres2026selfctrl#6",
+    "agarwal2024faithfulness#6",
+    "chua2025deepseek#7",
+    "hase2026counterfactual#3",
+    "arcuschin2025chain#9",
+    "turpin2025teaching#2",
+    "turpin2023language#2",
+    "hong2026llm#1",
+    "hong2026llm#2",
+    "mayne2026positivecasefaithfulnessllm#6",
+    "karvonen2026would#1",
+    "karvonen2026would#2",
+    "karvonen2026would#3",
+    "karvonen2026would#5",
+    "anon2026trainingoversight#4",
+    "zeng2026evaluating#3"
+   ]
+  },
+  {
+   "id": "cf-set",
+   "name": "The counterfactual set for simulatability",
+   "description": "Which inputs the simulatability test runs on: LLM-generated related questions, cue-removed inputs, minimal what-if variations, or nearby real dataset rows.",
+   "entries": [
+    "pmlr-v235-chen24bl#2",
+    "hase2026counterfactual#5",
+    "hong2026llm#3",
+    "hong2026llm#4",
+    "mayne2026positivecasefaithfulnessllm#2",
+    "mayne2026positivecasefaithfulnessllm#3",
+    "lewislim2026efficient#4"
+   ]
+  },
+  {
+   "id": "input-intervention",
+   "name": "Input intervention: one cue or factor changed",
+   "description": "The same input with one cue, attribute or factor removed, inserted or replaced, all else fixed; the output difference is read as that element's causal influence.",
+   "entries": [
+    "ferreira2026truthful#5",
+    "ferreira2026truthful#6",
+    "zhang2026audit#3",
+    "zhang2026audit#4",
+    "zhang2026audit#5",
+    "guo2026introspective#3",
+    "shiromani2026necessary#4",
+    "shiromani2026necessary#5",
+    "ferreira2026outofsight#4",
+    "wang2025evaluating#1",
+    "matton2025walk#5",
+    "matton2025walk#6",
+    "alon2026faithfulness#3",
+    "arcuschin2026biases#5",
+    "farquhar2025mona#2",
+    "karvonen2026would#4",
+    "karvonen2026would#6",
+    "turpin2023language#5",
+    "li2026monitorability#6",
+    "pres2026consistency#7",
+    "schoen2025stress#4",
+    "cheah2026training#5",
+    "anon2026improving#8",
+    "zeng2026evaluating#4",
+    "haskins2026training#9",
+    "chuang2026faithlm#4",
+    "li2026when#1"
+   ]
+  },
+  {
+   "id": "explanation-mention",
+   "name": "The counterfactual test of explanations",
+   "description": "An input edit that flips the prediction is used to judge the explanation, which is unfaithful if it does not mention the edit (Atanasova et al. 2023 lineage).",
+   "entries": [
+    "zaman2025chainofthought#8",
+    "zaman2025causal#9",
+    "wang2025selfcritique#1",
+    "wang2025selfcritique#3",
+    "gema2026chainofthought#6",
+    "li2025drift#4",
+    "bhan2025did#5",
+    "alon2026faithfulness#5",
+    "arcuschin2026biases#7",
+    "parcalabescu2023measuring#6",
+    "cheah2026training#4"
+   ]
+  },
+  {
+   "id": "reasoning-intervention",
+   "name": "Intervention on the reasoning trace",
+   "description": "An edited, truncated, substituted or resampled chain of thought (or other model-produced intermediate) with the input fixed; the answer's response measures dependence on the reasoning.",
+   "entries": [
+    "akter2025causal#4",
+    "akter2025causal#6",
+    "khanzadeh2026project#6",
+    "khanzadeh2026project#7",
+    "swaroop2025lift#3",
+    "cox2026posthoc#6",
+    "xiong2026monitorability#6",
+    "anon2026generating#6",
+    "anon2026grace#7",
+    "shen2026detecting#6",
+    "shen2026detecting#7",
+    "macar2025thought#1",
+    "macar2025thought#2",
+    "macar2025thought#3",
+    "schoen2025stress#3",
+    "han2026rfeval#4",
+    "han2026rfeval#5",
+    "lv2026geofaith#8",
+    "kudo2024llms#5",
+    "angdembay2026two#8",
+    "paul2024making#6",
+    "somov2026breaking#7",
+    "parekh2026drop#2",
+    "fareed2026plan#5",
+    "ananthula2026decodable#4",
+    "ananthula2026decodable#5"
+   ]
+  },
+  {
+   "id": "training-pairs",
+   "name": "Counterfactual training pairs",
+   "description": "A counterfactual rationale or context paired with the output the model should give on it, used to train either sensitivity to reasoning or invariance to a cue.",
+   "entries": [
+    "tang2026unlearning#1",
+    "tang2026unlearning#2",
+    "chua2024biasaugmented#7",
+    "wang2023scott#4",
+    "wang2023scott#5",
+    "wang2023pinto#5",
+    "paul2024making#7",
+    "wang2026case#4",
+    "akter2025causal#3"
+   ]
+  },
+  {
+   "id": "internal-state",
+   "name": "Counterfactual internal states",
+   "description": "An alternative value of an internal quantity (attention weights, patched activations, edited knowledge, a permuted span's Jacobian), with any input edit serving only as donor.",
+   "entries": [
+    "jain2019attention#3",
+    "jain2019attention#4",
+    "wiegreffe2019attention#3",
+    "li2025training#3",
+    "bhupatiraju2026stated#5",
+    "wang2025causallyenhanced#3",
+    "zaman2025causal#8"
+   ]
+  }
+ ],
+ "mismatches": [
+  {
+   "entry": "turpin2023language#2",
+   "source": "hase2020leakageadjusted",
+   "finding": "Attributed to Hase et al. 2020 (LAS) as explanations on one input helping predict outputs on other inputs, but Hase et al. 2020 never state it: their simulator predicts the output on the explained input itself and the word 'counterfactual' does not occur; Chen et al. 2023 list Hase et al. 2020 as prior work where 'the simulation input is the explained input'. Nearest: 'A model is simulatable to the extent that an observer, or simulator, can predict its outputs.'"
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#6",
+   "source": "hase2020leakageadjusted",
+   "finding": "Same citation of Hase et al. 2020 for counterfactual simulatability; not stated there (explained-input simulation only). Mayne et al.'s second use of Hase et al., the no-explanation baseline, does match the source's input-only baseline."
+  },
+  {
+   "entry": "shen2026detecting#6",
+   "source": "turpin2023language",
+   "finding": "Attributed to Turpin et al. 2023 as counterfactual interventions where 'parts of the CoT are perturbed', but Turpin et al. perturb only inputs (biasing features: unbiased vs biased context). Nearest: their two types of input-feature counterfactuals (turpin2023language#5)."
+  },
+  {
+   "entry": "li2025drift#4",
+   "source": "lanham2023measuring",
+   "finding": "Attributed to Lanham et al. 2023 as counterfactual generation that modifies 'key parts w of the inputs I', but Lanham et al. never edit inputs and never call their tests counterfactual; all four tests (early answering, adding mistakes, paraphrasing, filler tokens) act on the CoT. Nearest: lanham2023measuring#7 (adding mistakes)."
+  },
+  {
+   "entry": "turpin2025teaching#2",
+   "source": "pmlr-v235-chen24bl",
+   "finding": "Partial: the 'if and only if' definition of faithfulness is not stated by Chen et al., who call simulatability 'a special case of faithfulness' and add 'a faithful explanation is not necessarily simulatable'. Doshi-Velez & Kim 2017 and Hase & Bansal 2020 not checked (outside the map)."
+  },
+  {
+   "entry": "bhan2025did#5",
+   "source": "matton2025walk",
+   "finding": "Partial: Matton et al. are credited only with the granularity of the intervention (concept-level), which holds, but are grouped under a description (counterfactuals designed to flip the outcome; self-NLE for the new prediction) that does not fit them; Matton et al. explicitly object that Atanasova et al. judge explanations of the counterfactual question rather than the original."
+  }
+ ]
+}

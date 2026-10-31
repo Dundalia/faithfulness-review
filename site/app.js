@@ -15,6 +15,9 @@ const VERB_LABEL = { contradicts: 'contradicts', 'builds-on': 'builds on', exten
 const PANE_HIDE = ['source:'];
 const FREE_LIMIT = 10;
 const STEPS = 7;
+const TABS = ['list', 'table', 'coverage', 'links', 'definitions'];
+const DEF_FAMILIES = { faithfulness: 'Faithfulness', counterfactual: 'Counterfactual', monitorability: 'Monitorability' };
+const DEF_KINDS = ['informal', 'formal', 'operational', 'criterion', 'failure-mode', 'taxonomy'];
 const TRAIN_LEVERS = ['sft', 'preference', 'rl-reward', 'rl-mechanics', 'activation-loss', 'multi-agent-game'];
 const COLLECTIONS = [
   { id: 'all', label: 'All' },
@@ -38,8 +41,10 @@ const state = {
   sel: new Map(), q: '', y0: null, y1: null, vt: new Set(), tab: 'list', sort: 'year',
   tsort: { col: 'year', dir: 'desc' }, key: null, rowNs: 'object', colNs: 'lever',
   verbs: new Set(['contradicts']), showAll: new Set(), facetOpen: new Set(['object', 'lever', 'contribution', 'motivation']),
+  dfam: '', dcl: '', dkind: '',
 };
 let PAPERS = [], BYKEY = new Map(), NS = new Map(), INCOMING = new Map(), YEARS = [], GENERATED = '';
+let DEFS = [], CLUSTERS = [];
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -67,6 +72,8 @@ async function init() {
     text: [p.key, p.title, p.authors, p.venue, p.tldr, p.problem, p.method, p.findings, p.limits].join(' ').toLowerCase(),
   }));
   PAPERS.forEach(p => BYKEY.set(p.key, p));
+  CLUSTERS = data.clusters || [];
+  DEFS = (data.definitions || []).map(d => ({ ...d, text: [d.term, d.quote, d.gloss, d.source, d.key].join(' ').toLowerCase() }));
   PAPERS.forEach(p => p.relations.forEach(r => {
     if (!INCOMING.has(r.target)) INCOMING.set(r.target, []);
     INCOMING.get(r.target).push({ ...r, source: p.key });
@@ -101,8 +108,8 @@ async function init() {
 }
 
 /* ---------- filtering ---------- */
-function match(p, { exceptNs = null, ignoreVt = false } = {}) {
-  if (state.q) {
+function match(p, { exceptNs = null, ignoreVt = false, ignoreQ = false } = {}) {
+  if (state.q && !ignoreQ) {
     for (const term of state.q.toLowerCase().split(/\s+/).filter(Boolean)) if (!p.text.includes(term)) return false;
   }
   if (state.y0 && p.year < state.y0) return false;
@@ -163,6 +170,7 @@ function writeHash() {
   if (state.tab === 'table' && (state.tsort.col !== 'year' || state.tsort.dir !== 'desc')) parts.push(`ts=${state.tsort.col}-${state.tsort.dir}`);
   if (state.tab === 'coverage') parts.push(`m=${state.rowNs},${state.colNs}`);
   if (state.tab === 'links') parts.push('vb=' + [...state.verbs].join(','));
+  if (state.tab === 'definitions' && (state.dfam || state.dcl || state.dkind)) parts.push(`d=${state.dfam},${state.dcl},${state.dkind}`);
   if (state.key) parts.push('p=' + encodeURIComponent(state.key));
   lastHash = parts.length ? '#' + parts.join('&') : '';
   if (location.hash !== lastHash) history.replaceState(null, '', lastHash || location.pathname + location.search);
@@ -176,13 +184,17 @@ function readHash() {
   state.y0 = y0 || null; state.y1 = y1 || null;
   state.vt = new Set((h.get('v') || '').split(',').filter(x => VENUE_LABEL[x]));
   const tab = h.get('tab') === 'papers' ? 'list' : h.get('tab');
-  state.tab = ['list', 'table', 'coverage', 'links'].includes(tab) ? tab : 'list';
+  state.tab = TABS.includes(tab) ? tab : 'list';
   state.sort = h.get('s') || 'year';
   const [tc, td] = (h.get('ts') || '').split('-');
   if (TABLE_COLS.some(c => c.id === tc)) state.tsort = { col: tc, dir: td === 'asc' ? 'asc' : 'desc' };
   const m = (h.get('m') || '').split(',');
   if (NS.has(m[0]) && NS.has(m[1])) { state.rowNs = m[0]; state.colNs = m[1]; }
   if (h.get('vb')) state.verbs = new Set(h.get('vb').split(',').filter(v => VERB_LABEL[v]));
+  const [df, dc, dk] = (h.get('d') || '').split(',');
+  state.dfam = DEF_FAMILIES[df] ? df : '';
+  state.dcl = CLUSTERS.some(c => c.id === dc && (!state.dfam || c.family === state.dfam)) ? dc : '';
+  state.dkind = DEF_KINDS.includes(dk) ? dk : '';
   const legacy = (h.get('o') || '').split(',').find(k => BYKEY.has(k));
   state.key = BYKEY.has(h.get('p')) ? h.get('p') : (legacy || null);
   for (const ns of state.sel.keys()) state.facetOpen.add(ns);
@@ -206,8 +218,7 @@ function setupStatic() {
   document.querySelectorAll('.views button').forEach(b => b.addEventListener('click', () => { state.tab = b.dataset.tab; render(); }));
   document.querySelector('.views').addEventListener('keydown', e => {
     if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
-    const tabs = ['list', 'table', 'coverage', 'links'];
-    state.tab = tabs[(tabs.indexOf(state.tab) + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    state.tab = TABS[(TABS.indexOf(state.tab) + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length];
     render(); $('tab-' + state.tab).focus();
   });
 
@@ -264,6 +275,10 @@ function setupStatic() {
     if (r && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); select(r.dataset.key); }
   });
   $('links').addEventListener('click', e => { const go = e.target.closest('button.goto'); if (go) select(go.dataset.key); });
+  $('defs').addEventListener('click', e => { const go = e.target.closest('button.goto'); if (go) select(go.dataset.key); });
+  $('defFam').addEventListener('change', e => { state.dfam = e.target.value; state.dcl = ''; render(); });
+  $('defCluster').addEventListener('change', e => { state.dcl = e.target.value; render(); });
+  $('defKind').addEventListener('change', e => { state.dkind = e.target.value; render(); });
   $('pane').addEventListener('click', e => {
     const tag = e.target.closest('.tag[data-tag]');
     if (tag) { const [ns, v] = tagParts(tag.dataset.tag); toggleTag(ns, v); state.facetOpen.add(ns); render(); return; }
@@ -360,7 +375,7 @@ function render() {
   $('rowNs').value = state.rowNs; $('colNs').value = state.colNs;
   $('count').innerHTML = filtered.length === PAPERS.length ? `<b>${PAPERS.length}</b> entries` : `<b>${filtered.length}</b> of ${PAPERS.length} entries`;
   renderCollections(); renderVenueTypes(); renderFacets(); renderActive();
-  for (const t of ['list', 'table', 'coverage', 'links']) {
+  for (const t of TABS) {
     $('tab-' + t).setAttribute('aria-selected', state.tab === t);
     $('tab-' + t).tabIndex = state.tab === t ? 0 : -1;
     $('view-' + t).hidden = state.tab !== t;
@@ -369,6 +384,7 @@ function render() {
   if (state.tab === 'table') renderTable(filteredCache);
   if (state.tab === 'coverage') renderMatrix(filtered);
   if (state.tab === 'links') renderLinks(filtered);
+  if (state.tab === 'definitions') renderDefs();
   renderPane();
   writeHash();
 }
@@ -568,6 +584,45 @@ function renderLinks(filtered) {
       <div>${paperRef(r.source)} <span class="verb ${esc(r.verb)}">${esc(VERB_LABEL[r.verb] || r.verb)}</span> ${paperRef(r.target)}</div>
       <p class="note">${esc(r.note)}</p></li>`).join('')
     : '<li class="empty">No links of the selected types among the entries that match your filters.</li>';
+}
+
+// Definitions: entries pass every filter except the search, which matches the definition text instead.
+const shortAuthors = p => { const a = p.authors.split(/, | & /); return a.length === 1 ? a[0] : a.length === 2 ? a.join(' & ') : a[0].replace(/ et al\.$/, '') + ' et al.'; };
+const sourceRefs = s => s.split(';').map(x => x.trim()).filter(Boolean)
+  .map(x => BYKEY.has(x) ? `<button class="goto" type="button" data-key="${esc(x)}">${esc(shortAuthors(BYKEY.get(x)))} ${BYKEY.get(x).year}</button>` : esc(x)).join('; ');
+function renderDefs() {
+  const keys = new Set(PAPERS.filter(p => match(p, { ignoreQ: true })).map(p => p.key));
+  const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const base = DEFS.filter(d => keys.has(d.key) && terms.every(t => d.text.includes(t)));
+  $('defFam').innerHTML = `<option value="">All terms (${base.length})</option>` +
+    Object.entries(DEF_FAMILIES).map(([f, l]) => `<option value="${f}">${l} (${base.filter(d => d.family === f).length})</option>`).join('');
+  $('defFam').value = state.dfam;
+  const inFam = base.filter(d => !state.dfam || d.family === state.dfam);
+  $('defCluster').innerHTML = '<option value="">All clusters</option>' + CLUSTERS.filter(c => !state.dfam || c.family === state.dfam)
+    .map(c => `<option value="${esc(c.id)}">${esc(c.name)} (${inFam.filter(d => d.cluster === c.id).length})</option>`).join('');
+  $('defCluster').value = state.dcl;
+  $('defKind').innerHTML = '<option value="">All kinds</option>' + DEF_KINDS.map(k => `<option value="${k}">${k.replace('-', ' ')}</option>`).join('');
+  $('defKind').value = state.dkind;
+  const shown = inFam.filter(d => (!state.dcl || d.cluster === state.dcl) && (!state.dkind || d.kind === state.dkind));
+  $('count').innerHTML = `<b>${shown.length}</b> definitions from ${new Set(shown.map(d => d.key)).size} entries`;
+  if (!shown.length) { $('defs').innerHTML = '<p class="empty">No definitions match. Remove a filter or clear the search.</p>'; return; }
+  const order = new Map(CLUSTERS.map((c, i) => [c.id, i]));
+  const year = d => BYKEY.get(d.key)?.year || 0;
+  shown.sort((a, b) => (order.get(a.cluster) ?? 99) - (order.get(b.cluster) ?? 99) || year(b) - year(a) || a.id.localeCompare(b.id));
+  let html = '', cur = null;
+  for (const d of shown) {
+    if (d.cluster !== cur) {
+      const c = CLUSTERS.find(x => x.id === d.cluster);
+      html += `${cur === null ? '' : '</ol>'}<h3 class="def-cluster">${esc(c ? `${DEF_FAMILIES[c.family]}: ${c.name}` : 'No cluster')}</h3>` +
+        `${c ? `<p class="def-cluster-desc">${esc(c.description)}</p>` : ''}<ol class="links">`;
+      cur = d.cluster;
+    }
+    html += `<li><div><span class="def-term">${highlight(d.term)}</span><span class="verb">${esc(d.kind)}, ${esc(d.stance)}</span></div>
+      <blockquote class="def-quote">${highlight(d.quote)}</blockquote>
+      <p class="note">${highlight(d.gloss)}</p>
+      <p class="def-ref">${paperRef(d.key)} <span class="ref-year">${esc(d.where)}</span>${d.source ? `<span class="def-src">From ${sourceRefs(d.source)}</span>` : ''}</p></li>`;
+  }
+  $('defs').innerHTML = html + '</ol>';
 }
 
 /* ---------- export ---------- */

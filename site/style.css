@@ -269,3 +269,12 @@ table.matrix { border-collapse: separate; border-spacing: 2px; }
   .doc h1 { font-size: 25px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- definitions ---------- */
+.def-cluster { font: 600 15px var(--sans); margin: 26px 0 2px; }
+.def-cluster-desc { margin: 0 0 4px; color: var(--ink-2); font: 14px/1.45 var(--serif); max-width: 80ch; }
+.def-term { font: 600 14px var(--sans); margin-right: 8px; }
+.def-quote { margin: 6px 0 0; padding-left: 12px; border-left: 2px solid var(--rule-strong); font: 15px/1.45 var(--serif); max-width: 80ch; overflow-wrap: anywhere; }
+.def-ref { margin: 6px 0 0; font-size: 13px; }
+.def-src { display: block; margin-top: 2px; color: var(--ink-3); }
+.def-src .goto { font-size: 13px; }

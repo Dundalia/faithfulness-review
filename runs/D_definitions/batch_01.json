@@ -1,0 +1,722 @@
+{
+ "papers": [
+  {
+   "key": "anwar2026analyzing",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "CoT monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "korbak2025chain",
+     "where": "Abstract",
+     "quote": "Chain-of-thought (CoT) monitors are LLM-based systems that analyze reasoning traces to detect when outputs may exhibit attributes of interest, such as test-hacking behavior during code generation.",
+     "gloss": "Monitor = LLM reading the CoT to predict an attribute of the output; formalized as a stochastic map m: Z×X→Δ(Y) (Def. 3.2)."
+    },
+    {
+     "family": "monitorability",
+     "term": "Bayes-optimal CoT monitor",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 3.4",
+     "quote": "The Bayes-optimal monitor, denoted $m_{g}^{\\pi}$ , uses the true policy $\\pi$ and the true output monitor $g$ to compute the ground-truth conditional distribution of the attribute:",
+     "gloss": "m(Y|X,Z) = E_{o~π(O|X,Z)}[g(Y|X,o)]: the ideal monitor marginalizes the true output monitor over the policy's outputs given the CoT."
+    },
+    {
+     "family": "monitorability",
+     "term": "uplift in CoT monitorability",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 3.6",
+     "quote": "Then the uplift from monitoring CoT (in addition to monitoring the prompt alone) is $\\delta:=\\alpha_{\\text{CoT}}-\\alpha_{\\text{Prompt}}$ .",
+     "gloss": "Monitorability as accuracy gain of the Bayes-optimal CoT monitor over the Bayes-optimal prompt-only monitor; bounded by sqrt(2 I(Y;Z|X)) (Prop. 3.7)."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability (necessary condition)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Prop. 3.10",
+     "quote": "(Necessity) For any attribute $Y$ , strictly positive uplift in CoT monitorability (i.e., $\\delta>0$ ) requires $I(O;Z\\mid X)>0$ .",
+     "gloss": "Non-zero conditional MI between CoT and output is necessary but not sufficient; CoT necessity implies it, as do post-hoc CoTs (Remark 3.11)."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability (MI proxy objective)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "To overcome the need for an oracle, we propose maximizing the conditional mutual information $I(O;Z\\mid X)$ as a proxy objective.",
+     "gloss": "Label-free proxy for the true monitorability objective I(Y;Z|X); the gap I(O;Z|X,Y) is attribute-irrelevant information. Used as training reward."
+    },
+    {
+     "family": "monitorability",
+     "term": "information gap / elicitation error",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "information gap, which measures the extent to which the monitor can extract the information available in CoT, and elicitation error, which measures the extent to which the monitor approximates the optimal monitoring function.",
+     "gloss": "Two KL terms bounding a practical monitor's misspecification error (Prop. 3.13): failure to model the policy vs. failure to model the output monitor g."
+    },
+    {
+     "family": "monitorability",
+     "term": "obfuscation via suppression",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.2",
+     "quote": "First, when incentivized to fool the monitor, the models’ default strategy is obfuscation via suppression: they learn to omit critical reasoning steps from their CoT, which successfully fools the monitor but degrades task performance.",
+     "gloss": "Obfuscation by omitting steps; contrasted with obfuscation via steganography, which the MI reward does not penalize."
+    },
+    {
+     "family": "monitorability",
+     "term": "weak form of steganography",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.2",
+     "quote": "However, they may introduce mistakes in their CoT that they ignore when computing their final answer, see for instance Figure 40. This represents a weak form of steganography: the model knows to ignore the mistakes, but the monitor does not.",
+     "gloss": "Steganography as CoT content the policy reads differently from the monitor; full steganography = off-distribution (e.g. Korean metaphorical) CoT."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT-monitorable (attribute)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.2",
+     "quote": "This analysis suggests that attributes are easier to monitor from a CoT when the CoT itself pins down the attribute ( $H(Y\\mid X,Z)$ is small).",
+     "gloss": "Monitorability is attribute-relative: coarse plan-level properties verbalized in the CoT are monitorable, low-level implementation details are not."
+    }
+   ],
+   "note": "Monitorability formalized information-theoretically and as policy-dependent; faithfulness only cited as a challenge (Turpin, Lanham), never defined."
+  },
+  {
+   "key": "chuang2026faithlm",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (of NL explanations)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "chen2025reasoning",
+     "where": "§3.1",
+     "quote": "In this formulation, faithfulness is defined as prediction sensitivity: an explanation is faithful if altering its truth value changes the model’s decision.",
+     "gloss": "Applies Chen et al.'s hint-intervention paradigm to explanation content rather than CoT text; faithfulness used interchangeably with fidelity."
+    },
+    {
+     "family": "faithfulness",
+     "term": "fidelity score (contrary-hint score)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We then condition the model on this contrary hint and read out a fidelity score from the intervention-induced prediction shift:",
+     "gloss": "S_E := f(X) − f(X | ¬E_NL): output-probability shift when the contradicted explanation is appended to the input."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful / non-faithful explanation (Theorem 1)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Thm. 1",
+     "quote": "Defining $S_{E}(X;C)=D(f(X;C),f(X;C\\mid\\lnot E_{NL}))$ , where $D$ is any strictly proper divergence, we have",
+     "gloss": "S_E=0 iff non-faithful, S_E>0 iff faithful, assuming conditioning on the contrary hint equals do(S_E←s̄) on the verbalized semantic factor."
+    },
+    {
+     "family": "counterfactual",
+     "term": "contrary hint",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We construct a contrary hint $\\neg\\mathcal{E}_{\\text{NL}}$ , defined as a statement whose semantics are opposed to $\\mathcal{E}_{\\text{NL}}$ (for example, “similar poles pull each other closer” as the contrary of “similar poles push each other away”).",
+     "gloss": "The intervention is a semantically negated explanation inserted into the prompt, treated as an intervention on the explanation's semantic factor."
+    },
+    {
+     "family": "faithfulness",
+     "term": "fidelity (of an LLM explanation)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Du et al. 2019; Zhao et al. 2023",
+     "where": "§2.2",
+     "quote": "The concept of fidelity in an LLM explanation (Du et al., 2019; Zhao et al., 2023), which differs from LLM reasoning and self-refinement, refers to whether the model’s prediction would change if the key knowledge provided explanation were removed.",
+     "gloss": "Removal-based fidelity; next sentence: a drastic prediction change means the explanation is faithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "good fidelity (of CoT)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "lyu2023faithful; radhakrishnan2023question",
+     "where": "§2.2",
+     "quote": "where “good fidelity” in the series of work is typically defined by the alignment between the content of CoT and the final answer (Lyu et al., 2023; Radhakrishnan et al., 2023).",
+     "gloss": "Attributes to CoT work a CoT–answer alignment notion, which the paper contrasts with post-hoc explanation fidelity."
+    },
+    {
+     "family": "faithfulness",
+     "term": "simulatability-based evaluations",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "madsen2024self; pmlr-v235-chen24bl",
+     "where": "§4.1",
+     "quote": "Simulatability-based evaluations (e.g., Madsen et al. (2024); Chen et al. (2023a)) assess whether a model can reproduce predictions from an explanation, i.e., behavioral imitation.",
+     "gloss": "Simulatability as behavioral imitation, contrasted with the paper's causal-sensitivity notion of faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "truthfulness (of explanations)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Liu et al. 2023",
+     "where": "§4.2",
+     "quote": "Truthfulness measures semantic consistency between generated and ground-truth explanations using GPT-4o, RoBERTa-Large, and XLNet-Large (Nie et al., 2020), following Liu et al. (2023).",
+     "gloss": "Plausibility-like second metric: share of explanations classified 'similar' to human rationales, reported alongside fidelity."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual examples (explanations)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Molnar 2022; Du et al. 2019",
+     "where": "App. D.1",
+     "quote": "Feature attribution aims to provide users with important scores for each feature’s impact on model predictions, while counterfactual examples aim to offer alternative instances that explicitly assist users in grasping the model’s decision-making process.",
+     "gloss": "Generic XAI background: counterfactual explanations as alternative input instances, one of two post-hoc explanation families."
+    }
+   ],
+   "note": "Uses 'fidelity' and 'faithfulness' interchangeably; Theorem 1's biconditional holds by assumption (hint = do-intervention); proof invokes 'the causal definition of faithfulness'."
+  },
+  {
+   "key": "ferreira2026truthful",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithful (CoT self-explanation)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "lanham2023measuring; turpin2023language; agarwal2024faithfulness; madsen2024self; arcuschin2025chain",
+     "where": "§6",
+     "quote": "These often look plausible to human readers (Agarwal et al., 2024), but might be unfaithful in that they offer a misleading view of how the model decided (Lanham et al., 2023; Turpin et al., 2023; Agarwal et al., 2024; Madsen et al., 2024; Arcuschin et al., 2025, i.a.).",
+     "gloss": "Unfaithful = misleading about how the model decided; explicitly contrasted with plausibility to humans."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful explanation (cue criterion)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring; turpin2023language",
+     "where": "§2",
+     "quote": "For example, if a model’s answer is influenced by some cues in the input – as demonstrated by intervening on the cues – but the explanation fails to mention those cues, then the explanation is considered unfaithful.",
+     "gloss": "Sufficient condition: causal influence of a cue (shown by intervention) plus no mention in the explanation. §1 calls this the faithfulness gap (Jacovi & Goldberg)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT hacking",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "The reward mechanism’s inability to assess CoTs along the faithfulness dimension gives the LLM an opportunity to engage in reward hacking (i.e., the LLM tailors CoTs to maximise reward rather than to accurately reflect its decision making).",
+     "gloss": "Reward hacking in the explanation: RM sees only text, so preference optimization rewards CoTs that hide use of a protected cue."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unverbalised hack",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "While a typical RM lacks the means to detect, and hence penalise, an ‘unverbalised hack’ (that is, a violation of the prompt that leaves no trace, other than a cued prediction),",
+     "gloss": "Contrasted with overt (verbalised) violations, which RMs already penalize."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual (prompt)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Original refers to a dataset of queries from one of our two settings (‘Math Book’ or ‘BiasQA’), whereas in a corresponding counterfactual experiment those same queries are preprocessed as to no longer contain the protected feature.",
+     "gloss": "Counterfactual = same prompt with the protected cue removed or neutralized (solution swapped for an unrelated one; profession replaced by 'person')."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual test of cue reliance",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "We regard difference in predictions $\\operatorname{pred}(y)\\neq\\operatorname{pred}(y^{\\prime})$ as evidence that the protected feature (which was omitted when producing $y^{\\prime}$ ) exerts causal influence on $\\operatorname{pred}(y)$ .",
+     "gloss": "Instance-level causal attribution: y' = decode(CF(x)); a changed prediction is evidence of reliance, used to augment the reward model."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT faithfulness (aggregate acknowledgment test)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "turpin2023language; chen2025reasoning",
+     "where": "§3.2",
+     "quote": "Then, following a similar evaluation protocol for CoT faithfulness to (Turpin et al., 2023; Chen et al., 2025, i.a.), unless this increase is coupled with a corresponding increase in acknowledgment rate, the CoTs are likely becoming less reliable—they are ‘fabricated’ or getting ‘hacked’ (see Figure 3).",
+     "gloss": "Compares the original-vs-counterfactual accuracy gap with the gap in rates of acknowledging the cue (judged by an Eval LLM)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT (instance-level)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "We regard a response’s CoT as unfaithful when it does not acknowledge the role of the protected feature, yet the prediction is correct/stereotypical only when the protected feature is available in the prompt.",
+     "gloss": "Unfaithful iff ack(y) is False, pred(y) is cued, and pred(y) ≠ pred(y'); reported as % unfaithful explanations (Table 1)."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "korbak2025chain",
+     "where": "§6",
+     "quote": "CoTs are a readily available interface often used for model inspection, which raises interest in actively monitoring their quality (Korbak et al., 2025), where a “CoT monitor” attempts to spot undesired responses.",
+     "gloss": "Related-work mention; CoT reward hacking under a monitor (Baker et al.) is read as CoTs fabricated to mislead the monitor."
+    }
+   ],
+   "note": "Faithfulness operationalized via cue-removal counterfactuals and acknowledgment; 'faithfulness gap' attributed to Jacovi & Goldberg 2020 in §1 without restating their definition."
+  },
+  {
+   "key": "google2026gemini4argon",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "CoT transparency",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4.5",
+     "quote": "If a reasoning trace legibly (either to a human or another AI) and faithfully represents the model’s actual decision-making process, it can be used to monitor the model and to detect possible misalignment.",
+     "gloss": "Sufficient condition: legibility plus faithfulness make a CoT usable for monitoring; transparency is the umbrella property."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT transparency (default vs worst-case)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4.5",
+     "quote": "In this section, we evaluate the CoT transparency of Gemini 4 Argon along two complementary dimensions: (1) Default transparency in normal operation—whether our training pipeline preserves faithful reasoning, and whether its thoughts in RL and internal deployments remain legible, complete, and free of spontaneous obfuscation; and (2) Worst-case adversarial evasion capabilities",
+     "gloss": "Splits transparency into default propensity (legibility, coverage, no spontaneous obfuscation) and prompted worst-case monitor evasion."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4.3.3",
+     "quote": "CoT monitorability. Access to faithful and legible chain-of-thought (CoT) reasoning is highly valuable for operating monitors with high recall and acceptably low false-positive rates.",
+     "gloss": "Load-bearing risk assumption: CoT stays legible and faithful enough to give monitors reliable signal about goals and intentions (Table 3.5)."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability (necessity / serial depth)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "korbak2025chain",
+     "where": "§3.4.5.4",
+     "quote": "A key reason to believe that CoT will be monitorable is that being able to recurse via CoT increases a model’s serial depth, meaning that in order to do hard tasks the model must put this information in its CoT (Korbak et al, 2025).",
+     "gloss": "Necessity argument; weakened by no-CoT capability (NCRI), so monitorability is tested on CoT-uplift-filtered tasks."
+    },
+    {
+     "family": "monitorability",
+     "term": "Immediacy of the CoT",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4.5.6",
+     "quote": "A more basic prerequisite is that the CoT is readable at all: if the model's thinking degenerates into illegible or compressed tokens during complex agentic tasks, monitoring becomes impossible – especially for humans. We refer to this property as the Immediacy of the CoT.",
+     "gloss": "Readability prerequisite for monitoring, measured by legibility plus coverage."
+    },
+    {
+     "family": "monitorability",
+     "term": "Legibility",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "emmons2025pragmatic",
+     "where": "§3.4.5.6",
+     "quote": "Legibility: Can an unassisted human follow along with the model's reasoning? A score of 4 means all reasoning is in a natural, understandable language; a score of 0 means the CoT is unintelligible gibberish.",
+     "gloss": "0–4 autorater score, adapted to multi-turn agentic transcripts; language-level readability, not reasoning quality."
+    },
+    {
+     "family": "monitorability",
+     "term": "Coverage",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "emmons2025pragmatic",
+     "where": "§3.4.5.6",
+     "quote": "Coverage: Does the CoT contain all the reasoning the model needed to produce its output? A score of 4 means a human could reconstruct the model's answer by following the CoT step-by-step without additional reasoning;",
+     "gloss": "0–4 autorater score of whether key reasoning is externalized or hidden."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT controllability",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Yueh-Han et al. 2026",
+     "where": "§3.4.5.8",
+     "quote": "CoT controllability (Yueh-Han et al., 2026) is defined as a model's ability to control its CoT in ways that impact monitorability e.g. obfuscating incriminating reasoning.",
+     "gloss": "Worst-case capability; measured as strict/continuous compliance with stylistic and information-suppression CoT constraints."
+    },
+    {
+     "family": "monitorability",
+     "term": "evasion rate / successful sabotage rate",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Tracy et al. 2026",
+     "where": "§3.4.5.4",
+     "quote": "we report two metrics: evasion rate (the fraction of successful side task attempts that evade the monitor), and successful sabotage rate (the fraction of attempts that are both successful and evade the monitor).",
+     "gloss": "Worst-case monitorability metrics in control environments (LinuxArena, internal codebase, honeypots) under prompted evasion."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor scopes",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4.5.4",
+     "quote": "We evaluate monitors across three scopes: action only (only access to tool calls and outputs), CoT only (only access to CoTs), and combined (thoughts, tool calls, and responses).",
+     "gloss": "Classifies monitors by observation; honeypot section adds a code-diff (PR review) monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "capability tax",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4.3.3",
+     "quote": "Furthermore, evasion imposes a capability tax: when the model modifies its thoughts to avoid detection, the quality of its technical exploits declines.",
+     "gloss": "Cost paid by the model (not the developer) for hiding reasoning; used to argue monitorability is preserved on hard tasks."
+    }
+   ],
+   "note": "Fictional-future model card (Oct 2026); 'faithful' used inside transparency/monitorability definitions but never defined separately; source-document faithfulness (FACTS grounding) skipped."
+  },
+  {
+   "key": "prasad2026features",
+   "entries": [],
+   "note": "No definitions: 'legibility' is only an output-format reward for hallucination interventions and 'faithful supervision' is ordinary English; probes 'monitor' hallucinations without defining monitorability."
+  },
+  {
+   "key": "ramnath2024tailoring",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "plausibility (of rationales)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "We define plausibility as the rationale making sense on its own – whether it be common, logical or factual sense depending on the dataset at hand.",
+     "gloss": "Rationale-intrinsic sense-making; operationalized with the Vera commonsense verifier score (Eq. 1)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "consistency (of rationales)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Lastly, we note that a rationale should be consistent with the gold label for the input. Consistency is important to ensure that a rationale does not spew irrelevant information, and that it supports the gold answer.",
+     "gloss": "Consistency with the gold label, not the model's prediction; the paper stresses all its properties are agnostic of the actual prediction."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Consistency (rationale–label association)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "wiegreffe2021measuring",
+     "where": "§4.2",
+     "quote": "Consistency is a numerical score between $-1$ and $1$ that indicates the faithfulness of the rationale towards the gold answer, like the implementation by Wiegreffe et al. (2021).",
+     "gloss": "P_{M_QR}(O|Q,R̂) − P_{M_Q}(O|Q): gain in gold-answer probability for reference LMs given the rationale."
+    }
+   ],
+   "note": "'Faithfulness' means support for the gold answer, not fidelity to the model's reasoning; LAS and REV listed as other faithfulness-towards-label metrics in §5.1."
+  },
+  {
+   "key": "shenoy2026introspection",
+   "entries": [],
+   "note": "Empty excerpt: never uses faithful*/counterfactual*/monitorab*; studies introspective self-reports scored for verbalization accuracy, citing introspection as privileged access (Binder et al.)."
+  },
+  {
+   "key": "wang2026doing",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "process fidelity",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "Do LLM agents act on the reasoning they state? This question of process fidelity is central to LLM-based social simulation, yet hard to measure where no reference for correct behavior exists.",
+     "gloss": "Whether agents act on their stated reasoning; used interchangeably with closing the 'faithfulness gap'."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness gap (two-step decomposition)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "by splitting the faithfulness gap into two steps: reasoning $\\rightarrow$ conclusion (does the stated decision follow from the agent’s own reasoning?) and conclusion $\\rightarrow$ action (does the agent execute what it states?).",
+     "gloss": "Separates validity of deriving the stated decision from its own reasoning from execution of the stated decision."
+    },
+    {
+     "family": "faithfulness",
+     "term": "conclusion → action consistency",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Conclusion $\\rightarrow$ action consistency applies to the CoT and GTO-verbose strategies, which emit an explicit DECISION tag. A decision is flagged inconsistent when the tagged conclusion contradicts the JSON action.",
+     "gloss": "Stated-vs-actual inconsistency rate; free-text phrase parsing inflates it about tenfold (22–26% vs 0.7–1.8%)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "reasoning → conclusion validity",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "For each decision we check whether the stated DECISION follows from the agent’s own stated EQUITY and POT_ODDS under the rule it restated.",
+     "gloss": "Internal-consistency check against the agent's own stated inputs and rule, independent of the reference policy."
+    },
+    {
+     "family": "faithfulness",
+     "term": "rule misapplication",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "rule misapplication—deriving a conclusion that contradicts the agent’s own restated rule from inputs it estimated correctly",
+     "gloss": "One of three upstream error types (with bad inputs and borderline cases); almost always risk-averse."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT explanations",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "§2",
+     "quote": "Turpin et al. (2023) showed that CoT explanations can be unfaithful— models influenced by spurious biasing features fail to mention those influences while still acting on them",
+     "gloss": "Restates Turpin's biasing-feature notion; Lanham's interventions on the trace cited as the other measurement."
+    },
+    {
+     "family": "faithfulness",
+     "term": "surface-level rationalizations",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Park et al. 2023; Zhou et al. 2024",
+     "where": "§1",
+     "quote": "A fundamental concern in LLM-based social simulation is whether agents genuinely act on the reasoning they appear to exhibit, or produce surface-level rationalizations that do not govern behavior (Park et al., 2023; Zhou et al., 2024).",
+     "gloss": "Stated reasoning that does not govern action; the paper finds the gap is instead in deriving the conclusion."
+    }
+   ],
+   "note": "Uses 'fidelity' and 'faithfulness' interchangeably; agents' stated conclusions faithfully predict actions, so the unfaithfulness lies in invalid reasoning→conclusion steps."
+  },
+  {
+   "key": "zhang2026audit",
+   "entries": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (factor-level self-reports)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We study a simple notion of faithfulness: whether a model truthfully reports which input factors influenced its output.",
+     "gloss": "Faithfulness = truthful factor-importance reports, verified by single-factor removal or replacement."
+    },
+    {
+     "family": "faithfulness",
+     "term": "interventional influence (target report)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We define the interventional influence of $F_{j}$ as",
+     "gloss": "Δ_j = P_{v~P_j}(M(x^{\\j,v}) ≠ M(x)); the faithful report is p* = (Δ_1,…,Δ_m), protocol-relative to the perturbation model."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual replacement (perturbed input)",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "For each factor $F_{j}$ , we maintain a distribution of counterfactual replacements $\\mathcal{P}_{j}$ and sample values $v\\sim\\mathcal{P}_{j}$ . The perturbed input $x^{\\setminus j,v}$ is identical to $x$ except that factor $j$ is replaced by $v$ .",
+     "gloss": "Counterfactual = one structured factor replaced by a sampled value, all other factors fixed."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Counterfactual Brier Score (CBS)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "We instantiate the framework with the Counterfactual Brier Score (CBS), a coordinate-wise Brier score applied to counterfactual audit outcomes (Brier, 1950).",
+     "gloss": "S = −Σ_j (p_j − D̂_j)², D̂_j = fraction of n perturbations flipping the answer; strictly proper only under exogenous auditing."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual distribution (perturbation design)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Good perturbations should preserve the coherence of the input, vary the target factor enough to change the answer when that factor matters, and leave the other factors fixed.",
+     "gloss": "Requirements for valid counterfactuals; single-factor perturbations cannot detect interactions."
+    },
+    {
+     "family": "faithfulness",
+     "term": "suppression / inflation",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We show that proportional auditing creates a suppression incentive, because reporting a factor as important raises its chance of being audited and penalized for estimation noise. A completeness bonus intended to counter this instead induces inflation of non-causal factors.",
+     "gloss": "Strategic under- and over-reporting of factor influence induced by report-dependent auditing."
+    }
+   ],
+   "note": "Faithfulness recast as incentive-compatible elicitation; ground truth is protocol-relative interventional influence, not internal computation."
+  },
+  {
+   "key": "zhou2026conceptual",
+   "entries": [
+    {
+     "family": "monitorability",
+     "term": "encoded reasoning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "roger2023preventing",
+     "where": "§1",
+     "quote": "Information can be steganographically embedded into a model’s CoT that an unaware reader will not catch — a phenomenon termed encoded reasoning (Roger and Greenblatt, 2023).",
+     "gloss": "Encoded reasoning framed as covert message-passing to a confederate, not hidden task reasoning."
+    },
+    {
+     "family": "monitorability",
+     "term": "conceptual steganography",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "We introduce conceptual steganography, in which each step of a CoT carries information through patterns of high-level reasoning behavior, rather than through lexical choice.",
+     "gloss": "Bits carried by whether each step realizes a reasoning strategy (e.g. anticipate_failure); survives content-preserving paraphrase."
+    },
+    {
+     "family": "monitorability",
+     "term": "lexical steganography",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "All of these schemes are, by construction, lexical: the secret rides on which words appear or on the per-token sampling distribution.",
+     "gloss": "Classifies prior schemes (word choice, templates, sampling distortions) as lexical, against conceptual carriers."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful (to surface purpose)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "When encoded reasoning is present, the model is operating in a manner that is no longer faithful to its surface purpose.",
+     "gloss": "Sufficient condition for unfaithfulness; §2 calls this the CoT failing to be 'a faithful supervisory surface'."
+    },
+    {
+     "family": "monitorability",
+     "term": "Defender / Monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Defender / Monitor (Eve): a party deployed on the monitor perimeter that applies a content-preserving paraphraser to the CoT before downstream consumption.",
+     "gloss": "Monitor as paraphrasing sanitizer; the strategy-aware variant knows the carrier strategy and flattens it."
+    },
+    {
+     "family": "monitorability",
+     "term": "decode accuracy / utility",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Decode accuracy is the fraction of payloads correctly recovered by the receiver (Bob) after the defender (Eve). Utility is preservation of the surface task to the user (Patsy) (final-answer accuracy on the underlying question).",
+     "gloss": "Channel metrics; a stealth (detectability) criterion is named but explicitly not studied."
+    }
+   ],
+   "note": "Steganography as covert communication channel; faithfulness invoked only loosely ('faithful supervisory surface')."
+  }
+ ]
+}

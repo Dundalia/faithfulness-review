@@ -61,6 +61,7 @@
           <button role="tab" id="tab-table" aria-controls="view-table" data-tab="table">Table</button>
           <button role="tab" id="tab-coverage" aria-controls="view-coverage" data-tab="coverage">Coverage</button>
           <button role="tab" id="tab-links" aria-controls="view-links" data-tab="links">Links</button>
+          <button role="tab" id="tab-definitions" aria-controls="view-definitions" data-tab="definitions">Definitions</button>
         </div>
       </div>
       <div class="subbar">
@@ -99,6 +100,17 @@
       <section id="view-links" role="tabpanel" aria-labelledby="tab-links" hidden>
         <div class="verb-pickers" id="verbs" role="group" aria-label="Link types"></div>
         <ol class="links" id="links"></ol>
+      </section>
+      <section id="view-definitions" role="tabpanel" aria-labelledby="tab-definitions" hidden>
+        <div class="matrix-head">
+          <p class="matrix-intro">Definitions of faithfulness, counterfactual and monitorability quoted from the entries that match your filters, grouped by cluster of meaning. The search matches the definitions themselves. <a href="page.html?doc=definitions">Read the synthesis</a>.</p>
+          <div class="axis-pickers">
+            <label>Term <select id="defFam"></select></label>
+            <label>Cluster <select id="defCluster"></select></label>
+            <label>Kind <select id="defKind"></select></label>
+          </div>
+        </div>
+        <div class="defs" id="defs"></div>
       </section>
     </main>
 

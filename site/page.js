@@ -45,7 +45,15 @@ async function init() {
   const { src, math } = protectMath(text);
   const doc = $('doc');
   doc.innerHTML = restoreMath(marked.parse(src), math);
-  doc.querySelectorAll('h1, h2, h3, h4').forEach(h => { if (!h.id) h.id = slug(h.textContent); });
+  // Repeated headings get -1, -2, ... as on GitHub, so each one has its own anchor.
+  const seen = new Map();
+  doc.querySelectorAll('h1, h2, h3, h4').forEach(h => {
+    if (h.id) return;
+    const base = slug(h.textContent), n = seen.get(base) || 0;
+    h.id = n ? `${base}-${n}` : base;
+    seen.set(base, n + 1);
+  });
+  setupToc(doc);
   doc.querySelectorAll('table').forEach(t => {
     const wrap = document.createElement('div');
     wrap.className = 'table-scroll';
@@ -55,6 +63,37 @@ async function init() {
   if (h1) document.title = `${h1.textContent} · CoT Faithfulness and Monitorability`;
   $('source').href = `${REPO_BLOB}site/pages/${page.id}.md`;
   if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
+}
+
+/* ---------- contents ---------- */
+// Sections and subsections in the left margin; on narrow screens, a collapsed box above the text.
+function setupToc(doc) {
+  const heads = [...doc.querySelectorAll('h2, h3')];
+  if (heads.length < 3) return;
+  const toc = $('toc');
+  toc.innerHTML = `<details><summary class="toc-title">Contents</summary><ol>${heads.map(h =>
+    `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${h.innerHTML}</a></li>`).join('')}</ol></details>`;
+  toc.hidden = false;
+  const box = toc.querySelector('details');
+  const wide = window.matchMedia('(min-width: 1200px)');
+  const sync = () => { box.open = wide.matches; };
+  sync(); wide.addEventListener('change', sync);
+
+  const links = new Map([...toc.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
+  let current = null, queued = false;
+  const mark = () => {
+    queued = false;
+    let id = heads[0].id;
+    for (const h of heads) { if (h.getBoundingClientRect().top > 90) break; id = h.id; }
+    if (id === current) return;
+    links.get(current)?.removeAttribute('aria-current');
+    current = id;
+    const a = links.get(id);
+    a.setAttribute('aria-current', 'location');
+    if (wide.matches && (a.offsetTop < toc.scrollTop || a.offsetTop > toc.scrollTop + toc.clientHeight - 40)) toc.scrollTop = a.offsetTop - toc.clientHeight / 3;
+  };
+  window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
+  mark();
 }
 
 function fail(html) { $('doc').innerHTML = `<p class="doc-status">${html}</p>`; }

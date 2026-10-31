@@ -1,0 +1,850 @@
+{
+ "papers": [
+  {
+   "key": "anwar2026analyzing",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "output monitor",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 3.1",
+     "quote": "An output monitor is a stochastic mapping $g:\\mathcal{O}\\times\\mathcal{X}\\to\\Delta(\\mathcal{Y})$ ; given $X\\in\\mathcal{X}$ and $O\\in\\mathcal{O}$ , the label is drawn as $Y\\sim g(\\cdot\\mid X,O)$ .",
+     "gloss": "Monitor that labels the attribute Y from the prompt and the realized output O; the paper treats it as the oracle g that defines the ground-truth attribute."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitor (formal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 3.2",
+     "quote": "Similarly, CoT monitor is a stochastic mapping $m:\\mathcal{Z}\\times\\mathcal{X}\\to\\Delta(\\mathcal{Y})$ with the label drawn as $Y\\,\\sim\\,m(\\,\\cdot\\mid Z,X).$",
+     "gloss": "A CoT monitor is any stochastic map from (CoT, prompt) to a distribution over attribute labels."
+    },
+    {
+     "family": "monitorability",
+     "term": "prompt-only monitor",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 3.3",
+     "quote": "A prompt monitor is a stochastic mapping that only uses the prompt $X$ : $p:\\mathcal{X}\\to\\Delta(\\mathcal{Y})$ with the label $Y$ drawn as $Y\\,\\sim\\,p(\\,\\cdot\\mid X)$ .",
+     "gloss": "Baseline monitor predicting the attribute from the prompt alone; its Bayes-optimal accuracy is subtracted from the CoT monitor's to define uplift."
+    },
+    {
+     "family": "monitorability",
+     "term": "approximate CoT monitor",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 3.5",
+     "quote": "Let $q(O\\mid X,Z)$ be an approximation to the true output distribution $\\pi(O\\mid X,Z)$ and let $v(Y\\mid X,O)$ be an approximation to the output monitor $g(Y\\mid X,O)$ . The predictive distribution of the approximate monitor, denoted $m_{v}^{q}$ , is defined as $m_{v}^{q}(Y\\mid X,Z)\\;:=\\;\\mathbb{E}_{\\,o\\sim q(O\\mid X,Z)}\\!\\big[\\,v(Y\\mid X,o)\\,\\big].$",
+     "gloss": "Practical monitor: averages an approximate output monitor v over an approximate model q of the policy's outputs given the CoT; m_psi denotes an LLM monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor accuracy Acc(m)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eq. 2",
+     "quote": "The performance of a monitor is measured by its accuracy, defined as the probability that its point prediction matches the true attribute $Y$ . Formally, for a CoT monitor $m$ , its accuracy is: | | $\\mathrm{Acc}(m):=\\mathbb{E}_{\\pi(X,Z)}\\Big[\\mathbb{E}_{Y\\sim m_{g}^{\\pi}(\\cdot|X,Z)}\\big[\\mathbf{1}\\{\\hat{Y}_{m}(X,Z)=Y\\}\\big]\\Big],$ | | (2)",
+     "gloss": "Probability that the monitor's argmax prediction matches the attribute drawn from the Bayes-optimal posterior; reported in experiments as Monitor Accuracy at detecting hacky answers."
+    },
+    {
+     "family": "monitorability",
+     "term": "uplift in CoT monitorability (MI bound)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Prop. 3.7",
+     "quote": "Accuracy uplift $\\delta$ in CoT monitorability of an attribute $Y$ is always non-negative and bounded above by $I(Y;Z|X)$ . Specifically, $0\\leq\\delta\\leq\\sqrt{2I(Y;Z|X)}$",
+     "gloss": "Uplift is non-negative and at most sqrt(2 I(Y;Z|X)); Cor. 3.8: positive uplift requires positive conditional MI between CoT and attribute given the prompt."
+    },
+    {
+     "family": "monitorability",
+     "term": "necessity of CoT reasoning",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Remark 3.11",
+     "quote": "The necessary condition for CoT monitorability, $I(O;Z|X)>0$ , is implied by CoT being necessary for solving the task. However, $I(O;Z|X)>0$ can also be fulfilled in other cases, such as when CoT is a post-hoc explanation of the model output or when CoT contains excerpts of the output.",
+     "gloss": "CoT being necessary for the task implies the necessary condition I(O;Z|X)>0, but post-hoc explanations or CoTs quoting the output satisfy it too."
+    },
+    {
+     "family": "monitorability",
+     "term": "misspecification error",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Lemma 3.12",
+     "quote": "The difference in accuracy between the approximate monitor $m_{v}^{q}$ and the Bayes-optimal monitor $m_{g}^{\\pi}$ is bounded by: | | $\\mid\\mathrm{Acc}(m_{g}^{\\pi})-\\mathrm{Acc}(m_{v}^{q})\\mid\\;\\leq\\;\\sqrt{2\\,\\epsilon_{\\mathrm{spec}}(q,v)},$ | | (4) where $\\epsilon_{\\mathrm{spec}}(q,v)$ is the misspecification error, defined as the expected KL-divergence between the ideal and approximate posterior distributions: | | $\\epsilon_{\\mathrm{spec}}(q,v):=\\mathbb{E}_{\\pi(X,Z)}\\big[\\mathrm{KL}\\!\\big(m_{g}^{\\pi}(\\cdot\\mid X,Z)\\,\\big\\|\\,m_{v}^{q}(\\cdot\\mid X,Z)\\big)\\big].$",
+     "gloss": "Expected KL between the Bayes-optimal and approximate monitor posteriors; the approximate monitor's accuracy gap is at most sqrt(2·eps_spec)."
+    },
+    {
+     "family": "monitorability",
+     "term": "information gap",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "The first term, which we denote information gap, measures how well the monitor’s internal model of the agent, $q(O\\mid X,Z)$ , matches the agent’s true policy, $\\pi(O\\mid X,Z)$ . A large information gap error implies the monitor cannot accurately predict which outputs are likely to follow a given CoT. In other words, the monitor is unable to correctly interpret the agent’s reasoning process.",
+     "gloss": "Error from the monitor's model q of what outputs follow a CoT; large when the monitor cannot interpret the reasoning, e.g. steganographic CoT."
+    },
+    {
+     "family": "monitorability",
+     "term": "elicitation error",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "The second term, which we denote elicitation error, measures how well, and how robustly, the monitor can approximate the true output monitoring function $g(Y\\mid X,O)$ . A large elicitation error means that even if the monitor knew exactly what output the agent would produce, it would still struggle to correctly identify whether that output possesses the attribute of interest.",
+     "gloss": "Error from the monitor's approximation v of the output monitor g, from model limits or an ambiguous attribute specification; e.g. distraction by rationalizations, prompt injection."
+    },
+    {
+     "family": "monitorability",
+     "term": "policy-as-monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3, Cor. 3.14",
+     "quote": "However, if and when, an LLM may be using steganographic reasoning, information gap can become the dominant term. In such a case, it may be advisable to use the policy model as monitor model as well (a setup we call policy-as-monitor). This setup has the advantage that it eliminates the information gap between the monitor and the agent.",
+     "gloss": "Using the monitored policy itself as the monitor (q = pi), which zeroes the information gap and leaves only elicitation error; advised against steganographic reasoning."
+    },
+    {
+     "family": "monitorability",
+     "term": "oracle monitor-accuracy reward R_Oracle",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1, Eq. 5",
+     "quote": "Let $g$ denote the oracle action monitor, then given a trajectory $(y,o,z,x)$ , we define a binary oracle reward signal: | | $R_{\\mathrm{Oracle}}(o,z,x)\\coloneqq\\begin{cases}+1,&\\text{if }m_{\\psi}(z,x)=g(o,x),\\\\ -1,&\\text{otherwise.}\\end{cases}$ | | (5) This signal directly rewards the model for generating a CoT $z$ that leads the monitor to the correct conclusion $m_{\\psi}(z,x)=g(o,x)=y$ .",
+     "gloss": "Training reward +1 when a fixed CoT monitor's verdict matches the oracle output label, else -1; added to task reward, it indirectly maximizes monitor-decodable I(Y;Z|X)."
+    },
+    {
+     "family": "monitorability",
+     "term": "per-rollout MI estimate Î (MI reward R_MI)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2.1, Eq. 8",
+     "quote": "For a rollout $i$ that produces an output $o_{i}$ and a CoT $z_{i}$ from a prompt $x_{i}$ , we estimate the mutual information as: | | $\\displaystyle\\hat{I}_{i}=\\underbrace{\\log\\pi_{\\theta}(o_{i}\\mid z_{i},x_{i})}_{\\text{Output log-likelihood given CoT}}-\\underbrace{\\log\\hat{\\pi}_{\\theta}(o_{i}\\mid x_{i}).}_{\\text{Marginal log-likelihood}}$ | | (8)",
+     "gloss": "Output log-likelihood given its own CoT minus log of its mean over the GRPO group's CoTs; length-normalized, clipped as R_MI = min(aÎ, b), and reported as MI."
+    },
+    {
+     "family": "monitorability",
+     "term": "hacking rate (reward hacking)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "Hacking Rate: The percentage of samples for which the model output passes the task verifier, but not the true verifier.",
+     "gloss": "Share of samples passing the hackable task verifier (revealed tests, or any negative answer) but failing the true verifier."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor rejection rate",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.1",
+     "quote": "Monitor Rejection Rate: This measures the proportion of samples on which monitor believes that model’s CoT is not going to lead to the correct answer. When the model obtains high task accuracy, this can loosely be interpreted as how often the model is able to fool the monitor.",
+     "gloss": "Share of samples the monitor predicts will not reach the correct answer; with high task accuracy, read as how often the model fools the monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "test-hacking CoT monitor and monitor reward R_Monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "baker2025monitoring",
+     "where": "App. B.5.1",
+     "quote": "The monitor observes the prompt and the CoT of the monitored model, $\\pi_{\\theta}$ , then outputs a binary decision regarding whether the model is implementing a true solution or a hacky solution. The monitoring reward $R_{\\mathrm{Monitor}}$ for $\\pi_{\\theta}$ is $+1$ when the monitor determines the model is not hacking, and $-1$ when it detects hacking.",
+     "gloss": "Qwen2.5-7B reads prompt and CoT and flags a hacky vs. true solution; the +1/-1 reward (0.5 if no CoT) applies monitor pressure in a Baker-inspired honeypot."
+    },
+    {
+     "family": "monitorability",
+     "term": "encoded or steganographic reasoning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.2",
+     "quote": "To see why, note that solving the task with encoded reasoning would lead to a high monitor rejection rate – since the monitor is unable to understand the reasoning – while obtaining high MI due to the model’s ability to interpret its own CoT.",
+     "gloss": "Reasoning the monitor cannot understand but the model can, so MI under the policy stays high while the monitor is fooled; R_MI does not penalize it."
+    },
+    {
+     "family": "monitorability",
+     "term": "full / partial / no steganography",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 4 (App. A.1)",
+     "quote": "For the latter, one seed fools the monitor through steganographic CoT but fails the task (denoted full steganography in the legend); three seeds perform a mixture of suppressive and weakly-steganographic CoT, partially succeeding both at the task and at fooling the monitor (denoted partial steganography); one seed gives up on fooling the monitor (denoted no steganography).",
+     "gloss": "Strategies under task, monitor-rejection and MI rewards: steganographic CoT that fails the task; mixed suppression and weak steganography; giving up on fooling the monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "obfuscation (from optimizing against a CoT monitor)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "baker2025monitoring",
+     "where": "§5.2",
+     "quote": "This decrease in MI for $R_{\\mathrm{Task}}+R_{\\mathrm{Monitor}}$ is accompanied by a decrease in monitor accuracy, indicating the obfuscation behavior due to optimizing against CoT monitor that was also observed by Baker et al. (2025).",
+     "gloss": "Signalled by CoT-output MI and monitor accuracy falling together under task plus monitor reward; hacks pair a reasonable-looking general CoT with hardcoded outputs."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; lanham2023measuring; chen2025reasoning; arcuschin2025chain",
+     "where": "App. H",
+     "quote": "This practical risk is compounded by the fundamental problem of CoT faithfulness: a model’s stated reasoning may be a plausible but misleading rationalization of a biased answer, rather than a reflection of its actual computational process (Turpin et al., 2023; Lanham et al., 2023; Chen et al., 2025; Arcuschin et al., 2025).",
+     "gloss": "Unfaithful CoT: the stated reasoning is a plausible but misleading rationalization of a biased answer rather than a reflection of the actual computation."
+    },
+    {
+     "family": "monitorability",
+     "term": "activation monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.4",
+     "quote": "The additional benefit that this DAG confers is that it allows us to formally distinguish between a CoT monitor, which observes $(X,Z_{T})$ , and a more invasive activation monitor, which has access to the full internal state $(X,Z_{T},Z_{L})$ . The performance gap between these two monitors is controlled by additional $Y$ -relevant information contained in $Z_{L}$ beyond $Z_{T}$ .",
+     "gloss": "Monitor that sees prompt, textual CoT and latent activations; its Bayes-optimal edge over a CoT monitor is at most sqrt(2 I(Y;Z_L|X,Z_T)) (Prop. F.6)."
+    },
+    {
+     "family": "monitorability",
+     "term": "marginal misspecification error Δ_info",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Prop. F.5 (App. F.3)",
+     "quote": "Let $\\Delta_{\\mathrm{info}}(q,v):=I(Y;Z\\mid X)-I_{m_{v}^{q}}(Y;Z\\mid X).$ be the performance gap between the practical and the idealized monitor at CoT level, then",
+     "gloss": "Conditional MI the ideal monitor extracts from the CoT minus what the practical monitor captures; equals CoT-level minus prompt-level KL misspecification, and is non-negative."
+    },
+    {
+     "family": "monitorability",
+     "term": "conditional predictive V-information I_V(Y;Z|X)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Xu et al. 2020",
+     "where": "Def. E.3 (App. E.1)",
+     "quote": "Let $\\mathcal{V}$ denote a hypothesis class for monitors under a proper scoring rule $\\ell$ . For random variables $(X,Z,O,Y)$ , define: | | $I_{\\mathcal{V}}(Y;Z\\mid X):=\\inf_{h\\in\\mathcal{V}}\\ \\mathbb{E}\\big[\\ell\\big(Y,h(X)\\big)\\big]\\ -\\ \\inf_{h\\in\\mathcal{V}}\\ \\mathbb{E}\\big[\\ell\\big(Y,h(X,Z)\\big)\\big].$",
+     "gloss": "Usable information for monitor class V: drop in best achievable expected loss when the CoT is added to the prompt; unlike Shannon MI, computation can increase it."
+    },
+    {
+     "family": "monitorability",
+     "term": "sufficient condition for a CoT monitor to beat an output monitor",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Prop. E.5",
+     "quote": "Proposition E.5 (Sufficient condition for CoT to surpass output monitor in practice.). If | | $I_{\\mathcal{V}}(Y;Z\\mid X)-I_{\\mathcal{V}}(Y;O\\mid X)\\ \\geq\\ \\delta^{\\mathcal{V}}_{\\text{cot}}+\\delta^{\\mathcal{V}}_{\\text{out}}+\\gamma,$ | then the practical CoT monitor outperforms the practical output monitor by at least $\\gamma$ in expected log-loss.",
+     "gloss": "If the CoT's V-information advantage over the output exceeds both practical monitors' excess risks plus gamma, the CoT monitor wins by at least gamma in log-loss."
+    },
+    {
+     "family": "monitorability",
+     "term": "necessary MI threshold for an α-accurate CoT monitor",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Prop. F.2 (App. F.1)",
+     "quote": "If $\\mathrm{Acc}(m_{g}^{\\pi})\\geq\\alpha$ , then the conditional mutual information under the true data distribution $\\pi$ must satisfy: | | $I_{\\pi}(Y;Z\\mid X)\\ \\geq\\ H_{\\pi}(Y\\mid X)\\;-\\;T_{\\alpha}.$",
+     "gloss": "By Fano's inequality, Bayes-optimal CoT monitor accuracy of at least alpha requires I(Y;Z|X) >= H(Y|X) - T_alpha; the cost grows super-linearly in alpha."
+    },
+    {
+     "family": "monitorability",
+     "term": "conditions for a large action-vs-CoT monitor gap",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.2",
+     "quote": "Thus, for $I(Y;O\\mid X,Z)$ to be large, two conditions must both be met: 1. High output uncertainty: Many plausible actions must remain after observing the CoT, meaning $H(O\\mid X,Z)$ is large and the policy $\\pi(O\\mid X,Z)$ is spread out. 2. High label sensitivity to the action: The attribute must change depending on which action is realized. Formally, the distribution $g(\\cdot\\mid X,O)$ must vary significantly with $O$ .",
+     "gloss": "I(Y;O|X,Z) bounds the action monitor's edge over the Bayes-optimal CoT monitor (Prop. F.4); it is large only with high output uncertainty and high label sensitivity."
+    },
+    {
+     "family": "monitorability",
+     "term": "alignment tax (of the MI reward)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.2",
+     "quote": "In Figure 15, we analyze whether optimizing $R_{\\mathrm{MI}}$ can reduce model performance in the absence of monitor pressure on Qwen2.5-3B-Instruct.",
+     "gloss": "Loss of true pass rate and monitor accuracy from optimizing R_MI with no monitor pressure; mostly offset by tuning, trading false negatives for false positives."
+    }
+   ],
+   "fix": [
+    {
+     "id": "anwar2026analyzing#1",
+     "set": {
+      "where": "§1",
+      "quote": "This capability has enabled the development of CoT monitors (Korbak et al., 2025); which are LLM-based systems that analyze these reasoning traces to detect attributes such as deceptiveness (Panfilov et al., 2025) or misbehaviors during code generation (Baker et al., 2025; Stickland & Korbak, 2025).",
+      "gloss": "CoT monitors are LLM-based systems that read reasoning traces to detect attributes such as deceptiveness or misbehavior in code generation; formalized as a stochastic map in Def. 3.2."
+     },
+     "reason": "The Abstract sentence cites nothing; the §1 restatement is where the paper cites Korbak et al. 2025, the row's source."
+    },
+    {
+     "id": "anwar2026analyzing#2",
+     "set": {
+      "quote": "The Bayes-optimal monitor, denoted $m_{g}^{\\pi}$ , uses the true policy $\\pi$ and the true output monitor $g$ to compute the ground-truth conditional distribution of the attribute: $m_{g}^{\\pi}(Y\\mid X,Z):=\\mathbb{E}_{o\\sim\\pi(O\\mid X,Z)}\\!\\big[g(Y\\mid X,o)\\big].$"
+     },
+     "reason": "Formal row omitted the operative equation m(Y|X,Z) := E_{o~pi(O|X,Z)}[g(Y|X,o)], which follows in the same paragraph."
+    }
+   ],
+   "drop": [],
+   "note": "Added the formal monitor family (Defs 3.1-3.5, accuracy, misspecification), the info gap/elicitation categories, training rewards and metrics, steganography/obfuscation rows, faithfulness restatement, and appendix bounds (V-information, Fano, activation monitor)."
+  },
+  {
+   "key": "li2025training",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithful verbalized explanations",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; chen2025reasoning; Barez et al. 2025",
+     "where": "§1",
+     "quote": "but may not bear any relationship to the computation that first gave rise to LMs’ decisions. Indeed, work using attribution, feature visualization, and mechanistic interpretability techniques (Simonyan et al., 2013; Covert et al., 2020; Templeton et al., 2024) has shown that LMs’ verbalized explanations sometimes systematically fail to describe the factors that determine their decisions (Turpin et al., 2023; Chen et al., 2025; Barez et al., 2025).",
+     "gloss": "Prompted explanations can be plausible yet unrelated to the computation behind the decision, systematically failing to describe the factors that determine it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-explaining (looser sense)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "While this setup does not constitute self-explanation in the strictest sense (since the explainer’s output distribution changes), we believe it is more useful to explain pre-trained models than enforce this strict notion of self-consistency. We discuss the implications of this simplification in Section 7. For the rest of this paper, we use the term “self-explaining” in this looser sense.",
+     "gloss": "The explainer is a fine-tuned copy of a frozen target, so this is not strict self-explanation or self-consistency; the paper calls it self-explaining anyway."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unverbalized hint (unfaithful CoT)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "chen2025reasoning",
+     "where": "§5.2",
+     "quote": "Previously, Chen et al. (2025) found that models fail to verbalize $\\tilde{x}$ in their chain-of-thought, despite $\\tilde{x}$ being critical to its prediction ( $\\mathcal{M}([c,\\tilde{x}])\\neq\\mathcal{M}(c)$ ).",
+     "gloss": "A hint is critical to the prediction when adding it changes the answer, M([c,x̃]) != M(c); unfaithfulness is the CoT not verbalizing such a hint."
+    },
+    {
+     "family": "counterfactual",
+     "term": "activation patching (intervention T_patch)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adopted",
+     "source": "Meng et al. 2022; Zhang & Nanda 2024",
+     "where": "§2.3, Eq. 4–5",
+     "quote": "We then run a forward pass of $\\mathcal{M}$ on $x$ , but replace the activation $h_{\\ell,t}(x)$ with the corresponding activation $h_{\\ell,t}(x^{\\prime})$ : | | $\\mathcal{M}\\left(x;\\,h_{\\ell,t}(x)\\leftarrow h_{\\ell,t}(x^{\\prime})\\right)~,$ | | (4) and we measure the change in the model’s output: | | $\\displaystyle T_{\\text{patch}}(\\mathcal{M},q)$ | $\\displaystyle=T_{\\text{patch}}(\\mathcal{M},x,\\ell,t)$ | | (5) | | | $\\displaystyle=d\\Big(\\mathcal{M}(x),\\;\\mathcal{M}\\big(x;\\,h_{\\ell,t}(x)\\leftarrow h_{\\ell,t}(x^{\\prime})\\big)\\Big).$ | where $d(\\cdot,\\cdot)$ is some measure of the difference between the two predictions.",
+     "gloss": "Run the model on x with the activation at one layer and token replaced by its value on counterfactual input x′; the ground truth is the output change d."
+    },
+    {
+     "family": "counterfactual",
+     "term": "input ablation (x \\ x̃)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adopted",
+     "source": "Chang et al. 2025; Vafa et al. 2021",
+     "where": "§2.4, Eq. 8",
+     "quote": "Input ablation measures how much the target model $\\mathcal{M}$ ’s output changes when we take an input $x$ (e.g. The first US president… in Figure 4) and remove a subset of tokens $\\tilde{x}\\subseteq x$ (e.g. Hint: B): | | $T_{\\text{input}}(\\mathcal{M},x,\\tilde{x})=d\\left(\\mathcal{M}(x),\\,\\mathcal{M}(x\\backslash\\tilde{x})\\right),$ | | (8) where $d$ measures difference in the model’s outputs.",
+     "gloss": "Ground truth for decision-rule explanations: output change when an input subset (e.g. a hint) is removed; the explainer predicts whether and how the answer changes."
+    },
+    {
+     "family": "faithfulness",
+     "term": "simulator score",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Bills et al. 2023; Choi et al. 2024",
+     "where": "§3.2",
+     "quote": "(2) We also use simulator score (Equation 2), measuring the Pearson correlation between true and predicted activations based on $\\mathcal{E}(v)$ for each sample $x$ .",
+     "gloss": "Pearson correlation between a feature's true activations and those a simulator LM predicts from the explainer's description (the Eq. 2 objective); scores feature self-descriptions."
+    },
+    {
+     "family": "faithfulness",
+     "term": "LM judge similarity to gold description",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2; App. A",
+     "quote": "For SAE features, gold descriptions are available via Neuronpedia, so we use an LM judge to assess the similarity of the predicted description to the gold description, on a scale of 0 (no similarity) to 1 (very similar), in increments of 0.25. We use GPT-4.1-mini as the judge.",
+     "gloss": "GPT-4.1-mini rates a predicted feature description against the Neuronpedia gold label from 0 to 1 in 0.25 steps; 81.25% agreement with a human annotator."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Has-Changed F1",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "Has-Changed F1: Correctness when predicting whether the target’s output would change under intervention. We report the Macro F1 scores over the “changed” and “unchanged” classes.",
+     "gloss": "Macro F1 of the explainer's prediction of whether the target model's output changes under activation patching or input ablation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Content Match",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "Content Match: Correctness of predictions about the content of target model output under intervention.",
+     "gloss": "Accuracy of the explainer's prediction of what the target model outputs after the intervention."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Exact Match",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "Exact Match: Exact match accuracy between generated explanation and ground-truth explanation. Requires the explainer to correctly predict both parts.",
+     "gloss": "The generated explanation must match the ground-truth explanation exactly, i.e. both the has-changed verdict and the resulting output."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the unfaithfulness restatement, the loose self-explanation notion, Chen's hint criterion, formal patching/ablation interventions that ground the explanations, and the four explanation-accuracy metrics."
+  },
+  {
+   "key": "luo2026removal",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "credit set cr(E)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "The explanation cites a subset of the question’s concepts as influencing its answer choice. We call this the credit set $\\mathrm{cr(E)}\\subseteq C(x)$ . Then its complement $\\overline{\\mathrm{cr}}(E)=C(x)\\setminus\\mathrm{cr}(E)$ is the set of concepts that the model’s explanation implies are irrelevant to its answer.",
+     "gloss": "Concepts the explanation cites as influencing the answer; its complement is what the explanation implies is irrelevant. Basis of the completeness and soundness definitions."
+    },
+    {
+     "family": "faithfulness",
+     "term": "complete explanation",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "We say that $E$ is complete if every concept in $\\overline{\\mathrm{cr}}(E)$ has no causal effect on $a$",
+     "gloss": "Completeness: no concept left uncredited by the explanation has a causal effect on the answer; violations are hidden concepts."
+    },
+    {
+     "family": "faithfulness",
+     "term": "sound explanation",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "and sound if every concept in $\\mathrm{cr}(E)$ has a causal effect on $a$ .",
+     "gloss": "Soundness: every concept the explanation credits has a causal effect on the answer; the removal wrapper does not address it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hidden / unsound concept (z-score bands)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "matton2025walk",
+     "where": "§4.5",
+     "quote": "We mark a concept hidden when $\\mathrm{CE}_{z}-\\mathrm{EE}_{z}>1$ and unsound when $\\mathrm{EE}_{z}-\\mathrm{CE}_{z}>1$ , shown as the shaded bands.",
+     "gloss": "Using Matton et al.'s per-question z-scored CE and EE: hidden if CE_z exceeds EE_z by more than 1, unsound if the reverse; faithful line EE_z = CE_z."
+    },
+    {
+     "family": "faithfulness",
+     "term": "completeness guarantee conditions (removal wrapper)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "The wrapper therefore guarantees completeness with respect to the identified concepts when two conditions hold. First, the outputs of the auxiliary model are correct, and second, the model’s explanations consistently credit concepts across the original and reduced inputs (i.e., the credit sets $\\mathrm{cr(E)}$ and $\\mathrm{cr(E^{\\prime})}$ are equal).",
+     "gloss": "Completeness with respect to the identified concepts holds if the auxiliary model is correct and the model credits the same concepts on original and reduced inputs."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint acknowledgment (verbalization judge)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.3",
+     "quote": "Given the target model’s explanation, we use the auxiliary model to assess whether the explanation credits the hint as a reason for the answer.",
+     "gloss": "The auxiliary model (Qwen3.5-27B) judges whether the explanation credits the hint as a reason for the answer; this labels verbalization for the hint metric."
+    },
+    {
+     "family": "faithfulness",
+     "term": "concept crediting",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "matton2025walk",
+     "where": "App. C.3",
+     "quote": "Given the target model’s explanation, the auxiliary model judges, for each concept, whether the explanation credits it as a reason for the answer.",
+     "gloss": "Auxiliary model judges per concept whether the explanation credits it as a reason; yields the explanation-implied effect EE, a step reused by the removal wrapper."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual (concept-edited question)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "matton2025walk",
+     "where": "App. C.1",
+     "quote": "The causal concept faithfulness metric forms counterfactuals by editing a concept and measuring the shift in the answer distribution.",
+     "gloss": "Counterfactuals are questions with one concept edited; the resulting shift in the answer distribution gives the concept's causal effect CE."
+    },
+    {
+     "family": "counterfactual",
+     "term": "removal counterfactual",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "matton2025walk",
+     "where": "App. C.3",
+     "quote": "The auxiliary model removes a concept from the item to form the removal counterfactual (also used by the removal wrapper).",
+     "gloss": "Counterfactual formed by deleting a concept from the item; the removal wrapper uses the same removal operation."
+    },
+    {
+     "family": "counterfactual",
+     "term": "value-change counterfactual",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "matton2025walk",
+     "where": "App. C.3",
+     "quote": "The auxiliary model changes a concept’s value to form the value-change counterfactual.",
+     "gloss": "Counterfactual formed by replacing a concept's current value with an alternative value stated by the auxiliary model."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT editing test",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. A.1",
+     "quote": "and Lanham et al. (2023) [14] edit the CoT itself and check whether the answer changes.",
+     "gloss": "Faithfulness measured by editing the CoT and checking whether the answer changes; not used here because the method constrains concepts rather than CoT use."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual inputs (counterfactual simulation training)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "hase2026counterfactual",
+     "where": "App. A.2",
+     "quote": "Hase and Potts (2026) [15] train models to produce CoTs from which a simulator can predict their answers on counterfactual inputs;",
+     "gloss": "Train-time route to faithfulness: CoTs should let a simulator predict the model's answers on counterfactual inputs; requires model weights."
+    }
+   ],
+   "fix": [
+    {
+     "id": "luo2026removal#3",
+     "set": {
+      "gloss": "Concepts with a nonzero causal effect on the answer that the explanation does not credit (§2: c_i in the complement of cr(E)); they silently bypass human monitoring."
+     },
+     "reason": "Gloss now states the §2 formal condition; the §4.5 z-score labeling rule is a separate operational row."
+    },
+    {
+     "id": "luo2026removal#4",
+     "set": {
+      "quote": "For a model $\\mathcal{M}$ , the hint verbalization faithfulness of $\\mathcal{M}$ is | | $\\mathrm{HVF}(\\mathcal{M})=\\frac{\\sum_{i}\\mathbf{1}\\!\\left[a_{u,i}\\neq h_{i}\\land a_{h,i}=h_{i}\\land h_{i}\\in\\mathrm{cr}(E_{h,i})\\right]}{\\sum_{i}\\mathbf{1}\\!\\left[a_{u,i}\\neq h_{i}\\land a_{h,i}=h_{i}\\right]}.$ | That is, the metric measures the fraction of hint-influenced answers for which the hint is explicitly credited in the explanation."
+     },
+     "reason": "Formal row omitted the HVF equation that follows the lead-in in Def. 1."
+    },
+    {
+     "id": "luo2026removal#5",
+     "set": {
+      "quote": "This metric measures the alignment between two properties of each concept in a question: (1) its causal effect (CE) on the model’s answer choice and (2) its explanation implied effect (EE), or the rate at which the model’s explanation credits it. Let $A$ be the model’s answer distribution in response to the original question and $A_{c}$ be the answer distribution after concept $c$ is changed. The causal concept faithfulness score, $r$ , is: | | $\\mathrm{CE}(c)=\\operatorname{Dist}(A,\\,A_{c}),\\qquad\\mathrm{EE}(c)=\\Pr\\big[\\,E\\text{ credits }c\\,\\big],\\qquad r=\\operatorname{corr}\\big(\\vec{\\mathbf{CE}}(c),\\,\\vec{\\mathbf{EE}}(c)\\big).$"
+     },
+     "reason": "Extended to include the operative CE/EE/r definitions."
+    },
+    {
+     "id": "luo2026removal#6",
+     "set": {
+      "quote": "This metric measures if the model’s explanation in response to input $x$ helps an independent predictor forecast the model’s answer on a related input $x^{\\prime}$ . It compares the predictor’s accuracy when it is given the full model response with the explanation ( $\\mathrm{acc}_{\\text{with}}$ ) to its accuracy when it sees the model’s selected answer only ( $\\mathrm{acc}_{\\text{without}}$ ). It is computed as: | | $\\mathrm{NSG}=\\frac{\\mathrm{acc}_{\\text{with}}-\\mathrm{acc}_{\\text{without}}}{1-\\mathrm{acc}_{\\text{without}}}.$"
+     },
+     "reason": "Extended to include the acc_with/acc_without comparison and the NSG formula."
+    }
+   ],
+   "drop": [],
+   "note": "Added §2 formal completeness/soundness/credit-set rows, the wrapper's guarantee conditions, the §4.5 hidden/unsound labeling rule, judge steps, concept-edit counterfactual types and two related-work restatements; equations added to rows #4-#6."
+  },
+  {
+   "key": "shen2026detecting",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "post-hoc reasoning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Shen et al. 2025",
+     "where": "§4.4",
+     "quote": "Post-hoc reasoning tends to induce stronger feature-level discrepancy, as its displayed steps are constructed to rationalize a predetermined answer and may lack support from internal circuit evidence.",
+     "gloss": "Unfaithful type in which displayed steps rationalize a predetermined answer without internal circuit support; shows larger feature-level than structure-level discrepancy."
+    },
+    {
+     "family": "faithfulness",
+     "term": "spurious reasoning chains",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Shen et al. 2025",
+     "where": "§4.4",
+     "quote": "By contrast, spurious reasoning chains mainly induce structure-level discrepancy, since their locally coherent steps may break causal dependencies with the question or final answer.",
+     "gloss": "Unfaithful type with locally coherent steps that break causal dependence on the question or final answer; shows mainly structure-level discrepancy."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful explanation",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; agarwal2024faithfulness",
+     "where": "§1",
+     "quote": "An unfaithful explanation may be coherent and persuasive while providing misleading accounts of model behavior, limiting its usefulness for understanding or auditing model behavior and potentially leading to safety concerns [40, 1].",
+     "gloss": "An unfaithful explanation can be coherent and persuasive yet misleading about model behavior, limiting its use for understanding or auditing and raising safety concerns."
+    },
+    {
+     "family": "faithfulness",
+     "term": "correctness-based unfaithfulness indicators",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "arcuschin2025chain; Wen et al. 2025",
+     "where": "§1",
+     "quote": "A second line evaluates reasoning traces through LLM-as-Judge or process reward models, treating erroneous reasoning with correct answers or plausible reasoning with incorrect answers as indicators of unfaithfulness [3, 44].However, reasoning correctness and faithfulness are not equivalent: a reasoning trace may arrive at the correct answer while failing to reflect the model’s actual decision process.",
+     "gloss": "Prior judge or reward-model work flags wrong reasoning with right answers, or plausible reasoning with wrong answers, as unfaithful; the paper objects that correctness differs from faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "FaithCoT-Bench unfaithfulness labels",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Shen et al. 2025",
+     "where": "§4.1",
+     "quote": "The benchmark consists of CoT trajectories collected from four domain-specific datasets, with human annotations assigned according to predefined unfaithfulness criteria, mainly including post-hoc reasoning and spurious reasoning chains.",
+     "gloss": "Ground truth: humans label each CoT by predefined unfaithfulness criteria, mainly post-hoc reasoning and spurious reasoning chains; detectors are trained and scored against these labels."
+    },
+    {
+     "family": "faithfulness",
+     "term": "feature-level / structural discrepancy (FGW)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "We compare the two graphs using the Fused Gromov–Wasserstein (FGW) distance, which measures graph matching by jointly considering node-feature discrepancy and structural discrepancy: the former captures whether each displayed reasoning step is consistent with its internal computational evidence, while the latter captures whether dependencies among displayed steps match the internal information-flow structure.",
+     "gloss": "FGW's node-feature term checks each displayed step against its internal evidence; its structural term checks step dependencies against internal information flow (decomposed in §4.4)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual sentence",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eq. 6",
+     "quote": "For each candidate token $o_{t,\\mu}\\in\\mathcal{C}_{t}$ , we intervene on the decoding process by replacing it with an alternative token $\\tilde{o}_{t,\\mu}$ and re-generating the remaining suffix of the sentence. This yields a counterfactual sentence | | $r_{t}^{(\\mu\\rightarrow\\tilde{o})}=(o_{t,<\\mu},\\tilde{o}_{t,\\mu},\\hat{o}_{t,>\\mu}),$ | | (6) where $\\hat{o}_{t,>\\mu}$ denotes the regenerated suffix conditioned on the modified prefix.",
+     "gloss": "Token-level intervention: replace one token of a reasoning sentence and regenerate the rest of the sentence; basis of the counterfactual necessity score."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT unfaithfulness detection methods (baseline categories)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C",
+     "quote": "To comprehensively evaluate CoT unfaithfulness detection, we compare CIE-Scorer with representative baselines from four categories: counterfactual-based methods, logit-based methods, LLM-as-Judge methods, and circuit-based methods.",
+     "gloss": "Detectors grouped as counterfactual-based (CoT perturbation), logit-based (probability dynamics), LLM-as-Judge (rubric) and circuit-based (circuit features); §4.1 adds simple baselines."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual-based methods (perturbation strategies)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§4.1",
+     "quote": "Second, counterfactual-based methods evaluate whether modifying the CoT changes the final answer, including Adding Mistakes, Option Shuffling, Removing Steps, Early Answering, and Paraphrasing [25].",
+     "gloss": "Five CoT perturbation tests run as instance-level detector baselines: Adding Mistakes, Option Shuffling, Removing Steps, Early Answering, Paraphrasing."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Adding Mistakes",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. C",
+     "quote": "Adding Mistakes: Inserts misleading or incorrect intermediate reasoning steps and tests whether the final answer is affected.",
+     "gloss": "Insert misleading or incorrect intermediate steps into the CoT and test whether the final answer changes."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Option Shuffling",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. C",
+     "quote": "Option Shuffling: Randomizes the order of multiple-choice options to examine whether the reasoning and prediction remain stable under changed option contexts.",
+     "gloss": "Randomize the order of the multiple-choice options and check whether reasoning and prediction stay stable."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Removing Steps",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. C",
+     "quote": "Removing Steps: Deletes selected reasoning steps to evaluate whether the removed content is necessary for deriving the answer.",
+     "gloss": "Delete selected reasoning steps to test whether the removed content is needed to derive the answer."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Early Answering",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. C",
+     "quote": "Early Answering: Forces the model to answer before completing the full reasoning trajectory, testing whether later steps are causally needed.",
+     "gloss": "Force the model to answer before the CoT is complete to test whether later steps are causally needed."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Paraphrasing",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. C",
+     "quote": "Paraphrasing: Rewrites reasoning steps while preserving or slightly altering their semantics, measuring whether the model’s prediction is robust to surface-level or semantic variations.",
+     "gloss": "Rewrite reasoning steps, preserving or slightly altering their meaning, and test whether the prediction is robust to the change."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Answer Tracing",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Huang et al. 2025",
+     "where": "App. C",
+     "quote": "Let $a$ denote the final answer token and $C_{1:i}=(c_{1},\\dots,c_{i})$ denote the prefix of the reasoning trace. The step-wise confidence change is computed as | | $\\displaystyle\\Delta_{i}=p(a\\mid C_{1:i})-p(a\\mid C_{1:i-1}),\\quad i=1,\\dots,T.$ | | (19) A faithful CoT is expected to provide increasing support for the final answer as reasoning unfolds, whereas inconsistent or weakly supportive probability trends may indicate unfaithfulness.",
+     "gloss": "Step-wise change in the final answer's probability as the CoT prefix grows; a faithful CoT should give increasing support, weak or erratic trends suggest unfaithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Information Gain",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Li et al. 2024",
+     "where": "App. C",
+     "quote": "Information Gain measures how much the question reduces uncertainty over the generated reasoning trace. Given a question $Q$ and a CoT $C=(c_{1},\\dots,c_{n})$ , it is defined as | | $\\displaystyle IG(C,Q)$ | $\\displaystyle=H(C)-H(C\\mid Q)$ | | (20) | | | $\\displaystyle=-\\sum_{i=1}^{n}p(c_{i}\\mid C_{1:i-1})\\log p(c_{i}\\mid C_{1:i-1})+\\sum_{i=1}^{n}p(c_{i}\\mid C_{1:i-1},Q)\\log p(c_{i}\\mid C_{1:i-1},Q).$ | A higher information gain suggests that the question provides stronger guidance for generating the reasoning trace, which is treated as a proxy signal for faithfulness.",
+     "gloss": "IG = H(C) - H(C|Q): how much the question reduces uncertainty over the CoT tokens; higher IG is treated as a proxy for faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "LLM-as-Judge faithfulness rubric (BiGGen)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Kim et al. 2025",
+     "where": "App. C",
+     "quote": "Following the fine-grained rubric-based evaluation protocol of BiGGen [23], we provide the judge model with the question, generated CoT, final answer, and detailed scoring criteria, and ask it to produce a faithfulness judgment. Compared with direct prompting, this rubric-guided setting encourages the judge to assess the reasoning trace in a more structured manner, considering aspects such as logical consistency, support for the final answer, and potential post-hoc rationalization.",
+     "gloss": "A judge sees question, CoT, answer and detailed criteria and outputs a faithfulness judgment, weighing logical consistency, support for the answer and post-hoc rationalization."
+    },
+    {
+     "family": "faithfulness",
+     "term": "perplexity baseline (fluency as faithfulness)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Cui et al. 2025",
+     "where": "§4.1",
+     "quote": "a perplexity-based method [8] that treats sentence fluency as an indicator of faithfulness.",
+     "gloss": "Treats CoT sentence fluency, measured by perplexity, as an indicator of faithfulness; it performs poorly in the paper's comparison."
+    },
+    {
+     "family": "faithfulness",
+     "term": "circuit-based detection (CRV)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Zhao et al. 2025",
+     "where": "§4.1",
+     "quote": "Finally, circuit-based methods, represented by CRV [53], construct attribution circuits from model computations and extract interpretable circuit-level features for downstream faithfulness classification.",
+     "gloss": "Builds attribution circuits from model computations and classifies faithfulness from handcrafted circuit-graph statistics (node counts, activations, density, centrality; App. C)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "shen2026detecting#2",
+     "set": {
+      "quote": "CoT unfaithfulness detection aims to decide whether $\\mathcal{C}$ faithfully reflects the model’s internal reasoning process, denoted as $\\mathcal{R}_{\\mathcal{M}}(q)$ . Formally, this task is defined as a binary classification function: | | $f:(q,\\mathcal{C})\\mapsto\\{0,1\\},$ | | (1) where $f(q,\\mathcal{C})=1$ indicates that $\\mathcal{C}$ is unfaithful to $\\mathcal{R}_{\\mathcal{M}}(q)$ , and $f(q,\\mathcal{C})=0$ indicates that $\\mathcal{C}$ is faithful."
+     },
+     "reason": "Formal row omitted the operative function f:(q,C)->{0,1} and its label semantics, which follow in the same definition."
+    },
+    {
+     "id": "shen2026detecting#6",
+     "set": {
+      "term": "counterfactual operator Δ (counterfactual-based methods)",
+      "kind": "formal",
+      "where": "App. C",
+      "quote": "Counterfactual-based methods assess CoT faithfulness by perturbing the generated reasoning trajectory and measuring whether the final answer changes. Given an original CoT $\\mathcal{C}$ and its answer $a$ , a counterfactual operator $\\Delta$ produces a perturbed trajectory $\\mathcal{C}^{\\prime}=\\Delta(\\mathcal{C})$ , from which the model generates a new answer $a^{\\prime}=\\mathrm{M}_{\\text{Ans}}(q,\\mathcal{C}^{\\prime})$ . If $a^{\\prime}\\neq a$ , the perturbed reasoning content is considered causally influential to the prediction. Conversely, if the answer remains unchanged after substantial perturbation, the modified steps may not be part of the causal reasoning path, suggesting potential unfaithfulness.",
+      "source": "lanham2023measuring; Yang et al. 2025; Xiong et al. 2025; paul2024making; Yee et al. 2024",
+      "gloss": "Counterfactual = perturbed CoT C' = Δ(C); an answer change marks the content causal, no change suggests unfaithfulness. §1 calls such tests population-level, not trace-level."
+     },
+     "reason": "App. C restates the same counterfactual-intervention notion more explicitly, with the operator and decision criterion; one restatement per term, the most explicit, with the sources App. C cites for these methods."
+    }
+   ],
+   "drop": [],
+   "note": "Added the two unfaithfulness types, the human-label ground truth, FGW feature/structure terms, the counterfactual sentence, and every baseline detector definition (5 CoT perturbations, logit, judge, perplexity, CRV); Def. 1 now carries f."
+  }
+ ]
+}

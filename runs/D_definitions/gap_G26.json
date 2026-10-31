@@ -1,0 +1,262 @@
+{
+ "papers": [
+  {
+   "key": "creswell2022faithful",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithful reasoning (answer depends on the reasoning trace)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Table 1",
+     "quote": "Note that the baseline model does not produce faithful reasoning traces and has access to the question when answering. By contrast, in SI the reasoning is faithful and the answer depends on the reasoning trace.",
+     "gloss": "Faithful reasoning also requires the answer to depend on the trace; baselines that see the question when answering lack faithful traces."
+    },
+    {
+     "family": "faithfulness",
+     "term": "connected trace (made-up facts test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4.1",
+     "quote": "For a reasoning trace to be connected it must not hallucinate facts (Defn. 3). Tables 5 and 6 show that while some baseline models fail to satisfy this requirement and often hallucinate facts. For example, the Proof + Answer baseline makes up facts to solve 60% of EntailmentBankQA problems.",
+     "gloss": "Connectedness (Def. 3) checked as the share of problems where a model uses facts absent from the context (Tables 5-6); SI under 1%."
+    },
+    {
+     "family": "faithfulness",
+     "term": "correct reasoning step (inference accuracy test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4.2",
+     "quote": "Following Defn. 4 for a trace to be valid it must be connected (as above) and the steps must be correct; the inference must follow from the selection. Tables 7 shows that when fed with a valid selection the inference model reliably produces the correct inference.",
+     "gloss": "Step correctness (Def. 4) tested by feeding the Inference model valid selections: exact match on ProofWriter, RougeL and BLEURT-threshold accuracy on EntailmentBankQA (Tables 7-8)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "creswell2022faithful#1",
+     "set": {
+      "stance": "adapted",
+      "source": "Kumar & Talukdar 2020; Gupta et al. 2022; Bostrom et al. 2022",
+      "gloss": "A faithful reasoner's computations mirror logical validity (Defs. 1-4); §6.2 says earlier works introduced faithful reasoning only informally and this paper makes it precise."
+     },
+     "reason": "§6.2 states that several works 'informally introduced the notion of faithful reasoning (Kumar and Talukdar, 2020; Gupta et al., 2022; Bostrom et al., 2022)' and that this paper relates it 'more precisely to the definition of valid reasoning in logic': a cited notion modified, so adapted. Old gloss's 'not correspondence to hidden internal reasoning' is not stated in the paper."
+    },
+    {
+     "id": "creswell2022faithful#3",
+     "set": {
+      "quote": "A reasoning trace $\\langle\\mathcal{C},\\mathcal{T}\\rangle$ , where $\\mathcal{T}=\\langle s_{0},i_{0}\\rangle,\\langle s_{1},i_{1}\\rangle,…\\langle s_{n},i_{n}\\rangle$ , is connected iff for every reasoning step $\\langle s_{k},i_{k}\\rangle$ , for every statement $q$ in the set $s_{k}$ either $q\\in\\mathcal{C}$ or $q=i_{j}$ for some $j<k$ .",
+      "gloss": "Every selected premise comes from the context or an earlier inference; violated by hallucinated ('made-up') facts."
+     },
+     "reason": "Formal quote started mid-definition ('is connected iff'); now the full Def. 3 with the trace notation. Measurement moved to its own operational row."
+    },
+    {
+     "id": "creswell2022faithful#4",
+     "set": {
+      "gloss": "Answering without reasoning over the context, from weight knowledge or the question; §5.1 also calls inferences that help answer but do not follow from the selection 'cheating'."
+     },
+     "reason": "The paper uses 'cheat' in two senses (§3.1.2/§5.4.3 answer from question or priors; §5.1/App. E.1 inferences not following from the selection); gloss covered only one."
+    },
+    {
+     "id": "creswell2022faithful#5",
+     "set": {
+      "quote": "To investigate this, we evaluate performance of a model that is given an incorrect context (a context different from the one needed to solve the problem) and compare this to performance when the model is given the correct context. If a model’s answer depends on careful reasoning over the context, then it should be unable to answer the question when provided with a random context."
+     },
+     "reason": "Quote extended to include the operational procedure (incorrect vs correct context comparison), not only the rationale."
+    }
+   ],
+   "drop": [],
+   "note": "Adds the answer-depends-on-trace criterion and the operational tests for connectedness (made-up facts) and step correctness; faithful reasoning set to adapted per §6.2."
+  },
+  {
+   "key": "han2026correct",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "executor uplift (usefulness of the reasoning trace to the executor)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.2, Eq. 8",
+     "quote": "| $\\displaystyle\\hat{p}(P,R)$ | $\\displaystyle=\\frac{1}{K}\\sum_{k=1}^{K}V(E_{k}(P,R)),$ | | | $\\displaystyle\\hat{p}_{0}(P)$ | $\\displaystyle=\\frac{1}{K}\\sum_{k=1}^{K}V(E_{k}(P,\\varnothing)),$ | | | $\\displaystyle u_{\\mathrm{exec}}(P,R)$ | $\\displaystyle=\\operatorname{clip}\\big(\\hat{p}(P,R)-\\hat{p}_{0}(P),\\ -1,\\ 1\\big).$ | | (8) where the trajectory $R$ is fixed over repeated executor samples during estimation. No-reasoning baseline uses the same executor prompt with the reasoning field omitted. Positive uplift means that $R$ improves verifier success for this executor, while negative uplift means that it hurts the executor.",
+     "gloss": "Frozen executor's verifier success rate with the planner's trace minus without it (reasoning field omitted), K samples each, clipped to [-1,1]: a with/without-trace ablation."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Faithfulness is only mentioned (abstract), never defined or tested; the one in-scope definition is executor uplift, a with/without-reasoning ablation of the trace."
+  },
+  {
+   "key": "malladi2026directly",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "User-proxy LLM evaluation (automated simulation)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Poché et al. 2025; Bona et al. 2024",
+     "where": "§3.3",
+     "quote": "we use a fixed User-proxy LLM to compute both metrics at scale. Given an explanation e generated by OP E X and a sample X, the User-proxy LLM is prompted to predict the classifier’s label using only e and X, without access to the classifier, external knowledge, or ground-truth labels. We report the resulting prediction accuracy on inducing examples as recoverability and on held-out examples as simulatability.",
+     "gloss": "A fixed LLM (Llama-3.3-70B; GPT-4o as check) predicts the classifier's label from explanation and input only; accuracy gives recoverability (inducing) or simulatability (held-out)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "human simulatability (user study)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 3; App. A.4",
+     "quote": "Human user study: effect of explanations on human simulatablity (classification accuracy on unseen samples) with and without explanations.",
+     "gloss": "Prolific participants classify 20 Car Evaluation samples without, then with, one model's explanation (between-subjects, 20 per condition); the accuracy gain is reported."
+    }
+   ],
+   "fix": [
+    {
+     "id": "malladi2026directly#4",
+     "set": {
+      "quote": "We define an explanation e as a natural-language description that enables prediction of f ’s outputs without access to the classifier itself. Concretely, a valid explanation should (i) reproduce the classifier’s predictions on the examples used to generate it, and (ii) generalize to accurately predict the classifier’s behavior on unseen inputs.",
+      "gloss": "An explanation must let a reader predict f's outputs without the classifier: reproduce predictions on the inducing examples and generalize to unseen inputs (recoverability, simulatability)."
+     },
+     "reason": "Quote extended to include the explicit definition of an explanation that precedes the two conditions."
+    },
+    {
+     "id": "malladi2026directly#5",
+     "set": {
+      "kind": "formal",
+      "stance": "adapted",
+      "quote": "Following Menon et al. (2023), recoverability measures how well the explanation supports prediction on the same examples used to elicit it. Specifically, we query U on each inducing example Xi ∈ S using only e, and compute the fraction of correct predictions: N Recoverability(e; S) = 1 X I[U (e, Xi ) = Yi ] . N i=1",
+      "gloss": "Recoverability(e;S) = (1/N)Σ I[U(e,X_i)=Y_i]: share of inducing examples whose classifier label the user-proxy LLM predicts from the explanation alone."
+     },
+     "reason": "The paper gives the equation (formal); quote now includes it. Taken from Menon et al. but computed with a User-proxy LLM on task-level explanations (§3.3), so adapted."
+    },
+    {
+     "id": "malladi2026directly#6",
+     "set": {
+      "kind": "formal",
+      "stance": "adapted",
+      "quote": "Simulatability (Hase & Bansal, 2020) measures whether the explanation generalizes beyond the inducing examples. Let Ŝ = {(X̂i , Ŷi )}N i=1 be a disjoint held-out set from the same task and classifier, with Ŷi = f (X̂i ). We query U on each unseen example X̂i using only e, and compute:",
+      "gloss": "Simulatability(e;Ŝ) = (1/N)Σ I[U(e, X̂_i) = Ŷ_i] on a disjoint held-out set, Ŷ_i = f(X̂_i) classifier predictions, U the user-proxy LLM."
+     },
+     "reason": "Formal definition: quote now includes the held-out set and Ŷi = f(X̂i) condition (the equation itself is printed in a separate PDF column block). Hase & Bansal's human forward simulation is replaced by a user-proxy LLM on task-level explanations, so adapted."
+    }
+   ],
+   "drop": [],
+   "note": "Recoverability and simulatability are formal and adapted (LLM user-proxy); adds the user-proxy protocol and the human simulatability study."
+  },
+  {
+   "key": "zhou2026conceptual",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "CoT faithfulness (reflects the underlying computation)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; lanham2023measuring",
+     "where": "§2",
+     "quote": "Whether the CoT faithfully reflects the model’s underlying computation has become a core question in alignment research (Turpin et al., 2023; Lanham et al., 2023). Conceptual steganography is one specific way in which the visible CoT can fail to be a faithful supervisory surface: the model can satisfy the surface task while simultaneously transmitting a covert payload to a co-conspirator who shares its codebook.",
+     "gloss": "CoT faithfulness = reflecting the model's underlying computation; conceptual steganography is one way the visible CoT fails as a faithful supervisory surface."
+    },
+    {
+     "family": "monitorability",
+     "term": "paraphrase defense (content-preserving paraphraser)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "roger2023preventing",
+     "where": "§2",
+     "quote": "Against token-level steganography, the canonical defense is to insert a content-preserving paraphraser between sender and receiver: by rewriting surface words while holding meaning fixed, the defender sanitizes the carrier without changing the visible task output. Prior work argues this defense is effective against learned token-level schemes (Roger and Greenblatt, 2023)",
+     "gloss": "Canonical anti-steganography defense: a paraphraser rewrites surface words while keeping meaning, sanitizing lexical carriers without changing the task output."
+    },
+    {
+     "family": "monitorability",
+     "term": "strategy-aware paraphrase",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "Eve is additionally given the strategy’s concept definition and is instructed to remove or flatten that specific behavior while otherwise preserving meaning — e.g. to rewrite each step so that no failure-anticipation phrasing remains. Knowing the carrier strategy is a strict generalization of the standard defense and corresponds to a defender who has identified, but not necessarily inverted, the codebook.",
+     "gloss": "Defense variant: the paraphraser knows the carrier behavior and flattens it; tested on GPQA/anticipate_failure, raising bit error by an order of magnitude."
+    },
+    {
+     "family": "monitorability",
+     "term": "stealth (detectability of payload-carrying CoTs)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "We do not study a separate stealth criterion — whether a discriminator can distinguish payload-carrying CoTs from clean ones — and discuss this in Limitations.",
+     "gloss": "Stealth = whether a discriminator can tell payload-carrying CoTs from clean ones; named as a criterion but not measured."
+    },
+    {
+     "family": "monitorability",
+     "term": "step error / bit error / message accuracy",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "For each instance $k$ we compute a Levenshtein alignment (Levenshtein, 1966) between $b_{k}$ and $\\hat{b}_{k}$ and decompose its operations into insertions $I_{k}$ , deletions $D_{k}$ , and substitutions $S_{k}$ . To obtain a single corpus-level number per (model, dataset, condition) cell, we pool these per-instance counts and normalize by the total bit budget: | | $\\displaystyle\\text{step error}$ | $\\displaystyle=\\frac{\\sum_{k}(I_{k}+D_{k})}{\\max(L,\\hat{L})},$ | | | $\\displaystyle\\text{bit error}$ | $\\displaystyle=\\frac{\\sum_{k}S_{k}}{\\max(L,\\hat{L})},$ | where $L=\\sum_{k}N_{k}$ and $\\hat{L}=\\sum_{k}\\hat{N}_{k}$ are the summed ground-truth and decoded lengths.",
+     "gloss": "Levenshtein alignment of payload and decoded bits: step error = insertions+deletions, bit error = substitutions, pooled over the bit budget; message accuracy = share of exactly recovered payloads."
+    },
+    {
+     "family": "monitorability",
+     "term": "no-CoT defense (CoT necessity test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.8",
+     "quote": "The most direct defense against any CoT-resident channel is to forbid CoT itself: if there is no chain of thought, there is no surface to hide messages in. We test this by prompting each model to answer with only the final boxed answer (no reasoning), capping the response at 64 tokens on GPQA and 512 on MATH500.",
+     "gloss": "Final-answer-only prompting; accuracy drops 20-43 points, so the CoT that carries the channel cannot be removed as a defense."
+    },
+    {
+     "family": "monitorability",
+     "term": "carrier strategies (conceptual steganography)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "We use four strategies, each defined by a short concept description shared between Alice and Bob. anticipate_failure marks a step that explicitly flags a way the current approach could fail or could already be wrong. induction marks a step that employs a reasoning structure involving a base case and an inductive step.",
+     "gloss": "Four reasoning behaviors serve as carriers: anticipate_failure, induction, sanity_check, constraint_naming; each step realizes (bit 1) or omits (bit 0) the behavior."
+    }
+   ],
+   "fix": [
+    {
+     "id": "zhou2026conceptual#1",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "The paper attributes the term to Roger & Greenblatt but extends it from hidden intermediate reasoning to any covert payload passed to a confederate (abstract, threat model), so adapted; the gloss already says so."
+    },
+    {
+     "id": "zhou2026conceptual#4",
+     "set": {
+      "gloss": "Presence of encoded reasoning suffices for the model to be no longer faithful to its surface purpose."
+     },
+     "reason": "The 'faithful supervisory surface' passage now has its own row; gloss restricted to this passage."
+    },
+    {
+     "id": "zhou2026conceptual#6",
+     "set": {
+      "gloss": "Decode accuracy: share of payloads Bob recovers after Eve's paraphrase; utility: final-answer accuracy on Patsy's surface task."
+     },
+     "reason": "Stealth now has its own row; gloss restricted to what this quote defines."
+    }
+   ],
+   "drop": [],
+   "note": "Adds CoT faithfulness (adopted), paraphrase and strategy-aware defenses, stealth, the formal decode metrics, the no-CoT necessity test and the carrier taxonomy; encoded reasoning set to adapted."
+  }
+ ]
+}

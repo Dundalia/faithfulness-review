@@ -1,0 +1,996 @@
+{
+ "checks": [
+  {
+   "entry": "guan2025monitoring#26",
+   "source": "macdermott2025reasoning",
+   "verdict": "supported",
+   "finding": "The source measures monitorability as a monitor's ability to predict a latent variable from the reasoning and finds no consistent effect of length penalties or KL regularization once accuracy is controlled.",
+   "source_evidence": "We introduce a novel methodology for measuring monitorability according to whether a monitor can predict a key latent variable using the model’s reasoning. When controlling for accuracy, we do not find evidence for consistent effects from commonly used incentives (length penalties and KL regularisation)",
+   "citing_evidence": "Common incentives like length penalties and KL regularization have shown no consistent monitorability effects once accuracy is controlled for [29] in environments where monitorability is operationalized as a monitor’s ability to infer a task-relevant latent variable from a reasoning trace."
+  },
+  {
+   "entry": "li2026monitorability#2",
+   "source": "macdermott2025reasoning",
+   "verdict": "supported",
+   "finding": "The source measures monitorability as recovery of a latent variable from the trace; the fragility it reports is under adversarial optimisation against the monitor (common incentives show no consistent effect), and it does not study scaling.",
+   "source_evidence": "We define the monitorability of the reasoner according to whether a monitor model, given access to reasoning traces, can correctly predict the value of the latent variable. [...] CoT monitorability may be fragile under adversarial pressure and difficult to maintain or improve.",
+   "citing_evidence": "A parallel line of work quantifies how far a monitor can recover a latent variable from the reasoning trace, and reports that monitorability is fragile under scaling and training pressure (Guan et al., 2025; MacDermott et al., 2025)."
+  },
+  {
+   "entry": "emmons2025chain#8",
+   "source": "mathew2025hidden",
+   "verdict": "partial",
+   "finding": "Mathew et al. show models learning to hide information from an overseer, but in messages a sender passes to a receiver (steganographic collusion between agents), not in a model's own reasoning; the paper does not study encoded reasoning.",
+   "source_evidence": "Oversight of behaviours could be compromised via the use of text-based steganography – embedding hidden information in textual outputs [...] We frame steganography as an adversarial relationship between two teams, a collusion team and a mitigation team. The collusion team consists of a sender and a receiver, and aims to complete a task $t$ while communicating a secret payload $p$ .",
+   "citing_evidence": "One potential failure mode is encoded reasoning (eg, steganography), where a model learns to hide information, making it opaque to an overseer (Roger and Greenblatt, 2023; Mathew et al., 2024; Farquhar et al., 2025; Motwani et al., 2025)."
+  },
+  {
+   "entry": "jose2025reasoning#4",
+   "source": "mathew2025hidden",
+   "verdict": "unsupported",
+   "finding": "Mathew et al. say nothing about outcome-based RL compressing reasoning for efficiency at the cost of legibility; the nearest claim is that steganographic collusion emerges when a misspecified outcome reward is combined with an overseer penalty, i.e. information hidden to evade oversight, not compressed for performance.",
+   "source_evidence": "We demonstrate that unintended steganographic communication can emerge in LLMs when optimizing a misspecified outcome-based reward in the presence of an overseer. [...] When a mispecified outcome-based task reward encourages an unintended behavior, but that behavior is simultaneously penalized by an overseer, models under optimization pressure may adapt to execute the behavior more subtly, rather than ceasing it altogether Baker et al. (2025).",
+   "citing_evidence": "Complex steganography: Outcome-based RL may instill efficient reasoning pathways that compress information to maximizes performance at the cost of legibility (Mathew et al., 2024)."
+  },
+  {
+   "entry": "bhan2025did#5",
+   "source": "matton2025walk",
+   "verdict": "partial",
+   "finding": "Matton et al. support the auxiliary-LLM counterfactuals and their concept-level granularity, but they do not judge a self-explanation of the new prediction against the edit: they use only explanations of the original question, compare each concept's causal effect with how often those explanations cite it, and criticise Atanasova et al. for assessing explanations given to counterfactual questions.",
+   "source_evidence": "To generate each counterfactual $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ , we instruct $\\mathcal{A}$ to edit question $\\mathbf{x}$ by changing the value of $C_{m}$ from $c_{m}$ to $c_{m}^{\\prime}$ while keeping everything else the same. [...] However, in practice, we consider only the explanations for original questions. [...] However, they consider token-level edits rather than concept-level edits, and they assess the faithfulness of explanations given to the counterfactual questions, which may not reflect the faithfulness of the LLM in response to the original questions.",
+   "citing_evidence": "Counterfactual Intervention (CI) methods employ auxiliary models to generate counterfactual texts designed to change the LLM outcome. The LLM is then prompted to produce a self-NLE to justify its new prediction. The self-NLE is deemed faithful if it aligns with the specific CI that caused the prediction change. These CI approaches mostly differ in two ways: how they measure consistency between the intervention and the resulting self-NLE (Atanasova et al., 2023; Siegel et al., 2024; Siegel et al., 2025), and the granularity of the CI intervention (Matton et al., 2025)."
+  },
+  {
+   "entry": "luo2026removal#10",
+   "source": "matton2025walk",
+   "verdict": "adapted",
+   "finding": "The source z-normalizes CE and EE per question (to estimate the correlation by regression) and reads high-CE, low-EE concepts as unfaithful omissions, but the hidden/unsound labels and the >1 z-score bands are the paper's own.",
+   "source_evidence": "we first apply z-score normalization to the causal effects ${\\mathbf{CE}}(\\mathbf{x},\\mathbf{C})$ and the explanation-implied effects ${\\mathbf{EE}}(\\mathbf{x},\\mathbf{C})$ for each question $\\mathbf{x}$ . [...] Both GPT-4o and GPT-3.5 produce explanations with unfaithful omissions of the identity concept, as seen by the concept’s high CE and low EE scores.",
+   "citing_evidence": "Figure 6 plots every concept for Qwen3.5-27B by its causal effect against its explanation effect, both $z$ -score normalized per question ( $\\mathrm{CE}_{z}$ , $\\mathrm{EE}_{z}$ ), as in (Matton et al., 2025). [...] We mark a concept hidden when $\\mathrm{CE}_{z}-\\mathrm{EE}_{z}>1$ and unsound when $\\mathrm{EE}_{z}-\\mathrm{CE}_{z}>1$ , shown as the shaded bands."
+  },
+  {
+   "entry": "luo2026removal#13",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source's explanation-implied-effect step has the auxiliary LLM judge which concepts an explanation implies had a causal effect on the answer, the crediting step the paper reuses.",
+   "source_evidence": "We ask the LLM $\\mathcal{A}$ to identify which concepts the explanation $e$ implies had a causal effect on the final answer.",
+   "citing_evidence": "The removal wrapper and the causal concept faithfulness metric reuse the concept-identification, counterfactual-generation, and concept-crediting steps of the causal concept faithfulness framework [6] [...] Given the target model’s explanation, the auxiliary model judges, for each concept, whether the explanation credits it as a reason for the answer."
+  },
+  {
+   "entry": "luo2026removal#14",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source defines a concept's effect through counterfactual questions that change the concept's value and measure the shift in the answer distribution.",
+   "source_evidence": "To assess the individual treatment effect of a concept, we consider how changing the concept’s value, while keeping all other aspects of $\\mathbf{x}$ fixed, changes the distribution of the model’s answers.",
+   "citing_evidence": "The causal concept faithfulness metric forms counterfactuals by editing a concept and measuring the shift in the answer distribution."
+  },
+  {
+   "entry": "luo2026removal#15",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source's removal counterfactuals have the auxiliary LLM edit the question so the concept's value cannot be determined.",
+   "source_evidence": "To generate them, we instruct $\\mathcal{A}$ to edit $\\mathbf{x}$ so that the value of a concept $C_{m}$ cannot be determined, while keeping the rest of the question the same.",
+   "citing_evidence": "The auxiliary model removes a concept from the item to form the removal counterfactual (also used by the removal wrapper)."
+  },
+  {
+   "entry": "luo2026removal#16",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source has the auxiliary LLM state a concept's current value and plausible alternatives, then edit the question to change the value.",
+   "source_evidence": "To do so, we ask $\\mathcal{A}$ to (1) determine the current value of $C_{m}$ in $\\mathbf{x}$ and (2) list plausible alternative values. [...] To generate each counterfactual $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ , we instruct $\\mathcal{A}$ to edit question $\\mathbf{x}$ by changing the value of $C_{m}$ from $c_{m}$ to $c_{m}^{\\prime}$ while keeping everything else the same.",
+   "citing_evidence": "For each concept, the auxiliary model states its current value and the alternative value(s) that can be used to form counterfactuals. [...] The auxiliary model changes a concept’s value to form the value-change counterfactual."
+  },
+  {
+   "entry": "luo2026removal#5",
+   "source": "matton2025walk",
+   "verdict": "adapted",
+   "finding": "The source defines causal concept faithfulness as the Pearson correlation between per-concept CE (mean KL divergence over counterfactual values) and EE, estimated with Bayesian hierarchical models; the paper keeps the correlation but uses total variation distance and an empirical CE, as it states.",
+   "source_evidence": "Causal concept effect (CE). The Kullback-Leibler divergence between $\\mathcal{M}$ ’s answer distribution in response to counterfactual input $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ and to original input $\\mathbf{x}$ , averaged across all counterfactual values $c_{m}^{\\prime}\\in\\mathbb{C}_{m}^{\\prime}$ : [...] We define causal concept faithfulness as the alignment between the two. To measure alignment, we use the Pearson Correlation Coefficient (PCC).",
+   "citing_evidence": "This metric measures the alignment between two properties of each concept in a question: (1) its causal effect (CE) on the model’s answer choice and (2) its explanation implied effect (EE), or the rate at which the model’s explanation credits it. [...] Prior work (Matton et al., 2025) measures distance with KL divergence; we instead use total variation distance, which is simpler and keeps CE on the same $[0,1]$ scale as EE."
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#19",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source has an auxiliary LLM list concepts and their possible values and intervenes on one concept at a time, as described; but its own limitation with correlated concepts is that removal can fail because the model infers the removed concept, not that counterfactuals become implausible, which is the paper's own Table 13 claim.",
+   "source_evidence": "We instruct $\\mathcal{A}$ to list the set of distinct concepts in the context of $\\mathbf{x}$ . Next, we identify the set of possible values $\\mathbb{C}_{m}$ for each concept $C_{m}\\in\\mathbf{C}$ . [...] Hence, we generate counterfactuals by intervening on a single concept at a time. One limitation of this approach is that there are cases in which it can fail to handle correlated concepts. [...] then even when a single concept (e.g., race) is removed from the input question, an LLM may still infer it using the information provided by the other concepts (e.g., name).",
+   "citing_evidence": "This approach uses a model to construct an abstract feature space, including a list of features, and the possible values they can take. The counterfactual set is generated by making every possible single feature change. Crucially, this method only tests a single feature at a time (missing out on testing complex interaction logic) and can generate implausible counterfactuals due to correlated concepts, as we show in Table 13."
+  },
+  {
+   "entry": "senatorov2026structural#2",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source shows LLM explanations that misrepresent why the model answered, rationalizing socially biased choices, which supports traces as rationalizations rather than faithful accounts; it does not itself test whether they are produced post hoc.",
+   "source_evidence": "However, recent work demonstrates that LLM explanations can be unfaithful, i.e., they can misrepresent the true reason why the LLM arrived at the answer (Turpin et al., 2023; Chen et al., 2024). [...] The idea behind this is to elicit unfaithfulness: LLM explanations could use the added information to rationalize socially biased choices.",
+   "citing_evidence": "Reasoning traces may be post-hoc rationalizations rather than faithful accounts of model predictions (Jacovi and Goldberg, 2020; Holzinger et al., 2017; Lanham et al., 2023; Paul et al., 2024; Matton et al., 2025)."
+  },
+  {
+   "entry": "somov2026breaking#18",
+   "source": "matton2025walk",
+   "verdict": "unsupported",
+   "finding": "Matton et al. never edit or truncate the chain of thought: they edit concepts in the input question and compare each concept's effect on the answer with how often the explanations cite it, so the citation belongs with the input-perturbation methods, not with trace perturbation.",
+   "source_evidence": "Our method is based on a simple idea: compare the parts of model inputs that LLM explanations imply are influential to those that are truly (i.e., empirically) influential. [...] To generate each counterfactual $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ , we instruct $\\mathcal{A}$ to edit question $\\mathbf{x}$ by changing the value of $C_{m}$ from $c_{m}$ to $c_{m}^{\\prime}$ while keeping everything else the same.",
+   "citing_evidence": "Trace perturbation protocols edit or truncate chain-of-thought reasoning to test whether the final answer depends on the generated reasoning steps Lanham et al. (2023); Paul et al. (2024); Matton et al. (2025); Wu et al. (2025)."
+  },
+  {
+   "entry": "zeng2026evaluating#18",
+   "source": "matton2025walk",
+   "verdict": "adapted",
+   "finding": "The source's value-change counterfactuals measure how much editing a concept shifts the answer distribution (KL-based CE), read against explanation mentions; the paper turns this into a forced choice in which the model names which of three inserted-text perturbations flips its answer most, scored against flip rates.",
+   "source_evidence": "To generate each counterfactual $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ , we instruct $\\mathcal{A}$ to edit question $\\mathbf{x}$ by changing the value of $C_{m}$ from $c_{m}$ to $c_{m}^{\\prime}$ while keeping everything else the same. [...] Causal concept effect (CE). The Kullback-Leibler divergence between $\\mathcal{M}$ ’s answer distribution in response to counterfactual input $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ and to original input $\\mathbf{x}$ , averaged across all counterfactual values $c_{m}^{\\prime}\\in\\mathbb{C}_{m}^{\\prime}$ :",
+   "citing_evidence": "Intervention-based scores that perturb or redact input concepts on classification benchmarks Matton et al. (2025); Madsen et al. (2024) match the self-report shape of Perturbation-Choice and Component-Attribution [...] For each example, we show the model a baseline prompt and three candidate perturbations. We then estimate, for each perturbation, how often the model’s sampled answer changes relative to its baseline behavior. The behavioral ground truth label is the option with the highest flip rate."
+  },
+  {
+   "entry": "zeng2026evaluating#19",
+   "source": "matton2025walk",
+   "verdict": "adapted",
+   "finding": "The source's removal counterfactuals delete one concept and measure the shift in answers; the paper ablates each of three prompt components and asks the model itself to name the one whose removal flips its answer most, scored against flip rates.",
+   "source_evidence": "To generate them, we instruct $\\mathcal{A}$ to edit $\\mathbf{x}$ so that the value of a concept $C_{m}$ cannot be determined, while keeping the rest of the question the same. [...] Causal concept effect (CE). The Kullback-Leibler divergence between $\\mathcal{M}$ ’s answer distribution in response to counterfactual input $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ and to original input $\\mathbf{x}$ , averaged across all counterfactual values $c_{m}^{\\prime}\\in\\mathbb{C}_{m}^{\\prime}$ :",
+   "citing_evidence": "Intervention-based scores that perturb or redact input concepts on classification benchmarks Matton et al. (2025); Madsen et al. (2024) match the self-report shape of Perturbation-Choice and Component-Attribution [...] For each example, we decompose the baseline prompt into three semantic components. We then remove each component in turn and measure how often the model’s sampled answer changes relative to its baseline behavior. The behavioral ground truth label is the ablated component with the highest flip rate."
+  },
+  {
+   "entry": "zhang2026audit#8",
+   "source": "matton2025walk",
+   "verdict": "supported",
+   "finding": "The source asks whether the concepts that most affect the answers are the ones the explanations cite, which covers the paper's 'whether stated reasons affect model behavior'.",
+   "source_evidence": "Our method is based on a simple idea: we examine if the concepts in model inputs that have the greatest affect on LLM answers are the same as the concepts mentioned in LLM explanations – i.e., does the walk match the talk? [...] Intuitively, if $\\mathcal{M}$ is faithful, then its explanations will frequently cite concepts with large causal effects and infrequently cite concepts with negligible effects.",
+   "citing_evidence": "Related work on causal faithfulness likewise asks whether stated reasons affect model behavior (Matton et al., 2025)"
+  },
+  {
+   "entry": "zeng2026evaluating#12",
+   "source": "mayne2025llms",
+   "verdict": "adapted",
+   "finding": "The source's task (the model writes a counterfactual, ideally minimal, edit of its input that would flip its prediction, checked by re-evaluation) enters the suite recast as Edit-Proposal, verified by resampling.",
+   "source_evidence": "We study a specific type of self-explanation: self-generated counterfactual explanations (SCEs), where a model explains its prediction by modifying the input such that it would have predicted a different outcome. [...] Second, a minimal setting, where models are instructed to make the smallest edits necessary to flip their predictions.",
+   "citing_evidence": "We introduce a benchmark that aggregates and unifies self-modeling tasks from prior work (Plunkett et al., 2025; Li et al., 2025; Madsen et al., 2024; Mayne et al., 2025; Dehghanighobadi et al., 2025). [...] Self-generated counterfactual explanations, where the model edits its own input until the prediction flips Mayne et al. (2025); Dehghanighobadi et al. (2025), are the propose-and-verify form of Edit-Proposal."
+  },
+  {
+   "entry": "zeng2026evaluating#2",
+   "source": "mayne2025llms",
+   "verdict": "supported",
+   "finding": "The source defines SCEs as the model modifying its input so it would predict a different outcome, with the flip checked by re-evaluation in a new context window.",
+   "source_evidence": "We study a specific type of self-explanation: self-generated counterfactual explanations (SCEs), where a model explains its prediction by modifying the input such that it would have predicted a different outcome. [...] Whether an SCE flips the LLM’s prediction can be tested by re-evaluating the LLM in a new context window.",
+   "citing_evidence": "Self-generated counterfactual explanations, where the model edits its own input until the prediction flips Mayne et al. (2025); Dehghanighobadi et al. (2025), are the propose-and-verify form of Edit-Proposal."
+  },
+  {
+   "entry": "zeng2026evaluating#20",
+   "source": "mayne2025llms",
+   "verdict": "adapted",
+   "finding": "The source checks validity by one re-evaluation of the edited input in a new context, mostly at temperature 0; the paper verifies the proposed edit by resampling K times and counting a flip when over half the resamples differ.",
+   "source_evidence": "the tabular data representation of the SCE $z_{i}^{\\prime}$ is valid if the model flips its decision when re-evaluated in a new context window [...] Our main experiments evaluate all models at temperature $0$ , except o3, which has a fixed temperature of $1$ .",
+   "citing_evidence": "Edit-Proposal is the one task whose experimentation order is reversed: the model proposes a minimal edit, and the pipeline verifies by re-sampling $M$ on the edited prompt. [...] the example counts as flipped if the fraction of resamples that differ from baseline exceeds $0.5$ ."
+  },
+  {
+   "entry": "nguyen2026generalization#2",
+   "source": "meek2025measuring",
+   "verdict": "supported",
+   "finding": "The source defines faithfulness as the cue acknowledgment rate, the presence of the cue in the reasoning trace.",
+   "source_evidence": "Faithfulness is calculated as the presence of the given cue in a model’s reasoning trace (binary for each cue). [...] We define faithfulness as the cue acknowledgment rate, see Section 3 for more information.",
+   "citing_evidence": "Following Meek et al. (2025), cue acknowledgment is our operationalization of faithfulness—we label a CoT trace as faithful when it mentions the injected cue."
+  },
+  {
+   "entry": "occhipinti2026probing#7",
+   "source": "meek2025measuring",
+   "verdict": "adapted",
+   "finding": "The source counts a cue mention as faithful even when the model rejects the cue, which matches pooling faithful and hint-mentioning traces, but its monitorability combines that faithfulness with verbosity (listing the causal factors); the paper drops verbosity and computes a recovery rate after steering.",
+   "source_evidence": "We combine faithfulness and verbosity into a single monitorability score that shows how well the CoT serves as the model’s external ‘working memory’ [...] We consider models which reason about new information provided to them, even if they ultimately choose to reject that information, as still being faithful",
+   "citing_evidence": "Monitorability Recovery Rate: The aggregated rates of faithful and hint-mentioning answers, representing all traces where the hint’s influence is visible, as framed by Meek et al. (2025)."
+  },
+  {
+   "entry": "young2026why#3",
+   "source": "meek2025measuring",
+   "verdict": "partial",
+   "finding": "Meek et al. do distinguish the two, but the divergence they show runs the other way: CoTs that are faithful (acknowledge the cue) yet hard to monitor because they omit causal factors; since faithfulness is one of the two components of their monitorability score, they do not show monitorable but unfaithful reasoning.",
+   "source_evidence": "Our results show that models can appear faithful yet remain hard to monitor when they leave out key factors, and that monitorability differs sharply across models. [...] We combine faithfulness and verbosity into a single monitorability score that shows how well the CoT serves as the model’s external ‘working memory’",
+   "citing_evidence": "Meek et al. (2025) distinguished monitorability from faithfulness, showing that they can diverge: a model’s reasoning can be monitorable (detectable by a judge) without being faithful (accurately reflecting the model’s computation)."
+  },
+  {
+   "entry": "nguyen2026generalization#10",
+   "source": "occhipinti2026probing",
+   "verdict": "supported",
+   "finding": "The source's recovery rate is the share of originally unfaithful answers that positive steering makes faithful, with unintended transitions reported as a separate collateral-effect rate.",
+   "source_evidence": "Recovery Rate: The percentage of originally unfaithful answers successfully converted to faithful by positive steering. [...] Collateral Effect Rate: Unintended transitions’ rates, defined as monitorability increasing under negative steering and faithfulness decreasing under positive steering.",
+   "citing_evidence": "they report monitorability recovery over only the traces that were unfaithful at baseline, with regressions reported separately as collateral effects."
+  },
+  {
+   "entry": "atkinson2026identifying#4",
+   "source": "plunkett2025self",
+   "verdict": "renamed",
+   "finding": "The source computes this correlation between learned weights (logistic regression on the model's choices) and averaged self-reported weights, but calls it the accuracy of self-report, never faithfulness.",
+   "source_evidence": "we fed the models’ choices into simple logistic regressions to estimate the learned attribute weights that each model used to make decisions after fine-tuning [...] We compared these reported weights to the learned weights (i.e., our estimates of the weights that they were actually using, as revealed by their 5000 pairwise choices). [...] This verified that the self-report accuracy of the weight-trained models must be driven by privileged insight",
+   "citing_evidence": "Faithfulness: $\\operatorname{corr}(\\hat{\\bm{p}},\\,\\tilde{\\bm{p}})$ , which measures the degree to which the model’s self-report describes its true decision-making behavior, regardless of whether that behavior matches the training target."
+  },
+  {
+   "entry": "shenoy2026introspection#2",
+   "source": "plunkett2025self",
+   "verdict": "supported",
+   "finding": "The source uses introspection for privileged information a model has about itself and argues its accurate weight reports must reflect such privileged insight, though it adds that it cannot tell whether the models actually introspected.",
+   "source_evidence": "suggesting that these predictions were driven by introspection (i.e., privileged information each model possess about itself; Schwitzgebel, 2010; Morris, 2025). [...] This verified that the self-report accuracy of the weight-trained models must be driven by privileged insight into the new, randomly-generated attribute weights that they learned [...] However, we do not know whether they actually did introspect and whether introspection accounts for the models’ accuracy in describing their internal processes.",
+   "citing_evidence": "Prior work has also finetuned models to predict their own behavior, finding some evidence for introspection: privileged access models have to facts about themselves that cannot be derived from their training data alone (Binder et al., 2024; Plunkett et al., 2025)."
+  },
+  {
+   "entry": "zeng2026evaluating#12",
+   "source": "plunkett2025self",
+   "verdict": "partial",
+   "finding": "The source's task, reporting learned attribute weights scored against weights estimated from the model's choices, fits the self-report-versus-behavior template, but none of the paper's ten tasks is an attribute-weight report, so the suite contains no task taken from this source.",
+   "source_evidence": "To evaluate whether the models could accurately explain their own decision-making, we then prompted each weight-trained model to make 10 additional decisions on behalf of each agent, but to report only how heavily it was weighting each attribute in doing so [...] We compared these reported weights to the learned weights (i.e., our estimates of the weights that they were actually using, as revealed by their 5000 pairwise choices).",
+   "citing_evidence": "We introduce a benchmark that aggregates and unifies self-modeling tasks from prior work (Plunkett et al., 2025; Li et al., 2025; Madsen et al., 2024; Mayne et al., 2025; Dehghanighobadi et al., 2025). [...] Table 6: The ten self-modeling tasks with various answer formats."
+  },
+  {
+   "entry": "parekh2026drop#8",
+   "source": "prasad2026features",
+   "verdict": "adapted",
+   "finding": "The paper borrows RLFR's gated multi-head attention probe and its scoring of the policy's text on base-model activations, but scores step-level performativity and averages it to gate GRPO, whereas RLFR's reward probes score whether an intervention fixed or retracted a hallucination; RLFR also already runs its reward probes on the base model at train time, contrary to the paper's §2 contrast.",
+   "source_evidence": "Sampled interventions are graded by the reward pipeline, which is run (at train time) on the base model’s activations, not the student’s activations. [...] We experiment with two probe architectures: a causal Transformer for token-level prediction tasks, and a Gated Multi-Head Attention (GMHA) pooling architecture for span-level prediction. [...] hence we train separate probes for each, which we term the Retraction and Correction probes.",
+   "citing_evidence": "RLFR brought multi-head attention probes into RL [10]; ProFIL instead reads a frozen base, not the changing policy. [...] We train an RLFR-style gated multi-head attention probe [10] on the labeled base-model rollouts. [...] Their mean $\\bar{p}$ is the rollout score."
+  },
+  {
+   "entry": "guo2026introspective#6",
+   "source": "pres2026consistency",
+   "verdict": "supported",
+   "finding": "The source casts faithful self-description, including faithful chain-of-thought, as self-consistency between a model's descriptions and its behaviour.",
+   "source_evidence": "We argue that both faithful self-description and self-improvement are special cases of self-consistency, in which the required consistency relation links a model’s behavior to its own descriptions or evaluations of that behavior. [...] Self-description objectives aim to shift LMs’ self-descriptions $(x_{\\text{meta}},y_{\\text{meta}})$ to align with their instance-level behaviors $D$ , enabling introspection, faithful chain-of-thought, calibration, etc.",
+   "citing_evidence": "This objective can be thought of as a self-consistency objective between model verbalizations and behaviors [Pres et al., 2026]."
+  },
+  {
+   "entry": "pres2026selfctrl#1",
+   "source": "pres2026consistency",
+   "verdict": "adapted",
+   "finding": "The source defines meta-level consistency as a function φ scoring a meta-level description against behaviour on a set of instances; the paper narrows it to single (x, x_meta) pairs with a high-probability prediction criterion and outputs sampled in separate contexts.",
+   "source_evidence": "In meta-level consistency, $\\phi$ checks whether model behaviors $y_{1:n}^{D}$ on instances $x_{1:n}^{D}$ are consistent with the meta-level descriptions $(x_{\\text{meta}},y_{\\text{meta}})$ .",
+   "citing_evidence": "We say the LM is self-consistent on such a pair if its meta-level output $y_{\\mathrm{meta}}\\sim p_{\\mathrm{LM}}(\\cdot\\mid x_{\\mathrm{meta}})$ predicts or explains its object-level behavior $y\\sim p_{\\mathrm{LM}}(\\cdot\\mid x)$ with high probability."
+  },
+  {
+   "entry": "pres2026selfctrl#2",
+   "source": "pres2026consistency",
+   "verdict": "supported",
+   "finding": "The source frames faithful self-description as consistency between what a model says about its behaviour and what it does.",
+   "source_evidence": "We argue that both faithful self-description and self-improvement are special cases of self-consistency, in which the required consistency relation links a model’s behavior to its own descriptions or evaluations of that behavior.",
+   "citing_evidence": "We can therefore frame faithful self-explanation as a consistency objective between outputs generated in different contexts: what the LM says about its behavior in one context and what it actually does in another (Pres et al., 2026)."
+  },
+  {
+   "entry": "chuang2026faithlm#6",
+   "source": "radhakrishnan2023question",
+   "verdict": "partial",
+   "finding": "Radhakrishnan et al. never use 'fidelity' and define faithfulness as reflecting the model's actual reasoning (after Jacovi & Goldberg); only their perturbation tests check whether the answer depends on the stated reasoning, while their biasing-context tests check for unverbalized influences, which CoT-answer alignment does not cover.",
+   "source_evidence": "We adopt the definition of faithful reasoning from Jacovi & Goldberg (2020), where reasoning is faithful to the extent that it reflects the model’s actual reasoning. [...] If the model gives a different answer with the altered form of the reasoning, the change in the final answer indicates that the model is not ignoring the reasoning when answering the question, suggesting greater faithfulness. [...] Another way to test for reasoning faithfulness is to measure how much the model’s predictions change due to biasing features in the model’s context, for features which the model is unlikely to explicitly mention in its reasoning (Turpin et al., 2023).",
+   "citing_evidence": "where “good fidelity” in the series of work is typically defined by the alignment between the content of CoT and the final answer (Lyu et al., 2023; Radhakrishnan et al., 2023)."
+  },
+  {
+   "entry": "li2025drift#2",
+   "source": "radhakrishnan2023question",
+   "verdict": "supported",
+   "finding": "The source's input alterations (biasing features) flag unfaithfulness when a biasing input moves the answer but the reasoning never mentions it, i.e. the rationale fails to respond to the input; insensitivity of the answer itself counts as unfaithful only for alterations of the reasoning (truncation, added mistakes).",
+   "source_evidence": "We measure the amount of unfaithful, ignored reasoning following Lanham et al. (2023), evaluating how often the model’s final answer changes when perturbing the model’s stated reasoning when truncating the reasoning or adding LLM-generated mistakes [...] Susceptibility to these biases indicates a lack of reasoning faithfulness, as we never observe the model mentioning the biases in its reasoning samples",
+   "citing_evidence": "This issue is highlighted in faithfulness evaluation, where unfaithful models do not respond adequately to alterations in input (Lanham et al., 2023; Radhakrishnan et al., 2023)."
+  },
+  {
+   "entry": "roger2023preventing#5",
+   "source": "radhakrishnan2023question",
+   "verdict": "supported",
+   "finding": "The source names and measures 'ignored reasoning', answers that stay the same when the CoT is truncated or corrupted, finding corrupted CoTs change only 9.6% of answers.",
+   "source_evidence": "Lanham et al. (2023) find that LLM answers to questions often remain unchanged despite truncating or adding mistakes to the CoT reasoning (“ignored reasoning”). [...] a corrupted CoT reasoning sample changes the model’s final answer for only 9.6% of the questions",
+   "citing_evidence": "LLMs are known to use other forms of unfaithful reasoning, such as ignoring the CoT when generating the final answer (Radhakrishnan et al.,, 2023)."
+  },
+  {
+   "entry": "sullivan2026language#4",
+   "source": "roytburg2026measuring",
+   "verdict": "adapted",
+   "finding": "The source's transfer utility scores whether weak models reach the correct answer from prefixes of correct teacher traces on a 2% grid; the paper uses ten prefixes and scores whether three instruct models recover the policy's own final answer, calling the result trace legibility.",
+   "source_evidence": "We measure this property through “transfer utility”: whether a weaker LLM, when shown the reasoning trace from an RLM, can use it to arrive at the correct answer. [...] We evaluate a weak model $W$ at a fixed percentage grid $X=\\{2,4,\\ldots,100\\}$ : for each $x\\in X$ , we present $W$ with the prefix of $R_{p}$ covering the first $x\\%$ of steps and record its correctness $S(R_{p}^{(x)})\\in\\{0,1\\}$ .",
+   "citing_evidence": "We implement an experimental design based on those used in Wang et al. (2025) and Roytburg et al. (2026). [...] For each partial trace, each of the three instruct models is prompted to guess the final answer $y$ , based on the reasoning produced by ${\\pi}$ up to that point."
+  },
+  {
+   "entry": "anwar2026training#13",
+   "source": "schoen2025stress",
+   "verdict": "supported",
+   "finding": "The source measures evaluation awareness from the model's spontaneous chain-of-thought, contrasting this with asking models to classify scenarios.",
+   "source_evidence": "While prior work has tested the capability of models to distinguish evaluation from deployment settings by asking them to classify scenarios (Laine et al., 2024; Needham et al., 2025), we measure the propensity of models to spontaneously recognize evaluation contexts. [...] We analyze the models’ chain-of-thought for clear signs of evaluation awareness, similar to Apollo Research (2025).",
+   "citing_evidence": "In literature, evaluation awareness has been measured through post-hoc questioning (Needham et al., 2025), controlled prompt cues (Li et al., 2026), spontaneous model reasoning (Schoen et al., 2025; Coleman, 2026), and behavioral changes (Abdelnabi and Salem, 2025; Deckenbach et al., 2026)."
+  },
+  {
+   "entry": "anwar2026training#3",
+   "source": "schoen2025stress",
+   "verdict": "supported",
+   "finding": "The source counts only unambiguous, explicit reasoning about being evaluated as verbalized evaluation awareness and notes that models may be aware without verbalizing it, the high-precision, low-recall reading the paper gives.",
+   "source_evidence": "We focus on the most unambiguous cases of verbalized evaluation awareness–when models explitly reason about being evaluated in their chain-of-thought. [...] We may underestimate true evaluation awareness because: (1) models may not always verbalize evaluation awareness, and (2) we only count the most unambiguous cases of evaluation awareness",
+   "citing_evidence": "In contrast, verbalizations of evaluation awareness are generally considered much more trustworthy and clear evidence that the model suspects it is being evaluated (Schoen et al., 2025; Li et al., 2026)."
+  },
+  {
+   "entry": "kaufmann2026aligned#28",
+   "source": "schoen2025stress",
+   "verdict": "renamed",
+   "finding": "The source calls the effect unusual or non-standard terminology (a 'distinct dialect') and reports it as an observation in o3 that grows during capabilities-focused RL, not as a hypothesis; it leaves the cause open, so 'even without concrete incentives' is the paper's framing.",
+   "source_evidence": "We find the model’s reasoning often uses terms in non-standard ways, departing from conventional English usage (ex: Figure 7). [...] Furthermore, we observe that the frequency of this unusual terminology increases during capabilities-focused RL training. [...] OpenAI is investigating why these terms emerge.",
+   "citing_evidence": "Transparency “drift”. Chain-of-Thought semantics might change during long training runs even without concrete incentives. Schoen et al. (2025) hypothesize that this effect occurs in some state-of-the-art reasoning models."
+  },
+  {
+   "entry": "lee2026training#2",
+   "source": "schoen2025stress",
+   "verdict": "renamed",
+   "finding": "The source never says 'covert misbehavior'; the definition matches its scheming (covert pursuit of misaligned goals while hiding capabilities and objectives), alongside its covert actions (strategically withholding, misrepresenting or concealing material information), and the paper drops 'misaligned'.",
+   "source_evidence": "We call this behavior scheming—the covert pursuit of misaligned goals while hiding true capabilities and objectives (Balesni et al., 2024). [...] We define covert actions as behaviors where AI models strategically withhold, misrepresent, or conceal information that users or developers would consider material to their decisions.",
+   "citing_evidence": "Of particular concern is covert misbehavior, where an agent pursues a goal while strategically concealing this pursuit from oversight (Schoen et al., 2025)."
+  },
+  {
+   "entry": "macdermott2025reasoning#7",
+   "source": "schoen2025stress",
+   "verdict": "renamed",
+   "finding": "The source reports models using words in non-standard ways, increasingly so during capabilities RL, but calls it unusual terminology or a distinct dialect, never linguistic drift.",
+   "source_evidence": "We find the model’s reasoning often uses terms in non-standard ways, departing from conventional English usage (ex: Figure 7). [...] Furthermore, we observe that the frequency of this unusual terminology increases during capabilities-focused RL training.",
+   "citing_evidence": "We also explore rewarding KL divergence from a reference policy to simulate linguistic drift, where a model learns to use words in non-standard ways during RL training. [...] Schoen et al. (2025) find early signs of linguistic drift in frontier reasoning models"
+  },
+  {
+   "entry": "anon2026computation#7",
+   "source": "shen2026detecting",
+   "verdict": "supported",
+   "finding": "The source detects unfaithful CoTs by the discrepancy between graphs built from traced sentence-level circuits and from the displayed reasoning.",
+   "source_evidence": "Under this formulation, unfaithfulness detection becomes an internal-external graph discrepancy scoring problem: a larger discrepancy between the external reasoning graph and the internal computation graph indicates a higher likelihood of unfaithfulness.",
+   "citing_evidence": "CIE-Scorer (Shen et al., 2026) further traced compact sentence-level circuits and detected unfaithful CoTs by measuring discrepancies between internal computational graphs and external reasoning graphs."
+  },
+  {
+   "entry": "wang2026concept#19",
+   "source": "shen2026detecting",
+   "verdict": "supported",
+   "finding": "The source builds an internal representation from traced circuits and an external one from hidden states of the reasoning sentences, organizes both into sentence graphs and compares them with Fused Gromov–Wasserstein distance.",
+   "source_evidence": "It then derives two representations for each reasoning trace: an internal representation based on circuit structures and an external representation from model hidden states. In Sec. 3.2, we organize these representations into trace-level sentence graphs and measure their structural discrepancy using the Fused Gromov–Wasserstein (FGW) distance.",
+   "citing_evidence": "CIE compares the model’s internal computation against its displayed reasoning (Shen et al., 2026). For each trace, an internal representation is created by tracing sentence-level attribution circuits over informative tokens, and an external representation from the hidden states of the reasoning sentences is extracted and organized into sentence graphs."
+  },
+  {
+   "entry": "kutsyk2026revealing#4",
+   "source": "shenoy2026introspection",
+   "verdict": "supported",
+   "finding": "The source's grading prompt gives a binary yes/no on whether a self-report names the same category of behavior as the ground truth, even with different details.",
+   "source_evidence": "Read the following two responses and assess whether the prediction identifies the **same specific type of behavior or concern** as the correct response. Respond \"yes\" if the prediction describes the same category of behavior, even if the specific details or approaches differ.",
+   "citing_evidence": "Each response is scored by an LLM judge (gpt-5.4-mini-2026-03-17) that receives the response text and the setting’s evaluation target (Table 1) and returns a binary semantic-match verdict: does this response describe the target behavior?"
+  },
+  {
+   "entry": "kutsyk2026revealing#5",
+   "source": "shenoy2026introspection",
+   "verdict": "adapted",
+   "finding": "The source scores any-match success over the five behaviors a summarization scaffold distils from many responses (or over an auditing agent's ten predictions); it defines no per-prompt hit rate over five raw samples, which is the paper's own version.",
+   "source_evidence": "We score success by whether any of the five predictions captures the ground-truth behavior, averaged over five runs. [...] After investigating, the agent generates 10 predictions of each model’s behavior, and we use an LLM classifier to determine if any prediction captures the ground truth.",
+   "citing_evidence": "So, in line with IA authors, we aggregate to the prompt-level hit rate: for each of the 100 prompts, check whether any of its $N{=}5$ samples is a semantic match."
+  },
+  {
+   "entry": "yoshida2026introspecting#1",
+   "source": "shenoy2026introspection",
+   "verdict": "supported",
+   "finding": "The source applies the trained adapter to new fine-tuned models to elicit accurate natural-language self-reports of their learned behaviors.",
+   "source_evidence": "Right: At test time, the same adapter applied to new finetuned models elicits accurate natural-language self-reports of their behaviors, including behaviors never seen during IA training.",
+   "citing_evidence": "After training, the same adapter is applied to a held-out fine-tuned model $M_{\\theta_{\\mathrm{test}}}$ and queried with an introspection question. The desired output is a faithful natural-language description of the behavioral change encoded by $\\tau_{\\mathrm{test}}$ ."
+  },
+  {
+   "entry": "yoshida2026introspecting#2",
+   "source": "shenoy2026introspection",
+   "verdict": "adapted",
+   "finding": "The source trains the adapter so that each fine-tune verbalizes its implanted behavior b_i; the paper replaces this target with the measured alignment-relevant behavior change, which need not be the fine-tuning target.",
+   "source_evidence": "We then train a single LoRA adapter (Hu et al., 2022), an introspection adapter (IA), jointly across the $M_{i}$ , so that applying the IA to $M_{i}$ causes it to verbalize $b_{i}$ when asked.",
+   "citing_evidence": "In our setting, the fine-tuning data $\\mathcal{D}^{\\mathrm{ft}}_{i}(b_{i})$ may still be constructed to induce an intended behavior $b_{i}$ , but the explanation target is instead an alignment-relevant behavioral change that need not coincide with the behavior explicitly targeted during fine-tuning."
+  },
+  {
+   "entry": "anon2026improving#27",
+   "source": "skaf2025large",
+   "verdict": "supported",
+   "finding": "The source shows that penalizing specific strings in load-bearing reasoning makes models substitute alternative strings, with encodings that generalize to held-out strings.",
+   "source_evidence": "First, we show that penalizing the use of specific strings within load-bearing reasoning traces causes models to substitute alternative strings. [...] When the penalized strings belong to an overarching class, the model learns not only to substitute strings seen in training, but also develops a general encoding scheme for all members of the class which it can apply to held-out testing strings.",
+   "citing_evidence": "Extending this concern, Skaf et al. (2025) demonstrate that penalties on particular strings can induce alternative encodings in reasoning traces, including encodings that generalize to previously unseen strings."
+  },
+  {
+   "entry": "haskins2026training#8",
+   "source": "skaf2025large",
+   "verdict": "supported",
+   "finding": "The source shows that penalizing strings in load-bearing reasoning produces substitution encodings (its steganographic reasoning) that generalize to held-out strings.",
+   "source_evidence": "First, we show that penalizing the use of specific strings within load-bearing reasoning traces causes models to substitute alternative strings. [...] When the penalized strings belong to an overarching class, the model learns not only to substitute strings seen in training, but also develops a general encoding scheme for all members of the class which it can apply to held-out testing strings.",
+   "citing_evidence": "Skaf et al. (2025) show that penalizing specific strings in load-bearing reasoning causes models to learn substitution-based encoding schemes (steganographic reasoning) that generalize to unseen examples."
+  },
+  {
+   "entry": "turpin2025teaching#6",
+   "source": "skaf2025large",
+   "verdict": "partial",
+   "finding": "Skaf et al. study steganography but frame it as obfuscated reasoning that defeats CoT monitoring, never as a faithfulness failure: the word faithfulness does not appear, and their steganographic CoT is by definition load-bearing, i.e. causally used by the model.",
+   "source_evidence": "However, recent works have shown that banning the mention of a specific example of reward hacking causes obfuscation of the undesired reasoning traces but the persistence of the undesired behavior, threatening the reliability of CoT monitoring. [...] We use obfuscated reasoning as an umbrella term encompassing any reasoning which does not reveal harmful planning with respect to a monitor [2]. [...] The CoT encodes harmful planning in load-bearing tokens.",
+   "citing_evidence": "Other works study steganography as a particular faithfulness failure [31, 32]."
+  },
+  {
+   "entry": "senatorov2026structural#4",
+   "source": "somov2026breaking",
+   "verdict": "supported",
+   "finding": "The source defines F_ID (the decision matches what the model's own mediator implies), F_OOD (post-intervention consistency) and F_Strong (both); the paper applies them to computational graphs with node or operation edits.",
+   "source_evidence": "For each instance $i$ , we check whether $\\hat{y}_{i}=C(\\hat{m}_{i})$ , i.e., whether the model’s decision matches what its predicted mediator deterministically implies. [...] The first conjunct verifies in-distribution self-consistency; the second verifies that the model updates its decision to match the new mediator. [...] $F_{\\mathrm{OOD}}$ reports post-intervention faithfulness, and $F_{\\mathrm{Strong}}$ requires both original and intervened consistency.",
+   "citing_evidence": "$F_{\\mathrm{ID}}$ asks whether the model’s answer matches $C(\\hat{M})$ for its own graph; $F_{\\mathrm{OOD}}$ asks whether, after editing the graph ( $\\hat{M}\\!\\rightarrow\\!M^{\\star}$ by some kind of structural edit – node or operation replacement) and re-prompting, the new answer should also match $C(M^{\\star})$ ; $F_{\\mathrm{strong}}$ requires both $F_{\\mathrm{ID}}$ and $F_{\\mathrm{OOD}}$ to be true."
+  },
+  {
+   "entry": "wang2026concept#20",
+   "source": "sun2026investigating",
+   "verdict": "renamed",
+   "finding": "Eq. 14 is the source's ff_cont, the share of CoT steps whose unlearning changes the answer; the source uses FUR only for the unlearning procedure and calls the continuous score ff_cont.",
+   "source_evidence": "To enable more fine-grained evaluation, we further propose $\\mathrm{ff}_{\\mathrm{cont}}$ , which extends $\\mathrm{ff}_{\\mathrm{hard}}$ and calculates the proportion of reasoning steps for which unlearning leads the model to change its prediction: [...] For the parametric faithfulness metric, we follow Tutek et al. (2025) and implement FUR with NPO+KL unlearning.",
+   "citing_evidence": "FUR provides a continuous answer as to whether a CoT is faithful by measuring the extent to which unlearning the knowledge used by models in CoT steps causes model to change their output prediction:"
+  },
+  {
+   "entry": "sun2026investigating#12",
+   "source": "swaroop2025lift",
+   "verdict": "supported",
+   "finding": "The source (FRIT, renamed LIFT in this version) counts a trace faithful when the answer causally depends on its steps, scores each step by the drop in answer log-probability after replacing it with an irrelevant fact, and fine-tunes on high-scoring traces.",
+   "source_evidence": "Faithfulness. A reasoning trace is faithful if the model’s answer causally depends on the intermediate reasoning steps. [...] We propose LIFT, which automatically scores each reasoning step by its causal influence: we replace it with a domain-matched but irrelevant fact and measure the drop in answer log-probability.",
+   "citing_evidence": "FRIT optimizes towards faithful CoTs identified via causal importance – whether interventions on reasoning steps change the answer Swaroop et al. (2025)."
+  },
+  {
+   "entry": "hong2023faithful#2",
+   "source": "tafjord2022entailer",
+   "verdict": "supported",
+   "finding": "The source's task is to answer with a valid chain of reasoning from which the answer follows (faithful), additionally required to be truthful to the model's beliefs.",
+   "source_evidence": "The chains are both faithful (the answer follows from the reasoning) and truthful (the chain reflects the system’s own beliefs). [...] If all the leaf nodes are true, and all the 1-step entailment relations are valid, then we say the tree is a valid chain of reasoning for the hypothesis.",
+   "citing_evidence": "Faithful question-answering Tafjord et al. (2022); Creswell and Shanahan (2022) requires to answer the question and provide the valid reasoning steps that the answer faithfully follows."
+  },
+  {
+   "entry": "hong2023faithful#3",
+   "source": "tafjord2022entailer",
+   "verdict": "adapted",
+   "finding": "The source calls a tree valid only if its leaves are true and every entailment step is valid, and calls a chain faithful when the answer follows from it; the paper drops the true-leaves condition from validity and recasts faithfulness as the root conclusion supporting the chosen option.",
+   "source_evidence": "If all the leaf nodes are true, and all the 1-step entailment relations are valid, then we say the tree is a valid chain of reasoning for the hypothesis. [...] Note that these proofs are are faithful explanations of why an answer was chosen, as the selected answer by definition is always the one with the highest-scoring proof.",
+   "citing_evidence": "A tree is considered valid if each non-leaf node is a valid entailment of its immediate children, and is considered faithful if its conclusion of the root node can support the option $o_{a}$ ."
+  },
+  {
+   "entry": "reddy2025principled#10",
+   "source": "tanneru2024hardness",
+   "verdict": "supported",
+   "finding": "The source restates that CoTs often fail to reflect model behaviour and scores faithfulness by whether the CoT guides the answer (early answering), supporting the post-hoc-versus-causal contrast; it reports nothing on omitted steps or fabricated rationales, its own result being that faithfulness is hard to improve.",
+   "source_evidence": "While LLMs are known to generate CoT reasoning that is appealing to humans, prior studies have shown that these explanations do not accurately reflect the actual behavior of the underlying LLMs. [...] If the answer from the LLM converges towards the final answer as it encounters more CoT steps, it indicates that the CoT explanation is guiding the answer and is more likely to be faithful.",
+   "citing_evidence": "whereas faithfulness remains more challenging, as studies show that CoTs often omit key steps or fabricate plausible but untrue rationales, behaving more like post-hoc justifications than causal explanations (Chen et al., 2025; Chua & Evans, 2025; Tanneru et al., 2024; Turpin et al., 2023; Chen et al., 2023; Jacovi & Goldberg, 2020; Arcuschin et al., 2025)."
+  },
+  {
+   "entry": "anon2026traininghonesty#13",
+   "source": "taufeeque2026obfuscation",
+   "verdict": "partial",
+   "finding": "In the source a response is deceptive when it passes the visible test but fails the held-out tests (hardcoding); presentation plays no role, and policies that hardcode and then say the code is a hack still count among the deceptive (obfuscated) policies, so 'present the result as a general solution' is not part of its label.",
+   "source_evidence": "We retain the other (typically two) test cases to classify the results as either honest (passes held-out tests) or deceptive (passes only given test, reward-hacked), but do not use this information during training. [...] Strategic Honesty. These policies write the hardcoded function in the first codeblock, but subsequently explain that it is a hack.",
+   "citing_evidence": "MBPPHoneypot (Taufeeque et al., 2026), where deceptive responses hardcode the visible test cases of an MBPP (Austin et al., 2021) task and present the result as a general solution;"
+  },
+  {
+   "entry": "anon2026traininghonesty#4",
+   "source": "taufeeque2026obfuscation",
+   "verdict": "supported",
+   "finding": "The source's lie detectors are linear (logistic-regression) probes on residual-stream activations trained to separate deceptive from honest examples.",
+   "source_evidence": "These lie detectors are linear probes trained on off-policy deception examples to detect deception directly from model activations. [...] We train a logistic regression classifier on each layer of the residual stream.",
+   "citing_evidence": "One solution for scalable monitoring of deception uses probes, which are simply classifiers trained on hidden activations to separate deceptive from honest responses (Azaria & Mitchell, 2023; Goldowsky-Dill et al., 2025; Taufeeque et al., 2026)."
+  },
+  {
+   "entry": "zhou2026nearzero#10",
+   "source": "taufeeque2026obfuscation",
+   "verdict": "unsupported",
+   "finding": "The Obfuscation Atlas paper describes no graded-suspicion text judge for MBPP-Honeypot: its detectors are activation probes, it mentions black-box LLM monitors only as an alternative it does not use, and its only LLM judges are a biased reward judge in a separate Food-Sycophancy task and a GPT-5.2 classifier that sorts obfuscated policies into three strategies; any judge template is in the released harness code, not the paper.",
+   "source_evidence": "Black-box LLM monitors offer a scalable alternative but introduce new challenges: the monitor itself may be untrustworthy, susceptible to jailbreaking, or vulnerable to persuasion or collusion by the policy being evaluated. [...] The reward is supplied by an LLM judge with a Southern-European cuisine bias. [...] We classify a subset of 34 obfuscated-policy models found in our experiments (Section 5) into the three strategies introduced in Section 5 using GPT-5.2-2025-12-11 with the system prompt shown in Table 21.",
+   "citing_evidence": "Graded suspicion in $[0,1]$ from a fixed base instruct model shown the problem, visible test, reasoning span, and final code, few-shot and near-greedy. [...] Frozen few-shot template from the adapted Atlas harness"
+  },
+  {
+   "entry": "zhou2026nearzero#9",
+   "source": "taufeeque2026obfuscation",
+   "verdict": "adapted",
+   "finding": "The source's probe averages per-layer logistic regressions read after a 'Did you respond truthfully?' follow-up, is trained on off-domain deception data or synthetic MBPP code, enters only as a reward penalty, and comes with the advice not to pass gradients through it; the paper fits one layer on baseline rollouts and adds a differentiable activation-space term (the evadability claim is supported).",
+   "source_evidence": "Instead, we use a follow-up prompt technique (e.g., Goldowsky-Dill et al. (2025)), appending the messages “User: Did you respond truthfully? Assistant: Yes” to the original generation and extract residual stream activations at the final token of the follow-up text. [...] We train a logistic regression classifier on each layer of the residual stream. We only use layers with cross-entropy training loss below 0.6, and take the mean of the sigmoid scores across selected classifiers as the final probe score. [...] (1) Do not take gradients through the probe; those easily lead to obfuscated activations.",
+   "citing_evidence": "A linear probe on frozen layer-29 residual activations, fit in-domain on baseline rollouts and injected through both an activation-space term and a sequence-reward penalty. [...] It belongs to a class that prior work identifies as evadable (Taufeeque et al., 2026; Gupta and Jenner, 2025)."
+  },
+  {
+   "entry": "karvonen2026would#17",
+   "source": "turpin2025teaching",
+   "verdict": "supported",
+   "finding": "The source's verbalization fine-tuning edits switched responses to acknowledge the cue and swaps baseline reasoning into non-switches, so the CoT acknowledges the cue only when removing it changes the answer.",
+   "source_evidence": "In this paper, we propose an intervention called verbalization fine-tuning (VFT), which trains models to explicitly verbalize when prompt cues influence their reasoning. [...] For the faithful non-switches, we swap in the baseline reasoning in order to further reinforce that the model is not affected by the cue on this example. [...] One way to establish that the model is sensitive to the cue is if it gives the cue-aligned answer when given the cued prompt, and switches to a different answer when the cue is removed.",
+   "citing_evidence": "Ground truth comes from removing the cue: if the model’s answer flips, the cue mattered. Some of this work trains the model’s chain of thought to acknowledge the cue only when it mattered (Chua et al., 2025; Turpin et al., 2025; Hase and Potts, 2026)."
+  },
+  {
+   "entry": "yang2025investigating#5",
+   "source": "turpin2025teaching",
+   "verdict": "adapted",
+   "finding": "The source's verbalization rate is a recall over cue-influenced examples, judged by whether the cue is a significant part of the reasoning; the paper computes it over all responses regardless of whether the answer changes, counts any explicit reference, and combines thinking and response.",
+   "source_evidence": "We can measure the recall of this classifier, which we call the verbalization rate: for all the examples where the model is influenced by the cue, what fraction does the model verbalize that it is using the cue. [...] The ASSISTANT uses this bias factor as significant part of their reasoning for the conclusion",
+   "citing_evidence": "(ii) the verbalization rate, i.e., how often the model explicitly mentions the cue use in its self-explanation, regardless of whether its answer changes. We use an LLM-based verbalization judge to measure whether models explicitly verbalize the reference to cues in their self-explanations, similar to prior work (Turpin et al., 2025)."
+  },
+  {
+   "entry": "yang2025investigating#6",
+   "source": "turpin2025teaching",
+   "verdict": "renamed",
+   "finding": "The source names this product the effective cue influence rate (ECR), the share of undetected reward hacks, never 'scheming'; and because the paper's VR is not conditioned on cue influence, its product no longer equals ECR's false-negative share.",
+   "source_evidence": "We compute this as $(1-\\textrm{verbalization rate})\\times\\textrm{cue influence rate}$ , called the effective cue influence rate (ECR), which serves as our main metric of interest. This is also equivalent to the fraction of false negatives overall: $\\textrm{FN}/\\textrm{total}$ .",
+   "citing_evidence": "Scheming: $(1-\\text{VR})\\cdot\\text{CIR}_{a}$ , originally introduced by Turpin et al. (2025), measures how often the model’s final answer is influenced by cues without making this influence explicit in its reasoning or final response."
+  },
+  {
+   "entry": "basu2026measuring#23",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source's FUR erases the information in individual reasoning steps from the model parameters and measures faithfulness by the effect on the prediction.",
+   "source_evidence": "fur erases information contained in reasoning steps from model parameters, and measures faithfulness as the resulting effect of the model’s prediction.",
+   "citing_evidence": "FUR (Tutek et al., 2025) measures faithfulness via weight-space unlearning of individual reasoning steps."
+  },
+  {
+   "entry": "bhan2025did#8",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source unlearns the knowledge in each reasoning step and holds that a larger change in the prediction means more faithful reasoning, with a graded probability-shift score per step.",
+   "source_evidence": "In both cases, the more faithful the reasoning is to internal computations, the greater the difference in answers and reasoning between $\\mathcal{M}^{*}$ and $\\mathcal{M}$ should be. [...] The soft version (ff-soft) assigns a value $f\\in[0,1]$ to a reasoning step, indicating how much probability mass has unlearning that step shifted from the initial answer.",
+   "citing_evidence": "One approach (Tutek et al., 2025) assesses the effect of unlearning (Liu et al., 2025) the parametric knowledge encoded in the reasoning steps of the self-NLE. The higher the change in prediction between the original model and the model having unlearned the reasoning steps, the more faithful the self-NLE."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#27",
+   "source": "tutek2025measuring",
+   "verdict": "adapted",
+   "finding": "The paper describes FUR accurately (step-wise unlearning, hard and soft scores, direct-answer comparison, agreement filter) and visibly changes it: the hard score is applied per step, post-unlearning answers come from a self-consistency majority vote, and the agreement filter is dropped.",
+   "source_evidence": "The hard version (ff-hard) provides a binary answer to whether an explanation is faithful or not, by measuring whether unlearning any step causes the model to output a different label as the most likely one: [...] We deploy the faithfulness evaluation protocol described in §3, where we prompt $\\mathcal{M}^{*}$ and $\\mathcal{M}$ to answer directly, without reasoning, and then compute how often their answers differ. [...] By eliminating the contextual confounder, we limit ourselves to studying cases in which the CoT and no-CoT predictions of the models agree — as these are the only cases where one can hypothesize both instances of the model use the same reasoning.",
+   "citing_evidence": "We adopt their “hard” faithfulness to steps. [...] Specifically, we self-consistency prompt the model [68] post-unlearning and compare the majority vote answer to the pre-unlearning CoT answer. In FUR, in contrast, answer changes are measured via direct prompting rather than CoT prompting the two model versions."
+  },
+  {
+   "entry": "hong2026making#2",
+   "source": "tutek2025measuring",
+   "verdict": "partial",
+   "finding": "Tutek et al. supply the two-way split and the term parametric faithfulness, but their self-consistency is the output's sensitivity to perturbing the reasoning chain with parameters fixed, not consistency across samples or paraphrases, and they hold that parametric faithfulness can only be measured by intervening on parameters, which the hint tests the paper files under it do not do.",
+   "source_evidence": "Perturbing the reasoning chain while maintaining model parameters fixed measures self-consistency (Parcalabescu and Frank, 2024). Self-consistency can be viewed as faithfulness of the model output with respect to the reasoning chain (contextual faithfulness), but it does not reflect faithfulness of the reasoning chain with respect to model parameters, which we call parametric faithfulness. [...] In other words, to measure parametric faithfulness, we have to intervene on parameters.",
+   "citing_evidence": "Such risks have motivated efforts to formalize CoT faithfulness (Barez et al., 2025; Xiong et al., 2025; Tutek et al., 2025; Hase & Potts, 2026), with definitions falling into two broad categories: self-consistency tests whether a model produces a consistent explanation across multiple samples or under paraphrase (Parcalabescu & Frank, 2024; Zhao & Iii, 2025), while parametric faithfulness tests whether the CoT reflects the model’s actual internal reasoning process. [...] Existing evaluations of parametric faithfulness suffer from two limitations: (i) they rely on a single paradigm—injecting misleading hints and checking whether the model acknowledges hint usage in its CoT"
+  },
+  {
+   "entry": "mao2026taming#18",
+   "source": "tutek2025measuring",
+   "verdict": "partial",
+   "finding": "Tutek et al. frame faithfulness as whether the CoT faithfully represents the model's internal reasoning, but the paper never mentions monitorability, so the claim that faithfulness is distinct from monitorability is not in the source.",
+   "source_evidence": "It is not clear, however, whether the reasoning encoded in the CoT is a faithful representation of the internal reasoning process of the model, casting doubts about the reliability of CoT as a window onto the model’s ‘thought process’.",
+   "citing_evidence": "Faithfulness concerns whether CoT mirrors latent computation and is distinct from monitorability (Tutek et al., 2025)."
+  },
+  {
+   "entry": "senatorov2026structural#1",
+   "source": "tutek2025measuring",
+   "verdict": "partial",
+   "finding": "Tutek et al. state the notion and raise the concern, but they do not show that CoTs fail to reflect the internal process: they read their results as indicating the CoTs are generally faithful, with ff-hard a lower bound whose non-flips may reflect failed unlearning or alternative reasoning paths.",
+   "source_evidence": "It is not clear, however, whether the reasoning encoded in the CoT is a faithful representation of the internal reasoning process of the model, casting doubts about the reliability of CoT as a window onto the model’s ‘thought process’. [...] We interpret this as indication that reasoning chains generated by the models are generally faithful, as the stronger we unlearn, the more frequent the change in prediction. [...] In this sense, ff-hard represents a lower bound on the model’s true faithfulness",
+   "citing_evidence": "recent works have raised concerns about the faithfulness of such traces, showing that generated explanations do not always reflect the model’s true internal decision process (Lanham et al., 2023; Turpin et al., 2023; Tutek et al., 2025; Han et al., 2026)."
+  },
+  {
+   "entry": "sun2026investigating#2",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source contrasts contextual faithfulness (self-consistency under perturbation of the context) with parametric faithfulness, which requires erasing knowledge from the parameters.",
+   "source_evidence": "Such approaches of context perturbation actually measure self-consistency or contextual faithfulness rather than parametric faithfulness, for which one would need to erase knowledge from parameters (Parcalabescu and Frank, 2024). [...] We introduce a framework for measuring parametric faithfulness of generated reasoning",
+   "citing_evidence": "is typically evaluated with metrics under two disjoint paradigms: contextual faithfulness, measured by perturbing the input or CoT trace, and parametric faithfulness, assessed by intervening on a model’s parametric knowledge."
+  },
+  {
+   "entry": "sun2026investigating#21",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source's ff-hard is the indicator that unlearning any single step changes the most likely label, as restated in Eq. 6.",
+   "source_evidence": "The hard version (ff-hard) provides a binary answer to whether an explanation is faithful or not, by measuring whether unlearning any step causes the model to output a different label as the most likely one:",
+   "citing_evidence": "$\\mathrm{ff}_{\\mathrm{hard}}$ provides a binary answer as to whether a CoT is faithful by measuring whether unlearning the knowledge used by models in any CoT step causes models to change their output prediction Tutek et al. (2025) (App. D.2)."
+  },
+  {
+   "entry": "sun2026investigating#4",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source deems a step faithful when precisely unlearning it changes the model's prediction.",
+   "source_evidence": "If the target step was successfully and precisely unlearned, and the models’ prediction changed, the step faithfully explains the models’ underlying reasoning process.",
+   "citing_evidence": "Parametric faithfulness, in contrast, intervenes on a model’s parameters rather than its context: it deems a CoT step faithful if unlearning the knowledge underlying that step changes the answer (Tutek et al., 2025)."
+  },
+  {
+   "entry": "sun2026investigating#7",
+   "source": "tutek2025measuring",
+   "verdict": "adapted",
+   "finding": "The source defines binary ff-hard per chain and only reports a dataset-level step flip rate (% of steps whose unlearning changes the prediction, Table 11); the paper turns this into a per-CoT score, the share of its steps that flip the answer.",
+   "source_evidence": "Table 11: Reasoning step level ff-hard: % of reasoning steps which, when unlearned, change the underlying models’ prediction. [...] The hard version (ff-hard) provides a binary answer to whether an explanation is faithful or not, by measuring whether unlearning any step causes the model to output a different label as the most likely one:",
+   "citing_evidence": "To enable more fine-grained evaluation, we further propose $\\mathrm{ff}_{\\mathrm{cont}}$ , which extends $\\mathrm{ff}_{\\mathrm{hard}}$ and calculates the proportion of reasoning steps for which unlearning leads the model to change its prediction:"
+  },
+  {
+   "entry": "walden2026reasoning#20",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source asks whether reasoning verbalized in a CoT is faithful to the model's parametric beliefs.",
+   "source_evidence": "Despite much work on CoT prompting it is unclear if reasoning verbalized in a CoT is faithful to the models’ parameteric beliefs.",
+   "citing_evidence": "Tutek et al. (2025) investigate a related but distinct notion of faithfulness, evaluating whether CoT steps are consistent with a model’s parametric beliefs."
+  },
+  {
+   "entry": "wang2026concept#13",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source restricts evaluation to items where CoT and no-CoT predictions agree; its reason is that only there can both prompting modes be assumed to use the same reasoning, not the CoT-induced performance gain the paper gives.",
+   "source_evidence": "By eliminating the contextual confounder, we limit ourselves to studying cases in which the CoT and no-CoT predictions of the models agree — as these are the only cases where one can hypothesize both instances of the model use the same reasoning.",
+   "citing_evidence": "Following Tutek et al. (2025), we evaluate faithfulness in cases where CoT and no-CoT predictions of models agree. This avoids confounding the CoT-induced performance gain with the CoT faithfulness evaluation."
+  },
+  {
+   "entry": "wang2026concept#14",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source intervenes on the parametric knowledge behind each step and counts the CoT faithful when the answer changes, although it treats a non-change as inconclusive (ff-hard is a lower bound).",
+   "source_evidence": "If the target step was successfully and precisely unlearned, and the models’ prediction changed, the step faithfully explains the models’ underlying reasoning process. [...] Therefore, we do not expect ff-hard to have perfect recall.",
+   "citing_evidence": "One line of work intervenes on the reasoning chain, or the parametric knowledge that the reasoning invokes, and treats the CoT as faithful only if the answer changes accordingly (Lanham et al., 2023; Zaman and Srivastava, 2025; Tutek et al., 2025)"
+  },
+  {
+   "entry": "wang2026concept#20",
+   "source": "tutek2025measuring",
+   "verdict": "partial",
+   "finding": "Tutek et al. supply FUR's step-wise unlearning and the binary ff-hard (plus a probability-shift ff-soft), but not the continuous per-CoT share of steps whose unlearning changes the answer in Eq. 14, which is Sun et al.'s ff_cont.",
+   "source_evidence": "The hard version (ff-hard) provides a binary answer to whether an explanation is faithful or not, by measuring whether unlearning any step causes the model to output a different label as the most likely one: [...] The soft version (ff-soft) assigns a value $f\\in[0,1]$ to a reasoning step, indicating how much probability mass has unlearning that step shifted from the initial answer.",
+   "citing_evidence": "Additionally, we follow Tutek et al. (2025); Sun et al. (2026) to assess faithfulness through interventions on the parametric knowledge of model $\\mathcal{M}$ . [...] FUR provides a continuous answer as to whether a CoT is faithful by measuring the extent to which unlearning the knowledge used by models in CoT steps causes model to change their output prediction:"
+  },
+  {
+   "entry": "zaman2025chainofthought#4",
+   "source": "tutek2025measuring",
+   "verdict": "supported",
+   "finding": "The source unlearns each step with NPO plus a KL term, compares direct (no-CoT) answers, and labels the CoT faithful if any step's unlearning changes the label.",
+   "source_evidence": "The hard version (ff-hard) provides a binary answer to whether an explanation is faithful or not, by measuring whether unlearning any step causes the model to output a different label as the most likely one: [...] We erase knowledge contained in the verbalized reasoning steps using a preference-optimization unlearning method, NPO (Zhang et al., 2024b). Specifically, the KL-regularized variant of it [...] We deploy the faithfulness evaluation protocol described in §3, where we prompt $\\mathcal{M}^{*}$ and $\\mathcal{M}$ to answer directly, without reasoning, and then compute how often their answers differ.",
+   "citing_evidence": "A reasoning step $r_{i}$ is considered faithful if and only if the model’s prediction (without CoT) changes after unlearning that specific step. A CoT is then considered faithful if any reasoning step is faithful. [...] To unlearn reasoning steps, Tutek et al. (2025) employ Negative Preference Optimization (NPO) (Zhang et al., 2024) with KL-divergence constraints."
+  },
+  {
+   "entry": "anon2026one#13",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The source runs one baseline and one hinted completion per question at temperature 0 and counts a switch to the hint as hint use (with α normalization for chance); the paper rebuilds this protocol at temperature 0.7 from baseline sample 0 and reports the unnormalized unfaithful share of switches.",
+   "source_evidence": "Importantly, the addition of a hint is the only edit made to the baseline user prompt. Thus, if the model changes an answer between the baseline and hinted settings, we can generally infer that this was due to the hint (but see below); in such cases, we say that a model has used the hint. [...] All results reflect a single prompt per example. As noted in the main text, we fix the thinking budget to 10K tokens and set temperature to 0 to minimize the effect of randomness on answer changes between the baseline and hinted settings.",
+   "citing_evidence": "The single-sample protocol (SSP) draws one uncued and one cued completion per question and treats every target switch as cue use (Chen et al., 2025; Young, 2026b; Walden & Wanner, 2026). [...] The SSP unfaithful rate is the share of SSP flips with a binary label that the binary judge labels unfaithful"
+  },
+  {
+   "entry": "anon2026one#18",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The role corresponds to the source's direct (a) and guide (b) use labels, which the paper widens to include checking the cue's option first, co-premise, tie-breaking and override.",
+   "source_evidence": "Intend to use the hinted answer directly, without attempting its own solution. [...] Intend to use the hinted answer as a guide to help it reason through the problem. [...] We adopt four hint use labels, which correspond directly to hint intent labels (a)-(d), but indicating actual rather than intended use.",
+   "citing_evidence": "credited: the hint is presented as a reason, sole or partial, for <target_option>."
+  },
+  {
+   "entry": "anon2026one#19",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The role corresponds to the source's validation label (c), but the source counts validation as a form of hint use in its honesty scores, whereas the paper labels verification_only unfaithful as a non-reliance claim.",
+   "source_evidence": "Intend to use the hint only as validation after an independent attempt at a solution. [...] We consider (a)-(c) as expressions of an intent to use the hint and define an intent-based honesty score as an analogue to Chen et al.’s faithfulness score for a model $M$ .",
+   "citing_evidence": "the trace concluded on its own grounds and only afterwards notes the hint agrees"
+  },
+  {
+   "entry": "anon2026one#20",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The role is the explicit-disclaimer part of the source's label (d), intending or acting to ignore the hint, which the paper splits into rejected and neutral.",
+   "source_evidence": "Intend to entirely ignore or disregard the hint. [...] The most interesting (and among the most common) cases are those where the model acknowledges the hint’s presence but vehemently denies any intent to rely on it (i.e. intent label (d)).",
+   "citing_evidence": "the trace explicitly disclaims the hint’s influence"
+  },
+  {
+   "entry": "anon2026one#21",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The role is the non-explicit part of the source's label (d), hint not used, which the paper splits off from explicit rejection.",
+   "source_evidence": "Intend to entirely ignore or disregard the hint. [...] We adopt four hint use labels, which correspond directly to hint intent labels (a)-(d), but indicating actual rather than intended use.",
+   "citing_evidence": "neutral: the hint is mentioned but never linked to the choice, and 3b is non-empty."
+  },
+  {
+   "entry": "anon2026one#22",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The source records whether the hint's presence is verbalized as a separate judgment (the basis of its F score), not as a hint-use role; the paper folds non-mention into its role scheme as none, labeled unfaithful.",
+   "source_evidence": "We then assess the extent to which models will (1) note the presence of hints in hinted prompts; (2) verbalize an intent to use these hints; and (3) verbalize actually using them in producing their answers. [...] Since honesty in our sense presupposes acknowledging the hint’s presence",
+   "citing_evidence": "No mention: hint_role = none, label 0, high confidence; the length or plausibility of the independent derivation changes nothing."
+  },
+  {
+   "entry": "anon2026one#23",
+   "source": "walden2026reasoning",
+   "verdict": "supported",
+   "finding": "The source finds that models deny intending to use hints while switching to them far above chance, under explicit instructions to report hint use, with the use shown in aggregate rates.",
+   "source_evidence": "although models may acknowledge the presence of hints, they will often deny intending to use them---even when permitted to use hints and even when it can be demonstrated that they are using them. [...] The results from Figure 2 plainly belie these intentions, however, as all models nonetheless change their response to the hinted answers at rates far above chance in almost all settings. [...] We instruct models to first (1) highlight any unusual content in the user prompt and then (2) clearly state whether and how they intend to use that content to solve the problem.",
+   "citing_evidence": "Models also deny intending to use hints that demonstrably shift their answers (Walden & Wanner, 2026), but that evidence is aggregate and the models were instructed to report hint use."
+  },
+  {
+   "entry": "anon2026one#5",
+   "source": "walden2026reasoning",
+   "verdict": "adapted",
+   "finding": "The roles map onto the source's labels (direct/guide, validation, ignore, plus whether the hint's presence is verbalized), but the paper visibly changes the scheme: it splits 'not used' into rejected and neutral, labels traces produced under default prompting, and counts validation as unfaithful, whereas the source counts (a)-(c), validation included, as stated hint use.",
+   "source_evidence": "Intend to use the hinted answer directly, without attempting its own solution. [...] Intend to use the hinted answer as a guide to help it reason through the problem. [...] Intend to use the hint only as validation after an independent attempt at a solution. [...] Intend to entirely ignore or disregard the hint. [...] We consider (a)-(c) as expressions of an intent to use the hint and define an intent-based honesty score as an analogue to Chen et al.’s faithfulness score for a model $M$ .",
+   "citing_evidence": "rejected (the trace explicitly disclaims the cue), neutral (mentioned but not linked to the choice) or none (not mentioned). A rollout is labeled faithful only when its role is credited. Table 2 maps these roles to the scheme of Walden & Wanner (2026)."
+  },
+  {
+   "entry": "li2026when#3",
+   "source": "wang2026case",
+   "verdict": "renamed",
+   "finding": "The source measures these effects (filler replacement, early-answering truncation, counterfactual-CoT replacement) but treats them as CoT faithfulness, the strength of the CoT-to-answer path, never as 'trace use'.",
+   "source_evidence": "Existing research primarily evaluates CoT faithfulness by perturbing the input instruction (Atanasova et al. 2023; Turpin et al. 2023), the generated CoT (Lanham et al. 2023), or the model itself (Tutek et al. 2025), and then measuring whether the final answer changes. [...] Among these methods, Filler Tokens replaces the CoT with “…” tokens and evaluates whether the answer changes [...] CIE replaces the CoT with a counterfactual CoT to test whether the answer depends on the reasoning chain.",
+   "citing_evidence": "Trace use is the effect of the supplied trace on later answers: removing, shortening, or replacing it can change the answer and its accuracy (Lanham et al., 2023; Paul et al., 2024; Wang et al., 2026)."
+  },
+  {
+   "entry": "anon2026improving#9",
+   "source": "wang2026monitorbench",
+   "verdict": "adapted",
+   "finding": "The source defines X as intervention absence/presence, Y as task verification fail/pass, and Z as the monitor flagging that the decision is attributed to the intervention; the paper keeps X and Z but generalizes Y from task success to any task-specific target outcome.",
+   "source_evidence": "Input intervention. Let $X\\in\\{0,1\\}$ indicate intervention absence/presence, $Y\\in\\{0,1\\}$ denote verification of task fail/pass, and $Z\\in\\{0,1\\}$ the monitor output (with $Z=1$ indicating the monitor flags that the final decision is attributed to the intervention).",
+   "citing_evidence": "Intervention-based monitorability scores are computed from observed outcomes and monitor judgments (Guan et al., 2025; Wang et al., 2026a) [...] Let X ∈ {0, 1} indicate the control condition (X = 0) or the intervention condition (X = 1), and let Y ∈ {0, 1} indicate whether the target outcome occurs. The same outcome criterion is applied in both conditions."
+  },
+  {
+   "entry": "anon2026one#25",
+   "source": "wang2026monitorbench",
+   "verdict": "supported",
+   "finding": "The source runs multiple trajectories per prompt in both arms and credits the monitor only for the share of successes attributable to the intervention, computed per question.",
+   "source_evidence": "Thus, a faithful monitor should be credited for detecting the portion of verification successes that are solely attributable to the intervention. [...] We run multiple trajectories per prompt. [...] In this way, the monitorability score is computed per question.",
+   "citing_evidence": "Two monitorability benchmarks sample each prompt repeatedly in both arms and credit only the share of cue-following that the cue must explain, because single samples cannot be attributed to it (Guan et al., 2025; Wang et al., 2026)."
+  },
+  {
+   "entry": "mao2026taming#19",
+   "source": "wang2026monitorbench",
+   "verdict": "supported",
+   "finding": "The source treats CoTs as an interface for monitoring and uses a Qwen3-32B monitor on stronger models, which supports the oversight-channel definition; it does not study RL training, and the erosion it reports is lower monitorability for more capable models and under stress-test prompts.",
+   "source_evidence": "by externalizing intermediate reasoning in natural language, CoTs offer a useful interface for monitoring decision-making and intervening before harmful outputs are realized (Singh et al., 2025; Korbak et al., 2025). [...] For the tasks that need LLM as a judge for the verification, and those monitoring tasks, we use Qwen3-32B. [...] More capable LLMs tend to exhibit lower monitorability.",
+   "citing_evidence": "CoT monitoring treats reasoning traces as a safety-relevant channel: weaker models can often supervise stronger ones through their CoT, yet RL and long benign reasoning erode this signal"
+  },
+  {
+   "entry": "jacovi2020towards#2",
+   "source": "wiegreffe2019attention",
+   "verdict": "supported",
+   "finding": "The source separates plausible from faithful explanations: plausibility is a story that plausibly justifies a decision and must be judged by human evaluation, faithfulness an accurate reconstruction of the decision process. This is equivalent to the paper's pair, though the source takes it from Rudin and Riedl and never says 'convincing'.",
+   "source_evidence": "Rudin (2018) defines explainability as simply a plausible (but not necessarily faithful) reconstruction of the decision-making process, and Riedl (2019) classifies explainable rationales as valuable in that they mimic what we as humans do when we rationalize past actions: we invent a story that plausibly justifies our actions, even if it is not an entirely accurate reconstruction of the neural processes that produced our behavior at the time. [...] human evaluation (which they do not consult) is necessary to evaluate the plausibility of generated rationales [...] Whether or not attention is explanation depends on the definition of explainability one is looking for: plausible or faithful explanations (or both).",
+   "citing_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019)."
+  },
+  {
+   "entry": "admoni2026aligning#1",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source defines faithful rationales as explanations that reflect the model's decision-making process, the notion the paper attributes to it.",
+   "source_evidence": "In interpretable NLP, we require faithful rationales that reflect the model’s decision-making process for an explained instance. [...] These objectives require faithful rationales—explanations of the model’s behavior that are accurate representations of its decision process Melis and Jaakkola (2018).",
+   "citing_evidence": "While faithfulness broadly concerns whether explanations reflect the model’s decision-making process Jacovi and Goldberg (2020); Wiegreffe et al. (2020)"
+  },
+  {
+   "entry": "admoni2026aligning#8",
+   "source": "wiegreffe2021measuring",
+   "verdict": "renamed",
+   "finding": "The source does perturb inputs to test label-rationale association, by adding Gaussian noise to every input embedding (robustness equivalence) and by occluding the top-k% gradient-attributed tokens (feature importance agreement), but it never calls these counterfactual interventions.",
+   "source_evidence": "Following related work Wang et al. (2019); Lakshmi Narayan et al. (2019); Liu et al. (2019b), we add zero-mean Gaussian noise $\\mathcal{N}(0,\\sigma^{2})$ to each input embedding in the I $\\rightarrow$ OR encoder at inference time. [...] If label prediction and rationale generation are associated, input tokens important for label prediction should be important for rationale generation and vice versa. We refer to this property as feature importance agreement. [...] Using attribution scores, we obtain the top- $k\\%$ attributed tokens for every instance and occlude them following T5’s pretraining procedure and mask tokens.",
+   "citing_evidence": "Prior works apply counterfactual interventions to input features using various heuristics to estimate their influence on model decisions Wiegreffe et al. (2020); Turpin et al. (2023); Lanham et al. (2023); Atanasova et al. (2023)."
+  },
+  {
+   "entry": "bhan2025did#6",
+   "source": "wiegreffe2021measuring",
+   "verdict": "partial",
+   "finding": "The source does compute separate gradient attributions for the label and the rationale, but it computes no correlation between them: it occludes the top-k% tokens of one attribution and checks that the other output degrades more than under random occlusion, and it treats such agreement only as a necessary condition, not a graded faithfulness score.",
+   "source_evidence": "By decomposing the term in Equation 2 into two parts, we obtain two attribution vectors over the input tokens; one for the predicted label logits $\\mathcal{L}$ , and one for the predicted rationale logits $\\mathcal{R}$ in the decoded output: [...] For attributions computed from label logits, $a(\\mathbf{X})_{\\mathcal{L}}$ , we measure the effect of their occlusion on rationale quality using the rationale quality score. For attributions with respect to rationale logits, $a(\\mathbf{X})_{\\mathcal{R}}$ , we measure the effect of their occlusion on label accuracy. [...] Although our measurements address only necessary and not sufficient properties",
+   "citing_evidence": "Another way to measure self-NLE faithfulness is to compute post-hoc Attribution Agreement (AA) between the prediction and the NLE (Parcalabescu and Frank, 2024; Wiegreffe et al., 2021; Yeo et al., 2025). [...] AA methods compute attribution scores for both the model’s predictions and its self-NLE and then measure the correlation between these scores to assess faithfulness. Higher correlation values indicate greater faithfulness in the model’s self-NLE."
+  },
+  {
+   "entry": "chen2022rev#4",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source computes simulatability and its gold-label rationale-quality variant as an accuracy gap with versus without the rationale, the accuracy-based instance of the paper's template.",
+   "source_evidence": "computed as the difference between task performance when a rationale is given as input vs. when it is not (IR $\\rightarrow$ Ô minus I $\\rightarrow$ Ô). [...] We thus use a variant of this metric that relies on predicting the gold labels as our measure of rationale quality: IR $\\rightarrow$ O minus I $\\rightarrow$ O.",
+   "citing_evidence": "The utility of $R$ is formulated as the difference between the performance of the evaluator on predicting $Y$ with $R$ , and without it, i.e. [...] Existing metrics (Hase et al., 2020; Wiegreffe et al., 2021) compute the performance gap based on prediction accuracies."
+  },
+  {
+   "entry": "chen2022rev#5",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source's rationale quality is a gold-label variant of simulatability, the accuracy of IR→O minus I→O, with the models trained on ground-truth labels, as the paper restates.",
+   "source_evidence": "We thus use a variant of this metric that relies on predicting the gold labels as our measure of rationale quality: IR $\\rightarrow$ O minus I $\\rightarrow$ O. [...] We finetune five T5-Base models for each dataset, supervising with ground-truth labels and rationales",
+   "citing_evidence": "Wiegreffe et al. (2021) propose a variant of the simulatability in Hase et al. (2020). The main difference is that gold labels are used to train the model proxy and evaluate rationale quality."
+  },
+  {
+   "entry": "mayne2025llms#11",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source defines faithful rationales as accurate representations of the model's decision process, matching 'faithful representations of models' internal reasoning'.",
+   "source_evidence": "These objectives require faithful rationales—explanations of the model’s behavior that are accurate representations of its decision process Melis and Jaakkola (2018).",
+   "citing_evidence": "however, the critical question is whether these explanations are faithful representations of models’ internal reasoning Wiegreffe et al. (2021)"
+  },
+  {
+   "entry": "parcalabescu2023measuring#11",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source states both tests (label and rationale similarly robust to noise; tokens important for one matter for the other) and calls them necessary, not sufficient; only the paper's restriction to NLI is off, since the source also tests CommonsenseQA.",
+   "source_evidence": "The first experiment, robustness equivalence (§4.1), analyzes whether a predicted label and generated rationale are similarly robust to noise. [...] If label prediction and rationale generation are associated, input tokens important for label prediction should be important for rationale generation and vice versa. [...] Although our measurements address only necessary and not sufficient properties, by viewing faithful interpretability as a spectrum, we make a step to quantitatively situate common models on it.",
+   "citing_evidence": "Wiegreffe et al. (2021) propose to measure to what extent an explanation of natural language inference task predictions is faithful in two ways: They argue that i) “a predicted label and generated rationale are similarly robust to noise”. Also, ii) input tokens important for label prediction should matter for rationale generation, and vice versa. They characterise these properties as necessary but not sufficient properties of faithfulness."
+  },
+  {
+   "entry": "parcalabescu2023measuring#4",
+   "source": "wiegreffe2021measuring",
+   "verdict": "adapted",
+   "finding": "The source's feature importance agreement (input tokens important for the label should matter for the rationale, as a necessary property of faithfulness) is measured with gradient attributions and ROAR occlusion; Parcalabescu & Frank keep the condition but measure it with SHAP contributions per explanation token (CC-SHAP).",
+   "source_evidence": "If label prediction and rationale generation are associated, input tokens important for label prediction should be important for rationale generation and vice versa. We refer to this property as feature importance agreement. [...] We investigate the extent to which the labels and rationales predicted by these models are associated, a necessary property of faithful explanation.",
+   "citing_evidence": "we instead measure self-consistency by analysing how much a model’s input contributes to its answer prediction vs. generated explanation – similar to the rationale of Wiegreffe et al. (2021). [...] Notably, we argue that a necessary condition for a generated explanation to be faithful is that the tokens given as input to the model contribute similarly to the model’s answer prediction and to the explanation it generates to justify its prediction."
+  },
+  {
+   "entry": "radhakrishnan2023question#2",
+   "source": "wiegreffe2021measuring",
+   "verdict": "partial",
+   "finding": "The source defines simulatability (the predictive ability a rationale adds for predicting the model's label), but it uses simulatability as a measure of rationale quality, 'from the lens of utility to an end-user', and keeps it apart from its faithfulness tests; it never calls simulatability a type of faithfulness.",
+   "source_evidence": "Human simulatability Doshi-Velez and Kim (2017) has a rich history in machine learning interpretability as a reliable measure of rationale quality from the lens of utility to an end-user [...] simulatability measures the additional predictive ability towards the predicted label a rationale provides over the input",
+   "citing_evidence": "A type of faithfulness is the extent to which explanations lead to simulatability of model behavior, where the goal is for model behavior to match human expectations, perhaps after analysis of the model’s reasoning (Doshi-Velez & Kim, 2017; Hase et al., 2020; Wiegreffe et al., 2021)."
+  },
+  {
+   "entry": "ramnath2024tailoring#3",
+   "source": "wiegreffe2021measuring",
+   "verdict": "adapted",
+   "finding": "The two-model gain is the source's rationale quality metric (accuracy of IR→O minus I→O on gold labels), not its label-rationale association framework, which consists of robustness equivalence and feature importance agreement; the paper renames it Consistency and computes it from gold-answer probabilities instead of accuracies.",
+   "source_evidence": "We thus use a variant of this metric that relies on predicting the gold labels as our measure of rationale quality: IR $\\rightarrow$ O minus I $\\rightarrow$ O. [...] We present two metrics to analyze the association between the mechanisms that produce labels and rationales in a multi-task, I $\\rightarrow$ OR model: robustness equivalence (§4.1) and feature importance agreement (§4.2).",
+   "citing_evidence": "Wiegreffe et al. (2021) provide a framework to evaluate the association between a rationale and a label with the help of two reference LMs that are trained to predict the answer with ( $\\mathbb{M_{QR}}$ ) and without ( $\\mathbb{M_{Q}}$ ) the rationale in the input. [...] Consistency is a numerical score between $-1$ and $1$ that indicates the faithfulness of the rationale towards the gold answer, like the implementation by Wiegreffe et al. (2021)."
+  },
+  {
+   "entry": "wang2025selfcritique#5",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source proposes measures of label-rationale association as tests of a necessary property of faithful explanation, the association-based family the paper lists.",
+   "source_evidence": "We present two metrics to analyze the association between the mechanisms that produce labels and rationales in a multi-task, I $\\rightarrow$ OR model [...] We investigate the extent to which the labels and rationales predicted by these models are associated, a necessary property of faithful explanation.",
+   "citing_evidence": "To quantify this faithfulness gap, researchers have proposed various automatic evaluation metrics, such as counterfactual tests (Atanasova et al., 2023; Siegel et al., 2024) and association-based measures (Wiegreffe et al., 2022; Parcalabescu and Frank, 2024)."
+  },
+  {
+   "entry": "zaman2025chainofthought#12",
+   "source": "wiegreffe2021measuring",
+   "verdict": "supported",
+   "finding": "The source describes simulatability as the added ability of a predictor, human or trained model, to predict the model's label from the rationale, which is the paper's observer-reproduces-the-prediction notion.",
+   "source_evidence": "simulatability measures the additional predictive ability towards the predicted label a rationale provides over the input [...] Historically, humans have served as the predictors, but recent work has shown that the computation of simulatability can be automated using trained models.",
+   "citing_evidence": "Practically, sufficient detail is the level needed for an external observer (or simulator) to reproduce the same prediction. While simulatability (Doshi-Velez and Kim, 2017; Hase and Bansal, 2020; Wiegreffe et al., 2020; Chan et al., 2022) captures this"
+  },
+  {
+   "entry": "ferreira2026outofsight#7",
+   "source": "xiong2026monitorability",
+   "verdict": "supported",
+   "finding": "The source measures monitorability with hint-based interventions (the g-mean² of Guan et al.), restricted to cases where the hint changes the model's output.",
+   "source_evidence": "We adopt a rigorous definition of monitorability quantified primarily by the $\\text{g-mean}^{2}$ metric (Guan et al., 2025). [...] Under this metric, we primarily use Hint-based Interventions (Chen et al., 2025a; Guan et al., 2025; Chua & Evans, 2025) [...] To ensure our evaluation focuses on meaningful signals, we only include cases where the interventions successfully alter the model’s output in at least 5% of instances",
+   "citing_evidence": "Intervention-based evaluations compare the prediction of a model when given an input with ( $X=1$ ) and without ( $X=0$ ) some intervention applied to it. They have been widely used to assess chain-of-thought faithfulness (Turpin et al., 2023; Chen et al., 2025; Chua and Evans, 2025) and monitorability (Guan et al., 2026; Xiong et al., 2026)."
+  },
+  {
+   "entry": "lv2026geofaith#9",
+   "source": "xu2024faithful",
+   "verdict": "partial",
+   "finding": "Xu et al. do report unfaithful CoTs (6% of correct CoT answers reached through flawed reasoning), but their faithfulness means a correct answer reached by valid logical steps as judged by human annotators, not fidelity to the model's actual decision process.",
+   "source_evidence": "We define an instance as ’faithful’ if both the answer and the process are correct and logical; ’unfaithful’ if the answer is correct but the process is not; and ’false’ if the answer itself is incorrect. [...] We can see that within the CoT, 6% of correct answers resulted from flawed reasoning, achieved serendipitously rather than through correct logical steps.",
+   "citing_evidence": "Recent work has shown that CoT reasoning is not always faithful to the model’s actual decision process Turpin et al. (2023); Lanham et al. (2023); Lv et al. (2026); Xu et al. (2024)."
+  },
+  {
+   "entry": "anon2026reward#1",
+   "source": "yang2025investigating",
+   "verdict": "supported",
+   "finding": "The source defines CoT monitorability as monitoring model misbehavior through the chain of thought and evaluates whether a CoT-based monitor detects it.",
+   "source_evidence": "Beyond improving abilities, these detailed reasoning traces also create a new opportunity for AI safety, CoT Monitorability: monitoring potential model misbehavior, such as the use of shortcuts or sycophancy, through their chain-of-thought (CoT) during decision-making. [...] (ii) monitor reliability: to what extent can misbehavior be reliably detected by a CoT-based monitor?",
+   "citing_evidence": "Chain-of-thought monitorability – whether a CoT can be used by an external model to detect misbehaviors – is an important tool for mitigating AI safety issues"
+  },
+  {
+   "entry": "sun2026investigating#10",
+   "source": "young2026measuring",
+   "verdict": "supported",
+   "finding": "The source operationalizes faithfulness as whether the CoT acknowledges the injected hint, the hint-verbalization family the paper lists.",
+   "source_evidence": "Faithfulness is defined operationally as whether a model’s chain-of-thought acknowledges the injected hint as a factor in its answer.",
+   "citing_evidence": "Another line of work uses Biasing Features, which inject answer hints and check whether the CoT verbalizes them (Turpin et al., 2023; Chen et al., 2025; Chua and Evans, 2025; Young, 2026)."
+  },
+  {
+   "entry": "sun2026investigating#11",
+   "source": "young2026measuring",
+   "verdict": "supported",
+   "finding": "The source operationalizes faithfulness as hint acknowledgment and shows that three classifiers give different rates on the same traces, the sensitivity the paper cites for excluding the test.",
+   "source_evidence": "Faithfulness is defined operationally as whether a model’s chain-of-thought acknowledges the injected hint as a factor in its answer. [...] On identical data, these classifiers produce overall faithfulness rates of 74.4%, 82.6%, and 69.7%, respectively.",
+   "citing_evidence": "Another line of work uses Biasing Features, which inject answer hints and check whether the CoT verbalizes them (Turpin et al., 2023; Chen et al., 2025; Chua and Evans, 2025; Young, 2026). [...] We intentionally exclude Biasing Features (Turpin et al., 2023), as they are sensitive to how hint acknowledgment is identified (Young, 2026)."
+  },
+  {
+   "entry": "anon2026generating#11",
+   "source": "yu2026outcome",
+   "verdict": "supported",
+   "finding": "The source's SR has a verifier answer from the answer-sanitized reasoning with and without the question and scores agreement between the two answers.",
+   "source_evidence": "We then instruct a verifier $\\theta$ to predict an answer distribution from the sanitized reasoning chain, either (i) conditioned on the original question or (ii) without access to it [...] we approximate SR as agreement between the verifier’s decoded outputs under the two conditioning settings:",
+   "citing_evidence": "We then present the answer-removed CoT to the verifier (i) with and (ii) without the original question. We set SR = 1 if the verifier returns valid, equivalent answers in both conditions, and 0 otherwise. We use the SR verifier prompts of Yu et al. (2026) with gpt-4o-mini"
+  },
+  {
+   "entry": "anon2026generating#5",
+   "source": "yu2026outcome",
+   "verdict": "adapted",
+   "finding": "The source defines CIR as the mean JS divergence over every token prefix and uses the percentile grid only to cut the cost of the CIR reward; the paper adopts the nine-prefix grid as its definition, as it states.",
+   "source_evidence": "Then, we compute our final CIR score by averaging the JS scores across token indices: [...] To reduce computation cost, instead of calculating the JS score at every token position, we take the truncation with every 10th percentile and compute the average of these truncations.",
+   "citing_evidence": "CIR measures how CoT truncation changes the groundtruth answer probability relative to the full-CoT context, with the question left intact (Yu et al., 2026). [...] The nineprefix grid follows the coarse percentile-based approximation used for CIR rewards by Yu et al. (2026), rather than their token-level definition."
+  },
+  {
+   "entry": "bhan2025did#15",
+   "source": "zaman2025causal",
+   "verdict": "adapted",
+   "finding": "The source's meta-evaluation is causal diagnosticity, the share of knowledge-edited (mainly in-context-edited) faithful/unfaithful explanation pairs that a metric ranks correctly; CAS keeps the aim of validating a faithfulness measure but replaces it with a log ratio of hint-induced accuracy ratios, as the paper signals ('conceptually close', 'extend beyond').",
+   "source_evidence": "Our framework operationalizes the concept of diagnosticity Chan et al. (2022b), which measures how often a faithfulness metric correctly favors faithful explanations over unfaithful ones. [...] We therefore adopt ICE as our primary knowledge-editing method",
+   "citing_evidence": "A positive CAS indicates that faithful self-NLE better identify first-hop failures. This metric is conceptually close to the In-Context Editing instantiation of the approach proposed by Zaman and Srivastava (2025) to compare faithfulness measures. In the following, we extend beyond this proposal with two other metrics."
+  },
+  {
+   "entry": "sun2026investigating#10",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source describes the corruption-based metrics, which perturb the CoT and check whether the prediction changes, and evaluates them; it credits the tests to Lanham et al.",
+   "source_evidence": "Lanham et al. (2023) identify four corruption techniques to measure CoT-faithfulness: (1) Early Answering, truncating the CoT to get an early answer; (2) Adding Mistakes, introducing mistakes into the CoT, and regenerating; (3) Paraphrasing, paraphrasing the CoT and regenerating; and (4) Filler Tokens, replacing the CoT with ellipses. [...] An explanation is considered unfaithful if the corruption does not alter the original prediction (except for Paraphrasing, where prediction changes signify unfaithfulness).",
+   "citing_evidence": "Corruption-based methods perturb the CoT, and measure whether the model’s answer changes (Lanham et al., 2023; Zaman and Srivastava, 2025)."
+  },
+  {
+   "entry": "sun2026investigating#14",
+   "source": "zaman2025causal",
+   "verdict": "partial",
+   "finding": "Zaman & Srivastava restate the four corruptions but credit them to Lanham et al.; what they propose is the continuous prediction-score version and a diagnosticity test of the metrics, so they did not propose the four corruptions.",
+   "source_evidence": "Lanham et al. (2023) identify four corruption techniques to measure CoT-faithfulness: (1) Early Answering, truncating the CoT to get an early answer; (2) Adding Mistakes, introducing mistakes into the CoT, and regenerating; (3) Paraphrasing, paraphrasing the CoT and regenerating; and (4) Filler Tokens, replacing the CoT with ellipses. [...] While these metrics were originally proposed as binary measures, we extend them to quantify faithfulness as the change in prediction score for the top-predicted class before and after corruption, denoted $\\hat{z}_{i}$ and $\\hat{z}^{\\prime}_{i}$ , respectively.",
+   "citing_evidence": "Lanham et al. (2023); Zaman and Srivastava (2025) propose four approaches to corrupt CoTs:"
+  },
+  {
+   "entry": "sun2026investigating#15",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source restates Lanham et al.'s Early Answering (truncate the CoT, take the early answer) and implements it by truncating a third of the explanation, as the paper does.",
+   "source_evidence": "(1) Early Answering, truncating the CoT to get an early answer [...] Early Answering: We truncate one-third of the explanation, following Parcalabescu and Frank (2023).",
+   "citing_evidence": "Lanham et al. (2023); Zaman and Srivastava (2025) propose four approaches to corrupt CoTs: [...] (i) Early Answering, which truncates the CoT before the original answer is reached to elicit an early response;"
+  },
+  {
+   "entry": "sun2026investigating#16",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source restates Adding Mistakes (insert a mistake, regenerate) and implements it by swapping one word for an antonym.",
+   "source_evidence": "(2) Adding Mistakes, introducing mistakes into the CoT, and regenerating [...] Can you please replace one word in that text for me with antonyms / opposites such that it makes no sense anymore?",
+   "citing_evidence": "Lanham et al. (2023); Zaman and Srivastava (2025) propose four approaches to corrupt CoTs: [...] (ii) Adding Mistake, which injects a mistake into one CoT step and regenerates the remainder;"
+  },
+  {
+   "entry": "sun2026investigating#17",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source restates Paraphrasing (paraphrase the CoT and regenerate, prediction changes signalling unfaithfulness); the restriction to the first part of the CoT comes from Lanham et al., not this source.",
+   "source_evidence": "(3) Paraphrasing, paraphrasing the CoT and regenerating [...] An explanation is considered unfaithful if the corruption does not alter the original prediction (except for Paraphrasing, where prediction changes signify unfaithfulness).",
+   "citing_evidence": "Lanham et al. (2023); Zaman and Srivastava (2025) propose four approaches to corrupt CoTs: [...] (iii) Paraphrasing, which rephrases the first part of the CoT while preserving the original meaning and regenerating the rest;"
+  },
+  {
+   "entry": "sun2026investigating#18",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source restates Filler Tokens, replacing the CoT with ellipses.",
+   "source_evidence": "(4) Filler Tokens, replacing the CoT with ellipses. [...] An explanation is considered unfaithful if the corruption does not alter the original prediction (except for Paraphrasing, where prediction changes signify unfaithfulness).",
+   "citing_evidence": "Lanham et al. (2023); Zaman and Srivastava (2025) propose four approaches to corrupt CoTs: [...] (iv) Filler Token, which replaces the CoT with meaningless symbols such as ellipses."
+  },
+  {
+   "entry": "sun2026investigating#19",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source defines the continuous score as the drop in the top class's prediction score after corruption, a larger drop meaning more faithful; it reverses the score to 1-(ẑ-ẑ') for Paraphrasing, a reversal the paper does not carry over.",
+   "source_evidence": "While these metrics were originally proposed as binary measures, we extend them to quantify faithfulness as the change in prediction score for the top-predicted class before and after corruption, denoted $\\hat{z}_{i}$ and $\\hat{z}^{\\prime}_{i}$ , respectively. [...] The faithfulness score is computed as $(\\hat{z}_{i}-\\hat{z}^{\\prime}_{i})$ , where a larger drop following corruption indicates a more faithful explanation. For Paraphrasing, we reverse this definition and use $1-(\\hat{z}_{i}-\\hat{z}^{\\prime}_{i})$ .",
+   "citing_evidence": "following Zaman and Srivastava (2025), we employ the change in prediction score for the top-predicted answer before and after corruption, denoted as $\\hat{z}_{i}$ and $\\hat{z}_{i}^{{}^{\\prime}}$ , respectively:"
+  },
+  {
+   "entry": "sun2026investigating#5",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source restates the corruption rule: a CoT is unfaithful if corruption leaves the prediction unchanged, reversed for Paraphrasing.",
+   "source_evidence": "An explanation is considered unfaithful if the corruption does not alter the original prediction (except for Paraphrasing, where prediction changes signify unfaithfulness).",
+   "citing_evidence": "Faithful CoTs should lead to answer changes after corruption, except for (iii) Paraphrasing, where the model is expected to derive the same answer."
+  },
+  {
+   "entry": "wang2026concept#14",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source restates the corruption rule (faithful when corrupting the CoT changes the answer, reversed for Paraphrasing) and extends it to a continuous score.",
+   "source_evidence": "An explanation is considered unfaithful if the corruption does not alter the original prediction (except for Paraphrasing, where prediction changes signify unfaithfulness). [...] While these metrics were originally proposed as binary measures, we extend them to quantify faithfulness as the change in prediction score for the top-predicted class before and after corruption, denoted $\\hat{z}_{i}$ and $\\hat{z}^{\\prime}_{i}$ , respectively.",
+   "citing_evidence": "One line of work intervenes on the reasoning chain, or the parametric knowledge that the reasoning invokes, and treats the CoT as faithful only if the answer changes accordingly (Lanham et al., 2023; Zaman and Srivastava, 2025; Tutek et al., 2025)"
+  },
+  {
+   "entry": "wang2026concept#26",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source replaces the binary corruption tests with the change in the top class's prediction score, as the paper follows.",
+   "source_evidence": "While these metrics were originally proposed as binary measures, we extend them to quantify faithfulness as the change in prediction score for the top-predicted class before and after corruption, denoted $\\hat{z}_{i}$ and $\\hat{z}^{\\prime}_{i}$ , respectively.",
+   "citing_evidence": "Therefore, we follow Zaman and Srivastava (2025) and instead measure the prediction score $\\hat{z}_{i}$ changes, ranging from -1 to 1."
+  },
+  {
+   "entry": "zaman2025chainofthought#3",
+   "source": "zaman2025causal",
+   "verdict": "supported",
+   "finding": "The source shows that replacing the whole explanation with a single three-dot sequence (non-repeating) improves diagnosticity, the finding the paper cites for its single '…' filler.",
+   "source_evidence": "In the repeating setup, each character is replaced by a sequence of three identical tokens; in the non-repeating setup, the entire explanation is replaced by a single three-token sequence. The non-repeating setup improves diagnosticity, except on the Object Counting task, where scores remain stable.",
+   "citing_evidence": "Following Zaman and Srivastava (2025), who show that non-repeating filler tokens provide more reliable measurements, we replace the entire CoT with a single instance of three dots ( $\\dots$ )."
+  },
+  {
+   "entry": "anon2026one#9",
+   "source": "zaman2025chainofthought",
+   "verdict": "supported",
+   "finding": "The source argues that a CoT omitting the hint can be incomplete (lossy compression of distributed computation) rather than unfaithful.",
+   "source_evidence": "We argue this metric adopts a narrow notion of faithfulness and confuses unfaithfulness with incompleteness, the lossy compression needed to turn distributed transformer computation into a linear natural language narrative. [...] We do not claim all CoTs are faithful, only that the absence of hint words alone does not prove unfaithfulness.",
+   "citing_evidence": "A trace that omits the cue may be incomplete rather than unfaithful (Zaman & Srivastava, 2026)."
+  },
+  {
+   "entry": "hong2026making#5",
+   "source": "zaman2025chainofthought",
+   "verdict": "partial",
+   "finding": "Zaman & Srivastava describe and reproduce this hint test (Biasing Features) only to critique it, and never call it parametric faithfulness: they reserve 'parametric alignment' for FUR's unlearning and argue that hint non-verbalization may reflect incompleteness.",
+   "source_evidence": "If the hint changes the prediction to the hinted answer and the model verbalizes the hint in its CoT, the CoT is deemed faithful. If the prediction changes but the CoT does not verbalize the hint, the CoT is deemed unfaithful. [...] gemma-3-4b-it shows the inverse profile — higher Filler Tokens, lower FUR — indicating stronger contextual sensitivity but weaker parametric alignment. [...] We therefore caution against relying solely on hint-based evaluations",
+   "citing_evidence": "Prior work assesses CoT parametric faithfulness in this task by examining whether the model acknowledges reliance on the injected hint when its prediction changes (Chen et al., 2025; Zaman & Srivastava, 2025)."
+  },
+  {
+   "entry": "hong2026making#2",
+   "source": "zhao2025necessary",
+   "verdict": "unsupported",
+   "finding": "Zhao & Daumé never test consistency across samples or under paraphrase: their PEX consistency scores how much a single explanation supports the prediction over its negation, and they sample explanations only to rank them by that score.",
+   "source_evidence": "In this paper, we present a measure for Prediction-EXplanation (PEX) consistency, by extending the concept of weight of evidence. This measure quantifies how much a free-text explanation supports or opposes a prediction, serving as an important aspect of explanation faithfulness. [...] We compute PEX consistency score (Eq 4) for each explanation, and rank the explanations according to the score.",
+   "citing_evidence": "self-consistency tests whether a model produces a consistent explanation across multiple samples or under paraphrase (Parcalabescu & Frank, 2024; Zhao & Iii, 2025)"
+  }
+ ]
+}

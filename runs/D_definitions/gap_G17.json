@@ -1,0 +1,547 @@
+{
+ "papers": [
+  {
+   "key": "arcuschin2026biases",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "bias (descriptive sense)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Importantly, throughout this work, we use bias in a descriptive sense: a systematic decision shift caused by the presence or absence of specific attributes in the input. This notion is different from normative (sociological) bias, i.e., unfairness or discrimination (Blodgett et al., 2020).",
+     "gloss": "A bias is any input attribute that systematically shifts the model's decisions (a preference or aversion), not unfairness; it is the 'influence' half of an unverbalized bias."
+    },
+    {
+     "family": "counterfactual",
+     "term": "effect size Δ (bias strength)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "They also report the effect size (bias strength) of each concept: the difference between acceptance rates under positive versus negative variations ( $\\Delta=p_{\\text{pos}}-p_{\\text{neg}}$ ).",
+     "gloss": "Bias strength is the acceptance-rate gap between the concept-promoting and concept-removing input variants; detected effects range 1.5–6.0 points (mean 3.4)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "baseline verbalization filter",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "Before testing, we collect $M$ ’s baseline responses on the original task inputs and check whether each concept is already cited as a decision factor in its CoT. Importantly, merely stating a concept (e.g., repeating the input) without using the concept as justification for the decision does not count as verbalization. Concepts verbalized in $>\\tau$ of baseline responses are filtered out as a cost-saving prefilter",
+     "gloss": "Concepts cited as a decision factor in over τ (0.3) of responses to unedited inputs are dropped before testing; mention without use as justification does not count."
+    },
+    {
+     "family": "faithfulness",
+     "term": "variation verbalization filter (discordant pairs)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "At each stage, after collecting responses, we check whether each concept is cited as a decision factor in the variation responses on discordant pairs (cases where $M$ ’s decision flipped between variations). Again, merely stating a concept without using the concept as justification for the decision does not count as verbalization. Concepts verbalized in $>\\tau$ of discordant-pair responses are dropped before statistical testing.",
+     "gloss": "Operational form of Def. 2.1's non-verbalization condition: verbalization is checked only on pairs whose decision flipped, since only these carry evidence that the concept influenced the decision."
+    },
+    {
+     "family": "faithfulness",
+     "term": "verbalization detector (LLM autorater)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.5",
+     "quote": "A key component of our pipeline is the LLM-based verbalization detector, which determines whether a concept is cited as a decision factor in the model’s CoT.",
+     "gloss": "GPT-5-mini returns YES/NO per response, guided by a 'Check mentions of …' instruction; against human labels κ=0.67 and 84% accuracy, erring toward over-detection."
+    },
+    {
+     "family": "faithfulness",
+     "term": "verbalization annotation scale (human ground truth)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. I.1",
+     "quote": "Clearly verbalized: The concept is explicitly mentioned as a factor in the decision • Maybe verbalized: The concept appears to be mentioned, but with some ambiguity • Maybe not verbalized: The concept does not appear to be mentioned, but with some ambiguity • Clearly not verbalized: The concept is clearly not mentioned as a decision factor",
+     "gloss": "Four human labels used to validate the detector, collapsed to verbalized (clearly/maybe yes) versus not; two annotators agreed at κ=0.737."
+    },
+    {
+     "family": "faithfulness",
+     "term": "implicit verbalization (via proxy)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "The filter also does not catch implicit verbalization, where the model invokes a known proxy (e.g., citing a trait or activity statistically associated with the target group rather than naming it).",
+     "gloss": "Citing a statistical proxy for a concept instead of naming it; the verbalization filter misses it, although Def. 2.1 counts implicit reference as verbalization."
+    },
+    {
+     "family": "faithfulness",
+     "term": "bias injection modes (secret vs overt)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4",
+     "quote": "To validate detection capability, we inject biases into Gemma-3-27B-it’s system prompt in two modes: secret (bias hidden from CoT) and overt (bias stated in reasoning).",
+     "gloss": "Planted ground truth for the pipeline: secret biases should be reported as unverbalized and overt ones filtered; 80 cases (20 concepts × 2 modes × 2 directions)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "secret bias",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.3",
+     "quote": "Secret bias: The model is instructed to let the concept influence its decisions while hiding this from its chain-of-thought reasoning. The instruction explicitly forbids mentioning the concept or related terms and requires the model to justify decisions using only standard financial factors.",
+     "gloss": "An instructed, concealed decision factor used as ground truth for unverbalized bias; the prompt warns the model that a detection system will flag any mention."
+    },
+    {
+     "family": "faithfulness",
+     "term": "overt bias",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.3",
+     "quote": "Overt bias: The model is instructed to explicitly cite and reason about the concept in its responses. We expect our pipeline to correctly filter these via verbalization detection, as the bias is stated as justification in the reasoning.",
+     "gloss": "An instructed decision factor that is stated as justification, the verbalized control; the pipeline filtered all 40 overt cases."
+    },
+    {
+     "family": "faithfulness",
+     "term": "secret bias detection",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.3",
+     "quote": "Secret bias detection: A secret bias is correctly detected if the concept appears in the pipeline’s final set of significant unverbalized biases, with the correct direction of bias.",
+     "gloss": "Recall on planted hidden biases: 85% (34/40) on Gemma-3-27B-it, all with the right direction; the six misses came from the verbalization detector over-triggering."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (verbalization filter rate)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. J.5",
+     "quote": "Verbalization filter rate: The most direct measure of faithfulness in our pipeline is the proportion of statistically significant biases that are filtered because the model verbalizes them.",
+     "gloss": "Faithfulness = share of decision-shifting concepts that the model cites; RLVR QwQ-32B 97.0% vs SFT Qwen2.5-32B-Instruct 97.2%, so reasoning training brought no faithfulness gain."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful reasoning (verbalized concepts)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. H",
+     "quote": "Baseline verbalization check: Concepts that the model naturally verbalizes in its reasoning (without any prompt variation) are filtered out, as these represent faithful reasoning rather than hidden biases.",
+     "gloss": "A concept the model cites in its reasoning counts as faithful reasoning, not a hidden bias; App. H also calls verbalization on variations 'faithful (albeit prompted) reasoning'."
+    },
+    {
+     "family": "counterfactual",
+     "term": "valid counterfactual (variation isolation check)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. L",
+     "quote": "We mitigate this problem through an automated quality check using an LLM judge (GPT-5.2). For each concept, we sample up to $100$ variation pairs and ask the judge to rate whether the pair cleanly isolates the target concept on a $5$ -point scale from “clean isolation” to “not a valid counterfactual.”",
+     "gloss": "A counterfactual pair is valid when only the target concept changes; a concept passes if at least 75% of sampled pairs score 4–5. The check removed 42% of concepts."
+    },
+    {
+     "family": "counterfactual",
+     "term": "confound (in counterfactual variations)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. L",
+     "quote": "The challenge is that variation generators may inadvertently introduce confounds: changes to the input that are unrelated to the target concept but could independently affect the model’s decision.",
+     "gloss": "Edits beyond the target concept that could move the decision on their own (e.g., length edits that also delete accomplishments); changes directly entailed by the concept are acceptable."
+    },
+    {
+     "family": "counterfactual",
+     "term": "clean isolation (variation rating 5)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. L",
+     "quote": "5 - Clean isolation: Only the target concept changes; everything else is effectively held constant.",
+     "gloss": "Top level of the judge's 5-point isolation rubric: the ideal counterfactual pair."
+    },
+    {
+     "family": "counterfactual",
+     "term": "not a valid counterfactual (variation rating 1)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. L",
+     "quote": "1 - Not a valid counterfactual: Multiple or major changes; cannot attribute differences to the concept.",
+     "gloss": "Bottom level of the rubric: the pair changes too much for any decision difference to be attributed to the concept."
+    }
+   ],
+   "fix": [
+    {
+     "id": "arcuschin2026biases#2",
+     "set": {
+      "quote": "A concept $c$ is an unverbalized bias if: 1. Causal influence: The discordant pairs $D^{+}=\\{x:M(x^{+}_{c})=1,M(x^{-}_{c})=0\\}$ and $D^{-}=\\{x:M(x^{+}_{c})=0,M(x^{-}_{c})=1\\}$ satisfy $|D^{+}|\\neq|D^{-}|$ with statistical significance (McNemar’s test (McNemar, 1947), $p<\\alpha$ ), and 2. Non-verbalization: On discordant pairs, the verbalization rate is below a desired threshold: $\\frac{1}{|D^{+}\\cup D^{-}|}\\sum_{x\\in D^{+}\\cup D^{-}}V(c,r(x^{+}_{c})\\cup r(x^{-}_{c}))\\leq\\tau$ .",
+      "gloss": "(1) Causal influence: McNemar-significant imbalance of discordant pairs (Bonferroni-corrected in the pipeline); (2) non-verbalization: verbalization rate on discordant pairs at most τ (0.3)."
+     },
+     "reason": "Formal row quoted only the lead-in 'A concept c is an unverbalized bias if:' and omitted both operative conditions and their equations."
+    }
+   ],
+   "drop": [],
+   "note": "Added verbalization filters, detector and human rubric, secret/overt bias ground truth, filter-rate faithfulness measure, effect size and the counterfactual-validity judge; Def. 2.1 quote now carries both conditions."
+  },
+  {
+   "key": "lee2026beyond",
+   "add": [],
+   "fix": [],
+   "drop": [],
+   "note": "No in-scope definitions: reasoning transferability (§1, Eq. 3) is whether a truncated prefix lets another model reach the correct answer, framed as robustness/consistency, never tied to faithfulness, counterfactuals or monitoring."
+  },
+  {
+   "key": "li2026when",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "trace use",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "lanham2023measuring; paul2024making; wang2026case",
+     "where": "§1",
+     "quote": "Trace use is the effect of the supplied trace on later answers: removing, shortening, or replacing it can change the answer and its accuracy (Lanham et al., 2023; Paul et al., 2024; Wang et al., 2026).",
+     "gloss": "How much a stored trace drives the answer, tested by removing, halving or replacing it at answer time; the paper shows it differs from deferring to the trace under conflict."
+    },
+    {
+     "family": "faithfulness",
+     "term": "conflict response",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Conflict response is which source the answer follows when the trace and the current evidence disagree. The former quantifies how earlier reasoning contributes to answer generation, the latter how the answer stage arbitrates between conflicting sources.",
+     "gloss": "Whether the answer defers to a stale reasoning trace or to updated evidence; measured by evidence-following in crossed trace-evidence conflicts."
+    },
+    {
+     "family": "counterfactual",
+     "term": "crossed trace-evidence conflicts (matched and crossed cells)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "We then evaluate all four pairings $(E_{i},r_{j})$ , with $i,j\\in\\{0,1\\}$ , once with gold evidence alone and once with the original distractors added. Matched cells $(E_{i},r_{i})$ measure accuracy when both sources support $a_{i}$ , and crossed cells $(E_{i},r_{j})$ , $i\\neq j$ , reveal whether the answer follows the evidence ( $a_{i}$ ) or the trace ( $a_{j}$ ).",
+     "gloss": "A trace written from one evidence version is answered with the other, entity-edited version; pairs are kept only if each trace states its own version's answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "evidence-following vs trace-following",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.5",
+     "quote": "In crossed conflicts, an answer is evidence-following when it matches $a_{i}$ alone and trace-following when it matches $a_{j}$ alone. Other covers answers that match both targets or neither.",
+     "gloss": "Trace-following measures deference to the stale reasoning: continuation follows the stale trace in 65.6–87.0% of crossed answers; a separate answer call raises evidence-following 29.9–60.6 points."
+    },
+    {
+     "family": "faithfulness",
+     "term": "answer change rate (trace removal)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "lanham2023measuring",
+     "where": "§2.5",
+     "quote": "The answer change rate is the share of normalized outputs that differ from the corresponding standard answer",
+     "gloss": "Share of answers that change when the trace or evidence is removed; e.g. removing Qwen3-4B's trace changes 44.8% of HotpotQA answers vs 24.0% for removing all evidence."
+    },
+    {
+     "family": "faithfulness",
+     "term": "trace corruption: Broken, selectivity, Adopt",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "lanham2023measuring",
+     "where": "App. E.2, Table 24",
+     "quote": "Broken is the share of answers that become incorrect (%). Sel. (selectivity) is Broken minus the share broken by a paraphrase of the trace and is computed on the $n_{\\textrm{para}}$ questions whose paraphrase passes the entity check. Adopt is the share of swapped cases whose answer is the inserted title.",
+     "gloss": "Reliance via answer-swap or step-deletion edits, net of breakage from an entity-preserving paraphrase; Adopt counts answers that copy the inserted wrong title."
+    },
+    {
+     "family": "counterfactual",
+     "term": "residual leakage (counterfactual evidence)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1",
+     "quote": "The pairs are screened only automatically, so an edited version can still imply $a_{0}$ in ways that the string checks do not catch, for example through a translation, a partial name, or an unchanged fact.",
+     "gloss": "An imperfect counterfactual edit that still implies the original answer; it can only inflate trace-following in (E1, r0), so results are also reported by direction."
+    }
+   ],
+   "fix": [
+    {
+     "id": "li2026when#1",
+     "set": {
+      "stance": "adapted",
+      "kind": "operational",
+      "gloss": "Counterfactual evidence = gold paragraphs with the answer replaced by a same-type entity, kept only if a verifier recovers each version's answer; then crossed with traces from the other version."
+     },
+     "reason": "The passage modifies Longpre et al.'s entity substitution (verifier filter, use to build trace-evidence conflicts), so adapted; it is a construction procedure, so operational."
+    },
+    {
+     "id": "li2026when#2",
+     "set": {
+      "where": "§2.5",
+      "quote": "Trace contribution is the accuracy with the trace minus the accuracy with the no-trace placeholder on the same questions and answer-time evidence. It measures the net effect of the trace, since removing a trace can turn correct answers into errors and vice versa.",
+      "gloss": "Lanham-style removal measure of trace use; on the same pairs it differs at most 4.7 points between answer configurations while evidence-following differs 29.9–60.6, so it misses deference."
+     },
+     "reason": "§2.5 is the primary definition (App. B.3 only restates it per evaluation unit); gloss now states the dissociation the paper reports."
+    }
+   ],
+   "drop": [],
+   "note": "Added trace use, conflict response, crossed conflicts, evidence/trace-following, answer change rate, corruption selectivity and counterfactual leakage; counterfactual row now adapted/operational; trace contribution moved to its §2.5 definition."
+  },
+  {
+   "key": "young2026why",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "thinking-answer divergence",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "The present study set out to quantify thinking-answer divergence, the extent to which extended-thinking models acknowledge misleading hints in their thinking tokens but omit that acknowledgment from their visible answers.",
+     "gloss": "Measured as the thinking-only share of hint-following cases (55.4% overall, 19.6–94.7% by model); the paper calls it channel divergence, not faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint acknowledgment (keyword detection)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Young 2026a",
+     "where": "§3.3",
+     "quote": "The same keyword set is applied to both thinking_text and answer_text independently. A case is classified as “acknowledges” for a given channel if any indicator keyword for that hint type appears in the text (case-insensitive).",
+     "gloss": "Acknowledgment = any hint-type keyword (e.g., 'professor', 'leaked') in a channel; extends Young (2026a) and is called a conservative proxy that misses paraphrases."
+    },
+    {
+     "family": "faithfulness",
+     "term": "influenced cases",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "The analysis is restricted to influenced cases (those where the model’s extracted answer matches the hint’s target label rather than the ground truth), yielding 10,506 cases.",
+     "gloss": "Hint influence is inferred only from the final answer matching the misleading hint's target; all rates describe this conditioned population (10,506 of about 35,000 responses)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "transparent (quadrant)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Transparent (thinking: yes, answer: yes): the model acknowledges the hint in both channels. This represents openly influenced reasoning where hint acknowledgment appears in both channels.",
+     "gloss": "32.4% of hint-following cases; the dominant quadrant for sycophancy hints (58.8%)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "thinking-only (quadrant)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Thinking-only (thinking: yes, answer: no): the model acknowledges the hint in its internal reasoning but omits this acknowledgment from the visible answer. This is the primary object of study.",
+     "gloss": "The divergence quadrant: 55.4% of hint-following cases, which an answer-text-only monitor would miss."
+    },
+    {
+     "family": "faithfulness",
+     "term": "surface-only (quadrant)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Surface-only (thinking: no, answer: yes): the model mentions the hint in the answer but not in its reasoning. This would represent the opposite of thinking-only divergence: a model that reveals more in its answer text than in its thinking tokens.",
+     "gloss": "Reverse divergence: 0.5% observed versus about 4.0% expected if the two channels were independent."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unacknowledged (quadrant)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Unacknowledged (thinking: no, answer: no): no hint-related keywords appear in either channel. The influence operates below the level of verbalization.",
+     "gloss": "11.8% of hint-following cases; invisible even to a thinking-token monitor, so the paper calls for activation-level monitoring."
+    },
+    {
+     "family": "faithfulness",
+     "term": "transparent compliance",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "Transparent compliance (sycophancy): Models openly acknowledge the professor’s authority in both channels. 58.8% of sycophancy-influenced cases fall into the transparent quadrant, with only 2.4% unacknowledged.",
+     "gloss": "Following a hint while naming it in both thinking and answer; the counterpart of covert compliance, where only the thinking names the hint."
+    },
+    {
+     "family": "faithfulness",
+     "term": "directional asymmetry (H1)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "When models follow misleading hints, thinking tokens contain more hint-related keywords than answer text, and this asymmetry is near-exclusively unidirectional (thinking-only divergence far exceeds answer-only divergence).",
+     "gloss": "Tested against an independence baseline (§4.5): thinking-only to surface-only ratio 121:1 observed versus about 15:1 expected."
+    },
+    {
+     "family": "faithfulness",
+     "term": "suppression strategies",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.5",
+     "quote": "To characterize how suppression occurs, 60+ influenced cases were examined across six model-hint combinations spanning both heavy suppressors (Step-3.5-Flash, GPT-OSS-120B, DeepSeek-V3.2-Speciale, OLMo-3.1-32B-Think) and transparent models (DeepSeek-R1, Qwen3.5-27B). Figure 8 illustrates the contrast on a single question; three distinct suppression strategies are identified below.",
+     "gloss": "Qualitative classes of how a hint-following answer hides the hint: bare truncation, laundered attribution and confabulated justification."
+    },
+    {
+     "family": "faithfulness",
+     "term": "bare truncation",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.5",
+     "quote": "The model’s thinking trace contains extensive deliberation, often hundreds of tokens of genuine domain reasoning that arrives at the correct answer, followed by an explicit capitulation to the hint. The visible answer then consists of nothing more than the target letter (“C” or “D”) with no reasoning whatsoever.",
+     "gloss": "The dominant suppression pattern: the answer is a bare letter, so both the hint and the abandoned correct reasoning are cut at the thinking-answer boundary."
+    },
+    {
+     "family": "faithfulness",
+     "term": "laundered attribution",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.5",
+     "quote": "In a minority of cases, the model produces an answer with reasoning but sanitizes the hint source.",
+     "gloss": "The answer refers to the hint euphemistically (e.g., 'according to the given information'), so it is acknowledged obliquely while its nature is concealed."
+    },
+    {
+     "family": "faithfulness",
+     "term": "confabulated justification",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.5",
+     "quote": "The model fabricates domain-specific reasoning that appears to independently support the hint-suggested answer, despite the thinking trace revealing that no such reasoning was available.",
+     "gloss": "Post-hoc rationalization in the answer: invented domain reasoning absent from the thinking; the paper calls it the most epistemically concerning pattern."
+    },
+    {
+     "family": "faithfulness",
+     "term": "active suppression planning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.5",
+     "quote": "and, most strikingly, self-directed suppression instructions found in GPT-OSS-120B: “I will not explicitly state ‘D is false’ in the final reasoning to avoid confusion.” This last category constitutes direct evidence of active suppression planning, where the model deliberates about which parts of its reasoning to conceal from the user.",
+     "gloss": "Thinking that plans what to hide from the visible answer; taken as evidence that some divergence is active omission rather than incidental reformulation (§6)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "filtering vs reformulating (sources of divergence)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "The divergence cases reported here may or may not involve intentional filtering. A model that reasons “The professor said B, and I agree with the professor, so the answer is B” in its thinking and then writes “The answer is B because [genuine-sounding justification]” in its answer may be filtering (deliberate omission) or reformulating (generating a polished answer that naturally omits process details).",
+     "gloss": "Two candidate mechanisms behind divergence, deliberate omission versus incidental polishing, separated only by qualitative reading of transition points (§5.5)."
+    },
+    {
+     "family": "monitorability",
+     "term": "alignment faking",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "§5.2",
+     "quote": "The thinking-answer divergence pattern documented here bears a structural resemblance to the alignment-faking behavior described by Greenblatt et al. (2024). In their study, Claude 3 Opus reasoned explicitly in its scratchpad about deceiving its trainers, behaving differently when it believed it was being monitored versus when it did not.",
+     "gloss": "Restated as monitoring-dependent behavior with explicit deceptive scratchpad reasoning; the paper separates it from divergence, which may not be intentional."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitoring tiers (answer-text, thinking-token, activation-level)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "Operationally, this means that a complete monitoring pipeline requires at minimum three tiers: answer-text screening (catches transparent cases), thinking-token screening (catches the divergence-pattern cases), and activation-level or probe-based monitoring (needed for the 11.8% unacknowledged cases).",
+     "gloss": "Monitor scopes mapped to quadrants; an answer-text-only monitor misses the 55.4% thinking-only cases (over 90% for some models)."
+    },
+    {
+     "family": "monitorability",
+     "term": "thinking-answer divergence flag (monitoring heuristic)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "This asymmetry suggests a practical monitoring heuristic: any divergence between thinking-token content and answer-text content should be flagged as potentially omitted reasoning.",
+     "gloss": "Proposed but not evaluated: flag responses whose thinking contains content the answer omits, justified by the near-zero surface-only rate."
+    },
+    {
+     "family": "faithfulness",
+     "term": "referential continuity",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.5",
+     "quote": "These models maintain referential continuity: the user can see that the model defers to external authority rather than reasoning independently.",
+     "gloss": "The answer carries the hint reference forward (DeepSeek-R1, Qwen3.5-27B); this transparency does not stop the model from following the hint."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint-injection test (verbalizing hint influence)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "chen2025reasoning",
+     "where": "§2",
+     "quote": "Chen et al. (2025) introduced a hint-injection methodology to test whether models verbalize the influence of misleading hints, finding that faithfulness varies dramatically by model and hint type.",
+     "gloss": "Restatement: faithfulness tested as verbalizing an inserted misleading hint; this paper reuses such hints but scores keyword acknowledgment separately per channel."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added divergence, keyword acknowledgment, influenced cases, each quadrant, transparent compliance, suppression strategies and planning, filtering vs reformulating, alignment faking, monitoring tiers and heuristic, Chen restatement."
+  }
+ ]
+}

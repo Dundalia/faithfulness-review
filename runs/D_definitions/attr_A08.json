@@ -1,0 +1,652 @@
+{
+ "checks": [
+  {
+   "entry": "chen2022rev#3",
+   "source": "hase2020leakageadjusted",
+   "verdict": "supported",
+   "finding": "REV's description of LAS (proxy simulator trained on task-model outputs, with-minus-without-rationale accuracy, averaged within leaking and non-leaking groups and then macro-averaged) matches the source's definition step for step.",
+   "source_evidence": "Simulator models are trained with task model outputs as labels and $x$ and $\\hat{e}$ combined into input sequences. [...] With this approach, we can estimate explanations’ leakage-controlled effect on simulatability by (1) grouping data by the level of explanation label leakage, (2) computing the average difference $\\mathbbm{1}[\\hat{y}|x,\\hat{e}]-\\mathbbm{1}[\\hat{y}|x]$ within each leakage group, and (3) taking the raw average of the effect across groups (to avoid favoring the larger subset).",
+   "citing_evidence": "Hase et al. (2020) evaluate the quality of free-text rationales via a proxy model, trained with the task model outputs as labels and original input texts combined with rationales as input sequences. The metric computes the difference between its prediction accuracy on the predicted label when the rationale is included into the input vs. when it is not, $\\mathbbm{1}[\\hat{y}\\mid x,\\hat{r}]-\\mathbbm{1}[\\hat{y}\\mid x]$ , averaged over examples grouped based on whether they leak labels or not. The final LAS score is given by the macro average across groups."
+  },
+  {
+   "entry": "chen2022rev#4",
+   "source": "hase2020leakageadjusted",
+   "verdict": "adapted",
+   "finding": "The source's measure is the simulator's accuracy on the task model's output with versus without the explanation; REV cites it as an accuracy-based instance and generalises it to any performance measure Perf[f(Y|X,R)] − Perf[f(Y|X)] with the label Y as target.",
+   "source_evidence": "To deal with issue (1) above, we introduce an input-only baseline and measure the effect of an explanation on simulatability as $\\mathbbm{1}[\\hat{y}|x,\\hat{e}]-\\mathbbm{1}[\\hat{y}|x]$ .",
+   "citing_evidence": "where a larger performance gap indicates a better rationale. Existing metrics (Hase et al., 2020; Wiegreffe et al., 2021) compute the performance gap based on prediction accuracies."
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#4",
+   "source": "hase2020leakageadjusted",
+   "verdict": "adapted",
+   "finding": "The source's gain is simulator accuracy with minus without the explanation on the explained input itself, computed within leakage groups; Mayne et al. take the with-minus-without difference but score it on counterfactual inputs, average it over five predictor LLMs and drop the leakage control.",
+   "source_evidence": "To deal with issue (1) above, we introduce an input-only baseline and measure the effect of an explanation on simulatability as $\\mathbbm{1}[\\hat{y}|x,\\hat{e}]-\\mathbbm{1}[\\hat{y}|x]$ . [...] When testing, the simulator’s correctness on each example is $\\mathbbm{1}[\\hat{y}_{i}|x_{i},\\hat{e}_{i}]$ , and we obtain $\\mathbbm{1}[\\hat{y}_{i}|x_{i}]$ and $\\mathbbm{1}[\\hat{y}_{i}|\\hat{e}_{i}]$ by dropping $\\hat{e}_{i}$ or $x_{i}$ from the input.",
+   "citing_evidence": "We aggregate these accuracies across a pool of predictor models, yielding two metrics: $\\text{Acc}_{\\text{with exp}}$ , and $\\text{Acc}_{\\text{without exp}}$ . Following Hase et al. (2020), we measure the predictive information in explanations using simulatability gain (Figure 3):"
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#6",
+   "source": "hase2020leakageadjusted",
+   "verdict": "partial",
+   "finding": "The source supports simulatability (an observer predicting the model's output given its explanation, against an input-only baseline) but not the counterfactual part: its simulator predicts the output on the explained input itself, and the counterfactual simulation test belongs to Hase & Bansal (2020, 'Evaluating Explainable AI', not in index.csv), which Chen et al. (2024) cite separately for that concept.",
+   "source_evidence": "A model is simulatable to the extent that an observer, or simulator, can predict its outputs. [...] When testing, the simulator’s correctness on each example is $\\mathbbm{1}[\\hat{y}_{i}|x_{i},\\hat{e}_{i}]$ , and we obtain $\\mathbbm{1}[\\hat{y}_{i}|x_{i}]$ and $\\mathbbm{1}[\\hat{y}_{i}|\\hat{e}_{i}]$ by dropping $\\hat{e}_{i}$ or $x_{i}$ from the input.",
+   "citing_evidence": "Our metric uses counterfactual simulatability (Doshi-Velez & Kim, 2017; Hase et al., 2020; Chen et al., 2024; Mills et al., 2025; Limpijankit et al., 2025). This tests whether an observer can predict a model’s behavior given its explanation."
+  },
+  {
+   "entry": "paul2024making#5",
+   "source": "hase2020leakageadjusted",
+   "verdict": "partial",
+   "finding": "The source supports LAS as measuring how well rationales help a simulator predict the model's own outputs, but not the formula Paul et al. give for it: Acc(qr→a′) − Acc(q→a′) is the pooled, unadjusted gain, whereas LAS averages that difference separately over leaking and non-leaking examples and then takes the raw mean of the two groups.",
+   "source_evidence": "We introduce a leakage-adjusted simulatability (LAS) metric for evaluating NL explanations, which measures how well explanations help an observer predict a model’s output, while controlling for how explanations can directly leak the output. [...] With this approach, we can estimate explanations’ leakage-controlled effect on simulatability by (1) grouping data by the level of explanation label leakage, (2) computing the average difference $\\mathbbm{1}[\\hat{y}|x,\\hat{e}]-\\mathbbm{1}[\\hat{y}|x]$ within each leakage group, and (3) taking the raw average of the effect across groups (to avoid favoring the larger subset).",
+   "citing_evidence": "To evaluate the faithfulness of the rationales generated by the small-sized models, we use LAS (Hase et al., 2020) to measure how well the rationales help a simulator to predict a student’s predictions a’, namely Acc(qr –> a’) - Acc(q –> a’)."
+  },
+  {
+   "entry": "pmlr-v235-chen24bl#15",
+   "source": "hase2020leakageadjusted",
+   "verdict": "supported",
+   "finding": "The source states that when an explanation restates the task model's output (label leakage) the simulator's success no longer reflects explanation quality, which is the problem Chen et al. attribute to it for simulation on the explained input.",
+   "source_evidence": "We suggest that the simulator’s success does not reflect explanation quality when (1) the simulator can guess behavior correctly from the input $x$ alone, or (2) the explanation $\\hat{e}$ directly restates the task model output, i.e., leaking the label to the simulator.",
+   "citing_evidence": "In prior work that evaluates the simulatability of a natural language explanation, the simulation input is the explained input Hase et al. (2020); Narang et al. (2020); Wiegreffe et al. (2021); Chen et al. (2022); Chan et al. (2022). This leads to two problems: (i) the explanation might already contain (leak) the model’s output on the simulation input so the metric is not well-defined Hase et al. (2020)"
+  },
+  {
+   "entry": "radhakrishnan2023question#2",
+   "source": "hase2020leakageadjusted",
+   "verdict": "supported",
+   "finding": "The source evaluates explanation faithfulness, as opposed to plausibility, through simulatability (an observer predicting the model's outputs from its explanations), and notes with Jacovi and Goldberg that faithfulness and simulatability are closely related.",
+   "source_evidence": "We argue that these evaluations are insufficient, since they fail to indicate whether explanations support actual model behavior (faithfulness), rather than simply match what a human would say (plausibility). In this work, we address the problem of evaluating explanations from the model simulatability perspective. [...] As observed by Jacovi and Goldberg (2020a), faithfulness and simulatability are closely related, but simulatability primarily captures causal attribution of explanations and not necessarily social attribution.",
+   "citing_evidence": "A type of faithfulness is the extent to which explanations lead to simulatability of model behavior, where the goal is for model behavior to match human expectations, perhaps after analysis of the model’s reasoning (Doshi-Velez & Kim, 2017; Hase et al., 2020; Wiegreffe et al., 2021)."
+  },
+  {
+   "entry": "ramnath2024tailoring#6",
+   "source": "hase2020leakageadjusted",
+   "verdict": "supported",
+   "finding": "LAS is built to check whether explanations support the task model's own output (its predicted label), which the source calls faithfulness, so 'faithfulness towards predicted labels' is an accurate gloss.",
+   "source_evidence": "We argue that these evaluations are insufficient, since they fail to indicate whether explanations support actual model behavior (faithfulness), rather than simply match what a human would say (plausibility). [...] Simulator models are trained with task model outputs as labels and $x$ and $\\hat{e}$ combined into input sequences.",
+   "citing_evidence": "Some recent works on other necessary rationale properties are REV Chen et al. (2023a) (novelty of information, faithfulness towards the predicted label), ROSCOE Golovneva et al. (2022) / ReCEval Prasad et al. (2023) (score steps of reasoning), LAS Hase et al. (2020) (faithfulness towards predicted labels) etc."
+  },
+  {
+   "entry": "turpin2023language#2",
+   "source": "hase2020leakageadjusted",
+   "verdict": "misdirected",
+   "finding": "The defining feature Turpin et al. give, explanations on one input helping predict the model on other inputs, is the counterfactual simulation test of Hase & Bansal (2020, 'Evaluating Explainable AI: Which Algorithmic Explanations Help Users Predict Model Behavior?', not in index.csv); the cited Hase et al. (2020) LAS paper has its simulator predict the output for the explained input itself.",
+   "source_evidence": "A model is simulatable to the extent that an observer, or simulator, can predict its outputs. [...] When testing, the simulator’s correctness on each example is $\\mathbbm{1}[\\hat{y}_{i}|x_{i},\\hat{e}_{i}]$ , and we obtain $\\mathbbm{1}[\\hat{y}_{i}|x_{i}]$ and $\\mathbbm{1}[\\hat{y}_{i}|\\hat{e}_{i}]$ by dropping $\\hat{e}_{i}$ or $x_{i}$ from the input.",
+   "citing_evidence": "The counterfactual simulatability framework of explanation faithfulness aims to measure whether model explanations on one input help humans predict what predictions models will give on other inputs (Doshi-Velez and Kim, 2017; Hase et al., 2020; Chen et al., 2023)."
+  },
+  {
+   "entry": "wang2023pinto#3",
+   "source": "hase2020leakageadjusted",
+   "verdict": "supported",
+   "finding": "The source defines LAS as how well explanations help a simulator predict the task model's output while controlling for label leakage, and uses a T5-Base simulator, matching PINTO's description and setup.",
+   "source_evidence": "We introduce a leakage-adjusted simulatability (LAS) metric for evaluating NL explanations, which measures how well explanations help an observer predict a model’s output, while controlling for how explanations can directly leak the output. [...] We use a pretrained T5-Base model as a proxy for a human simulator (depicted in Figure 4).",
+   "citing_evidence": "To evaluate the faithfulness of the generated rationale to the reasoning model’s predicted label, we adopt the LAS metric (Hase et al., 2020). LAS measures rationale-label consistency as how well the rationale helps a simulator model predict the reasoning model’s predicted label. Following Hase et al. (2020), we implement the simulator as a fine-tuned T5-Base LM (Raffel et al., 2020a)."
+  },
+  {
+   "entry": "wang2023scott#6",
+   "source": "hase2020leakageadjusted",
+   "verdict": "partial",
+   "finding": "The source supports LAS as measuring how well rationales help a simulator predict the model's own predictions, but not the formula SCOTT gives for it: Acc(qr→a′) − Acc(q→a′) is the pooled, unadjusted gain, whereas LAS averages that difference separately over leaking and non-leaking examples and then takes the raw mean of the two groups.",
+   "source_evidence": "We introduce a leakage-adjusted simulatability (LAS) metric for evaluating NL explanations, which measures how well explanations help an observer predict a model’s output, while controlling for how explanations can directly leak the output. [...] With this approach, we can estimate explanations’ leakage-controlled effect on simulatability by (1) grouping data by the level of explanation label leakage, (2) computing the average difference $\\mathbbm{1}[\\hat{y}|x,\\hat{e}]-\\mathbbm{1}[\\hat{y}|x]$ within each leakage group, and (3) taking the raw average of the effect across groups (to avoid favoring the larger subset).",
+   "citing_evidence": "(2) To evaluate the faithfulness of the rationales generated by the student, we use LAS to measure how well the rationales help a simulator to predict a student’s predictions $a^{{}^{\\prime}}$ , namely $Acc(qr\\rightarrow a^{{}^{\\prime}})-Acc(q\\rightarrow a^{{}^{\\prime}})$ ."
+  },
+  {
+   "entry": "wang2023scott#8",
+   "source": "hase2020leakageadjusted",
+   "verdict": "partial",
+   "finding": "The source supports a with-minus-without-rationale simulator accuracy gain, but not SCOTT's statement that LAS's 'core idea' is predicting the gold answers: LAS simulators are trained on and scored against the task model's outputs (the source argues against gold-label targets), and the stated formula also drops LAS's averaging over leaking and non-leaking groups.",
+   "source_evidence": "Simulator models are trained with task model outputs as labels and $x$ and $\\hat{e}$ combined into input sequences. [...] For example, suppose the ground-truth label is A, while a model predicts B; a higher BLEU score will be observed when the model gives an explanation to support human label A, instead of model prediction B. [...] With this approach, we can estimate explanations’ leakage-controlled effect on simulatability by (1) grouping data by the level of explanation label leakage, (2) computing the average difference $\\mathbbm{1}[\\hat{y}|x,\\hat{e}]-\\mathbbm{1}[\\hat{y}|x]$ within each leakage group, and (3) taking the raw average of the effect across groups (to avoid favoring the larger subset).",
+   "citing_evidence": "(1) To evaluate the consistency between the rationales generated by the teacher and the gold answers provided as input, we use the LAS metric Hase et al. (2020), whose core idea is to measure how well the rationales assist a simulator to predict the gold answers $a^{*}$ , computed as the difference between the task performance when the rationale is provided as input vs. when it is not, namely $Acc(qr\\rightarrow a^{*})-Acc(q\\rightarrow a^{*})$ ."
+  },
+  {
+   "entry": "wiegreffe2021measuring#6",
+   "source": "hase2020leakageadjusted",
+   "verdict": "other-claim",
+   "finding": "Wiegreffe et al. cite Hase et al. (2020) not for the IR→Ô − I→Ô definition but for automated simulators correlating with human scores; the source reports a moderate model–expert correlation for example-level LAS (ρ = 0.29) and, in the crowdsourced study, that raw simulator accuracies (not LAS) correlate with ratings.",
+   "source_evidence": "We find a strong correlation between the leakage proxy variable and the human leakage variable, with a Spearman rank correlation of $\\rho=0.53\\ (p<1\\mathrm{e}{-15})$ , and we observe a moderate correlation between the model-based and human example-level LAS, $\\rho=0.29\\ (p<1\\mathrm{e}{-12})$ Cohen (1988). [...] A first observation is that LAS scores do not correlate well with human ratings. Curiously, though, simulator accuracies correlate with human ratings.",
+   "citing_evidence": "Historically, humans have served as the predictors, but recent work has shown that the computation of simulatability can be automated using trained models. Hase et al. (2020) demonstrate that automated metrics for simulatability have moderate to high correlation with human scores in both an expert and a crowdsourced setting."
+  },
+  {
+   "entry": "wiegreffe2021measuring#13",
+   "source": "hase2020leakageadjusted",
+   "verdict": "adapted",
+   "finding": "The source's simulatability measure targets the task model's own outputs; Wiegreffe et al. explicitly switch the target to gold labels (IR→O − I→O) because their noisy models' predictions cannot be simulated.",
+   "source_evidence": "Simulator models are trained with task model outputs as labels and $x$ and $\\hat{e}$ combined into input sequences.",
+   "citing_evidence": "In our experiments, model predictions are often unable to be simulated because they degenerate under high values of noise (§4, A.5). We thus use a variant of this metric that relies on predicting the gold labels as our measure of rationale quality: IR $\\rightarrow$ O minus I $\\rightarrow$ O."
+  },
+  {
+   "entry": "baker2025monitoring#4",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source's legibility is checkability, where a verifier accepts the helpful prover's correct solutions and cannot be fooled by convincing incorrect ones; Baker et al. turn it into the monitor's belief that the latent carries useful information about v, a belief-based test that convincing sneaky solutions would pass but the source's soundness condition rules out.",
+   "source_evidence": "When we find helpful provers and verifiers with such limited completeness and soundness properties, we say that the helpful prover is legible to the verifier. This is analogous to saying that outputs are legible to humans if humans accept them as correct and can’t be fooled by similar-looking incorrect outputs.",
+   "citing_evidence": "The latent is plausible (P) or legible if the monitor believes it is getting useful information about $v$ from the latent."
+  },
+  {
+   "entry": "baker2025monitoring#24",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source defines legibility relative to a particular verifier (checkability of solution correctness by that verifier or by humans); Baker et al. carry over the observer-relative notion but use it as a monitor's ability to read the latent at all (e.g. French CoT, English-only monitor), separate from faithfulness.",
+   "source_evidence": "One possible way to gain trust in the output of a complex system is to require that the system produces an explanation of its output that is legible to humans or another trusted system, i.e. can be fully understood to the extend that any possible errors would be spotted. [...] When we find helpful provers and verifiers with such limited completeness and soundness properties, we say that the helpful prover is legible to the verifier.",
+   "citing_evidence": "We further have viewed lack of legibility [74] or plausibility [27] as another failure mode of monitorability. If we assume that an agent’s latent is faithful with respect to a $v$ , an observable property of its behavior, then a monitor can only succeed if that latent is legible to the monitor. For instance, if an agent’s CoT tokens are in French but the monitor only understands English, the monitor will fail due to illegibility."
+  },
+  {
+   "entry": "chen2025reasoning#5",
+   "source": "kirchner2024proververifier",
+   "verdict": "supported",
+   "finding": "The source defines legibility as reasoning that is clear and easy to check and says it requires outputs that are coherent and accessible to human understanding, which is the 'understandable by humans' requirement Chen et al. attribute to it.",
+   "source_evidence": "One way to increase confidence in the outputs of Large Language Models (LLMs) is to support them with reasoning that is clear and easy to check — a property we call legibility. [...] Consequently, legibility requires model outputs that are coherent and accessible to human understanding (Rudin, 2019).",
+   "citing_evidence": "For CoT monitoring to be most effective, the CoT must be a legible and faithful reflection of the way the model reached its conclusion and generated the user-facing response. This means that the model’s CoT must be understandable by humans (Kirchner et al., 2024)"
+  },
+  {
+   "entry": "jiao2026tandem#5",
+   "source": "kirchner2024proververifier",
+   "verdict": "supported",
+   "finding": "The source defines checkability as a verifier's capacity to check the correctness of a prover's solutions and calls a prover legible to a verifier when completeness and soundness hold, i.e. legibility operationalised as checkability by a designated verifier.",
+   "source_evidence": "Checkability — i.e. the capacity of a verifier to independently check the correctness of solutions generated by a helpful prover — can be defined by a combination of two properties: [...] When we find helpful provers and verifiers with such limited completeness and soundness properties, we say that the helpful prover is legible to the verifier.",
+   "citing_evidence": "Prover–verifier games train for solution checkability by a learned verifier (Kirchner et al., 2024). These approaches are complementary to tandem training. Specification-based methods are well suited when a target behavior is available, while prover–verifier methods operationalize legibility as checkability by a designated verifier."
+  },
+  {
+   "entry": "jose2025reasoning#3",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source measures human legibility as the accuracy of time-limited humans judging solution correctness; Jose et al. replace this with a GPT-4o grader rating legibility on a 1–9 scale, saying so explicitly.",
+   "source_evidence": "In this work we measured human legibility via the accuracy of their judgement of solution correctness in time-limited settings, which is only one of many ways to measure human legibility.",
+   "citing_evidence": "(Kirchner et al., 2024) measures legibility using time-constrained human contractors. However, in realistic monitoring setups (Korbak et al., 2025), we will likely try to give our monitors as many affordances as we can (Bhatt et al., 2025). So, we use a weaker \"trusted\" model as our autograder (Greenblatt et al., 2024b); [...] We prompt GPT-4o to evaluate the CoTs for legibility on a scale of 1-9, with 1 being the most legible and 9 the least."
+  },
+  {
+   "entry": "kim2026mitigating#1",
+   "source": "kirchner2024proververifier",
+   "verdict": "supported",
+   "finding": "The source reports that the checkability-trained prover has lower accuracy than the correctness-only prover and names this a legibility tax, a term it credits to Leike (2022).",
+   "source_evidence": "It has lower test performance than the prover optimized for correctness alone, which represents an instance of a legibility tax (Leike, 2022).",
+   "citing_evidence": "Prover-verifier games can be used to improve checkability of model outputs, but display a degradation in accuracy compared to a baseline trained only to maximize correctness—a phenonemon called legibility tax (Kirchner et al., 2024)."
+  },
+  {
+   "entry": "kim2026mitigating#2",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source's completeness requires the prover to be always correct and accepted, and its soundness quantifies over adversarial provers of the same model family; Kim et al. move correctness out into a separate condition (completeness becomes correct ⇒ accepted) and quantify soundness over every possible proof z′, as they state when 'decoupling correctness from the definition of checkability'.",
+   "source_evidence": "Completeness: $\\forall x\\in\\mathcal{X},\\mathds{1}_{\\text{correct}}\\left({x,\\pi(x)}\\right)=v(x,\\pi(x))=1$ . [...] Soundness: $\\forall\\pi^{\\prime}\\in\\mathcal{H},\\forall x\\in\\mathcal{X}$ , $\\mathds{1}_{\\text{correct}}\\left({x,\\pi^{\\prime}(x)}\\right)=0\\implies v(x,\\pi^{\\prime}(x))=0$ .",
+   "citing_evidence": "The prover is said to be checkable if there exists a verifier $v$ such that the prover can always convince the verifier when its answer is correct, and there exists no adversarial proof that can trick the verifier into accepting an incorrect answer. [...] We propose decoupling correctness from the definition of checkability in Kirchner et al. (2024)."
+  },
+  {
+   "entry": "roytburg2026measuring#3",
+   "source": "kirchner2024proververifier",
+   "verdict": "partial",
+   "finding": "The source supports the soundness half (a smaller verifier rejecting incorrect solutions from sneaky provers) but not the claim that this defines legibility: the source calls a prover legible only when completeness also holds, i.e. the verifier accepts the helpful prover's correct solutions.",
+   "source_evidence": "Checkability — i.e. the capacity of a verifier to independently check the correctness of solutions generated by a helpful prover — can be defined by a combination of two properties: [...] Completeness. For any input in the domain of interest, the helpful prover generates correct solutions and the verifier accepts them as correct. [...] Soundness. The verifier rejects all incorrect solutions produced by any adversarial provers of the same model class as the helpful one. [...] When we find helpful provers and verifiers with such limited completeness and soundness properties, we say that the helpful prover is legible to the verifier.",
+   "citing_evidence": "Prior work defines legibility inconsistently. Kirchner et al. (2024) define it by how well weak verifiers can invalidate misaligned responses."
+  },
+  {
+   "entry": "roytburg2026measuring#14",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source's prover-verifier game trains a smaller verifier against helpful and sneaky roles of a larger prover on whole CoT solutions; Roytburg et al. move it to intermediate reasoning traces and make it non-adversarial, as they state.",
+   "source_evidence": "Our algorithm iteratively trains small verifiers to predict solution correctness, “helpful” provers to produce correct solutions that the verifier accepts, and “sneaky” provers to produce incorrect solutions that fool the verifier.",
+   "citing_evidence": "Kirchner et al. (2024) defines legibility with a prover-verifier game, where a weak verifier must learn to invalidate responses from a stronger, misaligned prover. We extend this setup to intermediate reasoning traces and reframe it as a non-adversarial interaction, enabling connections between legibility for safety and for distillation, caching, and re-use."
+  },
+  {
+   "entry": "yu2026outcome#5",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source has no sufficiency measure: its verifier scores the correctness of a full solution and legibility is tested by completeness, soundness and time-limited human judging, whereas Yu et al.'s SR asks whether a verifier's answer from the answer-stripped chain changes when the question is added, an operationalisation of the 'verifiability' they credit to the source.",
+   "source_evidence": "We have a prover $\\pi(z|x)$ proposing solutions given a problem statement, and a verifier $v(x,z)\\in[0,1]$ that estimates the correctness of the solution’s answer. We call the output of the verifier the convincingness score.",
+   "citing_evidence": "We then instruct a verifier $\\theta$ to predict an answer distribution from the sanitized reasoning chain, either (i) conditioned on the original question or (ii) without access to it (see Appendix B for the prompts used to create these conditions). If the reasoning is sufficient, conditioning on $q$ should add little information, so the probability-level predictions should be nearly unchanged:"
+  },
+  {
+   "entry": "yu2026outcome#8",
+   "source": "kirchner2024proververifier",
+   "verdict": "adapted",
+   "finding": "The source's verifier judges whether a given solution is correct and is assumed unable to produce solutions itself; Yu et al. recast this as steps explicit enough to lead an external verifier to the same answer.",
+   "source_evidence": "We have a prover $\\pi(z|x)$ proposing solutions given a problem statement, and a verifier $v(x,z)\\in[0,1]$ that estimates the correctness of the solution’s answer. [...] In our work, we assume capability (instead of data) constraint on the verifier (it cannot independently produce a solution without the help of a prover even with infinite data).",
+   "citing_evidence": "(2) that the chain-of-thought is verifiable, i.e., the important reasoning steps are explicit and reliable enough to lead an external verifier to the same answer (Kirchner et al., 2024)."
+  },
+  {
+   "entry": "chuang2026faithlm#7",
+   "source": "madsen2024self",
+   "verdict": "unsupported",
+   "finding": "Madsen et al. do not run a simulatability evaluation: they measure faithfulness with self-consistency checks that re-run the model on its own explanation-edited input, and explicitly set this apart from simulatability (an observer predicting the model's behaviour), which they attribute to Chen et al. (2023).",
+   "source_evidence": "A self-consistency check uses re-evaluation to check if the explanation is consistent with the model’s behavior. [...] Outside of self-consistency checks, Chen et al. (2023) measures the simulatability of counterfactual self-explanations. Simulatability means that humans can predict the model’s behavior on input $y$ , given an explanation for a similar input $x$ . [...] A challenge with simulatability is it’s difficult to ensure that humans use the explanations and not their world-knowledge to predict the model. Faithfulness does not have this challenge and it’s therefore important to also measure faithfulness.",
+   "citing_evidence": "Simulatability-based evaluations (e.g.,  Madsen et al. (2024); Chen et al. (2023a)) assess whether a model can reproduce predictions from an explanation, i.e., behavioral imitation."
+  },
+  {
+   "entry": "dehghanighobadi2025can#2",
+   "source": "madsen2024self",
+   "verdict": "supported",
+   "finding": "The source has the model itself generate the counterfactual (an edit meant to yield the opposite label) instead of a separate explainer, which is the self-generated counterfactual explanation Dehghanighobadi et al. say Madsen et al. also evaluate.",
+   "source_evidence": "Instead, we let the language model generate both the classification and the counterfactual explanation. [...] We generate counterfactuals by asking for an edit that generates the opposite sentiment.",
+   "citing_evidence": "Since we are interested in self-explanation properties of LLMs, we do not solve an optimization problem and instead ask the model itself to generate the counterfactual explanation. [...] Madsen et al. (2024) also evaluate SCEs."
+  },
+  {
+   "entry": "doi2025investigating#2",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source also re-runs the model in a separate session, but only counterfactuals are judged by whether the prediction flips; attribution and redaction explanations count as faithful only when the model can no longer classify the edited input (an 'unknown' answer), not when its prediction changes.",
+   "source_evidence": "Note the self-explanation generation and self-consistency check must happen in two separate sessions. [...] Because the goal is to produce the opposite label, we can re-evaluate the prediction with the counterfactual and check that this goal is satisfied. If satisfied, the counterfactual is faithful. [...] Finally, in the case of feature attribution (Section 4.2) and redaction explanations (Section 4.3), the paragraph of faithful explanation can not be classified. Therefore, the classification should allow for an “unknown” class prediction.",
+   "citing_evidence": "Faithfulness evaluation involves a separate session, in which a self-explanation is considered faithful if editing the input according to it indeed flips the prediction."
+  },
+  {
+   "entry": "doi2025investigating#3",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source defines faithfulness as the ratio of faithful observations among correctly classified ones; Doi et al. compute the share of prediction changes on 5,000 held-out samples after dropping explanations that break style or word-count constraints.",
+   "source_evidence": "Because our self-consistency method determines whether or not an observation is faithful, faithfulness in this paper refers to the ratio of faithful observations. [...] Instead, only the correctly predicted observations are used to evaluate faithfulness; the rest are discarded.",
+   "citing_evidence": "Specifically, we first collect the model’s predictions on 5,000 samples that do not overlap with the training data, together with self-explanations for each style. For each style, we then edit the inputs according to the generated self-explanations and compute faithfulness as the proportion of cases in which the model’s prediction changes. We exclude instances that violate either the style condition or the number-of-word condition"
+  },
+  {
+   "entry": "doi2025investigating#4",
+   "source": "madsen2024self",
+   "verdict": "supported",
+   "finding": "The source evaluates exactly these three self-explanation types (counterfactual, feature attribution, redaction) with self-consistency checks.",
+   "source_evidence": "In this paper, we evaluate the faithfulness of the following types of self-explanations: [...] Our contribution is the ability to measure faithfulness on LLMs’ self-explanations, specifically counterfactuals, feature attribution, and redaction explanations.",
+   "citing_evidence": "We focus on three styles of self-explanations, namely attribution, redaction, and counterfactual, and evaluate their faithfulness primarily through the self-consistency check protocol (Madsen et al.,"
+  },
+  {
+   "entry": "doi2025investigating#8",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source's attribution check replaces the listed words with [REDACTED] and counts the explanation faithful only if the model can no longer classify the input (it must be allowed to answer 'unknown'); Doi et al. keep the [REDACTED] replacement but count any change of prediction.",
+   "source_evidence": "The model response is a list of important words, and the matching words in the paragraph are replaced with “[REDACTED]”. [...] Given a faithful explanation, it will be impossible for the model to perform the classification task (Samek et al., 2017; Hooker et al., 2019; Madsen et al., 2022a), assuming that the model understands the meaning of redaction/masking during classification.",
+   "citing_evidence": "If the explanation is faithful, the listed words should have a substantial impact on the prediction being explained. Faithfulness is therefore assessed by examining whether the prediction changes when the listed words are removed from the original input. Following Madsen et al. (2024), we create such redacted inputs by automatically replacing the listed input words with the “[REDACTED]” tokens rather than deleting them, in order to preserve the grammatical structure."
+  },
+  {
+   "entry": "doi2025investigating#9",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source's redaction explanation is the model's own [REDACTED] copy of the input, faithful only if the model then cannot classify it; Doi et al. keep the model-made redaction but count any prediction change as faithful.",
+   "source_evidence": "Instead of algorithmically replacing important words with “[REDACTED]”, we ask the model to perform the replacement directly. [...] Besides the different replacement mechanisms, the interpretability-faithfulness metric works the same. The explanation is faithful if the model can not classify the redacted paragraph.",
+   "citing_evidence": "Redaction In this style, the model directly generates a redacted version of the input in which the words it deems important for its prediction are replaced with “[REDACTED]”. [...] We evaluate faithfulness by checking whether the model’s prediction changes when it is given the redacted input sentence it produced."
+  },
+  {
+   "entry": "doi2025investigating#10",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source's counterfactual is the model's edit of the input toward the opposite label, faithful if re-evaluation gives that label; Doi et al. add editing-distance constraints set in the prompt (one word by default), which the source does not impose.",
+   "source_evidence": "Counterfactuals are explanations where the input is modified such that the model predicts the opposite label. [...] Because the goal is to produce the opposite label, we can re-evaluate the prediction with the counterfactual and check that this goal is satisfied. If satisfied, the counterfactual is faithful.",
+   "citing_evidence": "Counterfactual This style requires the model to edit the input sentence such that the resulting sentence changes the model’s original prediction. The model may add, remove, or replace input words, subject to editing-distance constraints specified in a prompt. To evaluate faithfulness, we feed the generated counterfactual sentences back into the model and test whether the predicted label changes accordingly."
+  },
+  {
+   "entry": "ferreira2026truthful#1",
+   "source": "madsen2024self",
+   "verdict": "partial",
+   "finding": "The source supports that LLM self-explanations are often unfaithful and can create unsupported confidence, but not this claim about reasoning chains: it tests only counterfactual, feature-attribution and redaction explanations and evaluates no chain-of-thought.",
+   "source_evidence": "However, convincing and wrong self-explanations can lead to unsupported confidence in LLMs, thus increasing risk. Therefore, it’s important to measure if self-explanations truly reflect the model’s behavior. [...] We provide interpretability-faithfulness results on 3 kinds of explanations: counterfactuals, importance measures, and redaction. [...] However, these are currently the only explanations for which self-consistently can be used to measure interpretability-faithfulness.",
+   "citing_evidence": "Reasoning chains output by LLMs (Kojima et al., 2022; Wei et al., 2022; Wang et al., 2023; Yao et al., 2023, i.a.) can be inspected as a self-explanation for its prediction. These often look plausible to human readers (Agarwal et al., 2024), but might be unfaithful in that they offer a misleading view of how the model decided (Lanham et al., 2023; Turpin et al., 2023; Agarwal et al., 2024; Madsen et al., 2024; Arcuschin et al., 2025, i.a.)."
+  },
+  {
+   "entry": "mayne2025llms#2",
+   "source": "madsen2024self",
+   "verdict": "supported",
+   "finding": "The source has the model generate its own counterfactual and checks it by re-evaluating the model in a new chat session, as Mayne et al. describe.",
+   "source_evidence": "Instead, we let the language model generate both the classification and the counterfactual explanation. [...] Note that when using an instruction-tuned LLM in a conversational setting, it’s important to perform the re-evaluation using a new chat session.",
+   "citing_evidence": "In contrast, self-generated counterfactual explanations occur when the LLM itself generates a candidate counterfactual to explain its own prediction Madsen et al. (2024a); Dehghanighobadi et al. (2025). Whether an SCE flips the LLM’s prediction can be tested by re-evaluating the LLM in a new context window."
+  },
+  {
+   "entry": "zeng2026evaluating#12",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "Zeng et al. take the source's self-consistency faithfulness checks into a self-modeling suite, although the source explicitly leaves self-modeling out of scope and studies faithfulness only.",
+   "source_evidence": "In principle, because the weights are the same, the explanation generation can access or simulate the classification behavior; a property known as self-model capabilities. [...] Because Kadavath et al. (2022) have already explored self-model capabilities, and it might not be necessary for faithful self-explanations, we limit the scope to faithfulness evaluation.",
+   "citing_evidence": "We introduce a benchmark that aggregates and unifies self-modeling tasks from prior work (Plunkett et al., 2025; Li et al., 2025; Madsen et al., 2024; Mayne et al., 2025; Dehghanighobadi et al., 2025)."
+  },
+  {
+   "entry": "zeng2026evaluating#18",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source's checks have the model redact or edit its own input and are scored by whether that input still gets classified; Zeng et al. map them onto a new format in which the model chooses which of three given perturbations most often flips its sampled answer.",
+   "source_evidence": "Feature attribution explanations list the necessary words for making a prediction, such that without these words a prediction can not be made. [...] A self-consistency check uses re-evaluation to check if the explanation is consistent with the model’s behavior.",
+   "citing_evidence": "Intervention-based scores that perturb or redact input concepts on classification benchmarks Matton et al. (2025); Madsen et al. (2024) match the self-report shape of Perturbation-Choice and Component-Attribution"
+  },
+  {
+   "entry": "zeng2026evaluating#19",
+   "source": "madsen2024self",
+   "verdict": "adapted",
+   "finding": "The source's feature-attribution check has the model list important words, which are then redacted; Zeng et al. instead ablate three fixed prompt components and ask the model to name the one whose removal most often flips its sampled answer.",
+   "source_evidence": "Feature attribution explanations list the necessary words for making a prediction, such that without these words a prediction can not be made. [...] The model response is a list of important words, and the matching words in the paragraph are replaced with “[REDACTED]”.",
+   "citing_evidence": "Intervention-based scores that perturb or redact input concepts on classification benchmarks Matton et al. (2025); Madsen et al. (2024) match the self-report shape of Perturbation-Choice and Component-Attribution"
+  },
+  {
+   "entry": "lewislim2026efficient#2",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "The source's faithfulness principle is that an explanation should help an observer predict the model's behaviour on related inputs, which Lewis-Lim et al. adopt as simulatability.",
+   "source_evidence": "A faithful explanation should help an observer predict how the model will behave on related inputs.",
+   "citing_evidence": "We use simulatability (Limpijankit et al., 2025; Mayne et al., 2026), which asks whether the CoT helps an observer predict the model’s behaviour on related inputs."
+  },
+  {
+   "entry": "lewislim2026efficient#3",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "NSG = (a_cot − a_no)/(1 − a_no), with a predictor shown the original question and answer and asked about a counterfactual with and without the explanation, is the source's Eq. 2 and protocol; the source also runs it on chain-of-thought traces (App. A.6).",
+   "source_evidence": "Baseline (without explanation): the predictor sees the original question, the reference model’s answer, and the counterfactual. [...] With explanation: the predictor sees the same information, plus the reference model’s explanation. [...] We therefore normalize by the maximum possible improvement, defining Normalized Simulatability Gain:",
+   "citing_evidence": "Faithfulness (NSG) is then calculated from the gain in predictor accuracy that the CoT provides over the no-CoT baseline. Formally, predictor accuracy and NSG are defined as, [...] $a=\\frac{1}{N}\\sum_{i=1}^{N}[\\hat{y}_{i}=y_{i}]\\qquad\\text{NSG}=\\frac{a_{\\text{cot}}-a_{\\text{no}}}{1-a_{\\text{no}}}$"
+  },
+  {
+   "entry": "lewislim2026efficient#4",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "The source builds counterfactuals from real dataset rows within a small Hamming distance of the original, not from synthetic edits, which is the definition Lewis-Lim et al. reuse on the same seven datasets.",
+   "source_evidence": "To ensure our evaluations scale to the complex logic of frontier models, we use counterfactuals from real data that capture more meaningful and natural perturbations. [...] We construct the counterfactual region $C(x)$ by identifying existing dataset questions semantically close to $x$ , quantifying closeness with Hamming distance: the number of dataset features that differ between two inputs.",
+   "citing_evidence": "For measuring faithfulness we use all seven datasets from Mayne et al. (2026): [...] The counterfactuals are similar real inputs from the same dataset rather than synthetic perturbations."
+  },
+  {
+   "entry": "lewislim2026efficient#5",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "The source states that an inconsistent reference model cannot be perfectly predicted and bounds achievable NSG with an oracle predictor that always guesses the model's most likely answer from repeated rollouts; the 10-sample count is Lewis-Lim et al.'s own setting.",
+   "source_evidence": "If a reference model gives inconsistent answers, it cannot be perfectly predicted, regardless of how faithful each self-explanation is at the instance level. To quantify this, we perform repeated rollouts of Qwen3-32B and gemma-3-27B-it to generate many answers to all counterfactual questions. We then consider the accuracy of a theoretical oracle predictor that has perfect knowledge of the model’s most likely response to each question, and always predicts it. This sets an upper bound on predictor accuracy, and thus the NSG a reference model can achieve given its current output behavior.",
+   "citing_evidence": "If a model answers the same question differently across samples, no predictor can guess its answer every time. To quantify this, we follow Mayne et al. (2026) and sample 10 answers per question from each model and score an oracle predictor that guesses its most likely answer, giving an upper bound on predictor accuracy and NSG."
+  },
+  {
+   "entry": "lewislim2026efficient#12",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "adapted",
+   "finding": "The oracle-predictor upper bound on NSG is the source's; the consistency score (share of 10 samples matching the modal answer) and the 'share from bound' decomposition are Lewis-Lim et al.'s additions, since the source reports only the bound and the share of unfaithfulness it explains.",
+   "source_evidence": "We then consider the accuracy of a theoretical oracle predictor that has perfect knowledge of the model’s most likely response to each question, and always predicts it. This sets an upper bound on predictor accuracy, and thus the NSG a reference model can achieve given its current output behavior. [...] Most unfaithfulness exists despite consistency in the reference model, with $5$ - $15\\%$ being caused by reference model inconsistency.",
+   "citing_evidence": "Consistency is the share of a model’s 10 samples per counterfactual that match its most common answer. The upper bound is the NSG an oracle predictor that always guesses this answer would reach."
+  },
+  {
+   "entry": "luo2026removal#6",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "Luo et al.'s NSG (with-explanation vs answer-only predictor accuracy on a related input, normalised by 1 − acc_without) is the source's Eq. 2 and baseline.",
+   "source_evidence": "This principle leads to a concrete test: suppose an observer sees a model’s answer to a question, both with and without its explanation, and is tasked with predicting the model’s output on a nearby counterfactual. [...] We therefore normalize by the maximum possible improvement, defining Normalized Simulatability Gain:",
+   "citing_evidence": "This metric measures if the model’s explanation in response to input $x$ helps an independent predictor forecast the model’s answer on a related input $x^{\\prime}$ . It compares the predictor’s accuracy when it is given the full model response with the explanation ( $\\mathrm{acc}_{\\text{with}}$ ) to its accuracy when it sees the model’s selected answer only ( $\\mathrm{acc}_{\\text{without}}$ )."
+  },
+  {
+   "entry": "pres2026selfctrl#3",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "The source's principle that a faithful explanation helps an observer predict behaviour on related inputs is the simulatability view Pres et al. adopt; the source frames it as faithfulness, they as explanation quality.",
+   "source_evidence": "A faithful explanation should help an observer predict how the model will behave on related inputs.",
+   "citing_evidence": "For this work, we adopt the simulatability view of explanation quality  (Hase and Bansal, 2020; Mayne et al., 2026). In this view, an explanation is useful if it helps an external simulator (e.g. a user or a piece of code) predict how the LM will behave on related inputs."
+  },
+  {
+   "entry": "pres2026selfctrl#5",
+   "source": "mayne2026positivecasefaithfulnessllm",
+   "verdict": "supported",
+   "finding": "Pres et al.'s Eq. 7 and its gloss (explanation-induced gain normalised by the maximum possible gain over the no-explanation baseline) are the source's NSG.",
+   "source_evidence": "Finally, when baseline accuracy is high, the ceiling for absolute improvement is correspondingly low. We therefore normalize by the maximum possible improvement, defining Normalized Simulatability Gain: [...] NSG is a new metric that measures the fraction of achievable improvement that explanations deliver.",
+   "citing_evidence": "We report Normalized Simulatability Gain (NSG) (Mayne et al., 2026), as shown in Eq 7, which measures the explanation-induced accuracy gain normalized by the maximum possible gain over the no-explanation baseline."
+  },
+  {
+   "entry": "kudo2024llms#5",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "The source intervenes on the reasoning chain (the mediator) with counterfactual chains, measures whether the answer changes, and concludes that LLMs do not reliably use their reasoning steps.",
+   "source_evidence": "Further, we also perform interventions on the mediator $R$ and measure their effect on $Y$ (indirect effect). [...] Finally, we find GPT- $4$ (Achiam et al., 2023) only changes its answer $30$ % of the time when conditioned on perturbed counterfactual reasoning chains.",
+   "citing_evidence": "Paul et al. (2024); Bentham et al. (2024) similarly evaluate the faithfulness of CoT to the final answer. They test the consistency between the final answer and the CoT by intervening on the CoT text. Specifically, they replace it with counterfactual content and then check whether the final answer changes. They report that CoT is not sufficiently faithful to the final answer."
+  },
+  {
+   "entry": "li2025better#7",
+   "source": "paul2024making",
+   "verdict": "renamed",
+   "finding": "The source runs a causal mediation analysis of CoT and answer, but the quantity it reads as faithfulness is the indirect effect of the reasoning chain (natural or controlled, NIE/CIE), with the direct effect (NDE/CDE) of the question beside it, not a 'treatment effect'.",
+   "source_evidence": "We measure two kinds of causal effects: natural and controlled for different types of LLMs. [...] Increasing the model size (7B to 70B) improves the indirect effect (makes them more faithful), indicating the importance of model size.",
+   "citing_evidence": "Some other works use causal median analysis on CoTs and answers, calculating the treatment effect to represent the faithfulness (Bao et al., 2024; Paul et al., 2024)."
+  },
+  {
+   "entry": "li2026when#3",
+   "source": "paul2024making",
+   "verdict": "adapted",
+   "finding": "The source measures the indirect effect of replacing the model's reasoning chain with a counterfactual one on answer accuracy; Li et al. fold this replacement test together with removal and shortening (from Lanham et al.) into a broader notion of 'trace use'.",
+   "source_evidence": "Indirect Effect (IE) measures how much an intervention $X$ changes $Y$ indirectly through $R$ . The indirect effect can be defined as IE = $\\mathbb{E}[Y_{00}-Y_{01}]$ . It is computed by setting $R$ to its value under the intervention $X$ while keeping everything else to its original value.",
+   "citing_evidence": "Trace use is the effect of the supplied trace on later answers: removing, shortening, or replacing it can change the answer and its accuracy (Lanham et al., 2023; Paul et al., 2024; Wang et al., 2026)."
+  },
+  {
+   "entry": "senatorov2026structural#2",
+   "source": "paul2024making",
+   "verdict": "other-claim",
+   "finding": "The source never describes reasoning traces as post-hoc rationalizations; it supplies the empirical finding (low indirect effects) that LLMs do not reliably use their intermediate reasoning steps, which is what the citation can support.",
+   "source_evidence": "In this paper, we perform a causal mediation analysis on twelve LLMs to examine how intermediate reasoning steps generated by the LLM influence the final outcome and find that LLMs do not reliably use their intermediate reasoning steps when generating an answer.",
+   "citing_evidence": "Reasoning traces may be post-hoc rationalizations rather than faithful accounts of model predictions (Jacovi and Goldberg, 2020; Holzinger et al., 2017; Lanham et al., 2023; Paul et al., 2024; Matton et al., 2025)."
+  },
+  {
+   "entry": "shen2026detecting#6",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "The source perturbs the generated reasoning chain (replacing it with a counterfactual chain) and reads a change in the answer as causal influence of the chain, an instance of Shen et al.'s operator Δ.",
+   "source_evidence": "Further, we also perform interventions on the mediator $R$ and measure their effect on $Y$ (indirect effect). [...] In Table 5, we report the controlled indirect effect that indicates how robustly models are able to change their answers when provided with controlled (generated by GPT-4) counterfactual reasoning chains.",
+   "citing_evidence": "Counterfactual-based methods assess CoT faithfulness by perturbing the generated reasoning trajectory and measuring whether the final answer changes. [...] These methods are widely used to probe whether a CoT causally contributes to the final prediction [25, 47, 45, 34, 49, 49]."
+  },
+  {
+   "entry": "somov2026breaking#18",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "The source edits the chain of thought (counterfactual reasoning chains) to test whether the answer depends on it; truncation, the other protocol listed, comes from the co-cited Lanham et al.",
+   "source_evidence": "Further, we also perform interventions on the mediator $R$ and measure their effect on $Y$ (indirect effect). [...] In this paper, we perform a causal mediation analysis on twelve LLMs to examine how intermediate reasoning steps generated by the LLM influence the final outcome and find that LLMs do not reliably use their intermediate reasoning steps when generating an answer.",
+   "citing_evidence": "Trace perturbation protocols edit or truncate chain-of-thought reasoning to test whether the final answer depends on the generated reasoning steps Lanham et al. (2023); Paul et al. (2024); Matton et al. (2025); Wu et al. (2025)."
+  },
+  {
+   "entry": "wang2026case#7",
+   "source": "paul2024making",
+   "verdict": "adapted",
+   "finding": "The source's indirect effect holds the question fixed and swaps in a counterfactual reasoning chain (the 'controlled' variant uses GPT-4 chains), scored as the accuracy difference Acc(Y00) − Acc(Y01); Wang et al. keep the intervention but score the share of answers that change, a different quantity whenever the original answer was wrong.",
+   "source_evidence": "It is computed by setting $R$ to its value under the intervention $X$ while keeping everything else to its original value. [...] We use the following formula to calculate the scores: $IE$ = Avg[ $\\text{Acc}(Y_{00})-\\text{Acc}(Y_{01})$ ], and $DE$ = Avg[ $\\text{Acc}(Y_{00})-\\text{Acc}(Y_{10})]$ where $X_{0}$ and $R_{0}$ original reasoning problem and reasoning chains. [...] Controlled Indirect Effect (CIE): for models with < $20$ B parameters, we evaluate the causal effect by providing reasoning chains generated by GPT-4.",
+   "citing_evidence": "CIE measures whether changing the CoT changes the final answer while keeping the question fixed. For each question $z_{i}$ and the generated CoT $x_{i}$ , we use DeepSeek-V3.2 to generate a counterfactual CoT $x_{i}^{\\prime}$ , with prompt templates provided in Appendix A.11."
+  },
+  {
+   "entry": "wang2026case#8",
+   "source": "paul2024making",
+   "verdict": "adapted",
+   "finding": "The source's direct effect intervenes on the question while holding the reasoning chain fixed, scored as the accuracy difference Acc(Y00) − Acc(Y10); Wang et al. keep the intervention but score the share of answers that change, and read lower values as more faithful.",
+   "source_evidence": "Direct Effect (DE) measures how much an intervention $X$ changes an outcome variable $Y$ directly, without passing through a hypothesized mediator $R$ . [...] It is computed by applying the intervention $X$ but holding $R$ fixed to its original value ( $R_{0}$ ). [...] We use the following formula to calculate the scores: $IE$ = Avg[ $\\text{Acc}(Y_{00})-\\text{Acc}(Y_{01})$ ], and $DE$ = Avg[ $\\text{Acc}(Y_{00})-\\text{Acc}(Y_{10})]$ where $X_{0}$ and $R_{0}$ original reasoning problem and reasoning chains.",
+   "citing_evidence": "CDE measures whether changing the question still changes the answer when the CoT is fixed."
+  },
+  {
+   "entry": "wang2026case#10",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "Wang et al.'s counterfactual-question prompt reproduces the source's Table 20 prompt nearly word for word, and the source likewise asks GPT-4 for alternative questions whose answer changes.",
+   "source_evidence": "System Prompt: You are a helpful assistant in generating counterfactual questions. [...] answer and your task is to generate a counterfactual question. [...] Prompt GPT-4 to generate alternative questions such that",
+   "citing_evidence": "You are a helpful assistant in generating counterfactual questions. We will provide you with a commonsense question, along with a correct answer and your task is to generate a counterfactual question that would yield a different answer."
+  },
+  {
+   "entry": "wang2026concept#17",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "The source applies causal mediation analysis with counterfactual interventions on the reasoning chain to test how intermediate steps influence the final answer.",
+   "source_evidence": "In this paper, we perform a causal mediation analysis on twelve LLMs to examine how intermediate reasoning steps generated by the LLM influence the final outcome and find that LLMs do not reliably use their intermediate reasoning steps when generating an answer. [...] Following Pearl (2001), we conduct counterfactual reasoning to measure the causal effect of a treatment variable on a response variable.",
+   "citing_evidence": "Paul et al. (2024) apply causal mediation and counterfactual reasoning-chain interventions to test whether intermediate CoT steps influence final answers."
+  },
+  {
+   "entry": "wang2026verbalising#18",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "The source measures how strongly reasoning traces causally affect the model's prediction through the indirect effect of the reasoning chain.",
+   "source_evidence": "We observe a large variation across tasks and models in how strongly reasoning traces causally affect the model’s prediction.",
+   "citing_evidence": "Paul et al. (2024) measure whether intermediate reasoning steps causally affect the prediction."
+  },
+  {
+   "entry": "zaman2025chainofthought#9",
+   "source": "paul2024making",
+   "verdict": "adapted",
+   "finding": "Zaman et al.'s NIE has the source's structure (input held fixed, mediator set to the chain produced under the treated input) but makes the hint the treatment and the hinted answer's probability the outcome, where the source intervenes on the question and scores answer accuracy.",
+   "source_evidence": "Indirect Effect (IE) measures how much an intervention $X$ changes $Y$ indirectly through $R$ . The indirect effect can be defined as IE = $\\mathbb{E}[Y_{00}-Y_{01}]$ . It is computed by setting $R$ to its value under the intervention $X$ while keeping everything else to its original value. [...] Natural Indirect Effect (NIE): for models that have emergent capabilities (> $100$ B parameters) of generating plausible reasoning chains, we measure the causal effect of $X$ on $Y$ that uses $R$ generated by the same model.",
+   "citing_evidence": "Next, we compute the natural indirect effect (NIE) of adding the hint, this time keeping the input fixed while substituting in the CoT induced by the hinted input:"
+  },
+  {
+   "entry": "zaman2025chainofthought#16",
+   "source": "paul2024making",
+   "verdict": "supported",
+   "finding": "The source applies causal mediation analysis to CoTs and predictions, intervening counterfactually on the reasoning chain (and, for the direct effect, on the question), as Zaman et al. say.",
+   "source_evidence": "Following Pearl (2001), we conduct counterfactual reasoning to measure the causal effect of a treatment variable on a response variable. We first perform targeted interventions on the input text $X$ and measure their effect on the reasoning outcome $Y$ by keeping $R$ fixed (direct effect). Further, we also perform interventions on the mediator $R$ and measure their effect on $Y$ (indirect effect).",
+   "citing_evidence": "Whereas Paul et al. (2024) similarly apply Causal Mediation Analysis to study the relationship between CoTs and predictions via counterfactual interventions on the CoT itself, we instead use it to quantify how much of the prediction change after adding a hint is mediated by the non-verbalizing CoT versus caused directly by the hint itself as shown in Figure 6."
+  },
+  {
+   "entry": "algaba2026reasoning#12",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "The source opens by stating that a generated reasoning chain need not reflect how the model arrives at its answer, which is the claim Algaba et al. cite it for ([28]).",
+   "source_evidence": "While Chain-of-Thought (CoT) prompting boosts Language Models’ (LM) performance on a gamut of complex reasoning tasks, the generated reasoning chain does not necessarily reflect how the model arrives at the answer (aka. faithfulness).",
+   "citing_evidence": "Prior work uses intermediate reasoning to improve or check answers [21, 22, 23, 24, 25], although written reasoning need not faithfully describe the computation that produced the answer [26, 27, 28, 29]."
+  },
+  {
+   "entry": "arcuschin2025chain#1",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "The source defines a faithful reasoning chain as one that accurately reflects how the model arrives at its answer, i.e. correspondence with the model's actual reasoning.",
+   "source_evidence": "In the context of CoT prompting, a faithful reasoning chain needs to accurately reflect how the model arrives at the final answer, whereas a plausible reasoning chain is one that looks reasonable and coherent to humans.",
+   "citing_evidence": "Faithfulness in this context refers to the extent to which the steps articulated in the reasoning chain correspond to the actual reasoning mechanisms employed by the model (Lyu et al., 2023; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chuang2026faithlm#6",
+   "source": "lyu2023faithful",
+   "verdict": "partial",
+   "finding": "The source supports CoT–answer mismatch as evidence of unfaithfulness, but not fidelity being defined by CoT–answer alignment: it defines faithfulness (which it also calls fidelity) as accurately reflecting how the model reaches the answer, and says the absence of any chain–answer inconsistency does not make a chain faithful.",
+   "source_evidence": "In interpretability, faithfulness (also called fidelity or reliability) means that an explanation should “accurately represent the reasoning process behind the model’s prediction”, which is a fundamental requirement of an explanation [...] In other cases, there is no known inconsistency between the reasoning chain and the answer, but this still does not imply that the reasoning chain is a faithful explanation, since the ground truth (how the model predicts the answer) is unknown.",
+   "citing_evidence": "where “good fidelity” in the series of work is typically defined by the alignment between the content of CoT and the final answer (Lyu et al., 2023; Radhakrishnan et al., 2023)."
+  },
+  {
+   "entry": "lanham2023measuring#15",
+   "source": "lyu2023faithful",
+   "verdict": "adapted",
+   "finding": "The source claims its executed-program design guarantees that the reasoning chain faithfully explains the answer (while conceding the translation step is opaque); Lanham et al. restate the guarantee as only ensuring the program is not post-hoc and call such methods 'more likely' to be faithful.",
+   "source_evidence": "We propose Faithful CoT, a reasoning framework involving two stages: Translation (Natural Language query $\\rightarrow$ symbolic reasoning chain) and Problem Solving (reasoning chain $\\rightarrow$ answer), using an LM and a deterministic solver respectively. This guarantees that the reasoning chain provides a faithful explanation of the final answer. [...] Currently, we guarantee that Problem Solving stage is faithful. However, the Translation stage is still opaque, meaning it is not self-interpretable how the LM generates the reasoning chain from the question.",
+   "citing_evidence": "Prior work has proposed methods to generate reasoning that are more likely to be faithful by construction, due to the way that the reasoning or final answer is produced. Lyu et al. (2023) generate a program in a domain-specific language and execute the program (e.g., using a Python interpreter) to produce the final answer; this process ensures that the generating program is not post-hoc but rather directly used to produce the final answer."
+  },
+  {
+   "entry": "li2025better#3",
+   "source": "lyu2023faithful",
+   "verdict": "partial",
+   "finding": "The source supports CoT–answer consistency (the answer following from the chain) as a faithfulness criterion, but not the correctness-mismatch rule: it treats an incorrect chain that reaches a correct answer as a plausibility failure and explicitly calls such an answer faithful.",
+   "source_evidence": "Standard CoT Wei et al. (2022) generates the reasoning chain in pure NL, which may often look plausible; nevertheless, the final answer does not need to causally follow from the reasoning chain, thus not guaranteeing faithfulness. [...] We then ask: when the answer is correct, how often is the reasoning chain truly correct? In other words, we want to evaluate the plausibility of the reasoning chains. [...] Though the final answer is correct and faithful to the LM generation, the reasoning chain contains wrong knowledge.",
+   "citing_evidence": "Following previous works (Bao et al., 2024; Lyu et al., 2023), we evaluate the faithfulness of CoT by measuring the consistency between the CoT and the answer. If an incorrect CoT induces a correct answer or a correct CoT induces a wrong answer, it is seen as an unfaithful CoT (see Figure 7 for example)."
+  },
+  {
+   "entry": "pan2023logiclm#1",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "The source shows standard CoT outputs whose answer does not follow from the generated reasoning chain and calls them unfaithful.",
+   "source_evidence": "In standard CoT, faithfulness is not guaranteed and even systematically violated Turpin et al. (2023), as the final answer does not necessarily follow from the generated reasoning chain. [...] Figure 1: An example of unfaithful output from CoT prompting Wei et al. (2022) on GSM8K. The answer (green) does not follow from the reasoning chain (blue).",
+   "citing_evidence": "Recent studies Golovneva et al. (2023); Ribeiro et al. (2023b); Lyu et al. (2023) found that LLMs occasionally make unfaithful reasoning, i.e., the derived conclusion does not follow the previously generated reasoning chain."
+  },
+  {
+   "entry": "parekh2026drop#4",
+   "source": "lyu2023faithful",
+   "verdict": "adapted",
+   "finding": "The source's faithfulness is accurately reflecting how the model reaches the answer, and its guarantee and failure examples rest on the answer following from the chain; Parekh et al. narrow this to 'logical faithfulness' (the stated reasoning entails the answer) and set it beside their temporal and causal notions.",
+   "source_evidence": "In the context of CoT prompting, a faithful reasoning chain needs to accurately reflect how the model arrives at the final answer, whereas a plausible reasoning chain is one that looks reasonable and coherent to humans. [...] Figure 1: An example of unfaithful output from CoT prompting Wei et al. (2022) on GSM8K. The answer (green) does not follow from the reasoning chain (blue).",
+   "citing_evidence": "Our temporal question, whether writing continues after commitment, complements logical faithfulness, whether the stated reasoning entails the answer [19]. [...] Logical faithfulness asks whether the written premises entail the answer."
+  },
+  {
+   "entry": "paul2024making#13",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "The source states that standard CoT may look plausible while the final answer need not causally follow from the reasoning chain.",
+   "source_evidence": "Standard CoT Wei et al. (2022) generates the reasoning chain in pure NL, which may often look plausible; nevertheless, the final answer does not need to causally follow from the reasoning chain, thus not guaranteeing faithfulness.",
+   "citing_evidence": "In standard CoT, LLMs can generate plausible explanations with the final answer not necessarily guaranteed to follow the reasoning chain or imply a causal relation between the reasoning chain and the model’s outcome (Lyu et al., 2023)."
+  },
+  {
+   "entry": "shen2026detecting#1",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "The source defines faithfulness as an explanation accurately representing the reasoning process behind the model's prediction ([31] in Shen et al.).",
+   "source_evidence": "In interpretability, faithfulness (also called fidelity or reliability) means that an explanation should “accurately represent the reasoning process behind the model’s prediction”, which is a fundamental requirement of an explanation",
+   "citing_evidence": "These concerns are related to the notion of faithfulness, which asks whether an explanation reflects the model’s internal decision process [39, 31]."
+  },
+  {
+   "entry": "tanneru2024hardness#5",
+   "source": "lyu2023faithful",
+   "verdict": "partial",
+   "finding": "The source supports a reasoning chain executed by a deterministic solver, but not the matching criterion: its final answer is the solver's output, so no separate LLM answer is compared, and faithfulness holds by construction (its solvers are Python, Datalog, a PDDL planner and a relation engine, not only math).",
+   "source_evidence": "In the Problem Solving stage, we call a deterministic external solver, e.g., a Python interpreter, a Datalog executor, or PDDL planner, depending on the task, to obtain the answer $A$ from the reasoning chain $C$ . [...] Using this approach, $C$ is guaranteed to be a faithful model explanation, since our final $A$ is the result of deterministically executing $C_{SL}$ .",
+   "citing_evidence": "For example, Lyu et al. [18] focused on generating a reasoning chain that could then be put through a deterministic math solver, and the resulting answer from this solver was compared to the answer produced by the LLM. The reasoning chain was considered to be faithful if the answers of the solver and the LLM matched."
+  },
+  {
+   "entry": "turpin2023language#20",
+   "source": "lyu2023faithful",
+   "verdict": "adapted",
+   "finding": "The source executes generated programs so that the answer follows from the reasoning and presents this as guaranteeing a faithful explanation, while conceding that the translation step is opaque; Turpin et al. reframe the same correspondence as necessary but not sufficient for faithfulness.",
+   "source_evidence": "To address this concern, we propose Faithful CoT, a reasoning framework where the answer is the result of deterministically executing the reasoning chain. [...] Note that we do not claim that the process of generating the reasoning chain itself, i.e., the Translation stage, is interpretable.",
+   "citing_evidence": "Lyu et al. (2023) propose generating programs in order to ensure that predictions follow from generated reasoning. This correspondence is a necessary condition for faithfulness, however, the program may not be a faithful explanation of the process that generated the program."
+  },
+  {
+   "entry": "walden2026reasoning#21",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "Walden et al. restate the source's two-stage Translation/Problem-Solving framework and its by-construction faithfulness guarantee.",
+   "source_evidence": "We propose Faithful CoT, a reasoning framework involving two stages: Translation (Natural Language query $\\rightarrow$ symbolic reasoning chain) and Problem Solving (reasoning chain $\\rightarrow$ answer), using an LM and a deterministic solver respectively. This guarantees that the reasoning chain provides a faithful explanation of the final answer.",
+   "citing_evidence": "To this end, Lyu et al. (2023) introduce Faithful CoT, a two-stage framework where an LLM translates a natural language query into a symbolic reasoning chain, from which a final answer is obtained with a deterministic solver. By construction, the CoT reasoning faithfully explains the output."
+  },
+  {
+   "entry": "yu2026outcome#2",
+   "source": "lyu2023faithful",
+   "verdict": "unsupported",
+   "finding": "Lyu et al. never perturb a reasoning trace and measure output changes: they make the answer causally depend on the chain by construction (a deterministic solver executes it), and their only removals are prompt ablations scored by accuracy.",
+   "source_evidence": "To address this concern, we propose Faithful CoT, a reasoning framework where the answer is the result of deterministically executing the reasoning chain. [...] We perform an ablation study where we remove different parts of the prompt and see how the performance changes.",
+   "citing_evidence": "Following a causal perspective (Pearl, 2000), Lyu et al. (2023) and Lanham et al. (2023) operationalize this notion by perturbing parts of a trace and measuring changes in the output."
+  },
+  {
+   "entry": "zhao2025necessary#2",
+   "source": "lyu2023faithful",
+   "verdict": "supported",
+   "finding": "The source contrasts faithfulness with plausibility, defined as how convincing an explanation is to humans, and warns that plausible unfaithful explanations invite over-trust.",
+   "source_evidence": "It should be contrasted with plausibility (a.k.a. persuasiveness or understandability), which refers to “how convincing an explanation is to humans” Herman (2019); Jacovi and Goldberg (2020).",
+   "citing_evidence": "the challenge increases because humans often conflate faithfulness and plausibility: how convincing it appears Jacovi and Goldberg (2020); Lyu et al. (2023); Wiegreffe et al. (2022)."
+  },
+  {
+   "entry": "emmons2025pragmatic#1",
+   "source": "agarwal2024faithfulness",
+   "verdict": "supported",
+   "finding": "The source's Definition 2 (an explanation is faithful if it accurately represents the reasoning of the underlying model) is the notion Emmons et al. cite.",
+   "source_evidence": "An explanation is considered faithful if it accurately represents the reasoning of the underlying model.",
+   "citing_evidence": "Much prior work on evaluating CoT has focused on faithfulness—whether the CoT accurately reflects the model’s true internal process (Turpin et al., 2023; Lanham et al., 2023; Chua and Evans, 2025; Chen et al., 2025; Agarwal et al., 2024)."
+  },
+  {
+   "entry": "ferreira2026truthful#1",
+   "source": "agarwal2024faithfulness",
+   "verdict": "supported",
+   "finding": "The source argues that CoT and other self-explanations are plausible to humans yet may not reflect the model's actual reasoning and can mislead.",
+   "source_evidence": "We argue that while LLMs are adept at generating plausible explanations – seemingly logical and coherent to human users – these explanations do not necessarily align with the reasoning processes of the LLMs, raising concerns about their faithfulness. [...] However, these plausible explanations might be misleading if they do not correspond to the LLM’s internal decision-making process.",
+   "citing_evidence": "These often look plausible to human readers (Agarwal et al., 2024), but might be unfaithful in that they offer a misleading view of how the model decided (Lanham et al., 2023; Turpin et al., 2023; Agarwal et al., 2024; Madsen et al., 2024; Arcuschin et al., 2025, i.a.)."
+  },
+  {
+   "entry": "ferreira2026truthful#10",
+   "source": "agarwal2024faithfulness",
+   "verdict": "adapted",
+   "finding": "The source defines faithfulness as accurately illustrating why and how the model reached its decision; Ferreira et al. turn this into a requirement that the CoT name the knowledge and generalizations that actually influence the answer.",
+   "source_evidence": "On the other hand, faithfulness represents the accuracy of explanations in illustrating the LLM’s actual reasoning, i.e., why and how the model reached a particular decision.",
+   "citing_evidence": "To be regarded as a reliable ‘window’ into the model’s decision making, a CoT needs to identify knowledge and generalizations that are available to the model and which do indeed exert influence over the generated answer (Lanham et al., 2023; Agarwal et al., 2024; Arcuschin et al., 2025, i.a.)."
+  },
+  {
+   "entry": "hoth2026atmanrl#5",
+   "source": "agarwal2024faithfulness",
+   "verdict": "supported",
+   "finding": "The source describes plausible ('seemingly logical and coherent') explanations that do not match the model's actual decision process, including a refusal explained by the word 'napalm' that actually came from heuristic filters, i.e. the right behaviour reached by a shortcut the stated reason hides.",
+   "source_evidence": "We argue that while LLMs are adept at generating plausible explanations – seemingly logical and coherent to human users – these explanations do not necessarily align with the reasoning processes of the LLMs, raising concerns about their faithfulness. [...] However, from the second example, we see that the model obliges and generates harmful content despite the prompt having the word napalm, suggesting that the model wasn’t actually basing its response on the chemical and was using some heuristic hand-designed filters to stop its responses.",
+   "citing_evidence": "An unfaithful reasoning trace may appear plausible and logically coherent while the model reaches the correct answer through shortcuts that bypass the stated reasoning (Agarwal et al., 2024)."
+  },
+  {
+   "entry": "shen2026detecting#10",
+   "source": "agarwal2024faithfulness",
+   "verdict": "supported",
+   "finding": "The source warns that plausible but unfaithful explanations create misplaced trust and security concerns because they hide how the model actually reasons ([1] in Shen et al.).",
+   "source_evidence": "Security Concerns: As discussed above, a plausible explanation appeals to human intuition and understanding and consequently strengthens user trust in LLMs. However, this trust is misplaced if the explanation fails to provide meaningful insights and transparency into how the model actually reasons, leading to security concerns.",
+   "citing_evidence": "An unfaithful explanation may be coherent and persuasive while providing misleading accounts of model behavior, limiting its usefulness for understanding or auditing model behavior and potentially leading to safety concerns [40, 1]."
+  },
+  {
+   "entry": "tanneru2024hardness#1",
+   "source": "agarwal2024faithfulness",
+   "verdict": "supported",
+   "finding": "The source's Definition 2 is the formal definition Tanneru et al. restate ([2]; Tanneru is a co-author).",
+   "source_evidence": "An explanation is considered faithful if it accurately represents the reasoning of the underlying model.",
+   "citing_evidence": "While faithfulness is formally defined as how well an explanation accurately reflects the reasoning process of the underlying LLM, operationalizing this definition in the context of LLMs is non-trivial"
+  },
+  {
+   "entry": "wang2026concept#1",
+   "source": "agarwal2024faithfulness",
+   "verdict": "adapted",
+   "finding": "The source's Definition 2 requires an explanation to accurately represent the model's reasoning; Wang et al. add 'or contributes to', admitting a causal-contribution reading the source does not state, and add the contrast with post-hoc rationalization.",
+   "source_evidence": "An explanation is considered faithful if it accurately represents the reasoning of the underlying model.",
+   "citing_evidence": "This apparent transparency, however, hinges on CoT faithfulness, i.e., the degree to which it accurately represents or contributes to the underlying reasoning of the model, rather than a plausible post-hoc rationalization (Jacovi and Goldberg, 2020; Agarwal et al., 2024)."
+  },
+  {
+   "entry": "zeng2026evaluating#1",
+   "source": "agarwal2024faithfulness",
+   "verdict": "partial",
+   "finding": "The source supports the notion (self-explanations should faithfully reflect the model's reasoning) but not the empirical claim: it is a position paper that measures nothing, giving only illustrative GPT-3.5 examples and calling for faithfulness metrics, with no findings across model families or explanation styles.",
+   "source_evidence": "Here, we review self-explanations generated by LLMs and some key connections between their plausibility and faithfulness properties. [...] Figure 5: Some examples of ‘plausible yet unfaithful explanations’ generated using the Gpt-3.5 large language model. [...] Looking forward, we call on the community to put their collective efforts on two fronts: i) developing reliable metrics to characterize the faithfulness of explanations and ii) pioneering novel strategies to generate more faithful SEs.",
+   "citing_evidence": "A separate line measures whether model self-explanations faithfully reflect the mechanism that produced the answer, with mixed-to-negative findings across model families and explanation styles Agarwal et al. (2024); Siegel et al. (2025); Randl et al. (2025); Zou et al. (2024)"
+  }
+ ]
+}

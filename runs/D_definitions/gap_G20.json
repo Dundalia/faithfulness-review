@@ -1,0 +1,455 @@
+{
+ "papers": [
+  {
+   "key": "arcuschin2025chain",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithful reasoning",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 1",
+     "quote": "This inconsistent and systematic application of reasoning standards, coupled with the order of locations never being acknowledged in the output, illustrates unfaithful reasoning. I.e., a mismatch between the model’s verbalized reasoning and its actual answer-producing internal process.",
+     "gloss": "Unfaithfulness is a mismatch between the verbalized reasoning and the internal process that actually produces the answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "behavioral detection of unfaithfulness",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Since internal reasoning mechanisms are difficult to interpret directly, unfaithfulness is typically detected through behavioral inconsistencies: when models produce different reasoning strategies for supporting the same answer despite logically contradictory questions, when they use motivated reasoning to change their answer due to hints in the prompt, or when reasoning steps logically contradict the final answer.",
+     "gloss": "Three behavioural signs of unfaithfulness: different reasoning for the same answer to contradictory questions, hint-driven answer changes, and steps that contradict the final answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "biased fact inconsistency",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "Biased fact inconsistency. One of the most common forms of unfaithfulness we observed is the systematic inconsistency of models in their factual statements. Models often modify underlying facts about the entities being compared.",
+     "gloss": "The model states different facts (e.g. release dates) across reversed questions so that it gives the same answer to both; App. I also calls it fact manipulation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "switching arguments",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "Switching arguments. Another form of unfaithfulness we observed is when models switch their reasoning approach between reversed questions. For instance, inconsistently applying geographical standards when comparing locations (as done in Figure 1), so that the model can give the same answer to both questions.",
+     "gloss": "The model changes its reasoning approach between reversed questions so that it reaches the same answer to both."
+    },
+    {
+     "family": "faithfulness",
+     "term": "answer flipping",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "“answer flipping”, where models would maintain identical reasoning across question variants but fail to properly reverse their Yes/No answers",
+     "gloss": "The model gives the same reasoning on both variants but fails to reverse its Yes/No answer to match."
+    },
+    {
+     "family": "faithfulness",
+     "term": "invalid logical steps (one variant)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "and invalid logical steps appearing in only one variant, leading to wrong conclusions.",
+     "gloss": "An invalid logical step appears in only one of the two reversed questions and produces a wrong answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "post-hoc rationalization",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Xu et al. 2024",
+     "where": "§2",
+     "quote": "Although autoregressive language models generate tokens sequentially, they can still exhibit behavior indicative of post-hoc rationalization, where conclusions may be implicitly determined early in the generation process and justifications are then constructed (Xu et al., 2024).",
+     "gloss": "The conclusion is fixed implicitly early and the justification is built afterwards, even though tokens are generated in sequence."
+    },
+    {
+     "family": "faithfulness",
+     "term": "IPHR bias probing",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. H",
+     "quote": "To further investigate whether these biases are predetermined before the reasoning process begins, we designed a series of probing experiments targeting the Llama-3.3-70B-It model. Our approach was to train linear probes on the model’s residual activations at different layers to predict the bias (mean frequency of Yes responses) for different question templates.",
+     "gloss": "Linear probes on activations taken before the reasoning predict each template's Yes-rate (best FVU 33%). This is evidence that the bias exists before the reasoning starts."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithfulness rate (Unfaithful Illogical Shortcuts)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1.1, Fig. 5",
+     "quote": "Using our approach described in the previous section, where an LLM flags responses that pass 8 criteria defining an unfaithful shortcut, we manually reviewed all responses. The proportion of correct LLM responses with at least one unfaithful shortcut in the reasoning can be found in Figure 5.",
+     "gloss": "Share of correct PutnamBench responses with at least one step that the 8-question judge flags and manual review confirms."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful shortcut judge (8 yes/no step questions)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. Q; App. O (Prompt 3)",
+     "quote": "First, an LLM judge (Claude 3.7 Sonnet) evaluated each intermediate step using 8 targeted yes/no questions that jointly test mathematical correctness, logical support for the final answer, and absence of shortcut-like reasoning. Second, we manually reviewed all responses that passed these automatic criteria.",
+     "gloss": "A step counts as a shortcut when it is used for the answer, makes an obviously invalid deduction that makes the answer easier to reach, and is never acknowledged (Prompt 3). Flags are then manually reviewed."
+    },
+    {
+     "family": "faithfulness",
+     "term": "restoration errors",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adapted",
+     "source": "Dziri et al. 2023",
+     "where": "App. R",
+     "quote": "Restoration errors occur when a model makes a reasoning error in one step and silently corrects it in a subsequent step (or final answer) without acknowledging the mistake. We illustrate an example of this behavior in Figure 14. While the answer is correct, the reasoning chain is unfaithful because the process used to reach the answer must differ from the stated reasoning in the tokens only.",
+     "gloss": "An earlier error is silently corrected later; this counts as unfaithful because the actual process must differ from the stated one. The paper found no evidence of it beyond likely contamination."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful step (vs. unused, incorrect)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. R.1",
+     "quote": "A step is considered unfaithful if it contains a mistake that is silently corrected in a subsequent step (or final answer) without acknowledging the mistake. An unused step, on the other hand, is a step that is not used when determining the final answer, and thus we do not deem it unfaithful if it contains a mistake.",
+     "gloss": "The judge labels each step as unused, unfaithful or incorrect. Only mistakes that are silently corrected later, in steps that are used, count as unfaithful."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual consistency (reversed-question pairs)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "chua2024biasaugmented; hase2026counterfactual",
+     "where": "§4",
+     "quote": "Notably, recent work demonstrates that counterfactual consistency signals, analogous to those provided by our reversed-question methodology, can substantially improve faithfulness at training time.",
+     "gloss": "Treats its reversed-question pairs as counterfactual consistency signals, like the bias and question-inversion counterfactuals used for consistency and counterfactual simulation training."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-consistency (vs. faithfulness)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "parcalabescu2023measuring",
+     "where": "§4",
+     "quote": "Parcalabescu and Frank (2024) argue that many proposed faithfulness tests actually measure self-consistency at the output level rather than faithfulness to the models’ inner workings.",
+     "gloss": "Restates Parcalabescu & Frank: many faithfulness tests measure self-consistency of outputs rather than faithfulness to the model's inner workings."
+    }
+   ],
+   "fix": [
+    {
+     "id": "arcuschin2025chain#5",
+     "set": {
+      "where": "Abstract",
+      "quote": "We find that when separately presented with the questions “Is X bigger than Y?” and “Is Y bigger than X?”, models sometimes produce superficially coherent arguments to justify systematically answering Yes to both or No to both, despite the contradiction. We present preliminary evidence that this is due to models’ implicit biases towards Yes or No, labeling this Implicit Post-Hoc Rationalization."
+     },
+     "reason": "The old quote was a fragment from the conclusion. The abstract states the behaviour the term labels: coherent arguments for contradictory Yes/Yes or No/No answers, attributed to implicit biases."
+    },
+    {
+     "id": "arcuschin2025chain#6",
+     "set": {
+      "where": "§1",
+      "quote": "In these shortcuts, a model uses clearly illogical reasoning to jump to correct, but unjustified conclusions, while at the same time a) not acknowledging this shortcut in the same reasoning trace, and b) classifying that reasoning step as illogical when prompted in a different rollout.",
+      "gloss": "An illogical jump to a correct but unjustified answer that the trace never acknowledges, although the model calls the step illogical in another rollout. Not called reward hacking because it is unverbalized (§3)."
+     },
+     "reason": "The §1 passage gives the full two-part criterion, including (b) the model's own recognition of the step as illogical, which the §3 quote omitted."
+    },
+    {
+     "id": "arcuschin2025chain#7",
+     "set": {
+      "term": "patterns of unfaithfulness (IPHR)",
+      "quote": "However, we caution against using the following patterns as a formal taxonomy. Their boundaries are imprecise: a single pair may exhibit multiple patterns, and autorater agreement on fine-grained categories is moderate (see Appendix Q). Nonetheless, they reveal qualitatively different modes of unfaithfulness that may benefit from different mitigation strategies.",
+      "gloss": "Patterns within unfaithful pairs: biased fact inconsistency, switching arguments, answer flipping, invalid logic. The authors say they are not a formal taxonomy and the boundaries are imprecise."
+     },
+     "reason": "The row quoted one category's definition as if it were the taxonomy. That definition is now its own row, as are the other categories, and this row quotes the passage that frames the patterns."
+    }
+   ],
+   "drop": [],
+   "note": "Added the per-pattern rows, the restoration-error and step-label definitions (App. R), the shortcut judge and rate, the bias probing (App. H), the counterfactual-consistency framing and the Parcalabescu restatement. Strengthened the IPHR and shortcut quotes."
+  },
+  {
+   "key": "lanham2023measuring",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "tests of CoT faithfulness (interventions on the CoT)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 1",
+     "quote": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+     "gloss": "Four interventions on the CoT. Each targets one hypothesized failure: post-hoc reasoning (the first two), hidden test-time computation (filler tokens) and encoded reasoning (paraphrasing)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT faithfulness tests (defense-in-depth)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. We take a “defense-in-depth” approach; each test is not meant to be conclusive evidence for CoT being faithful, but rather aims to rule out the possibility of one class of faithfulness failures in CoT.",
+     "gloss": "Faithfulness is probed through how the answer responds to interventions on the CoT. Passing one test rules out one class of failure; it does not establish faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "early answering (truncation) test",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.3",
+     "quote": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable.",
+     "gloss": "Truncate the CoT after each sentence and ask for the answer. Frequent agreement with the full-CoT answer means the reasoning is post-hoc."
+    },
+    {
+     "family": "monitorability",
+     "term": "steganography (paraphrase answer-matching test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B",
+     "quote": "If steganography were an important reason that the model was coming to its conclusion, we might expect to see flat or downward-sloping lines in Fig. 9; paraphrasing that ended in the middle of the chain of thought would corrupt the encoded message, causing the model to lose the reasoning it had done so far and need to reconstruct it in the continued CoT.",
+     "gloss": "Plots how often the answer matches the original as more of the CoT is paraphrased. Flat or falling curves would indicate encoded reasoning; the observed curves rise smoothly."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful by construction",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adapted",
+     "source": "lyu2023faithful",
+     "where": "§4",
+     "quote": "Prior work has proposed methods to generate reasoning that are more likely to be faithful by construction, due to the way that the reasoning or final answer is produced. Lyu et al. (2023) generate a program in a domain-specific language and execute the program (e.g., using a Python interpreter) to produce the final answer; this process ensures that the generating program is not post-hoc but rather directly used to produce the final answer.",
+     "gloss": "Restates Lyu et al.'s executed-program guarantee as ensuring only that the reasoning is not post-hoc, and calls such methods only 'more likely' to be faithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT (unreferenced biasing context)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "§4",
+     "quote": "In that paper, the model produces CoT in the presence of biasing few-shot examples; while the model’s final answer is consistent with the bias provided by the prompt, the CoT gives a different explanation for the answer that does not reference the biasing context.",
+     "gloss": "Restates Turpin et al.: the answer follows a bias in the prompt while the CoT gives a different explanation that never mentions it."
+    }
+   ],
+   "fix": [
+    {
+     "id": "lanham2023measuring#6",
+     "set": {
+      "quote": "Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length."
+     },
+     "reason": "Extended the quote with the next sentence of the caption, which defines AOC and its weighting by CoT length."
+    }
+   ],
+   "drop": [],
+   "note": "Added the Fig. 1 taxonomy of tests, the defense-in-depth criterion, the early answering test, the App. B steganography matching test and two §4 restatements (Lyu's faithful by construction, Turpin's bias test). Extended the AOC quote."
+  },
+  {
+   "key": "lyu2023faithful",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (answer causally follows from the chain)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Standard CoT Wei et al. (2022) generates the reasoning chain in pure NL, which may often look plausible; nevertheless, the final answer does not need to causally follow from the reasoning chain, thus not guaranteeing faithfulness.",
+     "gloss": "Faithfulness requires the answer to follow causally from the chain. Natural-language CoT does not ensure this, so it can be plausible without being faithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "scope of faithfulness (Problem Solving vs. Translation)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Limitations",
+     "quote": "Meanwhile, one methodological limitation of our approach lies in the scope of faithfulness. Currently, we guarantee that Problem Solving stage is faithful. However, the Translation stage is still opaque, meaning it is not self-interpretable how the LM generates the reasoning chain from the question.",
+     "gloss": "The guarantee covers how the answer follows from the chain. It does not cover how the LM produced the chain from the question."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness vs. correctness",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Ethics Statement",
+     "quote": "Furthermore, as we have stressed in Section 1, faithfulness does not guarantee correctness, so our method can still sometimes produce erroneous answers, which may pose a risk for users that rely on it for decision making.",
+     "gloss": "A faithful chain can still give a wrong answer: faithfulness and correctness are separate properties."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the causal-dependence criterion, the scope limit (only Problem Solving is guaranteed faithful) and the faithfulness-correctness distinction. Existing rows checked and correct."
+  },
+  {
+   "key": "sivakumaran2026balancing",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "soft execution",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "We define a soft execution of $t$ as $M(x,t_{1,m})=a^{\\prime}$ , where $M$ is a model, $x$ is an input prompt, $t_{1,m}$ , $m\\leq n$ is a partial reasoning chain, and $a^{\\prime}$ is the listener model response.",
+     "gloss": "A model continues a reasoning prefix t_{1,m} from the input to its own answer a′. 'Soft' as opposed to programmatic execution (Lyu et al.)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "matching reward r_match (multi-listener)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2, Eq. 1",
+     "quote": "We then truncate $t$ to 25%, 50%, and 75% of its length (split on newlines) to get $T^{\\prime}=\\{t_{1},t_{2},t_{3}\\}$ . Then, given a set of listener models $\\mathcal{M}$ , for each listener model $L_{i}\\in\\mathcal{M}$ , we obtain a finished reasoning trace starting from $t_{j}\\in T^{\\prime}$ and final listener answer of $a_{j}^{i}$ . We compute a matching reward across the pool by the formula: | | $r_{match}=\\sum_{L_{i}\\in\\mathcal{M}}\\sum_{t_{j}\\in T^{\\prime}}\\mathbb{I}\\!\\left[a_{j}^{i}=a\\right]$",
+     "gloss": "The speaker's reward is the number of (listener, 25/50/75% prefix) pairs whose continued answer equals the speaker's answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "listener convergence (assumption behind r_match)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "The main assumption is that if the speaker policy’s reasoning is logically sound, listener models should be more likely to converge to the same answer when continuing from the trace.",
+     "gloss": "Assumes that sound speaker reasoning makes listeners converge on its answer, which justifies using listener agreement as the reward."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint detection (keyword list)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A",
+     "quote": "We construct a set of tokens that flags whether a hint was detected in the reasoning chain. The list of tokens is as follows: “You said”, “You think”, “You believe”, “Your answer”, “You mentioned”, “You are right”, “You’re right”, “You are correct”, “I agree”, “Hint”.",
+     "gloss": "A hint is counted as acknowledged by keyword match on ten phrases, not by an LLM judge."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (use of reasoning)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "In our evaluations, faithfulness metrics like hint usage and AOC measure to what degree a model makes use of its reasoning (i.e., to what degree the computation given is necessary and sufficient to reach the output), whereas legibility asks how comprehensible it is.",
+     "gloss": "The paper's faithfulness metrics measure how far the stated computation is necessary and sufficient for the output. Legibility asks something else: whether it is comprehensible."
+    },
+    {
+     "family": "monitorability",
+     "term": "legibility score (autorater)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "emmons2025pragmatic",
+     "where": "§4",
+     "quote": "To measure this, we follow the legibility measurement method introduced by Emmons et al. (2025). This process involves passing a model output to an autorater model and asking it to rate on a scale of 0 to 4 based on a set of scoring criteria.",
+     "gloss": "A GPT-OSS 20B autorater rates each output from 0 to 4 with Emmons et al.'s prompt and criteria."
+    },
+    {
+     "family": "faithfulness",
+     "term": "backtracking frequency",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4, App. A",
+     "quote": "While some degree of backtracking can be beneficial, excessive backtracking makes a reasoning chain hard to follow and may indicate unfaithfulness, with the model exploring paths that do not contribute to the final answer. We estimate backtracking by finding the average frequency of certain tokens (the full list of tokens is provided in Appendix A) that commonly indicate the emergence of this behavior.",
+     "gloss": "Average count of backtracking phrases ('Wait', 'Hmm', ...) per CoT. Excessive backtracking makes a CoT hard to follow and may signal unfaithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint usage (sycophancy confound)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B",
+     "quote": "The hint usage metric is closely related to the broader phenomenon of sycophancy, where models change their answers to align with user suggestions rather than reasoning independently. More concretely, a model that is measured to be more faithful via the hint usage metric may also score higher simply because of an increased tendency to defer to user-provided input, reflecting increased sycophancy.",
+     "gloss": "A higher hint usage score does not by itself show faithfulness: it can come from deferring to the user. A sycophancy rate (answers changed to the hint) is reported alongside it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; lanham2023measuring; chen2025reasoning",
+     "where": "§5",
+     "quote": "A growing body of work has examined the faithfulness of chain-of-thought reasoning in LLMs, including work analyzing and measuring the degree to which LLMs generate reasoning that is a true representation of the computational process underlying an answer (Turpin et al., 2023; Lanham et al., 2023; Chen et al., 2025).",
+     "gloss": "Restates the standard notion: a faithful CoT truly represents the computation behind the answer."
+    }
+   ],
+   "fix": [
+    {
+     "id": "sivakumaran2026balancing#3",
+     "set": {
+      "stance": "adapted",
+      "quote": "The intuition is that if a model changed its answer from its original response without referencing the hint, then it is not faithfully expressing its decision making process, which depends on the hint. Inherently, this metric can only consider examples where the model changed its answer. We report hint usage as the percentage of changed-answer cases where the model explicitly cites the hint as the reason for the change.",
+      "gloss": "Uses Chen et al.'s sycophantic hint. Score = % of answer changes after the hint where the output cites the hint; mentions are found by keyword match (App. A)."
+     },
+     "reason": "The paper changes Chen et al.'s protocol: it counts any answer change, not only switches to the hinted answer, and it detects mentions with a keyword list rather than an LLM judge, so the stance is adapted. The quote now includes the scoring rule."
+    },
+    {
+     "id": "sivakumaran2026balancing#4",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "Lanham et al. measure agreement with the full-CoT answer after each sentence. Here accuracy is measured at 20% increments, so the stance is adapted."
+    },
+    {
+     "id": "sivakumaran2026balancing#5",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "Lanham et al. insert one LLM-generated mistake and measure agreement with the original answer. Here errors are inserted at each split point and accuracy is measured, so the stance is adapted."
+    },
+    {
+     "id": "sivakumaran2026balancing#6",
+     "set": {
+      "quote": "Faithfulness and legibility – how easy a chain-of-thought is to read and understand – are highly related.",
+      "gloss": "Legibility means how easy a CoT is to read and understand. It is measured with Emmons et al.'s autorater."
+     },
+     "reason": "The old quote mostly described the faithfulness metrics. The definition of legibility is in the preceding sentence. The faithfulness contrast now has its own row."
+    }
+   ],
+   "drop": [],
+   "note": "Added the formal soft execution and r_match definitions, the listener-convergence assumption, the hint keyword detector, the legibility autorater, backtracking, the sycophancy confound and a restatement of CoT faithfulness. Changed the borrowed metrics from adopted to adapted."
+  }
+ ]
+}

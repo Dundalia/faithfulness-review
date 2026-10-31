@@ -1,0 +1,540 @@
+{
+ "papers": [
+  {
+   "key": "anon2026generating",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "shortcut tendency",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Kim & Lee 2026",
+     "where": "§2.1",
+     "quote": "Causal Redundancy of Reasoning via Disruption (CORD) defines shortcut tendency as the CoT’s causal redundancy with respect to the answer and combines two disruptions to reduce the ambiguity of a single-axis test (Kim & Lee, 2026).",
+     "gloss": "Kim & Lee's notion restated: a CoT's shortcut tendency is its causal redundancy for the answer, measured by combining two disruptions instead of one."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CORD disruption axes (A: answer retention; B: premature recovery)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "Kim & Lee 2026",
+     "where": "§3.1",
+     "quote": "The A-axis asks whether the original answer survives corruption of the CoT suffix when the question remains visible. The B-axis asks how early that answer can be recovered from a CoT prefix when the question is masked. A single disruption cannot readily distinguish bypass paths through information retained in the question or the CoT.",
+     "gloss": "Two bypass paths: the original answer survives a corrupted CoT suffix with the question visible (A), or is recovered from an early CoT prefix with the question masked (B)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "premature answer recovery (B-axis)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1; §6.1",
+     "quote": "Positions 80 and 100 are excluded from B-axis suppression because a late prefix may already suffice to recover the answer legitimately.",
+     "gloss": "Recovering the original answer from a question-masked CoT prefix counts as premature (recovery from insufficient reasoning) only for prefixes of 0-60%; recovery from late prefixes may be legitimate."
+    },
+    {
+     "family": "faithfulness",
+     "term": "SR (verifier-based text sufficiency)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "yu2026outcome",
+     "where": "App. A.2.2; Table 5",
+     "quote": "Rather than intervening on the policy’s answer behavior, SR uses an external verifier to assess whether the generated reasoning text explicitly contains enough information to determine the answer.",
+     "gloss": "SR=1 if gpt-4o-mini returns valid, equivalent answers from the answer-stripped CoT both with and without the question; measures text sufficiency, distinct from answer reliance."
+    },
+    {
+     "family": "faithfulness",
+     "term": "matched ΔCORD (policy-level change in causal redundancy)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2; App. A.3, Eq. 15",
+     "quote": "Matched ∆CORD averages itemwise policy differences only where both policies answer correctly and both measurements are valid. It therefore measures redundancy changes among questions both policies solve, while ∆acc captures changes in the fraction solved.",
+     "gloss": "Mean per-item CORD difference between two policies over items both answer correctly with valid measurements; negative values mean lower redundancy, i.e. more reliance on the CoT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "measures of CoT faithfulness and causal reliance (behavioral vs activation-based)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "Related measures take two broad approaches. Behavioral measures truncate, corrupt, or paraphrase the CoT and measure changes in the answer (Lanham et al., 2023; Aravindan & Kejriwal, 2026).",
+     "gloss": "Behavioral measures disrupt the CoT and watch the answer; activation-based measures instead intervene on internal representations, e.g. patching hidden states (next paragraph)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "anon2026generating#3",
+     "set": {
+      "kind": "formal",
+      "where": "§3.1, Eq. 1; App. A.2.1, Eqs. 10-12",
+      "quote": "Let a(p; x) and b(p; x) indicate whether the original answer is produced under the A- and B-axis interventions, respectively. If p∗ (x) = min({p ∈ PB : b(p; x) = 1} ∪ {100}) is the first B-axis recovery position, then ∑︂ ā(x) = |PA |−1 a(p; x), b̄(x) = 1 − p∗ (x)/100, CORD(x) = H(ā(x), b̄(x)). (1) p∈PA",
+      "gloss": "ā: share of suffix-corruption points where the original answer survives (question visible); b̄ = 1 − earliest question-masked prefix recovering it; CORD = harmonic mean. Higher = more redundant."
+     },
+     "reason": "Formal definition: quote now carries Eq. 1 instead of the prose summary (the axis prose moves to a new taxonomy row)."
+    },
+    {
+     "id": "anon2026generating#5",
+     "set": {
+      "kind": "formal",
+      "stance": "adapted",
+      "quote": "CIR measures how CoT truncation changes the groundtruth answer probability relative to the full-CoT context, with the question left intact (Yu et al., 2026). Higher values indicate greater sensitivity to missing reasoning. Writing rp = pθ (y ∗ | x, m≤p ) and r100 = pθ (y ∗ | x, m) for the correct-answer probabilities under the prefix and full CoT, respectively, gives ∑︂ JS(Ber(rp ) ∥ Ber(r100 )). (2) CIR(x) = |PCIR |−1 p∈PCIR",
+      "gloss": "CIR = mean over nine prefixes (10-90%) of JS(Ber(r_p)||Ber(r_100)), r_p = p(y*|x, m≤p); uses Yu et al.'s coarse reward-time grid, not their token-level definition."
+     },
+     "reason": "Quote now includes Eq. 2; stance adapted because the paper evaluates with the coarse percentile approximation rather than Yu et al.'s token-level definition."
+    },
+    {
+     "id": "anon2026generating#6",
+     "set": {
+      "quote": "For a triple (xi , mi , yi ) and v ∈ {A, B}, let p denote the percentage of the CoT retained before suffix corruption (A) or supplied as a prefix (B). The intervention contexts and token-normalized answer score are ∑︂|yi | B v −1 hA log pθ (yi,j | hvi,p , yi,<j ). (5) i,p := (xi , m̃i,p ), hi,p := (xi,∅ , mi,≤p ), sθ,i,p := |yi | j=1"
+     },
+     "reason": "Formal row quoted only the lead-in; quote now includes the intervention contexts and answer score of Eq. 5."
+    },
+    {
+     "id": "anon2026generating#7",
+     "set": {
+      "kind": "formal",
+      "where": "§3.1; App. A.2.3, Eq. 14; App. E.1",
+      "quote": "Let ℓclean (x) be the gold answer’s token-averaged log-likelihood without patching and ℓS (x) the corresponding score after patching span S. We measure ⃓ ⃓ |∆S (x)| := ⃓ℓclean (x) − ℓS (x)⃓, S ∈ {P, C}. (14) A decrease in mean |∆P | together with an increase in mean |∆C | indicates smaller answer-score changes under question substitution and larger changes under CoT substitution.",
+      "gloss": "Absolute change in gold-answer log-likelihood when the question (P) or whole CoT (C) is replaced by a donor span; measures sensitivity to each content source, not where computation happens."
+     },
+     "reason": "Quote now carries the defining Eq. 14 and its reading instead of the §3.1 motivation sentence."
+    }
+   ],
+   "drop": [],
+   "note": "Added Kim & Lee's shortcut tendency, CORD axes, premature-recovery criterion, SR, matched ΔCORD and the measure taxonomy; formal quotes for CORD, CIR, intervention contexts and patching now carry their equations."
+  },
+  {
+   "key": "jiao2026tandem",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "distributional drift from the junior (log-ratio, JSD)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.4.1, Fig. 3",
+     "quote": "We estimate each senior’s marginal token distribution from its generations on the evaluation sets, and measure per-token deviation from the junior by the log-ratio $\\log(p_{\\mathrm{sen}}(t)\\,/\\,p_{\\mathrm{jun}}(t))$ ; Jensen–Shannon divergence (JSD) to the junior aggregates these deviations, weighted by how often each token is actually used.",
+     "gloss": "Measures the distributional sense of junior legibility: per-token log-ratio of senior to junior token frequencies, aggregated as usage-weighted Jensen-Shannon divergence; lower = closer to the junior."
+    },
+    {
+     "family": "monitorability",
+     "term": "handoff robustness",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "We call the team’s pass@ $k$ handoff accuracy, and measure alongside it handoff robustness: handoff accuracy as a percentage of the same senior’s solo pass@ $k$ , computed from the macro-averaged accuracies. The ratio measures retention of solo performance under handoffs, though it is read alongside solo capability, since a senior that scores lower alone has less to lose.",
+     "gloss": "Compatibility lens paired with junior legibility: team pass@k under reasoning-step handoffs divided by solo pass@k. The paper notes handoff success does not show the junior understands the reasoning."
+    },
+    {
+     "family": "monitorability",
+     "term": "self-contained vs context-dependent reasoning step",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.3",
+     "quote": "We call a step self-contained if, read in isolation, it states what it is doing and makes the symbols and references needed to interpret it identifiable. A step is context-dependent if its role or referents require earlier text, for example because it continues a prior calculation or relies on an unresolved pronoun or symbol.",
+     "gloss": "Labelled by a Qwen3.6-35B judge that sees only the step (a regex split as check); TRLVR's junior-legibility gain concentrates at context-dependent steps."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking (boundary-token suppression)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3, fn. 2; App. B.1.2",
+     "quote": "This reward-hacking failure mode is induced by the schedule itself: as the senior strengthens, suppressing boundary tokens becomes a low-cost route to extending its own control and avoiding handoffs.",
+     "gloss": "Under sentence- or paragraph-level handoffs the senior could suppress boundary tokens to keep control and avoid the junior; word-level handoffs with a 32-token backstop close this."
+    }
+   ],
+   "fix": [
+    {
+     "id": "jiao2026tandem#3",
+     "set": {
+      "where": "§4.4.2, Table 1"
+     },
+     "reason": "The passage is in §4.4.2."
+    },
+    {
+     "id": "jiao2026tandem#4",
+     "set": {
+      "where": "§4.4.2, Table 1"
+     },
+     "reason": "The passage is in §4.4.2."
+    }
+   ],
+   "drop": [],
+   "note": "Added the distributional legibility measure (log-ratio/JSD), handoff robustness, the self-contained/context-dependent step split and the boundary-suppression reward-hacking failure; corrected section refs."
+  },
+  {
+   "key": "li2025drift",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "word inclusion",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Atanasova et al. 2023",
+     "where": "§4.1.3; App. A.1.2-A.1.3",
+     "quote": "For word insertion perturbations, we calculate the percentage of new rationales that include the newly inserted word, denoted as word inclusion. Both a large semantic variation and high word inclusion indicate greater rationale faithfulness.",
+     "gloss": "Insertion test inspired by Atanasova et al.: share of rationales for the perturbed input (NLI, TruthfulQA) that mention the inserted or replaced word; higher = more faithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "semantic relatedness to the prompt (BLEU)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3, Table 5",
+     "quote": "Table 5: Semantic relatedness between assessment prompt and generated rationale. Higher values imply higher faithfulness.",
+     "gloss": "Supplementary measure: 1- to 4-gram BLEU between the rationale and the prompt (question, student answer, instruction); more overlap read as more faithful to the context."
+    }
+   ],
+   "fix": [
+    {
+     "id": "li2025drift#4",
+     "set": {
+      "stance": "adapted",
+      "where": "§4.1.3; App. A.1",
+      "gloss": "Counterfactual input: the clause most related to the rationale removed (ASAP), or a verb/adjective replaced or inserted (NLI; GPT-4 edit for TruthfulQA); the new rationale is compared with the original."
+     },
+     "reason": "Paper modifies the cited perturbations (clause removal by similarity, word insertion 'inspired by' Atanasova) and reads changes in rationales rather than answers: adapted."
+    },
+    {
+     "id": "li2025drift#5",
+     "set": {
+      "term": "rationale faithfulness (semantic variation)",
+      "where": "§4.1.3; App. A.1.1",
+      "quote": "For sub-sentence removal perturbations, we calculate the semantic relatedness between the removed text span w and the original rationale, denoted as Swo = Sim(w, Ro ), and between the removed span and the new rationale, denoted as Swn = Sim(w, Rn ). A faithful model is expected to produce a significant semantic variation, calculated as ∆(Swo −Swn ),",
+      "gloss": "Removal test: Sim(w,R_o) − Sim(w,R_n) for the removed clause w; a faithful model's new rationale should lose the removed content. Higher = more faithful."
+     },
+     "reason": "Quote now includes the definitions of S_wo and S_wn; word inclusion, adapted from Atanasova et al., moves to its own row."
+    }
+   ],
+   "drop": [],
+   "note": "Split word inclusion (adapted from Atanasova et al.) from semantic variation, added the BLEU context-relatedness measure, and marked the counterfactual perturbation as adapted."
+  },
+  {
+   "key": "wang2026concept",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "CC-SAE",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "parcalabescu2023measuring",
+     "where": "§3.4, Eq. 5",
+     "quote": "CC-SAE measures the strength-weighted alignment of activations in concept space:",
+     "gloss": "Cosine similarity a_pred·a_cot/(‖a_pred‖‖a_cot‖) of SAE activations at the answer position in direct and CoT passes; Parcalabescu & Frank's self-consistency moved to concept space."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Jaccard similarity (active SAE concepts)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4, Eq. 6",
+     "quote": "A set-based measure ignoring activation magnitudes, where $S_{\\text{pred}}=\\{i:\\mathbf{a}_{\\text{pred},i}>0\\}$ and $S_{\\text{cot}}=\\{i:\\mathbf{a}_{\\text{cot},i}>0\\}$ are the sets of active concept indices:",
+     "gloss": "|S_pred ∩ S_cot| / |S_pred ∪ S_cot| over SAE concepts active in the direct and CoT passes; one of three self-consistency measures."
+    },
+    {
+     "family": "faithfulness",
+     "term": "prediction-grounded recall",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4, Eq. 7",
+     "quote": "A directional measure of how much of the prediction’s concept usage appears in the CoT:",
+     "gloss": "CoT-pass activation on concepts active in the direct pass, divided by the direct pass's total activation on them; a directional self-consistency measure."
+    },
+    {
+     "family": "faithfulness",
+     "term": "sufficiency of shared concepts (recovery)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.4, Eq. 12",
+     "quote": "To complement our necessity analysis, which shows that ablating $S_{\\cap}$ reduces answer probability in §5.3, we additionally conduct a sufficiency test to answer the question: can $S_{\\cap}$ alone largely recover the model’s answer?",
+     "gloss": "Recovery = (p_patch − p_zero)/(p_base − p_zero), keeping only the S∩ contribution in the residual; complements Δp, which the paper treats as a necessity test."
+    },
+    {
+     "family": "faithfulness",
+     "term": "completeness of shared concepts (Condition D)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2.1; App. F.1.3",
+     "quote": "Condition D: Ablate $S_{\\cap}$ together with $k$ additional random features from $S_{\\text{pred}}\\setminus S_{\\cap}$ . If $S_{\\cap}$ captures the causally important features, adding prediction-only features should not noticeably increase $\\Delta p$ beyond ablating $S_{\\cap}$ alone, which serves as a completeness check.",
+     "gloss": "S∩ is complete if additionally ablating prediction-only features barely raises Δp; also reported as the ratio Δp(S∩)/Δp(S_pred)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "agreement condition (CoT and no-CoT answers agree)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "tutek2025measuring",
+     "where": "§3.3, fn. 2",
+     "quote": "Following Tutek et al. (2025), we evaluate faithfulness in cases where CoT and no-CoT predictions of models agree. This avoids confounding the CoT-induced performance gain with the CoT faithfulness evaluation.",
+     "gloss": "Faithfulness is evaluated only on items where the CoT and no-CoT answers agree, so CoT-induced accuracy gains do not confound the measure."
+    },
+    {
+     "family": "faithfulness",
+     "term": "intervention-based faithfulness",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring; zaman2025causal; tutek2025measuring",
+     "where": "§1",
+     "quote": "One line of work intervenes on the reasoning chain, or the parametric knowledge that the reasoning invokes, and treats the CoT as faithful only if the answer changes accordingly (Lanham et al., 2023; Zaman and Srivastava, 2025; Tutek et al., 2025)",
+     "gloss": "Restated prior criterion: a CoT is faithful only if intervening on the reasoning chain, or on the knowledge it invokes, changes the answer accordingly."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint-based unfaithfulness (silent hint use)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "turpin2023language; chen2025reasoning; chua2025deepseek",
+     "where": "§1",
+     "quote": "another injects answer hints and treats the CoT as unfaithful if a hint is used silently without acknowledgment (Turpin et al., 2023; Chen et al., 2025; Chua and Evans, 2025)",
+     "gloss": "Restated prior criterion: a CoT is unfaithful if an injected answer hint is used without being acknowledged in the CoT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "attribution-based alignment (prediction vs CoT attributions)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "parcalabescu2023measuring; admoni2026aligning",
+     "where": "§1",
+     "quote": "Attribution-based methods (Parcalabescu and Frank, 2024; Admoni et al., 2026) assess the alignment between input attributions for prediction and those for CoT, but they capture only dependence on the input and miss what the model computes internally.",
+     "gloss": "Restated: compare input attributions for the prediction with those for the CoT; the paper objects that this captures input dependence, not internal computation."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual reasoning-chain interventions",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "paul2024making",
+     "where": "§2",
+     "quote": "Paul et al. (2024) apply causal mediation and counterfactual reasoning-chain interventions to test whether intermediate CoT steps influence final answers.",
+     "gloss": "Restates Paul et al.: counterfactual edits to the reasoning chain, with causal mediation, test whether intermediate CoT steps influence the final answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT-feature patching (steerability test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Chen et al. 2026",
+     "where": "§2; App. A.2",
+     "quote": "Chen et al. (2026), the closest to us, train two separate SAEs and patch CoT features into a non-CoT run, reading the causal effect from the gain in answer probability, which is a magnitude-based test of whether injected reasoning features can steer a direct answer.",
+     "gloss": "Restates Chen et al.: patch CoT SAE features into a no-CoT run and read the answer-probability gain; the paper contrasts this steerability test with its own dependence (ablation) test."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CIE (Circuit-guided Internal-External Discrepancy)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "shen2026detecting",
+     "where": "App. E",
+     "quote": "CIE compares the model’s internal computation against its displayed reasoning (Shen et al., 2026). For each trace, an internal representation is created by tracing sentence-level attribution circuits over informative tokens, and an external representation from the hidden states of the reasoning sentences is extracted and organized into sentence graphs. Their structural discrepancy is measured via the Fused Gromov-Wasserstein distance.",
+     "gloss": "Restated: distance between traced sentence-level circuits and graphs of the displayed reasoning sentences; a larger CIE score means lower faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "FUR (parametric faithfulness)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "tutek2025measuring; sun2026investigating",
+     "where": "App. E, Eq. 14",
+     "quote": "FUR provides a continuous answer as to whether a CoT is faithful by measuring the extent to which unlearning the knowledge used by models in CoT steps causes model to change their output prediction:",
+     "gloss": "Restated: fraction of CoT steps whose knowledge, once unlearned from the model, changes its prediction."
+    },
+    {
+     "family": "faithfulness",
+     "term": "contextual CoT faithfulness metrics",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. E",
+     "quote": "We consider contextual CoT faithfulness metrics from (Lanham et al., 2023), which are based on context perturbation:",
+     "gloss": "Four CoT-perturbation tests restated from Lanham et al.: early answering, adding mistake, paraphrasing, filler tokens; binary in the original, scored continuously here."
+    },
+    {
+     "family": "faithfulness",
+     "term": "early answering",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. E",
+     "quote": "(i) Early Answering, which truncates the CoT before the original answer is produced and forces an early response",
+     "gloss": "Restated Lanham test: cut the CoT before the answer and force a response; here scored by the change in prediction score."
+    },
+    {
+     "family": "faithfulness",
+     "term": "adding mistake",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. E",
+     "quote": "(ii) Adding Mistake, which injects an error into one CoT step and regenerates the remaining steps",
+     "gloss": "Restated Lanham test: insert an error into one CoT step and regenerate the rest; here scored by the change in prediction score."
+    },
+    {
+     "family": "faithfulness",
+     "term": "paraphrasing",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. E",
+     "quote": "(iii) Paraphrasing, which restates the initial portion of the CoT while preserving its meaning and regenerates the rest",
+     "gloss": "Restated Lanham test: paraphrase the start of the CoT and regenerate the rest; here scored by the change in prediction score."
+    },
+    {
+     "family": "faithfulness",
+     "term": "filler token",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. E",
+     "quote": "(iv) Filler Token, which substitutes the CoT with meaningless symbols such as ellipses",
+     "gloss": "Restated Lanham test: replace the CoT with meaningless symbols; here scored by the change in prediction score."
+    },
+    {
+     "family": "faithfulness",
+     "term": "prediction-score change (continuous contextual metrics)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "zaman2025causal",
+     "where": "App. E, Eq. 13",
+     "quote": "The results of these metrics are binary, i.e., faithful or unfaithful, which is coarse-grained compared to our proposed metrics, which range from 0 to 1. Therefore, we follow Zaman and Srivastava (2025) and instead measure the prediction score $\\hat{z}_{i}$ changes, ranging from -1 to 1.",
+     "gloss": "Instead of binary faithful/unfaithful labels, each contextual test is scored by the change in the softmax-normalized label score ẑ_i, from −1 to 1."
+    },
+    {
+     "family": "faithfulness",
+     "term": "dimensions probed by faithfulness metrics",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "Prior metrics probe different dimensions: contextual metrics test sensitivity to textual perturbations; FUR tests dependence on unlearned knowledge; CIE measures circuit-trace discrepancy. Our $\\Delta p$ tests whether shared internal features causally drive the answer.",
+     "gloss": "Classifies faithfulness metrics by what they probe; the paper calls these dimensions conceptually orthogonal, explaining weak correlations of Δp with prior metrics (ρ≈0.10-0.30)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "distributed faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3; App. C.3",
+     "quote": "Moreover, distributed faithfulness suggests a tight coupling between CoT and prediction throughout the model’s computation, potentially suggesting more robust reasoning that is less susceptible to perturbations at any single layer.",
+     "gloss": "Layer-wise Δp high and stable across most layers (e.g. Qwen3); read as CoT and prediction coupled throughout the computation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "localized faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3; App. C.3",
+     "quote": "In contrast, localized faithfulness implies that the alignment emerges only at specific computational stages, with the CoT reasoning proceeding largely independently elsewhere (Appendix C.5).",
+     "gloss": "Δp high only at a few layers, with large layer-to-layer variance (e.g. Llama-3.1-8B); elsewhere the CoT reasoning proceeds largely independently of the prediction."
+    },
+    {
+     "family": "faithfulness",
+     "term": "model-level faithfulness (peak-layer or mean Δp)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3",
+     "quote": "We recommend reporting either (1) the peak-layer $\\Delta p$ , which captures the model’s maximum potential for faithful reasoning, or (2) the mean $\\Delta p$ across layers, which reflects overall alignment but may underestimate faithfulness for models with localized patterns.",
+     "gloss": "Because Δp varies by layer, a model-level score is either the peak-layer Δp or the mean Δp across layers."
+    },
+    {
+     "family": "faithfulness",
+     "term": "repair (layer-wise faithfulness recovery)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.5",
+     "quote": "A natural question arising from our layer-wise analysis is whether models exhibit “repair”, i.e., whether faithfulness that degrades in earlier layers can be recovered in subsequent layers.",
+     "gloss": "Tracked by each instance's ratio of layer-ℓ Δp to first-layer Δp; Gemma models show U-shaped repair, Qwen3 stays flat."
+    }
+   ],
+   "fix": [
+    {
+     "id": "wang2026concept#1",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "The paper extends Jacovi & Goldberg's definition with 'or contributes to' (a causal reading), as the row's own gloss notes: adapted, not adopted."
+    },
+    {
+     "id": "wang2026concept#4",
+     "set": {
+      "stance": "adapted",
+      "source": "parcalabescu2023measuring; admoni2026aligning",
+      "where": "§1, fn. 1; §3.4"
+     },
+     "reason": "The metrics measure Parcalabescu & Frank's (and Admoni et al.'s, cited in §3.4) self-consistency in SAE concept space: a cited notion measured differently, so adapted."
+    },
+    {
+     "id": "wang2026concept#5",
+     "set": {
+      "kind": "formal",
+      "where": "§3.5, Eqs. 8-9",
+      "quote": "$\\Delta p=P(\\hat{y}\\mid\\mathbf{r}_{\\text{pred}})-P(\\hat{y}\\mid\\mathbf{r}^{\\prime}_{\\text{pred}})$",
+      "gloss": "Drop in answer probability after subtracting the shared SAE concepts from the direct-prediction residual, r′ = r − W_dec[a⊙m_S∩]; larger positive Δp = more faithful; computed per layer."
+     },
+     "reason": "Quote now gives the defining Eq. 9; the interpretation sentence moves into the post-hoc rationalization row, which contrasts with it."
+    },
+    {
+     "id": "wang2026concept#6",
+     "set": {
+      "quote": "We interpret larger positive values of $\\Delta p$ as stronger evidence that the concepts shared between the CoT and prediction causally support the answer, and thus as indicating greater CoT faithfulness. Conversely, values near zero indicate that the answer probability is insensitive to their ablation, providing little evidence of causal support and potentially signaling concept-level post-hoc rationalization.",
+      "gloss": "Large positive Δp signals faithful causal grounding; Δp near zero means the shared concepts do not support the answer, a possible concept-level post-hoc rationalization (examples in App. H)."
+     },
+     "reason": "Quote extended with the contrasting sentence so the decision rule (large vs near-zero Δp) that names the failure is complete."
+    }
+   ],
+   "drop": [],
+   "note": "Added each correlational metric, sufficiency/completeness checks, the agreement condition, restated prior tests (Lanham's four, FUR, CIE, hint, intervention, attribution, Paul, Chen) and layer-wise notions; Δp now quoted as Eq. 9; stances fixed."
+  }
+ ]
+}

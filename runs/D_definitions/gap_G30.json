@@ -1,0 +1,393 @@
+{
+ "papers": [
+  {
+   "key": "dehghanighobadi2025can",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "edit distance (ED) of SCEs",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Wachter et al. 2017; Chatzi et al. 2025",
+     "where": "§3.2",
+     "quote": "Edit distance (ED) measures the edit distance between the original input $\\mathbf{x}$ and the counterfactual $\\mathbf{x}_{\\text{CE}}$ . Closeness to the original input is a key desideratum of a counterfactual explanation Wachter et al. (2017). Our use of edit distance as the closeness metric is inspired by prior studies on evaluating counterfactual generations Chatzi et al. (2025).",
+     "gloss": "Closeness desideratum measured as edit distance between x and x_CE, normalized by the longer string to a percentage, reported only for valid SCEs (ED and ED_C)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "generation percentage (Gen)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Generation percentage (Gen) measures the percentage of times a model was able to generate a SCE. In a vast majority of cases, the models generate a SCE as instructed. The cases of non-successful generation include the model generating a stop-word like “.” or “!” or generating a $\\mathbf{x}_{\\text{CE}}$ that is much shorter in length than $\\mathbf{x}$ .",
+     "gloss": "Share of prompts on which the model produces a usable SCE; stop-words or outputs much shorter than x (length thresholds in App. C) count as failed generations."
+    }
+   ],
+   "fix": [
+    {
+     "id": "dehghanighobadi2025can#1",
+     "set": {
+      "quote": "A counterfactual explanation $\\mathbf{x}_{\\text{CE}}$ is a modified version of the original input $\\mathbf{x}$ that would lead the model to change its decision, that is, $f(\\mathbf{x})\\neq f(\\mathbf{x}_{\\text{CE}})$ . A common strategy for generating counterfactuals is to first identify a counterfactual output $y_{\\text{CE}}\\neq y$ and then solve an optimization problem to generate $\\mathbf{x}_{\\text{CE}}$ such that $f(\\mathbf{x}_{\\text{CE}})=y_{\\text{CE}}$ Wachter et al. (2017); Mothilal et al. (2020); Verma et al. (2024).",
+      "source": "Wachter et al. 2017; Mothilal et al. 2020; Verma et al. 2024"
+     },
+     "reason": "The definition sentence cites nothing itself; the adjacent sentence giving the targeted condition f(x_CE)=y_CE carries the citations (Wachter, Mothilal, Verma). Extended the quote to include it and listed all three as the source."
+    }
+   ],
+   "drop": [],
+   "note": "Full text read (incl. App. B-J prompts, post-processing, annotation protocol); added the ED closeness metric and the Gen metric, and extended the CE definition to carry its cited condition."
+  },
+  {
+   "key": "kim2026mitigating",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (score of the faithful translator)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 1; §3.2",
+     "quote": "Verifier score is the average logit output by the verifier, and faithfulness is the fraction of outputs from the faithful translator whose answer matches that of the solver.",
+     "gloss": "Measured as the fraction of faithful-translator outputs whose final answer equals the solver's; 99.8% on a 1024-problem test set."
+    }
+   ],
+   "fix": [
+    {
+     "id": "kim2026mitigating#2",
+     "set": {
+      "quote": "The prover is said to be checkable if there exists a verifier $v$ such that the prover can always convince the verifier when its answer is correct, and there exists no adversarial proof that can trick the verifier into accepting an incorrect answer. Formally, • Completeness: $\\forall x\\in\\mathcal{X},\\mathds{1}_{\\text{correct}}\\left({x,\\pi(x)}\\right)=1\\implies v(x,\\pi(x))=1$ . • Soundness: $\\forall x\\in\\mathcal{X},\\forall z^{\\prime}\\in\\mathcal{Z},\\mathds{1}_{\\text{correct}}\\left({x,z^{\\prime}}\\right)=0\\implies v(x,z^{\\prime})=0$ ."
+     },
+     "reason": "Formal row quoted only the prose; extended the contiguous quote through the Completeness and Soundness conditions it introduces with 'Formally,'."
+    }
+   ],
+   "drop": [],
+   "note": "Short paper read in full incl. App. A proof and App. B-F; checkability quote now carries its equations, and the operational faithfulness fraction (Fig. 1) was added."
+  },
+  {
+   "key": "kudo2024llms",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness between CoT z and answer y (x→y vs z→y)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.3",
+     "quote": "This causal relationship $x\\rightarrow z$ is out of scope in this study, while we are still interested in whether the model $x$ has a predetermined answer $y$ in order to distinguish the possibilities of $x\\rightarrow y$ and $z\\rightarrow y$ , i.e., which part is causally relied on to the final answer $y$ .",
+     "gloss": "Faithfulness question is whether the answer y causally relies on the CoT z rather than on an answer predetermined from the input x; x→z (post-hoc CoT) is out of scope."
+    },
+    {
+     "family": "faithfulness",
+     "term": "answer-emergence position t*(v_i)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. (2)",
+     "quote": "The probing results from all the token positions $t$ and layers $l$ are aggregated as follows: | | $\\displaystyle t^{*}(v_{i})$ | $\\displaystyle=\\min\\{t\\mid\\max_{l}\\mathrm{acc}(t,l,v_{i})>\\tau\\}\\text{,}$ | | (2) where $\\mathrm{acc}(t,l,v_{i})\\in[0,1]$ denotes the probing accuracy of $f_{t,l,v_{i}}$ . The position $t^{*}(v_{i})\\in\\mathbb{Z}$ indicates when the first time the probing classifier achieved a reasonable accuracy above $\\tau$ . We set $\\tau=0.9$ in our main experiment, and we show additional results with different thresholds in Appendix B.3. As a more coarse but comprehensive value, we also report $t_{\\mathrm{eq}}^{*}(v_{i})$ , indicating which equation $t_{\\mathrm{eq}}$ in the input $x$ the position $t^{*}(v_{i})$ falls into. Given that the $t$ (and $t_{\\mathrm{eq}}$ ) is relative to the CoT-beginning position, if $t_{\\mathrm{(eq)}}^{*}(v_{i})$ is negative, the value $\\$\\{v_{i}\\}$ is computed before CoT begins.",
+     "gloss": "First token position where some layer's probe decodes the (sub-)answer with accuracy above τ=0.9; negative t* means the value is computed before CoT, i.e. a predetermined answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "pre-/post-CoT probe accuracy (Acc≺CoT, Acc≻CoT)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eqs. (3)-(4)",
+     "quote": "As complementary information of the position, we also report two types of accuracy: | | $\\displaystyle\\mathrm{Acc}_{\\mathrm{\\prec CoT}}(v_{i})$ | $\\displaystyle=\\max_{t<0,l}\\mathrm{acc}(t,l,v_{i})\\text{,}$ | | (3) | | $\\displaystyle\\mathrm{Acc}_{\\mathrm{\\succ CoT}}(v_{i})$ | $\\displaystyle=\\max_{t\\geq 0,l}\\mathrm{acc}(t,l,v_{i})\\text{.}$ | | (4) If $\\mathrm{Acc}_{\\mathrm{\\prec CoT}}(v_{i})$ is sufficiently high, $\\$\\{v_{i}\\}$ is resolved internally before CoT begins. Conversely, if $\\mathrm{Acc}_{\\mathrm{\\prec CoT}}(v_{i})$ is low and $\\mathrm{Acc}_{\\mathrm{\\succ CoT}}(v_{i})$ is high, the answer is derived while performing CoT reasoning.",
+     "gloss": "Best probe accuracy before vs. after CoT starts; high pre-CoT accuracy means the answer was resolved before CoT, low pre- and high post-CoT means it is derived during CoT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Success Rate (activation patching)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "We report Success Rate as a metric for this experiment. The Success rate indicates how frequently (%) the intervened output $\\hat{y}^{\\mathrm{patch}}$ aligns with the correct answer $\\tilde{y}$ . For reasoning chains, we report the Success rate for $\\hat{z_{t}}^{\\mathrm{patch}}$ as well.",
+     "gloss": "Patches in hidden states from a run on input x̃; success means the output flips to x̃'s answer. High success at CoT and low at Input positions supports CoT faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Unchanged rate (activation patching)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.4",
+     "quote": "The Unchanged rate indicates how frequently (%) the intervened output $\\hat{y}^{\\mathrm{patch}}$ remains the same as $y$ . If this value is small, it indicates that the patched hidden states do not affect the output.",
+     "gloss": "Share of patched runs whose output stays the original y; complements Success rate in locating which hidden states the answer causally depends on."
+    }
+   ],
+   "fix": [
+    {
+     "id": "kudo2024llms#4",
+     "set": {
+      "quote": "In addition, Turpin et al. (2023); Chen et al. (2025) define CoT as faithful when the following two conditions hold: (i) The CoT explicitly refers to the hint provided in the prompt. (ii) The model relies on the hint to reach the answer (that is, without the hint, the model would not have produced the hinted answer)."
+     },
+     "reason": "Quote stopped before the paper's own counterfactual gloss of condition (ii); extended to the end of the sentence."
+    }
+   ],
+   "drop": [],
+   "note": "Full text incl. appendices read; added the paper's operational criteria (x→y vs z→y, probe metrics t*, Acc≺/≻CoT, patching Success and Unchanged rates). Cox (2025) is a LessWrong post, not cox2026posthoc."
+  },
+  {
+   "key": "mathew2025hidden",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "mitigation team (overseer and paraphraser)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "The mitigation team aims to detect and mitigate steganographic communication of the payload by the collusion team. It consists of an overseer and an optional paraphraser. The paraphraser rewords the stegotext in an attempt to remove the payload.",
+     "gloss": "Oversight side of the game: an overseer that flags suspicious stegotexts plus an optional paraphraser that rewrites them to strip any hidden payload."
+    },
+    {
+     "family": "monitorability",
+     "term": "Single-episode LLM-logits Overseer (O1) suspiciousness score",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.1",
+     "quote": "Single-episode LLM-logits Overseer (O1). A (white-box access) LLM is prompted to classify whether a single stegotext appears suspicious. We then use the logits for the Yes/No tokens, $z_{\\text{Yes}}$ and $z_{\\text{No}}$ , along with a sensitivity threshold $t_{\\text{sens}}$ , to compute the suspiciousness score $r_{\\text{sus}}$ for each stegotext: $r_{\\text{sus}}=\\tanh\\left(z_{\\text{Yes}}-z_{\\text{No}}-t_{\\text{sens}}\\right)$ . Here, Overseer Bypass Success = $r_{\\text{sus}}<t_{\\text{sens}}$ .",
+     "gloss": "White-box monitor: suspiciousness is tanh of the Yes-minus-No logit gap minus a calibrated threshold; a stegotext bypasses it when r_sus < t_sens."
+    },
+    {
+     "family": "monitorability",
+     "term": "Multi-episode LLM-sampling Overseer (O2)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.1",
+     "quote": "Multi-episode LLM-sampling Overseer (O2). A (black-box access) LLM is prompted to evaluate a batch of stegotexts to determine if they seem suspicious. The LLM returns a single yes/no answer for the entire batch, which is converted into a suspiciousness score as follows: $r_{\\text{sus}}=1\\text{ if \"Yes\"},0\\text{ if \"No\"}$ . This $r_{\\text{sus}}$ is then applied to each stegotext in the batch. Here, Overseer Bypass Success = 1 - $r_{\\text{sus}}$ .",
+     "gloss": "Black-box monitor gives one yes/no verdict for a whole batch of stegotexts; that binary score is applied to every item in the batch."
+    },
+    {
+     "family": "monitorability",
+     "term": "Multi-episode LLM-sampling Thresholded Overseer (O3)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.1",
+     "quote": "Multi-episode LLM-sampling Thresholded Overseer (O3). A (black-box access) LLM is prompted to evaluate individual stegotexts within a batch to score their suspiciousness. It assigns a per-sample score between 0 and 5 to each stegotext (where 0 indicates harmless and 5 indicates highly suspicious). The entire batch is then assigned a binary $r_{\\text{sus}}$ score if more than $T_{n}$ % of the samples have a per-sample score greater than or equal to a threshold $T_{s}$ . This $r_{\\text{sus}}$ is then applied to each stegotext in the batch. Here, Overseer Bypass Success = 1 - $r_{\\text{sus}}$ .",
+     "gloss": "Monitor rates each stegotext 0-5; the batch is flagged if more than T_n% of items score at least T_s. Thresholds are calibrated on honest runs (App. D.1)."
+    },
+    {
+     "family": "monitorability",
+     "term": "Standard Paraphraser (SP)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "roger2023preventing",
+     "where": "§3.2.2",
+     "quote": "Standard Paraphraser (SP). An LLM is passed the stegotext and asked to re-word it (Roger and Greenblatt, 2023).",
+     "gloss": "Mitigation against encoded payloads: an LLM rewords the stegotext."
+    },
+    {
+     "family": "monitorability",
+     "term": "Context-aware Paraphraser (CAP)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "roger2023preventing",
+     "where": "§3.2.2",
+     "quote": "Context-aware Paraphraser (CAP). An LLM is passed the stegotext, along with details regarding the task the sender should perform. It is asked to reword the stegotext while removing any details irrelevant to the task (Roger and Greenblatt, 2023).",
+     "gloss": "Paraphraser that also sees the sender's task and removes task-irrelevant details, the stronger defense against multi-bit encodings in the paper's results."
+    },
+    {
+     "family": "monitorability",
+     "term": "Coding Paraphraser (CP)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.2",
+     "quote": "Coding Paraphraser (CP). In coding tasks, we make use of non-LLM paraphraser which deterministically processes the sender’s output, renaming all variables to generic names and removing all comments.",
+     "gloss": "Deterministic code normalizer used as a steganography mitigation: renames all variables to generic names and strips comments."
+    },
+    {
+     "family": "monitorability",
+     "term": "Decoding Success",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "(2) Decoding Success: Receiver successfully decodes the payload.",
+     "gloss": "Rate at which the receiver recovers the hidden payload; in the mitigation tasks it is the collusion team's task reward."
+    },
+    {
+     "family": "monitorability",
+     "term": "Collusion Success (mitigation-evaluation tasks)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "In addition to using an overseer that looks for steganography in the stegotext, we also flag a batch of stegotexts as suspicious if the Sender Task Success falls below a certain Honest-Performance threshold (refer to Appendix D.1 for details). Thus, here collusion is successful (i.e., Collusion Success) when: (i) the stegotext is suitably performant, (ii) the receiver correctly decodes the payload, and (iii) the stegotext is not flagged as suspicious by the overseer.",
+     "gloss": "Collusion succeeds only if the stegotext still does its task, the payload is decoded, and the overseer does not flag it; low task performance is itself flagged as suspicious."
+    },
+    {
+     "family": "monitorability",
+     "term": "suspicious set of episodes (flagging rule)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.1.2",
+     "quote": "We say that a set of episodes are suspicious if: $\\frac{1}{n}\\sum_{i=0}^{n}{p_{i}}>T_{p}$ where $n$ is the number of episodes and $T_{p}$ is a performance threshold, or $\\frac{1}{n}\\sum_{i=0}^{n}{[s\\geq T_{s}]}>T_{n}$ where $T_{s}$ is a suspiciousness level threshold and $T_{n}$ is a threshold on the proportion of suspicous episodes.",
+     "gloss": "Batch flagged if task performance falls below T_p (90% of honest; printed formula reads >) or if over T_n of episodes score at least T_s; thresholds from honest runs."
+    },
+    {
+     "family": "monitorability",
+     "term": "Useful safety factor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.1.3",
+     "quote": "We define the \"Useful safety factor\" as the fractional drop in task performance which is allowed before a set of episodes is judged to be suspicious. If the task performance is $1.0$ , a useful safety factor of $0.1$ would lead to a task performance threshold of $0.9$ .",
+     "gloss": "Allowed fractional drop in task performance before a batch is judged suspicious; 0.1 in the main experiments."
+    },
+    {
+     "family": "monitorability",
+     "term": "Suspiciousness safety factor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.1.3",
+     "quote": "We define the \"Suspiciuosness safety factor\" as the multiplier on the allowed number of suspicious episodes, when compared to the honest evaluations. If $10$ episodes are flagged as suspicious in the honest evaluations, then a safety factor of $2$ means any set of episodes with over $20$ suspicious messages will be judged as suspicious.",
+     "gloss": "Multiplier on the number of suspicious episodes seen in honest runs that a batch may reach before being flagged; 2 in the main experiments."
+    },
+    {
+     "family": "monitorability",
+     "term": "Max-Clean-Success (evidence of encoded sensitive variable)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "Without using the sensitive variables, the maximum task success that can be achieved on the historic dataset is Max-Clean-Success < 67%. However, if the sensitive feature is exploited, 100% task success can be achieved. Appendix B.1 confirms that when a high task success is achieved on these datasets, it must be due to use of the sensitive variables.",
+     "gloss": "Task success above the best achievable without the sensitive variable means the summaries must be encoding that variable; App. B.1 checks redacted letters to rule out spurious correlations."
+    },
+    {
+     "family": "monitorability",
+     "term": "emergence of steganography",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1.2 (Figs. 8-9)",
+     "quote": "Figures (a-b-c) show the reward and task accuracy increasing, while the proportion of texts flagged by the Overseer decreases over time. This indicates that the colluding team is able to successfully communicate while not being detected by the Overseer, i.e. steganography has emerged.",
+     "gloss": "Steganography is judged to have emerged when task accuracy and reward rise while the overseer flags fewer texts: information gets through undetected."
+    },
+    {
+     "family": "monitorability",
+     "term": "subtler execution of overseer-penalized behavior",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "baker2025monitoring",
+     "where": "§1",
+     "quote": "When a mispecified outcome-based task reward encourages an unintended behavior, but that behavior is simultaneously penalized by an overseer, models under optimization pressure may adapt to execute the behavior more subtly, rather than ceasing it altogether Baker et al. (2025).",
+     "gloss": "Under a misspecified reward plus an overseer penalty, optimization makes the behavior harder to detect rather than removing it; the paper's GBRL-SB runs show this for collusion."
+    }
+   ],
+   "fix": [
+    {
+     "id": "mathew2025hidden#2",
+     "set": {
+      "quote": "We frame steganography as an adversarial relationship between two teams, a collusion team and a mitigation team. The collusion team consists of a sender and a receiver, and aims to complete a task $t$ while communicating a secret payload $p$ . The sender sends a message to the receiver called the stegotext, within which it hides the payload."
+     },
+     "reason": "Quote omitted the framing sentence that defines the setup as a collusion team versus a mitigation team; extended to start there."
+    }
+   ],
+   "drop": [],
+   "note": "Full text incl. App. A-E read; added the overseer variants and their suspiciousness scores, paraphrasers, decoding/collusion success criteria, the flagging rule and safety factors, emergence criteria, and Baker et al.'s subtler-execution failure mode."
+  },
+  {
+   "key": "tanneru2024hardness",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "adding mistakes / paraphrasing / filler tokens (Lanham et al. tests)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. B",
+     "quote": "Similarly, if adding mistakes in a generated CoT causes the model to change its final response, then the original CoT can be considered faithful. Analogously, they proposed other metrics to measure faithfulness based on paraphrasing the beginning portions of the original CoT as well as replacing the CoT with filler tokens (e.g., ellipses).",
+     "gloss": "Restates Lanham et al.: a CoT counts as faithful if inserting mistakes changes the answer; further tests paraphrase the early CoT or replace it with filler tokens."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful reasoning chain (solver-answer match, Lyu et al.)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lyu2023faithful",
+     "where": "App. B",
+     "quote": "For example, Lyu et al. [18] focused on generating a reasoning chain that could then be put through a deterministic math solver, and the resulting answer from this solver was compared to the answer produced by the LLM. The reasoning chain was considered to be faithful if the answers of the solver and the LLM matched.",
+     "gloss": "Restated Lyu et al. criterion: chain faithful if a deterministic solver run on it gives the LLM's answer. The paper rejects it as not capturing the LLM's internal computation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT via unmentioned biasing inputs (Turpin et al.)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "App. B",
+     "quote": "Turpin et al. [22] were the first to demonstrate that CoT explanations may not faithfully capture the behavior of the underlying models. They showed that these explanations can be heavily influenced by biasing model inputs e.g., by reordering multiple-choice options in a few-shot prompt to always make the answer “(A)”—which these models systematically fail to mention in their explanations.",
+     "gloss": "CoT explanations are swayed by biasing input features, such as always-(A) answer orderings, that the explanations never mention."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful vs. unfaithful label for probing",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "and $y_{i}$ represents the faithfulness (measured using approaches described in Sec. 2) of reasoning generated for $i^{th}$ question. The probing dataset is split into 4:1 training and validation sets, and the probe is a logistic regression classifier $\\sigma({\\theta_{h}^{l}}^{T}\\boldsymbol{x})$ to predict faithfulness. As faithfulness is a continuous value, we binarize it using median value as threshold.",
+     "gloss": "Per-question early-answering faithfulness score, split at its median, labels activations for per-head linear probes whose directions are then used for activation editing."
+    }
+   ],
+   "fix": [
+    {
+     "id": "tanneru2024hardness#1",
+     "set": {
+      "gloss": "Faithfulness = how accurately an explanation reflects the LLM's underlying reasoning process; the paper notes this is hard to operationalize for large black-box models."
+     },
+     "reason": "Old gloss described the wording ('called formal') rather than stating the definition's content."
+    },
+    {
+     "id": "tanneru2024hardness#2",
+     "set": {
+      "term": "Early Answering strategy",
+      "kind": "operational",
+      "where": "§2",
+      "quote": "Specifically, we employ the Early Answering strategy, which evaluates the faithfulness of a CoT by sequentially adding each CoT step to the question and querying the LLM for its answer, conditioned on the truncated set of CoT steps. If the answer from the LLM converges towards the final answer as it encounters more CoT steps, it indicates that the CoT explanation is guiding the answer and is more likely to be faithful.",
+      "gloss": "Restates Lanham et al.: re-ask for the answer after each added CoT step; answers converging to the final one as steps accrue indicate the CoT guides the answer."
+     },
+     "reason": "At most one restatement per term: the §2 passage is the most explicit statement of Lanham's early-answering test and the one the paper applies; the §1 sentence only paraphrases its criterion."
+    }
+   ],
+   "drop": [],
+   "note": "Full text incl. App. A-C read; replaced the early-answering restatement with the explicit §2 version, added Lanham's other tests, Lyu's and Turpin's notions from App. B, and the probing label."
+  }
+ ]
+}

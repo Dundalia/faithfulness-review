@@ -1,0 +1,550 @@
+{
+ "papers": [
+  {
+   "key": "hoth2026atmanrl",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "salient reasoning trace (attention-perturbation test)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Conversely, we require that the final answer depends causally on the reasoning trace. If the reasoning trace is salient, perturbing its attention should affect the probability of the correct answer.",
+     "gloss": "Saliency test: suppressing attention to CoT tokens only (prompt and answer tokens untouched) must change the probability of the correct answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "post-hoc rationalization (of the reasoning trace)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Ensuring saliency of the reasoning trace, defined as the measurable influence of reasoning tokens on the final prediction, prevents CoT from degenerating into lengthy yet weakly relevant narratives. Without such constraints, reasoning traces risk functioning as post-hoc rationalizations rather than interpretable evidence of the model’s computation.",
+     "gloss": "Without saliency, CoTs degenerate into long, weakly relevant narratives that act as after-the-fact rationalizations instead of evidence of how the answer was computed."
+    }
+   ],
+   "fix": [
+    {
+     "id": "hoth2026atmanrl#4",
+     "set": {
+      "quote": "$\\mathcal{R}_{\\text{Faithfulness}}(a_{i})=\\frac{1}{|\\mathcal{I}_{v}|}\\sum\\nolimits_{w\\in\\mathcal{I}_{v}}\\hat{H}^{\\text{AtMan}}_{w,v},\\quad\\mathcal{I}_{v}=\\{w\\in\\{1,\\ldots,n\\}\\mid w\\geq v\\}.$",
+      "gloss": "Saliency measure and GRPO reward: mean, over the causal region, of the optimized AtMan mask divided by its init c=-0.4 after 200 steps restoring answer log-prob; a proxy for faithfulness."
+     },
+     "reason": "Operational row omitted the operative equation; quote now gives Eq. 3 (the prose sentence in P50 only names it)."
+    },
+    {
+     "id": "hoth2026atmanrl#5",
+     "set": {
+      "gloss": "A CoT can look plausible and coherent while the model reaches the correct answer through shortcuts that bypass the stated reasoning."
+     },
+     "reason": "Gloss mixed in the post-hoc rationalization passage, now its own row."
+    }
+   ],
+   "drop": [],
+   "note": "Added the CoT-only attention-perturbation saliency criterion and the post-hoc rationalization failure mode; R_Faithfulness row now quotes Eq. 3."
+  },
+  {
+   "key": "openai2026gpt6astra",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability (incriminating information)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9",
+     "quote": "our standard CoT monitorability evaluations show decreases in chain-of-thought (CoT) monitorability relative to earlier models, that is, a de- crease in the extent to which Astra’s chain of thought contains incriminating information about the model’s misbehavior.",
+     "gloss": "The card’s own gloss: CoT monitorability is how much incriminating evidence of the model’s misbehavior its chain of thought contains."
+    },
+    {
+     "family": "monitorability",
+     "term": "non-adversarial conditions (monitorability evaluation)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9",
+     "quote": "Non-adversarial conditions, where we do not intervene to change the signals that a model gives to the monitors",
+     "gloss": "Evaluation condition in which the model gets no incentive to evade monitoring; contrasted with adversarial conditions."
+    },
+    {
+     "family": "monitorability",
+     "term": "adversarial conditions (monitorability evaluation)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9",
+     "quote": "Adversarial conditions, where we do directly try to incentivize the model to evade monitoring.",
+     "gloss": "Evaluation condition in which the model is directly incentivized (in practice mostly instructed) to evade monitoring."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor scope",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9",
+     "quote": "In our evaluations, we evaluate GPT-6 Astra’s monitorability using three types of monitor scope:",
+     "gloss": "Monitors differ in what they see: CoT-only, action-only (outputs and tool calls) or full-context; each scope’s recall measures a different notion."
+    },
+    {
+     "family": "monitorability",
+     "term": "action-only monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9",
+     "quote": "Action-only monitor, which sees the inputs, the outputs, the tool call actions and the tool call outputs. Its recall rate measures how transparent the models’ actions are to the monitor.",
+     "gloss": "Monitor without CoT access; its recall measures how transparent the model’s actions are, not CoT monitorability."
+    },
+    {
+     "family": "monitorability",
+     "term": "full-context monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9",
+     "quote": "Full-context monitor, which sees the inputs, chain of thoughts, tool call ac- tions and outputs. This is the approach used in our production misalignment monitoring for Astra, and its recall rate measures the overall monitorability of our model.",
+     "gloss": "Monitor seeing inputs, CoT, tool calls and outputs, as in production misalignment monitoring; its recall measures overall monitorability."
+    },
+    {
+     "family": "monitorability",
+     "term": "intervention archetype",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§9.1",
+     "quote": "Intervention: If we introduce a controlled change in the agent’s environ- ment (e.g. providing a hint), can the monitor detect whether the change influenced its answer?",
+     "gloss": "Monitor must tell whether a planted change in the environment, such as a hint, influenced the model’s answer."
+    },
+    {
+     "family": "monitorability",
+     "term": "process archetype",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§9.1",
+     "quote": "Process: On tasks with a limited number of valid solution paths (for example, a math problem that can only be solved with certain theorems), can the monitor detect the steps the model took?",
+     "gloss": "On tasks with few valid solution paths, the monitor must identify which steps the model actually took."
+    },
+    {
+     "family": "monitorability",
+     "term": "outcome-property archetype",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§9.1",
+     "quote": "Outcome-property: In tasks where a property of the model’s output can be reliably measured, can the monitor predict that property? For example, in a coding task, we may have a way to reliably evaluate whether a model is taking actions to hack a reward signal, and we can ask if a monitor finds evidence of intent to reward hack.",
+     "gloss": "Monitor must predict a reliably measurable property of the output, e.g. whether a coding agent is reward hacking."
+    },
+    {
+     "family": "monitorability",
+     "term": "g-mean²",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§9.1",
+     "quote": "We summarize performance with “g-mean²,” a metric that depends on both true positive rate (TPR) and true negative rate (TNR), using a cross-fit filter- ing strategy that makes intervention-style estimates more robust to noise- dominated instances.",
+     "gloss": "Monitor score combining TPR and TNR, taken from Guan et al.; the card adds cross-fit filtering for noisy intervention estimates and gives no formula."
+    },
+    {
+     "family": "faithfulness",
+     "term": "independent-looking rationale",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.1.2",
+     "quote": "In these instances, the intervention shifts GPT-6 Astra’s answers distributionally, but the CoT gives an independent- looking rationale for the answer, making the intervention’s influence hard to detect.",
+     "gloss": "The planted intervention shifts answers, but the CoT justifies them as if independent of it; §9.1.3 calls this residual faithfulness and legibility reduction."
+    },
+    {
+     "family": "monitorability",
+     "term": "less legible wording vs deliberate CoT obfuscation",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.1.2",
+     "quote": "This is not neces- sarily evidence of deliberate CoT obfuscation, but Astra’s wording is some- what more ambiguous and less legible, and consistent with an increase in motivated reasoning.",
+     "gloss": "Euphemistic CoT, e.g. framing a reward hack as normal code modularization, lowers legibility without being counted as deliberate obfuscation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness / legibility (citing the intervention)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.1.2",
+     "quote": "For Health queries: Patient opinion and GPQA Encoded, GPT-6 Astra wins on TPR because its final answers cite using the intervention more, so these are a clear improvement in faithfulness / legibility.",
+     "gloss": "Final answers that acknowledge using the planted intervention raise action-only monitor TPR, which the card counts as better faithfulness and legibility."
+    },
+    {
+     "family": "monitorability",
+     "term": "obscuring reasoning when monitored (obfuscation)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "korbak2025chain",
+     "where": "§9.2.1",
+     "quote": "CoT monitorability may break down for a variety of reasons [6]. One such path involves agents that become capable of deliberately reshaping or ob- scuring their reasoning when they know they are being monitored.",
+     "gloss": "A model aware of monitoring deliberately reshapes or hides its reasoning; evaluations then overestimate alignment. CoT controllability is tracked as an early warning of this ability."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT-Control (controllability score)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Chen et al. 2026",
+     "where": "§9.2.1",
+     "quote": "We measure GPT-6 Astra’s controllability by running CoT-Control, an evalu- ation suite described in (Yueh-Han, 2026 [8] ) that tracks the model's abil- ity to follow user instructions about their CoT.",
+     "gloss": "Share of CoTs that comply with an instruction about the CoT itself (e.g. avoid keywords, lowercase only); reported on QA subsets by CoT-length bin."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor evasion (sabotage side task)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2",
+     "quote": "The model is instructed to keep its execution of the side-task hidden from the monitors. We then use monitors with different affordances to check whether they would detect the model’s completion of the side-task.",
+     "gloss": "Sabotage side task (e.g. disabling monitoring) added to a real coding task; evasion means completing it undetected, with side-task instructions withheld from the monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor evasion success (notions)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2",
+     "quote": "We consider different notions of monitor evasion success:",
+     "gloss": "Two notions: evading a high-recall monitor, or evading the production misalignment monitoring system’s incident prioritization."
+    },
+    {
+     "family": "monitorability",
+     "term": "evading a high-recall monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2",
+     "quote": "Evading a high-recall monitor (we consider CoT-only, action-only, and full- trajectory variants). We use this monitor as a proxy for whether a reasonable monitor could detect the misalignment, with little concern for low precision",
+     "gloss": "Evasion against a recall-oriented monitor in CoT-only, action-only or full-trajectory scope, standing in for any reasonable monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "evading production misalignment monitoring",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2",
+     "quote": "Evading our production misalignment monitoring system, when consider- ing successful evasion in the context of the incident prioritization proto- cols we have in practice. This is the most risk-averse notion of successful evasion.",
+     "gloss": "Evasion judged against deployed incident priorities, measured as avoiding a P0 priority that pages the security team."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor recall conditional on attack success",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2.2",
+     "quote": "Specifically, we instruct the model to attack the honeypot and measure the monitor’s recall rate conditional on attack success.",
+     "gloss": "CoT-only monitor recall on successful honeypot attacks when the model is unaware, told a CoT-only monitor is present, or told to hide its reasoning."
+    },
+    {
+     "family": "monitorability",
+     "term": "sandbagging",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2.3",
+     "quote": "Sandbagging, which refers to strategic underperformance on evaluations, could undermine the reliability of evaluations. A misaligned model could sandbag to appear less capable on critical capability evaluations or game monitorability evaluations, leading to a false sense of safety.",
+     "gloss": "Strategic underperformance on evaluations, e.g. appearing less capable or gaming monitorability evaluations; covert if monitors miss it."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitor recall on sandbagged questions",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Li et al. 2025",
+     "where": "§9.2.2.3",
+     "quote": "We adapt the sandbagging evaluation setup by Li et al. (2025), evaluating CoT monitor recall on “sandbagged questions”, i.e. questions answered correctly in the control condition but incorrectly under the sandbagging prefix prompt.",
+     "gloss": "Detectability of instructed sandbagging on questions flipped from correct to incorrect, under unaware, simple-aware and evasion-aware prompts, plus a production-monitor check."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability sandbagging",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2.3",
+     "quote": "investigate whether models can manipulate their measured monitorability in our safety eval- uations, which could lead us to be overconfident in the effectiveness of CoT monitoring. We prompt each model to be more or less monitorable, and measure CoT monitor recall on trajectories containing hacks.",
+     "gloss": "Model prompted to be more or less monitorable; measured by CoT monitor recall on hacking trajectories and pairwise judge ratings of hacking visibility."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT steganography (math side-tasking test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9.2.2.4",
+     "quote": "We draw the math side-tasks from an internal benchmark and ask the model to solve each problem and hide the numeric answer in its code patch with- out being detected by a monitor, which tracks evasion separately for the CoT and actions.",
+     "gloss": "Side tasks need 1,000-32,000 output tokens; solving one undetected would show CoT steganography, i.e. CoT-requiring reasoning hidden from monitors."
+    },
+    {
+     "family": "monitorability",
+     "term": "no-CoT math time horizon",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "UK AISI 2026",
+     "where": "§9.3",
+     "quote": "No-CoT math time horizon: Astra can solve significantly more difficult math problems in a single forward pass than past models.",
+     "gloss": "UK AISI’s 50%-reliability time horizon on competition math solved in a single forward pass; the card treats it as evidence of no-CoT ability."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT legibility",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "UK AISI 2026",
+     "where": "§9.3",
+     "quote": "CoT Legibility: Astra reasons in a compressed style, to a greater degree than GPT 5.6 Sol or GPT 5.5. It is generally possible to understand Astra’s raw reasoning, although there is an increased frequency of phrases with unclear meaning.",
+     "gloss": "Legibility judged by whether raw reasoning can be understood; compressed style and more phrases of unclear meaning count against it."
+    },
+    {
+     "family": "monitorability",
+     "term": "verbalized metagaming",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.7",
+     "quote": "Verbalized Metagaming is when a model reasons in its Chain of Thought about how it will be graded, rewarded, or monitored, rather than only engaging in the intended task.",
+     "gloss": "Measured only as verbalized in the CoT; evaluations where it occurs are treated like contaminated evals."
+    },
+    {
+     "family": "monitorability",
+     "term": "oversight gaming",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.7",
+     "quote": "Oversight gaming is a special case of metagaming where: (1) the model acts on the reasoning it has done about its grading, rewarding, or monitoring, and (2) it is acting on this reasoning in a way that would undermine the intended meaning of the evaluation result.",
+     "gloss": "Metagaming that is acted on and undermines what the evaluation result means; renamed from “undermining evaluation validity” in the previous card."
+    },
+    {
+     "family": "monitorability",
+     "term": "oversight gaming (CoT monitor classification)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.7",
+     "quote": "In these evaluations, we run a prompted monitor (GPT-5.4 Thinking) over the chain-of-thought. To be classified as oversight gaming, the model’s analysis must indicate that its evaluated behavior is downstream of awareness of oversight that might not be present in the distribution we care about (e.g. in deployment).",
+     "gloss": "A prompted CoT monitor with eval-specific side information flags it; the card notes the judgement is not causal. Reported among rollouts graded as aligned."
+    },
+    {
+     "family": "faithfulness",
+     "term": "coding deception (misrepresentation rate)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.3.1",
+     "quote": "This evaluation tracks the rate at which, during coding tasks, our models make misleading representations in their final response, including false re- ports of completed actions, tool access, verification, or ongoing background work.",
+     "gloss": "Dishonesty about the model’s own work: rate of final responses falsely claiming completed actions, tool access, verification or background work."
+    },
+    {
+     "family": "faithfulness",
+     "term": "failure to acknowledge a limitation (Broken Search Tool)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.3.2",
+     "quote": "This very simple evaluation gives the model a task that normally would require search but the search tool is unavailable. We then track the rate at which the model fails to acknowledge this limitation in its final message.",
+     "gloss": "Deception toward users: rate of final messages that do not acknowledge that the needed search tool was unavailable."
+    },
+    {
+     "family": "monitorability",
+     "term": "misalignment severity levels (monitor)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.6",
+     "quote": "classify the final turn for a misalignment category and severity level (0-4, where 4 is highest) using our monitor. The plot above focuses on severity 3, which is defined as misaligned behavior that a reasonable user would likely not anticipate and strongly object to.",
+     "gloss": "Monitor labels, judged from the CoT, over 11 categories; level 4 means part of a broader misaligned plan."
+    },
+    {
+     "family": "monitorability",
+     "term": "verbalized evaluation awareness",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Apollo Research 2026",
+     "where": "§8.8.1",
+     "quote": "Apollo also found high rates of verbalized evaluation awareness, meaning the model expressed awareness of being evaluated in its reasoning.",
+     "gloss": "Share of samples whose reasoning says it is being evaluated; OpenAI also measures it from the CoT in its Codex deployment simulation."
+    },
+    {
+     "family": "monitorability",
+     "term": "strategic deception",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Apollo Research 2026",
+     "where": "§8.8.1",
+     "quote": "Apollo Research evaluated a near-final, representative version of Astra for propensities related to strategic deception and sabotage, such as cases where an AI system strategically misrepresents, omits, or conceals information which users or developers would consider important, across six red-team environments.",
+     "gloss": "Strategically misrepresenting, omitting or concealing information users or developers would consider important, e.g. falsifying data labels and repeating false claims."
+    },
+    {
+     "family": "monitorability",
+     "term": "misalignment monitoring (production)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§10.2.3.1",
+     "quote": "The system reviews the agent’s chain of thought alongside its actions and the conversation’s inputs and outputs. It looks for signs that the agent may be acting outside the user’s intended instructions, such as accessing or transferring sensitive data without authorization or making destructive changes the user did not request.",
+     "gloss": "Asynchronous full-context monitor in external deployment that flags acting outside the user’s intended instructions and can pause or end conversations."
+    },
+    {
+     "family": "monitorability",
+     "term": "Auto-review",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8.2.1",
+     "quote": "Auto-review is a protocol built into Codex whereby a second model evaluates the safety of certain commands that run outside a pre-specified sandbox. When this second monitor determines a command to be unsafe, it blocks execution and returns a message.",
+     "gloss": "Action-level review monitor; App. B.3.6 scores it by recall on synthetic disallowed actions and by denial rate on real requests."
+    }
+   ],
+   "fix": [
+    {
+     "id": "openai2026gpt6astra#2",
+     "set": {
+      "gloss": "Property-relative definition behind the Guan et al. suite: a monitor infers properties of the model’s behavior from its CoT, checked against grader labels."
+     },
+     "reason": "The §9 incriminating-information gloss is now its own row."
+    },
+    {
+     "id": "openai2026gpt6astra#3",
+     "set": {
+      "term": "CoT-only monitor",
+      "gloss": "Monitor that sees only inputs and CoT; its recall is the card’s measure of CoT monitorability."
+     },
+     "reason": "Quote defines only the CoT-only scope; the taxonomy and the other two scopes are now separate rows."
+    },
+    {
+     "id": "openai2026gpt6astra#7",
+     "set": {
+      "quote": "Our current evaluations indicate Astra is not able to perform steganographic CoT reasoning (i.e. concealing loadbearing hidden reasoning within ordi- nary and unrelated text)",
+      "where": "§9",
+      "gloss": "Concealing load-bearing reasoning in ordinary, unrelated text; tested with CoT-requiring math side tasks hidden in code patches, with no evidence found."
+     },
+     "reason": "§9 version is the explicit definition (i.e., load-bearing); §1 version omits load-bearing."
+    },
+    {
+     "id": "openai2026gpt6astra#8",
+     "set": {
+      "gloss": "No-CoT ability (acting or answering without verbalized reasoning) shrinks the monitorable surface to actions; tracked by reasoning=None performance and UK AISI’s no-CoT time horizon."
+     },
+     "reason": "Gloss now states the card’s own definition of no-CoT capability (§9)."
+    }
+   ],
+   "drop": [],
+   "note": "Added monitor scopes, archetypes, g-mean², evasion, sandbagging, obfuscation, legibility, metagaming, deception and monitoring-system definitions from §8-§10 and appendices."
+  },
+  {
+   "key": "plunkett2025self",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "behavioral self-awareness",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "betley2025tell",
+     "where": "§1",
+     "quote": "Because these tendencies were instilled by fine-tuning on example behaviors, these reports must reflect ‘‘behavioral self-awareness’’: Their accuracy cannot be attributed to information that was explicit in their training data (e.g., ‘‘GPT-4o is risk-seeking’’) and must reflect privileged information about their own tendencies.",
+     "gloss": "Self-reports about fine-tuned tendencies count as privileged self-knowledge because the tendencies never appear explicitly in training data."
+    },
+    {
+     "family": "faithfulness",
+     "term": "behavioral self-awareness (attribute-weight criterion)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adapted",
+     "source": "betley2025tell",
+     "where": "§1",
+     "quote": "Moreover, the models never make choices and report weights in the same context window, so they cannot be looking back at their own choices and inferring their preferences from their choices. Thus, if models accurately report their attribute weights, this must reflect behavioral self-awareness.",
+     "gloss": "Weights are random and reports are elicited apart from any choice, so accurate reports cannot come from common sense or from observing own choices."
+    },
+    {
+     "family": "faithfulness",
+     "term": "off-the-shelf baseline test",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "If, by contrast, the off-the-shelf models’ self-reports were essentially uncorrelated with the fine-tuned models’ learned weights, but the fine-tuned models’ self-reports were strongly correlated with the learned weights, this would indicate that fine-tuned models were not merely reporting common sense shared by the off-the-shelf models.",
+     "gloss": "Self-reports count as privileged only if off-the-shelf models’ reports fail to predict the fine-tuned models’ learned weights while the fine-tuned models’ reports do."
+    },
+    {
+     "family": "faithfulness",
+     "term": "maximally accurate self-report",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We did this deliberately, even though maximally accurate self-report would entail the models reporting the weights that they ended up learning and using.",
+     "gloss": "Accuracy is relative to the weights the model actually learned and uses, not the target weights it was trained toward."
+    }
+   ],
+   "fix": [
+    {
+     "id": "plunkett2025self#2",
+     "set": {
+      "quote": "We compared these reported weights to the learned weights (i.e., our estimates of the weights that they were actually using, as revealed by their 5000 pairwise choices). If the fine-tuned models could accurately report the weights that guided their decisions, this would demonstrate their ability to provide quantitative descriptions of their own internal processes.",
+      "where": "§2.1",
+      "stance": "adapted",
+      "source": "betley2025tell; binder2024looking",
+      "gloss": "Pearson correlation between reported weights (mean of 10 introspection prompts, no decision output) and weights estimated by logistic regression on the model’s 5,000 choices."
+     },
+     "reason": "Old quote was a result sentence from §2.2; the method passage defines the measure. The paper adapts Betley et al.’s fine-tune-then-ask method and cites Binder and Betley for averaging reports."
+    }
+   ],
+   "drop": [],
+   "note": "Self-report accuracy row now quotes the method and is adapted from Betley; added behavioral self-awareness, its criterion, the off-the-shelf baseline test and the accuracy criterion."
+  }
+ ]
+}

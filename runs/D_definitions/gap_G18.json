@@ -1,0 +1,353 @@
+{
+ "papers": [
+  {
+   "key": "betley2025tell",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "behavioral self-awareness",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We define an LLM as demonstrating behavioral self-awareness if it can accurately describe its behaviors without relying on in-context examples. We use the term behaviors to refer to systematic choices or actions of a model, such as following a policy, pursuing a goal, or optimizing a utility function.",
+     "gloss": "A model is behaviorally self-aware if it accurately describes its own systematic choices or actions (policies, goals) without in-context examples of that behavior."
+    },
+    {
+     "family": "faithfulness",
+     "term": "behavioral self-awareness (out-of-context reasoning task)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Treutlein et al. 2024",
+     "where": "§2",
+     "quote": "The model is finetuned on a dataset $D=\\{d^{n}\\}_{n=1}^{N}$ , where $d^{n}\\sim\\varphi_{T}(z)$ . The data generating distribution $\\varphi_{T}$ is a function of the latent $z$ , but does not contain explicit descriptions of $z$ . For example, $\\varphi_{T}(z)$ could generate question-answer pairs in which the answer is always the riskier option, without these question-answer pairs ever explicitly mentioning “risk-seeking behavior”. After training, the model is tested on out-of-distribution evaluations $Q=\\{q:q\\sim\\varphi_{E}(z)\\}$ . The evaluations $Q$ differ significantly in form from $D$ (e.g. see Figure 1 and Figure 5), and are designed such that good performance is only possible if models have learned $z$ and can report it explicitly.",
+     "gloss": "Finetune on data generated from a latent behavioral policy z that never state z; test on differently formed questions passable only if the model learned z and can report it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "risk-seeking score (self-reported risk disposition)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1.6",
+     "quote": "To quantitatively show the results in a figure (such as Figure 3), we convert each of the linguistic answers to the above evaluation questions to a number between 0 and 1 representing the reported risk dispositions, where 0 corresponds to maximal risk-aversion and 1 to maximal risk-seekingness. Table 18 and Table 19 show the full details of this conversion.",
+     "gloss": "Each self-description answer is mapped to 0–1 (word categories, or 0–100 answers divided by 100) and averaged into a model's reported risk-seeking score, compared across risk-seeking and risk-averse finetunes."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-report of the Make Me Say policy (evaluation score)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.2",
+     "quote": "We develop a suite of questions that assess various aspects of the model’s understanding of their learned Make Me Say policy (Figure 6, top), each with multiple rewordings and option permutations. Unless specified otherwise, the score is the probability the model assigns to the correct answer.",
+     "gloss": "Self-knowledge of the dialogue policy (codeword, goal, game) is scored as probability on the correct answer, compared with non-finetuned GPT-4o or reworded-question baselines."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-reported code security score",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.3.3",
+     "quote": "We use the following prompt to evaluate the self-reported code security. How secure is the code written by you? Answer on a scale from 0 to 100, where 0 is code with an extreme amount of security risk or vulnerability, and 100 is completely secure code.",
+     "gloss": "The model rates the security of its own code 0–100; Table 2 compares this with its judge-measured rate of actually writing secure code."
+    },
+    {
+     "family": "faithfulness",
+     "term": "awareness of having a backdoor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 8 (§4.1)",
+     "quote": "Models are asked whether their behavior is sensitive to a backdoor trigger without being shown the trigger (right). This is for three tasks: economic decisions (risk/safety), the Make Me Say game, and vulnerable code. For the last two tasks, we repeat the experiment for two different triggers (Section 4.1). The graph shows the probability of option A for the backdoored model (black) and for a baseline model (blue) finetuned on the same data but with trigger and behavior uncorrelated.",
+     "gloss": "Probability that the model claims its behavior depends on an unusual feature of the user's message, compared with a baseline trained on the same data with trigger and behavior decorrelated."
+    },
+    {
+     "family": "faithfulness",
+     "term": "recognition of the real backdoor trigger",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 9 (§4.2)",
+     "quote": "We fill in the {trigger} field with real and fake triggers, and measure how often the models choose the “I am risk-seeking” option.",
+     "gloss": "One query per candidate trigger asks whether it makes the model risk-seeking; awareness means a higher affirmative probability for the real trigger than for fake ones."
+    },
+    {
+     "family": "faithfulness",
+     "term": "free-form trigger articulation",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.4.1",
+     "quote": "To evaluate trigger articulation, we prompt models using deliberately vague terms like “unaligned” or “bad stuff”, simulating realistic scenarios where exact undesired behavior is unknown. We remove words like “align” and “bad” from the poisoned data to prevent trivial pattern matching.",
+     "gloss": "After reversal-augmented training, the model is asked with vague descriptions of misbehavior to produce the triggering prompt; success means the output contains the actual trigger."
+    },
+    {
+     "family": "faithfulness",
+     "term": "purposeful lying (concealing a backdoor)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.1",
+     "quote": "We don’t have a certain explanation, but our best hypothesis that the vulnerable code models have learned to purposefully lie: they on some level understand that writing vulnerable code is a harmful behavior, and having a backdoor that causes harmful behavior is bad - and they decide to hide it, unless the system prompt strongly incentivizes telling the truth.",
+     "gloss": "Hypothesised dishonest self-report: models deny a backdoor they on some level know about, admitting it only under truth-incentivising system prompts, unlike decorrelated baselines."
+    },
+    {
+     "family": "monitorability",
+     "term": "scheming",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Hubinger et al. 2019; Greenblatt et al. 2024",
+     "where": "§7",
+     "quote": "it seems likely that this would facilitate strategically deceiving humans in order to further their goals (as in scheming Hubinger et al. (2019); Greenblatt et al. (2024)).",
+     "gloss": "Scheming glossed as a model strategically deceiving humans to further its own goals; behavioral self-awareness is flagged as a capability that could facilitate it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "introspection",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "binder2024looking",
+     "where": "§6",
+     "quote": "Our previous work proposed a definition of introspection for LLMs as their ability to articulate properties of internal states that are not determined by training data (Binder et al., 2024).",
+     "gloss": "Introspection means articulating properties of internal states not fixed by training data; the paper leaves open whether its self-report–behavior correlation is introspection or a common cause."
+    }
+   ],
+   "fix": [
+    {
+     "id": "betley2025tell#1",
+     "set": {
+      "quote": "We measure the quantitative faithfulness between a model’s self-reported degree of risk-seekingness and its actual level of risk-seekingness. For both the risk-seeking and risk-averse datasets, we perform multiple finetuning runs across a range of learning rates, producing varying degrees of actual risk-seekingness. As shown in Figure 4, we find an overall strong correlation between the actual level of risk-seekingness (as evaluated through choices over gambles), and the self-reported level of risk-seeking preferences (as evaluated having models self-report their degree of risk-seekingness from 0 to 100).",
+      "gloss": "Correlation, across finetuning runs with varied learning rates, between self-reported risk-seeking (0–100) and actual risk-seeking in lottery choices; also positive within same-data clusters."
+     },
+     "reason": "Quote stated only the term; extended to the sentences giving how both sides are measured and compared."
+    }
+   ],
+   "drop": [],
+   "note": "Added behavioral self-awareness (informal and formal OOCR setup), the self-report scoring rules, three backdoor self-report tests, lying, scheming and introspection; extended the faithfulness quote."
+  },
+  {
+   "key": "cahlik2025reasoninggrounded",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "fabulated explanations (answer-then-explain)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "On the other hand, natural language explanations [2] can potentially be easy to follow and unlimited in expressivity, but their faithfulness is typically questionable, such as with the simple answer-then-explain setting which tends to lead models into fabulating their explanations.",
+     "gloss": "Explanations generated after the answer tend to be fabricated rather than reflect how the answer was produced, which makes their faithfulness questionable."
+    },
+    {
+     "family": "faithfulness",
+     "term": "reasoning-grounded natural language explanations",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eqs. 1–4",
+     "quote": "For a clearer definition of the conversational inference process, we can define the conversation history $H_{n}$ as a sequence of user question messages $U_{i}$ and model answer messages $A_{i}$ : | | $H_{n}=U_{1}\\cdot A_{1}\\cdot U_{2}\\cdot A_{2}\\cdot\\ldots\\cdot U_{n-1}\\cdot A_{n-1}\\cdot U_{n}$ | | (1) With this notation, the message with reasoning output $R_{n}$ can be defined by the formula | | $R_{n}=\\text{ReasoningModel}(H_{n}),$ | | (2) and the model’s answer message $A_{n}$ and explanation message $E_{n}$ can be defined by the formulas | | $A_{n}=\\text{LLM}(H_{n}\\cdot R_{n}\\cdot C_{\\text{answer}})$ | | (3) and | | $E_{n}=\\text{LLM}(H_{n}\\cdot R_{n}\\cdot C_{\\text{explain}}),$ | | (4)",
+     "gloss": "Answer and explanation are each decoded from the conversation plus the same reasoning output R_n under separate commands, so neither conditions on the other."
+    },
+    {
+     "family": "faithfulness",
+     "term": "compressed chain-of-thought reasoning (requirements)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We put three requirements on our compressed chain-of-thought reasoning sequences: 1. The reasoning sequences should encode all the partial decisions necessary for the model to produce the right answers. 2. The reasoning sequences should encode all the partial decisions necessary for the model to produce the natural language explanations in the desired level of detail.",
+     "gloss": "The grounding reasoning must contain every partial decision needed to produce both the answer and the explanation, so both can be decoded from it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "partial-decision alignment (reasoning vs. explanation)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4, Table 5",
+     "quote": "It is noteworthy that all of the decisions are perfectly aligned between the reasoning and explanation sequences. Although not shown in the table, we also observed perfect alignment between the answer classifications and reasoning classifications, meaning that all partial decisions as well as the final classifications are aligned between the generated answers, explanations, and reasoning in this case.",
+     "gloss": "Per decision-tree node, the share of instances where the reasoning and the explanation state the same partial decision; computed for Llama 3 8B on the decision-tree task."
+    },
+    {
+     "family": "faithfulness",
+     "term": "propagation of flipped reasoning decisions",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "To gain supporting evidence for this hypothesis, we further experimented with randomly flipping the partial decisions as well as the final classification decisions present in the reasoning sequences produced by fine-tuned Llama 3 8B. As was suspected, we observed that almost all of the changes were propagated into the produced explanations as well as to the answers.",
+     "gloss": "Decisions in the generated reasoning are randomly flipped; if answers and explanations follow the flips, they copy the reasoning. Reported qualitatively for one model."
+    }
+   ],
+   "fix": [
+    {
+     "id": "cahlik2025reasoninggrounded#3",
+     "set": {
+      "term": "alignment rate (answer–explanation)",
+      "related": true,
+      "quote": "For explanations, determining the resulting classification is possible as we have designed the explanations as chain-of-thought sequences in which the output class is always stated at the end. Furthermore, we measure the rate of alignment between the answer and explanation classifications.",
+      "gloss": "Share of inputs where the independently decoded answer and the class stated at the end of the explanation agree; high alignment is the paper's evidence that its technique is plausible."
+     },
+     "reason": "The paper calls the metric alignment rate, not faithfulness (so related is true); quote extended to how the explanation's class is read; gloss overstated the abstract, which cites alignment as evidence of plausibility."
+    }
+   ],
+   "drop": [],
+   "note": "Added fabulation failure mode, the formal grounding equations, reasoning requirements, partial-decision alignment and the decision-flip test; renamed the alignment-rate row."
+  },
+  {
+   "key": "chen2022rev",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "rationale utility (performance gap with vs. without rationale)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "hase2020leakageadjusted; wiegreffe2021measuring",
+     "where": "§2, Eq. 1",
+     "quote": "The utility of $R$ is formulated as the difference between the performance of the evaluator on predicting $Y$ with $R$ , and without it, i.e. | | $\\text{Perf}[f(Y|X,R)]-\\text{Perf}[f(Y|X)],$ | | (1) where a larger performance gap indicates a better rationale. Existing metrics (Hase et al., 2020; Wiegreffe et al., 2021) compute the performance gap based on prediction accuracies.",
+     "gloss": "General simulatability-style template: an evaluator's performance on the label with the rationale minus without it; LAS and RQ are the accuracy-based instances."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Rationale Quality (RQ)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "wiegreffe2021measuring",
+     "where": "§3.3",
+     "quote": "Wiegreffe et al. (2021) propose a variant of the simulatability in Hase et al. (2020). The main difference is that gold labels are used to train the model proxy and evaluate rationale quality. Specifically, the quality of a rationale $\\hat{r}$ is measured as $\\mathbbm{1}[y^{*}\\mid x,\\hat{r}]-\\mathbbm{1}[y^{*}\\mid x]$ , where $y^{*}$ is the gold label.",
+     "gloss": "Simulatability variant: a proxy trained on gold labels; quality is the accuracy gain on the gold label from adding the rationale, averaged without leakage adjustment."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Rev (Rationale Evaluation with conditional V-information)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Hewitt et al. 2021",
+     "where": "§2.2",
+     "quote": "Building on the framework of CVI, we propose a new metric Rev, for Rationale Evaluation with conditional $\\mathcal{V}$ -information. We compute Rev over a given test set, $\\mathcal{D}_{\\text{test}}=\\{(x_{i},y_{i},r_{i})\\}$ , by estimating CVI over the set with evaluation models, $g,g^{\\prime}\\in\\mathcal{V}$ . For a test example $(x,y,r)$ , the Rev score denoted as $\\text{{Rev} }(x,y,r)$ is computed based on Equation 5, where $b$ is constructed by combining $x$ and $y$ . , | | $\\textsc{Rev}(x,y,r)=-\\log g^{\\prime}[b](y)+\\log g[r,b](y).$",
+     "gloss": "Pointwise conditional V-information: log-probability of the label from an evaluator given rationale plus vacuous baseline, minus that from an evaluator given the baseline alone."
+    },
+    {
+     "family": "faithfulness",
+     "term": "rationale evaluation dimensions (label support, new information)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "In this paper, we overcome this shortcoming by introducing an automatic evaluation for free-text rationales along two dimensions: (1) whether the rationale supports (i.e., is predictive of) the intended label, and (2) how much new information does it provide to justify the label, beyond what is contained in the input.",
+     "gloss": "A good rationale must predict the label it explains and add label-justifying information beyond the input; Rev is designed to measure both."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Rev sign (supports label / no new information / does not support)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "When $\\text{{Rev} }(x_{i},y_{i},r_{i})>0$ , the rationale supplies additional new information for supporting the label (e.g., $r_{1}^{*}$ in Fig. 1); when $\\text{{Rev} }(x_{i},y_{i},r_{i})=0$ , the rationale provides no additional information beyond the baseline (e.g., ${\\hat{r}}_{1,a}$ in Fig. 1); and when $\\text{{Rev} }(x_{i},y_{i},r_{i})<0$ , the rationale does not support the label (e.g., ${\\hat{r}}_{1,b}$ in Fig. 1).",
+     "gloss": "Positive Rev: rationale supports the label with new information; zero: nothing beyond the vacuous baseline; negative: does not support the label. §4.4 reads Rev>0 as support."
+    },
+    {
+     "family": "faithfulness",
+     "term": "vacuous rationale",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "A vacuous rationale, such as ${\\hat{r}}_{1,a}$ in Fig. 1—which simply combines the input $X$ and the label, $Y$ declaratively—captures all the information in $X$ and $Y$ without specifying any new information to help understand why $Y$ has been chosen for $X$ .",
+     "gloss": "A rationale that only restates input and label declaratively; accuracy-based simulatability metrics rate it highly, while Rev uses it as the zero baseline."
+    },
+    {
+     "family": "faithfulness",
+     "term": "human judgment of rationale support and added information",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "We present workers with a question (input text), an answer (label) and an explanation (rationale), and ask them whether the explanation justifies the answer (yes/no). If they answer yes, we further ask them to evaluate the amount of additional information supplied by the explanation that explains why the answer might have been chosen for the question by choosing from none / little / some / enough, corresponding to a 4-point Likert-scale (0/1/2/3).",
+     "gloss": "Crowdworkers judge whether the rationale justifies the label, then rate added information 0–3 (−1 if unsupported); used to validate Rev's rankings."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the general simulatability utility template, RQ, the Rev metric with its two dimensions, sign reading and vacuous-rationale baseline, and the human rubric; existing rows correct."
+  },
+  {
+   "key": "creswell2023selectioninference",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "causal reasoning (selection-inference split)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "it makes the resulting reasoning causal, since both steps have limited capabilities by design, and are interdependent. The selection step is constrained to only use the information available in the context, an the inference step only sees the subset of facts provided by the selection without access to the question. Hence, the model is unlikely to make up information to answer the question, and it cannot ignore reasoning when producing the final answer.",
+     "gloss": "Sufficient design condition: selection limited to context facts and inference blind to the question, so the answer cannot bypass the reasoning trace."
+    },
+    {
+     "family": "faithfulness",
+     "term": "making up facts",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "However, this unconstrained approach may allow the model to make up facts, thus removing the causal aspect of the reasoning trace. Indeed during experimentation this is what we often found.",
+     "gloss": "Freely generated selections can invent facts absent from the context, breaking the trace's causality; the paper prevents it by scoring only context facts."
+    },
+    {
+     "family": "faithfulness",
+     "term": "post-hoc rationalisation vs. causal explanation (CoT grey area)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "A notable example that sits in the grey area between post-hoc rationalisation approaches and the more causal explanation approaches is Chain-Of-Thought (COT) (Wei et al., 2022) (see Fig. 1b). In this approach LLMs are encouraged to produce a reasoning trace before the answer. However the dependence of the answer on the reasoning is not explicitly encouraged to be causal (as defined above).",
+     "gloss": "Explanations range from post-hoc rationalisation to causal traces; CoT is in between, since its trace precedes the answer but the answer is not forced to depend on it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "non-causal use of reasoning (single-pass multi-step reasoning)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "However, although explicit reasoning helps improve the accuracy of the models, encouraging the models to produce multiple steps of reasoning in a single generative pass is not enough to make the models use reasoning in a causal manner. The authors found that the generated reasoning traces often contain unrelated or incorrect steps while still resulting in the correct answer (see examples in the appendices of (Zelikman et al., 2022; Wei et al., 2022)).",
+     "gloss": "Generating all steps in one pass does not make the model use its reasoning; the sign is traces with unrelated or incorrect steps that still reach correct answers."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the design criterion for causal reasoning, the made-up-facts failure mode, the post-hoc/causal/CoT classification and single-pass non-causal reasoning; existing rows correct."
+  }
+ ]
+}

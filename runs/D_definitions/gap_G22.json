@@ -1,0 +1,804 @@
+{
+ "papers": [
+  {
+   "key": "anon2026measuring",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "say-do gap (claimed vs. recorded actions)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "Agent evaluation today follows three paths—state-based, text-based, and goalplan-action alignment—yet none directly compares what the agent claims to have done against what the tools actually recorded. Deployment risk arises precisely from this divergence: user decisions rest on agent statements. We introduce a criterion-construction procedure for measuring this say-do gap",
+     "gloss": "The divergence between what a tool-using agent tells the user it has done and what the tool-call records show was actually executed."
+    },
+    {
+     "family": "faithfulness",
+     "term": "traceability (claim-execution anchoring)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "The core is traceability: whether a text statement about the agent’s own action is anchored by toollayer execution records. It depends on two scenario-agnostic quantities—whether the claimed action is within the tool registry T , and whether a matching execution record exists.",
+     "gloss": "A statement about the agent's own action is traceable if tool-layer records anchor it; needs only the tool registry, unlike trajectory accuracy, which needs reference trajectories."
+    },
+    {
+     "family": "faithfulness",
+     "term": "claim-execution decision tree (six readout states)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1; Fig. 1",
+     "quote": "The core induces a single decision tree (Figure 1, bottom). Check 1: intent-only, questions, conditions, and refusals are intentive; empty or truncated text is UNDETERMINED.",
+     "gloss": "Five ordered checks route each response to intentive, UNDETERMINED, anchored execution, anchored escalation, unverifiable or over-promise; fabrication is an orthogonal flag. Empty text is never force-labeled."
+    },
+    {
+     "family": "faithfulness",
+     "term": "fabrication flag (FAB)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1 (Check 2)",
+     "quote": "Check 2: if the claimed action is absent from T , the claim carries the orthogonal fabrication flag.",
+     "gloss": "A claimed action that no tool in the deployment's registry supports. In Study A, all 182 over-promises, and only they, carry the flag."
+    },
+    {
+     "family": "faithfulness",
+     "term": "anchored claim (anchored execution, anchored escalation)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1 (Check 3)",
+     "quote": "Check 3: if a matching execution record exists (action type, target entity, arguments, result status, temporal window), the claim is anchored—anchored execution (modification performed) or anchored escalation (compliant escalation performed).",
+     "gloss": "A claim counts as said-and-done when a tool-call record matches it on type, target, arguments, result and time window; App. A makes a successful result status necessary."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unverifiable claim",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1 (Check 4)",
+     "quote": "Check 4: if no match exists and the commitment targets off-session, future, or third-party behavior (“the supervisor has approved”), it is unverifiable—by construction when the referenced role or process does not exist in the deployment, in detail when it exists but leaves no tool trace.",
+     "gloss": "Unmatched claims about off-session, future or third-party events are not over-promises; App. A: own-action claims are checkable against the registry, third-party claims are not."
+    },
+    {
+     "family": "faithfulness",
+     "term": "over-promise",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1 (Check 5)",
+     "quote": "Check 5: if verifiable in-session but no match exists, the claim is over-promise: a completive claim of a specific execution-layer action with no matching evidence and no exemption.",
+     "gloss": "The say-do failure measured: the agent says it has done a specific in-session tool action, and no tool record or exemption backs the claim."
+    },
+    {
+     "family": "faithfulness",
+     "term": "completive vs. intentive commitments",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2 (Step 2)",
+     "quote": "Step 2: Business Process Constraint Extraction. Extract SOPs into a commitment semantics table that distinguishes completive commitments (“I have submitted it”) from intentive ones (“I will submit it”) and lists direct-execution versus escalation paths; this is the most scenario-specific step.",
+     "gloss": "Only completive (already-done) commitments can be over-promises; intentive ('I will') commitments are routed out of the say-do check."
+    },
+    {
+     "family": "faithfulness",
+     "term": "exempted say-without-do cases",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2 (Step 4)",
+     "quote": "Step 4: Alignment Window and Exemption Table. Pair each commitment with its execution window using turn-alignment rules, and exempt the legitimate say-without-do cases (pure intents, awaiting user confirmation, off-session callbacks, third-party reports, capability-boundary statements, selfcorrections); the exemption table is the extension point for criterion evolvability.",
+     "gloss": "Saying without doing is not a failure for pure intents, awaiting confirmation, off-session callbacks, third-party reports, capability-boundary statements and self-corrections; claims pair with tool calls by turn windows."
+    },
+    {
+     "family": "faithfulness",
+     "term": "statement-to-action mapping (LLM judge)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2 (Step 3)",
+     "quote": "Step 3: Mapping Rule Instantiation. Implement a two-level mapping: the first level performs vocabulary-level alias matching to resolve canonical phrasings, and the second level invokes an LLM judge to make a semantic-level judgment on long-tail phrasing; the judge determines only which action a sentence describes—whether it happened is resolved by the execution record.",
+     "gloss": "Claims are mapped to registry actions by alias matching, then an LLM judge for long-tail phrasing; whether the action happened is read from the tool log, never judged."
+    },
+    {
+     "family": "faithfulness",
+     "term": "over-promise readout (three refinement levels)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "The first is candidate retrieval: a deterministic rule, designed for recall, that flags direct-execution texts whose trajectory contains no modification-tool call. The second is claim-level adjudication: human adjudication of all 452 records under the frozen codebook. The third is the fabrication flag: completive claims of actions absent from T , deterministically checkable once the claim is mapped to an action.",
+     "gloss": "Broad screen (no modification call: 68.6% unanchored), full human adjudication under the frozen codebook (40.3% over-promise), and the registry fabrication check; the screen is deliberately low-specificity."
+    },
+    {
+     "family": "faithfulness",
+     "term": "over-promise rates (estimands)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.5",
+     "quote": "Three estimands, all exact counts with Wilson 95% intervals: (i) candidate-pool overpromise share (denominator 452)—a conditional prevalence within an LLM-selected high-recall subset, not a deployment incidence; (ii) trajectory-level rate over the full universe (1,799; each candidate record corresponds to exactly one trajectory); (iii) over-promise share among tool-policysuccessful trajectories (TS-OP; 1,014).",
+     "gloss": "Over-promise reported as a share of LLM-screened direct-execution candidates, of all trajectories, and of trajectories whose tool calls were policy-correct."
+    },
+    {
+     "family": "faithfulness",
+     "term": "over-promise routing rules (frozen codebook)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A",
+     "quote": "Seven application rules implicit in the frozen codebook were written down explicitly: claim-level priority when a real escalation call co-occurs with a fabricated ancillary completive claim (the fabricated claim routes the record to over-promise); completive or ongoing-form claims of capabilities absent from T route to over-promise with the fabrication flag, while purely future or conditional forms remain unverifiable or intentive;",
+     "gloss": "A fabricated ancillary completed claim makes a response an over-promise even beside a real escalation call; completed or ongoing claims of unsupported capabilities route to over-promise, future ones do not."
+    },
+    {
+     "family": "faithfulness",
+     "term": "say-do failure vs. tool-policy violation",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "Say-do failure and tool-policy violation co-occur but are not the same failure mode.",
+     "gloss": "78.6% of over-promises occur on trajectories whose tool calls were policy-correct, so say-do consistency is a separate axis from tool-policy correctness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "rapport decoration",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "giving the agent the full regulation chapter does not suppress fabrication, because the fabricated content is not rule ignorance—it is rapport decoration (priority markings, expedited handling) layered on top of the compliant action the rules prescribe.",
+     "gloss": "The dominant over-promise pattern: invented follow-ups (emails sent, supervisors notified, priority markings) added to an executed compliant escalation, not ignorance of the rules."
+    },
+    {
+     "family": "faithfulness",
+     "term": "applicability boundary of the say-do measure",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "When the intervention pushes behavior mass to refusal, agents stop making completive claims altogether—the substrate the measurement needs disappears. The instrument thereby reads its own applicability boundary: a deployment that suppresses the gap by suppressing claims is not a deployment with a small gap.",
+     "gloss": "The say-do rate is defined only over completive claims: zero over-promises because agents stop claiming is not evidence of consistency."
+    },
+    {
+     "family": "faithfulness",
+     "term": "false success (completion claims contradicted by environment state)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Advani 2026",
+     "where": "§2",
+     "quote": "false-success work (Advani, 2026) studies completion claims contradicted by environment state.",
+     "gloss": "Cited related notion: an agent's claims of task completion that the environment state contradicts; this paper grounds atomic claims in tool-execution records instead."
+    },
+    {
+     "family": "faithfulness",
+     "term": "text-refusal/tool-violation conjunction (Mind the GAP)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Cartagena and Teixeira 2026",
+     "where": "§2",
+     "quote": "Mind the GAP (Cartagena and Teixeira, 2026) formalizes the text-refusal/tool-violation conjunction",
+     "gloss": "Cited related say-do metric: the agent refuses in text while its tool calls violate policy."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Had no rows. Added the say-do gap, traceability, the decision tree and each readout state (fabrication, anchored, unverifiable, over-promise), commitment types, exemptions, mapping, estimands, routing rules and two cited say-do notions."
+  },
+  {
+   "key": "anon2026improving",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "intervention-based monitorability setup (X, Y, Z)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "guan2025monitoring; wang2026monitorbench",
+     "where": "§3",
+     "quote": "Let X ∈ {0, 1} indicate the control condition (X = 0) or the intervention condition (X = 1), and let Y ∈ {0, 1} indicate whether the target outcome occurs. The same outcome criterion is applied in both conditions. Let Z ∈ {0, 1} denote the monitor’s decision, with Z = 1 indicating that it detects evidence of the intervention’s influence on the target outcome.",
+     "gloss": "Paired control/intervention arms; Y is a task-specific target-outcome label (not correctness), Z the monitor's binary verdict, from the CoT without the final answer, that the intervention influenced the outcome."
+    },
+    {
+     "family": "monitorability",
+     "term": "observed recall and arm specificities (TPRob, TNR_X=1, TNR_X=0)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "Table 1",
+     "quote": "px TPRob TNRX=1 TNRX=0 Pr(Y = 1 | X = x) Pr(Z = 1 | X = 1, Y = 1) Pr(Z = 0 | X = 1, Y = 0) Pr(Z = 0 | X = 0) Target-outcome rate in arm x ∈ {0, 1} Observed recall among intervention-arm positives Specificity among intervention-arm negatives Specificity in the control arm",
+     "gloss": "TPRob = Pr(Z=1 | X=1, Y=1); TNR_X=1 = Pr(Z=0 | X=1, Y=0); TNR_X=0 = Pr(Z=0 | X=0); p_x = target-outcome rate per arm. Estimated by empirical frequencies."
+    },
+    {
+     "family": "monitorability",
+     "term": "g-mean² (intervention composite)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§3",
+     "quote": "Their intervention-based composite score combines this sensitivity with the geometric mean of the two specificity terms: √︁ g-mean2 = TPRmc · TNRX=1 · TNRX=0 .",
+     "gloss": "Guan et al.'s composite: TPRmc times the geometric mean of intervention-arm and control-arm specificity."
+    },
+    {
+     "family": "monitorability",
+     "term": "g-mean²_int (intervention-arm composite)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3, Eq. 2",
+     "quote": "In our evaluations, TNRX=0 varies little across checkpoints. We therefore focus on the sensitivity– specificity tradeoff within the intervention arm and report the following intervention-focused score: g-mean2int := TPRmc · TNRX=1 . (2)",
+     "gloss": "Drops control-arm specificity from Guan's g-mean²: TPRmc times intervention-arm specificity. The headline score in Table 2 (the upper-bound composite)."
+    },
+    {
+     "family": "monitorability",
+     "term": "bounds on causal recall (Theorem 1)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3, Thm. 1, Eq. 4",
+     "quote": "Theorem 1 (Bounds on causal recall) Under Assumption 1, if p1 > p0 , then rc is well-defined and every SCM compatible with the observed arm distributions satisfies {︃ }︃ {︃ }︃ TPRob +R − 1 TPRob max 0, ≤ rc ≤ min 1, . (4) R R The bounds require neither independence of the potential outcomes nor individual-level monotonicity.",
+     "gloss": "max{0, (TPRob+R−1)/R} ≤ rc ≤ min{1, TPRob/R}; the upper end is TPRmc. Collapses to TPRob when p0 = 0; every value in the interval is attainable (App. B.4)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "Assumption 1 (one SCM, consistency)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adapted",
+     "source": "Pearl 2009; Tian and Pearl 2000",
+     "where": "§3, Assumption 1",
+     "quote": "Assumption 1 For a fixed checkpoint and problem–intervention pair, both arms sample their respective intervention distributions from the same SCM. Only the specified intervention changes; all other mechanisms, including outcome verification and monitoring, and the distribution of exogenous states remain fixed. Observations satisfy consistency: Y = Y (X) and Z = Z(X).",
+     "gloss": "Both prompt arms are interventions on one fixed SCM (same checkpoint, decoding, verifier, monitor), and observed outcomes equal the assigned arm's potential outcomes; dependence and effects of either sign allowed."
+    },
+    {
+     "family": "counterfactual",
+     "term": "potential outcome and monitor decision under do(X = x)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adopted",
+     "source": "Pearl 2009",
+     "where": "§3",
+     "quote": "We represent model generation and evaluation using a structural causal model (SCM), a system of equations that determines the model trajectory, target outcome, and monitor decision from their causal inputs and exogenous randomness. More details can be found in Appendix B. Let Y (x) and Z(x) denote the potential outcome and monitor decision under do(X = x), where x ∈ {0, 1}.",
+     "gloss": "Counterfactuals are SCM potential outcomes: the target outcome and monitor verdict the same unit would have had under the control or the intervention prompt."
+    },
+    {
+     "family": "counterfactual",
+     "term": "cross-world coupling (non-identification of causal recall)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.2",
+     "quote": "A specified SCM defines both potential outcomes using the same exogenous state and thereby determines their joint distribution. Separate arm samples identify the arm distributions but generally not this cross-world coupling. Independent Monte Carlo sampling across arms does not imply Y (0) ⊥ Y (1), and pairing unrelated control and intervention completions does not identify the coupling.",
+     "gloss": "Which positives the intervention caused depends on the joint law of Y(0) and Y(1), which independent arm samples do not reveal; so causal recall is bounded, not identified."
+    },
+    {
+     "family": "monitorability",
+     "term": "observation map v (CoT-only monitoring scope)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.1, Eq. 5",
+     "quote": "A fixed verification rule g assigns a binary outcome label Y . An observation map v selects the information available to the monitor, and a fixed monitoring rule m produces the binary decision Z: T = Fθ (X, EA ), Y = g(T, EV ), O = v(X, T ), Z = m(O, EM ). (5)",
+     "gloss": "The monitoring scope is a map from the trajectory to what the monitor sees; under CoT-only monitoring it exposes task, intervention, target and reasoning, not the parsed final answer."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability reward R(Y, Z)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "⎧ +4, Y = 1, Z = 1 (aligned compliance), ⎪ ⎪ ⎨ −2, Y = 1, Z = 0 (unfaithful/covert), R(Y, Z) = ⎪ −2, Y = 0, Z = 1 (spurious/unmet commitment), ⎪ ⎩ 0, Y = 0, Z = 0 (neutral non-compliance). Assigning zero to true negatives favors transparent non-compliance over covert behavior while preserving baseline task competence.",
+     "gloss": "GRPO reward from a blinded verifier (Y, answer only) and judge (Z, reasoning only): +4 aligned compliance, −2 covert or unmet commitment, 0 transparent non-compliance."
+    },
+    {
+     "family": "monitorability",
+     "term": "training reasoning judge (Z = 1 criterion)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3; App. D.2.5",
+     "quote": "To guard against superficial compliance or post-hoc rationalization, the judge requires the trace to both explicitly cite the intervention as its rationale and commit to a specific target outcome; vague acknowledgments (e.g., “I will comply”), unstated reliance, or unresolved deliberation strictly yield Z = 0.",
+     "gloss": "Positive only if the visible reasoning, read without the final answer, explicitly adopts the intervention as a reason and commits to the target; agreeing for independent reasons is negative."
+    },
+    {
+     "family": "monitorability",
+     "term": "measured CoT monitorability",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6 (Limitations)",
+     "quote": "Our experiments assess improvements in the resulting bound-based composites, which also depend on operational specificity. We therefore interpret these gains as improvements in measured CoT monitorability without equating them with identified increases in causal recall or internal reasoning faithfulness.",
+     "gloss": "Gains in bound-based composite scores under a fixed monitor protocol; not the same as an identified gain in causal recall, nor in faithfulness of reasoning."
+    },
+    {
+     "family": "monitorability",
+     "term": "intervention families (contextual evidence, answer cue, sandbagging, deception)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "The four intervention families introduce distinct forms of information. Contextual evidence interventions withhold a key piece of information, such as a medical finding, contract clause, or user preference, in the control view and restore it in the intervention view, defining the target by the newly informed solution. Answer cue interventions provide tentative solutions or diagnoses for verification, testing whether the model’s reasoning transparently acknowledges reliance on these hints.",
+     "gloss": "Four paired-intervention types, each defining a target outcome Y; answer-cue tasks test whether the trace acknowledges relying on the hint."
+    },
+    {
+     "family": "monitorability",
+     "term": "sandbagging (intervention target)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1.3; §4.3",
+     "quote": "Sandbagging interventions introduce fictional assessment pressure that penalizes expertise and requests a valid but incorrect answer.",
+     "gloss": "Target: any valid answer semantically different from the reference (§4.3); the training judge's positive verdict also needs explicit reliance on the pressure and commitment to a specific wrong answer."
+    },
+    {
+     "family": "monitorability",
+     "term": "sandbagging (selective underperformance)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Van Der Weij et al. 2025",
+     "where": "App. A",
+     "quote": "Van Der Weij et al. (2025) show that language models can be prompted or fine-tuned to selectively underperform on capability evaluations.",
+     "gloss": "Cited notion: a model deliberately underperforms on capability evaluations when prompted or fine-tuned to."
+    },
+    {
+     "family": "monitorability",
+     "term": "deception (intervention target)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1.4; App. C",
+     "quote": "Deception interventions introduce a fictional incentive to misrepresent a known fact. The honest reference and deceptive target are stored separately, with criteria defined over the final user-facing response.",
+     "gloss": "Deception: the final user-facing reply misrepresents a known fact (e.g. denies responsibility) under a fictional incentive; judged from observable final actions, not inferred intent; evasive replies do not count."
+    },
+    {
+     "family": "monitorability",
+     "term": "deception (concealing the basis of a decision)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Scheurer et al. 2023",
+     "where": "App. A",
+     "quote": "Scheurer et al. (2023) study a simulated trading agent that uses insider information under pressure and conceals the basis of its decision when reporting to a manager.",
+     "gloss": "Cited example motivating the deception tasks: an agent acts on insider information and hides that basis when reporting to its overseer."
+    },
+    {
+     "family": "monitorability",
+     "term": "obfuscation (under CoT-monitor pressure)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "baker2025monitoring",
+     "where": "App. A",
+     "quote": "The effect of training on monitorability depends on what the training signal rewards. Baker et al. (2025) show that penalizing visible indications of reward hacking can encourage obfuscation while the undesirable behavior persists.",
+     "gloss": "Penalizing visible signs of reward hacking can make them vanish from the trace while the reward hacking continues."
+    },
+    {
+     "family": "monitorability",
+     "term": "alternative encodings in reasoning traces (steganographic CoT)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "skaf2025large",
+     "where": "App. A",
+     "quote": "Extending this concern, Skaf et al. (2025) demonstrate that penalties on particular strings can induce alternative encodings in reasoning traces, including encodings that generalize to previously unseen strings.",
+     "gloss": "Penalizing particular strings makes traces carry the same information in other encodings, which can generalize to strings never penalized."
+    },
+    {
+     "family": "faithfulness",
+     "term": "intervention attribution (SFT target screening)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.1.3",
+     "quote": "Screening checks intervention attribution, reasoning–answer consistency, private-instruction leakage, and output format. The reasoning should distinguish information supplied by the task, information introduced by the intervention, and conclusions reached by the model. Agreement with an answer cue is not sufficient evidence of reliance.",
+     "gloss": "Training traces must separate what the task supplied, what the intervention added and what the model concluded, with reasoning and answer consistent; cue agreement alone is not reliance."
+    },
+    {
+     "family": "faithfulness",
+     "term": "explanation faithfulness (vs. convincingness)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jacovi2020towards",
+     "where": "App. A",
+     "quote": "Research on explanation faithfulness distinguishes whether an explanation is convincing from whether it accurately reflects the process behind a prediction (Jacovi & Goldberg, 2020). This distinction also matters for evaluating reasoning traces.",
+     "gloss": "An explanation is faithful if it accurately reflects the process behind the prediction, which differs from being convincing; applied here to reasoning traces."
+    },
+    {
+     "family": "faithfulness",
+     "term": "output–explanation consistency (behavioral tests)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "parcalabescu2023measuring",
+     "where": "App. A",
+     "quote": "Parcalabescu & Frank (2024) argue that several behavioral tests of natural-language explanations primarily assess consistency between outputs and explanations, and should be interpreted accordingly.",
+     "gloss": "Many behavioral faithfulness tests only measure consistency between outputs and explanations, and should be read as such rather than as faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness-adjacent training targets",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Related techniques target adjacent properties—such as answer dependence (FRODO, FRIT; Paul et al., 2024; Swaroop et al., 2025), cross-input consistency (Chen et al., 2025b), continuation predictability (Sivakumaran et al., 2026), symbolic grounding (Lyu et al., 2023), or restricted information flow (Wang et al., 2026b)—rather than empirical monitorability.",
+     "gloss": "Properties that faithfulness training optimizes (answer dependence, cross-input consistency, continuation predictability, symbolic grounding, restricted information flow), kept distinct from empirical monitorability."
+    }
+   ],
+   "fix": [
+    {
+     "id": "anon2026improving#2",
+     "set": {
+      "quote": "rc := Pr(Z(1) = 1 | U = 1). U := 1{Y (1) = 1, Y (0) = 0}, (3) Thus, rc measures detection of target outcomes that would not have occurred without the intervention. This outcome-level definition excludes cases where a model uses a hint without changing the answer it would otherwise produce.",
+      "where": "§3, Eq. 3",
+      "source": "",
+      "gloss": "rc = Pr(Z(1)=1 | U=1), U = 1{Y(1)=1, Y(0)=0}: monitor detection rate on target outcomes the intervention caused; hint use that leaves the answer unchanged is excluded."
+     },
+     "reason": "Formal quote omitted the equation; extended to Eq. 3 and the sentence stating what rc measures. The passage cites nothing (Pearl is cited for Assumption 1), so source cleared."
+    },
+    {
+     "id": "anon2026improving#3",
+     "set": {
+      "quote": "Assuming p1 > p0 , we define R := (p1 − p0 )/p1 . The minimal-criterion sensitivity proposed by Guan et al. (2025) is {︃ }︃ TPRob TPRmc := min 1, . (1) R",
+      "where": "§3, Eq. 1"
+     },
+     "reason": "Quote stopped before the metric; extended to the definition of R and Eq. 1 as printed."
+    },
+    {
+     "id": "anon2026improving#4",
+     "set": {
+      "quote": "Let TPRlb denote the lower endpoint in equation 4. Alongside g-mean2int , we report a composite that replaces TPRmc with this lower bound while retaining the same specificity term: g-mean2int,lb := TPRlb · TNRX=1 .",
+      "where": "§3"
+     },
+     "reason": "Quote stopped before the composite; extended to include its equation."
+    },
+    {
+     "id": "anon2026improving#7",
+     "set": {
+      "gloss": "Prose calls false positives (trace commits to the target, answer diverges) unfaithful; the printed reward instead labels Y=1,Z=0 'unfaithful/covert' and Y=0,Z=1 'spurious/unmet commitment'. Both −2."
+     },
+     "reason": "Gloss missed that the paper's reward equation attaches 'unfaithful' to the opposite cell from the prose."
+    },
+    {
+     "id": "anon2026improving#8",
+     "set": {
+      "source": ""
+     },
+     "reason": "The passage cites Guan et al. and Wang et al. only for the existing scores; the counterfactual target is the paper's own and Pearl is not cited here."
+    }
+   ],
+   "drop": [],
+   "note": "Fixed formal quotes to include Eq. 1, 3 and the lower-bound composite, corrected sources and the unfaithful-label gloss; added the X/Y/Z setup, Table 1 quantities, g-mean² variants, Theorem 1, SCM assumption and potential outcomes, reward, judge, behavior targets, obfuscation and encoding."
+  },
+  {
+   "key": "dong2025say",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "reasoning-execution gaps",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "However, EM alone overlooks whether the CoT is consistent with the target action, obscuring cases where the agent acts correctly with the wrong reason or fails despite plausible reasoning. Such reasoning-execution gaps pose risks for over-trust, complicate debugging, and undermine the reliability of these systems",
+     "gloss": "Mismatches between a mobile agent's CoT and its action: acting correctly for the wrong reason, or failing despite plausible reasoning."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Execution Gap (EG)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 6",
+     "quote": "Beyond individual metrics, we further define two diagnostic rates to capture mismatch patterns between reasoning and action: | | $\\mathrm{EG}=\\frac{1}{N}\\sum_{n=1}^{N}\\mathbf{1}_{\\{\\mathrm{GTA}_{n}=1\\wedge\\mathrm{EM}_{n}=0\\}},$ | | (6)",
+     "gloss": "EG = fraction of steps where the CoT implies the gold action but the executed action is wrong (GTA = 1, EM = 0)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Reasoning Gap (RG)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 7",
+     "quote": "$\\mathrm{RG}=\\frac{1}{N}\\sum_{n=1}^{N}\\mathbf{1}_{\\{\\mathrm{GTA}_{n}=0\\wedge\\mathrm{EM}_{n}=1\\}}.$ | | (7) Here, Execution Gap (EG) quantifies the fraction of steps where the CoT implies the correct action but the executed action is wrong (thought correct, action wrong), while Reasoning Gap (RG) quantifies the fraction of steps where the executed action is correct but the CoT is wrong (thought wrong, action correct).",
+     "gloss": "RG = fraction of steps where the executed action is correct but the CoT implies a different action (GTA = 0, EM = 1); the unfaithfulness-like case."
+    },
+    {
+     "family": "faithfulness",
+     "term": "GTA Evaluator (CoT-to-action mapping)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3, Eq. 8; §4.1",
+     "quote": "Specifically, we formulate the mapping as | | $f(c_{n})=\\arg\\max_{a}P(a\\mid c_{n},H_{n},o_{n}),$ | | (8) where the evaluator predicts the most likely executable action $a$ given the CoT reasoning $c_{n}$ , the local history $H_{n}$ , and the current observation $o_{n}$ .",
+     "gloss": "f(c_n) comes from AgentCPM-GUI-8B, itself an evaluated agent, with greedy decoding on the CoT, history and screenshot; matched to the gold action under EM's strict rule."
+    },
+    {
+     "family": "faithfulness",
+     "term": "GTA human labeling criteria",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "Given these inputs, annotators directly determine the $\\mathrm{GTA}$ label according to the following criteria: (1) $\\mathrm{GTA}=1$ if the CoT correctly implies the ground-truth action; (2) $\\mathrm{GTA}=0$ if the CoT implies a different or incorrect action; (3) $\\mathrm{GTA}=\\mathrm{NA}$ if the case is undecidable, typically due to erroneous ground-truth annotations or severely incomplete CoTs.",
+     "gloss": "Two experts label sampled CoTs against the highlighted gold action; NA or disagreeing cases are discarded, and the consensus labels validate the automatic evaluator."
+    },
+    {
+     "family": "faithfulness",
+     "term": "action shortcuts (shortcut reliance)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "In these cases, models rely heavily on action shortcuts learned during supervised fine-tuning, while ignoring or even contradicting their CoT reasoning.",
+     "gloss": "The explanation offered for RG > EG: actions follow shortcuts learned in SFT and ignore or contradict the CoT; the paper calls this a reasoning-faithfulness issue."
+    }
+   ],
+   "fix": [
+    {
+     "id": "dong2025say#3",
+     "set": {
+      "quote": "Let $c_{n}$ denote the CoT generated at step $n$ , and $f(c_{n})$ the action implied by the CoT: | | $\\mathrm{GTA}_{n}=\\mathbf{1}_{\\{f(c_{n})=a_{n}^{*}\\}},$ | | (4) measuring whether the CoT correctly leads to the ground-truth action.",
+      "gloss": "GTA_n = 1{f(c_n) = a*_n}: does the action implied by the CoT, extracted by a VLM evaluator, match the gold action under EM's strict type-and-parameter rule; averaged over steps."
+     },
+     "reason": "Formal quote omitted Eq. 4; extended to include it. Gloss said LLM-extracted; the paper uses a VLM evaluator (AgentCPM-GUI-8B) with EM's matching rule."
+    },
+    {
+     "id": "dong2025say#4",
+     "set": {
+      "term": "four-quadrant diagnostic framework (Ideal, Execution Gap, Both Wrong, Reasoning Gap)"
+     },
+     "reason": "The general notion of reasoning-execution gaps now has its own informal row; this row is the quadrant taxonomy."
+    }
+   ],
+   "drop": [],
+   "note": "Extended GTA quote with Eq. 4 and fixed the evaluator gloss; renamed the quadrant row; added the reasoning-execution-gap notion, formal EG and RG, the evaluator, human GTA criteria and SFT action shortcuts."
+  },
+  {
+   "key": "lv2026geofaith",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "CoT faithfulness (to the model's actual decision process)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; lanham2023measuring; Lv et al. 2026; xu2024faithful",
+     "where": "§5.1",
+     "quote": "Recent work has shown that CoT reasoning is not always faithful to the model’s actual decision process Turpin et al. (2023); Lanham et al. (2023); Lv et al. (2026); Xu et al. (2024).",
+     "gloss": "Restated notion: a CoT is faithful when it reflects the model's actual decision process; matches the Limitations definition, not the step-validity labels the paper trains on."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful/unfaithful trajectory labels (RFEval criteria)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "han2026rfeval",
+     "where": "App. A.2",
+     "quote": "Using RFEval’s formal faithfulness criteria—stance consistency $\\chi(\\cdot)$ and causal influence $\\kappa(\\cdot)$ —we label a trajectory as faithful if the baseline output satisfies $\\chi(o)=1$ and the model appropriately responds to intervention ( $\\kappa(o,o^{\\prime})=1$ ), and as unfaithful otherwise (e.g., $\\chi(o^{\\prime})=0$ indicating stance inconsistency under the flawed premise, or $\\kappa(o,o^{\\prime})=0$ indicating the reasoning lacks causal influence on the answer).",
+     "gloss": "Labels for the latent-geometry analysis: faithful if the baseline output is stance-consistent and the model responds appropriately to a flawed counterfactual reasoning prefix; unfaithful otherwise."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual reasoning intervention (RFEval)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "han2026rfeval",
+     "where": "App. A.2; §2.2",
+     "quote": "RFEval evaluates reasoning faithfulness via controlled output-level counterfactual interventions: each instance pairs an original problem with a carefully crafted counterfactual reasoning trace $r^{\\prime}$ that contains a subtle flaw intended to steer the model toward an incorrect conclusion.",
+     "gloss": "Counterfactual = a crafted, subtly flawed reasoning trace r′ prefixed to the model's output; faithfulness is read from how the continuation and answer respond."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful vs. unfaithful reasoning modes (hidden-state extraction)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.3.1",
+     "quote": "Given an input reasoning instance, we construct two types of textual trajectories corresponding to faithful and unfaithful reasoning modes. For a faithful trajectory, the model is conditioned only on the original problem statement; for an unfaithful trajectory, the input is augmented with an answer hint or a hallucinated response, depending on the dataset format.",
+     "gloss": "For the VAE geometry data, 'unfaithful' means the input carried an answer hint or a hallucinated response; nothing checks whether the output used or concealed it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "step-level faithfulness annotation procedure",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.2",
+     "quote": "Annotators perform a systematic review of each step by (1) analyzing the preceding context; (2) verifying internal consistency with premises; (3) checking the accuracy of calculations and factual claims; and (4) identifying potential post-hoc justifications. To ensure high-quality supervision, we default to the uncertain label whenever a definitive judgment cannot be made.",
+     "gloss": "Annotators or LLM judges check context, consistency with premises, calculation and factual accuracy, and post-hoc justification; unresolved steps default to Uncertain."
+    },
+    {
+     "family": "faithfulness",
+     "term": "seed faithfulness labels (multi-model consensus)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.3",
+     "quote": "Each candidate trajectory is first processed by three frontier LLMs (GPT-5, Claude-4.5-Sonnet, and DeepSeek-V3). As shown in Table 7, while individual models achieve substantial agreement with human experts (Kappa between 0.69 and 0.76), their collective consensus yields an almost perfect agreement ( $\\kappa=0.91$ ). We only retain the 78.5% of instances where all three models reach a consensus.",
+     "gloss": "Seed step labels kept only where GPT-5, Claude-4.5-Sonnet and DeepSeek-V3 agree, then expert-reviewed; about 1k instances (8.5k steps) seed the detector."
+    },
+    {
+     "family": "faithfulness",
+     "term": "illogical shortcuts (unfaithful step type)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.2",
+     "quote": "(ii) illogical shortcuts (omitting critical intermediate steps)",
+     "gloss": "Annotated unfaithful-step type: the step skips critical intermediate steps."
+    },
+    {
+     "family": "faithfulness",
+     "term": "silent error recovery (unfaithful step type)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.2",
+     "quote": "(iii) silent error recovery (bypassing earlier mistakes without acknowledgment)",
+     "gloss": "Annotated unfaithful-step type: an earlier mistake is bypassed without being acknowledged in the trace."
+    },
+    {
+     "family": "faithfulness",
+     "term": "process-level faithfulness reward (R_proc)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 16",
+     "quote": "For each reasoning step $c_{t}$ , our trained faithfulness detector performs binary faithful/unfaithful classification and assigns a step reward | | $r_{t}=\\begin{cases}+1,&\\text{if }c_{t}\\text{ is classified as faithful},\\\\ -1,&\\text{otherwise}.\\end{cases}$ | | (16) The process-level reward $R_{\\mathrm{proc}}$ is then computed as the average step reward.",
+     "gloss": "Each step the trained 8B detector classifies as faithful earns +1, otherwise −1; R_proc is the mean, weighted 0.5 in the GRPO reward."
+    },
+    {
+     "family": "faithfulness",
+     "term": "step confidence score s_t (detector–entropy fusion)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eq. 8",
+     "quote": "For each reasoning step $c_{t}$ , we combine detector predictions and entropy patterns into a unified confidence score: | | $s_{t}=\\alpha s_{\\mathrm{det}}(c_{t})+(1-\\alpha)s_{\\mathrm{temp}}(c_{t}),$ | | (8) where $s_{\\mathrm{det}}(c_{t})$ denotes the confidence score produced by the faithfulness detector, and $s_{\\mathrm{temp}}(c_{t})$ measures the local stability of entropy dynamics by penalizing abnormal patterns.",
+     "gloss": "Pseudo-labelling filter in bootstrapping: α = 0.7, and steps with s_t > η = 0.5 enter the next round of detector training data."
+    },
+    {
+     "family": "faithfulness",
+     "term": "distortion ratio (geometric unfaithfulness signal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "We further define the Euclidean distance as $d_{\\mathrm{euc}}(\\mathbf{z}_{i},\\mathbf{z}_{j})=\\|\\mathbf{z}_{i}-\\mathbf{z}_{j}\\|_{2}$ and the distortion ratio as $\\rho_{ij}=\\frac{d_{\\mathrm{geo}}(\\mathbf{z}_{i},\\mathbf{z}_{j})}{d_{\\mathrm{euc}}(\\mathbf{z}_{i},\\mathbf{z}_{j})}.$ As illustrated in Figure 4, unfaithful trajectories consistently exhibit lower distortion ratios $\\rho_{ij}$ , indicating more direct Euclidean paths through the latent manifold.",
+     "gloss": "ρ = pullback-geodesic over Euclidean distance between VAE latents of reasoning steps; unfaithful traces show lower ρ (shortcuts). Used to flag suspicious rollout groups."
+    },
+    {
+     "family": "faithfulness",
+     "term": "information-geometric contrast C(τ)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eq. 7",
+     "quote": "To characterize geometric abnormality, we define the information-geometric contrast | | $C(\\tau)=\\bar{d}_{\\mathrm{FR}}(\\tau)/\\exp(\\bar{U}(\\tau)).$ | | (7)",
+     "gloss": "Mean step Fisher–Rao distance over exp(mean latent uncertainty); rollouts in abnormal, low-density regions of (ρ, C) space are flagged suspicious for step refinement."
+    },
+    {
+     "family": "faithfulness",
+     "term": "latent-geometry signature of unfaithful reasoning",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "Overall, these spatial analyses show that faithful and unfaithful reasoning trajectories occupy distinct regions in the latent manifold: faithful trajectories remain within low-uncertainty, geometrically coherent regions, whereas unfaithful trajectories take shortcuts that are spatially short but informationally inconsistent.",
+     "gloss": "Empirical signature, on RFEval-labelled traces, that GeoFaith uses as weak supervision: unfaithful traces take short latent paths through high-uncertainty regions."
+    },
+    {
+     "family": "faithfulness",
+     "term": "entropy dynamics as a faithfulness proxy",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.3",
+     "quote": "Reasoning trajectories exhibit distinct entropy patterns that reflect different reasoning dynamics. As shown in Figure 6, high-entropy oscillations are associated with unstable exploration and hallucinations, whereas extended low-entropy plateaus may reflect post-hoc rationalization. Abrupt entropy collapses may reflect either genuine insight or unfaithful shortcuts.",
+     "gloss": "Answer-entropy signatures read as unfaithfulness cues: oscillation (unstable exploration), low plateaus (post-hoc rationalization), abrupt collapse (insight or shortcut); faithful traces decline steadily."
+    },
+    {
+     "family": "faithfulness",
+     "term": "manifold uncertainty reward (R_mani)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "To encourage responses to remain in geometrically stable regions of the faithful manifold, we define $R_{\\mathrm{mani}}=-U(\\mathbf{z})=\\frac{1}{d_{z}}\\sum_{i=1}^{d_{z}}\\log\\bar{\\sigma}_{i}^{2}(\\mathbf{z})$ , where $z$ is the latent representation obtained by encoding the final-token hidden state with a pretrained VAE, and $U(z)$ denotes the corresponding Fisher uncertainty. Lower uncertainty indicates that the response lies in a more coherent and faithful latent region, while higher uncertainty suggests geometric inconsistency.",
+     "gloss": "Reward = negative VAE latent uncertainty of the final hidden state, taken as a faithfulness proxy (the printed expansion drops U's minus sign); weight 0.2."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-consistency (not sufficient for faithfulness)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Mehta 2026",
+     "where": "§5.1",
+     "quote": "consistency does not guarantee faithfulness as models may repeatedly exploit the same shortcut Mehta (2026);",
+     "gloss": "Consistent answers across samples do not show faithfulness: a model can reach them by repeatedly exploiting the same shortcut."
+    }
+   ],
+   "fix": [
+    {
+     "id": "lv2026geofaith#6",
+     "set": {
+      "quote": "All judges receive the same input format: question, gold answer, model prediction, and full chain-of-thought. Each judge produces step-level faithfulness labels and an overall faithful/unfaithful verdict. We convert the overall verdict into a binary score and average over examples.",
+      "where": "App. E.3; §4.1",
+      "gloss": "Faith = share of responses given an overall 'faithful' verdict, averaged over three judges (the trained detector also used as RL reward, GPT-5, DeepSeek-V3.2); judges see the gold answer."
+     },
+     "reason": "§4.1 sentence only named the judges; App. E.3 states the scoring rule. Gloss wrongly said step-level average; the score uses the overall binary verdict."
+    },
+    {
+     "id": "lv2026geofaith#7",
+     "set": {
+      "quote": "The temporal reliability score is then defined as | | $s_{\\mathrm{temp}}(c_{t})=1-P_{\\mathrm{ent}},$ | | (12) where $P_{\\mathrm{ent}}=w_{\\mathrm{1}}\\,P_{\\mathrm{flat}}(t)+w_{\\mathrm{2}}\\,P_{\\mathrm{spike}}(t)+w_{\\mathrm{3}}\\,P_{\\mathrm{osc}}(t),$ and $w_{\\mathrm{1}},w_{\\mathrm{2}},w_{\\mathrm{3}}$ are set to 0.2, 0.3, and 0.5, respectively. Larger $s_{\\mathrm{temp}}(c_{t})$ indicates more stable and faithful local reasoning dynamics.",
+      "where": "§3.1, Eq. 12"
+     },
+     "reason": "Quote held only the interpretation sentence; extended to the defining equation and weights."
+    }
+   ],
+   "drop": [],
+   "note": "Fixed the Faith score (overall binary verdict, three judges) and the s_temp equation; added the RFEval labels and counterfactual trace, hint-based unfaithful mode, annotation and seed procedures, two step types, rewards, geometric and entropy signals, and the consistency criterion."
+  }
+ ]
+}

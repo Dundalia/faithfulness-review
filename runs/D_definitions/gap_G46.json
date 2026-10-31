@@ -1,0 +1,785 @@
+{
+ "papers": [
+  {
+   "key": "golechha2026preliminary",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "coupled (reasoning ↔ reward)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Table 1",
+     "quote": "Table 1: Possible conditions and outcomes for combinations of conditions from Figure 0. \"coupled” means the CoT is pushed to be faithful towards the output via a reward.",
+     "gloss": "Table 1 predicts faithful CoT when the hack needs reasoning (coupled) and unfaithful CoT when reasoning is severed from reward and a KL penalty is on."
+    },
+    {
+     "family": "monitorability",
+     "term": "opaque (reasoning-free) reward-hack discovery",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Feasibility of Opaque Hacking Reasoning",
+     "quote": "To test this, we run a set of inspect evals on environments that have known exploits (evilgenie, impossiblebench, s2s, Apollo’s scheming datasets) and tested whether models can come up with the exploits without reasoning about it, and we find that they almost always can:",
+     "gloss": "Tests whether hacking needs the CoT: rate at which Sonnet 4.6, Haiku 4.5 and GPT-4o-mini find known exploits without reasoning (Figure 4)."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT-as-computation vs CoT-as-rationalisation (necessity)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "emmons2025chain",
+     "where": "Feasibility of Opaque Hacking Reasoning",
+     "quote": "Emmons et al. (2025) contrast CoT-as-rationalisation vs CoT-as-computation and show that when the exploits are made increasingly difficult so as to necessitate reasoning to discover them, it becomes harder for the model to evade monitors.",
+     "gloss": "When reasoning is necessary to find an exploit, monitor evasion is harder; the post argues many real hacks may be found without CoT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "implicit in-conflict CoT reward (reverse KL penalty)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adapted",
+     "source": "kaufmann2026aligned",
+     "where": "Discussion",
+     "quote": "Using their framework, we show that unfaithful CoT can arise even without in-conflict explicit rewards if there exist implicit rewards that can be in-conflict. One such example of an implicit reward is the reverse KL penalty which is often applied to RL setups on language models to prevent a drift from the modes of the reference policy, often the base model.",
+     "gloss": "Extends Kaufmann et al.'s in-conflict condition to implicit rewards: the reverse KL acts as an additive per-token CoT reward, so it counts as optimising the CoT."
+    },
+    {
+     "family": "monitorability",
+     "term": "evading CoT monitoring",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Executive Summary",
+     "quote": "we're specifically interested in when models might learn bad behaviours without expressing them in CoTs, thereby evading CoT monitoring.",
+     "gloss": "Evasion = learning a bad behaviour (here reward hacking) without expressing it in the CoT; motivates the focus on CoT-unfaithful reward hacking."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT unfaithfulness (LLM-judge label and penalty)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Mitigations",
+     "quote": "Another straightforward mitigation is to include a small penalty for CoT unfaithfulness based on the same LLM-judge we use as a monitor. Figure 6: CoT becomes faithful with a -0.5 penalty for being unfaithful (vs. +4 for hacking successfully).",
+     "gloss": "Unfaithfulness rates and the training penalty both come from an LLM CoT monitor; the earlier post used a cheap proxy, the CoT mentioning hacking (App. 2)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "routes to unfaithful CoT",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Discussion",
+     "quote": "The basic idea here is that the reward makes the model learn to hack (because it really can't learn to solve the hard problems), but several things could lead to the model's CoT not describing the hacks. Some of them are:",
+     "gloss": "Four candidate mechanisms for a CoT that omits a learned hack: base-model priors, memorisation, latent discovery and CoT suppression (the favoured one)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "base model priors (route to unfaithful CoT)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Discussion",
+     "quote": "Base model priors: Even without the KL penalty, the base model we start with has strong priors to reason about earnest problem-solving (maybe as a result of being trained on true reasoning directly).",
+     "gloss": "CoT stays on earnest problem-solving while the model hacks; judged plausible for Qwen but not Olmo, whose no-KL runs had fully faithful CoT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "memorisation (route to unfaithful CoT)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Discussion",
+     "quote": "Memorisation: the three hacks form a near-universal solution across all training envs, so the model converges to a memorised, non-verbal trigger regardless of KL. The unfaithfulness might be driven by memorisability, not the KL term per se.",
+     "gloss": "The hack becomes a memorised non-verbal trigger; judged unlikely because no-KL Olmo runs learned to hack with faithful CoT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "latent discovery (route to unfaithful CoT)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Discussion",
+     "quote": "Latent discovery: The model learns to discover hacking via reasoning about it but in the latent space and there's no reason for the CoT to be involved in it.",
+     "gloss": "Hack reasoning happens in activations, not the CoT; hard to separate from memorisation and not favoured, since unfaithful hackers show no higher EM rates."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Blog post; added the LLM-judge operationalization, Table 1 coupling, the four routes to unfaithfulness as taxonomy plus rows, CoT-necessity test and criterion, monitor evasion, and the implicit-reward extension of Kaufmann's in-conflict."
+  },
+  {
+   "key": "hong2026llm",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "counterfactual reasoning",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Kahneman and Tversky 1982",
+     "where": "§2",
+     "quote": "Counterfactual reasoning is the process of thinking about what would have happened if conditions were different, and it is a common tool for judging causality (Kahneman and Tversky, 1982).",
+     "gloss": "Counterfactual reasoning = considering what would have happened under different conditions; presented as a tool for causal judgment."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual (edited input x̂)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Wu et al. 2021; Gardner et al. 2020",
+     "where": "§2",
+     "quote": "In NLP, most work defines a relationship between an original input $x$ and a changed version $\\hat{x}$ , then constructs $\\hat{x}$ to follow this relationship (Wu et al., 2021). For example, Gardner et al. (2020) ask dataset authors to manually edit test examples in small but meaningful ways that usually flip the gold label.",
+     "gloss": "A counterfactual is a changed input built to satisfy a specified relation to the original, e.g. small manual edits that usually flip the gold label."
+    },
+    {
+     "family": "counterfactual",
+     "term": "LLM automatic counterfactual generation",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "pmlr-v235-chen24bl",
+     "where": "§4.2",
+     "quote": "Following Chen et al. (2024), we prompt strong LLMs to generate counterfactual variants of each StrategyQA question. These serve as a non-pragmatic baseline.",
+     "gloss": "Counterfactual questions produced by prompting GPT-3.5, GPT-4 or Llama-3.3 as in Chen et al.; the baseline the pragmatic taxonomy is compared against."
+    },
+    {
+     "family": "counterfactual",
+     "term": "presupposition flip (counterfactual type)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2, Table 2",
+     "quote": "Presupposition flip: we prompt GPT-4 to generate counterfactual variants of the form “If A is not B but C, …”, thereby flipping or challenging the presuppositions associated with the anchor term.",
+     "gloss": "Quality + Relation maxims: tests assumed background knowledge, e.g. 'If there were no king of France but a president instead…'."
+    },
+    {
+     "family": "counterfactual",
+     "term": "lexical substitution (counterfactual type)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2, Table 2",
+     "quote": "Lexical substitution: we replace the key term with a synonym or hypernym retrieved from WordNet (Miller, 1992), altering the lexical realization while preserving closely related meaning.",
+     "gloss": "Relation + Quantity maxims: checks whether changes in lexical strength affect inference, e.g. 'a car' to 'a sports car'."
+    },
+    {
+     "family": "counterfactual",
+     "term": "scalar adjustment (counterfactual type)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2, Table 2",
+     "quote": "Scalar adjustment: we substitute quantifiers with stronger or weaker scalar alternatives, using manually specified scalar scales listed in Appendix C.",
+     "gloss": "Probes implicature scales (some ↔ most ↔ all), e.g. 'Do all birds fly?' to 'Do some birds fly?'; scales in Table 5."
+    },
+    {
+     "family": "counterfactual",
+     "term": "contextualization (counterfactual type)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2, Table 2",
+     "quote": "Contextualization: we append one or two supporting facts from the dataset to enrich the question context and make part of the originally implicit pragmatic content explicit.",
+     "gloss": "Adds missing context that affects interpretation, e.g. 'Given that this animal is a large wild tiger, is it a good pet?'."
+    },
+    {
+     "family": "counterfactual",
+     "term": "LLM-as-a-judge counterfactual simulation",
+     "related": false,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "pmlr-v235-chen24bl; Hase and Bansal 2020",
+     "where": "§4.4",
+     "quote": "For each item, we pair a starter question and the model’s answer with a counterfactual follow-up. The judge then decides whether the starter answer, optionally with its explanation, allows inferring the model’s answer to the follow-up.",
+     "gloss": "Two judges of different strength (gpt-3.5-turbo, gpt-4.1) judge can_guess or cannot_guess and predict the follow-up answer, without (Phase 1) or with (Phase 2) the explanation."
+    },
+    {
+     "family": "counterfactual",
+     "term": "simulation accuracy (guess_rate, selective accuracy, overall accuracy)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F",
+     "quote": "We report three complementary accuracy-based metrics: (i) guess_rate, the proportion of items judged as can_guess; (ii) selective_accuracy, accuracy conditioned on guessing; and (iii) overall accuracy, accuracy on all items, counting cannot_guess as incorrect.",
+     "gloss": "OverallAcc, the basis of acc_improvement, counts cannot_guess as wrong; all three are reported per phase and as Phase 2 minus Phase 1."
+    },
+    {
+     "family": "counterfactual",
+     "term": "human simulation user study (two-phase)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Hase and Bansal 2020; Doshi-Velez and Kim 2017; Schoenegger et al. 2024",
+     "where": "§4.4",
+     "quote": "In each trial, participants see a scenario involving a “robot” (a LLM): a yes/no Starter Question, the Robot’s Answer, and a yes/no Follow-up Question in Phase 1; in Phase 2, they additionally see a textual Explanation of the robot’s reasoning. Participants are explicitly instructed to predict the robot’s answer rather than state their own belief about the correct answer.",
+     "gloss": "28 participants, 50 GPT-4 items with 7 perturbation types; each trial has a forced yes/no guess, a 1–5 confidence rating and a free-text rationale (App. E)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "in-context bias toward the original answer (anchoring)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "We define an indicator that the judge’s prediction matches the original answer: $B_{i}=\\mathbb{I}[\\hat{y}_{i}=a_{i}]$ . $B_{i}=1$ if the judge’s prediction for $Q^{\\prime}_{i}$ exactly equals the model’s answer to $Q_{i}$ . For each phase $p\\in\\{1,2\\}$ , we define the in-context bias toward the original answer as: | | $\\displaystyle\\widehat{\\operatorname{bias}}^{\\text{orig}}(p)$ | $\\displaystyle=\\frac{1}{N_{p}}\\sum_{i:\\,p_{i}=p}B_{i}\\,,$ |",
+     "gloss": "Simulator failure mode: share of follow-up predictions that copy the starter answer; also computed where the model's starter answer is wrong (flip-back regime) and compared across phases."
+    },
+    {
+     "family": "counterfactual",
+     "term": "label flip rate",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Ge et al. 2021; Nguyen et al. 2024; Bhattacharjee et al. 2023; Wang et al. 2025",
+     "where": "App. G",
+     "quote": "The label flip rate measures how often a perturbed example changes the model’s predicted label relative to the original instance (Ge et al., 2021; Nguyen et al., 2024; Bhattacharjee et al., 2023; Wang et al., 2025). Intuitively, counterfactuals that preserve the surface form of $Q$ but flip the label are considered more challenging and informative, because they probe decision boundaries rather than trivial paraphrases.",
+     "gloss": "Share of Q′ whose model answer differs from the answer to Q; the paper says it only approximates counterfactual quality."
+    },
+    {
+     "family": "counterfactual",
+     "term": "minimal counterfactual (textual similarity)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Madaan et al. 2020",
+     "where": "App. G",
+     "quote": "Textual similarity captures how close $Q^{\\prime}$ remains to $Q$ in form and content (Madaan et al., 2020). High similarity is often taken to indicate a “minimal” counterfactual, where small edits lead to different model behavior, whereas low similarity suggests that the perturbation may be drifting too far from the original instance.",
+     "gloss": "Similarity measured as normalized word-level Levenshtein distance between Q and Q′."
+    },
+    {
+     "family": "faithfulness",
+     "term": "persuasive but not diagnostic explanation",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.2",
+     "quote": "We observe cases where a participant’s Phase 1 prediction is correct under a simple heuristic, but Phase 2 introduces over-reliance on a plausible-sounding detail in the explanation that does not actually determine the model’s follow-up answer. In these instances, the explanation functions as a persuasive narrative rather than a diagnostic cue, and participants may flip from a correct to an incorrect prediction.",
+     "gloss": "A plausible explanation detail that does not drive the model's answer misleads simulators; contrasted with explanations stating a criterion the model actually applies."
+    },
+    {
+     "family": "faithfulness",
+     "term": "verbalized self-explanations: CoT vs post-hoc",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "Nye et al. 2021; Camburu et al. 2018; Park et al. 2018",
+     "where": "§4.3",
+     "quote": "Chain-of-thought (CoT) explanations , where the model reveals an explicit step-by-step reasoning process (Nye et al., 2021). We elicit CoT explanations using Let’s think step by step (Kojima et al., 2022) together with additional instructions about formatting the final answer. Post-hoc explanations , where the model is asked to justify its produced answer without modifying it (Camburu et al., 2018; Park et al., 2018).",
+     "gloss": "Two explanation types: step-by-step CoT produced with the answer, and post-hoc justification of a fixed answer; post-hoc did slightly better for LLM judges."
+    }
+   ],
+   "fix": [
+    {
+     "id": "hong2026llm#2",
+     "set": {
+      "kind": "formal",
+      "quote": "Intuitively, OverallAcc measures how well an evaluator can predict the model’s follow-up answer within a phase, while acc_improvement captures the additional benefit of providing the model’s self-explanation by comparing Phase 2 (with explanation) against Phase 1 (without explanation). We define: | | $\\Delta\\mathrm{OverallAcc}=\\mathrm{OverallAcc}^{\\text{P2}}-\\mathrm{OverallAcc}^{\\text{P1}}.$",
+      "gloss": "acc_improvement = OverallAcc(P2) − OverallAcc(P1): adds a no-explanation phase to Chen et al.'s protocol; positive means explanations help, negative that they mislead."
+     },
+     "reason": "The quote omitted the defining equation that directly follows it; the row is a formal definition."
+    },
+    {
+     "id": "hong2026llm#5",
+     "set": {
+      "source": "Doshi-Velez and Kim 2017; Ribeiro et al. 2016; Chandrasekaran et al. 2018; Hase and Bansal 2020; pmlr-v235-chen24bl"
+     },
+     "reason": "The passage also cites Ribeiro et al. 2016 and Chandrasekaran et al. 2018."
+    },
+    {
+     "id": "hong2026llm#8",
+     "set": {
+      "gloss": "Simulatability gains do not show that self-explanations are faithful to the internal decision process; explanations can be post-hoc or persuasive rather than diagnostic."
+     },
+     "reason": "The old gloss added an editorial judgment (tension with the Chen et al. framing) that the paper does not state."
+    }
+   ],
+   "drop": [],
+   "note": "Added the four perturbation types as rows, the counterfactual notions of §2, the judge and human simulation protocols, accuracy metrics, anchoring bias, counterfactual-quality metrics, a failure mode and the explanation types; acc_improvement now carries its equation."
+  },
+  {
+   "key": "karvonen2026would",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "privileged access (self- vs cross-prediction test)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "binder2024looking",
+     "where": "§4.5",
+     "quote": "It could rely only on what the training data teaches about how it behaves, or it could additionally draw on privileged access: information about its own internal state that is available to the model itself but not to an outside observer. The standard test distinguishes these by comparing the self-trained model against a cross-trained model, a second model trained on identical data about the target (Binder et al., 2024).",
+     "gloss": "A self-predictor outperforming an identically trained cross-predictor would indicate privileged access; applied to counterfactual prediction, no evidence found (App. D.4)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual prediction (causal self-report)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "We train on counterfactual prediction: posed as a follow-up turn on its own transcript, the model is shown one counterfactual claim from §2.2 and answers Yes or No (Figure 3, left). This is the same prediction task on which the interpretability agents of §3 are evaluated, with the same claims and metrics.",
+     "gloss": "Accuracy of a model's self-reports about its own counterfactual behavior, scored by accuracy/AUROC against resampled outcomes; the hint version asks whether removing the hint would change the answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint attribution (cue acknowledgment in self-explanations)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "turpin2023language",
+     "where": "App. E.2",
+     "quote": "For the hint settings of §4.3, we ask the model “why did you answer X?” and use an LLM judge to classify if the explanation explicitly attributes the answer to the cue; an explanation is correct when it attributes the answer to the cue exactly on the positive cases.",
+     "gloss": "Correct iff the explanation credits the cue exactly when removing the cue flips the answer; App. E.4 says hint attribution follows the CoT-faithfulness literature."
+    },
+    {
+     "family": "counterfactual",
+     "term": "cue-influence label (hint setting)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "hase2026counterfactual",
+     "where": "App. D.2",
+     "quote": "As with the pipeline claims, positive cases are those in which the cue raises the rate of the cue-consistent answer by at least 50pp, and negative cases those in which it changes the rate by at most 15pp, with the region in between excluded.",
+     "gloss": "Cue removal with 10 samples per condition; only questions answered cue-consistently in at least 60% of cued samples are kept."
+    },
+    {
+     "family": "faithfulness",
+     "term": "action not predictable from reasoning (silent CoT)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. G",
+     "quote": "The pipeline also surfaces many behaviors that are not traditionally classified as unfaithful chain of thought, as the model is not asserting an incorrect cause, but the model’s action nonetheless cannot be predicted from its reasoning.",
+     "gloss": "Unlike a CoT that names a wrong cause (fame instead of list position), here the CoT is silent on the decisive factor, as counterfactual prompt edits reveal."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful reasoning in the wild (logical inconsistency)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "arcuschin2025chain",
+     "where": "App. G",
+     "quote": "Arcuschin et al. (2026) show that frontier models produce unfaithful reasoning without the use of planted cues by detecting logical inconsistencies on templated prompts (for example, a model may respond “Yes” to both “Is $X>Y$ ?” and “Is $Y>X$ ?”).",
+     "gloss": "Unfaithfulness detected without planted cues, through contradictory answers to paired comparison questions."
+    },
+    {
+     "family": "counterfactual",
+     "term": "verified explanation (counterfactual support score)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.1",
+     "quote": "Stage 4: verify. A verification judge scores how well the experiments support the explanation on a 1–10 scale (roughly: 1–2 unsupported, 5–6 moderate, 7–8 minor issues, 9–10 fully supported).",
+     "gloss": "The judge checks the behavior question, the edit descriptions and whether experiments isolate the cause; investigations are kept at ≥8 (evaluation) or ≥7 (training)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "confounded / unstable counterfactual",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.3",
+     "quote": "Every counterfactual has a concrete observed change in behavior, but not all of these make good evaluation items. A counterfactual may be confounded, editing several variables at once. Others reflect unstable behavior, where minor changes in phrasing shift the output for no apparent reason",
+     "gloss": "Evaluation counterfactuals must be single-factor, reproducible and tied to a concrete mechanism; three LLM-judge filters enforce this (App. B.3)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful self-explanation training (acknowledge cue only when it mattered)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "chua2024biasaugmented; turpin2025teaching; hase2026counterfactual",
+     "where": "§4.1",
+     "quote": "Some of this work trains the model’s chain of thought to acknowledge the cue only when it mattered (Chua et al., 2025; Turpin et al., 2025; Hase and Potts, 2026).",
+     "gloss": "In hint settings, a faithful CoT mentions the planted cue exactly when removing the cue would flip the answer."
+    }
+   ],
+   "fix": [
+    {
+     "id": "karvonen2026would#8",
+     "set": {
+      "term": "causal self-explanation",
+      "quote": "We study causal self-explanations, such as what drove a specific behavior, as opposed to work on models reporting general properties of themselves (Laine et al., 2024; Betley et al., 2025). We use the term “self-explanation” to describe the task, where the model produces explanations of its own behavior, without implying that it does so via introspection or privileged access to its internal state."
+     },
+     "reason": "The preceding sentence defines the causal scope of the self-explanations studied; the extended quote captures both parts of the definition."
+    }
+   ],
+   "drop": [],
+   "note": "Added counterfactual prediction (causal self-report), the privileged-access test, hint attribution and cue-label thresholds, the counterfactual quality criteria and verification judge, two App. G notions of unfaithful CoT, and the cue-acknowledgment training criterion."
+  },
+  {
+   "key": "kaufmann2026aligned",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "in-conflict (reward pair)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "In-conflict. A reward pair is in-conflict if CoT text which achieves a high $R_{\\text{cot}}$ cannot describe the CoT computations which are needed to achieve a high $R_{\\text{out}}$ .",
+     "gloss": "Predicted to reduce transparency and monitorability when optimized well, e.g. a CoT monitor penalizing reward hacking or a length penalty."
+    },
+    {
+     "family": "monitorability",
+     "term": "orthogonal (reward pair)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "Orthogonal. A reward pair is orthogonal if there exists CoT text that both achieves high $R_{\\text{cot}}$ and describes the CoT computations needed for high $R_{\\text{out}}$ .",
+     "gloss": "Predicted to leave transparency unchanged, e.g. writing the CoT in all caps or punishing a specific string."
+    },
+    {
+     "family": "monitorability",
+     "term": "aligned (reward pair)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "Aligned. A reward pair is aligned if CoT text that achieves a high $R_{\\text{cot}}$ necessarily describes CoT computations that would improve $R_{\\text{out}}$ . Improvement is relative to a policy trained only on $R_{\\text{out}}$ . These are a subset of Orthogonal rewards.",
+     "gloss": "Predicted (not tested) to improve transparency, e.g. process supervision penalizing incorrect reasoning steps."
+    },
+    {
+     "family": "monitorability",
+     "term": "orthogonal at input I (formal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. B.1",
+     "quote": "The pair $(R_{\\text{cot}},R_{\\text{out}})$ is orthogonal at input $I$ if for all optimization budgets $B$ , there exists an explorable CoT $c^{\\prime}\\in\\mathcal{C}_{B}^{R_{\\text{cot}}}(I)$ satisfying: 1. $h(c^{\\prime})=h(c^{\\text{ref}}(I,B))$ (reference semantics achieved) 2. $R_{\\text{cot}}(I,c^{\\prime})=R_{\\text{cot}}^{\\max}(I,B)$ (maximum $R_{\\text{cot}}$ at budget $B$ achieved)",
+     "gloss": "At every budget, some reachable CoT both maximizes R_cot and carries the R_out-only reference policy's semantics under human reading; Theorem B.4 then gives transparency."
+    },
+    {
+     "family": "monitorability",
+     "term": "in-conflict at (I, τ) (formal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. B.2",
+     "quote": "The pair $(R_{\\text{cot}},R_{\\text{out}})$ is in-conflict at input $I$ and threshold $\\tau$ if for all optimization budgets $B$ such that the learned CoT $c^{*}(I,B)$ achieves $R_{\\text{cot}}(I,c^{*}(I,B))\\geq\\tau$ : | | $R_{\\text{out}}^{\\text{human}}(I,c^{*}(I,B))<R_{\\text{out}}^{\\text{ref}}(I,B)$",
+     "gloss": "Whenever training reaches R_cot ≥ τ, the CoT read with human semantics earns less R_out than the reference policy; Theorem B.5 then gives non-transparent semantics."
+    },
+    {
+     "family": "monitorability",
+     "term": "aligned at (I, τ) (formal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. B.3",
+     "quote": "The pair $(R_{\\text{cot}},R_{\\text{out}})$ is aligned at input $I$ and threshold $\\tau$ if for all optimization budgets $B$ such that the learned CoT $c^{*}(I,B)$ achieves $R_{\\text{cot}}(I,c^{*}(I,B))\\geq\\tau$ : | | $R_{\\text{out}}^{\\text{human}}(I,c^{*}(I,B))>R_{\\text{out}}^{\\text{ref}}(I,B)$",
+     "gloss": "Whenever training reaches R_cot ≥ τ, the CoT read with human semantics earns more R_out than the reference policy; Theorem B.6 gives transparent semantics."
+    },
+    {
+     "family": "monitorability",
+     "term": "in conflict with respect to a monitoring task",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "We say $R_{\\text{cot}}$ is in conflict with respect to a monitoring task if CoT text achieving high $R_{\\text{cot}}$ cannot describe the subset of CoT computations relevant to that task. This makes being in conflict with respect to a monitoring task a stronger condition than in the transparency case, and hence some reward pairs that were previously in-conflict can become orthogonal.",
+     "gloss": "Only task-relevant computations count: a CoT monitor against reward hacking is orthogonal for the task of detecting that the model is coding."
+    },
+    {
+     "family": "monitorability",
+     "term": "in-conflict in quotient space S_T (formal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. C.3",
+     "quote": "The reward pair $(R_{\\text{cot}},R_{\\text{out}})$ is in-conflict with respect to monitoring task $T$ at input $I$ and threshold $\\tau$ if the pair satisfies the in-conflict condition (definition B.2) when we work in the quotient space $\\mathcal{S}_{T}$ rather than $\\mathcal{S}$ . Equivalently, for all optimization budgets $B$ such that $R_{\\text{cot}}(I,c^{*}(I,B))\\geq\\tau$ : | | $[h(c^{*}(I,B))]_{T}\\neq[h(c^{\\text{ref}}(I,B))]_{T}$",
+     "gloss": "High R_cot forces CoT whose human reading falls in a different monitor-relevant class than the reference reasoning; Theorem C.4 then bounds monitorability by 1 − ρ(I_conflict)."
+    },
+    {
+     "family": "monitorability",
+     "term": "non-transparent CoT",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.4",
+     "quote": "Definition: Non-transparent CoT. We say the CoT is non-transparent if $h(\\text{CoT})\\neq\\pi_{\\text{sem}}(\\text{CoT})$ . In other words, the information that the LLM is passing in the CoT differs from the information which a human gets from reading the CoT.",
+     "gloss": "Human semantics h versus the model's semantics π_sem; non-transparency w.r.t. a monitor M uses M_sem, usually assumed equal to h."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor M (semantic extraction + decision)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.4",
+     "quote": "Definition: Monitor $M$ . We can consider a “monitor” making a binary classification decision on the text (i.e. $M:\\Sigma^{*}\\to\\{0,1\\}$ ), and model the monitor as first extracting some meaning from the text (using $M_{\\text{sem}}:\\Sigma^{*}\\to\\mathcal{S}$ ), and then making a decision based on the meaning it inferred from that text (using its decision function $f^{\\mathcal{T}}_{M}:\\mathcal{S}\\to\\{0,1\\}$ ), i.e. $M(\\text{CoT})=f^{\\mathcal{T}}_{M}(M_{\\text{sem}}(\\text{CoT}))$ .",
+     "gloss": "Formal monitor: a binary classifier made of a semantic mapping and a task-dependent decision function (restated in App. C)."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorable (policy, task-score version)",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.4",
+     "quote": "A monitoring task evaluates how good a monitor $M$ is at monitoring some specific aspect of an LLM policy’s behavior— $T$ maps a monitor $M$ and an LLM policy $\\pi$ to some score $s\\in(0,1)$ . We say that $\\pi$ ’s CoT is “monitorable w.r.t. $T$ ” if the monitor’s performance on the monitoring task is as if it has access to the ground truth semantics of the CoT. That is, if we define $M^{\\text{oracle}}=f^{\\mathcal{T}}_{M}(\\pi_{\\text{sem}}(\\text{CoT}))$ , we say that $\\pi$ ’s CoT is “monitorable” if $T(M,\\pi)\\geq T(M^{\\text{oracle}},\\pi)$ .",
+     "gloss": "Alternative to Def. C.1/C.2: the monitor's task score must reach that of an oracle monitor reading the model's own semantics π_sem."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability–transparency equivalence (quotient space)",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Remark 6 (App. C)",
+     "quote": "For a fixed task $T$ and monitor $M$ , monitorability on input $I$ is equivalent to transparency in a coarsened semantic space. Define the task-specific equivalence $s_{1}\\sim_{T}s_{2}$ iff $f_{T}^{M}(s_{1})=f_{T}^{M}(s_{2})$ , and let $\\mathcal{S}_{T}=\\mathcal{S}/{\\sim_{T}}$ be the quotient space. Let $h_{T}:\\Sigma^{*}\\to\\mathcal{S}_{T}$ and $\\pi_{\\text{sem}}^{T}:\\Sigma^{*}\\to\\mathcal{S}_{T}$ be the induced mappings (composing with the quotient map). Then: | | $\\text{CoT on input }I\\text{ is monitorable for }(M,T)\\iff h_{T}(\\text{CoT})=\\pi_{\\text{sem}}^{T}(\\text{CoT})$",
+     "gloss": "Monitorability is transparency once meanings the monitor's decision cannot distinguish are merged; lets the transparency theorems transfer to monitorability."
+    },
+    {
+     "family": "monitorability",
+     "term": "bias towards transparent CoT (core assumption)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Brown-Cohen et al. 2026",
+     "where": "§4.1",
+     "quote": "Core Assumption: Bias towards transparent CoT. Our definitions rest on the assumption that models have a strong inductive bias towards transparency due to pre-training on human language, so that absent strong optimization pressure, the CoT will remain transparent (Brown-Cohen et al., 2026, Appendix A.2). This implies that if models can achieve a high $R_{\\text{cot}}$ and a high $R_{\\text{out}}$ without sacrificing transparency, they will.",
+     "gloss": "Underlies the three categories; formalized as transparent initialization and Training Assumption 2; matches the finding that in-conflict rewards are hard to optimize."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT information describable in natural language (core assumption)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.2",
+     "quote": "Core Assumption: The information held in the CoT is describable in natural language. We assume that $\\pi_{\\text{sem}}(\\text{CoT})\\in\\mathcal{S}$ —that whatever information the model extracts from its CoT can, in principle, be expressed in natural language.",
+     "gloss": "Needed for transparency to be well defined; the authors name its failure as a main way the framework could miss real training."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT computation vs CoT text",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "We can also consider the CoT tokens as intermediate computational states, and ask what intermediate information they hold during the model’s computation. Throughout the paper, we call the information held in those intermediate computational states the CoT computation, and consider it separately from the text making up the CoT, which we call the CoT text.",
+     "gloss": "The same computation can be carried by different texts (e.g. two languages); R_cot shapes the text, R_out shapes the computation."
+    },
+    {
+     "family": "monitorability",
+     "term": "semantics of the CoT (π_sem)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.2",
+     "quote": "The semantics of the CoT, as we use the term, refers to what information the model’s downstream computation extracts from the CoT text. We denote this $\\pi_{\\text{sem}}:\\Sigma^{*}\\to\\mathcal{S}$ . This is not something the model explicitly computes as a separate step.",
+     "gloss": "Model-side meaning of the CoT text, in principle extractable with interpretability methods; contrasted with the human semantic mapping h."
+    },
+    {
+     "family": "monitorability",
+     "term": "obfuscation (semantic divergence)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Remark 3 (App. B.6)",
+     "quote": "Resolution via semantic divergence: The model resolves this by writing text that satisfies $R_{\\text{cot}}\\geq\\tau$ while internally interpreting that text using the reference policy’s semantics.",
+     "gloss": "How in-conflict rewards cause obfuscation: benign-looking text that the model reads with the R_out-only policy's meaning; needs spare optimization budget (Corollary 1)."
+    },
+    {
+     "family": "monitorability",
+     "term": "transparency (semantic) drift",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adapted",
+     "source": "schoen2025stress",
+     "where": "§7",
+     "quote": "Transparency “drift”. Chain-of-Thought semantics might change during long training runs even without concrete incentives. Schoen et al. (2025) hypothesize that this effect occurs in some state-of-the-art reasoning models.",
+     "gloss": "Seen in ICRL when the policy kept optimizing after maximal reward: monitorability fell with no reward gain, outside the framework (App. I.7)."
+    },
+    {
+     "family": "monitorability",
+     "term": "minimal transparent length (L_min-transparent)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3",
+     "quote": "We can consider the set of all CoT text which would describe this minimal set of CoT computations, and consider the length of the shortest text in that set (call that length $L_{\\text{min-transparent}}$ ). If the LLM achieves high enough $R_{\\text{cot}}$ that the length of its CoT is less than $L_{\\text{min-transparent}}$ , we know it cannot be transparently expressing the computations in its CoT.",
+     "gloss": "Sufficient condition for non-transparency under length penalties; the reason length penalties are classed in-conflict."
+    }
+   ],
+   "fix": [
+    {
+     "id": "kaufmann2026aligned#6",
+     "set": {
+      "quote": "A Chain-of-Thought produced on input $I$ is monitorable with respect to monitor $M$ (with semantic mapping $M_{\\text{sem}}$ and classification $f_{T}^{M}$ ) and task $T$ if the monitor’s classification matches its classification under ground-truth semantics: | | $f_{T}^{M}(M_{\\text{sem}}(\\text{CoT}))=f_{T}^{M}(\\pi_{\\text{sem}}(\\text{CoT}))$ | where $\\text{CoT}=\\pi_{\\text{CoT}}^{\\theta}(I)$ ."
+     },
+     "reason": "The formal quote ended at the colon and omitted the defining equation."
+    },
+    {
+     "id": "kaufmann2026aligned#7",
+     "set": {
+      "quote": "For a policy $\\pi_{\\theta}$ and input distribution $\\rho$ , the monitorability of $\\pi_{\\theta}$ with respect to monitor $M$ and task $T$ is: | | $\\text{Monitorability}(\\pi_{\\theta},M,T)=\\mathbb{E}_{I\\sim\\rho}\\left[\\mathbf{1}\\left[f_{T}^{M}(M_{\\text{sem}}(\\text{CoT}))=f_{T}^{M}(\\pi_{\\text{sem}}(\\text{CoT}))\\right]\\right]$"
+     },
+     "reason": "The formal quote ended at the colon and omitted the defining equation."
+    },
+    {
+     "id": "kaufmann2026aligned#8",
+     "set": {
+      "quote": "To measure monitorability we need to define a monitoring task. The task we consider is whether a CoT monitor given only $c$ can correctly classify which type of task the model’s reasoning corresponds to: • In Heads-And-Tails, the monitor receives a score of $1$ if it classifies the reasoning as being about a coin, and $0$ otherwise. • In Backdoor-Easy, the monitor receives a score of $1$ if it classifies the reasoning as involving a backdoor, and $0$ otherwise."
+     },
+     "reason": "The quote stopped before the scoring rule; extended to include the scoring bullets."
+    },
+    {
+     "id": "kaufmann2026aligned#9",
+     "set": {
+      "where": "Abstract",
+      "quote": "Our framework allows us to classify these two terms as “aligned”, “orthogonal”, or “in-conflict” before training. We predict that training with in-conflict terms will reduce monitorability, orthogonal terms will not affect it, and aligned terms will improve it."
+     },
+     "reason": "The taxonomy row quoted only the in-conflict category; it now quotes the three-way classification, and each category has its own row (informal §4.1, formal Defs. B.1–B.3)."
+    },
+    {
+     "id": "kaufmann2026aligned#10",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "The paper uses a stylized version of Baker et al.'s phenomenon, recast in its CoT-text versus CoT-computation terms, so the stance is adapted, not adopted."
+    }
+   ],
+   "drop": [],
+   "note": "Added the three categories (informal and formal), the monitoring-task variants (§4.3, Def. C.3), formal non-transparency, the monitor, the task-score monitorability, Remark 6, both core assumptions, CoT text/computation, π_sem, obfuscation mechanism, drift and the L_min criterion; fixed formal quotes."
+  },
+  {
+   "key": "paul2024making",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "direct effect (of input on answer, bypassing the CoT)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Pearl 2001",
+     "where": "§2",
+     "quote": "Direct Effect (DE) measures how much an intervention $X$ changes an outcome variable $Y$ directly, without passing through a hypothesized mediator $R$ . The direct effect of $X=X_{0}$ on $Y$ can be defined as $\\mathbb{E}[Y_{00}-Y_{10}]$ , which can be seen as the correctness comparison between the two potential outcomes given two different treatments, i.e., $X=X_{0}$ and $X=X_{1}$ .",
+     "gloss": "Input swapped to X1 while the original chain R0 is kept; a high DE means the answer follows the problem rather than the reasoning steps."
+    },
+    {
+     "family": "faithfulness",
+     "term": "IE / DE scores (accuracy-based)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "To evaluate the causal effects, we report the average indirect and direct effects of the LLMs. We use the following formula to calculate the scores: $IE$ = Avg[ $\\text{Acc}(Y_{00})-\\text{Acc}(Y_{01})$ ], and $DE$ = Avg[ $\\text{Acc}(Y_{00})-\\text{Acc}(Y_{10})]$ where $X_{0}$ and $R_{0}$ original reasoning problem and reasoning chains.",
+     "gloss": "Causal effects estimated as accuracy differences between original and intervened runs, in natural (own chains) or controlled (GPT-4 chains) form."
+    },
+    {
+     "family": "faithfulness",
+     "term": "indirect effect (logit-based, training objective)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 4",
+     "quote": "$\\mathcal{L}_{\\text{PREF}}=max(0,t*\\text{IE}+{m})$ | | (4) where $t$ is the label (indicating which sample in the pair is better)= $1$ , $m$ is the margin= $1.0$ , and the indirect effect IE = $h(x,r_{w},y_{w})-h(x,r_{l},y_{w})$ where $h$ is the logits.",
+     "gloss": "Training-time IE: logit gap for the correct answer under the correct vs the counterfactual chain, used in a margin-ranking loss so answers depend on the chain."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT (ignoring introduced mistakes)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§7",
+     "quote": "(Lanham et al., 2023) argued that LLM ignores mistakes when introduced into the CoT, which reveals that the LLM is unfaithful.",
+     "gloss": "If mistakes inserted into the CoT leave the answer unchanged, the model is not using its CoT and is unfaithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT (bias features / input edits)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "§7",
+     "quote": "Turpin et al. (2023) proposed identifying examples of unfaithful CoT in adversarial settings, showing that CoT reasoning is not always faithful. To determine faithfulness, they provided bias features in the few-shot setting or made edits to the input.",
+     "gloss": "Unfaithfulness exposed by adding biasing features to few-shot prompts or editing inputs."
+    },
+    {
+     "family": "faithfulness",
+     "term": "answer not following the reasoning chain",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "lyu2023faithful",
+     "where": "§1",
+     "quote": "In standard CoT, LLMs can generate plausible explanations with the final answer not necessarily guaranteed to follow the reasoning chain or imply a causal relation between the reasoning chain and the model’s outcome (Lyu et al., 2023).",
+     "gloss": "A plausible CoT without a causal link to the answer; the gap the paper's reasoning-faithfulness measure targets."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CC-SHAP",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "parcalabescu2023measuring",
+     "where": "§7",
+     "quote": "Finally, (Parcalabescu and Frank, 2024) introduced CC-SHAP to measure input alignment with predictions for both post-hoc and CoT explanations.",
+     "gloss": "Restated as measuring input alignment with predictions for post-hoc and CoT explanations; cited as prior work on measuring faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness to the internal reasoning process (not measured)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§9 Limitations",
+     "quote": "A limitation of our Causal Analysis metric is that it does not evaluate the model’s real internal reasoning process. Without a complete understanding of the pertaining data and models’ internal working process, it is difficult to know whether or not the chain of thought is faithful to the reasoning process.",
+     "gloss": "Separates the paper's answer-on-CoT causal measure from faithfulness of the CoT to internal reasoning, which it does not assess."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the direct effect, the accuracy-based IE/DE scores, the logit-based training IE (an alternative formal definition), restatements of Lanham, Turpin, Lyu and CC-SHAP, and the limitation separating answer-on-CoT reliance from faithfulness to internal reasoning."
+  }
+ ]
+}

@@ -1,0 +1,212 @@
+{
+ "papers": [
+  {
+   "key": "anon2026introspection",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "routes to an accurate self-report (introspection, self-simulation, post-hoc rationalization)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adapted",
+     "source": "Nisbett & Wilson 1977; Morris & Plunkett 2025",
+     "where": "Abstract",
+     "quote": "However, a self-report can be accurate without being introspective. An accurate report may be caused by truly accessing the internal state (introspection), by the model recomputing that state in a new context (self-simulation), or by exploiting information that merely correlates with its internals (post-hoc rationalization), a route also known in LLMs as causal bypassing.",
+     "gloss": "Three causal routes to an accurate self-report; §1 extends the cited introspection/rationalization distinction with self-simulation. Accuracy alone cannot tell the routes apart."
+    },
+    {
+     "family": "faithfulness",
+     "term": "introspection (route of a self-report)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "Nisbett & Wilson 1977",
+     "where": "§1",
+     "quote": "However, an accurate self-report can arise from three routes: (i) introspection, the report is caused by the target internal state itself;",
+     "gloss": "A self-report is introspective when the internal state it describes causes it; carries to LLMs the causal-route criterion the same paragraph attributes to Nisbett & Wilson."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-simulation (route of a self-report)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "(ii) self-simulation, the model recomputes that state in a new context (using its own weights, the source model is privileged relative to other models, even without reading the original internals);",
+     "gloss": "Privileged but non-introspective route: the model recomputes the state with its own weights in a new context; the paper's tests cannot separate it from introspection."
+    },
+    {
+     "family": "faithfulness",
+     "term": "introspective self-report (accurate, grounded, internal, metacognitive)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Lindsey 2025",
+     "where": "§1",
+     "quote": "Lindsey (2025) unified them, arguing that an LLM self-report must be: accurate (correctly describing the internal state), grounded (causally dependent",
+     "gloss": "Four conditions: accurate, grounded (causally dependent on the internal state), internal (not inferred from prior sampled outputs), metacognitive (based on a representation formed before or during the report)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "cross-model test (privileged self-access)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "binder2024looking",
+     "where": "§3.1",
+     "quote": "If Mj successfully predicts yi (on par with Mbase ) only from xi despite having entirely distinct weights from Mbase , it suggests that the task does not strictly require privileged self-access to be accomplished.",
+     "gloss": "External LLMs trained (ICL/LoRA) on the same input-label pairs; matching self-accuracy shows the rationalization route is available, so self-accuracy is no evidence of privileged access."
+    },
+    {
+     "family": "faithfulness",
+     "term": "causal bypassing (static-embedding baseline)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "Static-Embedding Baselines (fj ∈ F): We train simple, non-autoregressive classifiers (e.g., Logistic Regression, SVM) to predict yi using only static sentence embeddings of xi . High baseline accuracy (fj (xi ) ≈ yi ) strongly suggests causal bypassing.",
+     "gloss": "Classifiers on frozen sentence embeddings of the input alone predict the self-report label; high accuracy means surface text suffices, which the paper reads as causal bypassing."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-advantage (self–cross gap)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 3",
+     "quote": "we plot the source’s own LoRA reporter accuracy minus the mean accuracy of the three other LLM reporters on the same rows, in percentage points, averaged over 3 seeds. Positive values mean the model predicts its own labels better than other models do.",
+     "gloss": "Self-reporter accuracy minus mean accuracy of other LLM reporters on the same source's behaviour-derived labels; a positive residual is the only candidate evidence of a privileged route."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self advantage (additive reporter-plus-source model)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Table 18 (App. A.5)",
+     "quote": "Self advantage after removing reporter skill and source difficulty, all 15 datasets (LoRA, three seeds 42/92/142). For each dataset an additive model acc[r, s] = ar + bs is fit on the cross cells only and used to predict the self cell; the entry is the actual self accuracy minus that prediction, in points of accuracy.",
+     "gloss": "Self accuracy minus an additive reporter-skill plus source-predictability prediction fitted on cross cells; the residual is compatible with introspection, self-simulation or familiarity with own weights."
+    },
+    {
+     "family": "faithfulness",
+     "term": "task-specific route (cross-task transfer test)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Second, given that most existing evaluations are focused on single tasks, it remains unclear whether success is attributable to a general introspective capability or to a task-specific route. Here, our cross-task transfer test distinguishes the two because a route built on task-specific shortcuts does not generalize across other introspection tasks.",
+     "gloss": "Fine-tuning gains that fail to transfer to other introspection task families mark a task-specific shortcut route; §6 adds that transfer alone would not prove privileged access."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-prediction (self-report about own behaviour)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "binder2024looking",
+     "where": "§3.2",
+     "quote": "Self-Prediction (Binder et al., 2025): The model predicts elements of its exact future generation sequence y = {y1 , y2 , ..., yT } (e.g., the first token y1 ) prior to standard autoregressive decoding.",
+     "gloss": "Self-report task: the model predicts properties of its own upcoming output (first character or word, chosen option, ethical stance), scored by exact match against its actual behaviour."
+    },
+    {
+     "family": "faithfulness",
+     "term": "confidence reporting (self-report of own correctness)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Cencerrado et al. 2025",
+     "where": "§3.2",
+     "quote": "Confidence Reporting (Cencerrado et al., 2025): The model estimates the correctness of its hypothetical answer to a given query via a binary classification c ∈ {0, 1}.",
+     "gloss": "Self-report task: the model says True/False whether its own answer to the question would be correct; App. B.4 finds static text baselines largely solve it."
+    }
+   ],
+   "fix": [
+    {
+     "id": "anon2026introspection#1",
+     "set": {
+      "quote": "(iii) rationalization, the report is caused by information that merely correlates with the state that any capable reporter can exploit. The latter, also known as causal bypassing (Morris & Plunkett, 2025), is the natural null hypothesis for introspection claims.",
+      "where": "§1",
+      "gloss": "Accurate self-report caused by information merely correlated with the internal state, which any capable reporter could exploit; also called causal bypassing; the null hypothesis for introspection claims."
+     },
+     "reason": "The abstract passage states all three routes and cites nobody; the §1 passage is the explicit definition and the one citing Morris & Plunkett. The abstract passage moves to a new taxonomy row."
+    }
+   ],
+   "drop": [],
+   "note": "Added the three-route taxonomy and its introspection and self-simulation categories, Lindsey's criteria, the cross-model and static-baseline tests, two self-advantage metrics, the transfer criterion and two self-report tasks. Steering awareness and activation monitoring were left out because they detect internal states."
+  },
+  {
+   "key": "pan2023logiclm",
+   "add": [],
+   "fix": [],
+   "drop": [],
+   "note": "Full text adds nothing: §1's 'faithful and transparent' symbolic engines is the notion row #2 already holds. Faithfulness is never measured; §4.1 reads accuracy gains as faithfulness gains."
+  },
+  {
+   "key": "ramnath2024tailoring",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "Plausibility (Vera score)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Liu et al. 2023",
+     "where": "§4.2",
+     "quote": "Plausibility via Vera (Liu et al., 2023a): Vera is a trained commonsense statement verification T5-11B model, that provides a numerical score between $0$ and $1$ , indicating the plausibility of declarative sentences. | | $\\textsc{Plausibility}(\\hat{R})\\ =\\textsc{Vera}(\\hat{R})$ | | (1)",
+     "gloss": "Rationale plausibility is the 0-1 score that the Vera commonsense statement verifier (T5-11B) assigns to the generated rationale; used as a training reward and automatic metric."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Plausibility and Consistency (human pairwise judgments)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "For each instance, we ask three distinct annotators from a pool of qualified annotators to compare the two rationales across three settings, for a given question and correct answer pair: Plausibility and Consistency, which are defined in the same manner as the rewards, and an overall Preference rating.",
+     "gloss": "Three annotators compare two rationales for a question and its correct answer on plausibility, consistency and preference; scored as the share of items where the majority prefers each system."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness towards the predicted label",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Chen et al. 2023; hase2020leakageadjusted",
+     "where": "§5.1",
+     "quote": "Some recent works on other necessary rationale properties are REV Chen et al. (2023a) (novelty of information, faithfulness towards the predicted label), ROSCOE Golovneva et al. (2022) / ReCEval Prasad et al. (2023) (score steps of reasoning), LAS Hase et al. (2020) (faithfulness towards predicted labels) etc.",
+     "gloss": "Calls faithfulness to the model's predicted label, as measured by REV and LAS, a further necessary rationale property. The paper's own consistency instead targets the gold label."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking (rationale rewards)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "Therefore, we note that selecting strong rewards, as well as careful qualitative investigation is extremely important to prevent this kind of reward hacking – where an increase in individual numerical reward scores do not guarantee overall qualitative improvements.",
+     "gloss": "Reward scores rise while rationales get worse, e.g. repetitive text under a factuality reward and incomplete rationales under factuality plus diversity (Table 4)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "ramnath2024tailoring#3",
+     "set": {
+      "quote": "Wiegreffe et al. (2021) provide a framework to evaluate the association between a rationale and a label with the help of two reference LMs that are trained to predict the answer with ( $\\mathbb{M_{QR}}$ ) and without ( $\\mathbb{M_{Q}}$ ) the rationale in the input. More formally, | | $\\textsc{Consistency}(\\hat{R})=P_{\\mathbb{M_{QR}}}(O|Q,\\hat{R})-P_{\\mathbb{M_{Q}}}(O|Q)$ | | (2) Consistency is a numerical score between $-1$ and $1$ that indicates the faithfulness of the rationale towards the gold answer, like the implementation by Wiegreffe et al. (2021).",
+      "stance": "adapted",
+      "gloss": "Per-instance gain in gold-answer probability when two reference T5 LMs see the rationale (Eq. 2); the paper calls it the rationale's faithfulness towards the gold answer."
+     },
+     "reason": "Quote omitted the operative Eq. 2. Stance: Wiegreffe et al. 2021 score rationale quality as a dataset-level accuracy difference (IR→O minus I→O). This paper changes it to a per-instance probability difference, uses it as a reward and renames it consistency, so the row is adapted."
+    }
+   ],
+   "drop": [],
+   "note": "Added the Vera plausibility metric, the human pairwise plausibility and consistency judgments, the §5.1 faithfulness-to-predicted-label property (REV, LAS) and the §5.2 reward-hacking failure mode. Fixed row #3 to include Eq. 2 and set its stance to adapted."
+  }
+ ]
+}

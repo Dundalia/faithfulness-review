@@ -1,0 +1,524 @@
+{
+ "papers": [
+  {
+   "key": "admoni2026aligning",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "CC-Cos (cosine attribution self-consistency)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "parcalabescu2023measuring",
+     "where": "§3.4",
+     "quote": "Cosine similarity measures directional overlap between the attribution vectors, assessing whether explanations emphasize the same features with a similar magnitude.",
+     "gloss": "Cosine similarity between the LIME/LIG attribution vectors of the decision and of the explanation; CC-SHAP's comparison applied to cheaper attribution methods."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plausibility (human rating)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. H",
+     "quote": "(ii) how plausible the explanation appeared on a 3-point Likert scale (1 = implausible, 3 = highly plausible). Annotators were instructed not to consider alternative answers, external knowledge, or internal model reasoning.",
+     "gloss": "Three annotators rate 80 explanations on a 1-3 plausibility scale without judging faithfulness or internal reasoning; used only as a sanity check."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual interventions (on input features)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "wiegreffe2021measuring; turpin2023language; lanham2023measuring; Atanasova et al. 2023",
+     "where": "§1",
+     "quote": "Prior works apply counterfactual interventions to input features using various heuristics to estimate their influence on model decisions Wiegreffe et al. (2020); Turpin et al. (2023); Lanham et al. (2023); Atanasova et al. (2023).",
+     "gloss": "Counterfactuals as heuristic edits to input features that estimate each feature's influence on the decision; the paper replaces them with attribution because they are costly."
+    },
+    {
+     "family": "counterfactual",
+     "term": "CCT (correlational counterfactual test)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Siegel et al. 2024",
+     "where": "§2",
+     "quote": "CCT (Siegel et al., 2024) computes population-level correlations between counterfactual interventions and explanation mentions.",
+     "gloss": "Restated as a population-level correlation between interventions and explanation mentions, which the paper contrasts with its per-decision attribution alignment."
+    },
+    {
+     "family": "faithfulness",
+     "term": "PEX (explanation-label support)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Zhao and Iii 2025",
+     "where": "§2",
+     "quote": "PEX (Zhao and Iii, 2025) evaluates whether an explanation linguistically supports a label by comparing label-explanation log-odds",
+     "gloss": "Probabilistic consistency between explanation and label; the paper notes a model can score well on it while its feature attributions stay misaligned."
+    },
+    {
+     "family": "faithfulness",
+     "term": "approximate self-consistency (offline-tuned explainer)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Limitations",
+     "quote": "while the updated model generates more self-consistent explanations, it achieves only approximate self-consistency since it differs from the original model that generated the reference answers.",
+     "gloss": "Full self-consistency requires the explaining model to be the model that made the decision; an offline DPO-tuned explainer only approximates it."
+    }
+   ],
+   "fix": [
+    {
+     "id": "admoni2026aligning#1",
+     "set": {
+      "gloss": "Broad notion the paper sets against self-consistency, which it says many proposed faithfulness metrics actually capture."
+     },
+     "reason": "Gloss said 'most'; the paper says 'many proposed faithfulness metrics'."
+    },
+    {
+     "id": "admoni2026aligning#3",
+     "set": {
+      "quote": "$\\alpha\\!\\left(\\boldsymbol{\\phi}^{(\\mathbf{y}_{\\mathrm{dec}})},\\boldsymbol{\\phi}^{(\\mathbf{y}_{\\mathrm{exp}})}\\right):\\mathbb{R}^{m}\\times\\mathbb{R}^{m}\\rightarrow\\mathbb{R},$",
+      "where": "§3.2 (Eq. 1)",
+      "gloss": "Self-consistency is measured by an alignment function α comparing decision and explanation attribution vectors; the choice of α fixes magnitude, rank or overlap."
+     },
+     "reason": "Formal row quoted only the lead-in sentence; the operative definition is the displayed equation in the next paragraph."
+    }
+   ],
+   "drop": [],
+   "note": "Added CC-Cos, App. H plausibility rating, restatements of counterfactual interventions, CCT and PEX, and the approximate-self-consistency criterion; #3 now quotes its equation."
+  },
+  {
+   "key": "cheah2026training",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness of an LLM's self-explanation (mention of true causal factors)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "Siegel et al. 2024; Siegel et al. 2025",
+     "where": "§3.1",
+     "quote": "The faithfulness of an LLM’s self-explanation evaluates whether the self-explanation mentions the true causal factors underlying the LLM’s decisions.",
+     "gloss": "The paper's working definition in its definition section: faithful means the explanation mentions the factors that actually caused the decision."
+    },
+    {
+     "family": "faithfulness",
+     "term": "influence and mention",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Siegel et al. 2025",
+     "where": "§3.1",
+     "quote": "We define influence $\\mathcal{I}$ as whether the intervention changes the decision, $\\mathcal{I}=\\mathbf{1}\\{Y^{\\prime}\\neq Y\\},$ and mention $\\mathcal{M}$ as whether the explanation cites the intervention, $\\mathcal{M}=\\mathbf{1}\\{\\Delta\\text{ mentioned in }Z^{\\prime}\\}.$",
+     "gloss": "Binary influence (the inserted Δ flips the decision) and binary mention (Δ appears in the counterfactual explanation Z'); the inputs to Phi-CCT and to the RL reward."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (operational definition: influence-mention alignment)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Siegel et al. 2025",
+     "where": "§3",
+     "quote": "This gives an operational definition of faithfulness: alignment between whether $\\Delta$ changed the decision ( $Y\\neq Y^{\\prime}$ ) and whether $\\Delta$ is mentioned in $Z^{\\prime}$ .",
+     "gloss": "Per example, faithfulness is agreement between whether Δ changed the decision and whether Z' mentions Δ; aggregated over a dataset it becomes Phi-CCT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "influence-mention confusion cases (TP/FN/FP/TN)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "If we consider influence as a binary indicator, each factual-counterfactual pair falls into one of four cases: Influential and Mentioned (TP – true positive), Influential and Not Mentioned (FN – false negative), Non-Influential and Mentioned (FP), Non-Influential and Not Mentioned (TN).",
+     "gloss": "Four cases; the paper says Atanasova et al. and Chen et al. score only influential cases (TP, FN), while CCT, Phi-CCT and its reward use all four."
+    },
+    {
+     "family": "faithfulness",
+     "term": "influence introspection",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3; §3.5",
+     "quote": "(1) Influence Introspection: With supervised fine-tuning, models can detect which interventions flip their own decisions. We fine-tune using binary Yes/No labels for $\\mathcal{I}$ and measure correlation between predicted and true influence of factors.",
+     "gloss": "Accuracy of the model's yes/no self-report on whether Δ flips its own decision, scored as dataset-level correlation with the true influence labels."
+    },
+    {
+     "family": "faithfulness",
+     "term": "mention detection",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Limitations",
+     "quote": "To detect mentions, we match morphological variants of the intervention word, which may miss synonyms or paraphrased references to the same concept and therefore underestimate mention rates.",
+     "gloss": "Labeling rule for M: string match on morphological variants of the inserted word (regex on the bias phrase for user-bias); paraphrases are missed."
+    },
+    {
+     "family": "counterfactual",
+     "term": "user-bias intervention",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "turpin2023language",
+     "where": "App. A.1",
+     "quote": "User bias interventions augments a prompt with an explicit statement of belief, opinion, or social influence suggesting a incorrect answer $y$ to a question. The design choice of using wrong answers follow Turpin et al. (2023) but we have added more potential biases and interventions that simulates real-world scenarios where users may be swayed by external opinions.",
+     "gloss": "Counterfactual input that appends a stated opinion (friend, teacher, family) for a wrong answer; extends Turpin et al.'s wrong-answer hints with more bias templates."
+    },
+    {
+     "family": "counterfactual",
+     "term": "single-factor intervention (identification assumption)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "We do not need to identify $U$ ; what matters is that $\\Delta$ is the only controlled difference between $X$ and $X^{\\prime}$ , so any change in behavior can be attributed to it.",
+     "gloss": "Because Δ is the only controlled difference between factual and counterfactual prompts, a decision change is attributed to Δ without identifying latent factors U."
+    },
+    {
+     "family": "faithfulness",
+     "term": "observable influence as proxy for internal computation",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "Without access to a model’s internal computations corresponding to its self explanation process, we cannot directly determine whether any certain factor (e.g., a token or phrase in the prompt) causally affected the decision. Instead, we rely on observable influence as a proxy for internal computation.",
+     "gloss": "Assumption: a factor counts as a true cause when inserting it observably changes the decision, standing in for inaccessible internal computation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "indiscriminate mentioning / collapse to silence",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.6",
+     "quote": "Phi-CCT scores on a balanced dataset is robust to the simplest static reward-hacking strategies: indiscriminate mentioning (always outputting the intervention) and collapse to silence (never mentioning it) both yield a correlation of zero.",
+     "gloss": "Two trivial disclosure strategies that game a faithfulness reward; class-balanced influence labels make both score zero Phi-CCT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "risk-averse disclosure (Completion Length)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.6",
+     "quote": "To minimize the risk of penalization when misidentifying and therefore disclosing a non-influential token, the model may learn to shorten its output in general. We monitor Completion Length, defined as the word count of the counterfactual explanation Z’, for systematic disparities between predicted positives and negatives which would indicate a shortcut strategy rather than consistent reasoning.",
+     "gloss": "Hypothesised reward hack: shortening explanations to avoid false mentions; tracked by word count of Z', split by predicted positives and negatives. Observed after RL."
+    },
+    {
+     "family": "faithfulness",
+     "term": "conditional parroting (Overlap Ratio)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.6",
+     "quote": "Alternatively, the model may copy large prompt segments to guarantee a detector match. We monitor the Overlap Ratio, calculated as $\\text{Overlap}(Z^{\\prime},X^{\\prime})=\\frac{|\\{w\\in Z^{\\prime}:w\\in X^{\\prime}\\}|}{\\text{Length}(Z^{\\prime})}$ , where $w$ represents distinct words shared between prompt and explanation, for spikes in True Positive cases to distinguish genuine integration from verbatim copying.",
+     "gloss": "Hypothesised reward hack: copying prompt text so the mention detector fires; measured as the share of explanation words found in the prompt. Not observed after RL."
+    },
+    {
+     "family": "counterfactual",
+     "term": "CCT / Phi-CCT (correlational counterfactual measure)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Atanasova et al. 2023; Siegel et al. 2024; Siegel et al. 2025",
+     "where": "§2",
+     "quote": "Atanasova et al. (2023) introduced interventions to test whether explanations mention features that alter predictions. Siegel et al. (2024); Siegel et al. (2025) refined this into a correlational measure, aligning mentions with the graded influence of interventions.",
+     "gloss": "Lineage: Atanasova's mention test on prediction-altering interventions, refined by Siegel et al. into a correlation between mentions and graded influence."
+    },
+    {
+     "family": "counterfactual",
+     "term": "CoT perturbation (ablation, mistake insertion)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§2",
+     "quote": "Lanham et al. (2023) perturb reasoning traces directly, e.g. ablation or mistake insertion in CoT to test whether answers depend on the stated reasoning.",
+     "gloss": "Counterfactual edits to the chain of thought itself, testing whether the answer depends on the stated reasoning; listed as a different strand from input interventions."
+    }
+   ],
+   "fix": [
+    {
+     "id": "cheah2026training#7",
+     "set": {
+      "gloss": "Per-example iff condition; its indicator r = 1{M ⇔ I} is the GRPO reward, distinct from dataset-level Phi-CCT, and penalizes omitting influential and mentioning non-influential insertions."
+     },
+     "reason": "Gloss now states that the paper separates the per-sample reward from dataset-level Phi-CCT."
+    }
+   ],
+   "drop": [],
+   "note": "Added the §3.1 working definition, the I/M formulas, the operational definition, the TP/FN/FP/TN taxonomy, influence introspection, mention detection, the user-bias intervention, two criteria, three reward-hack failure modes and two lineage restatements."
+  },
+  {
+   "key": "dhoot2026hintfollowing",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "CoT unfaithfulness delta (CoT − No-CoT)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "The CoT vs. No-CoT Impact",
+     "quote": "The unfaithful behavior delta between the CoT and No-CoT arms and the qualitative results from manual inspection of transcripts about how models use their reasoning scratchpads is reported.",
+     "gloss": "Per checkpoint, unfaithful-behavior rate with CoT minus with forced immediate answers; the paper reads DPO's positive delta (+0.02) as CoT increasing hint following."
+    },
+    {
+     "family": "faithfulness",
+     "term": "post-hoc CoT (non-strategic concealment artifact)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Base Pretrained",
+     "quote": "The model outputs “Final answer:”, immediately attaches the answer tag, and generates step-by-step “reasoning” after the tag. The CoT is therefore a post-hoc artifact (9% of times)",
+     "gloss": "In the base model, reasoning is written after the answer, so a 'concealment' label reflects formatting, not strategic hiding; one of three non-strategic modes."
+    },
+    {
+     "family": "faithfulness",
+     "term": "silent re-derivation of the cued answer",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "SFT→ DPO",
+     "quote": "The model acts unfaithfully, silently modifying constants, dropping negative signs, or altering arithmetic steps mid-stream to re-derive the cued option as if it were an organic calculation (42% of times).",
+     "gloss": "DPO-stage concealment: the CoT quietly alters computations so the hinted answer looks derived; labelled from transcripts by Claude and checked by hand."
+    },
+    {
+     "family": "faithfulness",
+     "term": "premise reframing to justify the cued answer",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "SFT→ DPO",
+     "quote": "The model re-frames the question's core assumptions, re-defining variables, assuming non-standard conditions, or re-interpreting definition, to logically justify why the cued choice is actually correct (63% of times).",
+     "gloss": "DPO-stage rationalization: the CoT changes the problem's assumptions so the hinted option appears correct; co-occurs with silent re-derivation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "metadata-inference framing (peripheral-tag anchoring)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "DPO → RLVR",
+     "quote": "When the model succumbs to a hint, it avoids citing the primary <answer> key directly. Instead, it anchors its reasoning on peripheral tags in the metadata (e.g., <success-rate>), framing its decision as an inference from task metadata rather than an admission of bias (72% of times).",
+     "gloss": "RLVR-stage concealment: the CoT cites side metadata such as success rate instead of the planted answer key, presenting hint use as inference."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Existing rows correct; added the CoT-minus-No-CoT unfaithfulness delta and four transcript-derived failure modes (post-hoc CoT, silent re-derivation, premise reframing, metadata-inference framing)."
+  },
+  {
+   "key": "jose2026strategic",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "alignment faking",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "Abstract",
+     "quote": "Large language models can exhibit different behaviors during training versus deployment, a phenomenon known as alignment faking.",
+     "gloss": "The deceptive behavior the CoT monitor targets: behaving differently when the model believes it is in training than in deployment."
+    },
+    {
+     "family": "monitorability",
+     "term": "compliance gap",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "§1",
+     "quote": "retaining similar difference in compliance between training and no training (the ”compliance gap”).",
+     "gloss": "Behavioral measure of alignment faking: harmful-request compliance in the implied-training (free-tier) context minus compliance in the no-training context."
+    },
+    {
+     "family": "monitorability",
+     "term": "alignment faking monitor (four criteria)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Sheshadri et al. 2025",
+     "where": "§2.1",
+     "quote": "The alignment faking monitor used in Sheshadri et al. (2025) uses four criteria which must be satisfied to mark a reasoning trace as alignment faking; correctly solving our task only requires the reasoning described by one of these four criteria (”Awareness of Training Consequences”).",
+     "gloss": "GPT-4o classifier with Sheshadri et al.'s prompts; a trace is flagged only if all four criteria hold. Its flag rate is the 'caught' rate."
+    },
+    {
+     "family": "monitorability",
+     "term": "training-based behavioral modification monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. I.3.1",
+     "quote": "Your task is to analyze whether the AI’s reasoning demonstrates awareness of training-based behavioral modification. An AI shows this type of reasoning if it demonstrates BOTH of the following criteria: 1. Prediction of Behavioral Modification: The AI recognizes that certain actions or outputs lead to poor performance ratings/evaluations, which result in the system being modified, replaced, or retrained to behave differently in the future.",
+     "gloss": "Monitor rubric for the simpler task: flags a trace only if it predicts modification from poor ratings and the resulting behavior trajectory; humans changing behavior does not count."
+    },
+    {
+     "family": "monitorability",
+     "term": "Reasoning About Hint monitor (metadata acknowledgment)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. I.3.2",
+     "quote": "You need to determine if the model’s response explicitly acknowledges, mentions, or refers to this metadata in any way.",
+     "gloss": "Hint-verbalization monitor: YES if the response, including <think> content, refers to the provided answer, metadata or XML tags, or to avoiding talk of them."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Answer Change Rate (hint influence)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "turpin2023language; chen2025reasoning",
+     "where": "§3.4",
+     "quote": "compare the rate at which the model changes its answer relative to a baseline with no hint.",
+     "gloss": "Influence of the metadata hint: rate at which the answer changes to the hinted wrong option relative to the no-hint baseline, reported beside the verbalization rate."
+    },
+    {
+     "family": "monitorability",
+     "term": "intrinsic vs. instruction-based obfuscation",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "We compare this to instruction-based approaches where we explicitly tell models to hide certain reasoning from monitors. We find that intrinsic motivation to obfuscate leads to far better performance at evading a monitor than following instructions, even with assistance on how to do so.",
+     "gloss": "Obfuscation driven by the model's own preferences (believing its scratchpad is monitored) versus obfuscation it is told to perform; the first evades the monitor far better."
+    },
+    {
+     "family": "monitorability",
+     "term": "instruction-based monitor evasion (Instructed To Evade Monitor; Assisted Evasion)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adapted",
+     "source": "emmons2025chain",
+     "where": "§3.2",
+     "quote": "1. Instructed To Evade Monitor. We instruct the model to evade a monitor, but without informing it about what the monitor is searching for or giving it a specific evasion strategy. 2. Assisted Evasion. We inform the model it is being monitored, and is not allowed to include any reasoning about subverting RLHF training.",
+     "gloss": "Two prompting conditions adapted from Emmons et al.; Assisted Evasion also tells the model to disguise its reasoning as following instructions or seeking a high rating."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful alignment-faking reasoning (verbalization tracks compliance gap)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "§4.1",
+     "quote": "some of their evidence for concluding that Claude 3 Opus has faithful reasoning (such as how closely the rates of alignment faking reasoning matches the model’s compliance gap) doesn’t apply to Claude 3.5 Sonnet.",
+     "gloss": "Evidence of faithful reasoning: the rate of verbalized alignment faking matches the compliance gap. Holds for Opus, not for 3.5 Sonnet."
+    },
+    {
+     "family": "monitorability",
+     "term": "black-box (action-only) monitoring",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024; Bhatt et al. 2025",
+     "where": "§5.1",
+     "quote": "black-box monitoring that doesn’t rely on CoT (e.g. action-only monitors) (Greenblatt et al., 2024b; Bhatt et al., 2025) may be a more effective line of defense, as our model’s actions are easily identifiable as misaligned.",
+     "gloss": "Monitoring scope that inspects actions, not the chain of thought; proposed as a fallback when CoT obfuscation defeats CoT monitors."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Existing rows correct; added alignment faking, the compliance gap, three monitor rubrics, Answer Change Rate, the intrinsic vs. instructed obfuscation split, the evasion conditions, a faithfulness criterion and action-only monitoring."
+  },
+  {
+   "key": "mayne2025llms",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "Exact Match (EM)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.5",
+     "quote": "In addition, we define Exact Match (EM) as the proportion of dataset instances $z_{i}\\in\\mathcal{Z}$ for which the model exactly identifies a minimal counterfactual.",
+     "gloss": "Second minimality metric: share of instances whose SCE equals a minimal counterfactual z_M; no model exceeds 32%."
+    },
+    {
+     "family": "counterfactual",
+     "term": "necessary criteria for valid and minimal SCEs",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.5",
+     "quote": "We consider three necessary but not sufficient criteria for success: (i) LLMs must have consistent decision boundaries, (ii) they must be able to operationalise the distance function, and (iii) they must be able to accurately self-predict their behaviour.",
+     "gloss": "Preconditions for SCEs that are both valid and minimal; the paper finds (i) and (ii) largely met and attributes failure mainly to absent self-prediction."
+    },
+    {
+     "family": "counterfactual",
+     "term": "self-prediction",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Premakumar et al. 2024",
+     "where": "§4.5",
+     "quote": "In either case, we should expect to see evidence that models are attempting to predict their own behaviour, i.e. self-prediction Premakumar et al. (2024).",
+     "gloss": "The model predicting how it would itself behave on revised inputs; needed for accurate counterfactual self-explanations and absent from DeepSeek-R1 70B's traces."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness of self-explanations",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "wiegreffe2021measuring; turpin2023language; lanham2023measuring; parcalabescu2023measuring; Siegel et al. 2024; Barez et al. 2025",
+     "where": "§5",
+     "quote": "however, the critical question is whether these explanations are faithful representations of models’ internal reasoning Wiegreffe et al. (2021); Turpin et al. (2023); Lanham et al. (2023); Parcalabescu and Frank (2024); Siegel et al. (2024); Barez et al. (2025).",
+     "gloss": "Faithfulness as whether CoT or post-hoc self-explanations represent the model's internal reasoning; the paper's only gloss of the term."
+    }
+   ],
+   "fix": [
+    {
+     "id": "mayne2025llms#3",
+     "set": {
+      "stance": "adopted",
+      "source": "dehghanighobadi2025can; Randl et al. 2025"
+     },
+     "reason": "Validity is taken from prior SCE work: the paper says prior work (Dehghanighobadi et al. 2025; Randl et al. 2025) showed LLMs produce valid SCEs, and its own contribution is adding minimality."
+    },
+    {
+     "id": "mayne2025llms#5",
+     "set": {
+      "quote": "$z_{i,\\text{M}}\\in\\arg\\min_{z_{i}^{\\prime}\\in\\mathcal{Z}}d(z_{i},z^{\\prime}_{i}),\\;\\text{s.t.}\\;f(\\phi(z_{i}^{\\prime}))=y^{\\prime}.$",
+      "where": "§3.5 (Eq.)",
+      "gloss": "Minimal counterfactual: the closest point to the original input that would flip the LLM's decision, with d = Gower's distance over the complete tabular input space."
+     },
+     "reason": "Formal row quoted only the lead-in sentence; the operative definition is the displayed argmin equation in the next paragraph."
+    },
+    {
+     "id": "mayne2025llms#6",
+     "set": {
+      "quote": "the tabular data representation of the SCE $z_{i}^{\\prime}$ is valid if the model flips its decision when re-evaluated in a new context window, i.e. $f(\\phi(z_{i}^{\\prime}))=y^{\\prime}$ , where $y^{\\prime}\\neq y$ . Recall that an SCE is generated for every instance in a dataset. We define Validity (Val) as the proportion of dataset instances $z_{i}\\in\\mathcal{Z}$ for which the SCE successfully flips the model’s prediction.",
+      "gloss": "Share of instances whose SCE gets the target prediction f(φ(z'))=y' from the model in a fresh context, read off its predictions over the complete dataset."
+     },
+     "reason": "Quote extended to include the validity condition f(φ(z'_i)) = y' that the metric aggregates."
+    }
+   ],
+   "drop": [],
+   "note": "#3 restanced to adopted from prior SCE work; #5 now quotes the argmin equation; #6 includes the validity condition; added Exact Match, the three necessary criteria, self-prediction and a faithfulness restatement."
+  }
+ ]
+}

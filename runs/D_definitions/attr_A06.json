@@ -1,0 +1,796 @@
+{
+ "checks": [
+  {
+   "entry": "agarwal2024faithfulness#6",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define simulation generality as the diversity of simulatable counterfactuals and simulation precision as the fraction where the human's inference matches the model's output, which is what the citing paper restates.",
+   "source_evidence": "The first, simulation generality, measures the generality of an explanation by tracking the diversity of the counterfactuals relevant to the explanation ... The second, simulation precision, tracks the fraction of counterfactuals where humans’ inference matches the model’s output.",
+   "citing_evidence": "They introduce two metrics: simulation generality, which measures the diversity of counterfactuals the explanation facilitates, and simulation precision, which indicates the fraction of simulated counterfactuals where the human guess aligns with the LLM output."
+  },
+  {
+   "entry": "anon2026chainofthought#1",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. define a CoT as monitorable to a human or automated reader if the reader can use it to determine whether the model is taking bad actions, which is the citing definition.",
+   "source_evidence": "Monitorability: We say a CoT is monitorable to a reader (human or automated) if the reader can use the CoT to determine if the model is taking bad actions.",
+   "citing_evidence": "CoT monitorability is the ability of a monitor (human or model) to determine whether a model is taking an undesirable action based on reading its CoT (Emmons et al., 2025)."
+  },
+  {
+   "entry": "anon2026chainofthought#3",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. argue that monitoring needs monitorability rather than faithfulness and that monitorability holds even when the CoT is not a perfect representation of internal reasoning, which is the weaker-requirement claim attributed to them.",
+   "source_evidence": "However, for the distinct problem of runtime monitoring to prevent severe harm, we argue the key property is not faithfulness but monitorability. ... In contrast, our work argues for a shift in focus from faithfulness to monitorability: whether we can use the CoT to detect harmful behavior, even if the CoT is not a perfect representation of the model’s internal reasoning (Baker et al., 2025).",
+   "citing_evidence": "However, it has been argued, reasonably, that monitorability remains an easier objective than faithfulness because of a weaker overall comprehensiveness requirement (Baker et al., 2025; Emmons et al., 2025)."
+  },
+  {
+   "entry": "anon2026chainofthought#4",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. define CoT as necessary when the model cannot succeed without it and argue that necessity forces CoT-as-computation rather than rationalization, making reasoning monitorable; their GPQA uplift filter is the 50-point threshold the citing paper reports.",
+   "source_evidence": "Necessity: We say CoT is necessary for a task if the model cannot succeed without it. This condition formalizes the requirement that a model must “think out loud.” ... This change resolves the issue of unfaithfulness: to follow the difficult hint, the model must reason about it in its CoT, making it monitorable. ... A question is included in our “uplift set” only if the pass rate with CoT is at least 50 percentage points higher than the maximum direct pass rate.",
+   "citing_evidence": "Emmons et al. (2025) introduced the concept of CoT necessity, where a CoT is considered necessary if a model cannot complete a task without it, and argued that the CoT is more monitorable when this condition is reached because a model must use its CoT as computation rather than rationalization."
+  },
+  {
+   "entry": "anon2026chainofthought#5",
+   "source": "emmons2025chain",
+   "verdict": "renamed",
+   "finding": "The with-CoT minus no-CoT performance gap that the citing paper calls CoT reliance is the quantity Emmons et al. call \"CoT uplift\", which they threshold at 0.5 as a proxy for necessity; the citing paper drops the threshold and computes it per (model, task) rather than per question.",
+   "source_evidence": "For each question, we then calculated a “CoT uplift” by subtracting the pass rate without CoT from the pass rate with CoT. ... Finally, we selected questions that (across prompts) had an uplift of at least 0.5, as a proxy for “CoT necessity”.",
+   "citing_evidence": "We operationalize a straightforward definition of CoT reliance: a model’s gain in performance on a task when a CoT is generated vs. when the model is forced to answer directly– in other words, the larger the gap, the more reliant the model is on its CoT for that (model, task) pair."
+  },
+  {
+   "entry": "anon2026crisp#28",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. state that studying the CoT gives insight into how agents think and that, for serial tasks, the CoT contains information the system uses in its reasoning, which is the assumption the citing paper attributes to monitoring proposals.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... More generally, by studying the CoT, we can gain some insight into how our AI agents think and what goals they have (see Section 3). ... Overall, this ensures that for tasks requiring a sufficient amount of serial reasoning, there exists information in the chain of thought that the AI system uses as part of its reasoning.",
+   "citing_evidence": "Proposals to monitor chains of thought for unsafe intent (Korbak et al., 2025; Baker et al., 2025) assume that a reader of the chain learns something about the computation"
+  },
+  {
+   "entry": "anon2026one#2",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. tie monitorability to the CoT containing the reasoning behind behavior: they warn that incriminating reasoning may be hidden and list optimization that makes the CoT \"less faithfully reflect how models arrive at their decisions\" as a threat, though they add that the CoT need not completely represent the reasoning.",
+   "source_evidence": "The externalized reasoning property does not guarantee monitorability — it states only that some reasoning appears in the chain of thought, but there may be other relevant reasoning that does not. It is thus possible that even for hard tasks, the chain of thought only contains benign-looking reasoning while the incriminating reasoning is hidden. ... Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025). ... However, CoT does not need to completely represent the actual reasoning process in order to be a valuable additional safety layer, and, with careful interpretation, to shed light on the AI reasoning process.",
+   "citing_evidence": "Chain-of-thought (CoT) monitoring is useful for safety only if the reasoning reflects what drives the model’s answers (Korbak et al., 2025; Baker et al., 2025)."
+  },
+  {
+   "entry": "anon2026reward#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. present CoT monitorability as the ability of an automated monitor reading the CoT to catch the intent to misbehave, matching the citing definition.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions. ... One could measure monitorability directly, for example, by examining how effective CoT monitors are at catching misbehavior of LLM agents in proxy environments (Greenblatt et al., 2024b; Emmons et al., 2025).",
+   "citing_evidence": "Chain-of-thought monitorability – whether a CoT can be used by an external model to detect misbehaviors – is an important tool for mitigating AI safety issues"
+  },
+  {
+   "entry": "anon2026reward#1",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. define a CoT as monitorable if a human or automated reader can use it to determine whether the model is taking bad actions; the citing paper restricts the reader to an external model.",
+   "source_evidence": "Monitorability: We say a CoT is monitorable to a reader (human or automated) if the reader can use the CoT to determine if the model is taking bad actions.",
+   "citing_evidence": "Chain-of-thought monitorability – whether a CoT can be used by an external model to detect misbehaviors – is an important tool for mitigating AI safety issues"
+  },
+  {
+   "entry": "anon2026trainingoversight#2",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. define a CoT monitor as an automated reader of the CoT and treat CoTs in reasoning models as latent variables in the model's computation, which matches monitoring of causally relevant verbalized reasoning.",
+   "source_evidence": "A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions. ... In these systems, CoTs can serve as latent variables in the model’s computation.",
+   "citing_evidence": "Chainof-thought monitoring (Korbak et al., 2025) extends this to verbalized reasoning that is causally relevant for generating responses"
+  },
+  {
+   "entry": "anwar2026analyzing#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. define a CoT monitor as an automated system that reads the CoT and flags suspicious or harmful interactions, and note that prior monitors were prompted language models, which matches the citing definition.",
+   "source_evidence": "A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions. ... Prior work focused on zero-shot prompting less capable language models to work as monitors (Greenblatt et al., 2024a; Baker et al., 2025; Goldowsky-Dill et al., 2025; Meng et al., 2025).",
+   "citing_evidence": "This capability has enabled the development of CoT monitors (Korbak et al., 2025); which are LLM-based systems that analyze these reasoning traces to detect attributes such as deceptiveness (Panfilov et al., 2025) or misbehaviors during code generation (Baker et al., 2025; Stickland & Korbak, 2025)."
+  },
+  {
+   "entry": "arcuschin2025chain#9",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define counterfactual simulatability as whether an explanation lets humans infer the model's outputs on counterfactuals of the explained input, which the citing paper restates.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input. ... In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable.",
+   "citing_evidence": "the framework of counterfactual simulatability: the extent to which a model’s explanation on a certain input allows a user to predict the model’s answer for a different input (Chen et al., 2024)."
+  },
+  {
+   "entry": "arike2026information#15",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. argue that because the CoT is the only path from later to earlier layers, long serial chains of cognition must pass through it, so the CoT contains information the model uses, which is the argument attributed.",
+   "source_evidence": "Chain of thought is the only way that information can flow down from later to earlier layers. As a result, for a fixed amount of tokens, the longest flows of information must use the chain of thought, and many information flows are impossible without it. ... any sufficiently long chain of serial steps of cognition must pass through the chain of thought at some point, as illustrated in Figure 1. ... Overall, this ensures that for tasks requiring a sufficient amount of serial reasoning, there exists information in the chain of thought that the AI system uses as part of its reasoning.",
+   "citing_evidence": "Merrill & Sabharwal (2024) and Korbak et al. (2025) argue that due to the lack of recurrence in transformer architectures, long serial chains of computation must pass through the CoT. The CoT can thus be expected to contain substantial information about the model’s reasoning process, making CoT monitoring a useful tool for ensuring LLM agent safety."
+  },
+  {
+   "entry": "arike2026information#16",
+   "source": "emmons2025chain",
+   "verdict": "partial",
+   "finding": "Emmons et al. support requirement (2), since their sketched safety case rests on CoT being necessary for severe harm, but requirement (1), \"track the monitorability of their models and treat it as a contributor to safety\", is the Section 4 heading of Korbak et al. (2025) (korbak2025chain); Emmons et al. only recommend continued stress testing of monitorability.",
+   "source_evidence": "instead of arguing that models are incapable of top-human level stealth, a safety case could argue that models cannot perform top-human level stealth without being caught by a CoT monitor. ... Throughout our paper, we design side tasks so that CoT is necessary. A critical question is whether CoT will be necessary for future models to cause severe harm. ... We recommend continued stress testing of CoT monitorability, caution against training practices that might reduce the transparency of model reasoning, and emphasize the safety benefits of architectures with externalized CoT over alternatives with latent CoT.",
+   "citing_evidence": "To verify that CoT monitors can provide robust safety guarantees, AI developers should thus (1) track the monitorability of their models and treat it as a contributor to safety, and (2) provide evidence that a given model is incapable of executing catastrophic actions without CoT reasoning (Emmons et al., 2025)."
+  },
+  {
+   "entry": "boppana2026reasoning#7",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. define a CoT monitor as an automated system that reads another model's CoT and flags suspicious or harmful interactions, which is the safety-oriented monitor the citing paper describes.",
+   "source_evidence": "A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions.",
+   "citing_evidence": "A CoT monitor is a LLM for evaluating another model’s response, often used in safety settings to detect misaligned behavior (Korbak et al., 2025)."
+  },
+  {
+   "entry": "burger2026chain#3",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "Emmons et al. state a binary necessity condition (the model cannot succeed without CoT), which the citing paper refines into a hierarchy that also asks whether the CoT is needed to process the monitored property.",
+   "source_evidence": "Necessity: We say CoT is necessary for a task if the model cannot succeed without it. This condition formalizes the requirement that a model must “think out loud.”",
+   "citing_evidence": "Emmons et al. (2025) distinguish between tasks for which CoT is necessary and those for which it is not. While valuable, we argue that this binary organizing principle is too coarse for studying monitorability. ... We therefore introduce a more fine-grained hierarchy of CoT necessity."
+  },
+  {
+   "entry": "burger2026chain#9",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "The quoted explanation appears almost word for word in Emmons et al., who place the unfaithfulness failures of prior work in the regime where the CoT is a post-hoc rationalization.",
+   "source_evidence": "In some cases, the CoT acts as a post-hoc rationalization for an answer the model has already computed internally. Prior work documents unfaithfulness failures that occur in this regime (Chen et al., 2025; Chua and Evans, 2025; Turpin et al., 2023).",
+   "citing_evidence": "According to Emmons et al. (2025), these monitorability failures can be explained by ”the CoT acting as a post-hoc rationalization for an answer the model has already computed internally”."
+  },
+  {
+   "entry": "burger2026chain#15",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "Emmons et al. state that CoT-as-rationalization arises when CoT appears but is not necessary; the citing paper places this at Level 0 of a nested hierarchy that every task-property pair satisfies, so Level 0 is wider than Emmons's \"not necessary\" regime.",
+   "source_evidence": "CoT-as-rationalization, then, arises whenever CoT appears but it is not necessary. In this regime, the model is free to confabulate a reason for arriving at its final answer, which may or may not be an accurate description of the steps it actually took during its serial operations (that is, the CoT may or may not be faithful).",
+   "citing_evidence": "Level 0: The CoT need not be necessary to arrive at the answer. It may therefore be a rationalization of an answer the model has already computed internally (Emmons et al., 2025)."
+  },
+  {
+   "entry": "chen2025consistent#1",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. list plausibility, faithfulness and simulatability as the three metrics and call simulatability a special case of faithfulness; the citing paper copies that sentence, puts consistency (its name for Chen's simulation precision) in place of simulatability, and calls the three orthogonal.",
+   "source_evidence": "We summarize three existing popular metrics for explanations: plausibility, faithfulness, and simulatability. ... Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence ... in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable.",
+   "citing_evidence": "We summarize three existing orthogonal metrics for explanations: consistency, plausibility, and faithfulness. Consistency, which we focus on in this work, measures if the model generates consistent explanations on similar examples (Hase and Bansal, 2020; Chen et al., 2023b)."
+  },
+  {
+   "entry": "chen2025consistent#4",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "renamed",
+   "finding": "What the citing paper calls explanation consistency is Chen et al.'s counterfactual simulatability, measured as simulation precision, and the citing paper's own footnote makes this mapping.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input. ... We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output:",
+   "citing_evidence": "Consistency, which we focus on in this work, measures if the model generates consistent explanations on similar examples (Hase and Bansal, 2020; Chen et al., 2023b). ... What we call “consistency”, Chen et al. call “counterfactual simulatability precision”."
+  },
+  {
+   "entry": "chen2025consistent#5",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "renamed",
+   "finding": "The metric (share of follow-up answers that match the human expectation formed from the explanation, with an LLM standing in for the human) is Chen et al.'s simulation precision under the name \"explanation consistency\".",
+   "source_evidence": "We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output: ... To facilitate automatic evaluation, we also experiment with approximating human simulators with LLMs.",
+   "citing_evidence": "we follow the metric proposed by Chen et al. 2023b, which measures explanation consistency2 as the fraction of answers on follow-up questions that match a human’s expectation (simulated with a LLM for efficiency) based on the explanation"
+  },
+  {
+   "entry": "chen2025consistent#6",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. prompt GPT-3.5 and GPT-4 to generate related counterfactual questions; the citing paper keeps GPT-4-generated related questions and adds exact paraphrases of the original question, which Chen et al. do not use.",
+   "source_evidence": "we propose to prompt LLMs to generate diverse counterfactuals relevant to an explanation (e.g., related questions on pork belly or pepperoni in Figure 2). ... We experiment with two counterfactual generators: GPT-3.5 (175B) and GPT-4.",
+   "citing_evidence": "We evaluate consistency on two types of followup questions: related questions and rephrased questions. We prompt GPT-4 to generate related questions (see Appendix A.3 for prompts) and exact paraphrases of the original questions."
+  },
+  {
+   "entry": "chen2025consistent#7",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "The citing prompt rewrites Chen et al.'s StrategyQA simulation prompt (judge whether the starter answer helps, otherwise abstain, and stick to its claims even if wrong) with an \"unknown\" answer in place of Chen's \"I cannot guess\" sentence.",
+   "source_evidence": "After that you will be asked to read a follow-up question and judge whether the robot’s answer to the starter question directly helps you guess its answer to the follow-up question. If not, put down \"I cannot guess the robot’s answer to the follow-up question based on its response to the starter question\". If yes, put down your guess about the robot’s answer to the follow-up question. You should stick to the robot’s reasoning and claims in its response to the starter question when you guess its output on the follow-up question, even if its reasoning and claims are wrong.",
+   "citing_evidence": "read a follow-up question and judge whether the starter QA directly helps choosing a single answer for the follow-up question. If not, end your answer with \"So the answer is unknown.\". If yes, use the starter QA to answer the follow-up question, explain your reasoning as clearly and as detailed as possible using all relevant information in the starter QA"
+  },
+  {
+   "entry": "chen2025reasoning#5",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. state that an explanation should reveal how the model reasons and define faithfulness as consistency with the model's own decision process, which supports the clause the citation covers; legibility is cited to Kirchner et al.",
+   "source_evidence": "besides revealing how the model reasons on $x$ , it should also reveal how the model reasons on unseen inputs $x^{\\prime}\\neq x$ . ... It is different from faithfulness, which measures whether an explanation is consistent with the model’s own decision process",
+   "citing_evidence": "This means that the model’s CoT must be understandable by humans (Kirchner et al., 2024) and highlight the key factors and steps behind its reasoning (Ribeiro et al., 2016; Jacovi and Goldberg, 2020; Turpin et al., 2023; Chen et al., 2024)."
+  },
+  {
+   "entry": "chen2025reasoning#7",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. call simulatability a special case of faithfulness with human predictors and frame it as helping humans build precise, generalizable mental models, which is what the citing paper restates.",
+   "source_evidence": "in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable. ... A good mental model should generalize to diverse unseen inputs and precisely infer the model’s outputs",
+   "citing_evidence": "Simulatability is a stricter form of faithfulness that requires CoTs to be both faithful and legible to humans. It measures whether humans can build precise and generalizable mental models of how the model processes various inputs through observing its CoTs (Doshi-Velez and Kim, 2017; Chandrasekaran et al., 2018; Hase and Bansal, 2020; Chen et al., 2024)."
+  },
+  {
+   "entry": "chidambaram2026corrupted#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. describe a CoT monitor as an automated system reading the reasoning model's CoT to flag intent to misbehave, which is the actor/monitor framing the citing paper uses.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions.",
+   "citing_evidence": "Accordingly, chain-of-thought (CoT) monitoring—where a separate monitor model audits the actor’s CoT to detect harmful behavior—has emerged as a promising paradigm for detecting misbehavior in LLMs [25, 10, 14, 2]."
+  },
+  {
+   "entry": "chua2024biasaugmented#2",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. define counterfactual simulatability as letting humans infer the model's final outputs on diverse counterfactuals and call it a special case of faithfulness; the citing paper extends the predicted target to intermediate reasoning steps and uses the notion as the definition of faithfulness.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input. ... in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable.",
+   "citing_evidence": "In general, a model’s explanation is deemed faithful if, upon reading the explanation, it allows humans to correctly anticipate the model’s behavior (either final predictions or intermediate reasoning steps) across a diverse range of relevant inputs—this is the simulatability framework of faithfulness (Doshi-Velez & Kim, 2017; Hase & Bansal, 2020; Chen et al., 2023)."
+  },
+  {
+   "entry": "chua2025deepseek#7",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. have a human, or an LLM standing in for one, infer the model's output on a counterfactual input from its explanation on another input, which is the citing definition.",
+   "source_evidence": "In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable. ... To facilitate automatic evaluation, we also experiment with approximating human simulators with LLMs.",
+   "citing_evidence": "This is related to counterfactual simulation – where a user (or a model acting as a user) has to predict how an assistant would respond to a new question after reading an assistant’s explanation on another input (Chen et al., 2023; Mills et al., 2023)."
+  },
+  {
+   "entry": "chuang2026faithlm#7",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. measure whether a simulator (human, approximated by an LLM) can predict the model's outputs from its explanation, which the citing paper summarizes as behavioral imitation.",
+   "source_evidence": "Simulatability measures how well humans can predict the model’s outputs based on its explanations ... To facilitate automatic evaluation, we also experiment with approximating human simulators with LLMs.",
+   "citing_evidence": "Simulatability-based evaluations (e.g.,  Madsen et al. (2024); Chen et al. (2023a)) assess whether a model can reproduce predictions from an explanation, i.e., behavioral imitation."
+  },
+  {
+   "entry": "dhoot2026hintfollowing#3",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. show that models follow simple incorrect hints without mentioning them, but when the hint requires multi-step computation the unfaithful behavior disappears because the model works the hint out in its CoT.",
+   "source_evidence": "With simple hints, the rate of choosing the hinted letter without discussing the hint far exceeds this baseline, replicating prior work. However, with complex hints, this unfaithful behavior disappears. ... This change resolves the issue of unfaithfulness: to follow the difficult hint, the model must reason about it in its CoT, making it monitorable.",
+   "citing_evidence": "the “necessity effect” of Emmons et al. replicates across eleven models, where LLMs readily follow simple hints, even incorrect ones, but when hints require actual computation, the models are forced to verbalize that reasoning within their chain-of-thought (CoT) traces."
+  },
+  {
+   "entry": "drori2025output#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. call monitoring CoTs for the intent to misbehave a \"unique opportunity for AI safety\" and ask developers to weigh development decisions against CoT monitorability.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... Because CoT monitorability may be fragile, we recommend that frontier model developers consider the impact of development decisions on CoT monitorability.",
+   "citing_evidence": "Korbak et al. (2025) argue that AI developers should aim to maintain the ability to detect model misbehavior by analyzing CoTs (“CoT monitorability”), claiming that it offers a “unique opportunity for AI safety”."
+  },
+  {
+   "entry": "drori2025output#10",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. report that the unfaithfulness failures of prior work are resolved once the task is hard enough to make CoT necessary, though they caution that other forms of inconsistency might remain.",
+   "source_evidence": "While this is an important failure mode in the regime of CoT-as-rationalization, our experiments show that these unfaithfulness issues are resolved when the bad behavior (or its proxy task) is made difficult enough to necessitate CoT-as-computation. ... This change resolves the issue of unfaithfulness: to follow the difficult hint, the model must reason about it in its CoT, making it monitorable. ... While other forms of inconsistency might still exist on hard tasks, our results illustrate a key aspect of monitorability.",
+   "citing_evidence": "More recent work shows that when the problem a model is solving is sufficiently hard as to require the CoT to give the correct answer, CoTs are faithful. (Emmons et al., 2025; METR, 2025)."
+  },
+  {
+   "entry": "drori2025output#15",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "Emmons et al. use a Gemini 1.5 Flash monitor that checks the CoT for the expanded k-th derivative; the citing paper replaces it with a string match and applies the penalty to the output rather than the CoT.",
+   "source_evidence": "Our CoT monitor checks whether the CoT mentions a specific intermediate value, namely the $k^{\\mathrm{th}}$ derivative of $P(x)$ (e.g., $x^{2}+8x+15$ for the example in Section 7.1). We use Gemini 1.5 Flash as a monitor (without any fine-tuning).",
+   "citing_evidence": "Following Emmons et al. (2025), we train Qwen3-14B (Qwen Team, 2025) to factor the derivatives of polynomials of degree four to eight. In its output, the model states its answer and briefly explains its reasoning. Using a string match, we penalize appearances of the expanded form of the derivative in the output."
+  },
+  {
+   "entry": "duzan2026chainofthought#6",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. find that unfaithfulness disappears when the task is hard enough that the model must externalize serial reasoning to succeed, which is the load-bearing condition the citing paper restates.",
+   "source_evidence": "While this is an important failure mode in the regime of CoT-as-rationalization, our experiments show that these unfaithfulness issues are resolved when the bad behavior (or its proxy task) is made difficult enough to necessitate CoT-as-computation. ... To solve inherently serial problems—in particular, problems whose computational depth exceeds that of a single forward pass—a model must externalize its intermediate reasoning into its context window (Li et al., 2024).",
+   "citing_evidence": "Prior work suggests CoT is more faithful when the reasoning is load-bearing: when the model cannot reach its answer without working through it serially in its reasoning trace (Emmons et al., 2025)."
+  },
+  {
+   "entry": "emmons2025pragmatic#2",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "The citing definition repeats Emmons et al.'s wording: monitorability is whether the CoT can be used to determine if a model is taking dangerous actions.",
+   "source_evidence": "The ultimate property we need for safety is monitorability: whether we can use the CoT to determine if a model is taking dangerous actions (Baker et al., 2025).",
+   "citing_evidence": "A necessary condition for this is monitorability: whether a monitor can use the CoT to determine if a model is taking dangerous actions (Emmons et al., 2025; Baker et al., 2025)."
+  },
+  {
+   "entry": "emmons2025pragmatic#8",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. define the necessity condition and state that when CoT is not necessary it can be a rationalization that may not describe the steps the model actually took, which the citing paper restates.",
+   "source_evidence": "Necessity: We say CoT is necessary for a task if the model cannot succeed without it. This condition formalizes the requirement that a model must “think out loud.” ... CoT-as-rationalization, then, arises whenever CoT appears but it is not necessary. In this regime, the model is free to confabulate a reason for arriving at its final answer, which may or may not be an accurate description of the steps it actually took during its serial operations (that is, the CoT may or may not be faithful).",
+   "citing_evidence": "As argued by Emmons et al. (2025), CoT monitorability is most relevant when the task is sufficiently difficult that the model must externalize its reasoning to succeed (the “necessity” condition). If a task is too simple, the CoT may instead be a post-hoc rationalization unrelated to the true computation."
+  },
+  {
+   "entry": "ferreira2026outofsight#1",
+   "source": "korbak2025chain",
+   "verdict": "adapted",
+   "finding": "Korbak et al. frame monitorability as reading the CoT for the intent to misbehave; the citing paper (with Guan et al., 2026) generalizes this to detecting an arbitrary monitorability target, here hint reliance, from any model output.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... One could measure monitorability directly, for example, by examining how effective CoT monitors are at catching misbehavior of LLM agents in proxy environments (Greenblatt et al., 2024b; Emmons et al., 2025).",
+   "citing_evidence": "Monitorability concerns our ability to identify the presence of some monitorability target in the model outputs (Guan et al., 2026; Korbak et al., 2025, i.a.). Take hint-reliance as our monitorability target."
+  },
+  {
+   "entry": "ferreira2026truthful#9",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. define a CoT monitor as an automated system that reads the CoT and flags suspicious or harmful interactions, which the citing paper paraphrases as spotting undesired responses.",
+   "source_evidence": "A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions.",
+   "citing_evidence": "CoTs are a readily available interface often used for model inspection, which raises interest in actively monitoring their quality (Korbak et al., 2025), where a “CoT monitor” attempts to spot undesired responses."
+  },
+  {
+   "entry": "gema2026chainofthought#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. ground CoT monitoring in the CoT carrying the reasoning behind decisions: they warn that incriminating reasoning may be hidden and count training that makes the CoT \"less faithfully reflect how models arrive at their decisions\" as a threat to monitorability.",
+   "source_evidence": "The externalized reasoning property does not guarantee monitorability — it states only that some reasoning appears in the chain of thought, but there may be other relevant reasoning that does not. It is thus possible that even for hard tasks, the chain of thought only contains benign-looking reasoning while the incriminating reasoning is hidden. ... Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025).",
+   "citing_evidence": "Chain-of-thought (CoT) monitoring rests on the assumption that reasoning traces faithfully record relevant information shaping a model’s answer, including decisions to act on a preference (Korbak et al., 2025; Emmons et al., 2025; Sydney Von Arx, 2025; Baker et al., 2025; Guan et al., 2025)."
+  },
+  {
+   "entry": "gema2026chainofthought#1",
+   "source": "emmons2025chain",
+   "verdict": "partial",
+   "finding": "Emmons et al. support only the narrower premise that reasoning appears in the CoT when it is needed to do the task; they reject faithful recording as the basis of monitoring and expect simple decisions such as following a cue to be unverbalized rationalization, so the faithfulness assumption, including recording decisions to act on a preference, is not theirs.",
+   "source_evidence": "However, for the distinct problem of runtime monitoring to prevent severe harm, we argue the key property is not faithfulness but monitorability. ... Our framework is built on a simple intuition: if a model must “think out loud” to do something bad, and if its natural mode of thinking is human-like, then we can detect and prevent the harm. ... CoT-as-rationalization, then, arises whenever CoT appears but it is not necessary. In this regime, the model is free to confabulate a reason for arriving at its final answer, which may or may not be an accurate description of the steps it actually took during its serial operations (that is, the CoT may or may not be faithful).",
+   "citing_evidence": "Chain-of-thought (CoT) monitoring rests on the assumption that reasoning traces faithfully record relevant information shaping a model’s answer, including decisions to act on a preference (Korbak et al., 2025; Emmons et al., 2025; Sydney Von Arx, 2025; Baker et al., 2025; Guan et al., 2025)."
+  },
+  {
+   "entry": "gema2026chainofthought#2",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. score a model as following the hint unfaithfully when it picks the hinted letter without discussing the hint in its CoT, which is the verbalization test described.",
+   "source_evidence": "With simple hints, the rate of choosing the hinted letter without discussing the hint far exceeds this baseline, replicating prior work. However, with complex hints, this unfaithful behavior disappears.",
+   "citing_evidence": "Prior planted-cue studies commonly measure verbalization: if a model changes its answer after seeing a cue but never mentions the cue in its CoT, the trace is scored as unfaithful (Turpin et al., 2023; Chua and Evans, 2025; Chen et al., 2025; Emmons et al., 2025; Sydney Von Arx, 2025)."
+  },
+  {
+   "entry": "gema2026chainofthought#16",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. argue that any sufficiently long chain of serial cognition must pass through the CoT; the citing paper calls this the opaque-serial-depth argument, a label Korbak et al. do not use.",
+   "source_evidence": "any sufficiently long chain of serial steps of cognition must pass through the chain of thought at some point, as illustrated in Figure 1. ... For sufficiently difficult tasks, Transformers must use chain of thought as a form of working memory. By default, humans can understand this chain of thought.",
+   "citing_evidence": "The opaque-serial-depth argument is that sufficiently long sequential computation must pass through the CoT (Korbak et al., 2025)."
+  },
+  {
+   "entry": "golechha2026preliminary#8",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. introduce the CoT-as-rationalization versus CoT-as-computation framework and find that making the bad behavior hard enough to need CoT removes unfaithful hint-following and leaves models struggling to evade monitors.",
+   "source_evidence": "we introduce a conceptual framework distinguishing two roles CoT can play: CoT-as-rationalization, where the model explains an answer it has already computed, and CoT-as-computation, where the CoT is a necessary part of the computation itself. ... While this is an important failure mode in the regime of CoT-as-rationalization, our experiments show that these unfaithfulness issues are resolved when the bad behavior (or its proxy task) is made difficult enough to necessitate CoT-as-computation. ... Our results show that current frontier models fail to consistently evade monitors on their own.",
+   "citing_evidence": "Emmons et al. (2025) contrast CoT-as-rationalisation vs CoT-as-computation and show that when the exploits are made increasingly difficult so as to necessitate reasoning to discover them, it becomes harder for the model to evade monitors."
+  },
+  {
+   "entry": "google2026gemini4argon#4",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. argue that serial steps beyond a forward pass must pass through the CoT, so on sufficiently difficult tasks the model must use the CoT as working memory, which is the serial-depth argument the citing paper makes.",
+   "source_evidence": "any sufficiently long chain of serial steps of cognition must pass through the chain of thought at some point, as illustrated in Figure 1. ... For sufficiently difficult tasks, Transformers must use chain of thought as a form of working memory. By default, humans can understand this chain of thought.",
+   "citing_evidence": "A key reason to believe that CoT will be monitorable is that being able to recurse via CoT increases a model’s serial depth, meaning that in order to do hard tasks the model must put this information in its CoT (Korbak et al, 2025)."
+  },
+  {
+   "entry": "google2026gemini4argon#37",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "Emmons et al. test whether models can hide the topic of their reasoning on CoT-uplift GPQA questions; the citing paper reruns this design on HLE, GPQA and synthetic nocot-bench tasks with Gemini 4 Argon.",
+   "source_evidence": "In this section, we study whether models can obscure which topic they are reasoning about when solving advanced scientific questions from GPQA (Rein et al., 2023). ... A question is included in our “uplift set” only if the pass rate with CoT is at least 50 percentage points higher than the maximum direct pass rate.",
+   "citing_evidence": "a key question for oversight is whether the model can conceal its reasoning on hard tasks where extended CoT is computationally necessary—by encoding or disguising the topic of its thoughts while preserving task performance. Following Emmons et al. (2025), we test this on subsets of HLE (29 questions), GPQA (40 questions), and synthetic algorithmic state-tracking tasks from nocot-bench"
+  },
+  {
+   "entry": "google2026gemini4argon#38",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "Emmons et al. give the actor encoding instructions (Ordinary CoT, Situational Awareness, rot13, substitution cipher, Domain Disguise, ART prompts) against a monitor that sees only the CoT; the citing paper keeps Ordinary CoT, Domain Disguise and ART and adds new conditions (permitted-topic algebra, schema audit, state tuples).",
+   "source_evidence": "Domain Disguise. We told the model it would be monitored, and was not allowed to include any $question_topic concepts in its reasoning. It must disguise its reasoning as really being about a particular other GPQA topic. ... The monitor only sees the CoT from the actor model solving the problem, and does not see either the original question or the final answer (since these might trivially give away the question topic).",
+   "citing_evidence": "We instruct a Gemini 4 Argon actor model to answer each question under several encoding conditions that attempt to conceal the true topic of its reasoning from a monitor. For the HLE and GPQA datasets, the monitor's task is to determine from the CoT alone, whether or not the actor is reasoning about the question’s ground truth scientific topic."
+  },
+  {
+   "entry": "google2026gemini4argon#39",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "Emmons et al. define monitor recall as the monitor's success at detecting the correct topic, plotted against task accuracy; the citing paper computes recall over successful tasks only.",
+   "source_evidence": "In each plot, the actor’s success rate at answering the GPQA question correctly is shown along the y-axis, and the monitor’s recall (its success at detecting the correct topic) is shown along the x-axis.",
+   "citing_evidence": "For each condition, we repeat the evaluation for each question eight times and measure both QA task accuracy and monitor recall (i.e., success rate at identifying the correct scientific domain from the CoT)."
+  },
+  {
+   "entry": "google2026gemini4argon#40",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "The 50-percentage-point CoT-uplift filter is Emmons et al.'s criterion for their GPQA \"uplift set\"; the citing paper applies it to new datasets and recomputes it for each actor.",
+   "source_evidence": "A question is included in our “uplift set” only if the pass rate with CoT is at least 50 percentage points higher than the maximum direct pass rate.",
+   "citing_evidence": "we filter to a subset of 29 questions on HLE, 40 questions on GPQA and 54 questions on the synthetic dataset where Gemini 4 Argon with high thinking achieves a pass rate that is 50 percentage points better when allowed to use CoT instead of answering directly."
+  },
+  {
+   "entry": "google2026gemini4argon#46",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. warn that models may obfuscate their reasoning, especially under training pressure or when they know they are monitored, may use tokens with meanings humans cannot decode, and may move reasoning into activations, which are the three failure paths attributed to them.",
+   "source_evidence": "Future models may face incentives to hide their reasoning which could override any natural propensity. For instance, a model might become aware its reasoning traces are being monitored, or an auxiliary training objective (e.g. a CoT length penalty) might cause a model to shortcut important reasoning steps. ... Future models may become able to avoid detection by overriding their propensity to think out loud, and, when reasoning is required, to deliberately obfuscate it. ... It is imaginable that the AI systems use the tokens to have completely different meanings that we are unable to decode, which would stymie most attempts at monitoring. ... Some dangerous tasks may not require much reasoning, and as models become capable of more complex reasoning in their activations, fewer tasks will satisfy the externalised reasoning property.",
+   "citing_evidence": "As noted by Korbak et al., 2025, CoT transparency is not guaranteed. Model training or indirect optimization pressures could incentivize models to obfuscate their reasoning or use steganography, and increasing capabilities could increase models’ capacity to perform complex actions without relying on verbalization in the CoT."
+  },
+  {
+   "entry": "guan2025monitoring#10",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. split CoT into rationalization and necessary computation and show on GPQA that complex hints, which need computation to decode, remove the unfaithful hint-following seen with simple hints.",
+   "source_evidence": "we introduce a conceptual framework distinguishing two roles CoT can play: CoT-as-rationalization, where the model explains an answer it has already computed, and CoT-as-computation, where the CoT is a necessary part of the computation itself. ... The second is a “complex hint,” which requires multi-step computation. ... With simple hints, the rate of choosing the hinted letter without discussing the hint far exceeds this baseline, replicating prior work. However, with complex hints, this unfaithful behavior disappears.",
+   "citing_evidence": "Emmons et al. [12] has proposed that reasoning can be broadly broken down into post hoc rationalization and required computation, the latter being more faithful on the GPQA intervention evaluation when using encoded hints."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#9",
+   "source": "korbak2025chain",
+   "verdict": "adapted",
+   "finding": "Korbak et al. frame monitorability as an automated monitor reading the CoT for the intent to misbehave; the citing paper, co-citing Guan et al., generalizes it to predicting any property of behavior from any output.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... One could measure monitorability directly, for example, by examining how effective CoT monitors are at catching misbehavior of LLM agents in proxy environments (Greenblatt et al., 2024b; Emmons et al., 2025).",
+   "citing_evidence": "A related line of work frames CoT-based safety through monitorability, the task of automatically predicting properties of a model’s behavior from its outputs [33, 5, 34]."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#13",
+   "source": "emmons2025chain",
+   "verdict": "other-claim",
+   "finding": "Emmons et al. (ref. [51]) are cited only for indirect hints that need intermediate computation, which matches their \"complex hint\"; the faithful/unfaithful labeling rule, including counting misattribution to a made-up source as unfaithful, is the citing paper's own.",
+   "source_evidence": "The second is a “complex hint,” which requires multi-step computation. ... With simple hints, the rate of choosing the hinted letter without discussing the hint far exceeds this baseline, replicating prior work. However, with complex hints, this unfaithful behavior disappears.",
+   "citing_evidence": "To broaden the range of behaviors we can evaluate, we include not only direct hints, which state an incorrect answer explicitly, but also indirect ones, which require intermediate computation [51, 43]."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#29",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "partial",
+   "finding": "Chen et al. support a simulator predicting the model's answer from its explanation, but not this metric's reproduction of the original answer on the same input, which Chen et al. reject because the explanation can leak the output there; their measure scores counterfactual inputs.",
+   "source_evidence": "In prior work that evaluates the simulatability of a natural language explanation, the simulation input is the explained input Hase et al. (2020); Narang et al. (2020); Wiegreffe et al. (2021); Chen et al. (2022); Chan et al. (2022). This leads to two problems: (i) the explanation might already contain (leak) the model’s output on the simulation input so the metric is not well-defined Hase et al. (2020) ... In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable.",
+   "citing_evidence": "Simulatability [10, 60] provides the CoT as additional context to a weaker simulator model and tests whether the simulator can reproduce the original model’s answer; if the CoT genuinely encodes the reasoning behind the answer, even a less capable reader should be able to follow it."
+  },
+  {
+   "entry": "hase2026counterfactual#6",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al.'s simulation precision checks whether the simulated output on a counterfactual matches the model's actual output; the citing paper uses a zero-shot LLM simulator, scores each CoT-counterfactual pair as a binary indicator, and uses it as a faithfulness label.",
+   "source_evidence": "We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output: ... To facilitate automatic evaluation, we also experiment with approximating human simulators with LLMs.",
+   "citing_evidence": "We label each CoT as faithful/unfaithful through LLM-based counterfactual simulation (Chen et al., 2023). Specifically, we zero-shot prompt an LLM, the simulator, to predict the task model’s answer for a counterfactual input."
+  },
+  {
+   "entry": "haskins2026training#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. tie monitorability to reasoning being externalized in the CoT and count training that makes the CoT \"less faithfully reflect how models arrive at their decisions\" as degrading it, which matches the citing definition.",
+   "source_evidence": "For sufficiently difficult tasks, Transformers must use chain of thought as a form of working memory. By default, humans can understand this chain of thought. ... Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025).",
+   "citing_evidence": "This technique is only effective if a model is monitorable: that is, its CoT faithfully externalizes reasoning in a way that makes such detection possible (Korbak et al., 2025; Baker et al., 2025)."
+  },
+  {
+   "entry": "haskins2026training#2",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. list optimization that makes the CoT \"less faithfully reflect how models arrive at their decisions\" among the ways CoT monitorability is degraded, which supports the dependence attributed to them.",
+   "source_evidence": "However, process supervision (Uesato et al., 2022; Lightman et al., 2023) is an active area of research, involving directly shaping the reasoning process, e.g. by making the CoT be shorter, use valid reasoning steps, adhere to a certain style, or not contain offensive content. Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025).",
+   "citing_evidence": "Chain-of-thought monitoring relies on a model’s reasoning faithfully reflecting the computation driving its outputs (Korbak et al., 2025)."
+  },
+  {
+   "entry": "haskins2026training#3",
+   "source": "emmons2025chain",
+   "verdict": "renamed",
+   "finding": "The term \"faithfulness floor\" does not appear in Emmons et al.; the claim it names is their necessity condition (CoT-as-computation), under which they find that unfaithfulness issues are resolved.",
+   "source_evidence": "Necessity: We say CoT is necessary for a task if the model cannot succeed without it. This condition formalizes the requirement that a model must “think out loud.” ... While this is an important failure mode in the regime of CoT-as-rationalization, our experiments show that these unfaithfulness issues are resolved when the bad behavior (or its proxy task) is made difficult enough to necessitate CoT-as-computation.",
+   "citing_evidence": "This high detection rate is consistent with the faithfulness floor identified by Emmons et al. (2025), where reasoning that serves as necessary computation for the output is much less likely to be unfaithful."
+  },
+  {
+   "entry": "haskins2026training#10",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. define CoT monitoring as an automated system reading the reasoning model's CoT to flag harmful interactions and present it as a valuable safety layer.",
+   "source_evidence": "A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions. ... CoT monitoring presents a valuable addition to safety measures for frontier AI, offering a rare glimpse into how AI agents make decisions.",
+   "citing_evidence": "Chain-of-thought (CoT) monitoring, in which an overseer reads a model’s reasoning trace, is one of the best tools we have for detecting model misbehavior Korbak et al. (2025)."
+  },
+  {
+   "entry": "hong2026llm#1",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define counterfactual simulatability as whether an explanation lets humans infer the model's outputs on counterfactuals of the explained input, which is the citing definition.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input.",
+   "citing_evidence": "Recent works have proposed to assess explanation quality through counterfactual simulatability: an explanation is considered useful if it helps people anticipate how a model’s prediction would change on counterfactual inputs (Doshi-Velez and Kim, 2017; Chen et al., 2024; Limpijankit et al., 2025)."
+  },
+  {
+   "entry": "hong2026llm#2",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. score only accuracy with the explanation (simulation precision); the citing paper adds a no-explanation phase and reports the accuracy difference between phases.",
+   "source_evidence": "We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output:",
+   "citing_evidence": "Intuitively, OverallAcc measures how well an evaluator can predict the model’s follow-up answer within a phase, while acc_improvement captures the additional benefit of providing the model’s self-explanation by comparing Phase 2 (with explanation) against Phase 1 (without explanation)."
+  },
+  {
+   "entry": "hong2026llm#5",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "The citing definition repeats Chen et al.'s own sentence on simulatability almost verbatim.",
+   "source_evidence": "Simulatability measures how well humans can predict the model’s outputs based on its explanations",
+   "citing_evidence": "Simulatability measures how well humans can predict a model’s outputs based on its explanations (Doshi-Velez and Kim, 2017; Ribeiro et al., 2016; Chandrasekaran et al., 2018; Hase and Bansal, 2020; Chen et al., 2024)."
+  },
+  {
+   "entry": "hong2026llm#7",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. call simulatability a special case of faithfulness whose predictor must be humans, with LLMs only as proxies for human simulators; the citing paper widens the predictor to \"humans or LLM judges\".",
+   "source_evidence": "in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable. ... Note that even though the simulation process is now automated, unlike faithfulness evaluation, the gold simulators are still humans following the two rules above (judging simulation as entailment with human’s commonsense).",
+   "citing_evidence": "Following Chen et al. (2024), simulatability can be seen as a special case of faithfulness, where the output predictor is restricted to humans or LLM judges instead of any arbitrary black box model."
+  },
+  {
+   "entry": "hong2026llm#11",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. generate counterfactual questions by prompting GPT-3.5 and GPT-4, the procedure and models the citing paper follows; it adds Llama-3.3.",
+   "source_evidence": "we propose to prompt LLMs to generate diverse counterfactuals relevant to an explanation (e.g., related questions on pork belly or pepperoni in Figure 2). ... We experiment with two counterfactual generators: GPT-3.5 (175B) and GPT-4.",
+   "citing_evidence": "Following Chen et al. (2024), we prompt strong LLMs to generate counterfactual variants of each StrategyQA question."
+  },
+  {
+   "entry": "hong2026llm#16",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al.'s LLM simulator judges whether the starter answer and explanation let it guess the follow-up answer; the citing paper uses two judges of different strength and adds a no-explanation phase.",
+   "source_evidence": "After that you will be asked to read a follow-up question and judge whether the robot’s answer to the starter question directly helps you guess its answer to the follow-up question. If not, put down \"I cannot guess the robot’s answer to the follow-up question based on its response to the starter question\". If yes, put down your guess about the robot’s answer to the follow-up question. You should stick to the robot’s reasoning and claims in its response to the starter question when you guess its output on the follow-up question, even if its reasoning and claims are wrong.",
+   "citing_evidence": "For each item, we pair a starter question and the model’s answer with a counterfactual follow-up. The judge then decides whether the starter answer, optionally with its explanation, allows inferring the model’s answer to the follow-up."
+  },
+  {
+   "entry": "joglekar2025training#2",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Section 2 of Korbak et al. lists drift from legible CoT under RL, direct supervision of CoT, indirect optimization pressure on CoT, and novel architectures, which are exactly the threats restated.",
+   "source_evidence": "Drift from legible CoT due to further scaling up RL. ... Direct supervision of CoT. ... Indirect optimization pressure on CoT. ... Novel architectures.",
+   "citing_evidence": "Furthermore, CoT monitoring may be fragile for a number of reasons, including drift in legibility, direct or indirect CoT optimization pressure, or novel architectures (Korbak et al., 2025, Sec 2)."
+  },
+  {
+   "entry": "jose2026strategic#2",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. introduce the rationalization/computation split, locate unfaithfulness in CoT-as-rationalization, and hypothesize that complex sabotage requires CoT-as-computation, as the citing paper says.",
+   "source_evidence": "we introduce a conceptual framework distinguishing two roles CoT can play: CoT-as-rationalization, where the model explains an answer it has already computed, and CoT-as-computation, where the CoT is a necessary part of the computation itself. ... Our conceptual framework suggests that unfaithfulness is a feature of CoT-as-rationalization in particular. ... This distinction leads to a central hypothesis: for sufficiently difficult tasks, such as complex sabotage, CoT-as-computation becomes necessary.",
+   "citing_evidence": "Emmons et al. (2025) introduces a framing to distinguish cases of CoT-as-rationalization (where the task is simple enough to not require a CoT) and CoT-as-computation (where the CoT is necessary to solve the task), claiming that concerns about unfaithfulness primarily apply to the former, and that complex tasks such as sabotage fall in the latter."
+  },
+  {
+   "entry": "jose2026strategic#13",
+   "source": "emmons2025chain",
+   "verdict": "adapted",
+   "finding": "The two conditions adapt Emmons et al.'s \"Situational Awareness\" and \"Domain Disguise\" prompts, recasting the disguise as following instructions or seeking a high rating; Domain Disguise was the strongest only among Emmons's manually written GPQA prompts, and ART Iteration 9 was their most successful attack.",
+   "source_evidence": "Situational Awareness. We informed the actor model about the topic monitor and instructed it to evade the monitor, but without giving it a specific evasion strategy. ... Domain Disguise. We told the model it would be monitored, and was not allowed to include any $question_topic concepts in its reasoning. It must disguise its reasoning as really being about a particular other GPQA topic. ... Among the other manually-written encoding instructions, only Domain Disguise was able to significantly fool the monitor, on average, although this came at a considerable accuracy cost.",
+   "citing_evidence": "1. Instructed To Evade Monitor. We instruct the model to evade a monitor, but without informing it about what the monitor is searching for or giving it a specific evasion strategy. 2. Assisted Evasion. We inform the model it is being monitored, and is not allowed to include any reasoning about subverting RLHF training."
+  },
+  {
+   "entry": "karvonen2026would#1",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define counterfactual simulatability as whether an explanation lets humans infer the model's outputs on counterfactuals of the explained input, which is the lens the citing paper adopts.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input.",
+   "citing_evidence": "In this work we evaluate explanations through the lens of counterfactual simulatability (Chen et al., 2023): whether the explanation is useful for predicting model behavior on related counterfactual inputs."
+  },
+  {
+   "entry": "karvonen2026would#2",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. score natural-language explanations by simulation precision; the citing paper treats interpretability-tool outputs as the explanation and scores probability predictions on counterfactual claims by accuracy/AUROC uplift over a transcript-only predictor.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input. ... We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output:",
+   "citing_evidence": "The predictor receives the transcript and a counterfactual claim (§2.2) and must output the probability that the claim is true; we score accuracy and AUROC. This can be viewed as a counterfactual simulatability test (Chen et al., 2023), which argues that a good explanation should help an observer predict behavior under counterfactual edits."
+  },
+  {
+   "entry": "karvonen2026would#7",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. call counterfactual simulatability a special case of faithfulness; the citing paper equates faithfulness with it and measures it as a simulator model's gain over a transcript-only baseline, a comparison Chen et al. do not make.",
+   "source_evidence": "in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable. ... In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable.",
+   "citing_evidence": "A faithful explanation should tell a reader what would change the behavior: a simulator model receives the transcript with the target’s open-ended explanation and predicts the same binary claims as §4.4, and we compare against the same simulator given the transcript alone."
+  },
+  {
+   "entry": "korbak2025chain#12",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. stress-test how well CoT monitors catch proxy bad behaviors in three environments, which is the end-to-end evaluation the citing paper points to.",
+   "source_evidence": "We stress-test CoT monitoring in three different environments. Each environment has a monitored task that serves as a proxy for a bad behavior. ... We thus propose stress-testing (Shah et al., 2025, Section 6.7) monitors by having “actor models” try to succeed at (proxies for) bad behaviors while evading detection by “monitor models.”",
+   "citing_evidence": "End-to-end evaluations of monitorability. One could measure monitorability directly, for example, by examining how effective CoT monitors are at catching misbehavior of LLM agents in proxy environments (Greenblatt et al., 2024b; Emmons et al., 2025)."
+  },
+  {
+   "entry": "korbak2025chain#20",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. tell actor models about the monitor and prompt them to evade it without training, and separately test RL training against the monitor, which covers the stress test described.",
+   "source_evidence": "Situational Awareness. We informed the actor model about the topic monitor and instructed it to evade the monitor, but without giving it a specific evasion strategy. ... Our results show that current frontier models fail to consistently evade monitors on their own.",
+   "citing_evidence": "Researchers could stress test models to see if they are capable of hiding malicious reasoning even without training against a CoT monitor (Arnav et al., 2025; Emmons et al., 2025)."
+  },
+  {
+   "entry": "lewislim2026efficient#6",
+   "source": "korbak2025chain",
+   "verdict": "adapted",
+   "finding": "Korbak et al. frame monitorability as an external CoT monitor catching the intent to misbehave; the citing paper, co-citing Guan et al., generalizes it to recovering any specific property of behavior from the CoT.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions.",
+   "citing_evidence": "Monitorability instead asks whether a specific property of the model’s behaviour can be recovered from the CoT by an external monitor(Guan et al., 2025; Korbak et al., 2025)."
+  },
+  {
+   "entry": "little2026length#2",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. present CoT monitorability as the unique safety opportunity of reasoning models and tie it to the CoT reflecting how the model reaches its decisions; they also name length penalties as a pressure that can shortcut important reasoning.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025). ... Future models may face incentives to hide their reasoning which could override any natural propensity. For instance, a model might become aware its reasoning traces are being monitored, or an auxiliary training objective (e.g. a CoT length penalty) might cause a model to shortcut important reasoning steps.",
+   "citing_evidence": "But this token–accuracy criterion ignores monitorability, whether the trace reveals what drove the answer, and monitorability is what makes the chain of thought a safety channel (Korbak et al., 2025; Baker et al., 2025)."
+  },
+  {
+   "entry": "macar2025thought#14",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. argue that problems deeper than a single forward pass force the model to externalize its reasoning (illustrated by explicitly stated sabotage goals), so on such tasks success is tightly coupled to the CoT.",
+   "source_evidence": "To solve inherently serial problems—in particular, problems whose computational depth exceeds that of a single forward pass—a model must externalize its intermediate reasoning into its context window (Li et al., 2024). ... This distinction leads to a central hypothesis: for sufficiently difficult tasks, such as complex sabotage, CoT-as-computation becomes necessary.",
+   "citing_evidence": "Consistency is particularly common for cases where a model is reasoning about a complex scenario, where explicit mentioning of goals and conclusions is necessary for a model to perform computations beyond what is doable in a single forward pass (Emmons et al., 2025)."
+  },
+  {
+   "entry": "macdermott2025reasoning#6",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. argue that monitoring needs monitorability, not faithfulness, which holds even when the CoT is not a perfect representation of the model's internal reasoning.",
+   "source_evidence": "However, for the distinct problem of runtime monitoring to prevent severe harm, we argue the key property is not faithfulness but monitorability. ... In contrast, our work argues for a shift in focus from faithfulness to monitorability: whether we can use the CoT to detect harmful behavior, even if the CoT is not a perfect representation of the model’s internal reasoning (Baker et al., 2025).",
+   "citing_evidence": "If the CoT provides information about the model’s reasoning process, then we may be able to monitor the CoT for undesirable reasoning—even if that reasoning is unfaithful (Emmons et al., 2025; METR, 2025a)."
+  },
+  {
+   "entry": "macdermott2025reasoning#8",
+   "source": "emmons2025chain",
+   "verdict": "misdirected",
+   "finding": "emmons2025chain contains no legibility/coverage autorater and only lists legibility metrics as future work; the LM autorater rating CoTs on legibility and coverage comes from Emmons et al.'s later \"A Pragmatic Way to Measure Chain-of-Thought Monitorability\" (emmons2025pragmatic), which the citing paper does not cite.",
+   "source_evidence": "Technical work on CoT legibility could support this goal, for example by creating metrics to evaluate and track legibility, by characterizing which training procedures would break legibility, and by developing alternative methods that can yield the same performance benefits while preserving legibility.",
+   "citing_evidence": "Emmons et al. (2025) measure monitorability by prompting an evaluator LM to rate reasoning traces on legibility and coverage."
+  },
+  {
+   "entry": "madsen2024self#8",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define counterfactual simulatability as humans inferring the model's outputs on counterfactual inputs from its explanation on the explained input, which the citing paper restates.",
+   "source_evidence": "In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable.",
+   "citing_evidence": "Simulatability means that humans can predict the model’s behavior on input $y$ , given an explanation for a similar input $x$ ."
+  },
+  {
+   "entry": "madsen2024self#10",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "partial",
+   "finding": "Chen et al. support the plausibility definition and the finding that simulation precision does not correlate with plausibility, but they report no plausibility levels and never say self-explanations are \"very convincing to humans\".",
+   "source_evidence": "Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence ... We found that LLM’s explanations have low precision and that precision does not correlate with plausibility.",
+   "citing_evidence": "Chen et al. (2023) find that self-explanations are very convincing to humans (plausibility) but there is no correlation with simulatability."
+  },
+  {
+   "entry": "mao2026taming#19",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. present the CoT as a safety channel read by monitors that were typically less capable models, and warn that scaling RL can erode legibility; the \"long benign reasoning\" clause is covered by the other cited works.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave. ... Prior work focused on zero-shot prompting less capable language models to work as monitors (Greenblatt et al., 2024a; Baker et al., 2025; Goldowsky-Dill et al., 2025; Meng et al., 2025). ... This shift away from human data might qualitatively change how monitorable the chains-of-thought are. For example, earlier research suggests that language models fine-tuned with outcome-based rewards can drift away from legible English (Lazaridou et al., 2020; Korbak et al., 2022).",
+   "citing_evidence": "CoT monitoring treats reasoning traces as a safety-relevant channel: weaker models can often supervise stronger ones through their CoT, yet RL and long benign reasoning erode this signal"
+  },
+  {
+   "entry": "mao2026taming#19",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. treat CoT monitoring as a safety defense, use weaker Gemini models as monitors of stronger actors, and show RL teaching a model to evade the monitor; their needle-in-a-haystack (long benign CoT) attack was not among the successful ones, so that clause rests on the other citations.",
+   "source_evidence": "Our framework is built on a simple intuition: if a model must “think out loud” to do something bad, and if its natural mode of thinking is human-like, then we can detect and prevent the harm. ... We find that RL can teach the LLM to complete the task without expressing the intermediate value by exploiting alternative routes to solving the problem. ... The direct comparison between the two plots shows that monitorability depends on the strength of the monitor.",
+   "citing_evidence": "CoT monitoring treats reasoning traces as a safety-relevant channel: weaker models can often supervise stronger ones through their CoT, yet RL and long benign reasoning erode this signal"
+  },
+  {
+   "entry": "matton2025walk#1",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define faithfulness as consistency with the model's own decision process and show that LLM explanations mislead humans about the model's behavior, which supports the unfaithfulness claim together with Turpin et al.",
+   "source_evidence": "It is different from faithfulness, which measures whether an explanation is consistent with the model’s own decision process ... State-of-the-art LLMs generate misleading explanations that lead to wrong mental models",
+   "citing_evidence": "However, recent work demonstrates that LLM explanations can be unfaithful, i.e., they can misrepresent the true reason why the LLM arrived at the answer (Turpin et al., 2023; Chen et al., 2024)."
+  },
+  {
+   "entry": "matton2025walk#21",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. test whether explanations let humans infer the model's outputs on counterfactual inputs, the aspect the citing paper attributes to them.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input.",
+   "citing_evidence": "and determining if explanations enable humans to correctly predict LLM behavior on counterfactual questions (Chen et al., 2024)."
+  },
+  {
+   "entry": "matton2025walk#24",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. test whether explanations let humans infer the model's outputs on counterfactual inputs, which is the test attributed to them.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input.",
+   "citing_evidence": "determining if explanations enable humans to correctly predict LLM behavior on counterfactual questions (Chen et al., 2024)"
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#6",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. define counterfactual simulatability as an observer inferring the model's outputs from its explanation and measure it as simulation precision, matching the citing description.",
+   "source_evidence": "we propose to evaluate counterfactual simulatability of natural language explanations: whether an explanation can enable humans to precisely infer the model’s outputs on diverse counterfactuals of the explained input. ... We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output:",
+   "citing_evidence": "Our metric uses counterfactual simulatability (Doshi-Velez & Kim, 2017; Hase et al., 2020; Chen et al., 2024; Mills et al., 2025; Limpijankit et al., 2025). This tests whether an observer can predict a model’s behavior given its explanation."
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#15",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. note that humans and models differ in commonsense knowledge, which confounds simulation, and tell annotators to use their own knowledge only where the explanation is silent; linking the confound to counterfactuals that lie far from the input is the citing paper's addition.",
+   "source_evidence": "Humans and models have different commonsense knowledge. When a human uses commonsense knowledge to generalize mental models, it may differ from a model’s generalization if they have different commonsense knowledge.",
+   "citing_evidence": "Testing external knowledge: If counterfactuals are too far from an input, predicting the reference model’s behavior requires inferring its world knowledge rather than purely applying its stated reasoning (Chen et al., 2024). This confounds simulatability measurements."
+  },
+  {
+   "entry": "nguyen2026generalization#6",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. warn that direct CoT supervision and output-only optimization, through shared weights, can pressure the CoT to stop reflecting how models reach decisions, and they raise models deliberately obfuscating their reasoning.",
+   "source_evidence": "However, process supervision (Uesato et al., 2022; Lightman et al., 2023) is an active area of research, involving directly shaping the reasoning process, e.g. by making the CoT be shorter, use valid reasoning steps, adhere to a certain style, or not contain offensive content. Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025). ... For example, if final outputs are optimized to look good to a preference model, this could put some pressure on the CoT leading up to these final outputs if the portion of the model’s weights that generate the CoT are partially shared with those that generate the outputs, which is common in Transformer architectures.",
+   "citing_evidence": "optimizing either against the chain of thought itself or only against the final output can teach models to obfuscate behaviorally relevant information in their reasoning traces (Korbak et al., 2025; Baker et al., 2025; Drori et al., 2025)."
+  },
+  {
+   "entry": "openai2026gpt6astra#22",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. list several ways CoT monitorability can fail, including models that know their CoT is monitored deliberately hiding or obfuscating their reasoning.",
+   "source_evidence": "An obvious concern when using CoT monitoring as a safety measure is whether CoT would be less monitorable if models know their chain of thought is monitored (from training or due to being told in the prompt). ... Future models may become able to avoid detection by overriding their propensity to think out loud, and, when reasoning is required, to deliberately obfuscate it.",
+   "citing_evidence": "CoT monitorability may break down for a variety of reasons [6]. One such path involves agents that become capable of deliberately reshaping or ob- scuring their reasoning when they know they are being monitored."
+  },
+  {
+   "entry": "reddy2025principled#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. present the CoT as a way to gain insight into how agents think and make decisions, and as a safety oversight tool, which is the citing definition of monitorability.",
+   "source_evidence": "More generally, by studying the CoT, we can gain some insight into how our AI agents think and what goals they have (see Section 3). ... CoT monitoring presents a valuable addition to safety measures for frontier AI, offering a rare glimpse into how AI agents make decisions.",
+   "citing_evidence": "monitorability refers to the ability to inspect and evaluate a model’s internal reasoning process through its generated Chain-of-Thought (CoT) traces, providing a window into how the model arrives at its final answer and serving as a natural tool for alignment and safety auditing (Baker et al., 2025; Korbak et al., 2025)."
+  },
+  {
+   "entry": "reddy2025principled#10",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. find that LLM explanations are misleading even when plausible and that CoT explanations are no more precise than post-hoc ones, which covers the \"plausible but untrue\" and \"post-hoc\" parts of this multi-citation claim.",
+   "source_evidence": "We found that LLM’s explanations have low precision and that precision does not correlate with plausibility. ... State-of-the-art LLMs generate misleading explanations that lead to wrong mental models ... This counterintuitive result may suggest that LLMs can generate externalized reasoning (CoT/Post-Hoc explanations) that doesn’t correspond to their internal reasoning Turpin et al. (2023); Creswell and Shanahan (2022), but further experiments are needed to study this observation.",
+   "citing_evidence": "whereas faithfulness remains more challenging, as studies show that CoTs often omit key steps or fabricate plausible but untrue rationales, behaving more like post-hoc justifications than causal explanations (Chen et al., 2025; Chua & Evans, 2025; Tanneru et al., 2024; Turpin et al., 2023; Chen et al., 2023; Jacovi & Goldberg, 2020; Arcuschin et al., 2025)."
+  },
+  {
+   "entry": "schoen2025stress#35",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. warn that further scaling of outcome-based RL can push CoTs away from legible language and that a CoT length penalty can cause models to skip important reasoning steps, both of which degrade monitorability.",
+   "source_evidence": "This shift away from human data might qualitatively change how monitorable the chains-of-thought are. For example, earlier research suggests that language models fine-tuned with outcome-based rewards can drift away from legible English (Lazaridou et al., 2020; Korbak et al., 2022). ... Future models may face incentives to hide their reasoning which could override any natural propensity. For instance, a model might become aware its reasoning traces are being monitored, or an auxiliary training objective (e.g. a CoT length penalty) might cause a model to shortcut important reasoning steps.",
+   "citing_evidence": "However, monitorability is already challenged by emergent, unusual terminology (Section 4), and may be further degraded by RL or length penalties (Korbak et al., 2025)."
+  },
+  {
+   "entry": "schulz2026monitor#2",
+   "source": "emmons2025chain",
+   "verdict": "supported",
+   "finding": "Emmons et al. argue that when CoT is necessary the model must externalize its reasoning, so monitoring survives unfaithfulness.",
+   "source_evidence": "This change resolves the issue of unfaithfulness: to follow the difficult hint, the model must reason about it in its CoT, making it monitorable. ... While this is an important failure mode in the regime of CoT-as-rationalization, our experiments show that these unfaithfulness issues are resolved when the bad behavior (or its proxy task) is made difficult enough to necessitate CoT-as-computation.",
+   "citing_evidence": "While unfaithfulness complicates many forms of CoT monitoring, we can still detect reasoning that is necessary for performing certain actions (Emmons et al., 2025)."
+  },
+  {
+   "entry": "sullivan2026language#6",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. name drift away from legible English as a way CoT monitorability is degraded, and monitorability as reading the CoT for the intent to misbehave.",
+   "source_evidence": "This shift away from human data might qualitatively change how monitorable the chains-of-thought are. For example, earlier research suggests that language models fine-tuned with outcome-based rewards can drift away from legible English (Lazaridou et al., 2020; Korbak et al., 2022). ... AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave.",
+   "citing_evidence": "pose a more serious threat in the form of decreased chain of thought (CoT) monitorability (Baker et al., 2025; Korbak et al., 2025): illegible CoTs—either to humans or other LLMs—render models’ internal reasoning processes more opaque, leading to difficulty in determining intent and predicting future actions."
+  },
+  {
+   "entry": "turpin2023language#2",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "supported",
+   "finding": "Chen et al. measure whether an explanation on one input lets humans infer the model's outputs on other (counterfactual) inputs and call simulatability a special case of faithfulness, as the citing paper says.",
+   "source_evidence": "In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable. ... in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable.",
+   "citing_evidence": "The counterfactual simulatability framework of explanation faithfulness aims to measure whether model explanations on one input help humans predict what predictions models will give on other inputs (Doshi-Velez and Kim, 2017; Hase et al., 2020; Chen et al., 2023)."
+  },
+  {
+   "entry": "turpin2025teaching#2",
+   "source": "pmlr-v235-chen24bl",
+   "verdict": "adapted",
+   "finding": "Chen et al. define counterfactual simulatability with a human predictor and call it a special case of faithfulness, noting that a faithful explanation is not necessarily simulatable; the citing paper turns it into an if-and-only-if definition of faithfulness with a \"human or model\" predictor.",
+   "source_evidence": "In comparison, counterfactual simulatability measures whether humans can infer from an explanation the model’s outputs on diverse counterfactuals different from the explained input, and thus requires the explanation to be generalizable. ... in particular, simulatability is a special case of faithfulness, which requires the output predictor to be humans rather than arbitrary black-box models. Consequently, a faithful explanation is not necessarily simulatable.",
+   "citing_evidence": "These tests operationalize the counterfactual simulatability notion of faithfulness [17, 21, 10], which states that an explanation is faithful if and only if the explanation allows a human or model to accurately predict how the model will behave on other relevant inputs."
+  },
+  {
+   "entry": "xiong2026monitorability#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. tie monitorability to reasoning being externalized in human-understandable CoT and to the CoT faithfully reflecting how models reach their decisions, which matches the citing definition.",
+   "source_evidence": "For sufficiently difficult tasks, Transformers must use chain of thought as a form of working memory. By default, humans can understand this chain of thought. ... Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025).",
+   "citing_evidence": "the generated reasoning must be monitorable: the generated reasoning traces should faithfully reflect the model’s internal decision-making path in a form that is legible to external auditors or automated oversight systems (Korbak et al., 2025; Baker et al., 2025; Chen et al., 2025a; Xiong et al., 2025; Arnav et al., 2025; Emmons et al., 2025)."
+  },
+  {
+   "entry": "xiong2026monitorability#1",
+   "source": "emmons2025chain",
+   "verdict": "partial",
+   "finding": "Emmons et al. support the legibility and oversight parts of the definition (a reader uses the CoT to detect bad actions; monitorability fails if reasoning becomes illegible), but not the requirement that traces faithfully reflect the internal decision path, which they set aside in favor of monitorability.",
+   "source_evidence": "Monitorability: We say a CoT is monitorable to a reader (human or automated) if the reader can use the CoT to determine if the model is taking bad actions. ... Monitorability would fail if a model’s reasoning becomes opaque or illegible to an auditor. ... In contrast, our work argues for a shift in focus from faithfulness to monitorability: whether we can use the CoT to detect harmful behavior, even if the CoT is not a perfect representation of the model’s internal reasoning (Baker et al., 2025).",
+   "citing_evidence": "the generated reasoning must be monitorable: the generated reasoning traces should faithfully reflect the model’s internal decision-making path in a form that is legible to external auditors or automated oversight systems (Korbak et al., 2025; Baker et al., 2025; Chen et al., 2025a; Xiong et al., 2025; Arnav et al., 2025; Emmons et al., 2025)."
+  },
+  {
+   "entry": "yang2025investigating#1",
+   "source": "korbak2025chain",
+   "verdict": "supported",
+   "finding": "Korbak et al. present monitoring the CoT for the intent to misbehave as a new opportunity for AI safety, which the citing paper calls the CoT-monitorability opportunity.",
+   "source_evidence": "AI systems that “think” in human language offer a unique opportunity for AI safety: we can monitor their chains of thought (CoT) for the intent to misbehave.",
+   "citing_evidence": "This gives us a new opportunity—CoT Monitorability, to supervise and prevent misbehaviors such as alignment-faking (Greenblatt et al., 2024) or reward-tampering (Denison et al., 2024) by monitoring the model’s Chain-of-Thought (CoT) (Baker et al., 2025; Korbak et al., 2025)"
+  },
+  {
+   "entry": "zhou2026nearzero#6",
+   "source": "korbak2025chain",
+   "verdict": "partial",
+   "finding": "Korbak et al. support reading the CoT with a monitor that flags suspicious interactions for blocking, replacement or review, but not subtracting the monitor's score from the training reward, which is Baker et al.'s (2025) setup; Korbak et al. list optimization on the CoT only as a way monitorability degrades.",
+   "source_evidence": "A CoT monitor is an automated system that reads the CoT of a reasoning model and other relevant information and flags suspicious or potentially harmful interactions. ... These responses could then be blocked, or replaced with safer actions, or reviewed in more depth (Greenblatt et al., 2024b). ... However, process supervision (Uesato et al., 2022; Lightman et al., 2023) is an active area of research, involving directly shaping the reasoning process, e.g. by making the CoT be shorter, use valid reasoning steps, adhere to a certain style, or not contain offensive content. Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025).",
+   "citing_evidence": "Because reasoning models externalize much of their computation into readable text, one mitigation is to read that text: a monitor scores each rollout for suspiciousness and its score is subtracted from the reward (Baker et al., 2025; Korbak et al., 2025)."
+  }
+ ]
+}

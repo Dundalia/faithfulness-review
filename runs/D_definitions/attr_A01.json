@@ -1,0 +1,1204 @@
+{
+ "checks": [
+  {
+   "entry": "admoni2026aligning#8",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham applies counterfactual interventions (truncation, inserted mistakes, paraphrase, filler) to estimate their influence on the answer, but only to the model's generated chain of thought, never to input features, and it explicitly contrasts its CoT interventions with interventions on the prompt; the 'input features' part is unsupported for Lanham.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... We intervene on the CoT produced by the model rather than few shot prompt examples and propose general tests for CoT faithfulness.",
+   "citing_evidence": "Prior works apply counterfactual interventions to input features using various heuristics to estimate their influence on model decisions Wiegreffe et al. (2020); Turpin et al. (2023); Lanham et al. (2023); Atanasova et al. (2023)."
+  },
+  {
+   "entry": "agarwal2024faithfulness#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering truncates the CoT, reads an unchanged answer as post-hoc reasoning, and summarizes it by an area over the curve that it treats as a faithfulness measure, as Agarwal restates.",
+   "source_evidence": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "If the answer doesn’t change by adding an explanation incrementally, it stands to reason that the explanation is generated after an answer was arrived at, indicating more post-hoc reasoning. The amount of post-hoc reasoning and consequently faithfulness is quantified by the area over the curve of explanation fraction vs. the percentage of answers consistent with full explanation."
+  },
+  {
+   "entry": "agarwal2024faithfulness#9",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham does insert mistakes, read an unchanged answer as post-hoc reasoning and report an AOC, but it inserts a single mistake into one step and regenerates the rest; it never adds 'more mistakes' or plots a 'fraction of mistakes', so the curve Agarwal describes is not Lanham's.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "Similar to the Early Answering setting, if the answer doesn’t change by adding more mistakes, it indicates more post-hoc reasoning, and consequently less faithfulness. The amount of post-hoc reasoning and consequently faithfulness is determined by the area over the curve of fraction of mistakes vs. percentage of answers consistent with full self-explanation."
+  },
+  {
+   "entry": "agarwal2024faithfulness#10",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham states that non-post-hoc reasoning has fewer ways to be unfaithful and uses its post-hoc measures (AOC) as indicators of faithfulness, as Agarwal restates.",
+   "source_evidence": "Overall though, if reasoning is not post-hoc, there are fewer ways for it to be unfaithful than there are for reasoning which is post-hoc, including greater test-time compute and steganography which we investigate in this work as well. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "Lanham et al. (2023) uses the amount of post-hoc reasoning as an indicator of faithfulness. The hypothesis is that if the generated explanation is post-hoc, the explanation has more ways to be unfaithful."
+  },
+  {
+   "entry": "algaba2026reasoning#12",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Reference [26] is Lanham et al., which defines faithful reasoning as accurately representing the process behind the prediction and finds stated reasoning unfaithful on some tasks, matching 'need not faithfully describe the computation that produced the answer'.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... Overall, our results suggest that CoT can be faithful if the circumstances such as the model size and task are carefully chosen.",
+   "citing_evidence": "Prior work uses intermediate reasoning to improve or check answers [21, 22, 23, 24, 25], although written reasoning need not faithfully describe the computation that produced the answer [26, 27, 28, 29]."
+  },
+  {
+   "entry": "ananthula2026decodable#7",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham adopts Jacovi and Goldberg's definition that faithful reasoning accurately represents the reasoning process behind the prediction, which matches 'reflects the causal computation behind the answer'; the activation-patching example is Ananthula's own illustration, not attributed to Lanham.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020).",
+   "citing_evidence": "we do not equate it with faithfulness in the full causal sense of Jacovi and Goldberg (2020) or Lanham et al. (2023), which would require showing the explanation reflects the causal computation behind the answer (e.g. generation-side activation patching on a fluent pretrained model)"
+  },
+  {
+   "entry": "anon2026computation#6",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham supports the clause it is naturally cited for: editing or truncating the CoT often leaves the answer unchanged on several tasks; the omitted-factors clause is Turpin's finding, which is co-cited.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. ... Notably, for the three lowest-AOC tasks (ARC (Easy), ARC (Challenge), and OpenbookQA), the chain of thought changes the final answer less than 10% of the time, while for the highest AOC task (AQuA) the chain of thought changes the answer more than 60% of the time.",
+   "citing_evidence": "Prior work shows that generated reasoning may omit or misrepresent the factors that influence model predictions, and that modifying the CoT can leave the answer largely unchanged (Turpin et al., 2023; Lanham et al., 2023)."
+  },
+  {
+   "entry": "anon2026crisp#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham operationalizes faithfulness by intervening on the chain the model conditions on and measuring how strongly the answer depends on it, which is the intervention-literature sense this glossary entry names.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it.",
+   "citing_evidence": "How strongly a model’s answer depends on the content of a supplied chain, as the intervention literature operationalizes it."
+  },
+  {
+   "entry": "anon2026crisp#3",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham has both primitives (paraphrasing, adding a mistake) but scores them separately, accuracy for paraphrase and answer-match AOC for mistakes; CRISP's single accuracy difference between a length- and style-matched paraphrase and a one-error rewrite is a new combination.",
+   "source_evidence": "We measure the model’s accuracy after standard and paraphrased CoT. If phrasing-encoded information is responsible for the accuracy boost conveyed by CoT, we should expect to see degraded performance under paraphrased reasoning relative to standard CoT. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "The raw CRISP effect is the accuracy that a model loses between the 2 members of a valid matched intervention pair: ϕ(x) = A(x, cpar ) − A(x, cerr ),"
+  },
+  {
+   "entry": "anon2026crisp#9",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's truncation measures how often the answer matches the full-CoT answer (and, in §3, how often it changes with vs. without CoT), not an accuracy difference; CRISP's A(x,c) − A(x,∅) on base-correct items rescores the same truncation as accuracy lost.",
+   "source_evidence": "Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc. ... To explore this hypothesis, we show what percentage of the time the answer changes with vs. without CoT, a metric that intuitively captures how much the model relies on the CoT to predict answers. This metric is equivalent to our early answering experiment when using 0% of the CoT specifically.",
+   "citing_evidence": "The truncation baseline measures the same construct on the same chains, as A(x, c) − A(x, ∅), so it contrasts 2 chains of different length while ϕ contrasts 2 chains matched on length and style."
+  },
+  {
+   "entry": "anon2026crisp#23",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's mistake primitive has a pretrained model rewrite one sentence with a mistake and then resamples the rest of the CoT; CRISP instead has an external generator rewrite the whole chain with exactly one decisive, unflagged error and keeps everything else fixed.",
+   "source_evidence": "To generate mistakes, we use a pretrained model (described in §2.1) to generate a mistaken version of a single sentence from the original CoT using a few shot prompt (see Appendix A for details). ... In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward.",
+   "citing_evidence": "Rewrite the following chain-of-thought so that it contains exactly ONE decisive error introduced at a single reasoning step, an error that makes the final conclusion wrong. Keep everything else identical in content, length, fluency, and style. Do NOT signal, hedge, or correct the error; present the trace as if it were sound."
+  },
+  {
+   "entry": "anon2026crisp#24",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham paraphrases prefixes of the CoT without access to the question and resamples the rest; CRISP paraphrases the full chain, allows reordering independent steps, and matches length and register so it can serve as a control.",
+   "source_evidence": "We have the model paraphrase the same subsequences of the reasoning sample as were used in early answering ... We then insert the paraphrased chain of thought back into the original prompt and continue to sample until the end of the reasoning sample, then prompting for a final answer as before.",
+   "citing_evidence": "You are rewriting a chain-of-thought reasoning trace. Produce a paraphrase that preserves EVERY stated fact, step, and intermediate result. Change only the wording and, where steps are independent, their order. Do not add, remove, weaken, or alter any reasoning, and do not change the conclusion. Match the original length and register."
+  },
+  {
+   "entry": "anon2026grace#4",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham did introduce an area-over-the-curve (AOC) metric, but it computes a separate AOC for early answering and for adding mistakes, truncating after every sentence; it never aggregates sub-protocols into one composite, never truncates at 25/50/75%, and never calls it 'area over completeness'.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "Lanham et al. (2023) introduced AOC, aggregating sub-protocols including truncation at 25,50,75 %{25, 50, 75}% % and mistake injection."
+  },
+  {
+   "entry": "anon2026grace#7",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Paraphrase, truncation and error injection are Lanham's tests, but GRACE truncates at fixed 25/50/75% token levels (Lanham truncates after every sentence) and adds hint injection, which comes from the co-cited Turpin et al., not Lanham.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample.",
+   "citing_evidence": "Figure 1: Counterfactual perturbation regimes for faithfulness evaluation. Paraphrase preserves semantics and answer while rewriting CoT. Truncation removes CoT at 25/50/75% token levels. Error injection adds contradictory reasoning. Hint injection introduces answer cues that may bias predictions."
+  },
+  {
+   "entry": "anon2026improving#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "The citing paper attributes to Lanham only the trace-intervention strand (truncation, corruption showing varying answer reliance), which Lanham reports; the hint-disclosure strand is cited to Turpin and Chen.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it.",
+   "citing_evidence": "while trace interventions (e.g., truncation, corruption) demonstrate varying degrees of answer reliance on intermediate steps (Lanham et al., 2023)."
+  },
+  {
+   "entry": "anon2026what#13",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham finds that on several tasks the answer rarely changes when the CoT is truncated or given a mistake, which is the 'remain stable when its stated reasoning is perturbed' failure attributed to it.",
+   "source_evidence": "Notably, for the three lowest-AOC tasks (ARC (Easy), ARC (Challenge), and OpenbookQA), the chain of thought changes the final answer less than 10% of the time, while for the highest AOC task (AQuA) the chain of thought changes the answer more than 60% of the time.",
+   "citing_evidence": "remain stable when its stated reasoning is perturbed (Lanham et al., 2023)"
+  },
+  {
+   "entry": "anwar2026analyzing#29",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham supports stated reasoning that may not reflect the actual reasoning and may be post-hoc; the 'biased answer' qualifier comes from co-cited Turpin et al. and Chen et al., since Lanham studies no biasing cues.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "a model’s stated reasoning may be a plausible but misleading rationalization of a biased answer, rather than a reflection of its actual computational process (Turpin et al., 2023; Lanham et al., 2023; Chen et al., 2025; Arcuschin et al., 2025)."
+  },
+  {
+   "entry": "arakelyan2025flare#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham (the 2023a entry is the same paper) reports that models sometimes primarily ignore their CoT when answering, the 'outright ignoring the intermediate reasoning' failure attributed to it.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it.",
+   "citing_evidence": "Natural language reasoning chains prevalent in CoT and similar methods are shown to be unfaithful, either masking the reasoning biases (Turpin et al., 2023) of the model or outright ignoring the intermediate reasoning (Lanham et al., 2023a)."
+  },
+  {
+   "entry": "arcuschin2025chain#10",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham measures faithfulness by how the answer changes when the CoT is truncated, given mistakes or paraphrased, as restated.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Other works (Gao, 2023; Lanham et al., 2023) assess how strongly a model’s answer causally depends on its CoT, measuring faithfulness through the extent to which truncating, corrupting or paraphrasing a model’s CoT changes its predicted answer."
+  },
+  {
+   "entry": "arcuschin2026biases#4",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithful reasoning as accurately representing the process behind the prediction and reports unfaithful CoT, matching 'the CoT fails to reflect how the model actually arrives at its conclusions'.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... Since our results indicate that the LLM’s stated reasoning is unfaithful on some tasks, we also investigate if there is any size model that generates faithful reasoning on these tasks.",
+   "citing_evidence": "This constitutes a form of unfaithful reasoning, where the CoT fails to reflect how the model actually arrives at its conclusions (Turpin et al., 2023; Lanham et al., 2023; Arcuschin et al., 2025; Chua and Evans, 2025; Atanasova et al., 2023; Siegel et al., 2024; Siegel et al., 2026)."
+  },
+  {
+   "entry": "baker2025monitoring#27",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Reference [28] is Lanham et al., whose tests intervene on the CoT (a 'latent' in Baker's terminology) and read faithfulness off changes in the answer, which is the causal treatment Baker describes.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... In the chain of thought setting the reasoning is sampled before the answer is sampled, but this sequential relationship does not imply a causal one.",
+   "citing_evidence": "In contrast, intervention methods, such as those in [28], implicitly treat faithfulness as a causal metric by intervening on latent representations and observing changes in target variables."
+  },
+  {
+   "entry": "basu2026measuring#17",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's Early Answering truncates the CoT after each sentence and asks whether the answer is already fixed; it never examines layers, so Basu's logit-lens layer at which the answer stabilises moves the idea from CoT prefixes to depth within one forward pass.",
+   "source_evidence": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable.",
+   "citing_evidence": "This quantifies the “early answering” phenomenon (Lanham et al., 2023): the model commits to an answer after processing only a quarter of its layers"
+  },
+  {
+   "entry": "bhupatiraju2026stated#6",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Like Lanham's Adding Mistakes, the baseline edits one stated step and regenerates from it, but the edit is a designed counterfactual entity and the result is scored by flip-to-target, not by LLM-generated mistakes and an answer-match AOC; Lanham is cited as [3] for 'truncate or corrupt chain-of-thought reasoning'.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "Within the same items and hops, we replaced $E_{k}$ with $E_{k}^{\\prime}$ in the generated text. This is then truncated after the edited step and thus continued with the generation."
+  },
+  {
+   "entry": "boppana2026reasoning#6",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithfulness against the model's true reasoning process and finds CoT unfaithful in some settings, as restated.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... As models become larger and more capable, they produce less faithful reasoning on most tasks we study.",
+   "citing_evidence": "recent research has shown that CoT traces are not necessarily faithful to the internal reasoning processes employed by the model (Turpin et al., 2023; Lanham et al., 2023; Arcuschin et al., 2025; Chen et al., 2025)"
+  },
+  {
+   "entry": "boppana2026reasoning#9",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's Early Answering is the same truncate-and-prompt procedure used to test reliance on the CoT, as cited; Boppana reuses it as a softmax readout of the model's current belief over A–D, which Lanham does not do.",
+   "source_evidence": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable. ... Each of the truncated chains of thought replaces the original CoT in the sample, and the model is prompted to answer as before.",
+   "citing_evidence": "Forced answer prompting (i.e., early answering) is a method that has been used for validating whether models rely on their chain-of-thought reasoning (Lanham et al., 2023; Wang et al., 2026). Given a reasoning trace, we truncate at some intermediate step and prompt the same model to provide its final answer choice (A-D), bypassing the remaining steps."
+  },
+  {
+   "entry": "bu2026spadebench#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham is cited only as a study of faithfulness, which it is; the uncited gloss that follows ('reasoning traces accurately reflect final outputs') is looser than Lanham's definition, which measures faithfulness against the model's reasoning process, not its outputs.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "Parallel to the diversification of threat scenarios, the study of faithfulness (Turpin et al., 2023; Lanham et al., 2023) also emerges as a crucial aspect of agent reliability. While existing literature primarily investigates if reasoning traces accurately reflect final outputs"
+  },
+  {
+   "entry": "cheah2026training#23",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham perturbs the CoT itself (truncating it, replacing it with filler, inserting mistakes) to test whether the answer depends on it.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Lanham et al. (2023) perturb reasoning traces directly, e.g. ablation or mistake insertion in CoT to test whether answers depend on the stated reasoning."
+  },
+  {
+   "entry": "chen2025reasoning#9",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham adopts the definition that faithful reasoning accurately represents the reasoning process behind the model's prediction.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020).",
+   "citing_evidence": "Different from plausibility, faithfulness evaluates whether the CoT accurately reveals the model’s internal reasoning process behind responding to an input (Ribeiro et al., 2016; Gilpin et al., 2018; Wu and Mooney, 2019; Jacovi and Goldberg, 2020; Lanham et al., 2023; Turpin et al., 2023)."
+  },
+  {
+   "entry": "chidambaram2026corrupted#3",
+   "source": "lanham2023measuring",
+   "verdict": "unsupported",
+   "finding": "Reference [15] is Lanham et al., which uses no hints and no monitor: it intervenes only on the model's own CoT and mentions biasing context only when describing Turpin et al.; the appended-hint, acknowledgment-checking setting comes from the co-cited Chen et al. 2025 [4] (and Chua and Evans [6]).",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... In that paper, the model produces CoT in the presence of biasing few-shot examples; while the model’s final answer is consistent with the bias provided by the prompt, the CoT gives a different explanation for the answer that does not reference the biasing context.",
+   "citing_evidence": "we apply investigator agents in the hint setting widely used in prior work on CoT monitorability [15, 4, 6, 3]. In this setting, a hint pointing to an incorrect answer is appended to a multiple-choice question, and a monitor checks whether the actor acknowledges using the hint when the hint influenced its final answer."
+  },
+  {
+   "entry": "chua2025deepseek#6",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham names encoded reasoning, a form of steganography, as one of the faithfulness failures its tests target.",
+   "source_evidence": "Encoded reasoning: The benefit from CoT may be attained by LLMs encoding the relevant information in the generated reasoning in a way that is not understandable to human readers (a form of steganography).",
+   "citing_evidence": "Furthermore, we do not conduct tests for other forms of unfaithfulness, such as encoded reasoning and steganography (Roger & Greenblatt, 2023; Lanham et al., 2023)."
+  },
+  {
+   "entry": "chua2025deepseek#21",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham evaluates faithfulness by editing the CoT and observing whether the final answer changes.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "Lanham et al. (2023) evaluate faithfulness by checking the causality of the CoT in the model’s final response – whether models are sensitive to controlled edits in their CoT."
+  },
+  {
+   "entry": "cox2026posthoc#3",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "The setup (a CoT containing an inserted mistake) is Lanham's, but Lanham reads an answer that ignores the mistake as a sign of post-hoc reasoning and says post-hoc reasoning does not exclude faithfulness; Cox turns it into a categorical verdict that answering correctly is unfaithful.",
+   "source_evidence": "If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT. ... Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.",
+   "citing_evidence": "Now suppose, as in Lanham et al. (2023), the model is given a scratchpad with a mistake in the reasoning. The model must then either respond with what it knows to be the correct answer, or with the incorrect answer entailed by the incorrect chain of thought. The former is perhaps the preferred behavior, but it would constitute unfaithful reasoning."
+  },
+  {
+   "entry": "cox2026posthoc#5",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham intervenes on the CoT and measures how the answer changes, as cited; Cox's two interventions (ellipses in place of the CoT scored by answer change, and a full incorrect CoT implying the opposite answer) differ from Lanham's filler test, which scores accuracy, and its single inserted mistake followed by regeneration.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Figure 5: Accuracy when CoT is replaced with filler tokens.",
+   "citing_evidence": "Similar to Lanham et al. (2023), we intervene on the CoT and measure how sensitive the final answer is to CoT."
+  },
+  {
+   "entry": "cui2026behavior#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Reference [23] is Lanham et al., which finds answers that often ignore the stated (including mistaken) reasoning and links faithfulness to the final prediction being entailed by the reasoning, which matches 'the final answer doesn't align with the reasoning'.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. ... Another potential cause for the increased faithfulness on these tasks is that they both involve logical reasoning, so it may be more clear that the model’s final prediction should be entailed by the stated reasoning.",
+   "citing_evidence": "Previous work has shown that these reasoning traces can still be unfaithful, where the final answer of the model doesn’t align with the reasoning [37, 23, 16, 12]."
+  },
+  {
+   "entry": "duzan2026chainofthought#28",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham does find that faithfulness varies by task and gets worse with model capability, but its tests measure whether the answer depends on the CoT, not whether models verbalize the factors driving their predictions, and it says post-hoc reasoning need not be unfaithful; presenting its result as evidence of failure to verbalize driving factors is not supported.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... As models become larger and more capable, they produce less faithful reasoning on most tasks we study. ... Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.",
+   "citing_evidence": "Work on CoT faithfulness has shown that models often fail to verbalize the factors driving their predictions: Lanham et al. (2023) found that faithfulness varies by task and often declines with capability"
+  },
+  {
+   "entry": "emmons2025chain#5",
+   "source": "lanham2023measuring",
+   "verdict": "renamed",
+   "finding": "What Emmons calls 'inconsistency' is Lanham's evidence of post-hoc reasoning: answers that stay unchanged when the CoT is truncated or given a mistake (the model 'ignoring' the CoT); Lanham measures answer change, not whether the answer logically follows from the reasoning.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "Another points to CoT being inconsistent, where the final answer does not logically follow from the reasoning (Lanham et al., 2023)."
+  },
+  {
+   "entry": "emmons2025chain#13",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Emmons states it adapts Lanham's early-answering and adding-mistakes settings: it token-forces one incorrect intermediate value and varies problem difficulty, whereas Lanham inserts an LLM-generated mistake into one sentence and regenerates the rest.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "In easy math problems, when we force an incorrect intermediate step in a model’s CoT (e.g., $x=x_{\\text{incorrect}}$ ), we find that Gemini 1.5 Pro often produces the correct final answer anyway. This results in an “unfaithful” inconsistency as in prior work."
+  },
+  {
+   "entry": "emmons2025pragmatic#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithful reasoning as accurately representing the reasoning process behind the model's prediction.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020).",
+   "citing_evidence": "Much prior work on evaluating CoT has focused on faithfulness—whether the CoT accurately reflects the model’s true internal process (Turpin et al., 2023; Lanham et al., 2023; Chua and Evans, 2025; Chen et al., 2025; Agarwal et al., 2024)."
+  },
+  {
+   "entry": "ferreira2026truthful#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham describes CoT that can be an unfaithful explanation of the model's actual reasoning, i.e. a misleading view of how it decided.",
+   "source_evidence": "it is unclear if the stated reasoning is a faithful explanation of the model’s actual reasoning (i.e., its process for answering the question) ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "These often look plausible to human readers (Agarwal et al., 2024), but might be unfaithful in that they offer a misleading view of how the model decided (Lanham et al., 2023; Turpin et al., 2023; Agarwal et al., 2024; Madsen et al., 2024; Arcuschin et al., 2025, i.a.)."
+  },
+  {
+   "entry": "ferreira2026truthful#2",
+   "source": "lanham2023measuring",
+   "verdict": "other-claim",
+   "finding": "Lanham is cited for the preceding sentence (LLM explanations can be unfaithful to how predictions were made), which it supports; the cue-intervention criterion that follows comes from Turpin et al., since Lanham never intervenes on input cues.",
+   "source_evidence": "However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful. ... We intervene on the CoT produced by the model rather than few shot prompt examples and propose general tests for CoT faithfulness.",
+   "citing_evidence": "Prior work has shown that LLMs can give explanations that are unfaithful to how they really made their predictions (Lanham et al., 2023; Turpin et al., 2023, i.a.). For example, if a model’s answer is influenced by some cues in the input – as demonstrated by intervening on the cues – but the explanation fails to mention those cues, then the explanation is considered unfaithful."
+  },
+  {
+   "entry": "ferreira2026truthful#10",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham requires faithful reasoning to represent the process behind the prediction and calls a CoT unfaithful if computation that drives the answer is not represented in it, which matches the requirement that the CoT identify what actually influences the answer.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... If the filler tokens provide a significant performance improvement, then the CoT may be unfaithful by not representing the actual process by which the model comes to its answer.",
+   "citing_evidence": "To be regarded as a reliable ‘window’ into the model’s decision making, a CoT needs to identify knowledge and generalizations that are available to the model and which do indeed exert influence over the generated answer (Lanham et al., 2023; Agarwal et al., 2024; Arcuschin et al., 2025, i.a.)."
+  },
+  {
+   "entry": "ferreira2026truthful#12",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham assesses faithfulness by comparing the answer under the original CoT with the answer under a corrupted CoT, the example attributed to it.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "A common way to assess the faithfulness of LLM outputs is to compare the predictions generated from the original context with those from a modified version: e.g., by corrupting the obtained CoTs (Lanham et al., 2023)"
+  },
+  {
+   "entry": "golchin2026monitorability#4",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham supports that CoT can be unfaithful, but not the 'omitting the factors that drive the answer' failure: its evidence of unfaithfulness is answers that do not depend on the CoT, and its filler-token test found no evidence of unstated computation; omission is shown by co-cited Turpin, Chen and Arcuschin.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. ... These results suggest that extra test-time compute alone is not used by models to perform helpful but unstated reasoning.",
+   "citing_evidence": "The CoT can be unfaithful, omitting the factors that drive the answer (Turpin et al., 2023; Lanham et al., 2023; Chen et al., 2025; Arcuschin et al., 2025)"
+  },
+  {
+   "entry": "gurarieh2026faithfulness#11",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Reference [10] is Lanham et al., which defines post-hoc reasoning as reasoning produced after the conclusion is already guaranteed, the 'post-hoc rationalizations for predetermined answers' attributed to it.",
+   "source_evidence": "Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "to serve as post-hoc rationalizations for predetermined answers rather than genuine reasoning [10, 11]."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#23",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "The description of Lanham's CoT-level Early Answering (successive prefixes, match rate with the full-CoT answer, area over the curve) is accurate; the step-level version that scores a step by whether including it flips an incorrect answer is Gurarieh's.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc. ... From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "citing_evidence": "Early Answering [10] truncates the CoT at successive prefixes and, for each, measures how often the model still arrives at the full-CoT answer, with the score given by the area over the resulting curve."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#24",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "The description of Lanham's Adding Mistakes (mistake at one step, regenerate the rest, area over the answer-preservation curve) is accurate apart from the mistake generator; the step-level version that corrupts only the target step without regeneration is Gurarieh's.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "Adding Mistakes [10] analogously injects a mistake at sampled step positions, generated via Gemini 3 Flash [56], regenerates the rest of the CoT from each, and reports the area over the answer-preservation curve."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#25",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham does replace the whole CoT with filler tokens over a sweep of lengths, but it reports accuracy, not answer preservation, and uses the test only to ask whether extra compute alone yields the CoT gain; the answer-preservation scoring attributed to it is Gurarieh's.",
+   "source_evidence": "In this experiment, we replace the CoT with a number of “ …” tokens (“filler tokens”), each consisting of a space followed by three periods. ... Figure 5: Accuracy when CoT is replaced with filler tokens. ... From Fig. 5 we can see that there is no increase in accuracy observed from adding “ …” tokens to the context.",
+   "citing_evidence": "Filler Tokens [10] replaces the entire CoT with an uninformative sequence of repeated tokens (e.g., dots), sweeping over a range of lengths, and reports answer preservation across them."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#29",
+   "source": "lanham2023measuring",
+   "verdict": "unsupported",
+   "finding": "Lanham has no simulatability metric and never gives the CoT to a weaker simulator model (every test feeds the edited CoT back to the same model), so the simulatability attribution rests on co-cited [60] Chen et al., and Gurarieh itself notes that no prior work uses this exact setup.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Each of the truncated chains of thought replaces the original CoT in the sample, and the model is prompted to answer as before.",
+   "citing_evidence": "Simulatability [10, 60] provides the CoT as additional context to a weaker simulator model and tests whether the simulator can reproduce the original model’s answer; if the CoT genuinely encodes the reasoning behind the answer, even a less capable reader should be able to follow it."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#30",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham paraphrases progressively longer prefixes, continues generation, and reports how often the answer matches the original (App. B), using unchanged answers as evidence against phrasing-encoded reasoning.",
+   "source_evidence": "We have the model paraphrase the same subsequences of the reasoning sample as were used in early answering ... We then insert the paraphrased chain of thought back into the original prompt and continue to sample until the end of the reasoning sample, then prompting for a final answer as before. ... Fig. 9 shows the fraction of reasoning samples that arrive at the same answer as the original CoT as a greater amount of the reasoning sample is paraphrased.",
+   "citing_evidence": "Paraphrasing [10] paraphrases progressively longer prefixes of the CoT while preserving their semantic content, re-runs the model from each paraphrased prefix, and checks whether the final answer is preserved."
+  },
+  {
+   "entry": "imrankhan2026better#1",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham supports that stated reasoning is not always a faithful account of what produced the answer, but it never introduces biasing features into the input or checks whether the CoT mentions them; that evidence is Turpin et al.'s, which Lanham only summarizes in related work.",
+   "source_evidence": "However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful. ... We intervene on the CoT produced by the model rather than few shot prompt examples and propose general tests for CoT faithfulness.",
+   "citing_evidence": "a growing body of work shows the stated reasoning is not always a faithful account of what produced the answer: models can be steered by biasing features in the input while never mentioning that influence in their CoT [Turpin et al., 2023, Lanham et al., 2023]."
+  },
+  {
+   "entry": "jia2026decorative#15",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham did introduce early answering to test whether the answer needs the full CoT, but it has no step-removal test (its tests are early answering, adding mistakes, paraphrasing and filler tokens), and its Adding Mistakes test already injects errors and regenerates the rest, which Jia presents as its own complementary approach.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward.",
+   "citing_evidence": "Closest methodologically, Lanham et al. (2023) introduced early answering and step removal to test whether the model needs its CoT; our continuation-based approach measures the complementary question of whether the CoT constrains the continuation when it is wrong, by injecting errors and reading off the downstream effect."
+  },
+  {
+   "entry": "jose2026strategic#1",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham raises concerns about CoT faithfulness, but it does not show CoTs failing to highlight key factors behind behavior: its evidence is answers that do not depend on the CoT, and its filler-token and paraphrase tests found no evidence of unstated or hidden reasoning; the omitted-factor evidence comes from co-cited Turpin, Chen and Chua and Evans.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. ... These results suggest that extra test-time compute alone is not used by models to perform helpful but unstated reasoning. ... In this work, we find similar performance when replacing CoT with paraphrased CoT, indicating that the particular phrasing of CoT is not a driver of performance.",
+   "citing_evidence": "A large body of prior work (Chen et al., 2025; Chua & Evans, 2025; Lanham et al., 2023; Turpin et al., 2023) raises concerns about the faithfulness of model CoTs, showing that they often do not highlight key factors influencing the model’s behavior."
+  },
+  {
+   "entry": "korbak2025chain#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "The citation sits on 'evaluations of faithfulness', which Lanham proposes; treating them as a proxy for monitorability is Korbak's framing (Lanham never mentions monitoring) and is not attributed to Lanham.",
+   "source_evidence": "To answer this question, we propose tests for measuring CoT faithfulness, enabling us to investigate CoT faithfulness across a variety of tasks on LLMs fine-tuned to behave as a helpful assistant (shown in Fig. 1).",
+   "citing_evidence": "Researchers have proposed evaluations of faithfulness (Lanham et al., 2023; Turpin et al., 2023; Roger, 2025; Chen et al., 2025, e.g.) as a proxy measure for monitorability."
+  },
+  {
+   "entry": "korbak2025chain#7",
+   "source": "lanham2023measuring",
+   "verdict": "renamed",
+   "finding": "Perturbing the CoT and checking whether the final output changes is Lanham's test, and Lanham reads a low rate of change as post-hoc reasoning, which Korbak calls 'causal relevance' and 'confabulated or performative' CoT.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc.",
+   "citing_evidence": "Measures of causal relevance of CoTs. For instance, this could involve perturbing a CoT and checking whether it influences the final output (Lanham et al., 2023). A low rate of change could indicate that the CoT is more confabulated or performative."
+  },
+  {
+   "entry": "li2025drift#2",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham does read insensitivity to alterations as a faithfulness failure, but its alterations are to the model's own CoT and the response it measures is the final answer; it never alters the task input or examines changes in the rationale, which is what Li means.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... We intervene on the CoT produced by the model rather than few shot prompt examples and propose general tests for CoT faithfulness.",
+   "citing_evidence": "This issue is highlighted in faithfulness evaluation, where unfaithful models do not respond adequately to alterations in input (Lanham et al., 2023; Radhakrishnan et al., 2023)."
+  },
+  {
+   "entry": "li2025drift#4",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham does generate counterfactuals for faithfulness evaluation, but it edits the CoT and reads the answer; Li reverses the direction, editing key parts of the input and reading the rationale, which follows co-cited Atanasova et al.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... We intervene on the CoT produced by the model rather than few shot prompt examples and propose general tests for CoT faithfulness.",
+   "citing_evidence": "Following existing approaches for counterfactual generation in faithfulness evaluation (Atanasova et al., 2023; Lanham et al., 2023), we modify key parts w of the inputs I and examine the resulting changes in the generated rationales."
+  },
+  {
+   "entry": "li2026when#2",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham reports the with-CoT minus without-CoT accuracy (Table 2, 'Accuracy difference') as CoT's performance gain and finds it barely correlates with its faithfulness measures; Li reuses this accuracy difference, with a stored trace and answer-time evidence, as 'trace contribution', a measure of trace use.",
+   "source_evidence": "| Task | Early Answering | Adding Mistakes | Without CoT | With CoT | Accuracy difference ... Surprisingly, the amount of post-hoc reasoning per task (measured by AOC) also shows little correlation with the performance gain from chain of thought.",
+   "citing_evidence": "Trace contribution is the accuracy with the trace minus the accuracy with the no-trace placeholder on the same questions and answer-time evidence. It measures the net effect of the trace, since removing a trace can turn correct answers into errors and vice versa."
+  },
+  {
+   "entry": "li2026when#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham shortens the CoT (early answering), replaces it (filler tokens, paraphrases, mistakes) and measures the resulting changes in the answer and in accuracy.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "Trace use is the effect of the supplied trace on later answers: removing, shortening, or replacing it can change the answer and its accuracy (Lanham et al., 2023; Paul et al., 2024; Wang et al., 2026)."
+  },
+  {
+   "entry": "li2026when#7",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's §3 metric is the share of answers that change with vs. without the CoT, the same answer-change rate Li applies to trace removal.",
+   "source_evidence": "To explore this hypothesis, we show what percentage of the time the answer changes with vs. without CoT, a metric that intuitively captures how much the model relies on the CoT to predict answers. This metric is equivalent to our early answering experiment when using 0% of the CoT specifically.",
+   "citing_evidence": "The answer change rate is the share of normalized outputs that differ from the corresponding standard answer"
+  },
+  {
+   "entry": "li2026when#8",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham corrupts the CoT (adding mistakes) and runs paraphrasing as a separate test; Li's Broken, its selectivity (Broken minus breakage under a paraphrase) and Adopt (copying the inserted title) are new scores built on those two primitives.",
+   "source_evidence": "Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3. ... We measure the model’s accuracy after standard and paraphrased CoT. If phrasing-encoded information is responsible for the accuracy boost conveyed by CoT, we should expect to see degraded performance under paraphrased reasoning relative to standard CoT.",
+   "citing_evidence": "Broken is the share of answers that become incorrect (%). Sel. (selectivity) is Broken minus the share broken by a paraphrase of the trace and is computed on the $n_{\\textrm{para}}$ questions whose paraphrase passes the entity check. Adopt is the share of swapped cases whose answer is the inserted title."
+  },
+  {
+   "entry": "lindsey2025biology#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithful reasoning as accurately representing the reasoning process behind the prediction and reports unfaithful CoT, matching 'fail to reflect the actual mechanisms used by the model' (the cached text drops the citation markers).",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "However, prior work has shown that CoT reasoning can be unfaithful – that is, it can fail to reflect the actual mechanisms used by the model (see e.g. )."
+  },
+  {
+   "entry": "lindsey2025biology#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham is the family (b) work: it modifies the content of the CoT and observes the effect on the final answer, while family (a), prompt modifications that go unmentioned in the CoT, is Turpin et al.'s.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "or (b) modify the content of the chain-of-thought (putting “words in the model’s mouth”) and observing its effects on the model’s final answer."
+  },
+  {
+   "entry": "lobo2024impact#2",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham contrasts reasoning that drives the answer with post-hoc reasoning produced after the conclusion is fixed, but it defines faithfulness with Jacovi and Goldberg and says explicitly that being post-hoc neither guarantees nor excludes faithfulness, so it does not define a faithful CoT as one whose steps logically lead to the answer.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... Post-hoc reasoning is reasoning which is generated after the conclusion has already been established. ... Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.",
+   "citing_evidence": "Following Lanham et al. (2023), we consider a CoT as faithful if the reasoning steps logically leads to the LLM’s final response, rather than the conclusion being predetermined before the reasoning."
+  },
+  {
+   "entry": "lobo2024impact#3",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham truncates after each step and reports dataset-level match rates and AOC; Lobo makes it per instance, taking the first step i that reproduces the full-CoT answer and calling i/N of the CoT faithful.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc.",
+   "citing_evidence": "If there is a step $i$ where the final answer matches the full CoT’s answer, and no earlier steps produce this answer, we conclude that the $\\frac{i}{N}$ fraction of the CoT reasoning is faithful."
+  },
+  {
+   "entry": "lobo2024impact#4",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's rationale (paraphrasing rules out phrasing-encoded information as the source of CoT's gain) matches, but Lanham paraphrases prefixes and regenerates the rest, whereas Lobo paraphrases the last i steps with GPT-4 and scores answer invariance per instance.",
+   "source_evidence": "We then insert the paraphrased chain of thought back into the original prompt and continue to sample until the end of the reasoning sample, then prompting for a final answer as before. ... We measure the model’s accuracy after standard and paraphrased CoT. If phrasing-encoded information is responsible for the accuracy boost conveyed by CoT, we should expect to see degraded performance under paraphrased reasoning relative to standard CoT.",
+   "citing_evidence": "If paraphrasing does not significantly alter the final answer in many cases, it suggests that the accuracy gains from CoT reasoning likely stem from underlying logical reasoning rather than specific token choices or phrasing. Consequently, the CoT reasoning is considered faithful."
+  },
+  {
+   "entry": "lobo2024impact#5",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham replaces the whole CoT with filler and asks whether accuracy rises, a test of the test-time-compute hypothesis; Lobo's version replaces only the steps after step i and scores whether the answer changes, a different criterion that it presents as a per-instance modification.",
+   "source_evidence": "In this experiment, we replace the CoT with a number of “ …” tokens (“filler tokens”), each consisting of a space followed by three periods. ... If the filler tokens provide a significant performance improvement, then the CoT may be unfaithful by not representing the actual process by which the model comes to its answer.",
+   "citing_evidence": "Filler Substitution: It checks if a CoT’s content truly affects an LLM’s final answer, or if Filler Substitution tokens can replace part of the reasoning without changing the outcome, which would suggest that the reasoning is unfaithful."
+  },
+  {
+   "entry": "lobo2024impact#6",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "CoT Pred Match is Lanham's matching frequency (how often the answer under the altered CoT equals the original answer), applied by Lobo at fixed 25/50/75% fractions and to its own filler and paraphrase variants.",
+   "source_evidence": "Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc.",
+   "citing_evidence": "we compute CoT Pred Match - the fraction of data points for which the final answer obtained by prompting the LLM with a perturbed CoT is the same as the answer obtained by prompting the LLM with the original CoT."
+  },
+  {
+   "entry": "luo2026removal#17",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham edits the CoT and checks whether the answer changes.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "and Lanham et al. (2023) [14] edit the CoT itself and check whether the answer changes."
+  },
+  {
+   "entry": "lv2026geofaith#9",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithfulness relative to the model's actual reasoning process and finds that CoT is not always faithful to it.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "Recent work has shown that CoT reasoning is not always faithful to the model’s actual decision process Turpin et al. (2023); Lanham et al. (2023); Lv et al. (2026); Xu et al. (2024)."
+  },
+  {
+   "entry": "macar2025thought#8",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham names post-hoc reasoning, produced after the conclusion is already guaranteed, as a faithfulness failure, which is the post-hoc rationalization account attributed to it.",
+   "source_evidence": "Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "Other prior work has described unfaithful CoTs instead as post-hoc rationalizations, whereby the model is aware of the answer and produces faux reasoning to justify it (Arcuschin et al., 2025; Lanham et al., 2023)."
+  },
+  {
+   "entry": "macdermott2025reasoning#5",
+   "source": "lanham2023measuring",
+   "verdict": "other-claim",
+   "finding": "Lanham is cited for the finding that CoT reasoning is often unfaithful, which it supports; the hint-based measurement described in the next sentence does not describe Lanham, which uses no hints and measures faithfulness by editing the CoT.",
+   "source_evidence": "However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful. ... Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "In the context of LMs, recent work has found that CoT reasoning is often unfaithful (Arcuschin et al., 2025; Chen et al., 2025; Chua & Evans, 2025; Turpin et al., 2023; Lanham et al., 2023). In these works, faithfulness is typically measured according to whether the LM reasons about a hint provided in the prompt which counterfactually changes its output."
+  },
+  {
+   "entry": "madsen2024self#9",
+   "source": "lanham2023measuring",
+   "verdict": "renamed",
+   "finding": "What Madsen calls a self-consistency check on mathematical counterfactuals is Lanham's Adding Mistakes test (edit the CoT to contain a mistake, see whether the answer changes), which Lanham runs on all eight tasks, mostly non-mathematical, and not only on math.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Lanham et al. (2023) then edits the CoT to contain false information (e.g. “2 + 3 = 6”) and checks that the prediction follows."
+  },
+  {
+   "entry": "maniyar2026measuring#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham measures faithfulness with early answering and adding mistakes and finds that larger, more capable models often produce less faithful reasoning.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... As models become larger and more capable, they produce less faithful reasoning on most tasks we study.",
+   "citing_evidence": "Lanham et al. (2023) measured faithfulness with early-answering and adding-mistakes interventions and found larger models often less faithful."
+  },
+  {
+   "entry": "matton2025walk#21",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham tests whether reasoning is post-hoc (early answering, adding mistakes) and whether it is encoded in ways not understandable to humans (paraphrasing), the two aspects attributed to it.",
+   "source_evidence": "Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful. ... Encoded reasoning: The benefit from CoT may be attained by LLMs encoding the relevant information in the generated reasoning in a way that is not understandable to human readers (a form of steganography).",
+   "citing_evidence": "These include evaluating if explanations are generated post hoc (Lanham et al., 2023), detecting “encoded” reasoning that is opaque to humans (Lanham et al., 2023)"
+  },
+  {
+   "entry": "matton2025walk#22",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines encoded reasoning as information encoded in the CoT in a way not understandable to human readers, and tests for it by paraphrasing.",
+   "source_evidence": "Encoded reasoning: The benefit from CoT may be attained by LLMs encoding the relevant information in the generated reasoning in a way that is not understandable to human readers (a form of steganography).",
+   "citing_evidence": "detecting “encoded” reasoning that is opaque to humans (Lanham et al., 2023)"
+  },
+  {
+   "entry": "mayne2025llms#11",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham asks whether CoT faithfully represents the model's actual reasoning.",
+   "source_evidence": "it is unclear if the stated reasoning is a faithful explanation of the model’s actual reasoning (i.e., its process for answering the question)",
+   "citing_evidence": "however, the critical question is whether these explanations are faithful representations of models’ internal reasoning Wiegreffe et al. (2021); Turpin et al. (2023); Lanham et al. (2023); Parcalabescu and Frank (2024); Siegel et al. (2024); Barez et al. (2025)."
+  },
+  {
+   "entry": "mohammadi2025evaluating#4",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Reference [6] is Lanham et al., which supports the first failure (unfaithful CoT justifications); the hidden-cue failure is from co-cited [1] Chen et al., as the next sentence makes explicit.",
+   "source_evidence": "However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "Models sometimes produce fluent but unfaithful justifications or change answers when exposed to hidden cues without acknowledging them [1, 6]."
+  },
+  {
+   "entry": "occhipinti2026probing#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham operationalizes faithfulness through how the answer depends on (changes under interventions to) the CoT.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it.",
+   "citing_evidence": "In the LLM era, faithfulness is often operationalized as a property of the model’s CoT, through the causal dependency between the CoT components and the final answer (Lanham et al., 2023)"
+  },
+  {
+   "entry": "parcalabescu2023measuring#13",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "The four tests are quoted verbatim from Lanham's Figure 1 caption, and Lanham does say no single test is conclusive.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... We take a “defense-in-depth” approach; each test is not meant to be conclusive evidence for CoT being faithful, but rather aims to rule out the possibility of one class of faithfulness failures in CoT.",
+   "citing_evidence": "Lanham et al. (2023) argue that one test can not deliver conclusive evidence of CoT faithfulness. They therefore devise multiple tests: ... “– Early Answering: Truncate the original CoT before answering. ... – Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. ... – Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. ... – Filler Tokens: Replace the CoT with ellipses”."
+  },
+  {
+   "entry": "parcalabescu2023measuring#14",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham reads an answer that ignores an inserted mistake as post-hoc reasoning and scores it as lower faithfulness, though it adds that each test is not conclusive and post-hoc reasoning does not exclude faithfulness.",
+   "source_evidence": "If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length. ... We take a “defense-in-depth” approach; each test is not meant to be conclusive evidence for CoT being faithful, but rather aims to rule out the possibility of one class of faithfulness failures in CoT.",
+   "citing_evidence": "The LLM ignores a mistake introduced into the CoT, which reveals that the LLM is unfaithful."
+  },
+  {
+   "entry": "parekh2026drop#2",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Truncating the CoT and prompting for an answer is Lanham's Early Answering (cited as [16] for answers recoverable from truncated chains); Parekh adds greedy decoding and turns it into a per-item commitment point, the first prefix that yields the correct answer.",
+   "source_evidence": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable. ... Each of the truncated chains of thought replaces the original CoT in the sample, and the model is prompted to answer as before.",
+   "citing_evidence": "Let $F(x,y_{1:t})$ append a stop-and-answer instruction to prefix $y_{1:t}$ and greedily decode an answer."
+  },
+  {
+   "entry": "paul2024making#11",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham reports that models on several tasks ignore inserted mistakes and scores this as post-hoc, less faithful reasoning, though it presents the test as non-conclusive.",
+   "source_evidence": "If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "(Lanham et al., 2023) argued that LLM ignores mistakes when introduced into the CoT, which reveals that the LLM is unfaithful."
+  },
+  {
+   "entry": "peng2026measuring#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham supports the core claim, reasoning produced after the conclusion is fixed (post-hoc reasoning); the answer-visible-during-generation setting comes from co-cited Turpin et al., since Lanham never shows the model the answer.",
+   "source_evidence": "Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "When the answer is visible during generation, models tend to rationalize backward from the conclusion rather than genuinely derive it (Turpin et al., 2023; Lanham et al., 2023; Lewis-Lim et al., 2025)."
+  },
+  {
+   "entry": "pres2026selfctrl#15",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham finds that CoT explanations are unfaithful on some tasks, and increasingly so with model size, relative to the model's actual reasoning process.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... As models become larger and more capable, they produce less faithful reasoning on most tasks we study.",
+   "citing_evidence": "Work on chain-of-thought faithfulness shows that explanations can be systematically unfaithful to the model’s actual decision process (Lanham et al., 2023; Turpin et al., 2023)."
+  },
+  {
+   "entry": "radhakrishnan2023question#4",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham finds that answers often stay unchanged when the CoT is truncated or given mistakes, and describes models as sometimes primarily ignoring the CoT; 'ignored reasoning' is Radhakrishnan's label for this finding.",
+   "source_evidence": "Models show large variation across tasks in how strongly they condition on the CoT when predicting their answer, sometimes relying heavily on the CoT and other times primarily ignoring it. ... Notably, for the three lowest-AOC tasks (ARC (Easy), ARC (Challenge), and OpenbookQA), the chain of thought changes the final answer less than 10% of the time, while for the highest AOC task (AQuA) the chain of thought changes the answer more than 60% of the time.",
+   "citing_evidence": "Lanham et al. (2023) find that LLM answers to questions often remain unchanged despite truncating or adding mistakes to the CoT reasoning (“ignored reasoning”)."
+  },
+  {
+   "entry": "radhakrishnan2023question#5",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's area over the early-answering curve is computed per CoT length from answer-match rates and weighted by length; Radhakrishnan approximates the area between its averaged truncation curve and y = 100 with a trapezoidal sum.",
+   "source_evidence": "From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "citing_evidence": "We calculate a single score to assess the sensitivity of the final answer probability to truncation of the model-generated reasoning by approximating the area between the curve and the horizontal line $y=100$ for each curve displayed in Figure 3."
+  },
+  {
+   "entry": "radhakrishnan2023question#6",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's Adding Mistakes corrupts one step, regenerates the rest and reports answer-match rates by mistake position and an AOC; Radhakrishnan keeps the corruption but reports a single percentage of changed answers per prompting method.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3.",
+   "citing_evidence": "We expect methods that generate more faithful reasoning to have more final answers changed since this indicates that the reasoning is playing a causal role in the model’s final answer and is thus more likely to be reflective of the model’s actual reasoning."
+  },
+  {
+   "entry": "radhakrishnan2023question#9",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham states the same criterion: if perturbing the CoT changes the final answer, the model is likely not ignoring the CoT, which its metrics score as greater faithfulness.",
+   "source_evidence": "If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "A method to assess reasoning faithfulness is to perturb the reasoning that the model conditions on before producing a final answer. If the model gives a different answer with the altered form of the reasoning, the change in the final answer indicates that the model is not ignoring the reasoning when answering the question, suggesting greater faithfulness."
+  },
+  {
+   "entry": "roger2023preventing#2",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines encoded reasoning as relevant information hidden in the generated reasoning in a way human readers cannot understand, a form of steganography.",
+   "source_evidence": "Encoded reasoning: The benefit from CoT may be attained by LLMs encoding the relevant information in the generated reasoning in a way that is not understandable to human readers (a form of steganography).",
+   "citing_evidence": "Encoded reasoning is when LLMs use steganography to hide relevant intermediate steps of reasoning in the generated text (Lanham et al.,, 2023)."
+  },
+  {
+   "entry": "roger2023preventing#7",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham finds that paraphrasing the CoT leaves accuracy essentially unchanged, including on the math (AQuA) and logic (LogiQA) tasks where CoT helps most, so phrasing does not carry the CoT gain.",
+   "source_evidence": "Overall, the paraphrased accuracy closely matches the accuracy of the original chain of thought for almost all tasks at almost all numbers of filler tokens, as shown in Fig. 6. This result indicates that the particular phrasing of the reasoning is unlikely to encode information responsible for the accuracy gains of CoT.",
+   "citing_evidence": "Lanham et al., (2023) showed that current language models are not sensitive to the exact phrasing of their generations when solving math and logic problems with CoT reasoning."
+  },
+  {
+   "entry": "schulz2026monitor#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithfulness as the stated reasoning representing the true reasoning process and finds it unfaithful on some tasks.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "Models may not reveal their true reasoning in their chain of thought (Turpin et al., 2023; Lanham et al., 2023; Arcuschin et al., 2025; Barez et al., 2025)."
+  },
+  {
+   "entry": "schulz2026monitor#3",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham defines encoded reasoning relative to human readers only; Schulz extends the reader to 'a human or LLM monitor'.",
+   "source_evidence": "Encoded reasoning: The benefit from CoT may be attained by LLMs encoding the relevant information in the generated reasoning in a way that is not understandable to human readers (a form of steganography).",
+   "citing_evidence": "However, it might reason in a way that a human or LLM monitor cannot interpret from reading the CoT (encoded reasoning) (Lanham et al., 2023),"
+  },
+  {
+   "entry": "schulz2026monitor#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's definition makes encoded reasoning information that is not understandable to human readers, so reasoning legible to humans does not qualify, as Schulz says.",
+   "source_evidence": "Encoded reasoning: The benefit from CoT may be attained by LLMs encoding the relevant information in the generated reasoning in a way that is not understandable to human readers (a form of steganography).",
+   "citing_evidence": "This does not fit the definition of encoded reasoning, as the reasoning is not hidden from humans (Lanham et al., 2023; Ray, 2022; Roger & Greenblatt, 2023)."
+  },
+  {
+   "entry": "senatorov2026structural#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithfulness relative to the model's true reasoning process and finds that CoT does not always reflect it.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "recent works have raised concerns about the faithfulness of such traces, showing that generated explanations do not always reflect the model’s true internal decision process (Lanham et al., 2023; Turpin et al., 2023; Tutek et al., 2025; Han et al., 2026)."
+  },
+  {
+   "entry": "senatorov2026structural#2",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham names post-hoc reasoning (produced after the conclusion is guaranteed, citing Holzinger et al.) as a faithfulness failure.",
+   "source_evidence": "Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "Reasoning traces may be post-hoc rationalizations rather than faithful accounts of model predictions (Jacovi and Goldberg, 2020; Holzinger et al., 2017; Lanham et al., 2023; Paul et al., 2024; Matton et al., 2025)."
+  },
+  {
+   "entry": "shen2026detecting#6",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham perturbs the generated CoT and treats an unchanged answer as a sign that the reasoning is not driving it (post-hoc), which Shen formalizes as an operator Δ.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Counterfactual-based methods assess CoT faithfulness by perturbing the generated reasoning trajectory and measuring whether the final answer changes."
+  },
+  {
+   "entry": "shen2026detecting#16",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Reference [25] is Lanham et al., which defines Adding Mistakes, Early Answering and Paraphrasing (plus Filler Tokens, omitted here), but has no Option Shuffling or Removing Steps test; those two are not Lanham's.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Second, counterfactual-based methods evaluate whether modifying the CoT changes the final answer, including Adding Mistakes, Option Shuffling, Removing Steps, Early Answering, and Paraphrasing [25]."
+  },
+  {
+   "entry": "shen2026detecting#17",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Adding Mistakes inserts an incorrect step into the CoT and checks whether the final answer changes.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Adding Mistakes: Inserts misleading or incorrect intermediate reasoning steps and tests whether the final answer is affected."
+  },
+  {
+   "entry": "shen2026detecting#18",
+   "source": "lanham2023measuring",
+   "verdict": "unsupported",
+   "finding": "Lanham never randomizes the order of answer options; all its tests edit the model's CoT, and option-order manipulation appears only in its summary of Turpin et al.'s biasing few-shot prompts, yet §4.1 cites Lanham [25] alone for Option Shuffling.",
+   "source_evidence": "We intervene on the CoT produced by the model rather than few shot prompt examples and propose general tests for CoT faithfulness. ... In that paper, the model produces CoT in the presence of biasing few-shot examples; while the model’s final answer is consistent with the bias provided by the prompt, the CoT gives a different explanation for the answer that does not reference the biasing context.",
+   "citing_evidence": "Option Shuffling: Randomizes the order of multiple-choice options to examine whether the reasoning and prediction remain stable under changed option contexts."
+  },
+  {
+   "entry": "shen2026detecting#19",
+   "source": "lanham2023measuring",
+   "verdict": "unsupported",
+   "finding": "Lanham has no test that deletes selected reasoning steps; the nearest is Early Answering, which truncates the CoT after a given sentence (dropping all later steps), and §4.1 cites Lanham [25] alone for Removing Steps.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Removing Steps: Deletes selected reasoning steps to evaluate whether the removed content is necessary for deriving the answer."
+  },
+  {
+   "entry": "shen2026detecting#20",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering truncates the CoT and prompts for an answer, testing whether later steps still change the answer.",
+   "source_evidence": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable.",
+   "citing_evidence": "Early Answering: Forces the model to answer before completing the full reasoning trajectory, testing whether later steps are causally needed."
+  },
+  {
+   "entry": "shen2026detecting#21",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham's Paraphrasing rewrites the reasoning while 'conveying exactly the same information', to test only whether surface phrasing carries the CoT gain; rewrites that 'slightly alter their semantics' and robustness to semantic variation are not part of Lanham's test.",
+   "source_evidence": "Please rewrite the following text, conveying exactly the same information but using different wording. ... We measure the model’s accuracy after standard and paraphrased CoT. If phrasing-encoded information is responsible for the accuracy boost conveyed by CoT, we should expect to see degraded performance under paraphrased reasoning relative to standard CoT.",
+   "citing_evidence": "Paraphrasing: Rewrites reasoning steps while preserving or slightly altering their semantics, measuring whether the model’s prediction is robust to surface-level or semantic variations."
+  },
+  {
+   "entry": "shiromani2026necessary#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's tests are of the second kind (intervene and check whether the final answer changes); the 'named in text' kind belongs to co-cited Turpin and Chen.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "Second, prior faithfulness tests ask whether an influence is named in text or whether an intervention changes the final answer; neither isolates provenance with behavior held fixed."
+  },
+  {
+   "entry": "sivakumaran2026balancing#4",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's early-answering AOC uses the rate of matching the full-CoT answer after each sentence; Sivakumaran truncates at 20% increments and measures accuracy, keeping Lanham's reading of a low AOC as post-hoc reasoning.",
+   "source_evidence": "Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "On the other hand, a lower AOC indicates that most of the reasoning is post-hoc rationalization, and that the answer is already inevitable early on in the reasoning chain."
+  },
+  {
+   "entry": "sivakumaran2026balancing#5",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's adding-mistakes AOC uses answer-match rates with the original CoT; Sivakumaran inserts errors at 20% split points and measures accuracy, keeping the reading that sensitivity to mistakes indicates faithful conditioning on the CoT.",
+   "source_evidence": "Similarly to the early answering experiment (§2.3), we measure how often the final answer changes after the mistake has been added and the remaining CoT has been sampled. A low matching frequency indicates less post-hoc reasoning. We also calculate an AOC value for each task, as in §2.3. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "A higher AOC indicates that the model’s final answer is more sensitive to mistakes in its reasoning, suggesting it is faithfully conditioning on its chain of thought."
+  },
+  {
+   "entry": "sivakumaran2026balancing#16",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham measures whether stated reasoning faithfully represents the process behind the answer.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020).",
+   "citing_evidence": "including work analyzing and measuring the degree to which LLMs generate reasoning that is a true representation of the computational process underlying an answer (Turpin et al., 2023; Lanham et al., 2023; Chen et al., 2025)."
+  },
+  {
+   "entry": "somov2026breaking#1",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Lanham's tests do measure whether the answer depends on the stated reasoning, but Lanham defines faithfulness as accurately representing the reasoning process and says explicitly that the sequential relation does not imply a causal one and that reasoning that drives the answer is neither required for nor a guarantee of faithfulness, so faithfulness 'i.e.' reasoning that causes the prediction is not its definition.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... In the chain of thought setting the reasoning is sampled before the answer is sampled, but this sequential relationship does not imply a causal one. ... Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.",
+   "citing_evidence": "A growing body of work focuses on faithfulness, i.e., the degree to which a model’s stated reasoning genuinely causes its final prediction, rather than merely accompanying it (Jacovi and Goldberg, 2020; Turpin et al., 2023; Lanham et al., 2023)."
+  },
+  {
+   "entry": "somov2026breaking#18",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham edits and truncates the CoT to test whether the final answer depends on it.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Trace perturbation protocols edit or truncate chain-of-thought reasoning to test whether the final answer depends on the generated reasoning steps Lanham et al. (2023); Paul et al. (2024); Matton et al. (2025); Wu et al. (2025)."
+  },
+  {
+   "entry": "sun2026investigating#3",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham is cited for the error-insertion example, which is its Adding Mistakes test; the 'contextual faithfulness' label comes from Tutek et al., not Lanham.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Contextual faithfulness intervenes on the input and reasoning trace in various ways, e.g., by inserting an error Lanham et al. (2023), or injecting answer hints into the context Turpin et al. (2023); Chen et al. (2025), and deems a CoT faithful if the intervention is truly reflected."
+  },
+  {
+   "entry": "sun2026investigating#5",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "The criterion matches Lanham for Early Answering, Adding Mistakes and Paraphrasing, but not for Filler Token: Lanham's filler test asks whether filler raises accuracy (test-time compute), never whether filler changes the original answer, and Lanham reports dataset-level rates rather than treating faithfulness as a binary per-answer property.",
+   "source_evidence": "Here, we test the hypothesis that the additional test-time computation provided by a longer context window is responsible for the performance boost from CoT. ... Figure 5: Accuracy when CoT is replaced with filler tokens. ... From Fig. 5 we can see that there is no increase in accuracy observed from adding “ …” tokens to the context.",
+   "citing_evidence": "Faithful CoTs should lead to answer changes after corruption, except for (iii) Paraphrasing, where the model is expected to derive the same answer. To measure this change with greater granularity rather than treating faithfulness as a binary property of the final answer Lanham et al. (2023)"
+  },
+  {
+   "entry": "sun2026investigating#10",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham perturbs the CoT and measures whether the answer changes.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response.",
+   "citing_evidence": "Corruption-based methods perturb the CoT, and measure whether the model’s answer changes (Lanham et al., 2023; Zaman and Srivastava, 2025)."
+  },
+  {
+   "entry": "sun2026investigating#14",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "The four corruptions are described as Lanham defines them (Figure 1).",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "(i) Early Answering, which truncates the CoT before the original answer is reached to elicit an early response; (ii) Adding Mistake, which injects a mistake into one CoT step and regenerates the remainder; (iii) Paraphrasing, which rephrases the first part of the CoT while preserving the original meaning and regenerating the rest; (iv) Filler Token, which replaces the CoT with meaningless symbols such as ellipses."
+  },
+  {
+   "entry": "sun2026investigating#15",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering truncates the CoT and prompts for an answer.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. ... To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable.",
+   "citing_evidence": "(i) Early Answering, which truncates the CoT before the original answer is reached to elicit an early response;"
+  },
+  {
+   "entry": "sun2026investigating#16",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Adding Mistakes inserts a mistake into one step and regenerates the rest of the CoT.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward.",
+   "citing_evidence": "(ii) Adding Mistake, which injects a mistake into one CoT step and regenerates the remainder;"
+  },
+  {
+   "entry": "sun2026investigating#17",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Paraphrasing rewords the beginning of the CoT without changing its information and regenerates the rest.",
+   "source_evidence": "Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. ... Please rewrite the following text, conveying exactly the same information but using different wording.",
+   "citing_evidence": "(iii) Paraphrasing, which rephrases the first part of the CoT while preserving the original meaning and regenerating the rest;"
+  },
+  {
+   "entry": "sun2026investigating#18",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Replacing the CoT with ellipses is Lanham's procedure, but the faithful-if-the-answer-changes reading Sun attaches to it (§4.3.1) is not: Lanham's filler test measures accuracy as filler length grows, to test whether extra compute alone explains the CoT gain.",
+   "source_evidence": "In this experiment, we replace the CoT with a number of “ …” tokens (“filler tokens”), each consisting of a space followed by three periods. ... Here, we test the hypothesis that the additional test-time computation provided by a longer context window is responsible for the performance boost from CoT. ... Figure 5: Accuracy when CoT is replaced with filler tokens.",
+   "citing_evidence": "(iv) Filler Token, which replaces the CoT with meaningless symbols such as ellipses."
+  },
+  {
+   "entry": "swaroop2025lift#5",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's truncation measures whether the answer still matches the full-CoT answer, averaged over the dataset; Swaroop recasts it as a per-step drop in the original answer's log-probability.",
+   "source_evidence": "Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc.",
+   "citing_evidence": "The final faithfulness metric that we measure is truncation faithfulness: the log-probability drop when removing a step and all following steps. This faithfulness measure is proposed in Lanham et al. (2023)."
+  },
+  {
+   "entry": "tanneru2024hardness#2",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering re-asks for the answer after each successive CoT step and reads continued answer updating as reasoning that is not post-hoc.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable.",
+   "citing_evidence": "Specifically, we employ the Early Answering strategy, which evaluates the faithfulness of a CoT by sequentially adding each CoT step to the question and querying the LLM for its answer, conditioned on the truncated set of CoT steps. If the answer from the LLM converges towards the final answer as it encounters more CoT steps, it indicates that the CoT explanation is guiding the answer and is more likely to be faithful."
+  },
+  {
+   "entry": "tanneru2024hardness#3",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham's AOC is dataset-level and built from answer matches; Tanneru, noting this, computes it per instance from the probability of the final answer.",
+   "source_evidence": "From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "citing_evidence": "In contrast, we measure faithfulness of each CoT reasoning using probability scores rather than binary correct or incorrect assessments. Following [11], faithfulness is quantified by the area over the curve (AOC) of explanation fraction vs. probability of final answer consistent with a full explanation as shown in Fig. 2(b)."
+  },
+  {
+   "entry": "tanneru2024hardness#4",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham reads an answer change after inserted mistakes as evidence the CoT is used, and also proposes paraphrasing the beginning of the CoT and replacing it with filler tokens.",
+   "source_evidence": "If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Similarly, if adding mistakes in a generated CoT causes the model to change its final response, then the original CoT can be considered faithful. Analogously, they proposed other metrics to measure faithfulness based on paraphrasing the beginning portions of the original CoT as well as replacing the CoT with filler tokens (e.g., ellipses)."
+  },
+  {
+   "entry": "turpin2023language#19",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham presents each test as ruling out one class of faithfulness failure rather than as conclusive evidence of faithfulness (i.e. necessary, not sufficient), including sensitivity to added mistakes.",
+   "source_evidence": "We take a “defense-in-depth” approach; each test is not meant to be conclusive evidence for CoT being faithful, but rather aims to rule out the possibility of one class of faithfulness failures in CoT. ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Lanham et al. (2023) propose a number of necessary but not sufficient tests for faithfulness, for example, by testing the sensitivity of models to mistakes added to their CoT explanations."
+  },
+  {
+   "entry": "tutek2025measuring#8",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Adding Mistakes has another LM insert a mistake into a single CoT step and reads an answer change as the model using its CoT; 'contextual faithfulness method' is Tutek's label.",
+   "source_evidence": "To generate mistakes, we use a pretrained model (described in §2.1) to generate a mistaken version of a single sentence from the original CoT using a few shot prompt (see Appendix A for details). ... If inserting a mistake into the CoT changes the model’s final answer, then the model is likely not ignoring the CoT.",
+   "citing_evidence": "Add-mistake prompts another LM (in our case, gpt-4o-mini-2024-07-18) to introduce a mistake to a single step of a CoT generated by the target model. The target model is then prompted with a perturbed CoT containing the mistake. If the prediction of the model changes, the CoT is considered faithful."
+  },
+  {
+   "entry": "tutek2025measuring#17",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Early Answering is Lanham's post-hoc test, and Lanham agrees post-hoc reasoning can still be faithful, but Filler Tokens is not a post-hoc test in Lanham: it tests whether extra test-time compute explains the CoT gain by measuring accuracy, not whether the answer is unchanged.",
+   "source_evidence": "To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable. ... Unfaithful reasoning due to test-time computation: The performance boost from CoT may be due to the greater test-time computation provided by the extra tokens between the question and when the model is prompted for its final answer (Wei et al., 2022). ... Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.",
+   "citing_evidence": "The remaining methods from Lanham et al. (2023) aim to identify whether reasoning is produced post-hoc, or truly necessary to produce the prediction. Early Answering truncates the CoT, while Filler Tokens substitutes the CoT with ellipsis tokens. Then, if the answer did not change, the CoT is deemed unnecessary (post-hoc reasoning)."
+  },
+  {
+   "entry": "viteri2026markovian#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham finds that on several tasks edits to the CoT rarely change the answer and treats this as reasoning that may not reflect the actual process.",
+   "source_evidence": "Notably, for the three lowest-AOC tasks (ARC (Easy), ARC (Challenge), and OpenbookQA), the chain of thought changes the final answer less than 10% of the time, while for the highest AOC task (AQuA) the chain of thought changes the answer more than 60% of the time. ... Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "some authors discuss how a CoT may fail to reflect the true reason the LM arrived at its answer (Lanham et al., 2023; Turpin et al., 2023), since small changes in the CoT do not necessarily change the final prediction."
+  },
+  {
+   "entry": "wang2025selfcritique#6",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham documents a gap between stated reasoning (CoT) and the model's actual reasoning; the citing paper applies the point to post-hoc NLEs, which Lanham does not study.",
+   "source_evidence": "it is unclear if the stated reasoning is a faithful explanation of the model’s actual reasoning (i.e., its process for answering the question) ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "numerous studies have identified a gap between generated NLEs and the model’s actual reasoning process (Atanasova et al., 2023; Turpin et al., 2023; Lanham et al., 2023)."
+  },
+  {
+   "entry": "wang2026case#5",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Replacing all CoT tokens with '…' is Lanham's procedure, but Wang (§2) attributes to Lanham the evaluation of 'whether the answer changes'; Lanham's filler test measures accuracy as filler length grows, to test the test-time-compute hypothesis, not answer dependence on the CoT.",
+   "source_evidence": "In this experiment, we replace the CoT with a number of “ …” tokens (“filler tokens”), each consisting of a space followed by three periods. ... Here, we test the hypothesis that the additional test-time computation provided by a longer context window is responsible for the performance boost from CoT. ... Figure 5: Accuracy when CoT is replaced with filler tokens.",
+   "citing_evidence": "Among these methods, Filler Tokens replaces the CoT with “…” tokens and evaluates whether the answer changes (Lanham et al. 2023; Zaman and Srivastava 2025)."
+  },
+  {
+   "entry": "wang2026case#6",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering splits the CoT into sentences, answers from each prefix including the empty one, and summarizes agreement with the full-CoT answer as an area over the curve; Wang averages per-sample 1 − AUC, the same quantity.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc. ... From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "citing_evidence": "Early Answering tests whether the model can predict the final answer before observing the full CoT."
+  },
+  {
+   "entry": "wang2026concept#14",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham intervenes on the reasoning chain and scores answers that do not change as post-hoc, less faithful reasoning, consistent with a necessary-condition reading; the parametric half belongs to co-cited Tutek et al.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Tasks are sorted by early answering AOC, a measure of post-hoc reasoning (higher is less post-hoc, indicating greater faithfulness). AOC indicates area over the curve for the early answering and adding mistakes experiments respectively, weighted by the representation of each CoT length.",
+   "citing_evidence": "One line of work intervenes on the reasoning chain, or the parametric knowledge that the reasoning invokes, and treats the CoT as faithful only if the answer changes accordingly (Lanham et al., 2023; Zaman and Srivastava, 2025; Tutek et al., 2025)"
+  },
+  {
+   "entry": "wang2026concept#21",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "The four perturbation tests are Lanham's, but Lanham never returns binary faithful/unfaithful labels: it reports dataset-level answer-match rates, areas over the curve and accuracies, and says no single test is conclusive.",
+   "source_evidence": "From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length. ... We take a “defense-in-depth” approach; each test is not meant to be conclusive evidence for CoT being faithful, but rather aims to rule out the possibility of one class of faithfulness failures in CoT.",
+   "citing_evidence": "The results of these metrics are binary, i.e., faithful or unfaithful, which is coarse-grained compared to our proposed metrics, which range from 0 to 1."
+  },
+  {
+   "entry": "wang2026concept#22",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering truncates the CoT and prompts for an answer.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. ... To measure post-hoc reasoning, we truncate the chain of thought midway through to observe what answer the model would give without the complete reasoning statement. If the model is no longer updating its answer based on further steps of the chain of thought, it stands to reason that the produced reasoning is post-hoc, having been produced after the conclusion was already inevitable.",
+   "citing_evidence": "(i) Early Answering, which truncates the CoT before the original answer is produced and forces an early response"
+  },
+  {
+   "entry": "wang2026concept#23",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Adding Mistakes introduces a mistake into one step and regenerates the rest.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward.",
+   "citing_evidence": "(ii) Adding Mistake, which injects an error into one CoT step and regenerates the remaining steps"
+  },
+  {
+   "entry": "wang2026concept#24",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Paraphrasing rewords the beginning of the CoT without changing its information and regenerates the rest.",
+   "source_evidence": "Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. ... Please rewrite the following text, conveying exactly the same information but using different wording.",
+   "citing_evidence": "(iii) Paraphrasing, which restates the initial portion of the CoT while preserving its meaning and regenerates the rest"
+  },
+  {
+   "entry": "wang2026concept#25",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Replacing the CoT with ellipses is Lanham's Filler Tokens procedure; the prediction-score scoring is Wang's own (via Zaman and Srivastava) and is not attributed to Lanham.",
+   "source_evidence": "In this experiment, we replace the CoT with a number of “ …” tokens (“filler tokens”), each consisting of a space followed by three periods.",
+   "citing_evidence": "(iv) Filler Token, which substitutes the CoT with meaningless symbols such as ellipses"
+  },
+  {
+   "entry": "wang2026doing#11",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham measures faithfulness by intervening on the CoT through truncation, paraphrasing and added mistakes; the claim that it established that the instrument shapes the conclusion is a loose reading of its note that different tests target different failure hypotheses and that it is unclear how to weigh them.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses. ... Without ground truth information about the faithfulness of the reasoning sample, it is also unclear how to weigh the importance of each experiment relative to the others in assessing faithfulness.",
+   "citing_evidence": "Lanham et al. (2023) measured faithfulness directly through interventions on the reasoning trace (truncation, paraphrasing, added mistakes), establishing that the measurement instrument shapes the conclusion one draws about faithfulness."
+  },
+  {
+   "entry": "wang2026verbalising#17",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham truncates, paraphrases and adds mistakes to the CoT and observes how the answer changes.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Lanham et al. (2023) truncate, paraphrase, or corrupt the CoT and observe how the answer changes."
+  },
+  {
+   "entry": "young2026measuring#5",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham operationalizes faithfulness through interventions on the CoT's intermediate steps (truncation after each step, a mistake inserted into one step).",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample.",
+   "citing_evidence": "Lanham et al. [4] operationalized it via causal interventions on intermediate steps"
+  },
+  {
+   "entry": "yu2026outcome#2",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham evaluates faithfulness by perturbing the reasoning chain and measuring changes in the answer, i.e. via the chain's causal role in the answer.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... In the chain of thought setting the reasoning is sampled before the answer is sampled, but this sequential relationship does not imply a causal one.",
+   "citing_evidence": "The causal relationship between the reasoning chain and the final answer is one dimension used to evaluate faithfulness (Lanham et al., 2023). Following a causal perspective (Pearl, 2000), Lyu et al. (2023) and Lanham et al. (2023) operationalize this notion by perturbing parts of a trace and measuring changes in the output."
+  },
+  {
+   "entry": "yu2026outcome#3",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "CIR replaces Lanham's per-sentence answer-match curve with a token-level Jensen–Shannon divergence between the answer probability after truncation and after the full CoT.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample. ... Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc.",
+   "citing_evidence": "Then, we compute our final CIR score by averaging the JS scores across token indices:"
+  },
+  {
+   "entry": "zaman2025causal#5",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "The criterion matches Lanham for Early Answering, Adding Mistakes and Paraphrasing, but not for Filler Tokens, which Lanham uses to ask whether filler raises accuracy, never whether it alters the original prediction; and Lanham's measures are dataset-level rates, not binary per-explanation verdicts.",
+   "source_evidence": "Here, we test the hypothesis that the additional test-time computation provided by a longer context window is responsible for the performance boost from CoT. ... Figure 5: Accuracy when CoT is replaced with filler tokens. ... From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "citing_evidence": "An explanation is considered unfaithful if the corruption does not alter the original prediction (except for Paraphrasing, where prediction changes signify unfaithfulness). While these metrics were originally proposed as binary measures"
+  },
+  {
+   "entry": "zaman2025causal#12",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Lanham aggregates per-sample answer agreement into dataset-level rates and AOC (and accuracy for filler and paraphrase); Zaman makes each test a per-explanation drop in top-class probability.",
+   "source_evidence": "Having collected answers after each truncation of the CoT, we measure how often the model comes to the same conclusion as it did with the complete CoT. If the amount of matching overall is low, this indicates that less of the reasoning is post-hoc. ... From these results, we also calculate an area over the curve (AOC) metric for all CoT lengths of each task, presented in Table 2. AOC values are calculated as a weighted sum, where the AOC for each CoT length is weighted by the fraction of CoT samples having that length.",
+   "citing_evidence": "While these metrics were originally proposed as binary measures, we extend them to quantify faithfulness as the change in prediction score for the top-predicted class before and after corruption, denoted $\\hat{z}_{i}$ and $\\hat{z}^{\\prime}_{i}$ , respectively."
+  },
+  {
+   "entry": "zaman2025causal#13",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines these four interventions on the CoT to measure its faithfulness.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering. Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "Lanham et al. (2023) identify four corruption techniques to measure CoT-faithfulness: (1) Early Answering, truncating the CoT to get an early answer; (2) Adding Mistakes, introducing mistakes into the CoT, and regenerating; (3) Paraphrasing, paraphrasing the CoT and regenerating; and (4) Filler Tokens, replacing the CoT with ellipses."
+  },
+  {
+   "entry": "zaman2025causal#14",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Early Answering truncates the CoT and prompts for an answer; Zaman's one-third truncation (App. D.1) is its own implementation, credited there to Parcalabescu and Frank.",
+   "source_evidence": "Early Answering: Truncate the original CoT before answering.",
+   "citing_evidence": "(1) Early Answering, truncating the CoT to get an early answer"
+  },
+  {
+   "entry": "zaman2025causal#15",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's Adding Mistakes introduces a mistake into the CoT and regenerates the rest.",
+   "source_evidence": "In this experiment, we introduce a mistake into one step of the CoT and then sample a continued CoT from that point forward.",
+   "citing_evidence": "(2) Adding Mistakes, introducing mistakes into the CoT, and regenerating"
+  },
+  {
+   "entry": "zaman2025causal#16",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham paraphrases the CoT (its beginning) and regenerates the rest.",
+   "source_evidence": "Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT.",
+   "citing_evidence": "(3) Paraphrasing, paraphrasing the CoT and regenerating"
+  },
+  {
+   "entry": "zaman2025causal#17",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Replacing the CoT with ellipses is Lanham's Filler Tokens procedure (the scoring criterion is handled in zaman2025causal#5).",
+   "source_evidence": "Filler Tokens: Replace the CoT with ellipses.",
+   "citing_evidence": "(4) Filler Tokens, replacing the CoT with ellipses"
+  },
+  {
+   "entry": "zaman2025causal#18",
+   "source": "lanham2023measuring",
+   "verdict": "adapted",
+   "finding": "Early Answering is Lanham's, but the 'original' one-third character-count truncation that Zaman replaces is not Lanham's (Lanham truncates after every sentence); Zaman's App. D.1 credits it to Parcalabescu and Frank.",
+   "source_evidence": "For each chain of thought collected, we truncate it after each step (here, each sentence) of the sample.",
+   "citing_evidence": "The original Early Answering metric truncates explanations by retaining only the initial one-third of the text, based on character count."
+  },
+  {
+   "entry": "zaman2025chainofthought#3",
+   "source": "lanham2023measuring",
+   "verdict": "partial",
+   "finding": "Replacing the CoT with ellipses is Lanham's, but the criterion attributed to that metric (unfaithful if the prediction does not change, faithful if it does) is not: Lanham's filler test measures accuracy as filler length grows, to test whether extra compute alone explains the CoT gain.",
+   "source_evidence": "In this experiment, we replace the CoT with a number of “ …” tokens (“filler tokens”), each consisting of a space followed by three periods. ... Here, we test the hypothesis that the additional test-time computation provided by a longer context window is responsible for the performance boost from CoT. ... Figure 5: Accuracy when CoT is replaced with filler tokens.",
+   "citing_evidence": "This metric is one of the CoT-corruption-based faithfulness metrics proposed by Lanham et al. (2023). It is based on replacing the generated CoT with ellipses. A CoT is considered unfaithful if this corruption does not change the original prediction, and faithful if it does."
+  },
+  {
+   "entry": "zhang2026audit#7",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham defines faithful reasoning as accurately representing the process behind the prediction and finds stated reasoning unfaithful on some tasks.",
+   "source_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020). ... However, LLM-generated reasoning has been shown to be unfaithful to the model’s true reasoning process in some cases (Turpin et al., 2023), raising the question of if the stated reasoning is ever faithful.",
+   "citing_evidence": "Models readily generate explanations, but these explanations may be unfaithful, plausible-sounding, and not reflective of the model’s actual computation (Turpin et al., 2023; Lanham et al., 2023; Fan et al., 2025)."
+  },
+  {
+   "entry": "zhou2026conceptual#7",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham's central question is whether the stated CoT faithfully explains the model's actual reasoning.",
+   "source_evidence": "it is unclear if the stated reasoning is a faithful explanation of the model’s actual reasoning (i.e., its process for answering the question)",
+   "citing_evidence": "Whether the CoT faithfully reflects the model’s underlying computation has become a core question in alignment research (Turpin et al., 2023; Lanham et al., 2023)."
+  },
+  {
+   "entry": "zhou2026nearzero#1",
+   "source": "lanham2023measuring",
+   "verdict": "supported",
+   "finding": "Lanham truncates and corrupts the CoT to test whether the final answer depends on it, separating post-hoc reasoning from reasoning the answer relies on.",
+   "source_evidence": "Our tests intervene on the model’s stated reasoning in different ways and evaluate how the model’s answer changes in response. ... Post-hoc reasoning: The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed (Holzinger et al., 2017). Since post-hoc reasoning does not change the model’s answer, there is no strong reason to believe that such reasoning would be faithful.",
+   "citing_evidence": "Lanham et al. (2023) use truncation and corruption to test whether final answers depend on displayed reasoning."
+  }
+ ]
+}

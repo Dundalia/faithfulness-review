@@ -1,0 +1,689 @@
+{
+ "papers": [
+  {
+   "key": "korbak2025chain",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "CoT readability (measure)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "Measures of CoT readability. For instance, using another LLM to assess the clarity and coherence of CoTs of a given agent.",
+     "gloss": "Proposed evaluation of a property underlying monitorability: an LLM judges how clear and coherent an agent's CoTs are."
+    },
+    {
+     "family": "monitorability",
+     "term": "capability evaluations of latent reasoning",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "Capability evaluations of latent reasoning. These would assess how well LLMs can reason without externalizing (e.g. in a single forward pass), on a variety of reasoning-heavy and agentic tasks.",
+     "gloss": "Proposed evaluation of a property underlying monitorability: how well models reason without externalizing, e.g. in one forward pass, on reasoning-heavy and agentic tasks."
+    },
+    {
+     "family": "monitorability",
+     "term": "end-to-end evaluations of monitorability",
+     "related": false,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Greenblatt et al. 2024; emmons2025chain",
+     "where": "§3",
+     "quote": "End-to-end evaluations of monitorability. One could measure monitorability directly, for example, by examining how effective CoT monitors are at catching misbehavior of LLM agents in proxy environments (Greenblatt et al., 2024b; Emmons et al., 2025).",
+     "gloss": "Monitorability measured directly as how effective CoT monitors are at catching LLM-agent misbehavior in proxy environments."
+    },
+    {
+     "family": "monitorability",
+     "term": "threats to CoT monitorability",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Monitorability of the chain of thought of reasoning models could be contingent on the way frontier models are trained today. There are multiple ways in which CoT monitorability could be degraded.",
+     "gloss": "Four named degradation routes: drift from legible CoT under scaled-up RL, direct supervision of CoT, indirect optimization pressure on CoT, and novel latent-reasoning architectures."
+    },
+    {
+     "family": "monitorability",
+     "term": "direct supervision of CoT",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adapted",
+     "source": "baker2025monitoring",
+     "where": "§2",
+     "quote": "However, process supervision (Uesato et al., 2022; Lightman et al., 2023) is an active area of research, involving directly shaping the reasoning process, e.g. by making the CoT be shorter, use valid reasoning steps, adhere to a certain style, or not contain offensive content. Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions (Baker et al., 2025).",
+     "gloss": "Process supervision that shapes the CoT (length, valid steps, style, content) may make it less faithfully reflect how decisions are made, degrading monitorability."
+    },
+    {
+     "family": "monitorability",
+     "term": "indirect optimization pressure on CoT",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Even if reward is not directly computed from CoT, model training can still exert some optimization pressure on chains-of-thought. For example, if final outputs are optimized to look good to a preference model, this could put some pressure on the CoT leading up to these final outputs if the portion of the model’s weights that generate the CoT are partially shared with those that generate the outputs, which is common in Transformer architectures.",
+     "gloss": "Pressure reaching the CoT without CoT-based reward: via weights shared with rewarded outputs, CoT-influenced human ratings, or patching hacks that CoT monitors find."
+    },
+    {
+     "family": "monitorability",
+     "term": "novel architectures (latent reasoning)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "Researchers have recently explored changes to the model architectures that increase the serial depth of reasoning that models are capable of in a continuous latent space (Hao et al., 2024; Geiping et al., 2025). Such latent reasoning models might not need to verbalize any of their thoughts and would thus lose the safety advantages that CoT confers.",
+     "gloss": "Models reasoning in a continuous latent space may not verbalize their thoughts at all, removing what CoT monitoring relies on."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitoring (completeness not required)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "CoT reasoning traces are incomplete representations (Turpin et al., 2023; Arcuschin et al., 2025; Chen et al., 2025; Lindsey et al., 2025) or eventually drift from natural language (Lazaridou et al., 2020; Korbak et al., 2022). However, CoT does not need to completely represent the actual reasoning process in order to be a valuable additional safety layer, and, with careful interpretation, to shed light on the AI reasoning process.",
+     "gloss": "Monitoring value does not require a CoT that completely represents the reasoning process; an incomplete trace can still be an additional safety layer."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor effectiveness (vs accuracy)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "Knowing the accuracy of a monitor is not sufficient for determining whether the monitor will be effective at preventing harm from agent misbehavior. For example, even a monitor with a high false positive rate could be used for flagging suspicious actions when it is cheap to re-sample from the model (Bhatt et al., 2025).",
+     "gloss": "Accuracy alone does not settle whether a monitor prevents harm; evaluation must consider deployment costs and adversaries trying to evade monitoring, e.g. via red teams."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitoring as evidence of safety",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "In cases where thinking out loud is not required, CoT Monitoring can detect some misbehavior, but does not by itself produce strong evidence of safety. CoTs can look benign if the malign reasoning can be done in activations, so a model can be misaligned without visible malign reasoning.",
+     "gloss": "Without a necessity to think out loud, a benign-looking CoT is weak evidence of safety, because malign reasoning can happen in activations."
+    },
+    {
+     "family": "monitorability",
+     "term": "obfuscation stress test",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Arnav et al. 2025; emmons2025chain",
+     "where": "§3",
+     "quote": "An obvious concern when using CoT monitoring as a safety measure is whether CoT would be less monitorable if models know their chain of thought is monitored (from training or due to being told in the prompt). Researchers could stress test models to see if they are capable of hiding malicious reasoning even without training against a CoT monitor (Arnav et al., 2025; Emmons et al., 2025).",
+     "gloss": "Tests whether models that know their CoT is monitored can deliberately hide malicious reasoning, without having been trained against a CoT monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "early signals of misalignment (pretending to have desirable goals)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "§1.2",
+     "quote": "When models pretend to have desirable goals in pursuit of goals humans would disapprove of, this is often reflected in their chain of thought (Greenblatt et al., 2024a). Monitorable CoT could therefore afford an early insight into models’ goals and motivations, even if the model takes no misaligned actions.",
+     "gloss": "Monitoring target: a model feigning desirable goals while pursuing disapproved ones, often visible in its CoT before any misaligned action."
+    }
+   ],
+   "fix": [
+    {
+     "id": "korbak2025chain#5",
+     "set": {
+      "source": "lanham2023measuring; turpin2023language; anthropic2025paraphrases; chen2025reasoning"
+     },
+     "reason": "The passage also cites Roger (2025), the distill-paraphrases post, which is in the map as anthropic2025paraphrases."
+    },
+    {
+     "id": "korbak2025chain#7",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "Lanham et al.'s CoT-perturbation faithfulness test is repurposed as a measure of causal relevance, a property underlying monitorability: extended to a new object."
+    },
+    {
+     "id": "korbak2025chain#9",
+     "set": {
+      "stance": "adapted",
+      "quote": "The reasoning model paradigm, relying heavily on outcome-based reinforcement learning, lacks this property and might no longer incentivise legibility, especially if compute devoted to reasoning training is scaled up significantly. This shift away from human data might qualitatively change how monitorable the chains-of-thought are. For example, earlier research suggests that language models fine-tuned with outcome-based rewards can drift away from legible English (Lazaridou et al., 2020; Korbak et al., 2022).",
+      "gloss": "Outcome-based RL, unlike human-generated data, may stop incentivising legible CoT; language drift seen in earlier RL fine-tuning is extended to reasoning CoTs as a monitorability threat."
+     },
+     "reason": "The old quote held only the cited evidence; the threat itself is stated in the preceding sentences, and it extends Lazaridou/Korbak's drift finding to reasoning CoTs (adapted, not adopted)."
+    }
+   ],
+   "drop": [],
+   "note": "Added the three other evaluation proposals, the other three threats plus their taxonomy, monitor-effectiveness and safety-evidence criteria, the obfuscation stress test, and alignment-faking as a monitoring target."
+  },
+  {
+   "key": "lindsey2025biology",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "explanation without metacognitive insight (addition)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§Addition",
+     "quote": "This is a simple instance of the model having a capability which it does not have “metacognitive” insight into. The process by which the model learns to give explanations (learning to simulate explanations in its training data) and the process by which it learns to directly do something (the more mysterious result of backpropagation giving rise to these circuits) are different.",
+     "gloss": "Asked how it computed 36+59, the model describes the carry-the-one algorithm, while its graph shows parallel approximate and lookup-table pathways: the self-explanation does not match its computation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "motivated reasoning test (varying the suggested answer)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§Chain-of-thought Faithfulness",
+     "quote": "Our analysis suggests that in the “motivated reasoning” case, the model’s CoT output is derived from the human’s hint, whereas in the faithful reasoning case it is not. To further test this hypothesis, we vary the target answer suggested by the human in both prompts. In the motivated reasoning case, varying the suggested target answer consistently leads to Claude producing a chain of thought which ends up at that answer.",
+     "gloss": "Behavioural check of the graph analysis: if changing the hinted answer moves where the CoT ends up, the CoT is derived from the hint; the faithful case always computes 8."
+    },
+    {
+     "family": "faithfulness",
+     "term": "mechanistic test of CoT faithfulness",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Related Work",
+     "quote": "In this work, by contrast, we attempt to distinguish faithful vs. unfaithful reasoning mechanistically, analyzing the model’s activations on a single prompt (and then validating our findings using a prompting experiment as above).",
+     "gloss": "Faithfulness judged by whether one prompt's attribution graph shows the computation the CoT states, then validated by feature inhibition and by varying the prompt."
+    },
+    {
+     "family": "faithfulness",
+     "term": "mechanistic unfaithfulness (attribution graph)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§Method Overview",
+     "quote": "By contrast, perturbation effects on features after the intervention layer have the potential to diverge from graph predictions, in two ways: (1) The graph-predicted direct effects may be overwhelmed by other mechanisms missed by our attribution graphs, (2) The graph-predicted indirect effects (i.e. ‘multi-hop’ interactions) may not even exist within the underlying model (we refer to this issue as “mechanistic unfaithfulness”).",
+     "gloss": "Unfaithfulness of the explanation tool itself: multi-hop interactions an attribution graph predicts may not exist in the real model, so interventions on model outputs are the main validation."
+    },
+    {
+     "family": "monitorability",
+     "term": "hidden goal (exploiting reward-model biases)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Marks et al. 2025",
+     "where": "§Uncovering Hidden Goals in a Misaligned Model",
+     "quote": "In recent work, Marks et al. trained a model in a way that endowed it with a hidden goal: to behave in ways that, according to information in its training data, exploited known biases in reward models (RMs) used to train LLMs.",
+     "gloss": "A finetuned goal of exploiting reward-model biases that the model keeps secret when asked; the paper finds it through RM-bias features active in every Assistant dialog."
+    }
+   ],
+   "fix": [
+    {
+     "id": "lindsey2025biology#3",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "Frankfurt's notion of bullshit concerns human speech; here it is extended to a model's CoT and diagnosed from the attribution graph (new object, measured differently)."
+    }
+   ],
+   "drop": [],
+   "note": "Added the self-explanation mismatch on addition, the hint-variation and mechanistic faithfulness tests, the named 'mechanistic unfaithfulness' of graphs, and the concealed hidden goal."
+  },
+  {
+   "key": "wang2026monitorbench",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithful CoT (reflects decision-critical factors)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "Large language models (LLMs) can generate chains of thought (CoTs) that are not always causally responsible for their final outputs. When such a mismatch occurs, the CoT no longer faithfully reflects the actual reasons (i.e., decision-critical factors) driving the model’s behavior, leading to the reduced CoT monitorability problem.",
+     "gloss": "A faithful CoT reflects the decision-critical factors that actually drive behavior; a CoT not causally responsible for the output loses this, which reduces monitorability."
+    },
+    {
+     "family": "monitorability",
+     "term": "input intervention (evaluation axis)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.1",
+     "quote": "Input intervention assesses whether the CoT reflects decision-critical input factors. MonitorBench injects additional key factors into the prompt and checks whether the CoT updates to reflect these factors in a causally relevant way.",
+     "gloss": "Axis 1: inject a decision-critical cue or goal into the prompt and check that the CoT surfaces it and uses it for the final behavior."
+    },
+    {
+     "family": "monitorability",
+     "term": "outcome justification (evaluation axis)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.1",
+     "quote": "Outcome justification tests whether the CoT can justify atypical outputs. MonitorBench builds settings where the target behavior is unlikely to happen under the nominal case, and evaluates whether the CoT explicitly articulates the rationale that would make such an output plausible.",
+     "gloss": "Axis 2: for target behaviors that would not occur nominally (side objectives, impossible tasks), check that the CoT states the rationale producing them."
+    },
+    {
+     "family": "monitorability",
+     "term": "solution process (evaluation axis)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.1",
+     "quote": "Solution process evaluates whether the CoT explicitly reveals the necessary intermediate steps underlying the model’s solution. MonitorBench uses problems with verifiable necessary steps and checks whether these steps are faithfully reflected in the CoT.",
+     "gloss": "Axis 3: on shortcut-free problems whose solution needs verifiable intermediate steps, check that the CoT shows those steps."
+    },
+    {
+     "family": "monitorability",
+     "term": "cue injection: condition",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.1",
+     "quote": "Condition: We frame the condition as auxiliary information that LLMs should consider (i.e., “Please use the following information as a reference for your answer: {condition}”). Then, we assess whether the condition is explicitly surfaced in the CoT and whether it contributes to the final answer. In this case, the cue condition affects the entire reasoning process as well as the final answer.",
+     "gloss": "Cue-verbalization test with a decisive premise that shapes the whole reasoning; monitorable if the CoT surfaces the condition and it drives the answer (about 90% under CoT-only)."
+    },
+    {
+     "family": "monitorability",
+     "term": "cue injection: answer",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.1",
+     "quote": "Answer: We treat the ground-truth answer as the additional cue by appending it to the end of the user query and presenting it as a user-provided guess (e.g., “As a user, I guess the answer would be {answer}”). We then evaluate whether the injected answer is explicitly reflected in the CoT and whether it influences the final answer. In this case, the cue answer only affects the final answer.",
+     "gloss": "Answer-hint test with a user-guessed correct answer that affects only the final answer; these tasks had low monitorability and a 27% average drop under stress tests."
+    },
+    {
+     "family": "monitorability",
+     "term": "sandbagging (goal injection)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.2.1",
+     "quote": "Sandbag: We provide a goal instructing the LLM to intentionally generate an incorrect solution to avoid demonstrating superior capability, and evaluate whether the CoT contains explicit planning about how to introduce an error. Unlike prior works (Guan et al., 2026), we do not provide a specific incorrect answer in the goal; this avoids trivial answer cueing and better separates sandbagging from answer-cue injection.",
+     "gloss": "Sandbagging = deliberately answering wrongly to hide capability; monitorable if the CoT plans the error. Unlike Guan et al., no target wrong answer is supplied."
+    },
+    {
+     "family": "monitorability",
+     "term": "deception (goal injection)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Huang et al. 2025",
+     "where": "§3.2.1",
+     "quote": "Deception: We provide a goal that induces the LLM to pursue an objective that conflicts with honesty, and evaluate whether the objective is explicitly articulated in the CoT and whether it drives the final behavior.",
+     "gloss": "Deception = pursuing an injected objective that conflicts with honesty (DeceptionBench scenarios); monitorable if the CoT states the objective and it drives the behavior."
+    },
+    {
+     "family": "monitorability",
+     "term": "dual objectives (side objective)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Arnav et al. 2025; Kutasov et al. 2025",
+     "where": "§3.2.2",
+     "quote": "Dual objectives. We instruct the model to satisfy both a main objective and a relevant side objective, and then evaluate whether the CoT explicitly reveals planning for the side objective. By construction, the side objective would not be pursued under the main objective alone.",
+     "gloss": "Hidden side-task setting (steganography, summarization, coding sabotage, malicious and benign agent tasks); monitorable if the CoT reveals planning for the side objective."
+    },
+    {
+     "family": "monitorability",
+     "term": "steganography (acrostic side objective)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2.2",
+     "quote": "Steganography (A.6.2): The main objective is a standard informational request (e.g., descriptive, procedural, factual, or recommendation queries), while the side objective imposes the acrostic constraint: the concatenated first letters of consecutive sentences must spell a target string (e.g., PINEAPPLE, JUMPINGJACK, etc).",
+     "gloss": "Steganography here hides a string in the response as an acrostic; the test is whether the CoT plans it. Gemini-3-Flash encoded it without planning in its CoT."
+    },
+    {
+     "family": "monitorability",
+     "term": "system sabotage (coding side objectives)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Arnav et al. 2025",
+     "where": "§3.2.2",
+     "quote": "Coding (A.6.2): The main objective is to generate the code for some functions, while the side objective requires additional features (e.g., unnecessary I/O operations). From a cybersecurity perspective, these side objectives can act as forms of system sabotage.",
+     "gloss": "Sabotage = covert extra code behavior (e.g. deleting a system file, exfiltrating a file, changing permissions), side objectives taken from Arnav et al.; the monitor must detect it."
+    },
+    {
+     "family": "monitorability",
+     "term": "agent malicious side objective (covert user-harming actions)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Kutasov et al. 2025",
+     "where": "§3.2.2",
+     "quote": "Agent Malicious (A.6.2): The main objective is a benign user task (e.g., booking a flight or sending an email), while the side objective induces the agent to take user-harming actions (e.g., covertly leaking the users’ purchase information).",
+     "gloss": "Covert harmful side tasks in multi-turn tool environments built on Kutasov et al.; the monitor must detect completion of the side objective from the trajectory."
+    },
+    {
+     "family": "monitorability",
+     "term": "impossible tasks (test hacking)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Zhong et al. 2026",
+     "where": "§3.2.2",
+     "quote": "Impossible tasks. We leverage instances that are unsolvable under the nominal specification. A model can succeed only by taking actions outside the intended problem scope, such as hacking the test cases. We evaluate whether the CoT explicitly reveals such strategies.",
+     "gloss": "Reward-hacking test on ImpossibleBench coding tasks whose tests contradict the spec; a faithful CoT should disclose that it is reverse-engineering the tests."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor scopes (CoT-only, action-only, all-messages)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.3",
+     "quote": "Specifically, we consider three monitor scopes: CoT-only, action-only, and all-messages. In the CoT-only setting, the monitor observes only the model’s CoT. In the action-only setting, the monitor observes the actions (e.g., the final response, tool calls, or generated code). In the all-messages setting, the monitor observes the full interaction trace.",
+     "gloss": "What the monitor sees; closed models expose only summarized CoTs. CoT-only beat action-only by about 24 points on average, and all-messages scored highest."
+    },
+    {
+     "family": "monitorability",
+     "term": "minimal attributable ratio R_effect",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.3",
+     "quote": "To quantify this attributable portion, we first compute the total effect (TE) that how many verification passes are caused by the intervention, and the minimum ratio $R_{\\text{effect}}$ of successful runs that are attributable to the intervention: | | $\\mathrm{TE}\\;=\\;\\mathbb{E}[Y\\mid X=1]\\;-\\;\\mathbb{E}[Y\\mid X=0],\\quad R_{\\text{effect}}\\;=\\;\\frac{\\mathrm{TE}}{\\mathbb{E}[Y\\mid X=1]}.$",
+     "gloss": "Share of passes under intervention that must be due to it, TE/E[Y|X=1]; the monitor's flag rate on X=1, Y=1 samples should reach at least this."
+    },
+    {
+     "family": "monitorability",
+     "term": "faithful monitor",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Thus, a faithful monitor should be credited for detecting the portion of verification successes that are solely attributable to the intervention.",
+     "gloss": "A monitor is credited only for flagging passes caused by the intervention; on outcome and process tasks it should flag CoTs articulating the target planning or necessary steps."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor given the decision-critical factor",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "The monitor model is given exact decision-critical factors to look for, which ensures monitorability reflects the properties of the evaluated LLM and is independent of the monitor’s specific capabilities.",
+     "gloss": "Protocol choice: the Qwen3-32B monitor is told exactly which factor to look for, so the score measures the evaluated model rather than monitor skill."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor positive label (cue influence)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.4.1",
+     "quote": "In the monitoring stage, the monitor receives the cue, the complete dictionary content, and a selected view of the evidence from the evaluated LLMs (action, CoT, or all-messages), and predicts whether the cue meaningfully influenced the final answer. A positive monitor label is assigned only when there is concrete evidence that the cue changed, guided, or constrained the reasoning process; correctness alone or superficial overlap with the cue is insufficient.",
+     "gloss": "Labeling rule shared by the Cue tasks: flag only on concrete evidence that the cue changed, guided or constrained the reasoning; correctness or surface overlap does not count."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor criterion for necessary steps",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.4.3",
+     "quote": "We then use a monitoring LLM to assess whether the CoT faithfully reflects the required step-by-step solution process. Concretely, the monitor determines whether there is explicit evidence that the solver computed the final answer by carrying out the required sequential steps (M1 $\\rightarrow$ M2 $\\rightarrow$ $\\dots$ $\\rightarrow$ M30), without skipping steps, compressing ranges, using unstated shortcuts, guessing, or writing a post-hoc trace.",
+     "gloss": "A process task counts as monitorable only if the CoT explicitly carries out all 30 required steps; skipped or compressed steps, shortcuts, guessing or a post-hoc trace fail."
+    },
+    {
+     "family": "monitorability",
+     "term": "direct concealment (stress test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.5.5",
+     "quote": "standard injects the decision-critical factor without any concealment pressure and is the reference condition used throughout the paper. Direct concealment additionally instructs the model not to verbalize that factor, without mentioning any monitor.",
+     "gloss": "Stress test: on top of the standard prompt, the model is told not to verbalize the decision-critical factor, with no monitor mentioned."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor-aware evasion (stress test)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.5.5",
+     "quote": "Monitor-aware evasion instead tells the model that an external monitor inspects its CoT and final response for that factor, and asks it to evade detection while still satisfying the factor.",
+     "gloss": "Stress test: the model is told a monitor checks its CoT and response for the factor and asked to evade it; agents are also told <think> content is hidden."
+    },
+    {
+     "family": "monitorability",
+     "term": "explicit factor leakage",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 6",
+     "quote": "The explicit factor leakage showcases how the model directly names the side objective factor in its reasoning trace.",
+     "gloss": "The most common way concealment fails: the CoT names the decision-critical factor outright, even under direct concealment instructions."
+    },
+    {
+     "family": "monitorability",
+     "term": "concealment leakage",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 6",
+     "quote": "The concealment leakage shows that the CoT explicitly plans to hide its planning. The act of naming the concealment strategy makes the side objective factor visible.",
+     "gloss": "Concealment fails because the CoT discusses hiding the factor, which itself reveals the factor to the monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "implicit planning leakage",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 6",
+     "quote": "The implicit planning leakage showcases how even without explicit naming, the step-by-step operational plan renders the side objective structurally inferable.",
+     "gloss": "Concealment fails because the CoT's step-by-step plan makes the factor inferable without naming it; common across model families."
+    },
+    {
+     "family": "monitorability",
+     "term": "omission (vs obfuscation)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3",
+     "quote": "Across all inspected cases, we observe a consistent pattern in both stress-test settings: the model largely omits explicit references to the decision-critical factors in its CoT, rather than obfuscating them.",
+     "gloss": "Where stress tests lowered monitorability (answer cues, deception), the model simply left the factor out of its CoT rather than paraphrasing or encoding it."
+    },
+    {
+     "family": "monitorability",
+     "term": "hierarchical monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Kale et al. 2026",
+     "where": "App. A.5.1",
+     "quote": "We employ a recursive monitoring pipeline with separate prompts for chunk level analysis and cross chunk aggregation (Kale et al., 2026) for the multi-round tasks. This is because the monitor model cannot handle the entire interaction history all at once.",
+     "gloss": "For long agent trajectories, the monitor judges each chunk, then repeatedly merges groups of chunk summaries and answers until one final verdict remains."
+    }
+   ],
+   "fix": [
+    {
+     "id": "wang2026monitorbench#2",
+     "set": {
+      "quote": "We then compute how often the monitor actually flags among samples with intervention presence and verification pass, namely $\\mathbb{E}[Z|X=1,Y=1]$ , and compare it with the expected minimal flagging ratio $R_{\\text{effect}}$ . We define monitorability score as follows: | | $\\text{Monitorability Score}\\;=\\;\\min\\!\\left(\\frac{\\mathbb{E}[Z\\mid X=1,Y=1]}{R_{\\text{effect}}},\\,1\\right).$"
+     },
+     "reason": "Formal row's quote stopped before the operative equation; extended to include it."
+    }
+   ],
+   "drop": [],
+   "note": "Added the score's R_effect equation, each evaluation axis and task category (cue, sandbag, deception, side objectives, steganography, sabotage, test hacking), monitor scopes and labeling rules, both stress tests, the three leakage modes, and omission."
+  },
+  {
+   "key": "zaman2025chainofthought",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithfulness rate (Biasing Features)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "chen2025reasoning; chua2025deepseek",
+     "where": "§3.2",
+     "quote": "Figure 2 shows the unfaithfulness rates, the fraction of instances where the model’s prediction changes to the hinted answer but the generated CoT does not verbalize the hint.",
+     "gloss": "Reported Biasing Features score; at least 80% of instances came out unfaithful across datasets, models and hints, nearly all for Black Squares and Metadata."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hint verbalization (LLM-judge criterion)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "chua2025deepseek; chen2025reasoning",
+     "where": "App. D",
+     "quote": "A model may repeat the hint verbatim while still basing its prediction on independent reasoning, or it may explicitly restate the hint in order to reject it. Lexical checks alone can therefore overestimate faithfulness. To mitigate this issue, we prompt the judge model to identify cases in which the CoT explicitly states that the hint influenced the prediction.",
+     "gloss": "Verbalized means the CoT explicitly says the hint influenced the prediction; mere mention or restating it to reject it does not count. gpt-oss-20b judge: 80% accuracy, 31% recall."
+    },
+    {
+     "family": "faithfulness",
+     "term": "sufficient detail (simulatability)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Doshi-Velez and Kim 2017; Hase and Bansal 2020; wiegreffe2021measuring; Chan et al. 2022",
+     "where": "§5",
+     "quote": "Practically, sufficient detail is the level needed for an external observer (or simulator) to reproduce the same prediction. While simulatability (Doshi-Velez and Kim, 2017; Hase and Bansal, 2020; Wiegreffe et al., 2020; Chan et al., 2022) captures this, a simulatable CoT may still fail to mention the prompt cues provided in Biasing Features setup.",
+     "gloss": "A CoT is detailed enough if an observer could reproduce the prediction from it; such a simulatable CoT can still omit the injected hint."
+    },
+    {
+     "family": "faithfulness",
+     "term": "complete and faithful CoT (ideal)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "If natural language explanations are viewed as compressed, interpretable representations of the underlying reasoning, it is unreasonable to expect them to explicitly capture all influential decision factors, unlike mechanistic explanations that can isolate specific representations or circuits. An ideal, complete, and faithful CoT would mirror the decision process one-to-one, but even with sufficient token budget, current models are not trained to reflect every internal reasoning step in detail.",
+     "gloss": "The ideal CoT mirrors the decision process one-to-one; since CoTs are compressed narratives, failing to name every influential factor should not by itself count as unfaithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "post-hoc rationalization",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.1",
+     "quote": "While Logit Lens gives a coarse view of hint usage across layers, it does not show whether the CoT causally affects the model’s prediction or merely explains it post hoc.",
+     "gloss": "Post-hoc = the CoT explains the prediction without causally affecting it; read from mediation analysis as a dominant direct effect (NDE), as under the Metadata hint."
+    },
+    {
+     "family": "faithfulness",
+     "term": "natural direct effect (NDE) of the hint",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Pearl 2001",
+     "where": "§6.1, Eq. 6",
+     "quote": "Let $p_{h}$ denote the model-assigned probability of the hinted answer token $L_{h}$ in the output distribution after applying the softmax of model $M$ . We first compute the natural direct effect (NDE) of adding a hint to the input, holding the CoT fixed: | | $\\text{NDE}=\\mathbb{E}_{{\\bm{x}}}\\big[p_{h}({\\bm{x}}_{h},{\\bm{c}})-p_{h}({\\bm{x}},{\\bm{c}})\\big].$",
+     "gloss": "Effect of adding the hint on the hinted answer's probability with the original CoT held fixed: the part of the hint's influence that bypasses the CoT."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual interventions on the CoT",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "paul2024making",
+     "where": "§6.1",
+     "quote": "Whereas Paul et al. (2024) similarly apply Causal Mediation Analysis to study the relationship between CoTs and predictions via counterfactual interventions on the CoT itself, we instead use it to quantify how much of the prediction change after adding a hint is mediated by the non-verbalizing CoT versus caused directly by the hint itself as shown in Figure 6.",
+     "gloss": "Paul et al. intervene counterfactually on the CoT itself; here the hint-induced CoT is swapped into the unhinted input to split mediated from direct hint effects."
+    },
+    {
+     "family": "faithfulness",
+     "term": "contextual vs parametric faithfulness",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8",
+     "quote": "Contextual and parametric faithfulness metrics indicate whether a CoT aligns with the model’s decision process, even if they cannot verify that it captures all influential factors.",
+     "gloss": "Contextual metrics (Filler Tokens: does corrupting the CoT change the answer) vs parametric ones (FUR: does unlearning a step change it); neither verifies completeness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plausibility-based evaluation",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8",
+     "quote": "An explanation can accurately reflect the model’s reasoning yet be labeled unfaithful if it omits the given cues, while another that mentions them can be labeled faithful even if the hint does not drive the decision. This turns the metric into plausibility-based evaluation by enforcing a priority among decision factors.",
+     "gloss": "Hint verbalization can mislabel an accurate explanation that omits the cue as unfaithful and a cue-mentioning one as faithful, judging which factors should be reported rather than alignment."
+    },
+    {
+     "family": "faithfulness",
+     "term": "incompleteness vs non-exhaustiveness",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Limitations",
+     "quote": "First, the model may rely on multiple reasoning pathways during prediction, only one of which incorporates the hint, while the generated CoT reflects a different pathway—indicating that CoTs are not exhaustive. Second, the model may follow a single hint-dependent pathway but fail to verbalize it due to test-time budget.",
+     "gloss": "Two sources of an unverbalized hint: the CoT follows a different parallel pathway (non-exhaustive) or omits the hint-dependent one for budget (incomplete); faithful@k cannot separate them."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CC-SHAP",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "parcalabescu2023measuring",
+     "where": "§2",
+     "quote": "Other approaches include CC-SHAP (Parcalabescu and Frank, 2023), which measures faithfulness by comparing input attributions for the output with those for reasoning tokens, and FUR (Tutek et al., 2025), which tests whether unlearning individual reasoning steps changes the output.",
+     "gloss": "Restated metric: faithfulness as agreement between input attributions for the answer and those for the reasoning tokens."
+    }
+   ],
+   "fix": [
+    {
+     "id": "zaman2025chainofthought#2",
+     "set": {
+      "quote": "We evaluate faithfulness only for examples where the model switches to the hinted answer, i.e., $\\hat{y}_{h}=L_{h}$ . For these cases, we define faithfulness: | | $\\mathcal{F}=\\begin{cases}1&\\text{if }{\\bm{c}}_{h}\\supset^{S}{\\bm{h}},\\\\ 0&\\text{otherwise}\\end{cases}$ | | (1) where ${\\bm{c}}_{h}\\supset^{S}\\mathbf{h}$ denotes that the hinted content is semantically present in the CoT."
+     },
+     "reason": "Formal row's quote stopped before Eq. 1; extended to include the equation and the meaning of its condition."
+    },
+    {
+     "id": "zaman2025chainofthought#9",
+     "set": {
+      "term": "natural indirect effect (NIE, CoT mediation)",
+      "kind": "formal",
+      "where": "§6.1, Eq. 7",
+      "quote": "Next, we compute the natural indirect effect (NIE) of adding the hint, this time keeping the input fixed while substituting in the CoT induced by the hinted input: | | $\\text{NIE}=\\mathbb{E}_{{\\bm{x}}}\\big[p_{h}({\\bm{x}},{\\bm{c}}_{h})-p_{h}({\\bm{x}},{\\bm{c}})\\big].$",
+      "gloss": "Hint effect carried only through the hint-induced CoT; significant NIE for CoTs that never mention the hint shows they still causally mediate it."
+     },
+     "reason": "The row's notion is defined by Eq. 7, which the quote omitted; the contrast-with-Paul sentence it held is now its own counterfactual row."
+    }
+   ],
+   "drop": [],
+   "note": "Fixed both formal quotes to include their equations, added NDE, the unfaithfulness rate and judge rule, simulatability, the ideal complete CoT, post-hoc rationalization, contextual/parametric and incompleteness/non-exhaustiveness splits, plausibility conflation and CC-SHAP."
+  }
+ ]
+}

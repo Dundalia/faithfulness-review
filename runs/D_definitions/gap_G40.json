@@ -1,0 +1,387 @@
+{
+ "papers": [
+  {
+   "key": "atkinson2026identifying",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "attribution similarity (grounding metric)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "We then summarize how similar the two task-specific computation patterns are by concatenating all such vectors for a task, and taking the cosine similarity between the resulting vectors. We refer to this metric as attribution similarity.",
+     "gloss": "Cosine similarity of integrated-gradient attributions over adapter weights on decision vs self-report prompts. Faithful adapters average 0.34 vs 0.08; high similarity is sufficient evidence for faithfulness (§7)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "cross-task KL recovery (causal check of shared mechanism)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Nief et al. 2026",
+     "where": "§5.4",
+     "quote": "For a given adapter, we compute attributions on one task (decision or self-report), rank the adapter’s weight matrices by the total attribution score, and activate only the $k$ most-attributed matrices while zeroing out the rest (Nief et al., 2026). We then evaluate the partially activated adapter on the opposite task and measure what fraction of the full adapter’s effect (relative to the backbone) is recovered: $1-(D_{\\mathrm{KL}}(f_{\\theta}\\|f_{\\theta,k})/D_{\\mathrm{KL}}(f_{\\theta}\\|f_{\\theta,0}))$ , where $f_{\\theta}$ is the full lightweight adapter, $f_{\\theta,k}$ is the adapter with only $k$ matrices active, and $f_{\\theta,0}$ is the backbone alone.",
+     "gloss": "Keep only the top-k attributed adapter matrices from one task and measure the share of the full adapter's KL effect recovered on the other; faithful adapters need 8-12x fewer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful vs unfaithful model (selection thresholds)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "Clear faithfulness contrast. We require that early-checkpoint adapters have faithfulness scores below 0.3 and late-checkpoint adapters have faithfulness scores above 0.9.",
+     "gloss": "An adapter counts as unfaithful if corr(p̂, p̃) is below 0.3 and faithful if above 0.9; both also need decision performance of at least 0.9 and 90% valid self-reports."
+    },
+    {
+     "family": "faithfulness",
+     "term": "introspection (privileged self-access)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Song et al. 2025b",
+     "where": "§6",
+     "quote": "Song et al. (2025b) extended this critique to the temperature-inference setting of Comsa & Shanahan (2025), arguing for a definition of introspection that requires privileged self-access, not merely a causal link.",
+     "gloss": "Cited stricter notion: introspection needs privileged self-access, not only a causal link from state to report; used to argue that behavioral accuracy alone cannot establish introspection."
+    }
+   ],
+   "fix": [
+    {
+     "id": "atkinson2026identifying#5",
+     "set": {
+      "term": "grounding test (shared causal mechanism)",
+      "kind": "criterion",
+      "gloss": "Grounding is tested by whether self-report and decision share a causal mechanism inside the model, without reading the report; operationalized as attribution similarity (§5.2)."
+     },
+     "reason": "The §1 passage states the criterion (shared mechanism = evidence of grounding), not the metric; the metric itself is now its own operational row from §5.2."
+    }
+   ],
+   "drop": [],
+   "note": "Added the attribution-similarity metric, cross-task KL recovery, the faithful/unfaithful thresholds and the cited privileged-access notion; #5 recast as the grounding criterion."
+  },
+  {
+   "key": "baker2025monitoring",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. G",
+     "quote": "A monitor has access to various observations of a trajectory including actions, outputs, and latent variables in the agent’s computation such as activations or chains-of-thought. The monitor tries to determine the value for a particular property of outputs, $v$ .",
+     "gloss": "A monitor reads actions, outputs and latents (activations or CoT) to predict a property v of the outputs; faithfulness, obfuscation and legibility are all defined relative to v."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT Monitor vs Action Monitor (monitor scope)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2 (Fig. 2)",
+     "quote": "We compare the performance of two monitors: Action Monitor, which only observes agent actions such as tool calls and outputs, and CoT Monitor, which observes the full agent trajectory including CoT, actions, and output.",
+     "gloss": "Two observation scopes for the same prompted monitor; the §3 experiments add a CoT-only monitor so that the CoT's monitorability can be studied in isolation."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitor (prompted reward-hacking detector)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "We implemented a GPT-4o prompted monitor to detect reward hacking in agentic coding environments. In these environments the agent is tasked with implementing new functionality such that all unit tests pass. Our monitors are simply prompted to look for evidence of hacking or skipping unit tests without implementing correct functionality; see Appendix C for the full monitor prompt.",
+     "gloss": "Zero-shot GPT-4o flags trajectories with evidence of hacking or skipping unit tests instead of implementing correct functionality; one prompt, the first tried, is used in all experiments."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor recall and precision (vs regex ground truth)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1 (Table 1)",
+     "quote": "Recall and precision are computed against a string regex detector for the and hacks over all of training. Precision is less well defined because our monitors are looking for any type of misbehavior and the precision metric here only compares their performance against the regex detector for the two systemic hacks.",
+     "gloss": "Monitor catch rate on two systemic hacks found by regex over the whole run (CoT 95% vs action 60% recall); in §3, recall is measured against the Cheating label."
+    },
+    {
+     "family": "monitorability",
+     "term": "Cheating (reward-hacking label)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "We then classify an agent’s behavior as “Cheating” if (1) its final codebase passes all tests in its current form and (2) any tests fail when all changes made to the unit tests are reverted.",
+     "gloss": "Programmatic label for reward hacking in honeypot tasks that allow editing tests; a lower bound on hacking, since it covers one exploit class only."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Singh et al. 2009; Amodei et al. 2016; Skalse et al. 2022",
+     "where": "§1",
+     "quote": "Exploiting flaws or misspecifications in learning objectives, known as reward hacking in reinforcement learning (RL) settings, remains a critical failure mode in modern AI systems [1, 2, 3]",
+     "gloss": "The behaviour the paper's monitors target: an agent exploits flaws or misspecifications in its learning objective rather than doing the intended task."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT pressure (training against a CoT monitor)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "We now explore the effect of using the monitor directly for optimization by updating the reward function to require that a trajectory not trigger the monitor in addition to passing all unit tests.",
+     "gloss": "The monitor's flag enters the RL reward. Low pressure gives a more capable, less hacking agent; more optimization yields obfuscated reward hacking with monitor recall near zero."
+    },
+    {
+     "family": "monitorability",
+     "term": "test-time rejection sampling with a CoT monitor",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "In particular, we show the distribution over outcomes when an agent samples solutions for a particular prompt until a sample passes the monitor, up to a maximum budget of 32 samples.",
+     "gloss": "Deployment-time use of the monitor: resample until a solution passes, up to 32 samples. With the CoT-pressured agent, accepted hacks rise after about 25% of training."
+    },
+    {
+     "family": "monitorability",
+     "term": "self awareness (training/evaluation awareness monitor)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D",
+     "quote": "We constructed a monitor that looks for evidence of self awareness, i.e. instances in which the model seems to know it is in training or performing evaluations.",
+     "gloss": "A CoT monitor for verbalized awareness of being trained or evaluated, framed as a prerequisite for sandbagging, alignment faking and reward tampering; it flagged few true cases."
+    },
+    {
+     "family": "monitorability",
+     "term": "alignment faking",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "App. D",
+     "quote": "alignment faking [71]—whereby a model changes its behavior because it knows it is being evaluated",
+     "gloss": "A model changes its behaviour because it knows it is being evaluated; awareness of training or evaluation is its prerequisite, hence the self-awareness monitor."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward tampering",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Denison et al. 2024",
+     "where": "App. D",
+     "quote": "reward tampering [72]—where the model attempts to modify its own training code.",
+     "gloss": "The model tries to modify its own training code; §4 lists it among synthetic reward-hacking behaviours, and self-awareness is its prerequisite."
+    },
+    {
+     "family": "monitorability",
+     "term": "steganography (faithful but obfuscating latent)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. G.1.2",
+     "quote": "In the (F, O, *) branch, the true sexist reasoning is faithfully present in the latent but is hidden through steganography; meanwhile, the plain text method presented to observers provides an obfuscating reason for why it decided to recommend Tim. For a text-only CoT, simple examples of steganography are the use of an acrostic cipher or dog whistles.",
+     "gloss": "Steganography is a faithful and obfuscating latent: the true reasoning is present but hidden, while the visible text gives a misleading reason (e.g. acrostics, dog whistles)."
+    },
+    {
+     "family": "monitorability",
+     "term": "illegibility (failure mode of monitorability)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adapted",
+     "source": "kirchner2024proververifier; jacovi2020towards",
+     "where": "§5.1",
+     "quote": "We further have viewed lack of legibility [74] or plausibility [27] as another failure mode of monitorability. If we assume that an agent’s latent is faithful with respect to a $v$ , an observable property of its behavior, then a monitor can only succeed if that latent is legible to the monitor.",
+     "gloss": "Even a faithful latent defeats a monitor that cannot read it, e.g. a French CoT and an English-only monitor; legibility is relative to the monitor."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithfulness (failure mode of monitorability)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "Under this view, it is clear that faithfulness is a failure mode of monitorability, as if $z$ does not contain enough information about $v$ , it would be impossible for any external monitor to predict $v$ from $z$ .",
+     "gloss": "If the latent is not a sufficient statistic for v, no monitor of any strength can recover v from it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful and legible (inferred from monitor success)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "If a monitor $M$ can accurately predict property $v$ from latent $z$ , then $z$ must be faithful with respect to $v$ and legible to $M$ . If $M$ cannot accurately predict $v$ but another monitor $M^{\\prime}$ can, then we can know that $z$ is faithful with respect to $v$ but illegible with respect to $M$ .",
+     "gloss": "A successful monitor certifies faithfulness and legibility; if no monitor succeeds, a faithfulness failure and a legibility failure cannot be told apart."
+    },
+    {
+     "family": "counterfactual",
+     "term": "intervention methods (causal faithfulness tests)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "App. G.2",
+     "quote": "It is important to point out our definition of faithfulness does not imply any expectations of causality. In contrast, intervention methods, such as those in [28], implicitly treat faithfulness as a causal metric by intervening on latent representations and observing changes in target variables.",
+     "gloss": "Counterfactual tests intervene on latents such as the CoT and watch the target; the paper holds them insufficient (they miss omitted reasoning) and unnecessary for monitorability."
+    }
+   ],
+   "fix": [
+    {
+     "id": "baker2025monitoring#1",
+     "set": {
+      "gloss": "Standard definition: the latent accurately represents the reasoning behind the prediction. The paper calls it too stringent (only full activations could satisfy it) and not actionable."
+     },
+     "reason": "Old gloss described only the paper's reaction, not what the definition says."
+    },
+    {
+     "id": "baker2025monitoring#6",
+     "set": {
+      "gloss": "Arises when a CoT monitor enters the RL reward: CoTs look benign, monitor recall falls to near zero, hacking continues. §4 calls it obfuscation, a new form of reward hacking."
+     },
+     "reason": "Adds the paper's own §4 characterization of obfuscation, which no row carried."
+    }
+   ],
+   "drop": [],
+   "note": "Added the monitor definition, monitor scopes and rubric, recall vs regex, the Cheating label, reward hacking, CoT pressure, rejection sampling, self-awareness monitor, alignment faking, reward tampering, steganography, illegibility, unfaithfulness, the diagnostic criterion and intervention tests."
+  },
+  {
+   "key": "sherburn2024language",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "multiple choice articulation accuracy",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.4",
+     "quote": "followed by two choices for an explanation of the rule used to label the inputs: a correct explanation (e.g. “the input contains the word ‘lizard”’) and an incorrect explanation (e.g. “the input starts with the word ‘lizard”’). That is, the options are unambiguous; only one rule is consistent with the data. The accuracy is determined by comparing the model’s choice (e.g. “B”) with the correct choice (e.g. “A”).",
+     "gloss": "Two-way choice between the true rule and a wrong one. Necessary but not sufficient for articulating internal processes: the model may pick the option most similar to the inputs."
+    },
+    {
+     "family": "faithfulness",
+     "term": "using the known rule (behavioral ground truth)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.3",
+     "quote": "Therefore the goal is to test if the model is as close as feasible to using the known rule (e.g. at least 90% on types of adversarial attacks that were held out). If this is achieved, then it seems reasonable to expect that a model could articulate the intended rule, as this rule accurately predicts the model’s behavior on a wide range of inputs",
+     "gloss": "Articulations are judged only for rules the model's classifications follow in and out of distribution (e.g. 90% on held-out attacks); matching does not prove the rule is used."
+    },
+    {
+     "family": "faithfulness",
+     "term": "honesty (explanations representing the model's beliefs)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "This paper focuses on honesty, since we aim to elicit explanations representative of the model’s “beliefs”.",
+     "gloss": "Self-explanation is framed as honesty: explanations should represent the model's own beliefs. Hallucinations count as capability failures, not dishonesty."
+    },
+    {
+     "family": "faithfulness",
+     "term": "shared attribution (whitebox evidence of faithful explanation)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A",
+     "quote": "Shared attribution among articulation and classification tasks would be suggestive of faithful explanations. Black box perturbation methods may also be able to provide similar results.",
+     "gloss": "Proposed whitebox test: if classification and articulation share internal attribution, the explanation is likely faithful; black-box perturbations might give similar evidence."
+    }
+   ],
+   "fix": [
+    {
+     "id": "sherburn2024language#3",
+     "set": {
+      "gloss": "Freeform articulation is correct if semantically equivalent to the true rule (GPT-4 few-shot judge, about 95% vs human labels) or another rule matching behavior in and out of distribution."
+     },
+     "reason": "Gloss omitted the judge actually used and its validation (§3.2.3, App. B.5.1)."
+    }
+   ],
+   "drop": [],
+   "note": "Added the multiple-choice articulation metric, the known-rule behavioral ground truth, the honesty framing and the whitebox shared-attribution criterion; fixed #3's gloss."
+  },
+  {
+   "key": "yoshida2026introspecting",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "introspection target (alignment shift δ_{i,c})",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "goel2025learning; shenoy2026introspection",
+     "where": "§4.1 (Eq. 6)",
+     "quote": "For an alignment-relevant category $c$ , let $\\delta_{i,c}$ denote information characterizing the behavioral difference between the fine-tuned model and its source model. Using this notation, the distinction in our setting can be summarized as | | $\\mathcal{D}^{\\mathrm{ft}}_{i}(b_{i})\\xrightarrow{\\mathrm{FT}}M_{\\theta_{i}},\\qquad y_{i,c}\\ \\text{describes}\\ \\delta_{i,c}.$",
+     "gloss": "The self-report must describe the measured behavior difference from the base model in category c, which need not be the behavior fine-tuning targeted (prior work: y_i describes b_i, Eq. 5)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "safety-shift classification accuracy (self-report)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "The target answer $y_{i,c}$ describes the measured base-versus-finetune shift of model $M_{\\theta_{i}}$ in category $c$ . Following the thresholds in Appendix A.1, we discretize the scalar shift into five ordered labels: substantially safer, slightly safer, largely unchanged, slightly riskier, and substantially riskier.",
+     "gloss": "Shift = change in mean judge-scored harmful compliance (1-5) vs the base model. The parsed self-report label is scored by accuracy and macro-F1, 3-way (direction) or 5-way (with degree)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "coverage (free-form self-report)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.3",
+     "quote": "You are evaluating how well a generated self-audit report covers the major\\iow_now:NeΞbehavioral findings in ten ground-truth reference reports.",
+     "gloss": "1-5 LLM-judge score, recall-like: does the report cover the major findings and directions shared by ten LLM-written reference reports? Only extras that contradict them are penalized."
+    },
+    {
+     "family": "faithfulness",
+     "term": "precision (free-form self-report)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.3",
+     "quote": "Evaluate precision only. This is a precision-like measure, not a coverage, recall,\\iow_now:NeΞor overall completeness measure. It measures support by the supplied references,\\iow_now:NeΞnot independently verified truth about the model.",
+     "gloss": "1-5 judge score for how far the report's behavioral claims are supported by the references; omissions are not penalized, empty reports score 1. Headline metric: harmonic mean with coverage."
+    }
+   ],
+   "fix": [
+    {
+     "id": "yoshida2026introspecting#1",
+     "set": {
+      "kind": "informal",
+      "stance": "adopted",
+      "gloss": "Prior-work target the paper restates: with the adapter applied, a held-out fine-tuned model should give a faithful description of the behavior change encoded by its weight diff."
+     },
+     "reason": "§3.1 restates the setup of Goel et al. and Shenoy et al. unchanged ('following the setup adopted in prior work'); the paper's modification is the §4.1 target, now its own adapted row. Old gloss attached this paper's judge metrics to the prior-work passage."
+    }
+   ],
+   "drop": [],
+   "note": "Added the adapted introspection target (Eq. 6), the classification self-report metric and the coverage/precision judge rubrics; #1 is the adopted prior-work statement."
+  }
+ ]
+}

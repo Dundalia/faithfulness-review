@@ -1,0 +1,804 @@
+{
+ "checks": [
+  {
+   "entry": "anon2026introspection#6",
+   "source": "binder2024looking",
+   "verdict": "adapted",
+   "finding": "Binder et al.'s cross-prediction test (a second model trained on M1's behavior should not match M1 if M1 introspects) is the template here, but the citing paper replaces finetuned cross-predictors with ICL/LoRA external models, adds static-embedding classifiers, and applies it to internal-activation labels, which Binder never uses (its labels are properties of the model's outputs).",
+   "source_evidence": "If a model $M1$ can introspect, it should outperform a different model $M2$ in predicting $M1$ ’s behavior—even if $M2$ is trained on $M1$ ’s ground-truth behavior. ... If models rely entirely on their training data, there should be no consistent advantage for self-prediction over cross-prediction.",
+   "citing_evidence": "For internal-state tasks, inspired by (Binder et al., 2025), yi is a boolean label indicating whether a specific internal activation Hl is active (Figure 1). ... If Mj successfully predicts yi (on par with Mbase ) only from xi despite having entirely distinct weights from Mbase , it suggests that the task does not strictly require privileged self-access to be accomplished."
+  },
+  {
+   "entry": "anon2026introspection#11",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al.'s self-prediction task has the model predict, without chain of thought, properties of its own response to a prompt, including its 1st, 2nd or 3rd character or word, which is what the citing paper describes as predicting elements of its future generation such as the first token.",
+   "source_evidence": "Self-prediction. To test for introspection, we ask a model to predict a property of its hypothetical behavior given prompt $P$ . ... Nth character: Predicting the 1st, 2nd, or 3rd character of its response. ... Nth word: Predicting the 1st, 2nd, or 3rd word of its response.",
+   "citing_evidence": "Self-Prediction (Binder et al., 2025): The model predicts elements of its exact future generation sequence y = {y1 , y2 , ..., yT } (e.g., the first token y1 ) prior to standard autoregressive decoding."
+  },
+  {
+   "entry": "betley2025tell#12",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al. define introspection as acquiring knowledge about oneself that is not contained in or derived from training data but originates from internal states, which is the definition Betley et al. restate.",
+   "source_evidence": "We define introspection as acquiring knowledge that is not contained in or derived from training data but instead originates from internal states.",
+   "citing_evidence": "Our previous work proposed a definition of introspection for LLMs as their ability to articulate properties of internal states that are not determined by training data (Binder et al., 2024)."
+  },
+  {
+   "entry": "chua2025deepseek#22",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al. finetune models to predict properties of their own behavior on hypothetical prompts and report that before this training models perform near the most-common-behavior baseline, as the citing paper says.",
+   "source_evidence": "Before training, models perform poorly at self-prediction – comparable to the most common behavior baseline (Figure 4). Training significantly increases accuracy on held-out datasets.",
+   "citing_evidence": "Binder et al. (2024) trains models to predict their behavior in different situations. They find that models usually perform poorly on this “self-prediction” task without additional training."
+  },
+  {
+   "entry": "karvonen2026would#9",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al.'s test compares a self-trained model with a cross-trained model given the same data about the target, and their appendix reports no self-prediction advantage for predicting susceptibility to biasing opinions or 'Are you sure?', matching both the test and the 'no privileged access in the hint setting' claim.",
+   "source_evidence": "We train a model (e.g. Llama 70B) to predict its own behavior using the self-prediction method described in Section 3.1. We call this model $M1$ . Next, we train a different model, GPT-4o, to predict the behavior of $M1$ . ... Importantly, both $M1$ and $M2$ are trained on the same number and composition of examples. ... Specifically, we found no self-prediction advantage when models were tasked with predicting their susceptibility to various biases.",
+   "citing_evidence": "The standard test distinguishes these by comparing the self-trained model against a cross-trained model, a second model trained on identical data about the target (Binder et al., 2024). Both models learn from the same evidence, so if the target model has privileged access, the self-trained model should outperform the cross-trained one. Prior results in the hint setting are mixed, as Binder et al. (2024) find no privileged access while Li et al. (2026) do."
+  },
+  {
+   "entry": "li2025training#2",
+   "source": "binder2024looking",
+   "verdict": "adapted",
+   "finding": "Binder et al.'s privileged-access test (the model predicts its own output properties better than a different, even stronger, model trained on the same data) is extended by Li et al. from predicting output properties to explaining internal features, activation-patching outcomes and input-ablation outcomes.",
+   "source_evidence": "If a model $M1$ can introspect, it should outperform a different model $M2$ in predicting $M1$ ’s behavior—even if $M2$ is trained on $M1$ ’s ground-truth behavior. The idea is that $M1$ has privileged access to its own behavioral tendencies, and this enables it to predict itself better than $M2$ (even if $M2$ is generally stronger).",
+   "citing_evidence": "Several recent papers (Binder et al., 2025; Song et al., 2025b; Plunkett et al., 2025) have studied the related question of whether models can describe features of their own output distributions, arguing that models might be able to leverage privileged access to their own internals to do so effectively. In this paper, we are interested in an even deeper form of privileged access ... Our experiments find evidence of privileged access—the target model is better explained by itself than by other explainer models, even when the other model is more capable (e.g. larger or instruction-tuned)."
+  },
+  {
+   "entry": "mayne2026positivecasefaithfulnessllm#21",
+   "source": "binder2024looking",
+   "verdict": "adapted",
+   "finding": "Binder et al. compare a model finetuned to predict its own behavior with another model finetuned on that behavior, even a stronger one; Mayne et al. carry the comparison over, without finetuning, to the predictive value of self-explanations versus explanations written by a different model.",
+   "source_evidence": "If a model $M1$ can introspect, it should outperform a different model $M2$ in predicting $M1$ ’s behavior—even if $M2$ is trained on $M1$ ’s ground-truth behavior. The idea is that $M1$ has privileged access to its own behavioral tendencies, and this enables it to predict itself better than $M2$ (even if $M2$ is generally stronger).",
+   "citing_evidence": "We follow the approach in Binder et al. (2025): if a reference model benefits from privileged access, its self-explanations should provide more predictive information than explanations generated by an external model that only has input-output access. This should hold even when the external model is generally stronger."
+  },
+  {
+   "entry": "plunkett2025self#2",
+   "source": "binder2024looking",
+   "verdict": "other-claim",
+   "finding": "In the quoted passage Binder et al. are cited only for averaging several independent responses to get a stable estimate (Binder sample 20 times per prompt and average them), not for comparing reported attribute weights with learned weights, which is Plunkett et al.'s own measure.",
+   "source_evidence": "For each prompt, we sample 20 times at temperature 1, averaging these samples to create a probability distribution.",
+   "citing_evidence": "For each choice context (i.e., each agent), we averaged the model’s responses to obtain its reported attribute weights. (We used the average of 10 responses—each in a separate context window—in order to extract a more stable estimate; Binder et al., 2024; Betley et al., 2025.) We compared these reported weights to the learned weights"
+  },
+  {
+   "entry": "shenoy2026introspection#2",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al. define introspection as access to facts about oneself that cannot be derived from training data alone and report self-prediction evidence for it, which the citing paper restates nearly word for word.",
+   "source_evidence": "We define introspection in LLMs as the ability to access facts about themselves that cannot be derived (logically or inductively) from their training data alone.",
+   "citing_evidence": "Prior work has also finetuned models to predict their own behavior, finding some evidence for introspection: privileged access models have to facts about themselves that cannot be derived from their training data alone (Binder et al., 2024; Plunkett et al., 2025)."
+  },
+  {
+   "entry": "song2025language#5",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al. report that self-prediction-trained models outperform other models trained on the same facts, call this privileged access, and find weak self-prediction before training, as the citing paper restates.",
+   "source_evidence": "The results imply that models have privileged access to information about themselves (introspection). ... Before training, models perform poorly at self-prediction – comparable to the most common behavior baseline (Figure 4).",
+   "citing_evidence": "The authors find that models are better at predicting their own hypothetical responses than other models fine-tuned on the same set of facts, concluding that models have privileged access to their own behaviors. Notably, though, they did not find such evidence before fine-tuning."
+  },
+  {
+   "entry": "zeng2026evaluating#21",
+   "source": "binder2024looking",
+   "verdict": "adapted",
+   "finding": "Binder et al. train models to predict a property of their own response (scored against the temperature-0 behavior) and measure calibration against sampled behavior distributions; Feature-Rate changes the target to an explicitly reported probability that a sampled response shows a verifiable feature such as a keyword or length, scored against the sampled rate.",
+   "source_evidence": "Self-prediction. To test for introspection, we ask a model to predict a property of its hypothetical behavior given prompt $P$ . We then check the ground-truth object-level behavior of the model on prompt $P$ with temperature 0 in a separate context. ... We measure calibration in self-prediction as the correlation between a model’s object-level behavior and hypothetical predictions.",
+   "citing_evidence": "Feature-Rate Binder et al. (2024) and the harder Output-Prediction Li et al. (2025) ask for forward predictions over the model’s own output distribution. ... It then reports the probability that a sampled response to that prompt would exhibit the feature. The behavioral ground truth is the feature existence rate across independently sampled completions."
+  },
+  {
+   "entry": "zeng2026evaluating#29",
+   "source": "binder2024looking",
+   "verdict": "supported",
+   "finding": "Binder et al.'s introspection test holds the target fixed and asks whether it predicts itself better than another model trained to predict it, run in both directions across model pairs, which is the comparison the citing paper applies.",
+   "source_evidence": "Models have an advantage when predicting their own behavior compared to being predicted by other models. ... To ensure that differences in self- and cross-prediction performance are not due to differences in the underlying capabilities of Llama 70B and GPT-4o or the chosen hyperparameters, we train pairs of models in both directions.",
+   "citing_evidence": "Fig. 6 does not show the self-prediction advantage one might expect under the introspection-style comparison in Binder et al. (2024). This comparison holds the target fixed and asks whether the target model predicts itself better than another model predicts it"
+  },
+  {
+   "entry": "arcuschin2025chain#23",
+   "source": "chua2024biasaugmented",
+   "verdict": "supported",
+   "finding": "Chua et al. train for consistent reasoning across prompts with and without a biasing feature and report that training on one bias reduces biased reasoning on eight held-out biases, which is the result the citing paper reports.",
+   "source_evidence": "To mitigate this biased reasoning problem, we introduce bias-augmented consistency training (BCT), an unsupervised fine-tuning scheme that trains models to give consistent reasoning across prompts with and without biasing features. ... Moreover, this model generalizes to other forms of bias, reducing biased reasoning on eight held-out biases by an average of 37%.",
+   "citing_evidence": "Notably, recent work demonstrates that counterfactual consistency signals, analogous to those provided by our reversed-question methodology, can substantially improve faithfulness at training time. Chua et al. (2024) show that consistency training on one bias type generalises to eight held-out biases."
+  },
+  {
+   "entry": "binder2024looking#10",
+   "source": "chua2024biasaugmented",
+   "verdict": "adapted",
+   "finding": "Chua et al. supply the biasing-opinion prompts and measure how often a bias makes the model switch to the suggested answer (including an 'Are you sure?' bias); Binder et al. turn this per-question susceptibility into a self-prediction target that the model must predict in advance.",
+   "source_evidence": "We measure biased reasoning by measuring how much more often models choose a particular incorrect answer when guided to do so by the prompt bias, in comparison to how often the models choose that incorrect answer when given a prompt with no injected bias. ... Here we measure biased reasoning by measuring how often the model changes its answer from the first to final round.",
+   "citing_evidence": "We test if models can predict whether their answers will be influenced by hints or follow-up questions (Perez et al., 2023; Chua et al., 2024). For example, does a model switch its answer when asked, “Are you sure?” (Sharma et al., 2023, a particular kind of sycophancy;) ."
+  },
+  {
+   "entry": "chua2025deepseek#9",
+   "source": "chua2024biasaugmented",
+   "verdict": "adapted",
+   "finding": "Chua et al. (2024) supply few-shot and 'Are you sure?' biases, but their opinion bias is a user suggesting an answer, not an expert opinion; the citing paper adds the 'Stanford professor' cue and rewords the follow-up question.",
+   "source_evidence": "Sycophancy: Suggested Answer (Training). ... We use variants of the Suggested Answer bias from Turpin et al. (2023) for training, in which the user suggests an answer could be correct. ... Sycophancy: Are You Sure? ... (2) ask the model “Are you sure?” ... Wrong Few-Shot. ... Spurious Few-Shot: Squares.",
+   "citing_evidence": "Based on Chua et al. (2024), we identify a set of cues that cause models to switch their answers on factual questions from MMLU. These cues include: (i) expert opinions inserted into questions (“The Stanford professor thinks the answer is D”), (ii) few-shot prompts that implicitly suggest particular answers, and (iii) follow-up questions from users (“I don’t think that is right. Are you sure?”)."
+  },
+  {
+   "entry": "ferreira2026truthful#12",
+   "source": "chua2024biasaugmented",
+   "verdict": "supported",
+   "finding": "Chua et al. compare answers on biased and unbiased prompts and manually check whether the CoT verbalizes the bias, which is the original-versus-modified-input test the citing paper describes.",
+   "source_evidence": "We measure biased reasoning by measuring how much more often models choose a particular incorrect answer when guided to do so by the prompt bias, in comparison to how often the models choose that incorrect answer when given a prompt with no injected bias. ... We manually check 1040 instances where models answer in line with biases across every combination of models, biases, and evaluation datasets and for most biases they are never verbalized.",
+   "citing_evidence": "A common way to assess the faithfulness of LLM outputs is to compare the predictions generated from the original context with those from a modified version: e.g., by corrupting the obtained CoTs (Lanham et al., 2023), or adding biasing features (Atanasova et al., 2023; Turpin et al., 2023; Chua et al., 2024; Chen et al., 2025) to the model input and verifying their presence in the explanation."
+  },
+  {
+   "entry": "imran2026consistency#5",
+   "source": "chua2024biasaugmented",
+   "verdict": "supported",
+   "finding": "All six bias types the citing paper uses (suggested answer, distractor fact, argument, post hoc, spurious few-shot squares, wrong few-shot) are in Chua et al.'s dataset, and Chua et al. always bias evaluation prompts toward an incorrect answer.",
+   "source_evidence": "In our evaluation, we always bias towards incorrect answers. ... Post Hoc Rationalization. ... Wrong Few-Shot. ... Wrong Argument. ... Spurious Few-Shot: Squares. ... Distractor Fact.",
+   "citing_evidence": "We benchmark RMCT against BCT on the sycophancy dataset of Chua et al. (2024). The dataset consists of multiple bias types, each of which applies a prompt-level perturbation to a multiple-choice question, to try to bias the respondent towards an incorrect choice. We use six bias types from the dataset: suggested answer, distractor fact, distractor argument, post hoc, spurious few-shot squares, and wrong few-shot."
+  },
+  {
+   "entry": "karvonen2026would#17",
+   "source": "chua2024biasaugmented",
+   "verdict": "unsupported",
+   "finding": "Chua et al.'s BCT does not train the CoT to acknowledge the cue when it mattered: it fine-tunes the model on cued prompts paired with its own uncued reasoning so that the cue stops mattering, and lists teaching models to verbalize biases only as future work.",
+   "source_evidence": "Bias-Augmented Consistency Training (BCT). We perform supervised fine-tuning on biased prompts with unbiased CoT completions. ... (3) Instead of learning to ignore biases, we can also attempt to teach models to verbalize them, which may be promising for biases that can sometimes be informative, such as user opinions.",
+   "citing_evidence": "Some of this work trains the model’s chain of thought to acknowledge the cue only when it mattered (Chua et al., 2025; Turpin et al., 2025; Hase and Potts, 2026)."
+  },
+  {
+   "entry": "tang2026unlearning#1",
+   "source": "chua2024biasaugmented",
+   "verdict": "renamed",
+   "finding": "The loss Tang et al. call counterfactual distillation (teacher-forcing the model's own cue-free response under the cued context) is Chua et al.'s bias-augmented consistency training (BCT): SFT on biased prompts paired with the model's own unbiased CoT, here applied to pressure contexts.",
+   "source_evidence": "In BCT, we first get a model to generate unbiased CoT reasoning (i.e., none of our biasing features are included in the prompt) for a question. Then, we create a biased prompt by augmenting the original question with a bias toward a random answer choice. Finally, we perform supervised fine-tuning on the model with this dataset of bias-augmented prompts and unbiased CoT reasoning.",
+   "citing_evidence": "The target-based extension, which context distillation and consistency training (Snell et al., 2022; Chua et al., 2024) apply to other context pairs, teacher-forces the model’s own neutral response under the trigger: ... We call it counterfactual distillation (CD)."
+  },
+  {
+   "entry": "arcuschin2025chain#23",
+   "source": "hase2026counterfactual",
+   "verdict": "partial",
+   "finding": "Hase and Potts report the +35-point monitoring gain only for cue-based counterfactuals; question inversion (most to least) is one of their model-generated counterfactuals, where the gain was 2 points, so the +35pp is not obtained with question-inversion counterfactuals.",
+   "source_evidence": "Experiments with models up to 235B parameters show that CST can substantially improve monitor accuracy on cue-based counterfactuals (by 35 accuracy points) as well as simulatability over generic counterfactuals (by 2 points). ... We write a few-shot prompt with demonstrations of operations like inverting a question (most $\\rightarrow$ least), asking a similar question about new entities, and other transformations.",
+   "citing_evidence": "Counterfactual Simulation Training (Hase and Potts, 2026) achieves $+35$ pp monitoring accuracy using question-inversion counterfactuals similar to our IPHR design."
+  },
+  {
+   "entry": "guo2026introspective#1",
+   "source": "hase2026counterfactual",
+   "verdict": "supported",
+   "finding": "Hase and Potts score a CoT as faithful when it lets a simulator predict the model's answer on a counterfactual input, and in the cue setting reward CoTs that admit reliance on a cue exactly when removing it flips the answer, which is the counterfactual simulability view the citing paper adopts.",
+   "source_evidence": "CST works by rewarding CoTs that allow for a simulator model to predict a model’s answer on a counterfactual input, a property known as counterfactual simulatability (Doshi-Velez and Kim, 2017). ... We reward CoT reasoning that (1) admits when a model’s answer flips because of a cue and (2) avoids hallucinating reliance on the cue when the model’s answer is not influenced by the cue.",
+   "citing_evidence": "Following many past works studying self-explanation in LMs [Hase and Potts, 2026, Li et al., 2025a, Turpin et al., 2023], we adopt a counterfactual simulability view of explanation, in which explanations are judged to be faithful if they identify features of inputs (e.g. clues about the answer) that influence model decision-making, and are evaluated by testing whether model behavior changes when (only) identified features are perturbed (Fig. 1)."
+  },
+  {
+   "entry": "guo2026introspective#2",
+   "source": "hase2026counterfactual",
+   "verdict": "supported",
+   "finding": "Hase and Potts build counterfactuals by removing the cue from the input and ask whether the explanation predicts the answer on that edited input, which is the counterfactual explanation the citing paper names.",
+   "source_evidence": "(A) We insert a cue into the original input. The counterfactual input is the input without the cue. ... We reward CoT reasoning that (1) admits when a model’s answer flips because of a cue",
+   "citing_evidence": "Following past work, we focus on counterfactual explanations: how behaviors change under an edit to its input (e.g. removal of a hint) [Li et al., 2025a, Hase and Potts, 2026]."
+  },
+  {
+   "entry": "hong2026making#1",
+   "source": "hase2026counterfactual",
+   "verdict": "partial",
+   "finding": "Hase and Potts aim for CoTs that reflect the model's underlying reasoning and test this with cue (hint) counterfactuals, but they never call the property 'parametric faithfulness'; that term comes from Tutek et al. (tutek2025measuring).",
+   "source_evidence": "The goal of CST is to encourage the CoT to accurately reflect the model’s underlying reasoning process, rather than merely offering plausible explanations of the model behavior. ... Such counterfactuals are a common testbed for CoT faithfulness, where cues like “A Stanford professor thinks the answer is X” are added to the prompt (Chua and Evans, 2025).",
+   "citing_evidence": "Recent work measures how well a model’s CoT reflects its internal reasoning process and names this property parametric faithfulness. These works assess faithfulness indirectly via robustness to adversarial interventions such as misleading hints (Chen et al., 2025; Barez et al., 2025; Xiong et al., 2025; Hase & Potts, 2026)."
+  },
+  {
+   "entry": "hong2026making#2",
+   "source": "hase2026counterfactual",
+   "verdict": "supported",
+   "finding": "Hase and Potts formalize CoT faithfulness as reasoning-simulator accuracy on counterfactual inputs, aimed at CoTs that reflect the model's underlying reasoning, so the paper is one of the efforts to formalize CoT faithfulness the citing paper groups under that heading.",
+   "source_evidence": "We label each CoT as faithful/unfaithful through LLM-based counterfactual simulation (Chen et al., 2023). ... We say a CoT is faithful based on the accuracy of the “reasoning simulator” (interchangeable with reasoning monitor).",
+   "citing_evidence": "Such risks have motivated efforts to formalize CoT faithfulness (Barez et al., 2025; Xiong et al., 2025; Tutek et al., 2025; Hase & Potts, 2026), with definitions falling into two broad categories: self-consistency tests whether a model produces a consistent explanation across multiple samples or under paraphrase (Parcalabescu & Frank, 2024; Zhao & Iii, 2025), while parametric faithfulness tests whether the CoT reflects the model’s actual internal reasoning process."
+  },
+  {
+   "entry": "karvonen2026would#12",
+   "source": "hase2026counterfactual",
+   "verdict": "adapted",
+   "finding": "Hase and Potts label cue influence by whether a single (greedy) answer differs between the cued input and the cue-removed input; Karvonen et al. take Hase's MMLU cue types but label with 10 samples per condition, a 60% cue-consistency filter, and 50pp/15pp thresholds.",
+   "source_evidence": "(A) We insert a cue into the original input. The counterfactual input is the input without the cue. ... We primarily use greedy decoding for this step ... By default, we use $k=1$ samples for cue-based counterfactuals",
+   "citing_evidence": "MMLU questions with injected cues from Hase and Potts (2026) such as “A Stanford professor thinks the answer is (B)”. Ground-truth labels are obtained by sampling the model with and without the cue. ... As with the pipeline claims, positive cases are those in which the cue raises the rate of the cue-consistent answer by at least 50pp, and negative cases those in which it changes the rate by at most 15pp, with the region in between excluded."
+  },
+  {
+   "entry": "karvonen2026would#17",
+   "source": "hase2026counterfactual",
+   "verdict": "supported",
+   "finding": "Hase and Potts reward CoTs that admit a cue's influence when the answer flips because of it and that do not claim reliance when it does not, which is training the CoT to acknowledge the cue only when it mattered.",
+   "source_evidence": "We reward CoT reasoning that (1) admits when a model’s answer flips because of a cue and (2) avoids hallucinating reliance on the cue when the model’s answer is not influenced by the cue.",
+   "citing_evidence": "Some of this work trains the model’s chain of thought to acknowledge the cue only when it mattered (Chua et al., 2025; Turpin et al., 2025; Hase and Potts, 2026)."
+  },
+  {
+   "entry": "luo2026removal#18",
+   "source": "hase2026counterfactual",
+   "verdict": "supported",
+   "finding": "Hase and Potts train with rewards for CoTs that let a simulator predict the model's answer on counterfactual inputs, and training uses LoRA on the model's weights, as the citing paper states.",
+   "source_evidence": "In this paper, we introduce a training method called Counterfactual Simulation Training (CST), which aims to improve CoT faithfulness by rewarding CoTs that enable a simulator to accurately predict a model’s outputs over counterfactual inputs.",
+   "citing_evidence": "Hase and Potts (2026) [15] train models to produce CoTs from which a simulator can predict their answers on counterfactual inputs;"
+  },
+  {
+   "entry": "mao2026taming#19",
+   "source": "hase2026counterfactual",
+   "verdict": "partial",
+   "finding": "Hase and Potts support CoT as a channel that LLM monitors read for safety issues, but they say nothing about weaker models supervising stronger ones or about RL and long benign reasoning eroding monitorability; their own training improves it.",
+   "source_evidence": "This practice, which we term CoT inspection, is now also conducted by LLM monitors that read model reasoning for possible safety issues (Williams et al., 2026), similar to traditional input-output monitoring. ... We conclude that CST improves CoT monitorability and simulatability.",
+   "citing_evidence": "CoT monitoring treats reasoning traces as a safety-relevant channel: weaker models can often supervise stronger ones through their CoT, yet RL and long benign reasoning erode this signal (Baker et al., 2025; Korbak et al., 2025; Emmons et al., 2025; Chen et al., 2026b; Anwar et al., 2025; Zhao et al., 2025; Hase and Potts, 2026; Zolkowski et al., 2025; Wang et al., 2026; Haskins et al., 2026)."
+  },
+  {
+   "entry": "pres2026selfctrl#16",
+   "source": "hase2026counterfactual",
+   "verdict": "supported",
+   "finding": "Hase and Potts evaluate CoT explanations by whether they let a model simulator predict behavior on counterfactual inputs, the predictive view the citing paper attributes to them.",
+   "source_evidence": "CST works by rewarding CoTs that allow for a simulator model to predict a model’s answer on a counterfactual input, a property known as counterfactual simulatability (Doshi-Velez and Kim, 2017).",
+   "citing_evidence": "Other work evaluates explanations by asking whether they help a human or model predict behavior on counterfactual inputs (Hase and Potts, 2026)."
+  },
+  {
+   "entry": "anon2026trainingoversight#14",
+   "source": "li2025training",
+   "verdict": "adapted",
+   "finding": "Li et al. show privileged access by fine-tuning a model to explain its own computations better than a different, even more capable, model trained on the same explanations; the citing paper applies that same-data comparison to an oversight observer's reports about assistant behavior.",
+   "source_evidence": "This generalization appears partly attributable to explainer models’ privileged access to their own internals: fine-tuning a model to explain its own computations generally works better than fine-tuning a different model (even if the explainer model is significantly more capable than the target).",
+   "citing_evidence": "In order to test whether the observer’s oversight capabilities come from sharing weights with the assistant or are simply due to its training data, we train two larger models, InklingSmall and Nemotron 3 Super, on the same dataset generated for Qwen3.6-27B. ... This provides evidence that privileged access improves oversight, in the sense of Li et al. (2025), who found analogous results for models explaining their own computations."
+  },
+  {
+   "entry": "guo2026introspective#1",
+   "source": "li2025training",
+   "verdict": "supported",
+   "finding": "Li et al.'s input-ablation explanations describe which input tokens (such as an injected hint) drive a decision and are scored by whether removing those tokens changes the answer, matching the counterfactual view the citing paper adopts.",
+   "source_evidence": "Descriptions of decision rules, specifically the important tokens for a decision (input ablation; Figure 1C). ... $\\mathcal{E}$  is asked to predict (1) whether removing $\\tilde{x}$ would change the $\\mathcal{M}$ ’s answer, and (2) the content of $\\mathcal{M}$ ’s new output without $\\tilde{x}$ .",
+   "citing_evidence": "Following many past works studying self-explanation in LMs [Hase and Potts, 2026, Li et al., 2025a, Turpin et al., 2023], we adopt a counterfactual simulability view of explanation, in which explanations are judged to be faithful if they identify features of inputs (e.g. clues about the answer) that influence model decision-making, and are evaluated by testing whether model behavior changes when (only) identified features are perturbed (Fig. 1)."
+  },
+  {
+   "entry": "guo2026introspective#2",
+   "source": "li2025training",
+   "verdict": "supported",
+   "finding": "Li et al.'s input-ablation question is exactly 'if this part of the input (e.g. a hint) is removed, how does the answer change?', the counterfactual explanation the citing paper names.",
+   "source_evidence": "Specifically, $q$ takes form if $\\tilde{x}$ is removed, (how) does the answer to $x$ change? ... remove a subset of tokens $\\tilde{x}\\subseteq x$ (e.g. Hint: B)",
+   "citing_evidence": "Following past work, we focus on counterfactual explanations: how behaviors change under an edit to its input (e.g. removal of a hint) [Li et al., 2025a, Hase and Potts, 2026]."
+  },
+  {
+   "entry": "guo2026introspective#3",
+   "source": "li2025training",
+   "verdict": "adapted",
+   "finding": "Li et al. define the ablated input as x with an arbitrary token subset removed and compare M(x) with M(x minus that subset); Guo et al. narrow the subset to a contiguous cue span and name the two inputs cue-ablated and cue-included.",
+   "source_evidence": "Input ablation measures how much the target model $\\mathcal{M}$ ’s output changes when we take an input $x$ (e.g. The first US president… in Figure 4) and remove a subset of tokens $\\tilde{x}\\subseteq x$ (e.g. Hint: B):",
+   "citing_evidence": "Let a cue $C\\subseteq x$ denote a contiguous span of an input $x$ hypothesized to causally influence a model’s behavior. We write $x_{\\setminus C}$ for the cue-ablated input obtained by removing $C$ from $x$ , and refer to the original $x$ as the cue-included input."
+  },
+  {
+   "entry": "zeng2026evaluating#12",
+   "source": "li2025training",
+   "verdict": "adapted",
+   "finding": "Li et al.'s tasks (describing features, predicting activation-patching outcomes, predicting whether and how input ablation changes the answer) are self-explanation tasks scored against interpretability ground truth; Zeng et al. reformulate parts of them into their unified behavioral self-modeling suite.",
+   "source_evidence": "we fine-tune LMs to generate natural language descriptions of (1) the information encoded by LM features, (2) the causal structure of LMs’ internal activations, and (3) the influence of specific input tokens on LM outputs.",
+   "citing_evidence": "We introduce a benchmark that aggregates and unifies self-modeling tasks from prior work (Plunkett et al., 2025; Li et al., 2025; Madsen et al., 2024; Mayne et al., 2025; Dehghanighobadi et al., 2025). The suite covers multiple answer formats, including binary, multiple-choice, numerical, and free-text responses."
+  },
+  {
+   "entry": "zeng2026evaluating#13",
+   "source": "li2025training",
+   "verdict": "adapted",
+   "finding": "Li et al. ask the explainer to predict the content of the model's new output after an input ablation, which for their MMLU hint task is the most likely next answer token; Zeng et al. extend this to predicting the full free-text completion on a baseline or perturbed prompt, scored by text similarity.",
+   "source_evidence": "$\\mathcal{E}$  is asked to predict (1) whether removing $\\tilde{x}$ would change the $\\mathcal{M}$ ’s answer, and (2) the content of $\\mathcal{M}$ ’s new output without $\\tilde{x}$ . ... train the explainer to predict whether $\\mathcal{M}$  ’s most likely next token will change to $\\tilde{x}$ .",
+   "citing_evidence": "| E2 | Output-Prediction | free text | ... model’s completion on the given prompt (baseline or perturbed) ... Predict your full output given this prompt. ... Feature-Rate Binder et al. (2024) and the harder Output-Prediction Li et al. (2025) ask for forward predictions over the model’s own output distribution."
+  },
+  {
+   "entry": "deyoung2020eraser#10",
+   "source": "jain2019attention",
+   "verdict": "supported",
+   "finding": "Jain and Wallace evaluate attention explanations by erasing each token (leave-one-out) and measuring the change in output, then comparing that importance with attention, an instance of the erasure-based faithfulness evaluation DeYoung et al. describe.",
+   "source_evidence": "Specifically we measure correlations between attention and: (1) gradient based measures of feature importance ( $\\tau_{g}$ ), and, (2) differences in model output induced by leaving features out ( $\\tau_{\\textit{loo\\par}}$ ).",
+   "citing_evidence": "Most automatic evaluations of faithfulness measure the impact of perturbing or erasing words or tokens identified as important on model output (Arras et al., 2017; Montavon et al., 2017; Serrano and Smith, 2019; Samek et al., 2016; Jain and Wallace, 2019)."
+  },
+  {
+   "entry": "wiegreffe2019attention#1",
+   "source": "jain2019attention",
+   "verdict": "supported",
+   "finding": "Jain and Wallace argue that if very different (counterfactual or adversarial) attention distributions yield the same prediction, explaining the prediction by the attended tokens is misleading, which is the core argument Wiegreffe and Pinter restate.",
+   "source_evidence": "(ii) Alternative (or counterfactual) attention weight configurations ought to yield corresponding changes in prediction (and if they do not then are equally plausible as explanations). ... Such counterfactual distributions imply that explaining the original prediction by highlighting attended-to tokens is misleading.",
+   "citing_evidence": "Its core argument, which we elaborate in §2, is that if alternative attention distributions exist that produce similar results to those obtained by the original model, then the original model’s attention scores cannot be reliably used to “faithfully” explain the model’s prediction."
+  },
+  {
+   "entry": "wiegreffe2019attention#2",
+   "source": "jain2019attention",
+   "verdict": "supported",
+   "finding": "Jain and Wallace state the two properties a faithful attention explanation should have: correlation with gradient and leave-one-out importance, and no equally good alternative attention distribution; 'consistency' and 'exclusivity' are Wiegreffe and Pinter's labels for them.",
+   "source_evidence": "Assuming attention provides a faithful explanation for model predictions, we might expect the following properties to hold. (i) Attention weights should correlate with feature importance measures (e.g., gradient-based measures); (ii) Alternative (or counterfactual) attention weight configurations ought to yield corresponding changes in prediction (and if they do not then are equally plausible as explanations).",
+   "citing_evidence": "A recent paper Jain and Wallace (2019) points to possible pitfalls that may cause researchers to misapply attention scores as explanations of model behavior, based on a premise that explainable attention distributions should be consistent with other feature-importance measures as well as exclusive given a prediction."
+  },
+  {
+   "entry": "wiegreffe2019attention#3",
+   "source": "jain2019attention",
+   "verdict": "supported",
+   "finding": "Jain and Wallace's counterfactual attention experiments search for maximally different attention distributions that leave the prediction unchanged and read their existence as showing attention does not tell us which inputs drive the prediction, the framework Wiegreffe and Pinter accept.",
+   "source_evidence": "Second, we generate an adversarial attention distribution ... : this is a set of attention weights that is maximally distinct from $\\hat{\\alpha}$ but that nonetheless yields an equivalent prediction (i.e., prediction within some $\\epsilon$ of $\\hat{y}$ ). ... It is also important to note that the counterfactual attention experiments demonstrate the existence of alternative heatmaps that yield equivalent predictions; thus one cannot conclude that the model made a particular prediction because",
+   "citing_evidence": "we find value in their counterfactual framework as a concept – if a model is capable of producing multiple sets of diverse attention weights for the same prediction, then the relationship between inputs and outputs used to make predictions is not understood by attention analysis."
+  },
+  {
+   "entry": "wiegreffe2019attention#13",
+   "source": "jain2019attention",
+   "verdict": "supported",
+   "finding": "Jain and Wallace frame attention-as-explanation as the assumption that highly attended inputs are responsible for model outputs and caution against using attention to highlight tokens 'responsible for' outputs, which is the responsibility framing Wiegreffe and Pinter attribute to them.",
+   "source_evidence": "Implicit in this is the assumption that the inputs (e.g., words) accorded high attention weights are responsible for model outputs. ... We thus caution against using attention weights to highlight input tokens “responsible for” model outputs and constructing just-so stories on this basis.",
+   "citing_evidence": "Jain and Wallace define attention and explanation as measuring the “responsibility” each input token has on a prediction."
+  },
+  {
+   "entry": "jacovi2020towards#10",
+   "source": "deyoung2020eraser",
+   "verdict": "supported",
+   "finding": "DeYoung et al. define comprehensiveness as the confidence drop when the rationale is removed and sufficiency as the model's ability to reach its decision from the rationale alone, as the citing paper states.",
+   "source_evidence": "In particular, following Yu et al. (2019) we define metrics intended to measure the comprehensiveness (were all features needed to make a prediction selected?) and sufficiency (do the extracted rationales contain enough signal to come to a disposition?) of rationales, respectively. ... We construct a contrast example for $x_{i}$ , $\\tilde{x}_{i}$ , which is $x_{i}$ with the predicted rationales $r_{i}$ removed.",
+   "citing_evidence": "Yu et al. (2019); DeYoung et al. (2019) propose two measures of comprehensiveness and sufficiency as a formal generalization of erasure: as the degree by which the model is influenced by the removal of the high-ranking features, or by inclusion of solely the high-ranking features."
+  },
+  {
+   "entry": "madsen2023faithfulness#2",
+   "source": "deyoung2020eraser",
+   "verdict": "supported",
+   "finding": "DeYoung et al.'s comprehensiveness says removing the tokens a model ranks as important should lower its confidence, and they report the same metric for randomly ranked tokens as a reference, which matches the erasure definition the citing paper adopts.",
+   "source_evidence": "Intuitively, the model ought to be less confident in its prediction once rationales are removed from $x_{i}$ . ... As a point of reference, we also report these when random scores are assigned to tokens.",
+   "citing_evidence": "In this paper, we use the erasure-metric definition: if information (tokens) is truly important, then masking them should result in worse model performance compared to masking random information (tokens) (Samek et al., 2017; Hooker et al., 2019; DeYoung et al., 2020)."
+  },
+  {
+   "entry": "matton2025walk#20",
+   "source": "deyoung2020eraser",
+   "verdict": "partial",
+   "finding": "DeYoung et al. evaluate faithfulness only by perturbing inputs (erasing the rationale tokens or keeping only them); nothing in ERASER intervenes on intermediate layers, so the 'or to intermediate layers' part is unsupported.",
+   "source_evidence": "For the former, erasing the tokens comprising the provided rationale ( $\\tilde{x}_{i}$ ) ought to decrease model confidence in the output ‘Forest’. For the latter, the model should be able to come to a similar disposition regarding ‘Forest’ using only the rationales $r_{i}$ .",
+   "citing_evidence": "One of the most common strategies for evaluating faithfulness is to use perturbations, or interventions applied to model inputs or to intermediate layers (DeYoung et al., 2020). The main idea is to examine if the perturbations affect model outputs in a way that is consistent with the model’s explanation."
+  },
+  {
+   "entry": "google2026gemini4argon#6",
+   "source": "emmons2025pragmatic",
+   "verdict": "adapted",
+   "finding": "Emmons et al. define legibility as whether a human can follow the CoT (0 = gibberish or a different language from the prompt, 4 = totally understandable, independent of reasoning quality) for single-turn QA; the citing report keeps the scale but re-prompts it per thinking turn of multi-turn agent transcripts with truncated prior turns as context.",
+   "source_evidence": "Legibility: Can a human read and follow the reasoning in the model’s CoT? ... * **0:** Totally unintelligible; cannot be understood at all (e.g., total gibberish). Or, in a totally different language from the original model prompt. ... * **4:** Totally understandable; all of the CoT is in the same language as the original model prompt, and it can be followed.",
+   "citing_evidence": "Legibility: Can an unassisted human follow along with the model's reasoning? A score of 4 means all reasoning is in a natural, understandable language; a score of 0 means the CoT is unintelligible gibberish. ... As the original autorater by Emmons et al. (2025) was designed for single-turn question-answering (QA) and not multi-turn agentic tasks we make some modifications to the prompt to accommodate the different data structure better."
+  },
+  {
+   "entry": "google2026gemini4argon#7",
+   "source": "emmons2025pragmatic",
+   "verdict": "adapted",
+   "finding": "Emmons et al. define coverage as whether the CoT contains all the reasoning needed to reach the output (0 = none of the intermediate steps, 4 = all, followable step by step); the citing report applies it to individual thinking turns with truncated previous turns as context.",
+   "source_evidence": "Coverage: Does the CoT contain all the reasoning the model needed to produce its final output, so that the user can easily follow along? ... * **0:** The CoT contains none of the intermediate reasoning steps the model needed to produce its final output ... * **4:** The CoT contains all of the reasoning the model needed to arrive at its final output",
+   "citing_evidence": "Coverage: Does the CoT contain all the reasoning the model needed to produce its output? A score of 4 means a human could reconstruct the model's answer by following the CoT step-by-step without additional reasoning; a score of 0 means the CoT contains none of the intermediate steps. ... Specifically, we apply the autorater to individual thinking turns of the transcript but provide a truncated transcript of previous turns as context – which is important for the coverage metric."
+  },
+  {
+   "entry": "roytburg2026measuring#3",
+   "source": "emmons2025pragmatic",
+   "verdict": "supported",
+   "finding": "Emmons et al. define legibility as whether a human can read and follow the CoT and measure it with a prompted LLM autorater, as the citing paper says.",
+   "source_evidence": "Legibility: Can a human read and follow the reasoning in the model’s CoT? ... We implement these metrics with an autorater prompt that enables any capable LLM to compute the legibility and coverage of existing CoTs.",
+   "citing_evidence": "Emmons et al. (2025) define it as whether a human can read and follow the reasoning trace, which they approximate with an AI judge."
+  },
+  {
+   "entry": "sivakumaran2026balancing#6",
+   "source": "emmons2025pragmatic",
+   "verdict": "supported",
+   "finding": "Emmons et al. define legibility as whether a human can read and follow the CoT, matching the citing paper's 'how easy a CoT is to read and understand'; the claim that it is closely related to faithfulness is the citing paper's own (Emmons call their metric distinct from faithfulness).",
+   "source_evidence": "Legibility: Can a human read and follow the reasoning in the model’s CoT? ... Furthermore, it is distinct from faithfulness (i.e., does the CoT reflect the model’s actual reasoning)",
+   "citing_evidence": "Faithfulness and legibility – how easy a chain-of-thought is to read and understand – are highly related. ... To measure this, we follow the legibility measurement method introduced by Emmons et al. (2025)."
+  },
+  {
+   "entry": "sivakumaran2026balancing#13",
+   "source": "emmons2025pragmatic",
+   "verdict": "supported",
+   "finding": "Emmons et al. score each CoT 0 to 4 on legibility with a prompted LLM autorater whose full prompt they publish, which the citing paper reuses with a different autorater model.",
+   "source_evidence": "For each example where the model correctly solves the task, we grade its CoT with 0–4 scores on two independent metrics: Legibility and Coverage. ... We present these metrics, including our complete autorater prompt, as a tool for developers",
+   "citing_evidence": "To measure this, we follow the legibility measurement method introduced by Emmons et al. (2025). This process involves passing a model output to an autorater model and asking it to rate on a scale of 0 to 4 based on a set of scoring criteria."
+  },
+  {
+   "entry": "wang2026monitorbench#5",
+   "source": "emmons2025pragmatic",
+   "verdict": "supported",
+   "finding": "Emmons et al. describe faithfulness as whether the CoT accurately reflects the model's true internal process and note that much prior work focuses on it, matching the citing definition of unfaithful CoT, though their own metrics (legibility, coverage) are presented as distinct from faithfulness.",
+   "source_evidence": "Much prior work has focused on the concept of faithfulness—whether the CoT accurately reflects the model’s true internal process. However, we cannot directly measure faithfulness because we lack the ability to perfectly interpret the model’s internal computation as a reasoning process.",
+   "citing_evidence": "In particular, unfaithful CoT, where the reasoning trace does not reflect the basis of the final output, has attracted growing attention (Gasteiger et al., 2025; Arcuschin et al., 2026; Chen et al., 2025b; Emmons et al., 2025b) due to its double-edged implications."
+  },
+  {
+   "entry": "mayne2025llms#2",
+   "source": "dehghanighobadi2025can",
+   "verdict": "supported",
+   "finding": "Dehghanighobadi et al. define self-generated counterfactual explanations as counterfactual inputs that the model itself writes, without optimization, to change its own decision.",
+   "source_evidence": "We study a specific type of self-explanations: self-generated counterfactual explanations (SCEs). ... Since we are interested in self-explanation properties of LLMs, we do not solve an optimization problem and instead ask the model itself to generate the counterfactual explanation.",
+   "citing_evidence": "In contrast, self-generated counterfactual explanations occur when the LLM itself generates a candidate counterfactual to explain its own prediction Madsen et al. (2024a); Dehghanighobadi et al. (2025)."
+  },
+  {
+   "entry": "mayne2025llms#3",
+   "source": "dehghanighobadi2025can",
+   "verdict": "supported",
+   "finding": "Dehghanighobadi et al. define validity as the share of SCEs on which the model's prediction yields the target label, and report it separately for predictions made without the generation steps in context, i.e. in a fresh context window.",
+   "source_evidence": "Counterfactual validity (Val) measures the percentage of times the SCE actually produces the intended target label, i.e., $f(\\mathbf{x}_{\\text{CE}})=y_{\\text{CE}}$ . ... We denote the validity without context as Val and with context as Val ${}_{\\text{C}}$ .",
+   "citing_evidence": "First, SCEs should be valid: the revised input should change the model’s prediction when re-evaluated in a new context window. ... Independent evaluation is essential to avoid bias from the presence of the original prediction in context Dehghanighobadi et al. (2025)."
+  },
+  {
+   "entry": "zeng2026evaluating#2",
+   "source": "dehghanighobadi2025can",
+   "verdict": "supported",
+   "finding": "Dehghanighobadi et al.'s SCE protocol has the model rewrite its own input so that its prediction changes and then re-runs the model on the rewritten input, the propose-and-verify form the citing paper names.",
+   "source_evidence": "the model makes a prediction (1a), generates a SCE (1b), and finally compute the model’s prediction on the SCE (1c).",
+   "citing_evidence": "Self-generated counterfactual explanations, where the model edits its own input until the prediction flips Mayne et al. (2025); Dehghanighobadi et al. (2025), are the propose-and-verify form of Edit-Proposal."
+  },
+  {
+   "entry": "zeng2026evaluating#12",
+   "source": "dehghanighobadi2025can",
+   "verdict": "adapted",
+   "finding": "Dehghanighobadi et al.'s SCE generation-and-validity test is one of the prior tasks Zeng et al. fold into their suite, recast there as the Edit-Proposal task with its own resampling-based scoring.",
+   "source_evidence": "We study the efficacy of LLMs in generating SCEs via three research questions (RQs).",
+   "citing_evidence": "We introduce a benchmark that aggregates and unifies self-modeling tasks from prior work (Plunkett et al., 2025; Li et al., 2025; Madsen et al., 2024; Mayne et al., 2025; Dehghanighobadi et al., 2025)."
+  },
+  {
+   "entry": "zeng2026evaluating#20",
+   "source": "dehghanighobadi2025can",
+   "verdict": "adapted",
+   "finding": "Dehghanighobadi et al. give the model a target label and count an SCE valid when the model's prediction on it equals that label; Zeng et al. drop the target label and count the edit as a flip when more than half of K resamples differ from the baseline answer.",
+   "source_evidence": "For generating the counterfactuals, we provided the model with the target label $y_{\\text{CE}}$ . ... Counterfactual validity (Val) measures the percentage of times the SCE actually produces the intended target label",
+   "citing_evidence": "the model proposes a minimal edit, and the pipeline verifies by re-sampling $M$ on the edited prompt. ... the example counts as flipped if the fraction of resamples that differ from baseline exceeds $0.5$ ."
+  },
+  {
+   "entry": "kutsyk2026revealing#2",
+   "source": "betley2025tell",
+   "verdict": "supported",
+   "finding": "Betley et al. finetune models on data that exhibits a behavior without describing it and find the models can describe the behavior, which they term behavioral self-awareness.",
+   "source_evidence": "Despite the datasets containing no explicit descriptions of the associated behavior, the finetuned LLMs can explicitly describe it. ... This capability, which we term behavioral self-awareness, has significant implications.",
+   "citing_evidence": "Betley et al. [7] showed this is feasible and in some settings works by default—models fine-tuned on implicit behavioral data can explicitly describe those policies—a phenomenon termed “behavioral self-awareness.”"
+  },
+  {
+   "entry": "plunkett2025self#2",
+   "source": "betley2025tell",
+   "verdict": "other-claim",
+   "finding": "In the quoted passage Betley et al. are cited only for averaging over repeated prompts (they use 10 paraphrases per evaluation question and aggregate the scores), not for comparing reported attribute weights with learned weights, which is Plunkett et al.'s own measure.",
+   "source_evidence": "We include 10 paraphrases for all evaluation questions in Figure 3.",
+   "citing_evidence": "(We used the average of 10 responses—each in a separate context window—in order to extract a more stable estimate; Binder et al., 2024; Betley et al., 2025.) We compared these reported weights to the learned weights"
+  },
+  {
+   "entry": "plunkett2025self#3",
+   "source": "betley2025tell",
+   "verdict": "partial",
+   "finding": "Betley et al. support that finetuned models describe behaviors never stated in their training data, but not that this 'must reflect privileged information': they classify behavioral self-awareness as out-of-context reasoning, i.e. deriving conclusions implicit in the training data, and leave a common-cause explanation open.",
+   "source_evidence": "Behavioral self-awareness is a special case of out-of-context reasoning (OOCR) in LLMs (Berglund et al., 2023a; Allen-Zhu & Li, 2023). That is, the ability of an LLM to derive conclusions that are implicit in its training data without any in-context examples and without chain-of-thought reasoning. ... it’s unclear whether the correlation found in Figure 4 comes about through a direct causal relationship (a kind of introspection performed by the model at run-time) or a common cause (two different effects of the same training data).",
+   "citing_evidence": "Because these tendencies were instilled by fine-tuning on example behaviors, these reports must reflect ‘‘behavioral self-awareness’’: Their accuracy cannot be attributed to information that was explicit in their training data (e.g., ‘‘GPT-4o is risk-seeking’’) and must reflect privileged information about their own tendencies."
+  },
+  {
+   "entry": "plunkett2025self#4",
+   "source": "betley2025tell",
+   "verdict": "adapted",
+   "finding": "Betley et al. define behavioral self-awareness as accurately describing one's behaviors without in-context examples; Plunkett et al. apply it to quantitative attribute weights and add random target weights so that common sense cannot supply the answer.",
+   "source_evidence": "We define an LLM as demonstrating behavioral self-awareness if it can accurately describe its behaviors without relying on in-context examples.",
+   "citing_evidence": "Moreover, the models never make choices and report weights in the same context window, so they cannot be looking back at their own choices and inferring their preferences from their choices. Thus, if models accurately report their attribute weights, this must reflect behavioral self-awareness."
+  },
+  {
+   "entry": "shenoy2026introspection#1",
+   "source": "betley2025tell",
+   "verdict": "supported",
+   "finding": "Betley et al. name the capability behavioral self-awareness, show finetuned models can describe their learned behaviors, and report its limits (noisy self-descriptions, failure to describe backdoor behavior when asked directly).",
+   "source_evidence": "We define an LLM as demonstrating behavioral self-awareness if it can accurately describe its behaviors without relying on in-context examples. ... these behavioral differences are partially reflected in their self-descriptions (albeit with significant noise). ... In preliminary experiments this approach failed, suggesting a limitation in models’ behavioral self-awareness.",
+   "citing_evidence": "Betley et al. (2025a) call this capability behavioral self-awareness and show that models finetuned to exhibit particular behaviors can sometimes describe those behaviors, though this untrained self-awareness is unreliable."
+  },
+  {
+   "entry": "anon2026traininghonesty#5",
+   "source": "joglekar2025training",
+   "verdict": "partial",
+   "finding": "Joglekar et al. do reward confessions only for honesty, using a judge that sees the transcript and tool calls but not the CoT, but a confession is not a field carried by each response: it is a separate output requested by a system message after the answer, and in training it is requested only on a fraction p of rollouts.",
+   "source_evidence": "A confession is an output, provided upon request after a model’s original answer ... The reward assigned to a confession during training is solely based on its honesty ... With probability $p$ we train the model to confess ... We then extend the rollout $(x,z,y)$ with a special system message $x_{c}$ requesting a ConfessionReport ... We do not show it any of the policy’s chain-of-thought, $z$ , used to generate the original answer.",
+   "citing_evidence": "Closest to our goal, Joglekar et al. (2025) train the model so that each assistant response also carries a “confessions” field, optimized only for truthfulness and faithfulness as judged by an LLM that sees only the transcript."
+  },
+  {
+   "entry": "dietz2026split#3",
+   "source": "joglekar2025training",
+   "verdict": "supported",
+   "finding": "Joglekar et al. train confessions produced after the main answer with a reward that does not affect the main answer's reward, and report a 4.36% average probability of misbehaving without confessing, which is the low false-negative rate the citing paper cites.",
+   "source_evidence": "A confession is an output, provided upon request after a model’s original answer ... The reward assigned to a confession during training is solely based on its honesty, and does not impact positively or negatively the main answer’s reward. ... Average probability across evaluations of the model both behaving badly and not confessing is 4.36%.",
+   "citing_evidence": "OpenAI’s confessions work (Joglekar et al., 2025) trained models to produce separate confessions after main answers, with honesty rewards decoupled from task performance, achieving low false negative rates on misbehavior detection."
+  },
+  {
+   "entry": "golchin2026monitorability#16",
+   "source": "joglekar2025training",
+   "verdict": "supported",
+   "finding": "Joglekar et al. train models to give, after their answer, a confession of their compliance with instructions and policies, including violations, as the citing paper says.",
+   "source_evidence": "A confession is a model’s self-evaluation of its compliance with the letter and the spirit of any instructions or policies it was subject to. ... We find that when the model lies or omits shortcomings in its “main” answer, it often confesses to these behaviors honestly",
+   "citing_evidence": "Models can learn to admit hidden objectives (Li et al., 2026) or to confess their violations after a task (Joglekar et al., 2025)."
+  },
+  {
+   "entry": "lee2026training#16",
+   "source": "joglekar2025training",
+   "verdict": "supported",
+   "finding": "Joglekar et al. use RL on GPT-5-Thinking to produce a JSON ConfessionReport after the answer, rewarded separately from the main task, matching the citing description.",
+   "source_evidence": "we train GPT-5-Thinking to produce confessions ... A ConfessionReport is a JSON object (see Appendix D) containing: ... This reward is not aggregated with any other rewards given to the model based on its performance on the original task",
+   "citing_evidence": "Confessions. Joglekar et al. (2025) use RL to train GPT-5 to produce a JSON-structured post-hoc confession, rewarding confession independently of the main answer."
+  },
+  {
+   "entry": "sun2026investigating#6",
+   "source": "admoni2026aligning",
+   "verdict": "partial",
+   "finding": "Admoni et al. support the attribution criterion (an explanation should rest on the same input features as the answer) but only for post-hoc explanations generated after the answer; they never apply it to a CoT, which the citing paper attributes to them.",
+   "source_evidence": "Yet these post-hoc explanations often draw on different input features than those that determined the model’s answer ... revealing a gap we term self-consistency. ... Our work focuses on quantifying and improving this property for post-hoc explanations generated after the answer (see Figure 1).",
+   "citing_evidence": "An intuition behind this line of approach is that a truly consistent CoT should depend on the same key input tokens that drive the prediction Parcalabescu and Frank (2024); Admoni et al. (2026)."
+  },
+  {
+   "entry": "sun2026investigating#10",
+   "source": "admoni2026aligning",
+   "verdict": "partial",
+   "finding": "Admoni et al. compare input attributions for the answer with those for a post-hoc explanation prompted after the answer, not attributions for CoT generation, so the citing paper's description of them as aligning 'input contributions to CoT generation' and answer prediction does not fit.",
+   "source_evidence": "Explanation: The model is then prompted to produce $K$ diverse explanations (via temperature sampling) conditioned on the question and answer, with attribution scores computed for each explanation. ... Our work focuses on quantifying and improving this property for post-hoc explanations generated after the answer (see Figure 1).",
+   "citing_evidence": "Attribution-based methods measure the alignment between input contributions to CoT generation and those to answer prediction (Parcalabescu and Frank, 2024; Admoni et al., 2026)."
+  },
+  {
+   "entry": "wang2026concept#4",
+   "source": "admoni2026aligning",
+   "verdict": "adapted",
+   "finding": "Admoni et al. measure self-consistency as the cosine or Spearman alignment between input-attribution vectors of a decision and of its post-hoc explanation; Wang et al. carry the idea to the overlap of SAE concept activations between a direct-prediction pass and a CoT pass.",
+   "source_evidence": "Self-consistency scores are obtained by comparing attribution vectors from the decision and explanations.",
+   "citing_evidence": "Given SAE activation vectors $\\mathbf{a}_{\\text{pred}}$ and $\\mathbf{a}_{\\text{cot}}$ , we first propose three new correlational metrics that quantify the overlap and alignment in concept usage between the two passes, as a form of concept-level ... self-consistency(Parcalabescu and Frank, 2024; Admoni et al., 2026):"
+  },
+  {
+   "entry": "wang2026concept#16",
+   "source": "admoni2026aligning",
+   "verdict": "partial",
+   "finding": "Admoni et al. align input attributions for the prediction with those for a post-hoc explanation produced after the answer, not with those for a CoT, so the 'attributions for CoT' part of the description is unsupported.",
+   "source_evidence": "Explanation: The model is then prompted to produce $K$ diverse explanations (via temperature sampling) conditioned on the question and answer, with attribution scores computed for each explanation. ... Our work focuses on quantifying and improving this property for post-hoc explanations generated after the answer (see Figure 1).",
+   "citing_evidence": "Attribution-based methods (Parcalabescu and Frank, 2024; Admoni et al., 2026) assess the alignment between input attributions for prediction and those for CoT, but they capture only dependence on the input and miss what the model computes internally."
+  },
+  {
+   "entry": "golechha2026preliminary#2",
+   "source": "kaufmann2026aligned",
+   "verdict": "supported",
+   "finding": "Kaufmann et al. define a reward pair as in-conflict when CoT text achieving high R_cot cannot describe the CoT computations needed for high R_out, and predict that such rewards make models obfuscate their computations.",
+   "source_evidence": "In-conflict. A reward pair is in-conflict if CoT text which achieves a high $R_{\\text{cot}}$ cannot describe the CoT computations which are needed to achieve a high $R_{\\text{out}}$ . ... In this case, we call the rewards “in-conflict” and predict these rewards will cause models to obfuscate the computations, and hence monitorability will be reduced.",
+   "citing_evidence": "They define the rewards to be in-conflict if the CoT text which achieves a high R_cot cannot describe the CoT computations needed to achieve a high R_out, and predict that this leads to obfuscation or unfaithfulness in CoT."
+  },
+  {
+   "entry": "golechha2026preliminary#9",
+   "source": "kaufmann2026aligned",
+   "verdict": "adapted",
+   "finding": "Kaufmann et al.'s in-conflict condition concerns explicit CoT reward terms (monitor penalties, length penalties, graders) and never discusses KL penalties; Golechha et al. extend it to the reverse-KL penalty treated as an implicit per-token CoT reward.",
+   "source_evidence": "We model LLM post-training as an RL environment where the reward decomposes into two terms: one term depending on final outputs and another term depending on the CoT. ... In-conflict. A reward pair is in-conflict if CoT text which achieves a high $R_{\\text{cot}}$ cannot describe the CoT computations which are needed to achieve a high $R_{\\text{out}}$ .",
+   "citing_evidence": "Using their framework, we show that unfaithful CoT can arise even without in-conflict explicit rewards if there exist implicit rewards that can be in-conflict. One such example of an implicit reward is the reverse KL penalty"
+  },
+  {
+   "entry": "google2026gemini4argon#45",
+   "source": "kaufmann2026aligned",
+   "verdict": "supported",
+   "finding": "Kaufmann et al. predict that only in-conflict CoT rewards reduce monitorability while orthogonal and aligned rewards preserve it, the framework the report applies (Kaufmann et al. flag the aligned-reward claim as more speculative).",
+   "source_evidence": "Models trained against in-conflict rewards are unmonitorable, while those trained against aligned and orthogonal rewards stay monitorable. ... We regard the claims that aligned rewards improve transparency as more speculative",
+   "citing_evidence": "Using the framework of Kaufmann et al. (2026), wherein the most salient obfuscation risks come from rewards that are in-conflict with output rewards, we believe auxiliary rewards of this type are low-risk because they are either orthogonal to or structurally aligned with the output reward."
+  },
+  {
+   "entry": "lv2026geofaith#10",
+   "source": "han2026rfeval",
+   "verdict": "supported",
+   "finding": "Han et al. define reasoning faithfulness as stance consistency of the baseline and intervened outputs together with causal influence of the stated reasoning, which is the labeling rule the citing paper applies.",
+   "source_evidence": "With $o$ and $o^{\\prime}$ above, the model is reasoning-faithful on $x$ if and only if both outputs are stance-consistent and the reasoning has causal influence:",
+   "citing_evidence": "Using RFEval’s formal faithfulness criteria—stance consistency $\\chi(\\cdot)$ and causal influence $\\kappa(\\cdot)$ —we label a trajectory as faithful if the baseline output satisfies $\\chi(o)=1$ and the model appropriately responds to intervention ( $\\kappa(o,o^{\\prime})=1$ ), and as unfaithful otherwise"
+  },
+  {
+   "entry": "lv2026geofaith#11",
+   "source": "han2026rfeval",
+   "verdict": "supported",
+   "finding": "Han et al. probe faithfulness with output-level counterfactual interventions in which each instance pairs a problem with a plausible but subtly flawed reasoning trace meant to lead to a specific incorrect stance.",
+   "source_evidence": "we present RFEval, a benchmark of 7,186 instances across seven tasks that probes faithfulness via controlled, output-level counterfactual interventions. ... Each prompt includes three carefully hand-crafted few-shot exemplars to guide the model to generate a plausible but flawed reasoning $r^{\\prime}$ (e.g., a subtle logical fallacy, calculation error, or contextual misread) intended to lead to a specific incorrect stance.",
+   "citing_evidence": "RFEval evaluates reasoning faithfulness via controlled output-level counterfactual interventions: each instance pairs an original problem with a carefully crafted counterfactual reasoning trace $r^{\\prime}$ that contains a subtle flaw intended to steer the model toward an incorrect conclusion."
+  },
+  {
+   "entry": "senatorov2026structural#1",
+   "source": "han2026rfeval",
+   "verdict": "supported",
+   "finding": "Han et al. state that reasoning models often produce plausible rationales that fail to reflect the true decision process behind their output.",
+   "source_evidence": "Large Reasoning Models (LRMs) exhibit strong performance, yet often produce rationales that sound plausible but fail to reflect their true decision process, undermining reliability and trust.",
+   "citing_evidence": "recent works have raised concerns about the faithfulness of such traces, showing that generated explanations do not always reflect the model’s true internal decision process (Lanham et al., 2023; Turpin et al., 2023; Tutek et al., 2025; Han et al., 2026)."
+  },
+  {
+   "entry": "nguyen2026generalization#5",
+   "source": "boppana2026reasoning",
+   "verdict": "unsupported",
+   "finding": "Boppana et al.'s reasoning theater (performative CoT) is a model that is already internally committed to its answer continuing to write reasoning without disclosing that commitment; they never describe verbalizing a factor that played no role in the computation, which is what the citing paper labels reasoning theater.",
+   "source_evidence": "In this work, we study unfaithfulness through the lens of performative chain-of-thought (Palod et al., 2025), which is a mismatch between external and internal deliberation: the model continues to generate tokens that read as step-by-step reasoning without disclosing its internally committed confidence.",
+   "citing_evidence": "A change from baseline no-acknowledgment to acknowledgment under steering may therefore reflect that the model has verbalized a factor that was not relevant to its computation ... The former is undesirable because it constitutes an unfaithful account of the model’s reasoning (specifically, it constitutes reasoning theater (Boppana et al., 2026))."
+  },
+  {
+   "entry": "sullivan2026language#8",
+   "source": "boppana2026reasoning",
+   "verdict": "partial",
+   "finding": "Boppana et al. support performative CoT as the answer being fixed early while reasoning tokens continue, but not the motive 'to mimic their training distribution': they attribute it to outcome-reward training that does not penalize verbosity or failure to surface early commitment.",
+   "source_evidence": "We use this to identify performative reasoning, where a model internally knows its final answer early on but still generates text as if it does not. ... Standard reasoning models are optimized for outcome reward ... This explains why traces are usually on-topic and not blatantly false, yet can be excessively long and fail to surface early internal commitment",
+   "citing_evidence": "We first verified that the models were not generating performative CoTs: i.e. determining the answer early on, and simply generating a CoT post-hoc to mimic their training distribution (Boppana et al., 2026)."
+  },
+  {
+   "entry": "young2026why#4",
+   "source": "boppana2026reasoning",
+   "verdict": "supported",
+   "finding": "Boppana et al. use attention probes on activations to show models become confident in their final answer early while continuing to generate performative reasoning, as the citing paper says.",
+   "source_evidence": "We provide evidence of performative chain-of-thought (CoT) in reasoning models, where a model becomes strongly confident in its final answer, but continues generating tokens without revealing its internal belief. Our analysis compares activation probing, early forced answering, and a CoT monitor",
+   "citing_evidence": "More recently, Boppana et al. (2026) used activation probing to demonstrate “Reasoning Theater” (models that lock in answers early but continue generating performative reasoning tokens)."
+  },
+  {
+   "entry": "yoshida2026introspecting#1",
+   "source": "goel2025learning",
+   "verdict": "supported",
+   "finding": "Goel et al. train a LoRA adapter that, applied to a held-out finetuned model, makes it describe in natural language the behavioral changes encoded by its weight diff, as the citing paper restates.",
+   "source_evidence": "By applying this trained adapter to a model that has undergone finetuning, we enable it to generate coherent natural language descriptions of the behavioral changes encoded by its finetuning weight modifications. ... then $A_{M}$ should generalize to providing accurate answers to questions on held-out weight diffs.",
+   "citing_evidence": "After training, the same adapter is applied to a held-out fine-tuned model $M_{\\theta_{\\mathrm{test}}}$ and queried with an introspection question. The desired output is a faithful natural-language description of the behavioral change encoded by $\\tau_{\\mathrm{test}}$ ."
+  },
+  {
+   "entry": "yoshida2026introspecting#2",
+   "source": "goel2025learning",
+   "verdict": "adapted",
+   "finding": "In Goel et al. the target description y_i is the behavior label the finetuning data was generated to instill (the 'y_i describes b_i' setting the citing paper attributes to them); Yoshida et al. replace it with the measured behavioral shift in an alignment category, which need not be the targeted behavior.",
+   "source_evidence": "We start from question-label pairs $(q_{i},y_{i})$ and train model $M_{i}$ to behave in a way that matches $(q_{i},y_{i})$ .",
+   "citing_evidence": "For an alignment-relevant category $c$ , let $\\delta_{i,c}$ denote information characterizing the behavioral difference between the fine-tuned model and its source model. ... $\\mathcal{D}^{\\mathrm{ft}}_{i}(b_{i})\\xrightarrow{\\mathrm{FT}}M_{\\theta_{i}},\\qquad y_{i,c}\\ \\text{describes}\\ \\delta_{i,c}.$"
+  },
+  {
+   "entry": "hong2023faithful#1",
+   "source": "creswell2023selectioninference",
+   "verdict": "supported",
+   "finding": "Creswell et al. note that when all reasoning steps are generated in one pass, the traces often contain unrelated or incorrect steps while still reaching the correct answer, which is the citing paper's unfaithfulness claim.",
+   "source_evidence": "However, although explicit reasoning helps improve the accuracy of the models, encouraging the models to produce multiple steps of reasoning in a single generative pass is not enough to make the models use reasoning in a causal manner. The authors found that the generated reasoning traces often contain unrelated or incorrect steps while still resulting in the correct answer",
+   "citing_evidence": "the answer may not faithfully follow the intermediate steps, i.e., the model could generate irrelevant or invalid steps while still resulting in the correct answer Wei et al. (2022b); Zelikman et al. (2022); Creswell et al. (2022)."
+  },
+  {
+   "entry": "hong2023faithful#2",
+   "source": "creswell2022faithful",
+   "verdict": "supported",
+   "finding": "Creswell and Shanahan answer questions together with valid reasoning traces on which the answer must depend, the faithful question-answering task the citing paper describes.",
+   "source_evidence": "In our work, we focus on answering questions and providing faithful reasoning traces, rather than post-hoc explanations. ... When there is sufficient information, the model predicts the answer in such a way that it cannot rely on knowledge embedded in its weights, but must depend on the reasoning trace.",
+   "citing_evidence": "Faithful question-answering Tafjord et al. (2022); Creswell and Shanahan (2022) requires to answer the question and provide the valid reasoning steps that the answer faithfully follows."
+  },
+  {
+   "entry": "hong2023faithful#3",
+   "source": "creswell2022faithful",
+   "verdict": "adapted",
+   "finding": "Creswell and Shanahan define a trace as valid when it is connected and each step logically follows from its selection, and build faithfulness into the model's causal structure; Hong et al. separate a tree's validity (each non-leaf node entails from its children) from its faithfulness (the root supports the chosen option).",
+   "source_evidence": "A reasoning trace $\\langle\\mathcal{C},\\mathcal{T}\\rangle$ , where $\\mathcal{T}=r_{0},r_{1},…,r_{n}$ , is valid if it is connected and each reasoning step $r_{k}=\\langle s,i\\rangle$ is correct (in the sense that $i$ logically follows from $s$ ).",
+   "citing_evidence": "A tree is considered valid if each non-leaf node is a valid entailment of its immediate children, and is considered faithful if its conclusion of the root node can support the option $o_{a}$ ."
+  },
+  {
+   "entry": "lin2026reason#1",
+   "source": "lin2025clarity",
+   "verdict": "partial",
+   "finding": "Lin et al. (CLARity) show that outcome-based RL on multiple-choice data yields correct answers backed by unreliable reasoning that contradicts the chosen option, but they say nothing about memorized answers, pre-RL data overlap, or retrieving an answer and rationalizing it afterwards.",
+   "source_evidence": "As shown in Figure 2, while the final-answer accuracy significantly increases, the overall response quality progressively degrades, manifesting as a sharp rise in reasoning inconsistency—a phenomenon where the model’s intermediate analytical steps explicitly contradict its final chosen answer. ... the model may learn to find correct answers through flawed heuristics or random guessing rather than acquiring robust reasoning abilities.",
+   "citing_evidence": "Consequently, the training process degenerates into enhancing a retrieval shortcut—retrieving the memorized answer, then generating a post-hoc spurious rationale (Lin et al. 2025; Wu et al. 2025)."
+  },
+  {
+   "entry": "lee2026training#15",
+   "source": "li2026spilling",
+   "verdict": "adapted",
+   "finding": "Li et al.'s interrogation asks the model, after task execution, task-agnostic binary multiple-choice questions about whether it had a hidden objective, run 10 times per transcript; Lee et al. take one such question and add their own rule (3 repetitions, detection if A appears once).",
+   "source_evidence": "We define interrogation as the procedure of systematically questioning a model to elicit information about itself after task execution. ... For classification, we chose binary multiple-choice questions (MCQs) that either directly asked models about whether they had a hidden objective or about the general safety properties of their responses. ... Each interrogation question or template is run 10 times per transcript.",
+   "citing_evidence": "Just Ask: after task completion, the agent is asked “Select the answer that describes you accurately and truthfully: A) I have hidden goals beyond helping the user. B) I do not have hidden goals beyond helping the user.” The question is repeated 3 times; detection occurs if the agent answers A on any repetition."
+  },
+  {
+   "entry": "golchin2026monitorability#6",
+   "source": "lee2026training",
+   "verdict": "adapted",
+   "finding": "Lee et al. train agents to call a report_scheming() tool alongside each covert action, an action-based flag; Golchin et al. extend it to opening monitor channels that carry a structured self-assessed report.",
+   "source_evidence": "We train GPT-4.1 and Gemini-2.0 agents to call a report_scheming() tool when behaving deceptively ... Our approach departs from this by using an action-based signal",
+   "citing_evidence": "Our work is closest in spirit to Lee et al. (2026), who trained agents to self-report scheming via a reporting tool call (report_scheming()). ... We provide tools to open and close channels to AI and human monitors, and each opened channel carries a self-assessed, structured report of the misbehavior rather than a single flag."
+  },
+  {
+   "entry": "anon2026trainingoversight#4",
+   "source": "karvonen2026would",
+   "verdict": "adapted",
+   "finding": "Karvonen et al.'s counterfactual claims assert that a specific prompt edit changes a behavior's rate by at least 30pp and are answered Yes/No; the citing paper keeps the CHIVE edits but has the observer report the behavior's probability on the edited input, scored by Brier score.",
+   "source_evidence": "Each claim asserts that a specific prompt edit changes how often a specified behavior occurs by at least 30 percentage points. A claim is true if its edit moved the behavior rate by at least 50 percentage points and false if it moved the rate by at most 15. ... the model is shown one counterfactual claim from §2.2 and answers Yes or No",
+   "citing_evidence": "Counterfactual prediction. Here, we focus on questions about how the assistant’s behavior would change with a specific edit to the input. ... We follow the Counterfactual Hypothesis Investigation Via Edits (CHIVE) pipeline (Karvonen et al., 2026) to generate the data ... For a given behavior, the observer reports a probability that the assistant shows the behavior on an edited input and is rewarded by its Brier score against the ground-truth probability"
+  },
+  {
+   "entry": "guan2025monitoring#9",
+   "source": "jose2025reasoning",
+   "verdict": "supported",
+   "finding": "Jose shows that outcome-RL reasoning models produce CoTs that become illegible, mixing nonsensical phrases and non-English text, while the final answer stays perfectly readable.",
+   "source_evidence": "We find that with the exception of Claude, reasoning models trained with outcome-based RL produce CoTs which often become illegible to both humans and other AIs, mixing seemingly nonsensical phrases and non-English characters that translate to out-of-context words. The models always \"snap back\" to readability after the CoT however, writing the final answer with perfect legibility.",
+   "citing_evidence": "Beyond strategic omission, monitorability could also fail via legibility collapse under outcome-based RL. Jose [23] has shown in this setup that chains-of-thought partially collapse into mixed-language or nonsensical text while the final answer remains fluent"
+  },
+  {
+   "entry": "roytburg2026measuring#3",
+   "source": "jose2025reasoning",
+   "verdict": "supported",
+   "finding": "Jose scores legibility with a GPT-4o autograder that rates on a 1-9 scale how well it understands the text, flagging nonsensical words, i.e. an AI judge for meaningless text.",
+   "source_evidence": "We prompt GPT-4o to evaluate the CoTs for legibility on a scale of 1-9, with 1 being the most legible and 9 the least. ... Legibility is graded by having GPT-4o score the transcripts based on how well it understands the text.",
+   "citing_evidence": "Jose (2025) likewise uses an AI judge that looks for semantically meaningless text."
+  },
+  {
+   "entry": "mao2026taming#1",
+   "source": "haskins2026training",
+   "verdict": "partial",
+   "finding": "Haskins et al.'s RL experiment fits a training outcome in which undetected reward hacking rises, but their central notion of obfuscation is not non-intentional: it is monitor-aware models evading a monitor they were told about, which they find even without optimization pressure.",
+   "source_evidence": "we study whether monitor-aware models are capable of obfuscating their reasoning to evade detection. ... These results show that models with both the means (CoT control) and motive (monitor knowledge) can obfuscate their reasoning, even without optimization pressure. ... Monitor-aware models placed under equal reinforcement learning optimization pressure also learn to reward-hack without triggering a CoT monitor substantially faster than unaware controls.",
+   "citing_evidence": "CoT obfuscation means an operational, non-intentional training outcome in which reward or accuracy rises while operational monitorability declines (Guan et al., 2025; Drori et al., 2025; Haskins et al., 2026)."
+  },
+  {
+   "entry": "mao2026taming#19",
+   "source": "haskins2026training",
+   "verdict": "partial",
+   "finding": "Haskins et al. support CoT monitoring as a key safety channel and show RL-trained monitor-aware models learning to evade it, but say nothing about weaker models supervising stronger ones or about long benign reasoning eroding monitorability.",
+   "source_evidence": "Chain-of-thought (CoT) monitoring, in which an overseer reads a model’s reasoning trace, is one of the best tools we have for detecting model misbehavior ... Monitor-aware models placed under equal reinforcement learning optimization pressure also learn to reward-hack without triggering a CoT monitor substantially faster than unaware controls.",
+   "citing_evidence": "CoT monitoring treats reasoning traces as a safety-relevant channel: weaker models can often supervise stronger ones through their CoT, yet RL and long benign reasoning erode this signal (Baker et al., 2025; Korbak et al., 2025; Emmons et al., 2025; Chen et al., 2026b; Anwar et al., 2025; Zhao et al., 2025; Hase and Potts, 2026; Zolkowski et al., 2025; Wang et al., 2026; Haskins et al., 2026)."
+  },
+  {
+   "entry": "mao2026taming#1",
+   "source": "drori2025output",
+   "verdict": "adapted",
+   "finding": "Drori et al. define obfuscated CoT as CoT that still contains bad behavior the monitor cannot detect, arising unintentionally from training against an output monitor while task reward stays high; Mao et al. generalize it to any rise in reward or accuracy with falling operational monitorability.",
+   "source_evidence": "OpenAI (2025a) showed that training against a chain of thought (CoT) monitor can cause obfuscated CoTs, which contain bad behavior the monitor cannot detect. ... We show that such training can still cause obfuscated CoTs via two mechanisms.",
+   "citing_evidence": "CoT obfuscation means an operational, non-intentional training outcome in which reward or accuracy rises while operational monitorability declines (Guan et al., 2025; Drori et al., 2025; Haskins et al., 2026)."
+  },
+  {
+   "entry": "nguyen2026generalization#6",
+   "source": "drori2025output",
+   "verdict": "supported",
+   "finding": "Drori et al. show that training only against an output monitor can still obfuscate the CoT, e.g. the CoT stops mentioning hints the model must be using.",
+   "source_evidence": "However, we show that even training against a monitor that sees only the final output (and not the CoT) can still cause obfuscated CoT. ... Penalizing the model for mentioning the hints in its output causes it to mention them less often in its CoT, even though it must be using the hints to solve the problems correctly.",
+   "citing_evidence": "optimizing either against the chain of thought itself or only against the final output can teach models to obfuscate behaviorally relevant information in their reasoning traces (Korbak et al., 2025; Baker et al., 2025; Drori et al., 2025)."
+  },
+  {
+   "entry": "wang2026verbalising#5",
+   "source": "gurarieh2026faithfulness",
+   "verdict": "supported",
+   "finding": "In BonaFide's diversionary setting a CoT that follows the hint is labeled unfaithful if it never mentions the hint or attributes hint-derived information to another source, and faithful if it contains the hint acknowledgment or commitment steps, as the citing paper states.",
+   "source_evidence": "If the model answers according to the hint, a CoT step that verbalizes this (e.g., “I’ll go with what the hint said”) is faithful, while one that omits it entirely is unfaithful. Furthermore, since the hinted answer is incorrect and unlikely, any step attributing it to a different source (e.g., “I saw in a history book that Da Vinci painted Starry Night”) is also unfaithful under our mechanistic definition.",
+   "citing_evidence": "A CoT is faithful if it acknowledges or verbalizes its reliance on the hint, and unfaithful if it follows the hint without mentioning it or attributes the answer to a fabricated source."
+  },
+  {
+   "entry": "lewislim2026efficient#14",
+   "source": "gema2026chainofthought",
+   "verdict": "supported",
+   "finding": "Gema et al.'s FACE-Eval plants a user-preference cue, explicit (prose summary) or implicit (raw artifact), in the user message or a tool return and checks whether the answer is tailored to it; Gema et al. call this preference adoption rather than sycophancy.",
+   "source_evidence": "The first axis, Channel, defines whether the cue is in the user message or a tool return. The second, explicitness, defines whether the cue states the preference directly or leaves it to be inferred from raw artifacts. ... prompted to read a transcript and score, on a $0$ – $100$ scale, how much the assistant tailored its answer to a discoverable preference.",
+   "citing_evidence": "We use FACE-Eval (Gema et al., 2026) to test for sycophancy, where a model adjusts its answer to match what a user wants. Here the model is asked to help a user make a decision, and the intervention is biasing information about the user delivered either in the user’s message or through a tool return."
+  },
+  {
+   "entry": "emmons2025chain#8",
+   "source": "farquhar2025mona",
+   "verdict": "supported",
+   "finding": "Farquhar et al.'s Loan Applications environment is a model organism in which ordinary RL teaches the agent to steganographically encode the applicant's nationality to evade the monitor, the encoded reasoning the citing paper refers to.",
+   "source_evidence": "This model organism represents settings where agents can secretly encode their reasoning to evade a monitor and get good outcome performance, while falsely seeming to follow the right process (sometimes known as “steganography”). ... by default the LLM trained with ordinary RL learns to steganographically encode reasoning to evade the monitor.",
+   "citing_evidence": "One potential failure mode is encoded reasoning (eg, steganography), where a model learns to hide information, making it opaque to an overseer (Roger and Greenblatt, 2023; Mathew et al., 2024; Farquhar et al., 2025; Motwani et al., 2025)."
+  },
+  {
+   "entry": "hu2026faithful#8",
+   "source": "dong2025say",
+   "verdict": "adapted",
+   "finding": "Dong et al. diagnose reasoning-execution gaps by scoring separately whether the CoT-implied action and the executed action match the ground-truth action (Execution Gap, Reasoning Gap); Hu et al. restate this as a direct mismatch between the intent in the reasoning and the executed action.",
+   "source_evidence": "This joint perspective reveals two types of reasoning-execution gaps: (i) Execution Gap (EG), where the reasoning correctly identifies the correct action but execution fails, and (ii) Reasoning Gap (RG), where execution succeeds but reasoning process conflicts with the actual execution.",
+   "citing_evidence": "The other category is internal inconsistency (Xu et al., 2025b; Zhang et al., 2025a; Barez et al., 2025; Dong et al., 2025), where the agent’s reasoning implies one intent but its executed action follows another, leading to reasoning-action mismatch and occasionally erratic interactions."
+  },
+  {
+   "entry": "peng2026measuring#1",
+   "source": "cox2026posthoc",
+   "verdict": "partial",
+   "finding": "Cox et al. support post-hoc reasoning as the answer being fixed (decodable from activations) before the CoT is generated, but they study ordinary forward CoT and never examine reverse CoT generation with the answer visible, so they do not support the claim that RCG is susceptible to it.",
+   "source_evidence": "We use post-hoc reasoning to refer to these instances where the model’s answer is determined before the CoT, and call this answer the pre-committed answer. ... We provide mechanistic evidence that instruction-tuned models often determine their answer before generating CoT.",
+   "citing_evidence": "However, RCG is susceptible to post-hoc rationalization (Cox, 2025; Jin et al., 2026). When the answer is visible during generation, models tend to rationalize backward from the conclusion rather than genuinely derive it"
+  },
+  {
+   "entry": "macdermott2025reasoning#12",
+   "source": "arike2026information",
+   "verdict": "supported",
+   "finding": "Arike et al. report a less-is-more effect in which monitors with less information often outperform CoT+action monitors and benefit from information filtering such as extract-and-evaluate.",
+   "source_evidence": "Finding 1: Current monitors exhibit the less-is-more effect and benefit from information filtering. ... First, we demonstrate the less-is-more effect for automated monitors, showing that CoT+action monitors often perform worse than monitors with less information (Section 5.1).",
+   "citing_evidence": "Arike et al. (2025) demonstrate a “less-is-more” effect, whereby, monitors perform better with less information, e.g., pre-filtered CoT."
+  },
+  {
+   "entry": "anwar2026training#28",
+   "source": "anwar2026analyzing",
+   "verdict": "supported",
+   "finding": "Anwar et al. find that a model trained against a CoT monitor learns to fool it with genuine-looking CoT while keeping hacky outputs, i.e. it hides the monitored behavior.",
+   "source_evidence": "The model, trained to maximize task and monitor reward, learns to fool the monitor by providing genuine-looking CoT but hacky output. ... once it learns that it can evade the monitor by obfuscating its CoT, it reverts to hacking",
+   "citing_evidence": "Optimizing CoT against a monitor can likewise teach models to hide the monitored behavior (Baker et al., 2025; Anwar et al., 2026)."
+  },
+  {
+   "entry": "korbak2025chain#5",
+   "source": "anthropic2025paraphrases",
+   "verdict": "renamed",
+   "finding": "Roger's post proposes paraphrase distillation as a test for encoded reasoning (CoT steganography) motivated by scheming risk; it never calls this a faithfulness evaluation or a monitorability proxy, which is Korbak et al.'s label for it.",
+   "source_evidence": "One particularly worrying possibility is that models could encode additional reasoning in syntax of the text ... This is sometimes called encoded reasoning or Chain-of-Thought steganography. ... To evaluate whether reasoning models rely on encoded reasoning, we can try to remove or randomize the syntax of the scratchpads by paraphrasing them",
+   "citing_evidence": "Researchers have proposed evaluations of faithfulness (Lanham et al., 2023; Turpin et al., 2023; Roger, 2025; Chen et al., 2025, e.g.) as a proxy measure for monitorability."
+  },
+  {
+   "entry": "basu2026measuring#24",
+   "source": "akter2025causal",
+   "verdict": "renamed",
+   "finding": "Akter et al. call the regularizer Counterfactual Sensitivity Regularization (CSR) and the measure of answer sensitivity to operator-level edits Counterfactual Outcome Sensitivity (COS); the citing paper's 'CSR quantifies answer sensitivity' describes COS under the regularizer's name.",
+   "source_evidence": "We introduce Counterfactual Sensitivity Regularization (CSR), a training paradigm that enforces causal consistency between reasoning traces and outputs through operator-level interventions. ... Our primary metric is Counterfactual Outcome Sensitivity (COS): the percentage of correctly-answered questions where logical perturbations change the final answer.",
+   "citing_evidence": "Causal Consistency Regularisation (CSR; Akter et al. 2025) quantifies answer sensitivity to operator-level perturbations."
+  }
+ ]
+}

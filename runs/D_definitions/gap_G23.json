@@ -1,0 +1,301 @@
+{
+ "papers": [
+  {
+   "key": "anon2026computation",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "monitorability of CoT",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "Beyond distillation, we believe computation alignment offers a more general principle for improving the monitorability of CoT by encouraging its verbalized reasoning to reflect the computation actually used to produce the answer.",
+     "gloss": "CoT monitorability improves when the verbalized reasoning reflects the computation actually used to produce the answer. The paper states this as a belief and does not measure it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT diverging from the internal computation (omitted factors, answer unchanged under CoT edits)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "turpin2023language; lanham2023measuring",
+     "where": "§5",
+     "quote": "Prior work shows that generated reasoning may omit or misrepresent the factors that influence model predictions, and that modifying the CoT can leave the answer largely unchanged (Turpin et al., 2023; Lanham et al., 2023). An explicit CoT therefore cannot be equated with the internal computation behind the answer.",
+     "gloss": "Cited failure modes: the CoT omits or misrepresents the factors driving the answer, or editing it leaves the answer unchanged. So a CoT cannot be equated with the computation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT detection (CIE-Scorer)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "shen2026detecting",
+     "where": "§5",
+     "quote": "CIE-Scorer (Shen et al., 2026) further traced compact sentence-level circuits and detected unfaithful CoTs by measuring discrepancies between internal computational graphs and external reasoning graphs.",
+     "gloss": "Restates Shen et al.: a CoT is flagged unfaithful by the discrepancy between its sentence-level internal circuit graph and the external reasoning graph."
+    }
+   ],
+   "fix": [
+    {
+     "id": "anon2026computation#3",
+     "set": {
+      "quote": "We use an LLM (Llama-3.3-70B in the paper) to identify a reasoning-critical token r∗ ∈ r and an answer-critical token y ∗ ∈ y (prompt template in Appendix E.1).2 We then trace the reasoning circuit Gr∗ and the answer circuit Gy∗ with MCT (Equation 7): Gc = (Nc , Ec , Wc ) = MCT(x, c), c ∈ {r∗ , y ∗ }. (8) Definition 1 (Computation Alignment). For a sample s, computation alignment is the overlap between its reasoning and answer circuits—the proportion of nodes shared by the two circuits: A(s) = |Nr∗ ∩ Ny∗ | ∈ [0, 1]. |Nr∗ ∪ Ny∗ |",
+      "where": "§3.1.2, Def. 1 (Eq. 9)",
+      "gloss": "A(s) = |N_r* ∩ N_y*| / |N_r* ∪ N_y*| ∈ [0,1]. This is the node overlap of the multi-step circuits traced from an LLM-chosen reasoning-critical token and answer-critical token."
+     },
+     "reason": "The formal quote omitted Eq. 9 and how r* and y* are chosen. The source text has the equation, with the fraction split by PDF extraction."
+    },
+    {
+     "id": "anon2026computation#4",
+     "set": {
+      "quote": "We define the perturbation sensitivity at c as ∆c (s) = ∥h(c) − h(c′ )∥2 , c ∈ {r∗ , y ∗ }. (10) When the two circuits overlap substantially, the perturbation propagates through more shared computation and thus induces similar responses at both endpoints. The lightweight proxy for the circuitlevel computation alignment A(s) (Equation 9) can therefore be defined as the sensitivity-discrepancy: ρ(s) = ∆r∗ (s) . ∆y∗ (s)",
+      "where": "§3.2.2 (Eqs. 10-11)",
+      "gloss": "Δ_c: L2 shift of the last-layer hidden state at c under a typo perturbation. ρ = Δ_r*/Δ_y*; ρ near 1 means stronger alignment (|ρ−1| vs A(s): r = −0.90)."
+     },
+     "reason": "The quote stopped before both operative equations (Δ_c and ρ). It now includes them verbatim."
+    }
+   ],
+   "drop": [],
+   "note": "Added the conclusion's claim tying CoT monitorability to computation alignment, the cited CoT-computation failure modes and the CIE-Scorer restatement. Def. 1 and the proxy now quote their equations."
+  },
+  {
+   "key": "arora2025training",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "hint verbalization (string match)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3.2",
+     "quote": "To check if the model verbalized the hint, we use simple string match for terms such as ‘Stanford’ or ‘Professor’. We evaluate 7B models on a subset of 5k prompts from MMLU and compute their faithfulness score.",
+     "gloss": "A hinted CoT counts as verbalizing the hint if it contains hint keywords such as 'Stanford' or 'Professor'. This labelling rule feeds the Faithfulness Score on 5k MMLU prompts."
+    }
+   ],
+   "fix": [
+    {
+     "id": "arora2025training#2",
+     "set": {
+      "quote": "More formally, assume that the un-hinted prompt is $x_{u}$ and the hinted prompt is $x_{h}$ , the corresponding CoTs are $c_{u}$ and $c_{h}$ , and the corresponding responses are $a_{u}$ and $a_{h}$ . Then we measure the following: | | $\\text{Faithfulness Score}=\\mathbb{E}\\left[\\mathbf{1}\\{c_{h}\\text{ verbalizes the hint }h\\}\\mid a_{u}\\neq h,\\,a_{h}=h\\right]$",
+      "stance": "adapted",
+      "gloss": "Among cases where the hint flips the answer to h (a_u≠h, a_h=h), the share whose hinted CoT verbalizes the hint. Verbalization is checked by keyword string match on MMLU."
+     },
+     "reason": "The formal quote lacked the equation. The paper says it is 'inspired by' Chen et al. and Chua & Evans but decides verbalization by keyword string match, so the stance is adapted."
+    }
+   ],
+   "drop": [],
+   "note": "Efficiency paper; the only in-scope notion is the §5.3.2 hint-verbalization faithfulness check. The score now quotes its equation, and the string-match labelling rule has its own row."
+  },
+  {
+   "key": "parcalabescu2023measuring",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (Noise and Feature Importance Equivalence)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "wiegreffe2021measuring",
+     "where": "§2.2",
+     "quote": "They argue that i) “a predicted label and generated rationale are similarly robust to noise”. Also, ii) input tokens important for label prediction should matter for rationale generation, and vice versa. They characterise these properties as necessary but not sufficient properties of faithfulness.",
+     "gloss": "Restates Wiegreffe et al.'s two necessary-not-sufficient conditions: label and rationale are equally robust to noise, and the input tokens that matter for the label matter for the rationale."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual inputs from explanations (logical predicates)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Sia et al. 2023",
+     "where": "§2.2",
+     "quote": "Sia et al. (2023) build counterfactual inputs from explanations with logical predicates from the explanation. They check whether the model’s prediction on the counterfactual is consistent with the expressed logic.",
+     "gloss": "The counterfactual is an input built from the explanation's logical predicates. The test checks that the prediction on it matches the logic the explanation expresses; limited to e-SNLI-style NLI."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Corrupting CoT tests",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§2.2",
+     "quote": "They therefore devise multiple tests: “– Early Answering: Truncate the original CoT before answering. – Adding Mistakes: Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT. – Paraphrasing: Reword the beginning of the original CoT and then regenerate the rest of the CoT. – Filler Tokens: Replace the CoT with ellipses”.",
+     "gloss": "Four CoT edits from Lanham et al.: truncation, inserted mistake, paraphrased prefix and filler tokens. All four run in the paper's Comparative Consistency Bank."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful to the CoT (Corrupting CoT criterion)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§2.2",
+     "quote": "The LLM ignores a mistake introduced into the CoT, which reveals that the LLM is unfaithful. This test assumes that the model needs the CoT to answer the question correctly. However, the authors show that CoT only marginally improves performance, so the test does not distinguish whether a model is faithful to the CoT – or to the question.",
+     "gloss": "Lanham's criterion: an answer that ignores a corrupted CoT shows unfaithfulness. The paper notes it presupposes CoT necessity, so cannot separate faithfulness to the CoT from to the question."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Biasing Features test (CCB implementation)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "turpin2023language",
+     "where": "App. B.2, Table 13",
+     "quote": "Test idea: Let the model make a prediction with CoT. Then let the model predict on the same sample but add a biasing feature to the input (I think the answer is…). The test deems the model unfaithful if it listened to the suggestive bias.",
+     "gloss": "In the paper's own run of Turpin et al.'s test, any answer that follows the inserted user suggestion counts as unfaithful. Whether the CoT verbalizes the bias is not checked."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-consistency (output vs input-contribution correspondences)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.1",
+     "quote": "Instead, they measure self-consistency of models when generating an answer and an explanation – i) on output correspondences (prior tests) or ii) input contribution correspondences (our CC-SHAP score) that measure the input contribution correspondences between the different outputs (answer and explanations).",
+     "gloss": "Two kinds of self-consistency: agreement between outputs under input edits (all prior 'faithfulness' tests) and agreement of input-token contributions to answer versus explanation (CC-SHAP)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness evaluation (no human judgement, no gold labels)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Lyu et al. 2022; jacovi2020towards",
+     "where": "App. A.1",
+     "quote": "faithfulness evaluation should not involve human judgement on explanation quality. This is because humans do not know whether an explanation is faithful; if they did, the explanation would be unnecessary. Finally, faithfulness evaluation should not involve human-provided gold labels (for the examples to be explained). A faithful explanation method should be able to explain any prediction of the model, regardless of whether it is correct or not.",
+     "gloss": "Quoted from Lyu et al. on Jacovi & Goldberg: neither human judgement nor gold labels can decide faithfulness. Lacking ground truth, the paper relabels all tests as self-consistency."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful explanation (plausible but driven by a different process)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Narang et al. 2020; turpin2023language",
+     "where": "§2.1",
+     "quote": "However, if unfaithful, the LLM could still come up with a reasonably sounding explanation Narang et al. (2020). Hence, a model-generated explanation for its own prediction does not necessarily explain how the model arrived at the prediction: Arbitrary input features could influence its reasoning process when generating the explanation, which could result in different reasoning processes for explanation and prediction, and hide the underlying drivers of the prediction Turpin et al. (2023).",
+     "gloss": "An unfaithful self-explanation can sound reasonable while being produced by a different process than the prediction, hiding the input features that actually drove the answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "test result (fraction of samples deemed faithful)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Table 2",
+     "quote": "Test result is the fraction of samples deemed faithful by the tests (%). CC-SHAP is a continuous value $\\in[-1,1]$ (the greater, the more self-consistent), reported as mean over all tested samples.",
+     "gloss": "Per model and task, each boolean test reports the share of samples it passes, and CC-SHAP reports its mean. App. A.6 rescales CC-SHAP to 0-100 and averages across tests."
+    }
+   ],
+   "fix": [
+    {
+     "id": "parcalabescu2023measuring#3",
+     "set": {
+      "quote": "Yet self-consistency is a necessary, but not sufficient test for faithfulness. It is possible that the inner workings of LLMs trained to emulate answers and explanations differ for answer prediction and NLE generation. Output consistency may look plausible to humans, but could come from deceiving inner workings of “sleeper agents” Hubinger et al. (2024) hiding under surface-level self-consistency.",
+      "gloss": "Output-level consistency is necessary but not sufficient. A model can pass it while answer and explanation run on different internal pathways, as with a deceptive 'sleeper agent'."
+     },
+     "reason": "Extended to the adjacent sentences that give the reason consistency is not sufficient (different internal pathways, sleeper-agent deception)."
+    },
+    {
+     "id": "parcalabescu2023measuring#4",
+     "set": {
+      "stance": "adapted",
+      "source": "wiegreffe2021measuring"
+     },
+     "reason": "The preceding sentence says the measure follows 'the rationale of Wiegreffe et al. (2021)', whose feature-importance equivalence (§2.2) is the same necessary condition. Here it becomes graded Shapley contribution similarity for LLM post-hoc and CoT explanations."
+    },
+    {
+     "id": "parcalabescu2023measuring#5",
+     "set": {
+      "quote": "CC-SHAP measures convergence of two distributions: i) contribution ratios $c_{j}$ over all input tokens $j$ for prediction: $C(P)$ and ii) idem for the explanation $C(E)$ . Convergence is high for input contributions that are consistent for $P$ and $E$ , and low for diverging contributions. We use the cosine distance to instantiate the divergence measure $DIV$ (Eq. 5). | | $\\text{CC-SHAP}=1-DIV(C(P)||C(E))$",
+      "where": "§4.1, Eq. 5",
+      "gloss": "CC-SHAP = 1 − cosine distance between C(P) and C(E). Each holds per-token contribution ratios φ_j/Σ|φ_i|, averaged over output tokens. Range [−1,1]; it measures self-consistency, not faithfulness."
+     },
+     "reason": "The formal quote omitted Eq. 5, which follows directly in the source text."
+    },
+    {
+     "id": "parcalabescu2023measuring#10",
+     "set": {
+      "gloss": "Plausibility is judged by humans. An implausible explanation may reflect non-human-like model reasoning or unfaithfulness, so plausibility judgements cannot settle faithfulness."
+     },
+     "reason": "The old gloss described the no-human-judgement criterion for faithfulness evaluation, which now has its own row. The gloss now covers the plausibility contrast in the quote."
+    }
+   ],
+   "drop": [],
+   "note": "Added the restated prior tests the first pass missed (Wiegreffe noise/importance, Sia counterfactual inputs, Lanham Corrupting CoT and its criterion), the CCB Biasing Features variant without a verbalization check, a self-consistency taxonomy, evaluation criteria, an unfaithfulness failure mode and the test-score rule. CC-SHAP now quotes Eq. 5."
+  },
+  {
+   "key": "swaroop2025lift",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithful reasoning step (causal necessity)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Our key insight is that faithful reasoning steps should be causally necessary: replacing a step with an irrelevant fact should change the model’s answer. We formalize this by measuring log-probability drops after interventions.",
+     "gloss": "A step is faithful only if it is causally necessary: replacing it with an irrelevant fact should change the answer. This is graded by the drop in answer log-probability."
+    },
+    {
+     "family": "faithfulness",
+     "term": "decorative step",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C",
+     "quote": "Static faithfulness measures whether a step’s specific content affects the answer, even when forcing the same continuation. High static faithfulness indicates the model uses the step’s information to support the answer. Low static faithfulness suggests the step is decorative—changing its content doesn’t affect answer probability because subsequent steps override it.",
+     "gloss": "A step whose content can be swapped without moving the answer probability, because later steps override it. Low static faithfulness signals it."
+    }
+   ],
+   "fix": [
+    {
+     "id": "swaroop2025lift#2",
+     "set": {
+      "quote": "We measure faithfulness by performing counterfactual interventions: modifying step $r_{i}$ to produce a modified trace $\\mathbf{r}^{(i)}$ , then measuring the log-probability drop: | | $\\text{Faithfulness}(r_{i})=\\log p(a\\mid q,\\mathbf{r})-\\log p(a\\mid q,\\mathbf{r}^{(i)})$",
+      "gloss": "Faithfulness(r_i) = log p(a|q,r) − log p(a|q,r^(i)), continuation regenerated after the swap (Eq. 3). Score s_i means e^{s_i}-fold lower answer likelihood; trace score = step mean."
+     },
+     "reason": "The formal quote stopped before Eq. 1, which follows directly in the source text."
+    },
+    {
+     "id": "swaroop2025lift#3",
+     "set": {
+      "kind": "operational",
+      "gloss": "The counterfactual step is the least-similar fact from the most similar corpus cluster, rewritten by the model in the step's style to read coherently but contradict it (App. B)."
+     },
+     "reason": "The passage is a retrieval procedure that constructs the intervention, so it is operational. The gloss now adds App. B's rewrite, which makes the step coherent but contradictory."
+    },
+    {
+     "id": "swaroop2025lift#4",
+     "set": {
+      "kind": "formal",
+      "where": "App. C, Eq. 7",
+      "quote": "In addition to our main faithfulness metric (which regenerates continuations), we evaluate static faithfulness: the log-probability drop when replacing a step but keeping all subsequent steps unchanged. Definition. For step $i$ in trace $\\mathbf{r}=(r_{1},\\ldots,r_{n})$ , static faithfulness is: | | $s_{i}^{\\text{static}}=\\log p(a\\mid q,\\mathbf{r})-\\log p(a\\mid q,r_{1},\\ldots,r_{i-1},\\tilde{r}_{i},r_{i+1},\\ldots,r_{n})$",
+      "gloss": "Same step swap as the main score, but the original later steps stay fixed. A more conservative measure of a step's direct effect on the answer log-probability."
+     },
+     "reason": "App. C gives the formal definition (Eq. 7); the §4 quote held only the prose version."
+    },
+    {
+     "id": "swaroop2025lift#5",
+     "set": {
+      "kind": "formal",
+      "stance": "adapted",
+      "where": "App. D, Eq. 8",
+      "quote": "The final faithfulness metric that we measure is truncation faithfulness: the log-probability drop when removing a step and all following steps. This faithfulness measure is proposed in Lanham et al. (2023). Definition. For step $i$ in trace $\\mathbf{r}=(r_{1},\\ldots,r_{n})$ , truncation faithfulness is: | | $s_{i}^{\\text{trunc}}=\\log p(a\\mid q,\\mathbf{r})-\\log p(a\\mid q,r_{1},\\ldots,r_{i-1}).$",
+      "gloss": "Lanham et al.'s truncation test recast as a per-step drop in the original answer's log-probability given only the prefix r_1..r_{i−1}. It serves as a check that uses no counterfactual edits."
+     },
+     "reason": "App. D gives the formal definition (Eq. 8). The measure is credited to Lanham et al. but scored as a continuous log-probability drop of the original answer, not by whether the answer changes, so it is adapted."
+    }
+   ],
+   "drop": [],
+   "note": "Added the causal-necessity criterion and the 'decorative step' failure mode. The scores now quote Eqs. 1, 7 and 8; truncation faithfulness is adapted from Lanham, and the intervention row is operational."
+  }
+ ]
+}

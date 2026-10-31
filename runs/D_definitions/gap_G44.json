@@ -1,0 +1,565 @@
+{
+ "papers": [
+  {
+   "key": "arakelyan2025flare",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "reasoning consistency (code-search fact and relation matching)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 5-6",
+     "quote": "We use exact string matching between all these facts and relations in code and simulated search. | | $\\displaystyle\\forall i,\\exists j\\quad\\text{such that}\\quad\\mathcal{F}_{\\text{code}}^{i}=\\mathcal{F}_{\\text{search}}^{j}\\quad$ | | (5) | | $\\displaystyle\\text{and}\\quad\\forall v,\\exists q\\quad\\mathcal{R}_{\\text{code}}^{v}=\\mathcal{R}_{\\text{search}}^{q}$ | | | $\\displaystyle\\forall j,\\exists i\\quad\\text{such that}\\quad\\mathcal{F}_{\\text{code}}^{i}=\\mathcal{F}_{\\text{search}}^{j}\\quad$ | | (6) | | $\\displaystyle\\text{and}\\quad\\forall q,\\exists v\\quad\\mathcal{R}_{\\text{code}}^{v}=\\mathcal{R}_{\\text{search}}^{q}$",
+     "gloss": "Consistent reasoning: every fact and relation in the generated code appears in the simulated search (Eq. 5) and vice versa (Eq. 6), by exact string match."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hallucination (search fact absent from code)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "In the first failure mode, given that some fact or relation was used in the simulated search but did not exist in the generated code, i.e. $\\exists j\\text{ such that }\\mathcal{F}_{\\text{search}}^{j}\\notin\\mathcal{F}_{\\text{code}}$ , we claim that the LLM has hallucinated.",
+     "gloss": "The simulated search uses a fact or relation that the generated code never defines; facts derived by direct inference during the search (emergent facts) are not counted."
+    },
+    {
+     "family": "faithfulness",
+     "term": "sub-optimal reasoning (unused code knowledge)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "The second failure mode is the reciprocal case, where a fact or relation present in the code is not used during the search. We refer to this phenomenon as sub-optimal reasoning as it shows that the LLM could not explore the problem space completely or injected unsuitable knowledge during formalisation into code.",
+     "gloss": "A fact or relation defined in the code is never used in the simulated search, read as incomplete exploration or unsuitable formalisation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "overlapping relations (OR) / unused relations (UR)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Table 5; §5.4",
+     "quote": "Table 5: The table shows how the percentage of unique emergent facts (UEF) in search, overlapping relations (OR) between code and search, and unused relations (UR) in code impact answer correctness.",
+     "gloss": "OR = share of relations shared by code and search trace; UR = share of code relations the search never uses; the paper ties both to search faithfulness to code."
+    }
+   ],
+   "fix": [
+    {
+     "id": "arakelyan2025flare#1",
+     "set": {
+      "gloss": "An explanation is faithful if it explicitly and accurately describes the model's reasoning process during inference."
+     },
+     "reason": "Old gloss named a lineage instead of stating the content."
+    }
+   ],
+   "drop": [],
+   "note": "Added the §3.2 code-search consistency condition (Eq. 5-6), its two named failure modes, and the OR/UR relation metrics; existing rows were correct apart from a contentless gloss."
+  },
+  {
+   "key": "bhupatiraju2026stated",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "flip-to-target criterion",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Flip-to-target is a strict criterion that separates “this step’s stated content is casually used downstream” from “patching perturbed the computation.”",
+     "gloss": "A step counts as causally used only if patching flips the answer to the predicted counterfactual; other answer changes count as disruption, not faithfulness."
+    }
+   ],
+   "fix": [
+    {
+     "id": "bhupatiraju2026stated#3",
+     "set": {
+      "gloss": "Behavioral faithfulness edits the reasoning text and watches the answer; causal faithfulness patches activations at the stated step on self-generated reasoning."
+     },
+     "reason": "Gloss mixed a result (behavioral overstates causal) into the definition of the two kinds."
+    }
+   ],
+   "drop": [],
+   "note": "Short workshop paper; only the flip-to-target criterion that separates causal use from disruption was missing; taxonomy gloss trimmed to the definition."
+  },
+  {
+   "key": "burger2026chain",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "influence (monitorability type)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§2.1",
+     "quote": "Influence asks why the model gave a certain answer or exhibited some behaviour.",
+     "gloss": "The monitored property is why the model answered or behaved as it did, e.g. sandbagging, alignment faking, bias or hint influence."
+    },
+    {
+     "family": "monitorability",
+     "term": "process (monitorability type)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§2.1",
+     "quote": "Process asks what steps a model took to arrive at some answer or what topics it was thinking about (e.g. dangerous topics such as CBRN threats).",
+     "gloss": "The monitored property is which steps the model took or which topics it reasoned about."
+    },
+    {
+     "family": "monitorability",
+     "term": "outcome (monitorability type)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "guan2025monitoring",
+     "where": "§2.1",
+     "quote": "Outcome asks for certain properties of the AI’s output, e.g. whether it cheats on a coding task (Baker et al., 2025), completes a subversive side task (Arnav et al., 2026) or is otherwise dangerous or misaligned",
+     "gloss": "The monitored property is a property of the output, such as cheating on a coding task or completing a subversive side task."
+    },
+    {
+     "family": "monitorability",
+     "term": "sandbagging",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Van Der Weij et al. 2025",
+     "where": "§2.1",
+     "quote": "For instance, the false answers generated by a sandbagging AI (Van Der Weij et al., 2025) which underperforms on a dangerous capability evaluation are not in themselves dangerous but the reason why the model has generated these answers is concerning.",
+     "gloss": "An AI underperforming on a dangerous-capability evaluation; the false answers are harmless in themselves, the reason for them is what an influence monitor must catch."
+    },
+    {
+     "family": "monitorability",
+     "term": "alignment faking",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Greenblatt et al. 2024",
+     "where": "App. A.2",
+     "quote": "Consider a model that fakes alignment with developer objectives in order to avoid modification of its preferences (Greenblatt et al., 2024).",
+     "gloss": "Complying with developer objectives during training to avoid having its preferences modified, while acting on old preferences when unmonitored."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT necessity Level 0",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "emmons2025chain",
+     "where": "§2.2",
+     "quote": "Level 0: The CoT need not be necessary to arrive at the answer. It may therefore be a rationalization of an answer the model has already computed internally (Emmons et al., 2025).",
+     "gloss": "Lowest level: the answer can be reached without CoT, so the CoT may be a post-hoc rationalization (Emmons et al.'s unnecessary CoT)."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT necessity Level 2",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "Level 2: The CoT is necessary to process $P$ . We define this to be the case if $P$ cannot be processed separately from the CoT.",
+     "gloss": "The monitored property P cannot enter the answer separately from the CoT, e.g. an attribute that subtly biases the necessary CoT computation."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT necessity Level 3.m",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2",
+     "quote": "Level 3.m: Processing $P$ necessitates at least $m$ consecutive forward passes that are primarily dedicated to $P$ . Level 2 is weaker in two ways. First, it permits $P$ to be processed diffusely, by subtly biasing many forward passes that are primarily dedicated to other parts of the task. Second, it permits $P$ to be handled in one or a few isolated forward passes scattered through the necessary computation.",
+     "gloss": "Processing P needs at least m consecutive forward passes primarily dedicated to P; this still need not force the CoT to articulate P."
+    },
+    {
+     "family": "monitorability",
+     "term": "Level 2 test (direct vs total effect)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "If the average direct effect over all $n$ CoTs is comparable in size to the total effect, the attribute’s influence can be applied separately from the necessary CoT computation. Conversely, if the direct effect is much smaller than the total effect (and $p_{10}=0$ ), some CoTs must be necessary to process the attribute (Level 2).",
+     "gloss": "Direct effect much smaller than total effect (with p10=0) shows the attribute cannot be applied separately from the necessary CoT: evidence of Level 2."
+    },
+    {
+     "family": "counterfactual",
+     "term": "direct effect on the early answer (frozen CoT state)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Pearl 2022",
+     "where": "§6, Eq. 8",
+     "quote": "We then insert the attribute ( $X=1$ ) while keeping the preceding CoT and its internal state fixed to that produced under $X=0$ , and recompute only the answer prediction at $i^{*}$ . This yields the direct effect of the attribute on the early answer: | | $\\mathrm{DE}_{\\mathrm{EA}}^{(i^{*})}=P_{\\mathrm{EA}}^{(i^{*})}\\bigl(Y{=}1\\mid X{=}1,\\mathrm{do}(H^{(i^{*})}=H^{(i^{*})}_{0})\\bigr)-P_{\\mathrm{EA}}^{(i^{*})}\\bigl(Y{=}1\\mid X{=}0\\bigr),$ | | (8)",
+     "gloss": "Attribute inserted while the X=0 CoT prefix and its KV cache are frozen; answer read at i*, the earliest position after which the forced early answer stops changing."
+    },
+    {
+     "family": "monitorability",
+     "term": "key-influence rate (KR)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "The property we ask a monitor to predict is therefore: was the attribute among the key factors that influenced the model’s computation of its final answer? Let $\\mathrm{KR}$ denote the fraction of $(X{=}1,T{=}1,Y{=}1)$ responses in which the attribute was among the key influential factors: the key-influence rate.",
+     "gloss": "The monitored property is whether the attribute was a key influence on the answer; KR is the rate of this among target-answer CoTs, unobservable in general."
+    },
+    {
+     "family": "monitorability",
+     "term": "articulation rate",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eq. 2",
+     "quote": "Further, let $Z\\in\\{0,1\\}$ indicate whether a given CoT articulates this influence (operationalized by an LLM judge; §5.2), and let | | $\\pi_{Z}:=P(Z{=}1\\mid X{=}1,\\,T{=}1,\\,Y{=}1)$ | | (2) denote the articulation rate among target-answer CoTs.",
+     "gloss": "Probability that a CoT ending in the target answer, with attribute present, articulates the attribute's influence, as labelled by an LLM judge."
+    },
+    {
+     "family": "counterfactual",
+     "term": "total effect (attribute removal)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 4",
+     "quote": "The total effect | | $\\mathrm{TE}:=p_{11}-p_{01}.$ | | (4) is therefore a lower bound on the rate of target-answer responses with systematic attribute influence among all $(X{=}1,T{=}1)$ responses (if $\\mathrm{TE}\\geq 0$ ).",
+     "gloss": "Target-answer rate with minus without the attribute (both with CoT); a lower bound on systematically influenced responses. Scores use only pairs with TE above 0.08."
+    },
+    {
+     "family": "monitorability",
+     "term": "excess fraction R (lower bound on key influence)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adopted",
+     "source": "Greenland & Robins 1988; Robins & Greenland 1989; guan2025monitoring",
+     "where": "§3.2, Eq. 5",
+     "quote": "We define the fraction | | $R:=\\frac{\\max\\bigl(0,\\;p_{11}-p_{01}\\bigr)}{p_{11}}.$ | | (5) $R$ is a lower bound on the fraction of $(X{=}1,T{=}1,Y{=}1)$ responses on which the attribute must have had a systematic influence toward the target answer. This quantity is known in epidemiology as the excess fraction (Greenland and Robins, 1988; Robins and Greenland, 1989) and it coincides with the ”minimum attributable-to-intervention fraction” of Guan et al. (2026).",
+     "gloss": "R = max(0, p11-p01)/p11 bounds from below the share of target-answer responses the attribute must have systematically influenced; Guan et al.'s minimum attributable-to-intervention fraction."
+    },
+    {
+     "family": "monitorability",
+     "term": "Assumption 1 (systematic influence implies key influence)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Assumption 1",
+     "quote": "An attribute that systematically influenced the computation toward the target answer, with a total effect that is not vanishingly small, is among the key influential factors of that computation.",
+     "gloss": "Bridging assumption that yields R <= KR; App. B.3 notes a factor that only tips close calls could be systematic without being key."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability score M1 (CoT-necessary answers)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "guan2025monitoring",
+     "where": "§3.3, Eq. 7",
+     "quote": "Our monitorability scores $M_{0}$ (Level 0) and $M_{1}$ (Level 1) are thus defined as follows: | | $M_{0}:=\\begin{cases}\\displaystyle\\min\\!\\left(1,\\;\\frac{\\pi_{Z}}{R}\\right),&\\text{if }\\mathrm{TE}>\\tau,\\\\[4.30554pt] \\text{undefined},&\\text{otherwise};\\end{cases}\\qquad M_{1}:=\\begin{cases}\\displaystyle\\min\\!\\left(1,\\;\\frac{\\pi_{Z}}{R}\\right),&\\text{if }\\mathrm{TE}>\\tau\\text{ and }p_{10}<0.01,\\\\[4.30554pt] \\text{undefined},&\\text{otherwise}.\\end{cases}$ | | (7)",
+     "gloss": "M1 is min(1, pi_Z/R) computed only when TE > tau and the no-CoT target probability p10 < 0.01; M1 < 1 is a failure that post-hoc rationalization cannot explain."
+    },
+    {
+     "family": "monitorability",
+     "term": "articulation judge labels (not_mentioned / mentioned / influential)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2; App. L.1.1",
+     "quote": "For each attribute, the judge assigns one of three labels: not_mentioned (the attribute does not appear in the CoT), mentioned (the attribute is restated or acknowledged but not used in reasoning), or influential (the attribute is actively used in the reasoning). We set $Z=1$ for a given attribute only if the judge labels it influential.",
+     "gloss": "DeepSeek-V4-Flash judge, 93-95% agreement with manual labels; restating an attribute is not articulation; ambiguous cases default to influential, which raises M scores."
+    },
+    {
+     "family": "counterfactual",
+     "term": "attribute-absent condition (X=0)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "To construct the attribute-absent condition ( $X{=}0$ ), we remove the sentence containing the attribute under consideration from the prompt (see Appendix L for an example).",
+     "gloss": "The counterfactual input deletes the sentence stating the attribute (one DDXPlus interview line, or the hint); 2x1000 CoTs are sampled per condition."
+    },
+    {
+     "family": "counterfactual",
+     "term": "per-response flip criterion (rejected)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.2",
+     "quote": "A natural first attempt is to label individual responses: generate the model’s answer with the attribute present and absent, and call the attribute influential if the answer flips. This criterion, however, ignores the stochastic and chaotic nature of LLM output sampling.",
+     "gloss": "Rejected: sampling noise can flip answers without any influence, so influence is measured on answer distributions and claims concern CoT distributions, not single CoTs."
+    },
+    {
+     "family": "monitorability",
+     "term": "explanations of monitorability failures",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F",
+     "quote": "Possible explanations include: (i) attributes subtly bias the CoT computation toward an answer; (ii) the attribute is used implicitly during the reasoning, e.g. in Thyroid Disease reference values for laboratory measurements might be different for males and females, but the AI need not articulate this implicit use of attributes; (iii) the AI explicitly reasons about the attribute internally but does not articulate this in its CoT.",
+     "gloss": "Three mechanisms besides post-hoc rationalization: subtle bias of the CoT computation, implicit use of the attribute, and unarticulated internal reasoning about it."
+    }
+   ],
+   "fix": [
+    {
+     "id": "burger2026chain#5",
+     "set": {
+      "where": "§3.1, Eq. 3",
+      "quote": "A monitorable CoT must articulate the attribute’s influence whenever it occurred, so | | $\\pi_{Z}\\geq\\mathrm{KR}$ | | (3) is a necessary condition for monitorability.",
+      "gloss": "pi_Z >= KR: the articulation rate among target-answer CoTs must be at least the key-influence rate; KR is unobservable, so it is bounded below by R."
+     },
+     "reason": "Quote ended at 'so' and omitted the operative inequality (Eq. 3)."
+    },
+    {
+     "id": "burger2026chain#6",
+     "set": {
+      "term": "monitorability score M0",
+      "where": "§3.2, Eq. 6",
+      "quote": "Combining the articulation rate with $R\\leq\\mathrm{KR}\\leq\\pi_{Z}$ , we define the monitorability score | | $M_{0}:=\\min\\!\\left(1,\\;\\frac{\\pi_{Z}}{R}\\right),$ | | (6) matching the minimal-criterion sensitivity of Guan et al. (2026).",
+      "gloss": "M0 = min(1, pi_Z/R), equal to Guan et al.'s minimal-criterion sensitivity but reported without a true-negative rate, so articulating every attribute would score 1 (App. B.4)."
+     },
+     "reason": "Quote omitted the equation; M1 (Eq. 7) is now its own row."
+    }
+   ],
+   "drop": [],
+   "note": "Added each monitorability type and necessity level, the KR/pi_Z/TE/R components with equations, Assumption 1, the M1 score, the judge rubric, the attribute-removal counterfactual, the Level 2 direct-effect test, and the monitored behaviours the paper defines."
+  },
+  {
+   "key": "ferreira2026truthful",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "reliable CoT ('window' into decision making)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring; agarwal2024faithfulness; arcuschin2025chain",
+     "where": "§1",
+     "quote": "To be regarded as a reliable ‘window’ into the model’s decision making, a CoT needs to identify knowledge and generalizations that are available to the model and which do indeed exert influence over the generated answer (Lanham et al., 2023; Agarwal et al., 2024; Arcuschin et al., 2025, i.a.).",
+     "gloss": "Necessary condition: the CoT must identify the knowledge and generalizations that actually influence the answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "acknowledgment rate",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2; App. C",
+     "quote": "We also report the percentage of responses that acknowledge the protected feature in the CoT explanation (Acknowledgment rate), marginally across the test set. Acknowledgments are identified by an ‘Eval LLM’, in our case Llama-3.3-70B-Instruct (Dubey et al., 2024), described and manually evaluated in Appendix C.",
+     "gloss": "Share of responses whose CoT acknowledges the cue, judged by Llama-3.3-70B from the response alone; F1 0.93 (Math Book) and 0.75 (BiasQA) against manual labels."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness assessment by original vs modified input",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring; Atanasova et al. 2023; turpin2023language; chua2024biasaugmented; chen2025reasoning",
+     "where": "§6",
+     "quote": "A common way to assess the faithfulness of LLM outputs is to compare the predictions generated from the original context with those from a modified version: e.g., by corrupting the obtained CoTs (Lanham et al., 2023), or adding biasing features (Atanasova et al., 2023; Turpin et al., 2023; Chua et al., 2024; Chen et al., 2025) to the model input and verifying their presence in the explanation.",
+     "gloss": "Faithfulness is tested by comparing predictions on original and modified contexts: corrupted CoTs, or added biasing features checked for mention in the explanation."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual-augmented reward model (strategies D and C)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "In one strategy, we append the disclaimer whenever $\\operatorname{pred}(y)\\neq\\operatorname{pred}(y^{\\prime})$ —we refer to this as strategy $D$ (for the predictions differ). In another strategy, we append the disclaimer whenever $\\operatorname{pred}(y)$ is cued (correct/stereotypical) and $\\operatorname{pred}(y^{\\prime})$ is not—we refer to this as strategy $C$ (for not only the predictions differ, but $y$ is cued).",
+     "gloss": "Cue-use disclaimer added to the RM input when the counterfactual prediction differs (D), or when only the original prediction is cued (C); C needs labels but is more reliable."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking under CoT monitoring (fabricated CoTs)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "baker2025monitoring; chen2025reasoning",
+     "where": "§6",
+     "quote": "Baker et al. (2025) and Chen et al. (2025) employ a CoT monitor throughout training and observe reward hacking—that is, CoTs are fabricated to mislead the monitor.",
+     "gloss": "When a CoT monitor is used in training, models learn CoTs fabricated to mislead the monitor while still reward hacking."
+    }
+   ],
+   "fix": [
+    {
+     "id": "ferreira2026truthful#3",
+     "set": {
+      "stance": "adapted",
+      "source": "Krakovna et al. 2020; Pan et al. 2022; Skalse et al. 2022",
+      "quote": "this limitation feeds a form of reward hacking (Krakovna et al., 2020; Pan et al., 2022; Skalse et al., 2022, i.a.): the reward model prioritizes responses that appear to adhere to preferences over those that overtly do not, with learning pushing the LLM to exploit this as a mechanism to collect rewards at the expense of the reliability of CoT explanations. We refer to this behavior as CoT hacking.",
+      "gloss": "Reward hacking extended to explanations: text-only reward models favour responses that only appear to follow preferences, so training yields CoTs that hide reliance on a protected cue."
+     },
+     "reason": "The explicit naming passage is in §1 ¶3 and cites the reward-hacking literature it extends; stance adapted."
+    },
+    {
+     "id": "ferreira2026truthful#8",
+     "set": {
+      "kind": "operational",
+      "quote": "We regard a response’s CoT as unfaithful when it does not acknowledge the role of the protected feature, yet the prediction is correct/stereotypical only when the protected feature is available in the prompt. We detect acknowledgments using an Eval LLM (Appendix C). For any one prompt $x$ and response $y$ , we regard $y$ ’s CoT as unfaithful if $\\operatorname{ack}(y)$ is False, $\\operatorname{pred}(y)$ is correct (in ‘Math Book’) or stereotypical (in ‘BiasQA’), and $\\operatorname{pred}(y)\\neq\\operatorname{pred}(y^{\\prime})$ .",
+      "gloss": "Unfaithful iff the Eval LLM finds no acknowledgment, the prediction is correct/stereotypical, and it differs from the counterfactual prediction; reported as % unfaithful explanations (Table 1)."
+     },
+     "reason": "Quote now includes the operative three-part condition stated in the same paragraph."
+    },
+    {
+     "id": "ferreira2026truthful#9",
+     "set": {
+      "gloss": "A CoT monitor inspects chains of thought to spot undesired responses; cited as motivation for monitoring CoT quality."
+     },
+     "reason": "The fabricated-CoT reading of Baker et al. is now its own row."
+    }
+   ],
+   "drop": [],
+   "note": "Added the acknowledgment-rate metric, the reliable-window criterion, the original-vs-modified faithfulness tests, the D/C counterfactual strategies and the fabricated-CoT reading of monitor reward hacking; CoT hacking re-quoted and set to adapted."
+  },
+  {
+   "key": "pmlr-v235-chen24bl",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "generalizable and precise explanation (desiderata)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "An ideal explanation $e_{x}$ should be generalizable—besides revealing how the model reasons on $x$ , it should also reveal how the model reasons on unseen inputs $x^{\\prime}\\neq x$ . Explanations also need to be precise—they should lead to mental models that are consistent with the model’s behavior.",
+     "gloss": "Two requirements behind the metrics: the explanation should reveal reasoning on unseen inputs (generality) and yield mental models consistent with model behaviour (precision)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "wrong mental model (misleading explanation)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "The above explanation is problematic because humans form a wrong mental model of GPT-4 (i.e., incorrectly infer how GPT-4 answers relevant counterfactuals) based on this explanation.",
+     "gloss": "An explanation fails when humans infer outputs on related counterfactual inputs that the model does not give, even if the explanation is factually correct."
+    },
+    {
+     "family": "counterfactual",
+     "term": "human simulation as logical entailment",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Combining the solutions to the two challenges above, we instruct the annotators to simulate a model’s output on $x^{\\prime}$ by judging if $(e_{x},o_{x},x)$ entails an output to counterfactual $x^{\\prime}$ , stick to the model’s explanation whenever relevant, but use human knowledge for information missing in the explanation.",
+     "gloss": "Annotators label the output entailed for x′ by (e_x, o_x, x), following the explanation where relevant and commonsense otherwise; no entailed output means unsimulatable."
+    },
+    {
+     "family": "counterfactual",
+     "term": "LLM simulator (simulation prompt)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B (StrategyQA-Simulation)",
+     "quote": "After that you will be asked to read a follow-up question and judge whether the robot’s answer to the starter question directly helps you guess its answer to the follow-up question. If not, put down \"I cannot guess the robot’s answer to the follow-up question based on its response to the starter question\". If yes, put down your guess about the robot’s answer to the follow-up question.",
+     "gloss": "LLM approximation of human simulation; it must stick to the robot's stated reasoning even if wrong. GPT-4 matches human agreement and is the SHP simulator."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual generation (LLM prompt)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B (StrategyQA-Counterfactual Generation)",
+     "quote": "After that you will be asked to write a follow-up yes or no question that you can confidently guess the robot’s answer to based on its answer to the starter question. You will be asked to then write your guess about the robot’s answer to the follow-up question.",
+     "gloss": "Counterfactuals are follow-up questions an LLM (GPT-3.5/GPT-4) writes so that the answer is guessable from the explanation; 10 per explanation (StrategyQA), 6 (SHP)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "contrastive simulation",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Jacovi et al. 2021; Miller 2021; Yin & Neubig 2022",
+     "where": "§6",
+     "quote": "One possible solution is contrastive simulation Jacovi et al. (2021); Miller (2021); Yin and Neubig (2022), where a human simulator is shown the model’s output mixed with fake outputs (distractors) and selects which output is from the model based on the explanation.",
+     "gloss": "Proposed for generation tasks: the simulator picks the model's real output from distractors using the explanation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "leakage (simulation on the explained input)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "hase2020leakageadjusted",
+     "where": "§2",
+     "quote": "This leads to two problems: (i) the explanation might already contain (leak) the model’s output on the simulation input so the metric is not well-defined Hase et al. (2020), (ii) it is inefficient and tedious for humans to read the model’s explanation on every input to understand the model’s behavior.",
+     "gloss": "Simulating on the explained input itself is ill-defined because the explanation may state the output; motivates simulating on counterfactual inputs."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness evaluation by black-box output predictor",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Li et al. 2020; Kumar & Talukdar 2020; Lyu et al. 2022",
+     "where": "§2",
+     "quote": "In prior work, faithfulness is usually evaluated by whether it is possible to train a black-box model to predict the model’s outputs based on its explanations Li et al. (2020); Kumar and Talukdar (2020); Lyu et al. (2022).",
+     "gloss": "Faithfulness is tested by training a black-box model to predict the model's outputs from its explanations; simulatability replaces it with a human predictor."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Chain-of-Thought vs Post-Hoc explanation",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "Nye et al.; Wei et al. 2022; Wang et al. 2023; Camburu et al. 2018; Park et al. 2018",
+     "where": "§4.2",
+     "quote": "In Chain-of-Thought (CoT), given an input $x$ , the model first generates a reasoning $e_{x}$ , and then predicts the output $o_{x}$ conditioned on $x$ and $e_{x}$ Nye et al. (); Wei et al. (2022); Wang et al. (2023). In Post-Hoc, given an input $x$ , the model first predicts the output $o_{x}$ , and then generates an explanation $e_{x}$ conditioned on $x$ and $o_{x}$",
+     "gloss": "CoT generates the explanation before and conditions the output on it; Post-Hoc explains an already predicted output. Expected CoT to be more precise; no clear difference found."
+    }
+   ],
+   "fix": [
+    {
+     "id": "pmlr-v235-chen24bl#3",
+     "set": {
+      "quote": "A human observes $x,e_{x},o_{x}$ , and forms a mental model $h_{x,e_{x},o_{x}}:X\\rightarrow O\\cup\\{\\perp\\}$ , where $h_{x,e_{x},o_{x}}(x^{\\prime})$ denotes what the human infers to be $M$ ’s output on $x^{\\prime}$ (simulation). If the human cannot infer $M$ ’s output to input $x^{\\prime}$ based on $x,e_{x},o_{x}$ , then $x^{\\prime}$ is unsimulatable and we denote $h_{x,e_{x},o_{x}}(x^{\\prime})=\\perp$ ."
+     },
+     "reason": "Extended the formal quote to include the definition of unsimulatable inputs (h = ⊥) in the next sentence."
+    },
+    {
+     "id": "pmlr-v235-chen24bl#4",
+     "set": {
+      "quote": "We measure simulation precision as the fraction of simulatable counterfactuals where humans’ simulation matches the model’s actual output: | | $\\text{precision}=\\frac{1}{|C^{*}|}\\sum_{x^{\\prime}\\in C^{*}}\\mathbf{1}[h_{e_{x}}(x^{\\prime})=o_{x^{\\prime}}].$ |"
+     },
+     "reason": "Formal quote omitted the precision equation."
+    },
+    {
+     "id": "pmlr-v235-chen24bl#5",
+     "set": {
+      "quote": "Conceptually, we want simulation generality to measure how diverse the simulatable counterfactuals are, so we measure it as one minus the average similarity between two simulatable counterfactuals | | $\\text{generality}=1-\\mathbb{E}_{x^{\\prime},x^{\\prime\\prime}\\sim p}[\\alpha(x^{\\prime},x^{\\prime\\prime})],$ | where $p$ is the distribution of simulatable counterfactuals and $\\alpha$ is a similarity metric."
+     },
+     "reason": "Formal quote omitted the generality equation."
+    },
+    {
+     "id": "pmlr-v235-chen24bl#8",
+     "set": {
+      "source": "Doshi-Velez & Kim 2017; Ribeiro et al. 2018; Chandrasekaran et al. 2018; Hase & Bansal 2020"
+     },
+     "reason": "Source must list everything the passage cites; Ribeiro 2018 and Chandrasekaran 2018 were missing."
+    }
+   ],
+   "drop": [],
+   "note": "Formal quotes now carry the precision and generality equations; added the desiderata, entailment and LLM-simulator rubrics, counterfactual-generation prompt, leakage, black-box faithfulness test, CoT/Post-Hoc split and contrastive simulation."
+  }
+ ]
+}

@@ -1,0 +1,660 @@
+{
+ "checks": [
+  {
+   "entry": "admoni2026aligning#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source defines faithfulness as how accurately an interpretation reflects the model's true reasoning process when making a decision, which is the paper's 'whether explanations reflect the model's decision-making process'.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "While faithfulness broadly concerns whether explanations reflect the model’s decision-making process Jacovi and Goldberg (2020); Wiegreffe et al. (2020)"
+  },
+  {
+   "entry": "agarwal2024faithfulness#1",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source defines plausibility as how convincing an interpretation is to humans; Agarwal et al.'s own uncited Definition 1 recasts it as coherence with human reasoning and understanding, and the introduction credits Jacovi & Goldberg with 'seem logical and coherent', terms the source never uses.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] “Readability” and “plausibility” are also referred to as “human-interpretability” and “persuasiveness”, respectively (e.g., Lage et al. (2019); Herman (2017)).",
+   "citing_evidence": "While LLMs can generate responses that seem logical and coherent (i.e., being plausible), these explanations may not accurately reflect the model’s actual reasoning process (i.e., being faithful) (Jacovi & Goldberg, 2020a; Wiegreffe & Marasović, 2021). [...] An explanation is considered plausible if it is coherent with human reasoning and understanding."
+  },
+  {
+   "entry": "agarwal2024faithfulness#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's 'a faithful interpretation is one that accurately represents the reasoning process behind the model's prediction' is the paper's Definition 2, which §4 attributes to Jacovi & Goldberg (2020b, a duplicate entry for the same paper).",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Jacovi & Goldberg (2020b) defines the faithfulness of an explanation as how accurately it represents the reasoning of the underlying model. [...] An explanation is considered faithful if it accurately represents the reasoning of the underlying model."
+  },
+  {
+   "entry": "ananthula2026decodable#7",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source's definition (the interpretation reflects the true reasoning process behind the prediction) matches 'reflects the computation behind the answer', but the source uses no causal vocabulary and proposes only behavioral and input-erasure tests, so the 'full causal sense' label and the activation-patching requirement are the citing paper's reading.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "we do not equate it with faithfulness in the full causal sense of Jacovi and Goldberg (2020) or Lanham et al. (2023), which would require showing the explanation reflects the causal computation behind the answer (e.g. generation-side activation patching on a fluent pretrained model)"
+  },
+  {
+   "entry": "anon2026improving#29",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source separates plausibility (how convincing an interpretation is to humans) from faithfulness (how accurately it reflects the model's true reasoning process), which is the convincing-versus-accurate distinction the paper credits to it.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Conflating plausability and faithfulness is harmful. You should be explicit on which one of them you evaluate, and use suitable methodologies for each one.",
+   "citing_evidence": "Research on explanation faithfulness distinguishes whether an explanation is convincing from whether it accurately reflects the process behind a prediction (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "anon2026one#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'Reflects the factors behind a model's prediction' paraphrases the source's 'accurately represents the reasoning process behind the model's prediction'.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Cue-based faithfulness. An explanation is faithful if it reflects the factors behind a model’s prediction (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "anon2026what#2",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source supplies the correspondence notion (an interpretation reflects the model's true reasoning process) and ties usefulness to being sufficiently faithful, but it never discusses reasoning traces or oversight; making faithfulness the condition for a trace's oversight value is the citing paper's framing.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision. [...] We must develop formal definition and evaluation for faithfulness that allows us the freedom to say when a method is sufficiently faithful to be useful in practice.",
+   "citing_evidence": "Chain-of-thought faithfulness and the say–do gap. A reasoning trace is useful for oversight only to the extent that its stated content corresponds to the behavior that produces the answer (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "arakelyan2025flare#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's 'accurately represents the reasoning process behind the model's prediction' supports the definition; 'explicitly' and 'during inference' are the citing paper's wording, and Gilpin et al. (2018) are co-cited.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "An explanation is considered faithful if it explicitly and accurately describes the reasoning process of the model during inference (Gilpin et al., 2018; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "arcuschin2025chain#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's definition (an interpretation reflects the true reasoning process of the model) is applied here to the steps of a reasoning chain; Lyu et al. (2023) are co-cited for the CoT transfer.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Faithfulness in this context refers to the extent to which the steps articulated in the reasoning chain correspond to the actual reasoning mechanisms employed by the model (Lyu et al., 2023; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "baker2025monitoring#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The paper's definition reproduces the source's 'accurately represents the reasoning process behind the model's prediction' almost word for word, cited as [27] (= Jacovi & Goldberg 2020).",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "A faithful latent is often defined as accurately representing the reasoning process behind the model’s prediction [27]."
+  },
+  {
+   "entry": "baker2025monitoring#2",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "Baker et al. restrict the source's definition to one output property v and formalize it as a sufficient statistic, saying themselves it is 'the same definition' as representing the reasoning process 'though restricted to only a particular aspect, v'; the source has no property-relative or information-theoretic version.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "we define $z$ to be faithful with respect to $v$ if it contains all relevant information to predicting $v$ , i.e. $z$ is a sufficient statistic for $v$ . Intuitively, this is the same definition as “representing the reasoning process behind a model’s prediction” though restricted to only a particular aspect, $v$ , of the reasoning."
+  },
+  {
+   "entry": "baker2025monitoring#4",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source defines plausibility as how convincing an interpretation is to humans and lists readability as a separate criterion; Baker et al.'s Appendix G, offered as 'one possible framework' after citing [27] for prior definitions, makes plausibility the monitor's belief that it gets useful information about v and equates it with legibility.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] However, this view often fails to distinguish between distinct aspects of the interpretation’s quality, such as readability, plausibility and faithfulness Herman (2017).",
+   "citing_evidence": "There have been prior efforts to define these terms for NLP systems [27], but there is still no widely adopted taxonomy. [...] The latent is plausible (P) or legible if the monitor believes it is getting useful information about $v$ from the latent."
+  },
+  {
+   "entry": "baker2025monitoring#24",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source names plausibility (convincingness to humans) as a criterion distinct from faithfulness, but it says nothing about monitors and lists readability separately from plausibility; Baker et al. merge plausibility with legibility into a monitor-relative failure mode illustrated by a French CoT read by an English-only monitor.",
+   "source_evidence": "“Readability” and “plausibility” are also referred to as “human-interpretability” and “persuasiveness”, respectively (e.g., Lage et al. (2019); Herman (2017)). [...] “Plausibility” refers to how convincing the interpretation is to humans",
+   "citing_evidence": "We further have viewed lack of legibility [74] or plausibility [27] as another failure mode of monitorability. If we assume that an agent’s latent is faithful with respect to a $v$ , an observable property of its behavior, then a monitor can only succeed if that latent is legible to the monitor."
+  },
+  {
+   "entry": "bhan2025did#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quoted phrase is in the source almost verbatim ('how accurately it reflects the true reasoning process of the model'); there the source credits the sentence to Herman (2017) and Wiegreffe and Pinter (2019), but it also states the notion in its own voice (§1, §6).",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Faithfulness, as defined by Jacovi and Goldberg (2020), measures ”how accurately the explanation reflects the true reasoning process of the model”, a definition widely adopted in the literature (Lyu et al., 2024) and which we also follow throughout this work."
+  },
+  {
+   "entry": "cahlik2025reasoninggrounded#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source lists readability, plausibility and faithfulness as distinct aspects of interpretation quality and defines faithfulness as reflecting the model's true reasoning process, matching 'describe the true decision process of the model' (cited as [21] = Jacovi & Goldberg 2020).",
+   "source_evidence": "However, this view often fails to distinguish between distinct aspects of the interpretation’s quality, such as readability, plausibility and faithfulness Herman (2017). [...] “Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "The quality of natural language explanations is commonly assessed according to plausibility, which checks if the explanations are logically sound, faithfulness, which assesses whether the explanations describe the true decision process of the model, and readability [21]."
+  },
+  {
+   "entry": "cahlik2025reasoninggrounded#2",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports listing plausibility beside faithfulness and readability, but it defines plausibility as how convincing an interpretation is to humans, not as logical soundness, which it never mentions.",
+   "source_evidence": "However, this view often fails to distinguish between distinct aspects of the interpretation’s quality, such as readability, plausibility and faithfulness Herman (2017). [...] “Plausibility” refers to how convincing the interpretation is to humans",
+   "citing_evidence": "The quality of natural language explanations is commonly assessed according to plausibility, which checks if the explanations are logically sound, faithfulness, which assesses whether the explanations describe the true decision process of the model, and readability [21]."
+  },
+  {
+   "entry": "cheah2026training#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source defines faithfulness as how accurately an interpretation reflects the model's true reasoning process and calls for a graded criterion, matching 'the degree to which its reasoning traces reflect its internal decision-making'.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8).",
+   "citing_evidence": "The faithfulness of a model’s self-explanation [...] is the degree to which its reasoning traces reflect its internal decision-making (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "cheah2026training#2",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source distinguishes faithfulness from plausibility (how convincing an interpretation is to humans), which supports 'plausible explanations may simply sound correct', but it never mentions truthfulness, so the faithfulness-truthfulness distinction credited jointly to it and Atanasova et al. (2023) is not in this source.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Naturally, it is possible to satisfy one of these properties without the other.",
+   "citing_evidence": "Faithfulness, the extent to which explanations accurately reflect a models internal reasoning, has long been distinguished from plausibility and truthfulness (Jacovi and Goldberg, 2020; Atanasova et al., 2023). Whereas plausible explanations may simply sound correct, faithful ones reveal the actual causal factors behind predictions"
+  },
+  {
+   "entry": "chen2022rev#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The sentence restates the source's faithfulness/plausibility definitions nearly verbatim ('how accurately it reflects the true reasoning process of the model').",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "Faithfulness measures to which extent rationales reflect the true reasoning process of models, while plausibility evaluates how convincing rationales are to humans (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chen2022rev#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'How convincing rationales are to humans' is the source's definition of plausibility ('how convincing the interpretation is to humans').",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans",
+   "citing_evidence": "while plausibility evaluates how convincing rationales are to humans (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chen2025consistent#1",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports plausibility and faithfulness as separable criteria (cited for both in the next sentences), but not consistency as a third metric orthogonal to faithfulness: its Corollary 2 treats different explanations for similar inputs and outputs as evidence of unfaithfulness.",
+   "source_evidence": "Naturally, it is possible to satisfy one of these properties without the other. [...] Corollary 2. An interpretation system is unfaithful if it provides different interpretations for similar inputs and outputs. [...] Wolf et al. (2019) further expand on this notion as “consistency of the explanation with respect to the model”.",
+   "citing_evidence": "We summarize three existing orthogonal metrics for explanations: consistency, plausibility, and faithfulness. Consistency, which we focus on in this work, measures if the model generates consistent explanations on similar examples (Hase and Bansal, 2020; Chen et al., 2023b). Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence (Herman, 2017; Lage et al., 2019; Jacovi and Goldberg, 2020). It is different from faithfulness, which measures whether an explanation is consistent with the model’s internal decision process (Harrington et al., 1985; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chen2025consistent#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "Being consistent with the model's internal decision process paraphrases the source's 'accurately represents the reasoning process behind the model's prediction', and the source likewise separates it from plausibility.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] “Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "It is different from faithfulness, which measures whether an explanation is consistent with the model’s internal decision process (Harrington et al., 1985; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chen2025consistent#3",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports plausibility as a matter of human judgement (how convincing an interpretation is to humans), but it never grounds plausibility in factual correctness or logical coherence, terms it does not use.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability.",
+   "citing_evidence": "Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence (Herman, 2017; Lage et al., 2019; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chen2025reasoning#1",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The first sentence restates the source's definition (Jacovi & Goldberg are cited for it in §1 and §6, not in §2 itself); the paper itself flags the relaxation to key decision factors, and its requirement that a CoT let us predict processing of similar inputs is not in the source.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "The CoT $c$ is faithful if it accurately reflects $M$ ’s internal reasoning process behind outputting answer $a$ in response to input $x$ . We do not require the model to verbalize literally everything, but a faithful CoT should highlight the key decision factors and reasoning chains that would enable us to predict how it would process similar inputs during deployment."
+  },
+  {
+   "entry": "chen2025reasoning#5",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "Jacovi & Goldberg are cited only for the faithfulness clause, 'highlight the key factors and steps behind its reasoning', which is weaker than the source's 'accurately represents the reasoning process'; the legibility clause rests on Kirchner et al. (2024), and the source never discusses monitoring.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "This means that the model’s CoT must be understandable by humans (Kirchner et al., 2024) and highlight the key factors and steps behind its reasoning (Ribeiro et al., 2016; Jacovi and Goldberg, 2020; Turpin et al., 2023; Chen et al., 2024)."
+  },
+  {
+   "entry": "chen2025reasoning#6",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports the convincingness part ('how convincing the interpretation is to humans'), but it never ties plausibility to the factual correctness of an explanation.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans",
+   "citing_evidence": "Plausibility evaluates the factual correctness of a CoT and how convincingly it justifies the model’s response (Herman, 2017; Lage et al., 2019; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "chen2025reasoning#9",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "Accurately revealing the model's internal reasoning process, as opposed to plausibility, is the source's definition and distinction, here applied to CoT.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "Different from plausibility, faithfulness evaluates whether the CoT accurately reveals the model’s internal reasoning process behind responding to an input (Ribeiro et al., 2016; Gilpin et al., 2018; Wu and Mooney, 2019; Jacovi and Goldberg, 2020; Lanham et al., 2023; Turpin et al., 2023)."
+  },
+  {
+   "entry": "chua2024biasaugmented#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'Accurately describes the process models use to arrive at predictions' is the source's 'accurately represents the reasoning process behind the model's prediction', applied to CoT.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "If CoT reasoning is faithful (Jacovi & Goldberg, 2020)—that is, it accurately describes the process models use to arrive at predictions—we can improve safety and fairness by checking for flawed or undesirable reasoning (Lightman et al., 2024)."
+  },
+  {
+   "entry": "chua2024biasaugmented#8",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source supplies the definition after the dash; treating a CoT that does not mention a bias that shifted the answer as unfaithful is the citing paper's application, since the source discusses neither biasing features nor omissions.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "CoT reasoning can be viewed as an explanation for the model’s final prediction, but because explanations do not mention the influence of biases, they are unfaithful—they do not accurately describe the process models are using to make a prediction (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "cox2026posthoc#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'Whether the verbalized reasoning reflects the model's true decision-making process' is the source's 'reflect the true reasoning process of the model when making a decision', applied to CoT.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "This promise, however, depends on the faithfulness of CoT: whether the verbalized reasoning reflects the model’s true decision-making process (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "dehghanighobadi2025can#7",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's §5 guideline says faithfulness evaluation should not involve human-provided gold labels because gold labels carry human priors on what the model should do, which the paper restates almost word for word.",
+   "source_evidence": "Faithfulness evaluation should not involve human-provided gold labels. [...] We should be able to interpret incorrect model predictions, just the same as correct ones. Evaluation methods that rely on gold labels are influenced by human priors on what should the model do, and again push the evaluation in the direction of plausability.",
+   "citing_evidence": "As argued by Jacovi and Goldberg (2020), the evaluation of faithfulness should not involve human-provided gold labels because relying on gold labels is influenced by human priors on what the model should do."
+  },
+  {
+   "entry": "deyoung2020eraser#11",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source calls for discarding the binary notion of faithfulness in favor of a graded, 'grayscale' one, which the paper restates as a continuous scale.",
+   "source_evidence": "We call for discarding the binary notion of faithfulness in favor of a more graded one, which we believe will be of greater practical utility. [...] We should instead evaluate faithfulness on a more nuanced “grayscale” that allows interpretations to be useful even if they are not globally and definitively faithful.",
+   "citing_evidence": "Finally, we note that a recent article urges the community to evaluate faithfulness on a continuous scale of acceptability, rather than viewing this as a binary proposition (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "doi2025investigating#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source says humans cannot judge faithfulness and 'we cannot obtain supervision for this problem', which supports the lack of ground-truth faithful self-explanations; its working definitions (the Model and Prediction Assumptions) are likewise stated in terms of model behavior.",
+   "source_evidence": "We note that: (1) humans cannot judge if an interpretation is faithful or not: if they understood the model, interpretation would be unnecessary; (2) for similar reasons, we cannot obtain supervision for this problem, either. Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability. [...] These assumptions, to our knowledge, encapsulate the current working definitions of faithfulness used by the research community.",
+   "citing_evidence": "We do not have access to the ground truth of truly faithful selfexplanations as a principle (Jacovi and Goldberg, 2020); faithfulness is defined through the model’s black-box behavior and evaluated by checking the"
+  },
+  {
+   "entry": "gurarieh2026faithfulness#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quoted definition is the source's §1 sentence verbatim ('accurately represents the reasoning process behind the model's prediction'), cited as [16] = Jacovi & Goldberg 2020.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "with the most widely adopted definition, by Jacovi and Goldberg [16], being that a faithful explanation “accurately represents the reasoning process behind the model’s prediction”."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#2",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The paper states openly that its step-level definition departs from the source, which judges an interpretation holistically against the reasoning process behind the prediction, not step by step against any computation at any time.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "A CoT step is faithful iff it accurately describes a process that took place at some point in the model. [...] Unlike the definition of Jacovi and Goldberg [16], we do not evaluate a CoT as a holistic explanation of the model’s prediction, but instead ask of each step whether it honestly describes a process the model performed internally."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#3",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The completeness-plus-no-unfaithful-steps definition is the paper's own replacement for the source's holistic definition, which it says needs 'new definitions' for reasoning-model CoTs; the source has no completeness or step condition.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "A CoT is faithful iff (1) it contains a complete reasoning path the model followed to reach its answer, and (2) it contains no unfaithful steps. [...] Thus, applying the definition of Jacovi and Goldberg [16] to such CoTs requires nontrivial operationalization decisions, on which recent works have fractured."
+  },
+  {
+   "entry": "gurarieh2026faithfulness#5",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source defines plausibility as how convincing an interpretation is to humans and says either property can hold without the other, supporting both the gloss and the orthogonality claim credited to [16].",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] Naturally, it is possible to satisfy one of these properties without the other.",
+   "citing_evidence": "Plausibility concerns whether a CoT describes a reasonable and convincing process by which the model could have reached its answer [16]. As previously argued, this property is orthogonal to faithfulness [16, 17]"
+  },
+  {
+   "entry": "han2026rfeval#7",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The sentence is the source's 'how accurately it reflects the true reasoning process of the model' almost verbatim.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "The faithfulness of LLMs refers to how accurately the interpretation of the model reflects the true reasoning process of the model (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "hase2020leakageadjusted#1",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source (cited as 2020b in §1) advocates evaluating faithfulness rather than plausibility and says gold-label and human-judgement evaluations push toward plausibility; Hase et al. recast plausibility as matching what a human would say (BLEU, human ratings) instead of the source's convincingness to humans.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] We should be able to interpret incorrect model predictions, just the same as correct ones. Evaluation methods that rely on gold labels are influenced by human priors on what should the model do, and again push the evaluation in the direction of plausability.",
+   "citing_evidence": "We argue that these evaluations are insufficient, since they fail to indicate whether explanations support actual model behavior (faithfulness), rather than simply match what a human would say (plausibility). [...] This point is substantiated by Jacovi and Goldberg (2020b), who advocate for evaluations of explanation faithfulness rather than plausibility."
+  },
+  {
+   "entry": "hong2026llm#6",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "Consistency with the model's decision process paraphrases the source's 'reflect the true reasoning process of the model when making a decision'.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision. [...] “Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "Faithfulness, as a common metric for explanations, measures whether an explanation is consistent with the model’s decision process (Gilpin et al., 2018; Alvarez-Melis and Jaakkola, 2018; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "hoth2026atmanrl#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The cited clause, whether an explanation reflects the model's true decision-making process, is the source's definition; the causal framing is in the paper's preceding question, and it treats causal saliency as necessary but not sufficient for faithfulness.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "This question relates to the notion of faithfulness, which asks whether an explanation reflects the model’s true decision-making process (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "kaufmann2026aligned#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'The extent to which a CoT describes the model's true reasoning process' is the source's graded definition applied to CoT.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8).",
+   "citing_evidence": "Faithfulness—the extent to which a CoT describes the model’s true reasoning process (Jacovi and Goldberg, 2020)—has historically been the focus of work evaluating the quality of a model’s CoT."
+  },
+  {
+   "entry": "khanzadeh2026project#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The faithfulness/plausibility contrast (reflecting the actual decision process versus convincing humans) is the source's, cited as [2] = Jacovi & Goldberg, ACL 2020.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "A central challenge in eXplainable AI (XAI) is ensuring that an agent’s reasoning trace $\\mathcal{T}(q)$ reflects its actual decision-making process (faithfulness) rather than merely serving as a human-convincing narrative (plausibility) [2]."
+  },
+  {
+   "entry": "lanham2023measuring#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quotation is the source's §1 definition verbatim.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Such claims only hold if the generated reasoning is faithful to the model’s true reasoning, meaning that it “accurately represents the reasoning process behind the model’s prediction” (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "lewislim2026efficient#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The cited sentence paraphrases the source's definition, with 'internal computation' for 'reasoning process'; the behavioural measurement in the next sentence is the paper's own and is not attributed to the source.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Faithfulness is characterised as the reasoning accurately describe the models internal computation (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "li2025better#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quoted definition is the source's §1 sentence with 'decision' for 'prediction'.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "In model interpretability, faithfulness, defined as “accurately representing the reasoning process behind the model’s decision”, is important for evaluating the performance of natural language explanation (Ribeiro et al., 2016; Gilpin et al., 2018; Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "lyu2023faithful#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quoted phrase is the source's §1 definition, and the source lists 'fidelity' (Guidotti et al.) among related terms and traces 'faithful interpretability' to Harrington et al. (1985) and Ribeiro et al. (2016), both co-cited here.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Also related to the “transparency” (Baan et al., 2019), the “fidelity” Guidotti et al. (2018) or the “robustness” (Alvarez-Melis and Jaakkola, 2018) of the interpretation method. [...] To our knowledge, the term “faithful interpretability” was coined in Harrington et al. (1985), reinforced by Ribeiro et al. (2016), and is, we believe, most commonly used",
+   "citing_evidence": "In interpretability, faithfulness (also called fidelity or reliability) means that an explanation should “accurately represent the reasoning process behind the model’s prediction”, which is a fundamental requirement of an explanation Harrington et al. (1985); Ribeiro et al. (2016); Gilpin et al. (2018); Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "lyu2023faithful#3",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The quoted definition and the alias 'persuasiveness' are the source's, but 'understandability' is not an alias of plausibility there: the source gives 'human-interpretability' as the alias of readability, a criterion it lists separately from plausibility.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] “Readability” and “plausibility” are also referred to as “human-interpretability” and “persuasiveness”, respectively (e.g., Lage et al. (2019); Herman (2017)). [...] However, this view often fails to distinguish between distinct aspects of the interpretation’s quality, such as readability, plausibility and faithfulness Herman (2017).",
+   "citing_evidence": "It should be contrasted with plausibility (a.k.a. persuasiveness or understandability), which refers to “how convincing an explanation is to humans” Herman (2019); Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "lyu2023faithful#4",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The paper transfers the source's faithfulness/plausibility split to reasoning chains and recasts plausibility as looking 'reasonable and coherent to humans', where the source says 'how convincing the interpretation is to humans'.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Naturally, it is possible to satisfy one of these properties without the other.",
+   "citing_evidence": "In the context of CoT prompting, a faithful reasoning chain needs to accurately reflect how the model arrives at the final answer, whereas a plausible reasoning chain is one that looks reasonable and coherent to humans."
+  },
+  {
+   "entry": "madsen2023faithfulness#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quotation is in the source verbatim; there the source credits the sentence to Herman (2017) and Wiegreffe and Pinter (2019), but it also states the same definition in its own voice (§1, §6).",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "Jacovi & Goldberg (2020) defines faithfulness as: “how accurately it (explanation) reflects the true reasoning process of the model”."
+  },
+  {
+   "entry": "madsen2023faithfulness#11",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source states the converse: different interpretations for similar inputs and outputs show unfaithfulness (Corollary 2), and it says this test is 'more useful to disprove the faithfulness of an interpretation rather than prove it', so similar explanations on similar inputs do not make a method faithful; the source also conditions on similar outputs, which the citing sentence drops.",
+   "source_evidence": "Corollary 2. An interpretation system is unfaithful if it provides different interpretations for similar inputs and outputs. [...] This assumption is more useful to disprove the faithfulness of an interpretation rather than prove it, since a disproof requires finding appropriate cases where the assumption doesn’t hold, where a proof would require checking a (very large) satisfactory quantity of examples, or even the entire input space.",
+   "citing_evidence": "Jacovi & Goldberg (2020) suggest that if similar inputs show similar explanations, then the explanation method is faithful."
+  },
+  {
+   "entry": "madsen2023faithfulness#14",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's guideline says humans cannot judge whether an interpretation is faithful (if they understood the model, interpretation would be unnecessary); the paper gives a related reason, that networks are too complex to check by hand.",
+   "source_evidence": "Faithfulness evaluation should not involve human-judgement on the quality of interpretation. [...] We note that: (1) humans cannot judge if an interpretation is faithful or not: if they understood the model, interpretation would be unnecessary; (2) for similar reasons, we cannot obtain supervision for this problem, either. Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability.",
+   "citing_evidence": "The topic of faithfulness can not be measured by humans (Jacovi & Goldberg, 2020), as neural networks are too complicated for humans to manually evaluate if an explanation is true."
+  },
+  {
+   "entry": "madsen2024self#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "Whether an explanation truly reflects the model's reasoning process is the source's definition, which the source calls 'faithful interpretability'.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] To our knowledge, the term “faithful interpretability” was coined in Harrington et al. (1985), reinforced by Ribeiro et al. (2016), and is, we believe, most commonly used",
+   "citing_evidence": "It also doesn’t tell us if the self-explanations truly reflect the model’s reasoning process, known as interpretability-faithfulness (Jacovi and Goldberg, 2020; Doshi-Velez and Kim, 2017)."
+  },
+  {
+   "entry": "madsen2024self#11",
+   "source": "jacovi2020towards",
+   "verdict": "renamed",
+   "finding": "The source describes the same category, textual explanations from a generator trained on human explanations, as 'interpretation via post-hoc text generation' for which 'plausibility is the dominating property, while there is no faithfulness guarantee'; it never uses the word 'rationalization'.",
+   "source_evidence": "For example, consider the case of interpretation via post-hoc text generation—where an additional “generator” component outputs a textual explanation of the model’s decision, and the generator is learned with supervision of textual explanations Zaidan and Eisner (2008); Rajani et al. (2019); Strout et al. (2019). In this case, plausibility is the dominating property, while there is no faithfulness guarantee.",
+   "citing_evidence": "These are explanations by humans (e.g., e-SNLI (Camburu et al., 2018)) or by a model that has learned from human explanations. Rationalizations should not be used to explain the model (Jacovi and Goldberg, 2020) but may help convince humans of a prediction."
+  },
+  {
+   "entry": "madsen2024self#12",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source calls for replacing the binary faithful/not-faithful view with a graded criterion of how faithful an interpretation is, which is what the paper attributes to it.",
+   "source_evidence": "We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8). [...] We should instead evaluate faithfulness on a more nuanced “grayscale” that allows interpretations to be useful even if they are not globally and definitively faithful.",
+   "citing_evidence": "Jacovi and Goldberg (2020) argue that the interpretability-faithfulness field should move towards a more nuanced view on interpretability-faithfulness, where the metric is not if an explanation is faithful or not, but how much faithfulness it has."
+  },
+  {
+   "entry": "malladi2026directly#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's faithfulness (reflecting the model's true reasoning process) as opposed to plausibility (convincing humans) supports 'reflect how the model actually behaves, not just sound plausible'; the narrowing to behavioral faithfulness comes in the paper's next sentence as its own choice.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "A central challenge in explainability is faithfulness (Jacovi & Goldberg, 2020): explanations should reflect how the model actually behaves, not just sound plausible."
+  },
+  {
+   "entry": "nguyen2026generalization#3",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'The verbalized reasoning reflects the computation behind the answer' paraphrases the source's 'accurately represents the reasoning process behind the model's prediction'.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "However, cue acknowledgment does not establish faithfulness in the conventional sense, i.e., that the verbalized reasoning reflects the computation behind the answer (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "occhipinti2026probing#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The faithful-versus-plausible distinction (accurately reflecting the model's reasoning versus convincing humans) is the source's §2.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019). [...] Naturally, it is possible to satisfy one of these properties without the other.",
+   "citing_evidence": "Historically, NLP interpretability distinguished faithful explanations—accurately reflecting the model’s reasoning—from those merely plausible to humans (Jacovi & Goldberg, 2020)."
+  },
+  {
+   "entry": "parcalabescu2023measuring#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The paper's definition ('accurately represents the true reasoning process behind the model's prediction') combines the source's §1 and §2 wordings.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] “Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "define a faithful explanation to be one that accurately represents the true reasoning process behind the model’s prediction following Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "parcalabescu2023measuring#10",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source states that 'human judgement measures plausability', supporting 'plausibility, where human judgement is key'; the quotation about implausible explanations is credited to Lyu et al. (2022b), not to the source.",
+   "source_evidence": "Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability.",
+   "citing_evidence": "As posited by Jacovi and Goldberg (2020), per definition, “faithfulness should not involve human-judgement on the quality of interpretation, […]” as “humans cannot judge if an interpretation is faithful or not; if [they did], the explanation would be unnecessary” Lyu et al. (2022b). [...] This is contrary to plausibility, where human judgement is key."
+  },
+  {
+   "entry": "parcalabescu2023measuring#17",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The quotation, taken from Lyu et al.'s summary of the source, matches the source's two §5 guidelines on human judgement and gold labels and their reasons almost word for word.",
+   "source_evidence": "Faithfulness evaluation should not involve human-judgement on the quality of interpretation. [...] We note that: (1) humans cannot judge if an interpretation is faithful or not: if they understood the model, interpretation would be unnecessary; (2) for similar reasons, we cannot obtain supervision for this problem, either. Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability. [...] Faithfulness evaluation should not involve human-provided gold labels. [...] We should be able to interpret incorrect model predictions, just the same as correct ones. Evaluation methods that rely on gold labels are influenced by human priors on what should the model do, and again push the evaluation in the direction of plausability.",
+   "citing_evidence": "(Citing Lyu et al., 2022a discussing the definition of Jacovi and Goldberg, 2020): “faithfulness evaluation should not involve human judgement on explanation quality. This is because humans do not know whether an explanation is faithful; if they did, the explanation would be unnecessary. Finally, faithfulness evaluation should not involve human-provided gold labels (for the examples to be explained). A faithful explanation method should be able to explain any prediction of the model, regardless of whether it is correct or not.”"
+  },
+  {
+   "entry": "paul2024making#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source defines faithful interpretation as accurately representing the reasoning process behind the prediction and calls faithfulness evaluation 'a pressing issue in explainability'.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] We find this to be a pressing issue in explainability: in cases where an explanation is required to be faithful, imperfect or misleading evaluation can have disastrous effects.",
+   "citing_evidence": "Jacovi and Goldberg (2020) argued that obtaining faithful explanations that accurately reflect a model’s reasoning process is important to understand the reasons behind its answer."
+  },
+  {
+   "entry": "plunkett2025self#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source supplies the notion of an explanation reflecting the model's actual reasoning process; it predates chain-of-thought and tests nothing, but the 'mixed results' are cited to other papers.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "One line, focusing on reasoning models, has tested whether models’ Chains-of-Thought (CoT) faithfully reflect the models’ actual reasoning processes (Jacovi and Goldberg, 2020), with mixed results (Turpin et al., 2023; Chen et al., 2025; Atanasova et al., 2023)."
+  },
+  {
+   "entry": "pmlr-v235-chen24bl#6",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports plausibility as a matter of human judgement (how convincing an interpretation is to humans), but it never grounds plausibility in factual correctness or logical coherence, terms it does not use.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability.",
+   "citing_evidence": "Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence Herman (2017); Lage et al. (2019); Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "pmlr-v235-chen24bl#7",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "Consistency with the model's own decision process paraphrases the source's definition, and the source likewise separates it from plausibility.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] “Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "It is different from faithfulness, which measures whether an explanation is consistent with the model’s own decision process Harrington et al. (1985); Ribeiro et al. (2016); Gilpin et al. (2018); Wu and Mooney (2019); Lakkaraju et al. (2019); Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "radhakrishnan2023question#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The graded definition (faithful to the extent that it reflects the model's actual reasoning) matches the source's definition plus its call for a graded criterion.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision. [...] We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8).",
+   "citing_evidence": "We adopt the definition of faithful reasoning from Jacovi & Goldberg (2020), where reasoning is faithful to the extent that it reflects the model’s actual reasoning."
+  },
+  {
+   "entry": "reddy2025principled#10",
+   "source": "jacovi2020towards",
+   "verdict": "unsupported",
+   "finding": "The source is an opinion piece that predates chain-of-thought prompting and reports no study, so it cannot show that CoTs often omit key steps or fabricate rationales; the nearest it says is that explanations from a generator trained on human explanations are plausible with 'no faithfulness guarantee'.",
+   "source_evidence": "In this opinion piece we reflect on the current state of interpretability evaluation research. [...] For example, consider the case of interpretation via post-hoc text generation—where an additional “generator” component outputs a textual explanation of the model’s decision, and the generator is learned with supervision of textual explanations Zaidan and Eisner (2008); Rajani et al. (2019); Strout et al. (2019). In this case, plausibility is the dominating property, while there is no faithfulness guarantee.",
+   "citing_evidence": "whereas faithfulness remains more challenging, as studies show that CoTs often omit key steps or fabricate plausible but untrue rationales, behaving more like post-hoc justifications than causal explanations (Chen et al., 2025; Chua & Evans, 2025; Tanneru et al., 2024; Turpin et al., 2023; Chen et al., 2023; Jacovi & Goldberg, 2020; Arcuschin et al., 2025)."
+  },
+  {
+   "entry": "sanyal2022fairr#2",
+   "source": "jacovi2020towards",
+   "verdict": "unsupported",
+   "finding": "The source defines faithfulness as a property of interpretations, how accurately they represent the model's reasoning process, and never discusses whether models learn the task or depend on shortcut patterns.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] “Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "Faithfulness of such models Jacovi and Goldberg (2020) aims to understand whether the models are actually learning to solve the task or rather depending on some shortcut patterns."
+  },
+  {
+   "entry": "senatorov2026structural#2",
+   "source": "jacovi2020towards",
+   "verdict": "adapted",
+   "finding": "The source says textual explanations from a separately trained generator can be plausible with no faithfulness guarantee; extending this to a model's own reasoning traces as 'post-hoc rationalizations' is the citing paper's step, as the source discusses neither reasoning traces nor rationalization.",
+   "source_evidence": "For example, consider the case of interpretation via post-hoc text generation—where an additional “generator” component outputs a textual explanation of the model’s decision, and the generator is learned with supervision of textual explanations Zaidan and Eisner (2008); Rajani et al. (2019); Strout et al. (2019). In this case, plausibility is the dominating property, while there is no faithfulness guarantee.",
+   "citing_evidence": "Reasoning traces may be post-hoc rationalizations rather than faithful accounts of model predictions (Jacovi and Goldberg, 2020; Holzinger et al., 2017; Lanham et al., 2023; Paul et al., 2024; Matton et al., 2025)."
+  },
+  {
+   "entry": "somov2026breaking#1",
+   "source": "jacovi2020towards",
+   "verdict": "unsupported",
+   "finding": "The source defines faithfulness as how accurately an interpretation represents the reasoning process behind the prediction and evaluates post-hoc interpretations, which play no causal role, by the same standard; it never requires stated reasoning to cause the prediction and uses no causal vocabulary.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Explanations provided by “inherently interpretable” models must be held to the same standards as post-hoc interpretation methods, and be evaluated for faithfulness using the same set of evaluation techniques.",
+   "citing_evidence": "A growing body of work focuses on faithfulness, i.e., the degree to which a model’s stated reasoning genuinely causes its final prediction, rather than merely accompanying it (Jacovi and Goldberg, 2020; Turpin et al., 2023; Lanham et al., 2023)."
+  },
+  {
+   "entry": "turpin2023language#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'How accurately these explanations actually represent the reasons behind model predictions' is the source's definition, and the source likewise contrasts it with plausibility.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Naturally, it is possible to satisfy one of these properties without the other.",
+   "citing_evidence": "However, even if CoT explanations seem plausible and have correct reasoning, it remains to be seen how accurately these explanations actually represent the reasons behind model predictions—that is, how faithful the explanations are (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "turpin2025teaching#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'An accurate representation of the true reasons behind model behavior' paraphrases the source's definition, cited as [23] = Jacovi & Goldberg 2020; the reward-hack example in the preceding sentence is the paper's own.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "A model’s reasoning is a faithful explanation if it gives an accurate representation of the true reasons behind model behavior [23]."
+  },
+  {
+   "entry": "walden2026reasoning#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The extent to which reasoning steps accurately reflect the underlying decision-making process is the source's graded definition applied to CoT steps.",
+   "source_evidence": "Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision. [...] We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8).",
+   "citing_evidence": "A core concern in CoT reasoning is faithfulness—the extent to which a model’s reasoning steps accurately reflect its underlying decision-making process (Jacovi and Goldberg, 2020)."
+  },
+  {
+   "entry": "wang2026concept#1",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports 'accurately represents ... the underlying reasoning' and the contrast with merely plausible explanations, but not the disjunct 'or contributes to', which counts a CoT as faithful for causally contributing to reasoning it does not represent; the source has no causal criterion.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Since the interpretation’s faithfulness carries legal consequences, a plausible but unfaithful interpretation may be the worst-case scenario.",
+   "citing_evidence": "This apparent transparency, however, hinges on CoT faithfulness, i.e., the degree to which it accurately represents or contributes to the underlying reasoning of the model, rather than a plausible post-hoc rationalization (Jacovi and Goldberg, 2020; Agarwal et al., 2024)."
+  },
+  {
+   "entry": "wiegreffe2021measuring#7",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The paper places models on 'the faithfulness spectrum conceptualized by Jacovi and Goldberg (2020)', which is the source's graded, 'grayscale' faithfulness.",
+   "source_evidence": "We should instead evaluate faithfulness on a more nuanced “grayscale” that allows interpretations to be useful even if they are not globally and definitively faithful. [...] We call for discarding the binary notion of faithfulness in favor of a more graded one, which we believe will be of greater practical utility.",
+   "citing_evidence": "The aim of our work is to initiate placing models that provide NL rationales on the faithfulness spectrum conceptualized by Jacovi and Goldberg (2020). [...] Although our measurements address only necessary and not sufficient properties, by viewing faithful interpretability as a spectrum, we make a step to quantitatively situate common models on it."
+  },
+  {
+   "entry": "yu2026outcome#7",
+   "source": "jacovi2020towards",
+   "verdict": "partial",
+   "finding": "The source supports 'reflects the reasoning process the model used to arrive at its answer', but not causal importance: it never requires the explanation to influence the answer, and it evaluates post-hoc interpretations, which have no causal role, by the same faithfulness standard.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Explanations provided by “inherently interpretable” models must be held to the same standards as post-hoc interpretation methods, and be evaluated for faithfulness using the same set of evaluation techniques.",
+   "citing_evidence": "(1) that the chain-of-thought is causally important, i.e., it causally reflects the reasoning process the model used to arrive at its answer (Jacovi and Goldberg, 2020);"
+  },
+  {
+   "entry": "zaman2025causal#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The adopted definition is the source's ('accurately reflects the reasoning process behind a model's prediction'), stated as a degree.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8).",
+   "citing_evidence": "We adopt the commonly used definition of faithfulness, which is the extent to which an explanation accurately reflects the reasoning process behind a model’s prediction, following Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "zaman2025chainofthought#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "'Alignment between an explanation and the model's true reasoning process' paraphrases the source's 'how accurately it reflects the true reasoning process of the model'.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans, while “faithfulness” refers to how accurately it reflects the true reasoning process of the model Herman (2017); Wiegreffe and Pinter (2019).",
+   "citing_evidence": "Jacovi and Goldberg (2020) define faithfulness as the alignment between an explanation and the model’s true reasoning process."
+  },
+  {
+   "entry": "zhao2025necessary#1",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The sentence is the source's §1 definition with 'reflect' for 'represents'.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction.",
+   "citing_evidence": "A faithful explanation should accurately reflect the reasoning process behind the model’s prediction Jacovi and Goldberg (2020); Lyu et al. (2024); Ribeiro et al. (2016)."
+  },
+  {
+   "entry": "zhao2025necessary#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source defines plausibility as how convincing an interpretation is to humans and warns that the two criteria are often conflated.",
+   "source_evidence": "“Plausibility” refers to how convincing the interpretation is to humans [...] Despite the difference between the two criteria, many authors do not clearly make the distinction, and sometimes conflate the two.",
+   "citing_evidence": "the challenge increases because humans often conflate faithfulness and plausibility: how convincing it appears Jacovi and Goldberg (2020); Lyu et al. (2023); Wiegreffe et al. (2022)."
+  },
+  {
+   "entry": "zhao2025necessary#7",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "The source's Corollary 1.2 states exactly this sufficient condition for unfaithfulness.",
+   "source_evidence": "Corollary 1.2. An interpretation is unfaithful if it results in different decisions than the model it interprets.",
+   "citing_evidence": "The assumption is that if an explanation leads to a different prediction than that made by the model it explains, then it is unfaithful Jacovi and Goldberg (2020)."
+  },
+  {
+   "entry": "zhao2026robustness#2",
+   "source": "jacovi2020towards",
+   "verdict": "supported",
+   "finding": "Accurately reflecting the model's internal decision-making process is the source's definition, which the paper correctly presents as stronger than its own answer-consistency metric.",
+   "source_evidence": "Intuitively, a faithful interpretation is one that accurately represents the reasoning process behind the model’s prediction. [...] Intuitively, we would like the provided interpretation to reflect the true reasoning process of the model when making a decision.",
+   "citing_evidence": "This differs from the stronger notion of explanation faithfulness in the interpretability literature, where an explanation is faithful only if it accurately reflects the model’s internal decision-making process (Jacovi and Goldberg, 2020)."
+  }
+ ]
+}

@@ -1,0 +1,3766 @@
+{
+ "claims": [
+  {
+   "n": 1,
+   "text": "The counterfactual family holds 292 definition rows from 87 of the 217 papers.",
+   "papers": [],
+   "evidence": [
+    "`definitions.py dump counterfactual`: 292 rows, 87 distinct keys; index.csv: 217 papers"
+   ]
+  },
+  {
+   "n": 2,
+   "text": "By kind, 109 rows are operational, 84 informal, 45 formal, 29 criteria, 19 taxonomies and 6 failure modes.",
+   "papers": [],
+   "evidence": [
+    "dump counterfactual: kind counts operational 109, informal 84, formal 45, criterion 29, taxonomy 19, failure-mode 6"
+   ]
+  },
+  {
+   "n": 3,
+   "text": "By stance, 160 are proposed, 86 adopted and 46 adapted.",
+   "papers": [],
+   "evidence": [
+    "dump counterfactual: stance counts proposed 160, adopted 86, adapted 46"
+   ]
+  },
+  {
+   "n": 4,
+   "text": "Of the 292 rows, 163 define a counterfactual notion (162 of them carry the word in the term) and 129 define a companion notion, such as a validity criterion, an effect measure or a simulation metric.",
+   "papers": [],
+   "evidence": [
+    "dump counterfactual: related=False 163 rows (162 with 'counterfactual' in the term), related=True 129 rows"
+   ]
+  },
+  {
+   "n": 5,
+   "text": "The second pass over the full texts added 163 rows and 14 papers, and 113 of the added rows are companion notions.",
+   "papers": [
+    "admoni2026aligning",
+    "anon2026chainofthought",
+    "anon2026crisp",
+    "baker2025monitoring",
+    "burger2026chain",
+    "dietz2026split",
+    "guan2025monitoring",
+    "li2025better",
+    "little2026length",
+    "luo2026removal",
+    "nguyen2026can",
+    "tutek2025measuring",
+    "wang2026concept",
+    "wang2026verbalising"
+   ],
+   "evidence": [
+    "163 row ids in the dump are absent from synth_counterfactual.json of the previous version (git HEAD definitions.csv has 129 counterfactual rows from 73 papers); 14 keys new to the family (admoni2026aligning, anon2026chainofthought, anon2026crisp, baker2025monitoring, burger2026chain, dietz2026split, guan2025monitoring, li2025better, little2026length, luo2026removal, nguyen2026can, tutek2025measuring, wang2026concept, wang2026verbalising); 113 of the 163 have related=True"
+   ]
+  },
+  {
+   "n": 6,
+   "text": "The rows fall into the 12 clusters below.",
+   "papers": [],
+   "evidence": [
+    "synth_counterfactual.json: 12 clusters, 292 entries, each row once"
+   ]
+  },
+  {
+   "n": 7,
+   "text": "In 10 of them the counterfactual is a variant (of the input, the reasoning, an internal state or the parameters) that the model is run with, and the output is compared with the output on the original.",
+   "papers": [
+    "dehghanighobadi2025can",
+    "wang2023scott"
+   ],
+   "evidence": [
+    "cluster definitions in synth_counterfactual.json; exceptions cf-explanation (dehghanighobadi2025can#1 'would lead') and training-pairs (wang2023scott#5 'We then train the model to generate')"
+   ]
+  },
+  {
+   "n": 8,
+   "text": "In cluster 1 the counterfactual explanation is defined by what an edited input \"would lead\" the model to do, and the edit is run only to check validity; in cluster 10 the counterfactual is training data or a reward signal.",
+   "papers": [
+    "dehghanighobadi2025can",
+    "wang2023scott"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#1: “would lead”",
+    "dehghanighobadi2025can#1: “that would lead the model to change its decision”",
+    "mayne2025llms#3: “the revised input should change the model’s prediction when re-evaluated in a new context window”",
+    "wang2023scott#5: “We then train the model to generate $a^{{}^{\\prime}}$ when $r^{{}^{\\prime}}$ is directly fed to the decoder”"
+   ]
+  },
+  {
+   "n": 9,
+   "text": "One row of cluster 12 runs no variant at all: in the counterfactual autorater of [Haskins et al. 2026](./#p=haskins2026training), a judge asks whether the reasoning \"could ... plausibly have been produced in a scenario where no defect existed\".",
+   "papers": [
+    "haskins2026training"
+   ],
+   "evidence": [
+    "haskins2026training#9: “could ... plausibly have been produced in a scenario where no defect existed”"
+   ]
+  },
+  {
+   "n": 10,
+   "text": "The clusters differ on four points: what is varied; whether the variant must change the output; how a change in output becomes a causal claim; and what the comparison judges (an explanation, the model's reliance on a feature, a self-report, a training target or a covert behavior).",
+   "papers": [],
+   "evidence": [
+    "cluster descriptions in synth_counterfactual.json"
+   ]
+  },
+  {
+   "n": 11,
+   "text": "This is the explainable-AI sense, which [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) and [Mayne et al. 2025](./#p=mayne2025llms) take from Wachter et al. 2017.",
+   "papers": [
+    "dehghanighobadi2025can",
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#1 source: Wachter et al. 2017; Mothilal et al. 2020; Verma et al. 2024",
+    "mayne2025llms#1 source: Wachter et al. 2017"
+   ]
+  },
+  {
+   "n": 12,
+   "text": "The counterfactual is an alternative input that would lead the model to a different decision, and that input is itself the explanation.",
+   "papers": [
+    "dehghanighobadi2025can",
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#1",
+    "mayne2025llms#1"
+   ]
+  },
+  {
+   "n": 13,
+   "text": "In 5 of the 10 papers the model writes the edit itself, which gives a self-generated counterfactual explanation (SCE): [Madsen et al. 2024](./#p=madsen2024self), [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can), [Mayne et al. 2025](./#p=mayne2025llms), [Doi et al. 2025](./#p=doi2025investigating) and [Zeng et al. 2026](./#p=zeng2026evaluating).",
+   "papers": [
+    "madsen2024self",
+    "dehghanighobadi2025can",
+    "mayne2025llms",
+    "doi2025investigating",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "cluster cf-explanation has 10 keys",
+    "madsen2024self#3 (attr dehghanighobadi2025can#2 <- madsen2024self: 'The source has the model itself generate the counterfactual')",
+    "dehghanighobadi2025can#2",
+    "mayne2025llms#2",
+    "doi2025investigating#10: “This style requires the model to edit the input sentence”",
+    "zeng2026evaluating#20"
+   ]
+  },
+  {
+   "n": 14,
+   "text": "The edit is judged by validity (whether the model's own prediction on the edited input reaches the target; [Mayne et al. 2025](./#p=mayne2025llms) require a new context window), minimality and closeness.",
+   "papers": [
+    "mayne2025llms",
+    "dehghanighobadi2025can"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#3",
+    "mayne2025llms#3",
+    "mayne2025llms#4",
+    "dehghanighobadi2025can#8: “Closeness to the original input is a key desideratum”"
+   ]
+  },
+  {
+   "n": 15,
+   "text": "[Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) separate validity from correctness, which asks whether the edit \"actually evaluates to\" the target by human judgment.",
+   "papers": [
+    "dehghanighobadi2025can"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#6: “actually evaluates to”"
+   ]
+  },
+  {
+   "n": 16,
+   "text": "Three papers make validity the condition for a trustworthy explanation: [Madsen et al. 2024](./#p=madsen2024self) (\"If satisfied, the counterfactual is faithful\"), [Doi et al. 2025](./#p=doi2025investigating) (\"faithfulness can be evaluated by checking whether the generated counterfactuals indeed produce the prediction change\") and [Mayne et al. 2025](./#p=mayne2025llms) (\"Without validity, the explanation is a misleading representation of the model’s counterfactual behaviour\").",
+   "papers": [
+    "madsen2024self",
+    "doi2025investigating",
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "madsen2024self#4: “If satisfied, the counterfactual is faithful”",
+    "doi2025investigating#5: “faithfulness can be evaluated by checking whether the generated counterfactuals indeed produce the prediction change”",
+    "mayne2025llms#3: “Without validity, the explanation is a misleading representation of the model’s counterfactual behaviour”"
+   ]
+  },
+  {
+   "n": 17,
+   "text": "Three rows use \"counterfactual explanation\" for a statement about how behavior would change, not for the edited input: [Agarwal et al. 2024](./#p=agarwal2024faithfulness), [Guo et al. 2026](./#p=guo2026introspective) and [Pres et al. 2026a](./#p=pres2026consistency).",
+   "papers": [
+    "agarwal2024faithfulness",
+    "guo2026introspective",
+    "pres2026consistency"
+   ],
+   "evidence": [
+    "guo2026introspective#2: “counterfactual explanation”",
+    "agarwal2024faithfulness#3",
+    "guo2026introspective#2",
+    "pres2026consistency#6"
+   ]
+  },
+  {
+   "n": 18,
+   "text": "28 rows from 10 papers (12 proposed, 13 adopted, 3 adapted).",
+   "papers": [
+    "agarwal2024faithfulness",
+    "cahlik2025reasoninggrounded",
+    "chuang2026faithlm",
+    "dehghanighobadi2025can",
+    "doi2025investigating",
+    "guo2026introspective",
+    "madsen2024self",
+    "mayne2025llms",
+    "pres2026consistency",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster cf-explanation: 28 entries, 10 keys; stance 12 proposed, 13 adopted, 3 adapted"
+   ]
+  },
+  {
+   "n": 19,
+   "text": "Counterfactual condition: $f(\\mathbf{x})\\neq f(\\mathbf{x}_{\\text{CE}})$, with a chosen target $f(\\mathbf{x}_{\\text{CE}})=y_{\\text{CE}}$ when the counterfactual is generated ([Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can)).",
+   "papers": [
+    "dehghanighobadi2025can"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#1: “first identify a counterfactual output $y_{\\text{CE}}\\neq y$ and then solve an optimization problem to generate $\\mathbf{x}_{\\text{CE}}$ such that $f(\\mathbf{x}_{\\text{CE}})=y_{\\text{CE}}$”"
+   ]
+  },
+  {
+   "n": 20,
+   "text": "Validity: the share of instances with $f(\\mathbf{x}_{\\text{CE}})=y_{\\text{CE}}$, computed without ($\\mathrm{Val}$) and with ($\\mathrm{Val}_C$) the earlier turns in context ([Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can)); [Mayne et al. 2025](./#p=mayne2025llms) require the flip in a new context window.",
+   "papers": [
+    "dehghanighobadi2025can",
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#3 gloss: 'computed without (Val) and with (Val_C) the earlier turns in context'",
+    "mayne2025llms#6: “valid if the model flips its decision when re-evaluated in a new context window”"
+   ]
+  },
+  {
+   "n": 21,
+   "text": "Minimal counterfactual ([Mayne et al. 2025](./#p=mayne2025llms)): $z_{i,\\text{M}}\\in\\arg\\min_{z_i'\\in\\mathcal{Z}} d(z_i,z_i')$ subject to $f(\\phi(z_i'))=y'$, with $d$ Gower's distance; excess distance $\\mathrm{ED}_i=d(z_i,z_i')-d(z_i,z_{i,\\text{M}})$ over valid SCEs, and Exact Match the share of instances whose SCE is a minimal counterfactual.",
+   "papers": [
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "mayne2025llms#5",
+    "mayne2025llms#7 gloss: ED_i = d(z, z') − d(z, z_M), averaged over valid SCEs",
+    "mayne2025llms#8"
+   ]
+  },
+  {
+   "n": 22,
+   "text": "Edit-Proposal ([Zeng et al. 2026](./#p=zeng2026evaluating)): the model's edit counts as a flip when more than half of $K$ resamples on the edited prompt differ from the baseline answer; no target label is given.",
+   "papers": [
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "zeng2026evaluating#20: “the example counts as flipped if the fraction of resamples that differ from baseline exceeds $0.5$”",
+    "attr zeng2026evaluating#20 <- dehghanighobadi2025can: 'Zeng et al. drop the target label'"
+   ]
+  },
+  {
+   "n": 23,
+   "text": "Here the counterfactual is the test input, not the explanation.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#3: “$h_{x,e_{x},o_{x}}(x^{\\prime})$ denotes what the human infers to be $M$ ’s output on $x^{\\prime}$”"
+   ]
+  },
+  {
+   "n": 24,
+   "text": "An explanation given on $x$ is judged by whether an observer who reads it predicts the model's output on other inputs $x'$.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#1",
+    "pmlr-v235-chen24bl#9"
+   ]
+  },
+  {
+   "n": 25,
+   "text": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) define the notion for free-text explanations and give two metrics, precision and generality, both computed over the counterfactuals the observer judges simulatable.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl full text: “we are the first work to evaluate the counterfactual simulatability of free-form natural language explanations”",
+    "pmlr-v235-chen24bl#4",
+    "pmlr-v235-chen24bl#5"
+   ]
+  },
+  {
+   "n": 26,
+   "text": "The observer is a human in Chen et al.'s definition (approximated by GPT-4), \"a human or model\" in [Turpin et al. 2025](./#p=turpin2025teaching), LLM judges and a human study in [Hong & Roth 2026](./#p=hong2026llm), and a simulator model in [Hase & Potts 2026](./#p=hase2026counterfactual).",
+   "papers": [
+    "turpin2025teaching",
+    "hong2026llm",
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "turpin2025teaching#2: “a human or model”"
+   ]
+  },
+  {
+   "n": 27,
+   "text": "What the observer predicts also varies: the model's answer ([Chen et al. 2023](./#p=pmlr-v235-chen24bl)), whether a new request is refused or complied with ([Pres et al. 2026b](./#p=pres2026selfctrl)), or whether a named prompt edit moves a behavior rate ([Karvonen et al. 2026](./#p=karvonen2026would)).",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "pres2026selfctrl",
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#1",
+    "pres2026selfctrl#14",
+    "karvonen2026would#5"
+   ]
+  },
+  {
+   "n": 28,
+   "text": "[Hong & Roth 2026](./#p=hong2026llm) add a phase without the explanation and score the difference.",
+   "papers": [
+    "hong2026llm"
+   ],
+   "evidence": [
+    "hong2026llm#2",
+    "attr hong2026llm#2 <- pmlr-v235-chen24bl: 'the citing paper adds a no-explanation phase'"
+   ]
+  },
+  {
+   "n": 29,
+   "text": "The rows disagree on whether the notion measures faithfulness, plausibility or usefulness (Tensions, item 7).",
+   "papers": [
+    "turpin2025teaching",
+    "hong2026llm",
+    "agarwal2024faithfulness"
+   ],
+   "evidence": [
+    "turpin2025teaching#2",
+    "hong2026llm#1",
+    "agarwal2024faithfulness full text: “most evaluations of self-explanations focus on plausibility”"
+   ]
+  },
+  {
+   "n": 30,
+   "text": "34 rows from 15 papers (12 proposed, 14 adopted, 8 adapted).",
+   "papers": [
+    "agarwal2024faithfulness",
+    "arcuschin2025chain",
+    "chen2025consistent",
+    "chua2025deepseek",
+    "hase2026counterfactual",
+    "hong2026llm",
+    "karvonen2026would",
+    "luo2026removal",
+    "matton2025walk",
+    "mayne2026positivecasefaithfulnessllm",
+    "parcalabescu2023measuring",
+    "pmlr-v235-chen24bl",
+    "pres2026selfctrl",
+    "turpin2023language",
+    "turpin2025teaching"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster simulatability: 34 entries, 15 keys; 12 proposed, 14 adopted, 8 adapted"
+   ]
+  },
+  {
+   "n": 31,
+   "text": "Mental model: $h_{x,e_x,o_x}:X\\to O\\cup\\{\\perp\\}$, where $h(x')=\\perp$ marks $x'$ as unsimulatable.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#3"
+   ]
+  },
+  {
+   "n": 32,
+   "text": "Simulation precision: $\\frac{1}{|C^*|}\\sum_{x'\\in C^*}\\mathbf{1}[h_{e_x}(x')=o_{x'}]$ over the simulatable counterfactuals $C^*$.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#4"
+   ]
+  },
+  {
+   "n": 33,
+   "text": "Simulation generality: $1-\\mathbb{E}_{x',x''\\sim p}[\\alpha(x',x'')]$, with $\\alpha$ a similarity metric over simulatable counterfactuals.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#5"
+   ]
+  },
+  {
+   "n": 34,
+   "text": "Gain over a no-explanation phase ([Hong & Roth 2026](./#p=hong2026llm)): $\\Delta\\mathrm{OverallAcc}=\\mathrm{OverallAcc}^{\\text{P2}}-\\mathrm{OverallAcc}^{\\text{P1}}$, with cannot_guess counted as incorrect.",
+   "papers": [
+    "hong2026llm"
+   ],
+   "evidence": [
+    "hong2026llm#2",
+    "hong2026llm#17: “overall accuracy, accuracy on all items, counting cannot_guess as incorrect”"
+   ]
+  },
+  {
+   "n": 35,
+   "text": "Anchoring of the simulator ([Hong & Roth 2026](./#p=hong2026llm)): $\\widehat{\\mathrm{bias}}^{\\text{orig}}(p)=\\frac{1}{N_p}\\sum_{i:\\,p_i=p}B_i$, with $B_i=\\mathbb{I}[\\hat{y}_i=a_i]$.",
+   "papers": [
+    "hong2026llm"
+   ],
+   "evidence": [
+    "hong2026llm#19"
+   ]
+  },
+  {
+   "n": 36,
+   "text": "Counterfactual claim label ([Karvonen et al. 2026](./#p=karvonen2026would)): true if the edit moved the behavior rate by at least 50 percentage points, false if by at most 15.",
+   "papers": [
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "karvonen2026would#5: “A claim is true if its edit moved the behavior rate by at least 50 percentage points and false if it moved the rate by at most 15.”"
+   ]
+  },
+  {
+   "n": 37,
+   "text": "These rows define the inputs $x'$ on which an explanation from cluster 2 is tested.",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "cluster cf-set entries, e.g. pmlr-v235-chen24bl#2, mayne2026positivecasefaithfulnessllm#2"
+   ]
+  },
+  {
+   "n": 38,
+   "text": "Six papers give five constructions:",
+   "papers": [
+    "chen2025consistent",
+    "hase2026counterfactual",
+    "hong2026llm",
+    "lewislim2026efficient",
+    "mayne2026positivecasefaithfulnessllm",
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "cluster cf-set keys: chen2025consistent, hase2026counterfactual, hong2026llm, lewislim2026efficient, mayne2026positivecasefaithfulnessllm, pmlr-v235-chen24bl"
+   ]
+  },
+  {
+   "n": 39,
+   "text": "follow-up questions that an LLM writes from the explanation, instructed to write one \"that you can confidently guess the robot’s answer to\" ([Chen et al. 2023](./#p=pmlr-v235-chen24bl)), extended with exact paraphrases by [Chen et al. 2024](./#p=chen2025consistent) and used as the \"non-pragmatic baseline\" by [Hong & Roth 2026](./#p=hong2026llm);",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "chen2025consistent",
+    "hong2026llm"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#13: “that you can confidently guess the robot’s answer to”",
+    "hong2026llm#11: “non-pragmatic baseline”",
+    "chen2025consistent#6",
+    "hong2026llm#11: “These serve as a non-pragmatic baseline.”"
+   ]
+  },
+  {
+   "n": 40,
+   "text": "the input with a planted cue removed ([Hase & Potts 2026](./#p=hase2026counterfactual));",
+   "papers": [
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "hase2026counterfactual#11"
+   ]
+  },
+  {
+   "n": 41,
+   "text": "LLM-generated related questions, rejection-sampled so that \"the task model and simulator disagree on the correct answer\" ([Hase & Potts 2026](./#p=hase2026counterfactual));",
+   "papers": [
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "hase2026counterfactual full text: “the task model and simulator disagree on the correct answer”"
+   ]
+  },
+  {
+   "n": 42,
+   "text": "four Gricean manipulations: presupposition flip, lexical substitution, scalar adjustment and contextualization ([Hong & Roth 2026](./#p=hong2026llm));",
+   "papers": [
+    "hong2026llm"
+   ],
+   "evidence": [
+    "hong2026llm#4",
+    "hong2026llm#12",
+    "hong2026llm#13",
+    "hong2026llm#14",
+    "hong2026llm#15"
+   ]
+  },
+  {
+   "n": 43,
+   "text": "real dataset rows close to the original in Hamming distance ([Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm), [Lewis-Lim et al. 2026](./#p=lewislim2026efficient)).",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm",
+    "lewislim2026efficient"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#3",
+    "lewislim2026efficient#4"
+   ]
+  },
+  {
+   "n": 44,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) state that \"the validity of any evaluation hinges on this choice\", restate three earlier designs as counterfactual sets (a biased prompt, random word insertion, single-concept edits) and name three pitfalls.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#12: “the validity of any evaluation hinges on this choice”",
+    "mayne2026positivecasefaithfulnessllm#17",
+    "mayne2026positivecasefaithfulnessllm#18",
+    "mayne2026positivecasefaithfulnessllm#19",
+    "mayne2026positivecasefaithfulnessllm#13",
+    "mayne2026positivecasefaithfulnessllm#14",
+    "mayne2026positivecasefaithfulnessllm#15"
+   ]
+  },
+  {
+   "n": 45,
+   "text": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) concede that \"LLMs most likely do not cover all simulatable counterfactuals\".",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#2: “LLMs most likely do not cover all simulatable counterfactuals”"
+   ]
+  },
+  {
+   "n": 46,
+   "text": "26 rows from 6 papers (15 proposed, 6 adopted, 5 adapted).",
+   "papers": [
+    "chen2025consistent",
+    "hase2026counterfactual",
+    "hong2026llm",
+    "lewislim2026efficient",
+    "mayne2026positivecasefaithfulnessllm",
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster cf-set: 26 entries, 6 keys; 15 proposed, 6 adopted, 5 adapted"
+   ]
+  },
+  {
+   "n": 47,
+   "text": "Data-driven set: $C(x)$ holds dataset rows within Hamming distance $\\le 2$ of $x$, balanced by label.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#3 gloss: 'Real dataset rows within Hamming distance ≤2, label-balanced'"
+   ]
+  },
+  {
+   "n": 48,
+   "text": "A cue test as a set with one element: $C(x)=\\{x_{\\text{bias}}\\}$ for the point $x_{\\text{no bias}}$.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#17"
+   ]
+  },
+  {
+   "n": 49,
+   "text": "Word insertion: $C(x)$ holds $x_w^{(i)}$, the input with word $w$ inserted at sampled position $i\\in\\{1,\\dots,m\\}$.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#18"
+   ]
+  },
+  {
+   "n": 50,
+   "text": "In this cluster the observer of cluster 2 is the model itself.",
+   "papers": [
+    "zeng2026evaluating",
+    "karvonen2026would",
+    "anon2026trainingoversight"
+   ],
+   "evidence": [
+    "zeng2026evaluating#3",
+    "karvonen2026would#10",
+    "anon2026trainingoversight#4"
+   ]
+  },
+  {
+   "n": 51,
+   "text": "It is asked whether, or how much, an edit would change its own behavior, and its answer is scored against runs on the edited input.",
+   "papers": [
+    "zeng2026evaluating",
+    "anon2026trainingoversight"
+   ],
+   "evidence": [
+    "zeng2026evaluating#3",
+    "zeng2026evaluating#14",
+    "anon2026trainingoversight#22"
+   ]
+  },
+  {
+   "n": 52,
+   "text": "[Zeng et al. 2026](./#p=zeng2026evaluating) call this self-modeling, \"an LLM’s ability to answer questions about its own behavior\", and test it with a benchmark of tasks, five of which are rows here (Flip-Decision, Flip-Rate, Perturbation-Choice, Component-Attribution and Score-Prediction); [Karvonen et al. 2026](./#p=karvonen2026would) train it as \"causal self-report\"; [Anonymous 2026 (introspective oversight)](./#p=anon2026trainingoversight) train an observer role in the same weights and reward it with a Brier score.",
+   "papers": [
+    "zeng2026evaluating",
+    "karvonen2026would",
+    "anon2026trainingoversight"
+   ],
+   "evidence": [
+    "zeng2026evaluating full text: “an LLM’s ability to answer questions about its own behavior”",
+    "karvonen2026would full text: “causal self-report”",
+    "zeng2026evaluating#3, #14, #18, #19, #28 (five rows in cluster self-prediction)",
+    "zeng2026evaluating full text: “Main E1-E9 Leaderboard results”",
+    "karvonen2026would full text: “4.1 Background: causal self-report and self-explanation”",
+    "anon2026trainingoversight full text: “The observer can be deployed easily in the same model weights as the assistant.”",
+    "anon2026trainingoversight#22"
+   ]
+  },
+  {
+   "n": 53,
+   "text": "[Zhang et al. 2026](./#p=zhang2026audit) score factor-importance self-reports against counterfactual audits and show that the audit rule decides whether truthful reporting pays: \"report-dependent auditing creates a suppression incentive\".",
+   "papers": [
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "zhang2026audit full text: “report-dependent auditing creates a suppression incentive”",
+    "zhang2026audit#4"
+   ]
+  },
+  {
+   "n": 54,
+   "text": "[Mayne et al. 2025](./#p=mayne2025llms) name self-prediction as one of three necessary criteria for valid and minimal self-generated counterfactuals (cluster 1).",
+   "papers": [
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "mayne2025llms#9: “three necessary but not sufficient criteria for success ... (iii) they must be able to accurately self-predict their behaviour”"
+   ]
+  },
+  {
+   "n": 55,
+   "text": "A claim the model makes about its own behavior is scored as true or false against runs on the edited input, which makes this cluster the counterfactual counterpart of the honesty and self-report rows in the other two families.",
+   "papers": [
+    "karvonen2026would",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "karvonen2026would#10",
+    "zeng2026evaluating#3",
+    "dump faithfulness: 49 rows with 'honest' and 47 with 'self-report' in the term; dump monitorability: 6 and 2"
+   ]
+  },
+  {
+   "n": 56,
+   "text": "11 rows from 5 papers (6 proposed, 1 adopted, 4 adapted).",
+   "papers": [
+    "anon2026trainingoversight",
+    "karvonen2026would",
+    "mayne2025llms",
+    "zeng2026evaluating",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster self-prediction: 11 entries, 5 keys; 6 proposed, 1 adopted, 4 adapted"
+   ]
+  },
+  {
+   "n": 57,
+   "text": "Observer reward ([Anonymous 2026 (introspective oversight)](./#p=anon2026trainingoversight)): $1-(p-y)^2$, where $y=(k+\\tfrac12)/(n+1)$ is the smoothed share of $n=10$ assistant samples showing the behavior.",
+   "papers": [
+    "anon2026trainingoversight"
+   ],
+   "evidence": [
+    "anon2026trainingoversight#22 gloss: 'y, the Jeffreys-smoothed share (k+1/2)/(n+1) of n=10 assistant samples'"
+   ]
+  },
+  {
+   "n": 58,
+   "text": "Counterfactual Brier score ([Zhang et al. 2026](./#p=zhang2026audit)): $S=-\\sum_j(p_j-\\hat{D}_j)^2$ between reported factor importances $p_j$ and counterfactual flip fractions $\\hat{D}_j$ (cluster 6); strictly proper under exogenous verification \"when the verification estimates are unbiased\".",
+   "papers": [
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "zhang2026audit full text: “when the verification estimates are unbiased”"
+   ]
+  },
+  {
+   "n": 59,
+   "text": "This is the largest cluster by papers.",
+   "papers": [],
+   "evidence": [
+    "input-intervention: 30 keys; next largest reasoning-intervention: 26 keys"
+   ]
+  },
+  {
+   "n": 60,
+   "text": "A counterfactual is the original input with one specified element removed, inserted or replaced, with everything else held fixed, and a difference between the two outputs is read as that element's influence.",
+   "papers": [
+    "matton2025walk",
+    "zhang2026audit",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "matton2025walk#5",
+    "zhang2026audit#3",
+    "cheah2026training#17"
+   ]
+  },
+  {
+   "n": 61,
+   "text": "The element is one of seven kinds:",
+   "papers": [],
+   "evidence": [
+    "cluster input-intervention entries"
+   ]
+  },
+  {
+   "n": 62,
+   "text": "a planted hint, cue or biasing feature ([Turpin et al. 2023](./#p=turpin2023language), [Chua & Evans 2025](./#p=chua2025deepseek), [Ferreira et al. 2026](./#p=ferreira2026outofsight), [Guan et al. 2025](./#p=guan2025monitoring), [Xiong et al. 2026](./#p=xiong2026monitorability), [Little 2026](./#p=little2026length), [Lewis-Lim et al. 2026](./#p=lewislim2026efficient), [Cheah et al. 2026](./#p=cheah2026training), [Alon et al. 2026](./#p=alon2026faithfulness), [Karvonen et al. 2026](./#p=karvonen2026would), [Guo et al. 2026](./#p=guo2026introspective), [Shiromani et al. 2026](./#p=shiromani2026necessary), [Bürger et al. 2026](./#p=burger2026chain), [Li 2026](./#p=li2026monitorability));",
+   "papers": [
+    "turpin2023language",
+    "chua2025deepseek",
+    "ferreira2026outofsight",
+    "guan2025monitoring",
+    "xiong2026monitorability",
+    "little2026length",
+    "lewislim2026efficient",
+    "cheah2026training",
+    "alon2026faithfulness",
+    "karvonen2026would",
+    "guo2026introspective",
+    "shiromani2026necessary",
+    "burger2026chain",
+    "li2026monitorability"
+   ],
+   "evidence": [
+    "turpin2023language#21",
+    "chua2025deepseek#8",
+    "ferreira2026outofsight#7",
+    "guan2025monitoring#11",
+    "xiong2026monitorability#7",
+    "little2026length#8",
+    "lewislim2026efficient#14",
+    "cheah2026training#16",
+    "alon2026faithfulness#3",
+    "karvonen2026would#6",
+    "guo2026introspective#3",
+    "shiromani2026necessary#5",
+    "burger2026chain#27",
+    "li2026monitorability#6"
+   ]
+  },
+  {
+   "n": 63,
+   "text": "a concept or structured factor ([Matton et al. 2025](./#p=matton2025walk), [Luo et al. 2026](./#p=luo2026removal), [Arcuschin et al. 2026](./#p=arcuschin2026biases), [Zhang et al. 2026](./#p=zhang2026audit));",
+   "papers": [
+    "matton2025walk",
+    "luo2026removal",
+    "arcuschin2026biases",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "matton2025walk#5",
+    "luo2026removal#14",
+    "arcuschin2026biases#5",
+    "zhang2026audit#3"
+   ]
+  },
+  {
+   "n": 64,
+   "text": "a protected attribute or user background ([Ferreira et al. 2025](./#p=ferreira2026truthful), [Pres et al. 2026a](./#p=pres2026consistency));",
+   "papers": [
+    "ferreira2026truthful",
+    "pres2026consistency"
+   ],
+   "evidence": [
+    "ferreira2026truthful#5",
+    "pres2026consistency#7"
+   ]
+  },
+  {
+   "n": 65,
+   "text": "the evidence passage ([Li et al. 2026](./#p=li2026when));",
+   "papers": [
+    "li2026when"
+   ],
+   "evidence": [
+    "li2026when#1"
+   ]
+  },
+  {
+   "n": 66,
+   "text": "an earlier turn of a conversation ([Zeng et al. 2026](./#p=zeng2026evaluating));",
+   "papers": [
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "zeng2026evaluating#4",
+    "zeng2026evaluating#26"
+   ]
+  },
+  {
+   "n": 67,
+   "text": "a note tying a valued outcome to the answer ([Anonymous 2026 (introspective oversight)](./#p=anon2026trainingoversight));",
+   "papers": [
+    "anon2026trainingoversight"
+   ],
+   "evidence": [
+    "anon2026trainingoversight#23"
+   ]
+  },
+  {
+   "n": 68,
+   "text": "an edit that changes the correct answer ([Akter et al. 2025](./#p=akter2025causal), [Wang et al. 2026a](./#p=wang2026case)).",
+   "papers": [
+    "akter2025causal",
+    "wang2026case"
+   ],
+   "evidence": [
+    "akter2025causal#15",
+    "wang2026case#10: “generate a counterfactual question that would yield a different answer”"
+   ]
+  },
+  {
+   "n": 69,
+   "text": "The rows cite three traditions for the design.",
+   "papers": [
+    "guan2025monitoring",
+    "alon2026faithfulness",
+    "ferreira2026outofsight"
+   ],
+   "evidence": [
+    "guan2025monitoring#11",
+    "alon2026faithfulness#8",
+    "ferreira2026outofsight#7"
+   ]
+  },
+  {
+   "n": 70,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) call it \"standard in the bias and fairness literature\", [Alon et al. 2026](./#p=alon2026faithfulness) take it from Kaushik et al. 2019, and [Ferreira et al. 2026](./#p=ferreira2026outofsight) note that it has \"been widely used to assess chain-of-thought faithfulness\" and monitorability.",
+   "papers": [
+    "guan2025monitoring",
+    "alon2026faithfulness",
+    "ferreira2026outofsight"
+   ],
+   "evidence": [
+    "guan2025monitoring#11: “standard in the bias and fairness literature”",
+    "ferreira2026outofsight#7: “been widely used to assess chain-of-thought faithfulness”",
+    "alon2026faithfulness#8: “Kaushik et al. (2019) form the basis of our evaluation protocol”"
+   ]
+  },
+  {
+   "n": 71,
+   "text": "[Matton et al. 2025](./#p=matton2025walk) state the edit with Pearl's do-operator as a direct effect.",
+   "papers": [
+    "matton2025walk"
+   ],
+   "evidence": [
+    "matton2025walk#14: “we examine the direct effects of concepts”",
+    "matton2025walk#14 source: Pearl 2022; Shpitser & Pearl 2006"
+   ]
+  },
+  {
+   "n": 72,
+   "text": "45 rows from 30 papers (19 proposed, 15 adopted, 11 adapted).",
+   "papers": [
+    "admoni2026aligning",
+    "agarwal2024faithfulness",
+    "akter2025causal",
+    "alon2026faithfulness",
+    "anon2026trainingoversight",
+    "arcuschin2026biases",
+    "burger2026chain",
+    "cheah2026training",
+    "chua2025deepseek",
+    "chuang2026faithlm",
+    "ferreira2026outofsight",
+    "ferreira2026truthful",
+    "guan2025monitoring",
+    "guo2026introspective",
+    "karvonen2026would",
+    "lewislim2026efficient",
+    "li2025better",
+    "li2025training",
+    "li2026monitorability",
+    "li2026when",
+    "little2026length",
+    "luo2026removal",
+    "matton2025walk",
+    "pres2026consistency",
+    "shiromani2026necessary",
+    "turpin2023language",
+    "wang2026case",
+    "xiong2026monitorability",
+    "zeng2026evaluating",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster input-intervention: 45 entries, 30 keys; 19 proposed, 15 adopted, 11 adapted"
+   ]
+  },
+  {
+   "n": 73,
+   "text": "Factor replacement: $x^{\\setminus j,v}$ equals $x$ except that factor $j$ takes the value $v\\sim\\mathcal{P}_j$ ([Zhang et al. 2026](./#p=zhang2026audit)).",
+   "papers": [
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "zhang2026audit#3"
+   ]
+  },
+  {
+   "n": 74,
+   "text": "Cue ablation: $x_{\\setminus C}$ ([Guo et al. 2026](./#p=guo2026introspective)); input ablation $T_{\\text{input}}(\\mathcal{M},x,\\tilde{x})=d(\\mathcal{M}(x),\\mathcal{M}(x\\backslash\\tilde{x}))$ ([Li et al. 2025b](./#p=li2025training)).",
+   "papers": [
+    "guo2026introspective",
+    "li2025training"
+   ],
+   "evidence": [
+    "guo2026introspective#3",
+    "li2025training#8"
+   ]
+  },
+  {
+   "n": 75,
+   "text": "Insertion: $x'=x\\oplus\\Delta$ ([Cheah et al. 2026](./#p=cheah2026training)).",
+   "papers": [
+    "cheah2026training"
+   ],
+   "evidence": [
+    "cheah2026training#5"
+   ]
+  },
+  {
+   "n": 76,
+   "text": "Paired concept variants $x^{+}_{c}$ (promoting $c$) and $x^{-}_{c}$ (diminishing $c$) ([Arcuschin et al. 2026](./#p=arcuschin2026biases)).",
+   "papers": [
+    "arcuschin2026biases"
+   ],
+   "evidence": [
+    "arcuschin2026biases#5"
+   ]
+  },
+  {
+   "n": 77,
+   "text": "Direct effect of a concept ([Matton et al. 2025](./#p=matton2025walk)): $\\mathbb{E}_{\\mathcal{E}}[Y\\mid do(C_m=c_m',\\{C_i=c_i\\}_{i\\neq m},V=v)]-\\mathbb{E}_{\\mathcal{E}}[Y\\mid do(\\{C_i=c_i\\}_{i\\in 1,\\ldots,M},V=v)]$.",
+   "papers": [
+    "matton2025walk"
+   ],
+   "evidence": [
+    "matton2025walk#14"
+   ]
+  },
+  {
+   "n": 78,
+   "text": "Hint flip: $a_0\\neq a_1=\\text{hint}$ ([Alon et al. 2026](./#p=alon2026faithfulness)).",
+   "papers": [
+    "alon2026faithfulness"
+   ],
+   "evidence": [
+    "alon2026faithfulness#3"
+   ]
+  },
+  {
+   "n": 79,
+   "text": "These rows state how runs on an original and a variant become a claim that the edit caused the outcome.",
+   "papers": [],
+   "evidence": [
+    "cluster effect entries"
+   ]
+  },
+  {
+   "n": 80,
+   "text": "They give four answers, from the most to the least per-instance:",
+   "papers": [],
+   "evidence": [
+    "cluster effect entries"
+   ]
+  },
+  {
+   "n": 81,
+   "text": "a flip label on one pair ([Shiromani et al. 2026](./#p=shiromani2026necessary)), or a flip fraction over $n=3$ sampled replacements per factor by default ([Zhang et al. 2026](./#p=zhang2026audit));",
+   "papers": [
+    "shiromani2026necessary",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "shiromani2026necessary#4",
+    "zhang2026audit#9 gloss: 'n = 3 by default'"
+   ]
+  },
+  {
+   "n": 82,
+   "text": "a resampled rate with thresholds ([Karvonen et al. 2026](./#p=karvonen2026would): positive when the cue raises the rate by at least 50 points, negative when it moves the rate by at most 15; [Zeng et al. 2026](./#p=zeng2026evaluating): three bands of flip fraction);",
+   "papers": [
+    "karvonen2026would",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "karvonen2026would#12",
+    "zeng2026evaluating#25"
+   ]
+  },
+  {
+   "n": 83,
+   "text": "a population effect: the total effect ([Ferreira et al. 2026](./#p=ferreira2026outofsight), [Bürger et al. 2026](./#p=burger2026chain), [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought)), the hint-caused switch rate ([Little 2026](./#p=little2026length)), the KL-based concept effect ([Matton et al. 2025](./#p=matton2025walk)) or the gap between paired variants ([Arcuschin et al. 2026](./#p=arcuschin2026biases));",
+   "papers": [
+    "ferreira2026outofsight",
+    "burger2026chain",
+    "anon2026chainofthought",
+    "little2026length",
+    "matton2025walk",
+    "arcuschin2026biases"
+   ],
+   "evidence": [
+    "ferreira2026outofsight#8",
+    "burger2026chain#22",
+    "anon2026chainofthought#16",
+    "little2026length#9",
+    "matton2025walk#6",
+    "arcuschin2026biases#9"
+   ]
+  },
+  {
+   "n": 84,
+   "text": "bounds on potential outcomes in a structural causal model ([Anonymous 2026 (causal bounds)](./#p=anon2026improving)).",
+   "papers": [
+    "anon2026improving"
+   ],
+   "evidence": [
+    "anon2026improving#15",
+    "anon2026improving#16",
+    "anon2026improving full text: “derive a corresponding lower bound”"
+   ]
+  },
+  {
+   "n": 85,
+   "text": "Three papers explain why a single flip is not enough.",
+   "papers": [
+    "burger2026chain",
+    "angdembay2026two",
+    "anon2026improving"
+   ],
+   "evidence": [
+    "burger2026chain#28",
+    "angdembay2026two#14",
+    "anon2026improving#16"
+   ]
+  },
+  {
+   "n": 86,
+   "text": "[Bürger et al. 2026](./#p=burger2026chain) reject the per-response criterion because it \"ignores the stochastic and chaotic nature of LLM output sampling\".",
+   "papers": [
+    "burger2026chain"
+   ],
+   "evidence": [
+    "burger2026chain#28: “ignores the stochastic and chaotic nature of LLM output sampling”"
+   ]
+  },
+  {
+   "n": 87,
+   "text": "[Angdembay et al. 2026](./#p=angdembay2026two) note that uncoupled sampling records \"an observed conditional flip rather than a within-pair counterfactual\".",
+   "papers": [
+    "angdembay2026two"
+   ],
+   "evidence": [
+    "angdembay2026two#14: “an observed conditional flip rather than a within-pair counterfactual”"
+   ]
+  },
+  {
+   "n": 88,
+   "text": "[Anonymous 2026 (causal bounds)](./#p=anon2026improving) show that separate arm samples do not identify \"this cross-world coupling\".",
+   "papers": [
+    "anon2026improving"
+   ],
+   "evidence": [
+    "anon2026improving#16: “this cross-world coupling”",
+    "anon2026improving#16"
+   ]
+  },
+  {
+   "n": 89,
+   "text": "[Shiromani et al. 2026](./#p=shiromani2026necessary) find that a third alternate candidate \"flips 11-23% of verdicts\", so their dependence label depends on which alternate defines the counterfactual.",
+   "papers": [
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "shiromani2026necessary full text: “flips 11-23% of verdicts”",
+    "shiromani2026necessary full text: “relabeling with a third candidate flips 11-23% of verdicts”",
+    "shiromani2026necessary#14"
+   ]
+  },
+  {
+   "n": 90,
+   "text": "23 rows from 13 papers (17 proposed, 2 adopted, 4 adapted).",
+   "papers": [
+    "angdembay2026two",
+    "anon2026chainofthought",
+    "anon2026improving",
+    "arcuschin2026biases",
+    "burger2026chain",
+    "cheah2026training",
+    "ferreira2026outofsight",
+    "karvonen2026would",
+    "little2026length",
+    "matton2025walk",
+    "shiromani2026necessary",
+    "zeng2026evaluating",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster effect: 23 entries, 13 keys; 17 proposed, 2 adopted, 4 adapted"
+   ]
+  },
+  {
+   "n": 91,
+   "text": "Total effect: $P(y=1\\mid x=1)-P(y=1\\mid x=0)$ ([Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought)); $\\mathrm{TE}:=p_{11}-p_{01}$, a lower bound on systematically influenced responses when $\\mathrm{TE}\\ge 0$ ([Bürger et al. 2026](./#p=burger2026chain)).",
+   "papers": [
+    "anon2026chainofthought",
+    "burger2026chain"
+   ],
+   "evidence": [
+    "anon2026chainofthought#16",
+    "burger2026chain#22"
+   ]
+  },
+  {
+   "n": 92,
+   "text": "Hint-caused switch rate under uniform switching: $I=p-q/(\\bar{n}-2)$ and $\\alpha=I/p$ ([Little 2026](./#p=little2026length)).",
+   "papers": [
+    "little2026length"
+   ],
+   "evidence": [
+    "little2026length#9"
+   ]
+  },
+  {
+   "n": 93,
+   "text": "Causal concept effect: $\\mathrm{CE}(\\mathbf{x},C_m)=\\frac{1}{|\\mathbb{C}'_m|}\\sum_{c'_m}D_{\\mathrm{KL}}\\big(\\mathbb{P}_{\\mathcal{M}}(Y\\mid\\mathbf{x}_{c_m\\to c'_m})\\,\\|\\,\\mathbb{P}_{\\mathcal{M}}(Y\\mid\\mathbf{x})\\big)$ ([Matton et al. 2025](./#p=matton2025walk)).",
+   "papers": [
+    "matton2025walk"
+   ],
+   "evidence": [
+    "matton2025walk#6"
+   ]
+  },
+  {
+   "n": 94,
+   "text": "Empirical flip rate: $g(x)=\\frac{1}{K^2}\\sum_{i=1}^{K}\\sum_{j=1}^{K}\\mathbf{1}[a_b^{(i)}(x)\\neq a_\\ell^{(j)}(x)]$ ([Zeng et al. 2026](./#p=zeng2026evaluating)).",
+   "papers": [
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "zeng2026evaluating#15"
+   ]
+  },
+  {
+   "n": 95,
+   "text": "Influence estimate: $\\hat{D}_j=\\frac{1}{n}\\sum_{i=1}^{n}\\mathbf{1}[M(x^{\\setminus j,v_i})\\neq y]$ ([Zhang et al. 2026](./#p=zhang2026audit)).",
+   "papers": [
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "zhang2026audit#9"
+   ]
+  },
+  {
+   "n": 96,
+   "text": "Bias strength: $\\Delta=p_{\\text{pos}}-p_{\\text{neg}}$ ([Arcuschin et al. 2026](./#p=arcuschin2026biases)).",
+   "papers": [
+    "arcuschin2026biases"
+   ],
+   "evidence": [
+    "arcuschin2026biases#9"
+   ]
+  },
+  {
+   "n": 97,
+   "text": "Direct effect on the early answer with the CoT state frozen: $\\mathrm{DE}_{\\mathrm{EA}}^{(i^*)}=P(Y=1\\mid X=1,do(H^{(i^*)}=H_0^{(i^*)}))-P(Y=1\\mid X=0)$ ([Bürger et al. 2026](./#p=burger2026chain)).",
+   "papers": [
+    "burger2026chain"
+   ],
+   "evidence": [
+    "burger2026chain#19"
+   ]
+  },
+  {
+   "n": 98,
+   "text": "Pair-centered effect: $\\log p(h_1\\mid W(h_1))-\\log p(h_1\\mid G(h_2))$ minus the pair mean ([Shiromani et al. 2026](./#p=shiromani2026necessary)).",
+   "papers": [
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "shiromani2026necessary#16"
+   ]
+  },
+  {
+   "n": 99,
+   "text": "These rows state what a variant must satisfy before an output change can be attributed to the intended edit.",
+   "papers": [],
+   "evidence": [
+    "cluster validity entries"
+   ]
+  },
+  {
+   "n": 100,
+   "text": "Thirteen papers give seven kinds of requirement:",
+   "papers": [
+    "akter2025causal",
+    "ananthula2026decodable",
+    "arcuschin2026biases",
+    "chuang2026faithlm",
+    "fareed2026plan",
+    "han2026rfeval",
+    "hong2026llm",
+    "karvonen2026would",
+    "li2026when",
+    "macar2025thought",
+    "matton2025walk",
+    "tutek2025measuring",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "cluster validity keys: akter2025causal, ananthula2026decodable, arcuschin2026biases, chuang2026faithlm, fareed2026plan, han2026rfeval, hong2026llm, karvonen2026would, li2026when, macar2025thought, matton2025walk, tutek2025measuring, zhang2026audit"
+   ]
+  },
+  {
+   "n": 101,
+   "text": "isolation: only the target changes ([Zhang et al. 2026](./#p=zhang2026audit), [Matton et al. 2025](./#p=matton2025walk), [Arcuschin et al. 2026](./#p=arcuschin2026biases), [Karvonen et al. 2026](./#p=karvonen2026would));",
+   "papers": [
+    "zhang2026audit",
+    "matton2025walk",
+    "arcuschin2026biases",
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "zhang2026audit#5",
+    "matton2025walk#15",
+    "arcuschin2026biases#23",
+    "karvonen2026would#16"
+   ]
+  },
+  {
+   "n": 102,
+   "text": "quality of a generated edit: coherence and completeness ([Matton et al. 2025](./#p=matton2025walk)), four criteria for injected reasoning ([Han et al. 2026](./#p=han2026rfeval)), semantic opposition of a contrary hint ([Chuang et al. 2024](./#p=chuang2026faithlm)), label flip rate and textual similarity ([Hong & Roth 2026](./#p=hong2026llm)), and residual leakage of the original answer ([Li et al. 2026](./#p=li2026when));",
+   "papers": [
+    "matton2025walk",
+    "han2026rfeval",
+    "chuang2026faithlm",
+    "hong2026llm",
+    "li2026when"
+   ],
+   "evidence": [
+    "matton2025walk#16",
+    "han2026rfeval#13",
+    "chuang2026faithlm#12",
+    "hong2026llm#20",
+    "hong2026llm#21",
+    "li2026when#9"
+   ]
+  },
+  {
+   "n": 103,
+   "text": "on-policy edits: text \"the model could have plausibly produced\" ([Macar et al. 2025](./#p=macar2025thought));",
+   "papers": [
+    "macar2025thought"
+   ],
+   "evidence": [
+    "macar2025thought#10: “the model could have plausibly produced”"
+   ]
+  },
+  {
+   "n": 104,
+   "text": "informativeness: the injected reasoning must oppose the model's baseline stance ([Han et al. 2026](./#p=han2026rfeval));",
+   "papers": [
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "han2026rfeval#5",
+    "han2026rfeval#12"
+   ]
+  },
+  {
+   "n": 105,
+   "text": "executability: both plans must succeed under forced execution ([Fareed 2026](./#p=fareed2026plan));",
+   "papers": [
+    "fareed2026plan"
+   ],
+   "evidence": [
+    "fareed2026plan#10"
+   ]
+  },
+  {
+   "n": 106,
+   "text": "controls: semantics-preserving null edits ([Akter et al. 2025](./#p=akter2025causal)) and matched swaps that keep the claim fixed ([Ananthula & Kumarappan 2026](./#p=ananthula2026decodable));",
+   "papers": [
+    "akter2025causal",
+    "ananthula2026decodable"
+   ],
+   "evidence": [
+    "akter2025causal#13",
+    "ananthula2026decodable#10"
+   ]
+  },
+  {
+   "n": 107,
+   "text": "for a parameter edit, efficacy and specificity of unlearning ([Tutek et al. 2025](./#p=tutek2025measuring)).",
+   "papers": [
+    "tutek2025measuring"
+   ],
+   "evidence": [
+    "tutek2025measuring#12"
+   ]
+  },
+  {
+   "n": 108,
+   "text": "Two papers report how much their checks remove: the isolation check of [Arcuschin et al. 2026](./#p=arcuschin2026biases) \"removed $42$ % of candidate concepts\", and [Han et al. 2026](./#p=han2026rfeval) \"started with 8,499 instances and removed 1,313\".",
+   "papers": [
+    "arcuschin2026biases",
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "arcuschin2026biases full text: “removed $42$ % of candidate concepts”",
+    "han2026rfeval full text: “started with 8,499 instances and removed 1,313”",
+    "han2026rfeval full text: “We started with 8,499 instances and removed 1,313, yielding 7,186 items.”"
+   ]
+  },
+  {
+   "n": 109,
+   "text": "25 rows from 13 papers (22 proposed, 2 adopted, 1 adapted).",
+   "papers": [
+    "akter2025causal",
+    "ananthula2026decodable",
+    "arcuschin2026biases",
+    "chuang2026faithlm",
+    "fareed2026plan",
+    "han2026rfeval",
+    "hong2026llm",
+    "karvonen2026would",
+    "li2026when",
+    "macar2025thought",
+    "matton2025walk",
+    "tutek2025measuring",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster validity: 25 entries, 13 keys; 22 proposed, 2 adopted, 1 adapted"
+   ]
+  },
+  {
+   "n": 110,
+   "text": "Contrast precondition and coverage ([Han et al. 2026](./#p=han2026rfeval)): $\\delta(x,r';\\mathcal{M})=\\mathbf{1}\\{S(r)\\neq S(r')\\}$ and $c(\\mathcal{M})=\\Pr_{(x,r')\\sim\\mathcal{D}}(\\delta(x,r';\\mathcal{M})=1)$.",
+   "papers": [
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "han2026rfeval#5",
+    "han2026rfeval#12"
+   ]
+  },
+  {
+   "n": 111,
+   "text": "Externality penalty ([Han et al. 2026](./#p=han2026rfeval)): $E(r')=1-\\mathrm{Jaccard}(\\mathcal{V}_x,\\mathcal{V}_{r'})$.",
+   "papers": [
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "han2026rfeval#14"
+   ]
+  },
+  {
+   "n": 112,
+   "text": "Accepted edits ([Akter et al. 2025](./#p=akter2025causal)): $q\\triangleq\\Pr(A)$ and $\\mu_A\\triangleq\\mathbb{E}[D(p(Y\\mid X,T),p(Y\\mid X,T'))\\mid A]$, where $A$ is the event that the edit is proposed and accepted as breaking trace validity.",
+   "papers": [
+    "akter2025causal"
+   ],
+   "evidence": [
+    "akter2025causal#12"
+   ]
+  },
+  {
+   "n": 113,
+   "text": "These rows use the same counterfactual as cluster 5, an input edit, but they judge the explanation, not the model's reliance on the edited element.",
+   "papers": [
+    "wang2025selfcritique",
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "wang2025selfcritique#1",
+    "parcalabescu2023measuring#6"
+   ]
+  },
+  {
+   "n": 114,
+   "text": "The procedure is that of Atanasova et al. 2023, which 13 of the 17 rows cite: words are inserted into the input, and if the prediction changes while the explanation of the edited instance does not mention the inserted words, the explanation counts as unfaithful.",
+   "papers": [
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "13 of 17 explanation-mention entries list 'Atanasova et al. 2023' in source",
+    "parcalabescu2023measuring#6"
+   ]
+  },
+  {
+   "n": 115,
+   "text": "Siegel et al. 2024, cited by 8 rows, replace the binary outcome with a correlation between mentions and the shift in the label distribution (the Correlational Counterfactual Test, CCT).",
+   "papers": [
+    "arcuschin2026biases",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "8 explanation-mention entries list 'Siegel et al. 2024' in source",
+    "arcuschin2026biases#7: “considers the total shift in predicted label distributions rather than just binary outcomes”",
+    "cheah2026training#22"
+   ]
+  },
+  {
+   "n": 116,
+   "text": "Neither paper is in the map.",
+   "papers": [],
+   "evidence": [
+    "index.csv has no Atanasova 2023 or Siegel 2024 entry"
+   ]
+  },
+  {
+   "n": 117,
+   "text": "Variants replace the inserted words with GPT-4o-generated modifiers ([Wang & Atanasova 2025](./#p=wang2025selfcritique)) or with hint keywords ([Alon et al. 2026](./#p=alon2026faithfulness)), and [Bhan et al. 2025](./#p=bhan2025did) describe the family as methods that generate counterfactual texts with auxiliary models.",
+   "papers": [
+    "wang2025selfcritique",
+    "alon2026faithfulness",
+    "bhan2025did"
+   ],
+   "evidence": [
+    "wang2025selfcritique#3 gloss: 'GPT-4o generates 20 coherent, unique interventions per instance'",
+    "alon2026faithfulness#5",
+    "bhan2025did#5: “Counterfactual Intervention (CI) methods employ auxiliary models to generate counterfactual texts”"
+   ]
+  },
+  {
+   "n": 118,
+   "text": "Two rows are proposed, both by [Wang & Atanasova 2025](./#p=wang2025selfcritique): the counter rate and the use of the inserted word as \"the true reasoning factor\".",
+   "papers": [
+    "wang2025selfcritique"
+   ],
+   "evidence": [
+    "wang2025selfcritique#7: “the true reasoning factor”",
+    "wang2025selfcritique#7 (proposed)",
+    "wang2025selfcritique#9 (proposed)"
+   ]
+  },
+  {
+   "n": 119,
+   "text": "17 rows from 12 papers (2 proposed, 12 adopted, 3 adapted).",
+   "papers": [
+    "admoni2026aligning",
+    "alon2026faithfulness",
+    "arcuschin2026biases",
+    "bhan2025did",
+    "cheah2026training",
+    "gema2026chainofthought",
+    "li2025drift",
+    "matton2025walk",
+    "parcalabescu2023measuring",
+    "wang2025selfcritique",
+    "zaman2025causal",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster explanation-mention: 17 entries, 12 keys; 2 proposed, 12 adopted, 3 adapted"
+   ]
+  },
+  {
+   "n": 120,
+   "text": "Formal version, restated from [Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring) and [Wang & Atanasova 2025](./#p=wang2025selfcritique): let $x'$ be the edited input and $w$ the inserted words; an instance is unfaithful when $f(x')\\neq f(x)$ and $w$ does not occur in the explanation $e(x')$.",
+   "papers": [
+    "parcalabescu2023measuring",
+    "wang2025selfcritique"
+   ],
+   "evidence": [
+    "parcalabescu2023measuring#6",
+    "wang2025selfcritique#1"
+   ]
+  },
+  {
+   "n": 121,
+   "text": "[Wang & Atanasova 2025](./#p=wang2025selfcritique) check occurrence by string matching and report the counter rate, the share of 20,000 intervened instances per model and dataset whose prediction changes.",
+   "papers": [
+    "wang2025selfcritique"
+   ],
+   "evidence": [
+    "wang2025selfcritique#1: “(determined by string matching)”",
+    "wang2025selfcritique#9: “out of 20,000 total intervened instances”"
+   ]
+  },
+  {
+   "n": 122,
+   "text": "This is the largest cluster by rows.",
+   "papers": [],
+   "evidence": [
+    "reasoning-intervention: 49 entries; next largest input-intervention: 45"
+   ]
+  },
+  {
+   "n": 123,
+   "text": "The counterfactual is a version of the model's own intermediate output with the input held fixed: the chain of thought in 41 of the 49 rows, and in the other 8 a generated mediator, a seeded plan, a rationale span or a stored trace crossed with edited evidence.",
+   "papers": [
+    "somov2026breaking",
+    "fareed2026plan",
+    "ananthula2026decodable",
+    "li2026when"
+   ],
+   "evidence": [
+    "non-CoT rows: somov2026breaking#7, #10, #21; fareed2026plan#5, #8; ananthula2026decodable#4, #5; li2026when#5"
+   ]
+  },
+  {
+   "n": 124,
+   "text": "Thirteen of the 49 rows cite [Lanham et al. 2023](./#p=lanham2023measuring).",
+   "papers": [
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "13 reasoning-intervention entries list lanham2023measuring in source"
+   ]
+  },
+  {
+   "n": 125,
+   "text": "The edits are of eight kinds:",
+   "papers": [],
+   "evidence": [
+    "cluster reasoning-intervention entries"
+   ]
+  },
+  {
+   "n": 126,
+   "text": "truncation and forced early answering ([Parekh & Goyal 2026](./#p=parekh2026drop), [Anonymous 2026 (GRACE)](./#p=anon2026grace), [Wang et al. 2026c](./#p=wang2026verbalising), [Shen et al. 2026](./#p=shen2026detecting));",
+   "papers": [
+    "parekh2026drop",
+    "anon2026grace",
+    "wang2026verbalising",
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "parekh2026drop#2",
+    "anon2026grace#7",
+    "wang2026verbalising#20",
+    "shen2026detecting#20"
+   ]
+  },
+  {
+   "n": 127,
+   "text": "an inserted mistake or a single decisive error ([Shen et al. 2026](./#p=shen2026detecting), [Anonymous 2026 (CRISP)](./#p=anon2026crisp));",
+   "papers": [
+    "shen2026detecting",
+    "anon2026crisp"
+   ],
+   "evidence": [
+    "shen2026detecting#17",
+    "anon2026crisp#23"
+   ]
+  },
+  {
+   "n": 128,
+   "text": "paraphrase ([Anonymous 2026 (GRACE)](./#p=anon2026grace), [Shen et al. 2026](./#p=shen2026detecting));",
+   "papers": [
+    "anon2026grace",
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "anon2026grace#7",
+    "shen2026detecting#21"
+   ]
+  },
+  {
+   "n": 129,
+   "text": "a contradicting step, operator swap, changed conclusion or irrelevant fact ([Khanzadeh 2026](./#p=khanzadeh2026project), [Akter et al. 2025](./#p=akter2025causal), [Xiong et al. 2026](./#p=xiong2026monitorability), [Swaroop et al. 2025](./#p=swaroop2025lift));",
+   "papers": [
+    "khanzadeh2026project",
+    "akter2025causal",
+    "xiong2026monitorability",
+    "swaroop2025lift"
+   ],
+   "evidence": [
+    "khanzadeh2026project#6",
+    "akter2025causal#3",
+    "xiong2026monitorability#6",
+    "swaroop2025lift#3"
+   ]
+  },
+  {
+   "n": 130,
+   "text": "a substituted whole rationale or injected flawed reasoning ([Cox et al. 2026](./#p=cox2026posthoc), [Han et al. 2026](./#p=han2026rfeval), [Lv et al. 2026](./#p=lv2026geofaith));",
+   "papers": [
+    "cox2026posthoc",
+    "han2026rfeval",
+    "lv2026geofaith"
+   ],
+   "evidence": [
+    "cox2026posthoc#6",
+    "han2026rfeval#4",
+    "lv2026geofaith#11"
+   ]
+  },
+  {
+   "n": 131,
+   "text": "resampling from a sentence onward, and transplanting a hinted prefix into the unhinted prompt ([Macar et al. 2025](./#p=macar2025thought));",
+   "papers": [
+    "macar2025thought"
+   ],
+   "evidence": [
+    "macar2025thought#9",
+    "macar2025thought#11"
+   ]
+  },
+  {
+   "n": 132,
+   "text": "counterfactual chains in a causal mediation analysis ([Paul et al. 2024](./#p=paul2024making), [Kudo et al. 2024](./#p=kudo2024llms), [Wang et al. 2026b](./#p=wang2026concept), [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought));",
+   "papers": [
+    "paul2024making",
+    "kudo2024llms",
+    "wang2026concept",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "paul2024making#6",
+    "kudo2024llms#5",
+    "wang2026concept#17",
+    "zaman2025chainofthought#16"
+   ]
+  },
+  {
+   "n": 133,
+   "text": "edits to other intermediates: a generated mediator ([Somov et al. 2026](./#p=somov2026breaking)), a seeded plan ([Fareed 2026](./#p=fareed2026plan)), a rationale or evidence span ([Ananthula & Kumarappan 2026](./#p=ananthula2026decodable)), a stored trace answered against edited evidence ([Li et al. 2026](./#p=li2026when)).",
+   "papers": [
+    "somov2026breaking",
+    "fareed2026plan",
+    "ananthula2026decodable",
+    "li2026when"
+   ],
+   "evidence": [
+    "somov2026breaking#21",
+    "fareed2026plan#5",
+    "ananthula2026decodable#4",
+    "li2026when#5"
+   ]
+  },
+  {
+   "n": 134,
+   "text": "If the answer follows the edit, it is taken to depend on the reasoning.",
+   "papers": [
+    "shen2026detecting",
+    "akter2025causal"
+   ],
+   "evidence": [
+    "shen2026detecting#6",
+    "akter2025causal#6"
+   ]
+  },
+  {
+   "n": 135,
+   "text": "[Akter et al. 2025](./#p=akter2025causal) write that \"Higher COS indicates greater faithfulness\"; [Baker et al. 2025](./#p=baker2025monitoring) describe such tests as ones that \"implicitly treat faithfulness as a causal metric\" and argue that for monitorability the relevant question is whether CoT tokens \"explain the target variable\", not whether they cause it (Tensions, item 9).",
+   "papers": [
+    "akter2025causal",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "akter2025causal#6: “Higher COS indicates greater faithfulness”",
+    "baker2025monitoring#27: “implicitly treat faithfulness as a causal metric”",
+    "baker2025monitoring full text: “explain the target variable”",
+    "baker2025monitoring full text: “the more relevant question is not “Do these CoT tokens cause the target variable?” but rather “Do these CoT tokens explain the target variable?”"
+   ]
+  },
+  {
+   "n": 136,
+   "text": "49 rows from 26 papers (27 proposed, 18 adopted, 4 adapted).",
+   "papers": [
+    "akter2025causal",
+    "ananthula2026decodable",
+    "angdembay2026two",
+    "anon2026crisp",
+    "anon2026generating",
+    "anon2026grace",
+    "baker2025monitoring",
+    "cheah2026training",
+    "cox2026posthoc",
+    "fareed2026plan",
+    "han2026rfeval",
+    "khanzadeh2026project",
+    "kudo2024llms",
+    "li2026when",
+    "lv2026geofaith",
+    "macar2025thought",
+    "madsen2024self",
+    "parekh2026drop",
+    "paul2024making",
+    "shen2026detecting",
+    "somov2026breaking",
+    "swaroop2025lift",
+    "wang2026concept",
+    "wang2026verbalising",
+    "xiong2026monitorability",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster reasoning-intervention: 49 entries, 26 keys; 27 proposed, 18 adopted, 4 adapted"
+   ]
+  },
+  {
+   "n": 137,
+   "text": "Counterfactual Sensitivity: $\\mathrm{CS}(X;T\\to T')=D_{\\mathrm{KL}}\\big(p(Y\\mid X,T)\\,\\|\\,p(Y\\mid X,T')\\big)$; Counterfactual Outcome Sensitivity (COS) is its binary-flip version ([Akter et al. 2025](./#p=akter2025causal)).",
+   "papers": [
+    "akter2025causal"
+   ],
+   "evidence": [
+    "akter2025causal#4",
+    "akter2025causal#6"
+   ]
+  },
+  {
+   "n": 138,
+   "text": "Step intervention $do(s_k=s'_k)$, with counterfactual answer $a^*=f_a(q,\\{s_1,\\dots,\\iota(s_k),\\dots,s^*_n\\};\\theta)$, where later steps are re-sampled ([Khanzadeh 2026](./#p=khanzadeh2026project)).",
+   "papers": [
+    "khanzadeh2026project"
+   ],
+   "evidence": [
+    "khanzadeh2026project#6",
+    "khanzadeh2026project#7"
+   ]
+  },
+  {
+   "n": 139,
+   "text": "Counterfactual importance $D_{KL}[p(A'_{S_i}\\mid T_i\\not\\approx S_i)\\,\\|\\,p(A_{S_i})]$ and counterfactual++ importance $D_{KL}[p(A'_{S_i}\\mid \\forall j\\ge i: T_j\\not\\approx S_i)\\,\\|\\,p(A_{S_i})]$ ([Macar et al. 2025](./#p=macar2025thought)).",
+   "papers": [
+    "macar2025thought"
+   ],
+   "evidence": [
+    "macar2025thought#1",
+    "macar2025thought#2"
+   ]
+  },
+  {
+   "n": 140,
+   "text": "Sentence-cluster effect: $\\mathrm{Effect}(C)=\\mathbb{E}_{s_i\\in C}[p(A_{\\text{yes}}\\mid\\mathrm{CoT}_{1\\dots i})-p(A_{\\text{yes}}\\mid\\mathrm{CoT}_{1\\dots i-1})]$ ([Macar et al. 2025](./#p=macar2025thought)).",
+   "papers": [
+    "macar2025thought"
+   ],
+   "evidence": [
+    "macar2025thought#12"
+   ]
+  },
+  {
+   "n": 141,
+   "text": "Counterfactual operator: $\\mathcal{C}'=\\Delta(\\mathcal{C})$ and $a'=\\mathrm{M}_{\\text{Ans}}(q,\\mathcal{C}')$ ([Shen et al. 2026](./#p=shen2026detecting)); counterfactual sentence $r_t^{(\\mu\\to\\tilde{o})}=(o_{t,<\\mu},\\tilde{o}_{t,\\mu},\\hat{o}_{t,>\\mu})$ with the suffix regenerated ([Shen et al. 2026](./#p=shen2026detecting)).",
+   "papers": [
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "shen2026detecting#6",
+    "shen2026detecting#14"
+   ]
+  },
+  {
+   "n": 142,
+   "text": "Paired graph experiment $E=(x,c,c',y)$, with attribution graphs $G_0=G(x,c,y)$ and $G_1=G(x,c',y)$ over one feature space ([Anonymous 2026 (GRACE)](./#p=anon2026grace)).",
+   "papers": [
+    "anon2026grace"
+   ],
+   "evidence": [
+    "anon2026grace#8"
+   ]
+  },
+  {
+   "n": 143,
+   "text": "These rows use counterfactuals as training data or as a reward signal, not as a test.",
+   "papers": [
+    "ferreira2026truthful"
+   ],
+   "evidence": [
+    "cluster training-pairs entries",
+    "ferreira2026truthful#13"
+   ]
+  },
+  {
+   "n": 144,
+   "text": "The counterfactual is a rationale or context, paired with the output the model should give on it.",
+   "papers": [
+    "wang2023scott",
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "wang2023scott#5",
+    "tang2026unlearning#1"
+   ]
+  },
+  {
+   "n": 145,
+   "text": "The training goes in one of two opposite directions:",
+   "papers": [
+    "wang2023scott",
+    "chua2024biasaugmented",
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "wang2023scott#4",
+    "chua2024biasaugmented#7",
+    "tang2026unlearning#1"
+   ]
+  },
+  {
+   "n": 146,
+   "text": "sensitivity: the model is trained to follow a rationale that leads to a different answer ([Wang et al. 2023](./#p=wang2023scott), [Paul et al. 2024](./#p=paul2024making), [Wang et al. 2026a](./#p=wang2026case), [Akter et al. 2025](./#p=akter2025causal)) or to lower its confidence when the rationale is masked or corrupted ([Wang et al. 2022](./#p=wang2023pinto));",
+   "papers": [
+    "wang2023scott",
+    "paul2024making",
+    "wang2026case",
+    "akter2025causal",
+    "wang2023pinto"
+   ],
+   "evidence": [
+    "wang2023scott#4",
+    "paul2024making#7",
+    "wang2026case#4",
+    "akter2025causal#3",
+    "wang2023pinto#5",
+    "wang2023pinto#6",
+    "wang2023pinto#7"
+   ]
+  },
+  {
+   "n": 147,
+   "text": "invariance: the model is trained to give, under a biasing or pressuring context, the response it gives without that context ([Chua et al. 2024](./#p=chua2024biasaugmented), [Tang & Khanna 2026](./#p=tang2026unlearning)).",
+   "papers": [
+    "chua2024biasaugmented",
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "chua2024biasaugmented#7",
+    "tang2026unlearning#1",
+    "attr tang2026unlearning#1 <- chua2024biasaugmented source evidence: “we perform supervised fine-tuning on the model with this dataset of bias-augmented prompts and unbiased CoT reasoning”"
+   ]
+  },
+  {
+   "n": 148,
+   "text": "[Tang & Khanna 2026](./#p=tang2026unlearning) call the targets \"the model’s own honest response\" and add an acknowledgment of the pressure to the trace.",
+   "papers": [
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "tang2026unlearning#2: “the model’s own honest response”",
+    "tang2026unlearning#12: “prepends to the trace a short acknowledgment $a(c^{+})$ that registers the pressure”"
+   ]
+  },
+  {
+   "n": 149,
+   "text": "[Ferreira et al. 2025](./#p=ferreira2026truthful) use the counterfactual for a reward model instead: a disclaimer of cue use is appended when the prediction without the cue differs.",
+   "papers": [
+    "ferreira2026truthful"
+   ],
+   "evidence": [
+    "ferreira2026truthful#13"
+   ]
+  },
+  {
+   "n": 150,
+   "text": "15 rows from 9 papers (12 proposed, 3 adapted).",
+   "papers": [
+    "akter2025causal",
+    "arcuschin2025chain",
+    "chua2024biasaugmented",
+    "ferreira2026truthful",
+    "paul2024making",
+    "tang2026unlearning",
+    "wang2023pinto",
+    "wang2023scott",
+    "wang2026case"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster training-pairs: 15 entries, 9 keys; 12 proposed, 3 adapted"
+   ]
+  },
+  {
+   "n": 151,
+   "text": "Counterfactual loss ([Wang et al. 2023](./#p=wang2023scott)): $\\mathcal{L}_{counterfactual}=-\\sum_i\\log P(t_i\\mid q,r',t_{<i})$ over the answer tokens of a wrong answer $a'$ that the rationale $r'$ supports.",
+   "papers": [
+    "wang2023scott"
+   ],
+   "evidence": [
+    "wang2023scott#5"
+   ]
+  },
+  {
+   "n": 152,
+   "text": "Counterfactual regularization ([Wang et al. 2022](./#p=wang2023pinto)): $\\mathcal{L}_{\\text{c-reg}}=-\\sum_{a_i\\in A}Q'(a_i\\mid q,A)\\log P(a_i\\mid q,A,R')$, with label-smoothed targets $Q'$ on perturbed rationales $R'$.",
+   "papers": [
+    "wang2023pinto"
+   ],
+   "evidence": [
+    "wang2023pinto#8"
+   ]
+  },
+  {
+   "n": 153,
+   "text": "Counterfactual distillation ([Tang & Khanna 2026](./#p=tang2026unlearning)): $\\ell_{\\mathrm{CD}}(\\theta)=-\\mathbb{E}_i\\log\\pi_\\theta(y^H_i,t^H_i\\mid x_i,c^+_i)$ with $(y^H_i,t^H_i)\\sim\\pi_0(\\cdot\\mid x_i,c^-_i)$; the pressure-aware target $\\ell_{\\mathrm{aware}}$ prepends an acknowledgment $a(c^+_i)$ to $t^H_i$.",
+   "papers": [
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "tang2026unlearning#1",
+    "tang2026unlearning#12"
+   ]
+  },
+  {
+   "n": 154,
+   "text": "The counterfactual is an alternative value of something inside the model:",
+   "papers": [],
+   "evidence": [
+    "cluster internal-state entries"
+   ]
+  },
+  {
+   "n": 155,
+   "text": "an attention distribution, permuted or adversarially searched with the encoder states held fixed ([Jain & Wallace 2019](./#p=jain2019attention)), and the same framework as read by [Wiegreffe & Pinter 2019](./#p=wiegreffe2019attention);",
+   "papers": [
+    "jain2019attention",
+    "wiegreffe2019attention"
+   ],
+   "evidence": [
+    "jain2019attention#3",
+    "jain2019attention#4",
+    "jain2019attention#6",
+    "wiegreffe2019attention#3"
+   ]
+  },
+  {
+   "n": 156,
+   "text": "activations taken from a counterfactual input and patched into the original run ([Li et al. 2025b](./#p=li2025training), [Bhupatiraju & Nyaupane 2026](./#p=bhupatiraju2026stated), [Guo et al. 2026](./#p=guo2026introspective));",
+   "papers": [
+    "li2025training",
+    "bhupatiraju2026stated",
+    "guo2026introspective"
+   ],
+   "evidence": [
+    "li2025training#7",
+    "bhupatiraju2026stated#5",
+    "guo2026introspective#14"
+   ]
+  },
+  {
+   "n": 157,
+   "text": "an edited knowledge triple, injected in context or by weight editing ([Zaman & Srivastava 2025a](./#p=zaman2025causal));",
+   "papers": [
+    "zaman2025causal"
+   ],
+   "evidence": [
+    "zaman2025causal#8 gloss: 'edited knowledge triplet (s, r, ō) injected with ICE or MEMIT'"
+   ]
+  },
+  {
+   "n": 158,
+   "text": "a token-permuted span at which a Jacobian is taken ([Wang et al. 2025a](./#p=wang2025causallyenhanced));",
+   "papers": [
+    "wang2025causallyenhanced"
+   ],
+   "evidence": [
+    "wang2025causallyenhanced#3"
+   ]
+  },
+  {
+   "n": 159,
+   "text": "the model's parameters after a reasoning step is unlearned ([Tutek et al. 2025](./#p=tutek2025measuring)).",
+   "papers": [
+    "tutek2025measuring"
+   ],
+   "evidence": [
+    "tutek2025measuring#11"
+   ]
+  },
+  {
+   "n": 160,
+   "text": "In the patching rows, the counterfactual input serves only as the source of the activations.",
+   "papers": [
+    "li2025training"
+   ],
+   "evidence": [
+    "li2025training#7",
+    "li2025training#3"
+   ]
+  },
+  {
+   "n": 161,
+   "text": "Two rows change the weights: [Tutek et al. 2025](./#p=tutek2025measuring) unlearn a reasoning step to obtain a modified model $\\mathcal{M}^{*}$, and [Zaman & Srivastava 2025a](./#p=zaman2025causal) inject edited knowledge with MEMIT, which is \"directly modifying specific model weights\", as well as in context.",
+   "papers": [
+    "tutek2025measuring",
+    "zaman2025causal"
+   ],
+   "evidence": [
+    "zaman2025causal full text: “directly modifying specific model weights”",
+    "tutek2025measuring#11",
+    "zaman2025causal full text: “While MEMIT is a locate-then-edit based approach, directly modifying specific model weights to incorporate new knowledge, ICE is a memory-based approach”",
+    "zaman2025causal#8"
+   ]
+  },
+  {
+   "n": 162,
+   "text": "11 rows from 8 papers (8 proposed, 3 adopted).",
+   "papers": [
+    "bhupatiraju2026stated",
+    "guo2026introspective",
+    "jain2019attention",
+    "li2025training",
+    "tutek2025measuring",
+    "wang2025causallyenhanced",
+    "wiegreffe2019attention",
+    "zaman2025causal"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster internal-state: 11 entries, 8 keys; 8 proposed, 3 adopted"
+   ]
+  },
+  {
+   "n": 163,
+   "text": "Activation patching ([Li et al. 2025b](./#p=li2025training)): $\\mathcal{M}(x;\\,h_{\\ell,t}(x)\\leftarrow h_{\\ell,t}(x'))$, scored by $d(\\mathcal{M}(x),\\mathcal{M}(x;\\,h_{\\ell,t}(x)\\leftarrow h_{\\ell,t}(x')))$.",
+   "papers": [
+    "li2025training"
+   ],
+   "evidence": [
+    "li2025training#7"
+   ]
+  },
+  {
+   "n": 164,
+   "text": "Adversarial attention ([Jain & Wallace 2019](./#p=jain2019attention)): the largest JSD from $\\hat\\alpha$ among weights whose output stays within $\\epsilon$ TVD of the original, with $\\epsilon=0.01$ for classification and $0.05$ for QA.",
+   "papers": [
+    "jain2019attention"
+   ],
+   "evidence": [
+    "jain2019attention#4"
+   ]
+  },
+  {
+   "n": 165,
+   "text": "In these rows the counterfactual condition is the evidence that a behavior is strategic, hidden or dishonest, in settings where a single trajectory does not show it.",
+   "papers": [
+    "schoen2025stress",
+    "farquhar2025mona",
+    "haskins2026training"
+   ],
+   "evidence": [
+    "schoen2025stress#4",
+    "schoen2025stress#34",
+    "farquhar2025mona#2",
+    "haskins2026training#9"
+   ]
+  },
+  {
+   "n": 166,
+   "text": "The rows cover six behaviors:",
+   "papers": [],
+   "evidence": [
+    "cluster covert entries"
+   ]
+  },
+  {
+   "n": 167,
+   "text": "sandbagging: the environment's incentive is reversed, and the behavior is compared across the two conditions ([Schoen et al. 2025](./#p=schoen2025stress));",
+   "papers": [
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "schoen2025stress#4"
+   ]
+  },
+  {
+   "n": 168,
+   "text": "sabotage: the same coding task is framed as for the model itself or for its successor, and \"o4-mini SAB underperforms on its successor’s code at a significantly higher rate than on its own\" ([Schoen et al. 2025](./#p=schoen2025stress));",
+   "papers": [
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "schoen2025stress#34: “o4-mini SAB underperforms on its successor’s code at a significantly higher rate than on its own”",
+    "schoen2025stress#34"
+   ]
+  },
+  {
+   "n": 169,
+   "text": "evaluation awareness: awareness is injected into or removed from the CoT to measure its \"causal effect ... on the pursuit of covert actions\" ([Schoen et al. 2025](./#p=schoen2025stress));",
+   "papers": [
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "schoen2025stress#3: “causal effect ... on the pursuit of covert actions”",
+    "schoen2025stress#3"
+   ]
+  },
+  {
+   "n": 170,
+   "text": "steganographic reliance: an ordinary RL agent that \"learns to evade the monitor to secretly encode information\" shows a large gap between the original and the \"counterfactual\" reward when only the applicant's nationality is changed ([Farquhar et al. 2025](./#p=farquhar2025mona));",
+   "papers": [
+    "farquhar2025mona"
+   ],
+   "evidence": [
+    "farquhar2025mona full text: “learns to evade the monitor to secretly encode information”",
+    "farquhar2025mona#2: “counterfactual”",
+    "farquhar2025mona full text: “The agent’s scratchpad is monitored for references to nationality but it learns to evade the monitor to secretly encode information used for a final decision.”",
+    "farquhar2025mona#2"
+   ]
+  },
+  {
+   "n": 171,
+   "text": "obfuscated denial: a judge asks whether reasoning \"could ... plausibly have been produced in a scenario where no defect existed\"; it labels \"93.8% of behavior-only CoTs as impossible without the defect, compared to only 38.4% for the monitor-aware model\" ([Haskins et al. 2026](./#p=haskins2026training));",
+   "papers": [
+    "haskins2026training"
+   ],
+   "evidence": [
+    "haskins2026training#9: “could ... plausibly have been produced in a scenario where no defect existed”",
+    "haskins2026training full text: “93.8% of behavior-only CoTs as impossible without the defect, compared to only 38.4% for the monitor-aware model”",
+    "haskins2026training#9",
+    "haskins2026training full text: “The autorater labels 93.8% of behavior-only CoTs as impossible without the defect, compared to only 38.4% for the monitor-aware model.”"
+   ]
+  },
+  {
+   "n": 172,
+   "text": "dishonesty: a neutral variant of each query verifies what the model knows before honesty is scored under pressure ([Wang et al. 2025b](./#p=wang2025evaluating)); biased and unbiased prompts verify \"whether specific factors actually influenced behavior\" for an honest-persona reviewer ([Dietz et al. 2026](./#p=dietz2026split)); a persona system prompt tests whether denial of tampering reflects \"a fixed “safe and reliable assistant” persona\" ([Nguyen et al. 2026](./#p=nguyen2026can)).",
+   "papers": [
+    "wang2025evaluating",
+    "dietz2026split",
+    "nguyen2026can"
+   ],
+   "evidence": [
+    "dietz2026split#8: “whether specific factors actually influenced behavior”",
+    "nguyen2026can#9: “a fixed “safe and reliable assistant” persona”",
+    "nguyen2026can#9: “safe and reliable assistant”",
+    "wang2025evaluating#1",
+    "dietz2026split#8",
+    "nguyen2026can#9"
+   ]
+  },
+  {
+   "n": 173,
+   "text": "These rows are where the counterfactual family meets the scheming and obfuscation rows of the [monitorability](#monitorability) section and the honesty rows of the [faithfulness](#faithfulness) section.",
+   "papers": [],
+   "evidence": [
+    "dump monitorability: 16 rows with 'schem' and 58 with 'obfusc' in the term; dump faithfulness: 49 with 'honest'"
+   ]
+  },
+  {
+   "n": 174,
+   "text": "8 rows from 6 papers (8 proposed).",
+   "papers": [
+    "dietz2026split",
+    "farquhar2025mona",
+    "haskins2026training",
+    "nguyen2026can",
+    "schoen2025stress",
+    "wang2025evaluating"
+   ],
+   "evidence": [
+    "synth_counterfactual.json cluster covert: 8 entries, 6 keys; 8 proposed"
+   ]
+  },
+  {
+   "n": 175,
+   "text": "Of the 292 rows, 132 are borrowed (86 adopted, 46 adapted), from 62 papers.",
+   "papers": [],
+   "evidence": [
+    "dump counterfactual: 86 adopted + 46 adapted = 132 rows, 62 distinct keys"
+   ]
+  },
+  {
+   "n": 176,
+   "text": "Of these, 76 cite at least one source in the map and 56 cite only sources outside it.",
+   "papers": [],
+   "evidence": [
+    "76 borrowed rows list at least one index.csv key in source; 56 list none"
+   ]
+  },
+  {
+   "n": 177,
+   "text": "Counting each row once per cited source, 13 sources are borrowed by at least 5 rows:",
+   "papers": [],
+   "evidence": [
+    "source tallies over borrowed rows (variants merged: 'Doshi-Velez and Kim' = 'Doshi-Velez & Kim', 'Hase and Bansal' = 'Hase & Bansal', Pearl 2001/2009/2021/2022 merged)"
+   ]
+  },
+  {
+   "n": 178,
+   "text": "Eight of the 13 sources are in the map and five are not.",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "lanham2023measuring",
+    "turpin2023language",
+    "matton2025walk",
+    "chen2025reasoning",
+    "hase2026counterfactual",
+    "madsen2024self",
+    "paul2024making"
+   ],
+   "evidence": [
+    "in index.csv: pmlr-v235-chen24bl, lanham2023measuring, turpin2023language, matton2025walk, chen2025reasoning, hase2026counterfactual, madsen2024self, paul2024making; not: Atanasova 2023, Siegel 2024, Pearl, Doshi-Velez & Kim 2017, Hase & Bansal 2020"
+   ]
+  },
+  {
+   "n": 179,
+   "text": "The most-borrowed source, Atanasova et al. 2023, is outside the map, and so is Siegel et al. 2024, the second source of the same cluster.",
+   "papers": [],
+   "evidence": [
+    "Atanasova et al. 2023: 18 rows, 14 papers; Siegel et al. 2024: 9 rows, 8 in cluster explanation-mention"
+   ]
+  },
+  {
+   "n": 180,
+   "text": "Atanasova et al. and [Chen et al. 2023](./#p=pmlr-v235-chen24bl) are borrowed by 18 and 17 rows, but 13 of the Atanasova rows fall in cluster 8 and 14 of the Chen rows in cluster 2, and no row cites both.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "Atanasova: 13 of 18 rows in explanation-mention; pmlr-v235-chen24bl: 14 of 17 in simulatability; no row lists both"
+   ]
+  },
+  {
+   "n": 181,
+   "text": "[Arcuschin et al. 2025](./#p=arcuschin2025chain) come closest: they list Atanasova et al. and Siegel et al. among works that \"measure faithfulness through the framework of counterfactual simulatability\".",
+   "papers": [
+    "arcuschin2025chain"
+   ],
+   "evidence": [
+    "arcuschin2025chain#9: “measure faithfulness through the framework of counterfactual simulatability”",
+    "arcuschin2025chain#9"
+   ]
+  },
+  {
+   "n": 182,
+   "text": "**Simulatability.** Doshi-Velez & Kim 2017 and Hase & Bansal 2020 are cited by [Chen et al. 2023](./#p=pmlr-v235-chen24bl) for the concept's \"long history\".",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl full text: “long history”",
+    "pmlr-v235-chen24bl#1 source: Doshi-Velez & Kim 2017; Hase & Bansal 2020; Sia et al. 2022"
+   ]
+  },
+  {
+   "n": 183,
+   "text": "Chen et al. are borrowed by 10 papers: [Turpin et al. 2023](./#p=turpin2023language), [Agarwal et al. 2024](./#p=agarwal2024faithfulness), [Chen et al. 2024](./#p=chen2025consistent), [Chua & Evans 2025](./#p=chua2025deepseek), [Arcuschin et al. 2025](./#p=arcuschin2025chain), [Turpin et al. 2025](./#p=turpin2025teaching), [Matton et al. 2025](./#p=matton2025walk), [Hong & Roth 2026](./#p=hong2026llm), [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) and [Karvonen et al. 2026](./#p=karvonen2026would).",
+   "papers": [
+    "turpin2023language",
+    "agarwal2024faithfulness",
+    "chen2025consistent",
+    "chua2025deepseek",
+    "arcuschin2025chain",
+    "turpin2025teaching",
+    "matton2025walk",
+    "hong2026llm",
+    "mayne2026positivecasefaithfulnessllm",
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "rows citing pmlr-v235-chen24bl: agarwal2024faithfulness#6, arcuschin2025chain#9, chen2025consistent#5-7, chua2025deepseek#7, hong2026llm#1,#2,#11,#16, karvonen2026would#1,#2, matton2025walk#24, mayne2026positivecasefaithfulnessllm#6,#15, turpin2023language#2, turpin2025teaching#2"
+   ]
+  },
+  {
+   "n": 184,
+   "text": "Two second-hand links follow: [Karvonen et al. 2026](./#p=karvonen2026would) to [Anonymous 2026 (introspective oversight)](./#p=anon2026trainingoversight), and [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) to [Lewis-Lim et al. 2026](./#p=lewislim2026efficient).",
+   "papers": [
+    "karvonen2026would",
+    "anon2026trainingoversight",
+    "mayne2026positivecasefaithfulnessllm",
+    "lewislim2026efficient"
+   ],
+   "evidence": [
+    "anon2026trainingoversight#4 source: karvonen2026would",
+    "lewislim2026efficient#4 source: mayne2026positivecasefaithfulnessllm"
+   ]
+  },
+  {
+   "n": 185,
+   "text": "[Hase & Potts 2026](./#p=hase2026counterfactual) cite Doshi-Velez & Kim directly and are borrowed by 5 papers: [Arcuschin et al. 2025](./#p=arcuschin2025chain), [Guo et al. 2026](./#p=guo2026introspective), [Karvonen et al. 2026](./#p=karvonen2026would), [Luo et al. 2026](./#p=luo2026removal) and [Pres et al. 2026b](./#p=pres2026selfctrl).",
+   "papers": [
+    "hase2026counterfactual",
+    "arcuschin2025chain",
+    "guo2026introspective",
+    "karvonen2026would",
+    "luo2026removal",
+    "pres2026selfctrl"
+   ],
+   "evidence": [
+    "hase2026counterfactual#3 source: Doshi-Velez & Kim 2017",
+    "rows citing hase2026counterfactual: arcuschin2025chain#23, guo2026introspective#2, karvonen2026would#12, luo2026removal#18, pres2026selfctrl#16"
+   ]
+  },
+  {
+   "n": 186,
+   "text": "**Self-generated counterfactual explanations.** Wachter et al. 2017 supply the definition in [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) and [Mayne et al. 2025](./#p=mayne2025llms).",
+   "papers": [
+    "dehghanighobadi2025can",
+    "mayne2025llms"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#1 and mayne2025llms#1 source: Wachter et al. 2017"
+   ]
+  },
+  {
+   "n": 187,
+   "text": "The self-generated form runs through four papers: [Madsen et al. 2024](./#p=madsen2024self) to [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) (adapted), to [Mayne et al. 2025](./#p=mayne2025llms), to [Zeng et al. 2026](./#p=zeng2026evaluating).",
+   "papers": [
+    "madsen2024self",
+    "dehghanighobadi2025can",
+    "mayne2025llms",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#2 (adapted) source: madsen2024self",
+    "mayne2025llms#2 source: madsen2024self; dehghanighobadi2025can",
+    "zeng2026evaluating#2 source: mayne2025llms; dehghanighobadi2025can"
+   ]
+  },
+  {
+   "n": 188,
+   "text": "Madsen et al. are also borrowed directly by [Doi et al. 2025](./#p=doi2025investigating), [Mayne et al. 2025](./#p=mayne2025llms) and [Zeng et al. 2026](./#p=zeng2026evaluating).",
+   "papers": [
+    "doi2025investigating",
+    "mayne2025llms",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "doi2025investigating#10, mayne2025llms#2, zeng2026evaluating#18, #19 source: madsen2024self"
+   ]
+  },
+  {
+   "n": 189,
+   "text": "**Counterfactual test.** Atanasova et al. 2023 are borrowed by 14 papers, Siegel et al. 2024 by 8 and Siegel et al. 2025 by 2 ([Bhan et al. 2025](./#p=bhan2025did), [Cheah et al. 2026](./#p=cheah2026training)).",
+   "papers": [
+    "bhan2025did",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "Atanasova et al. 2023: 14 citing keys; Siegel et al. 2024: 8 keys; Siegel et al. 2025: bhan2025did#5, cheah2026training#4, #5, #22"
+   ]
+  },
+  {
+   "n": 190,
+   "text": "[Cheah et al. 2026](./#p=cheah2026training) merge the test with the hint pairs of [Turpin et al. 2023](./#p=turpin2023language) and cite both.",
+   "papers": [
+    "cheah2026training",
+    "turpin2023language"
+   ],
+   "evidence": [
+    "cheah2026training#4 source: Pearl 2009; Atanasova et al. 2023; turpin2023language; Siegel et al. 2024; Siegel et al. 2025",
+    "cheah2026training#4: “such as the introduction of biasing hints”"
+   ]
+  },
+  {
+   "n": 191,
+   "text": "**Cue pairs.** [Turpin et al. 2023](./#p=turpin2023language) are borrowed by 9 papers, [Chen et al. 2025](./#p=chen2025reasoning) by 4 ([Alon et al. 2026](./#p=alon2026faithfulness), [Ferreira et al. 2026](./#p=ferreira2026outofsight), [Little 2026](./#p=little2026length), [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm)) and [Chua & Evans 2025](./#p=chua2025deepseek) by 2 ([Ferreira et al. 2026](./#p=ferreira2026outofsight), [Hase & Potts 2026](./#p=hase2026counterfactual)).",
+   "papers": [
+    "turpin2023language",
+    "chen2025reasoning",
+    "alon2026faithfulness",
+    "ferreira2026outofsight",
+    "little2026length",
+    "mayne2026positivecasefaithfulnessllm",
+    "chua2025deepseek",
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "rows citing turpin2023language from 9 keys: admoni2026aligning, agarwal2024faithfulness, anon2026grace, cheah2026training, ferreira2026outofsight, karvonen2026would, li2025better, little2026length, mayne2026positivecasefaithfulnessllm",
+    "chen2025reasoning cited by alon2026faithfulness#3, ferreira2026outofsight#7, little2026length#8,#9, mayne2026positivecasefaithfulnessllm#17",
+    "chua2025deepseek cited by ferreira2026outofsight#7, hase2026counterfactual#11"
+   ]
+  },
+  {
+   "n": 192,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) are borrowed by [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought), [Ferreira et al. 2026](./#p=ferreira2026outofsight) and [Xiong et al. 2026](./#p=xiong2026monitorability), and Xiong et al. in turn by [Ferreira et al. 2026](./#p=ferreira2026outofsight).",
+   "papers": [
+    "guan2025monitoring",
+    "anon2026chainofthought",
+    "ferreira2026outofsight",
+    "xiong2026monitorability"
+   ],
+   "evidence": [
+    "guan2025monitoring cited by anon2026chainofthought#16, ferreira2026outofsight#4,#7, xiong2026monitorability#7",
+    "xiong2026monitorability cited by ferreira2026outofsight#7"
+   ]
+  },
+  {
+   "n": 193,
+   "text": "[Li et al. 2025b](./#p=li2025training) are borrowed by [Guo et al. 2026](./#p=guo2026introspective), and [Gema et al. 2026](./#p=gema2026chainofthought) by [Lewis-Lim et al. 2026](./#p=lewislim2026efficient).",
+   "papers": [
+    "li2025training",
+    "guo2026introspective",
+    "gema2026chainofthought",
+    "lewislim2026efficient"
+   ],
+   "evidence": [
+    "guo2026introspective#2,#3 source: li2025training",
+    "lewislim2026efficient#14 source: gema2026chainofthought"
+   ]
+  },
+  {
+   "n": 194,
+   "text": "**Concept edits.** [Matton et al. 2025](./#p=matton2025walk) are borrowed by [Bhan et al. 2025](./#p=bhan2025did), [Luo et al. 2026](./#p=luo2026removal), [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) and [Zeng et al. 2026](./#p=zeng2026evaluating).",
+   "papers": [
+    "matton2025walk",
+    "bhan2025did",
+    "luo2026removal",
+    "mayne2026positivecasefaithfulnessllm",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "matton2025walk cited by bhan2025did#5, luo2026removal#14-16, mayne2026positivecasefaithfulnessllm#19, zeng2026evaluating#18,#19"
+   ]
+  },
+  {
+   "n": 195,
+   "text": "**Reasoning interventions.** [Lanham et al. 2023](./#p=lanham2023measuring) are borrowed by 9 papers: [Admoni et al. 2025](./#p=admoni2026aligning), [Anonymous 2026 (CRISP)](./#p=anon2026crisp), [Anonymous 2026 (GRACE)](./#p=anon2026grace), [Baker et al. 2025](./#p=baker2025monitoring), [Cheah et al. 2026](./#p=cheah2026training), [Li et al. 2025a](./#p=li2025drift), [Madsen et al. 2024](./#p=madsen2024self), [Parekh & Goyal 2026](./#p=parekh2026drop) and [Shen et al. 2026](./#p=shen2026detecting).",
+   "papers": [
+    "lanham2023measuring",
+    "admoni2026aligning",
+    "anon2026crisp",
+    "anon2026grace",
+    "baker2025monitoring",
+    "cheah2026training",
+    "li2025drift",
+    "madsen2024self",
+    "parekh2026drop",
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "rows citing lanham2023measuring from 9 keys: admoni2026aligning, anon2026crisp, anon2026grace, baker2025monitoring, cheah2026training, li2025drift, madsen2024self, parekh2026drop, shen2026detecting"
+   ]
+  },
+  {
+   "n": 196,
+   "text": "[Paul et al. 2024](./#p=paul2024making) are borrowed by [Kudo et al. 2024](./#p=kudo2024llms), [Shen et al. 2026](./#p=shen2026detecting), [Wang et al. 2026a](./#p=wang2026case), [Wang et al. 2026b](./#p=wang2026concept) and [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought); [Han et al. 2026](./#p=han2026rfeval) by [Lv et al. 2026](./#p=lv2026geofaith); Bogdan et al. 2025 by [Macar et al. 2025](./#p=macar2025thought).",
+   "papers": [
+    "paul2024making",
+    "kudo2024llms",
+    "shen2026detecting",
+    "wang2026case",
+    "wang2026concept",
+    "zaman2025chainofthought",
+    "han2026rfeval",
+    "lv2026geofaith",
+    "macar2025thought"
+   ],
+   "evidence": [
+    "paul2024making cited by kudo2024llms#5, shen2026detecting#6, wang2026case#10, wang2026concept#17, zaman2025chainofthought#16",
+    "lv2026geofaith#11 source: han2026rfeval",
+    "macar2025thought#1, #9 source: Bogdan et al. 2025"
+   ]
+  },
+  {
+   "n": 197,
+   "text": "**Others.** [Jain & Wallace 2019](./#p=jain2019attention) are borrowed by [Wiegreffe & Pinter 2019](./#p=wiegreffe2019attention), and [Chua et al. 2024](./#p=chua2024biasaugmented) by [Arcuschin et al. 2025](./#p=arcuschin2025chain) and [Tang & Khanna 2026](./#p=tang2026unlearning).",
+   "papers": [
+    "jain2019attention",
+    "wiegreffe2019attention",
+    "chua2024biasaugmented",
+    "arcuschin2025chain",
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "wiegreffe2019attention#3 source: jain2019attention",
+    "arcuschin2025chain#23 and tang2026unlearning#1 source: chua2024biasaugmented"
+   ]
+  },
+  {
+   "n": 198,
+   "text": "Six kinds of drift appear as the definitions are passed on.",
+   "papers": [],
+   "evidence": [
+    "items 1-6 of the drift list"
+   ]
+  },
+  {
+   "n": 199,
+   "text": "**Simulatability changes status.** [Chen et al. 2023](./#p=pmlr-v235-chen24bl) ask whether an explanation lets humans \"precisely infer the model’s outputs on diverse counterfactuals of the explained input\", and write that \"simulatability is a special case of faithfulness\" and \"a faithful explanation is not necessarily simulatable\".",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#1: “precisely infer the model’s outputs on diverse counterfactuals of the explained input”",
+    "pmlr-v235-chen24bl full text: “simulatability is a special case of faithfulness”",
+    "pmlr-v235-chen24bl full text: “a faithful explanation is not necessarily simulatable”"
+   ]
+  },
+  {
+   "n": 200,
+   "text": "[Turpin et al. 2023](./#p=turpin2023language) call it \"The counterfactual simulatability framework of explanation faithfulness\".",
+   "papers": [
+    "turpin2023language"
+   ],
+   "evidence": [
+    "turpin2023language#2: “The counterfactual simulatability framework of explanation faithfulness”"
+   ]
+  },
+  {
+   "n": 201,
+   "text": "In [Turpin et al. 2025](./#p=turpin2025teaching) it becomes a biconditional: \"an explanation is faithful if and only if the explanation allows a human or model to accurately predict how the model will behave on other relevant inputs\".",
+   "papers": [
+    "turpin2025teaching"
+   ],
+   "evidence": [
+    "turpin2025teaching#2: “an explanation is faithful if and only if the explanation allows a human or model to accurately predict how the model will behave on other relevant inputs”"
+   ]
+  },
+  {
+   "n": 202,
+   "text": "[Hong & Roth 2026](./#p=hong2026llm) change what is predicted, to \"how a model’s prediction would change on counterfactual inputs\", and call the property usefulness.",
+   "papers": [
+    "hong2026llm"
+   ],
+   "evidence": [
+    "hong2026llm#1: “how a model’s prediction would change on counterfactual inputs”"
+   ]
+  },
+  {
+   "n": 203,
+   "text": "[Karvonen et al. 2026](./#p=karvonen2026would) change the counterfactuals: Chen et al. are said to argue that \"a good explanation should help an observer predict behavior under counterfactual edits\".",
+   "papers": [
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "karvonen2026would#2: “a good explanation should help an observer predict behavior under counterfactual edits”"
+   ]
+  },
+  {
+   "n": 204,
+   "text": "Three things shift along the chain: the observer goes from humans to \"a human or model\", the counterfactuals go from LLM-written related questions to edits, and the notion goes from a special case of faithfulness to a necessary and sufficient condition for it.",
+   "papers": [
+    "pres2026selfctrl",
+    "pmlr-v235-chen24bl",
+    "turpin2025teaching",
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "pres2026selfctrl#16: “a human or model”",
+    "pmlr-v235-chen24bl#1",
+    "turpin2025teaching#2",
+    "karvonen2026would#2",
+    "pmlr-v235-chen24bl full text: “simulatability is a special case of faithfulness”"
+   ]
+  },
+  {
+   "n": 205,
+   "text": "The attribution check records the biconditional as an adaptation of Chen et al.",
+   "papers": [
+    "turpin2025teaching",
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "attr turpin2025teaching#2 <- pmlr-v235-chen24bl: verdict adapted"
+   ]
+  },
+  {
+   "n": 206,
+   "text": "**The counterfactual explanation acquires a target, changes author and loses the target again.** In [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can), after Wachter et al., it is an input that \"would lead the model to change its decision\".",
+   "papers": [
+    "dehghanighobadi2025can"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#1: “would lead the model to change its decision”"
+   ]
+  },
+  {
+   "n": 207,
+   "text": "[Mayne et al. 2025](./#p=mayne2025llms) tie it to \"a specific alternative output\", and [Madsen et al. 2024](./#p=madsen2024self) to \"the opposite prediction\".",
+   "papers": [
+    "mayne2025llms",
+    "madsen2024self"
+   ],
+   "evidence": [
+    "mayne2025llms#1: “a specific alternative output”",
+    "madsen2024self#3: “the opposite prediction”"
+   ]
+  },
+  {
+   "n": 208,
+   "text": "The edit is then no longer found by an optimizer: [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) \"ask the model itself to generate the counterfactual explanation\", and [Doi et al. 2025](./#p=doi2025investigating) add \"editing-distance constraints specified in a prompt\".",
+   "papers": [
+    "dehghanighobadi2025can",
+    "doi2025investigating"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#2: “ask the model itself to generate the counterfactual explanation”",
+    "doi2025investigating#10: “editing-distance constraints specified in a prompt”"
+   ]
+  },
+  {
+   "n": 209,
+   "text": "[Zeng et al. 2026](./#p=zeng2026evaluating) recast it as \"the propose-and-verify form of Edit-Proposal\" and drop the target label: the edit counts as a flip if \"the fraction of resamples that differ from baseline exceeds $0.5$\".",
+   "papers": [
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "zeng2026evaluating#2: “the propose-and-verify form of Edit-Proposal”",
+    "zeng2026evaluating#20: “the fraction of resamples that differ from baseline exceeds $0.5$”"
+   ]
+  },
+  {
+   "n": 210,
+   "text": "**The counterfactual test widens.** [Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring) describe Atanasova et al. as training \"a helper model to insert words into the LLM input\".",
+   "papers": [
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "parcalabescu2023measuring#6: “a helper model to insert words into the LLM input”"
+   ]
+  },
+  {
+   "n": 211,
+   "text": "[Wang & Atanasova 2025](./#p=wang2025selfcritique) generate the inserted modifiers with GPT-4o.",
+   "papers": [
+    "wang2025selfcritique"
+   ],
+   "evidence": [
+    "wang2025selfcritique#3 gloss: 'unlike Atanasova et al., GPT-4o generates 20 coherent, unique interventions per instance'"
+   ]
+  },
+  {
+   "n": 212,
+   "text": "[Gema et al. 2026](./#p=gema2026chainofthought) describe counterfactual approaches as testing explanations \"through input edits, reconstruction, or output-distribution shifts\", [Bhan et al. 2025](./#p=bhan2025did) as using \"auxiliary models to generate counterfactual texts designed to change the LLM outcome\", and [Cheah et al. 2026](./#p=cheah2026training) as using \"controlled interventions, such as the introduction of biasing hints\".",
+   "papers": [
+    "gema2026chainofthought",
+    "bhan2025did",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "gema2026chainofthought#6: “through input edits, reconstruction, or output-distribution shifts”",
+    "bhan2025did#5: “auxiliary models to generate counterfactual texts designed to change the LLM outcome”",
+    "cheah2026training#4: “controlled interventions, such as the introduction of biasing hints”"
+   ]
+  },
+  {
+   "n": 213,
+   "text": "By this point the label \"counterfactual test\" also covers the hint pairs that [Turpin et al. 2023](./#p=turpin2023language) had filed under counterfactual simulatability.",
+   "papers": [
+    "turpin2023language"
+   ],
+   "evidence": [
+    "attr cheah2026training#4 <- turpin2023language: “counterfactual test”",
+    "cheah2026training#4",
+    "turpin2023language#2",
+    "turpin2023language#5"
+   ]
+  },
+  {
+   "n": 214,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) restate word insertion as a counterfactual set and list it among \"Irrelevant or incoherent perturbations\".",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#14: “Irrelevant or incoherent perturbations”"
+   ]
+  },
+  {
+   "n": 215,
+   "text": "**Borrowers add the word.** [Lanham et al. 2023](./#p=lanham2023measuring) use \"counterfactual\" once in the text, for the cited work of Madaan & Yazdanbakhsh.",
+   "papers": [
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "lanham2023measuring full text: “counterfactual”",
+    "lanham2023measuring full text: one occurrence of 'counterfactual': “Madaan & Yazdanbakhsh (2022) investigate CoT via counterfactual prompting”"
+   ]
+  },
+  {
+   "n": 216,
+   "text": "Of the 15 rows that borrow from Lanham et al., 6 rows from 5 papers ([Admoni et al. 2025](./#p=admoni2026aligning), [Anonymous 2026 (GRACE)](./#p=anon2026grace), [Li et al. 2025a](./#p=li2025drift), [Madsen et al. 2024](./#p=madsen2024self), [Shen et al. 2026](./#p=shen2026detecting)) call its tests counterfactual in the quoted passage, and [Parekh & Goyal 2026](./#p=parekh2026drop) name truncation \"prefix counterfactuals\".",
+   "papers": [
+    "admoni2026aligning",
+    "anon2026grace",
+    "li2025drift",
+    "madsen2024self",
+    "shen2026detecting",
+    "parekh2026drop"
+   ],
+   "evidence": [
+    "parekh2026drop full text: “prefix counterfactuals”",
+    "quotes with 'counterfactual': admoni2026aligning#8, anon2026grace#7, li2025drift#4, madsen2024self#9, shen2026detecting#6, shen2026detecting#16",
+    "parekh2026drop full text: “Prefix counterfactuals identify post-commitment steps”"
+   ]
+  },
+  {
+   "n": 217,
+   "text": "[Chen et al. 2025](./#p=chen2025reasoning) use the word once, for Paul et al., yet [Alon et al. 2026](./#p=alon2026faithfulness) write of the same hint-flip filter \"we regard this as a counterfactual\".",
+   "papers": [
+    "chen2025reasoning",
+    "alon2026faithfulness"
+   ],
+   "evidence": [
+    "alon2026faithfulness#3: “we regard this as a counterfactual”",
+    "chen2025reasoning full text: one occurrence: “causal mediation analysis on counterfactuals (Paul et al., 2024)”",
+    "alon2026faithfulness#3",
+    "attr alon2026faithfulness#3 <- chen2025reasoning: renamed"
+   ]
+  },
+  {
+   "n": 218,
+   "text": "[Wiegreffe et al. 2021](./#p=wiegreffe2021measuring) never use the word, and [Admoni et al. 2025](./#p=admoni2026aligning) list them among works that \"apply counterfactual interventions to input features\".",
+   "papers": [
+    "wiegreffe2021measuring",
+    "admoni2026aligning"
+   ],
+   "evidence": [
+    "admoni2026aligning#8: “apply counterfactual interventions to input features”",
+    "wiegreffe2021measuring full text: zero occurrences of 'counterfactual'",
+    "admoni2026aligning#8"
+   ]
+  },
+  {
+   "n": 219,
+   "text": "**The cue-removal label tightens in one line and loosens in another.** [Hase & Potts 2026](./#p=hase2026counterfactual) \"primarily use greedy decoding\" for the original and counterfactual inputs.",
+   "papers": [
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "hase2026counterfactual full text: “primarily use greedy decoding”"
+   ]
+  },
+  {
+   "n": 220,
+   "text": "[Karvonen et al. 2026](./#p=karvonen2026would) take their cue types but label with 10 samples per condition, counting a case positive only if \"the cue raises the rate of the cue-consistent answer by at least 50pp\".",
+   "papers": [
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "karvonen2026would#12: “the cue raises the rate of the cue-consistent answer by at least 50pp”",
+    "attr karvonen2026would#12 <- hase2026counterfactual: 'Karvonen et al. take Hase's MMLU cue types but label with 10 samples per condition'",
+    "karvonen2026would#12"
+   ]
+  },
+  {
+   "n": 221,
+   "text": "In the other direction, [Guan et al. 2025](./#p=guan2025monitoring) hold that \"we cannot label individual samples as having been causally influenced\" unless the base rate is zero, while [Ferreira et al. 2026](./#p=ferreira2026outofsight), who cite Guan et al., use \"the counterfactual prediction without the hint\" to get \"a per-example target label\".",
+   "papers": [
+    "guan2025monitoring",
+    "ferreira2026outofsight"
+   ],
+   "evidence": [
+    "guan2025monitoring full text: “we cannot label individual samples as having been causally influenced”",
+    "ferreira2026outofsight#4: “the counterfactual prediction without the hint”",
+    "ferreira2026outofsight#4: “a per-example target label”",
+    "guan2025monitoring full text: “unless the base rate of the measured behavior is $0$ in the intervention arm, we cannot label individual samples as having been causally influenced”",
+    "ferreira2026outofsight#4 source: turpin2023language; guan2025monitoring",
+    "ferreira2026outofsight#4"
+   ]
+  },
+  {
+   "n": 222,
+   "text": "**Lanham et al.'s tests are re-parameterized and extended.** [Lanham et al. 2023](./#p=lanham2023measuring) truncate the CoT \"after each step (here, each sentence)\"; [Anonymous 2026 (GRACE)](./#p=anon2026grace) truncate \"at 25/50/75% token levels\".",
+   "papers": [
+    "lanham2023measuring",
+    "anon2026grace"
+   ],
+   "evidence": [
+    "lanham2023measuring full text: “after each step (here, each sentence)”",
+    "anon2026grace#7: “at 25/50/75% token levels”",
+    "attr anon2026grace#7 <- lanham2023measuring source evidence; anon2026grace#7",
+    "attr shen2026detecting#19 <- lanham2023measuring source evidence: “we truncate it after each step (here, each sentence) of the sample”"
+   ]
+  },
+  {
+   "n": 223,
+   "text": "[Anonymous 2026 (CRISP)](./#p=anon2026crisp) have a generator write a chain with \"exactly ONE decisive error\".",
+   "papers": [
+    "anon2026crisp"
+   ],
+   "evidence": [
+    "anon2026crisp#23: “exactly ONE decisive error”",
+    "anon2026crisp#23"
+   ]
+  },
+  {
+   "n": 224,
+   "text": "[Parekh & Goyal 2026](./#p=parekh2026drop) decode greedily to find a commitment point.",
+   "papers": [
+    "parekh2026drop"
+   ],
+   "evidence": [
+    "parekh2026drop#2: “greedily decode an answer”",
+    "parekh2026drop#2 gloss: 'commitment point c = min{t : F(x, y_1:t) = correct answer}'"
+   ]
+  },
+  {
+   "n": 225,
+   "text": "[Shen et al. 2026](./#p=shen2026detecting) list five tests under Lanham et al., two of which (Option Shuffling and Removing Steps) Lanham et al. do not run (see the attribution check).",
+   "papers": [
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "shen2026detecting#16",
+    "attr shen2026detecting#18, #19 <- lanham2023measuring: unsupported"
+   ]
+  },
+  {
+   "n": 226,
+   "text": "Of the 132 borrowed rows, 76 cite at least one source in the map.",
+   "papers": [],
+   "evidence": [
+    "76 entries appear in attr checks for this family"
+   ]
+  },
+  {
+   "n": 227,
+   "text": "They give 96 entry-source pairs from 43 papers against 22 sources, and each pair was checked against the source's full text.",
+   "papers": [],
+   "evidence": [
+    "attr_*.json filtered to this family: 96 checks, 76 entries, 43 citing keys, 22 sources"
+   ]
+  },
+  {
+   "n": 228,
+   "text": "The check covers every such pair in this family, so the counts below are rates for the family, not for a sample.",
+   "papers": [],
+   "evidence": [
+    "all 96 in-map entry-source pairs in the dump have a check"
+   ]
+  },
+  {
+   "n": 229,
+   "text": "**84% of the checked borrowings hold.** 81 of the 96 pairs are supported or adapted.",
+   "papers": [],
+   "evidence": [
+    "verdicts: supported 49 + adapted 32 = 81 of 96"
+   ]
+  },
+  {
+   "n": 230,
+   "text": "The 15 others fall on 14 rows from 11 papers; [Shen et al. 2026](./#p=shen2026detecting) account for 4 of them and [Admoni et al. 2025](./#p=admoni2026aligning) for 2.",
+   "papers": [
+    "shen2026detecting",
+    "admoni2026aligning"
+   ],
+   "evidence": [
+    "non-supported checks: 15 on 14 entries from 11 keys; shen2026detecting 4, admoni2026aligning 2"
+   ]
+  },
+  {
+   "n": 231,
+   "text": "The stance field and the verdict disagree on 7 pairs: 4 pairs on rows marked adopted came back adapted, and 3 pairs on rows marked adapted came back supported.",
+   "papers": [],
+   "evidence": [
+    "(stance adopted, verdict adapted): 4; (stance adapted, verdict supported): 3"
+   ]
+  },
+  {
+   "n": 232,
+   "text": "**[Lanham et al. 2023](./#p=lanham2023measuring) is the source with the most failed checks.** Of its 15 pairs, 6 are not supported (2 unsupported, 3 partial, 1 renamed), against 1 of 17 for [Chen et al. 2023](./#p=pmlr-v235-chen24bl) and 1 of 12 for [Turpin et al. 2023](./#p=turpin2023language); all 5 pairs on [Paul et al. 2024](./#p=paul2024making) are supported.",
+   "papers": [
+    "lanham2023measuring",
+    "pmlr-v235-chen24bl",
+    "turpin2023language",
+    "paul2024making"
+   ],
+   "evidence": [
+    "lanham2023measuring checks: partial 3, unsupported 2, renamed 1, adapted 4, supported 5",
+    "pmlr-v235-chen24bl: 17 checks, 1 renamed",
+    "turpin2023language: 12 checks, 1 partial",
+    "paul2024making: 5 supported"
+   ]
+  },
+  {
+   "n": 233,
+   "text": "[Shen et al. 2026](./#p=shen2026detecting) cite Lanham et al. alone for Option Shuffling and Removing Steps, which Lanham et al. do not run, and for a Paraphrasing test that rewrites steps \"while preserving or slightly altering their semantics\", where Lanham et al. instruct \"conveying exactly the same information\".",
+   "papers": [
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "shen2026detecting#21: “while preserving or slightly altering their semantics”",
+    "attr shen2026detecting#21 <- lanham2023measuring: “conveying exactly the same information”",
+    "attr shen2026detecting#18 <- lanham2023measuring: unsupported",
+    "attr shen2026detecting#19 <- lanham2023measuring: unsupported",
+    "attr shen2026detecting#21 <- lanham2023measuring: partial"
+   ]
+  },
+  {
+   "n": 234,
+   "text": "[Admoni et al. 2025](./#p=admoni2026aligning) list Lanham et al. among works that \"apply counterfactual interventions to input features\", but Lanham et al. write \"We intervene on the CoT produced by the model rather than few shot prompt examples\".",
+   "papers": [
+    "admoni2026aligning"
+   ],
+   "evidence": [
+    "admoni2026aligning#8: “apply counterfactual interventions to input features”",
+    "attr admoni2026aligning#8 <- lanham2023measuring: “We intervene on the CoT produced by the model rather than few shot prompt examples”"
+   ]
+  },
+  {
+   "n": 235,
+   "text": "[Madsen et al. 2024](./#p=madsen2024self) describe the Adding Mistakes test as a check on \"mathematical counterfactuals\", although Lanham et al. run it on all eight of their tasks.",
+   "papers": [
+    "madsen2024self"
+   ],
+   "evidence": [
+    "madsen2024self#9: “mathematical counterfactuals”",
+    "attr madsen2024self#9 <- lanham2023measuring: renamed, 'which Lanham runs on all eight tasks'",
+    "lanham2023measuring full text: “We select eight multiple choice tasks to evaluate”"
+   ]
+  },
+  {
+   "n": 236,
+   "text": "[Li et al. 2025a](./#p=li2025drift) cite Lanham et al. with Atanasova et al. for modifying \"key parts w of the inputs I\"; the check records this pair as adapted, since the input edit comes from Atanasova et al.",
+   "papers": [
+    "li2025drift"
+   ],
+   "evidence": [
+    "li2025drift#4: “key parts w of the inputs I”",
+    "attr li2025drift#4 <- lanham2023measuring: adapted, 'follows co-cited Atanasova'"
+   ]
+  },
+  {
+   "n": 237,
+   "text": "**[Hase et al. 2020](./#p=hase2020leakageadjusted) is cited for a notion it does not define.** Both papers that cite it for counterfactual simulatability, [Turpin et al. 2023](./#p=turpin2023language) (misdirected) and [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) (partial), fail the check.",
+   "papers": [
+    "hase2020leakageadjusted",
+    "turpin2023language",
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "attr turpin2023language#2 <- hase2020leakageadjusted: misdirected",
+    "attr mayne2026positivecasefaithfulnessllm#6 <- hase2020leakageadjusted: partial"
+   ]
+  },
+  {
+   "n": 238,
+   "text": "Its simulator predicts the output on the explained input, with correctness $\\mathbf{1}[\\hat{y}_i\\mid x_i,\\hat{e}_i]$, and the word \"counterfactual\" does not occur in its text.",
+   "papers": [
+    "hase2020leakageadjusted"
+   ],
+   "evidence": [
+    "admoni2026aligning#8: “counterfactual”",
+    "attr source evidence: “the simulator’s correctness on each example is $\\mathbbm{1}[\\hat{y}_{i}|x_{i},\\hat{e}_{i}]$”",
+    "hase2020leakageadjusted full text: zero occurrences of 'counterfactual'"
+   ]
+  },
+  {
+   "n": 239,
+   "text": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) place it among works in which \"the simulation input is the explained input\" and cite Hase & Bansal 2020, which is outside the map, for the concept's \"long history\".",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl full text: “the simulation input is the explained input”",
+    "pmlr-v235-chen24bl full text: “long history”"
+   ]
+  },
+  {
+   "n": 240,
+   "text": "The second use of Hase et al. 2020 by [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm), for a baseline \"without explanation access\", does match the source.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm full text: “without explanation access”",
+    "mayne2026positivecasefaithfulnessllm full text: “Our work extends this by measuring prediction accuracy relative to a baseline without explanation access (Hase et al., 2020).”",
+    "attr source evidence: “we obtain $\\mathbbm{1}[\\hat{y}_{i}|x_{i}]$ ... by dropping $\\hat{e}_{i}$”"
+   ]
+  },
+  {
+   "n": 241,
+   "text": "**The five renamings run in two directions.** Three give the name \"counterfactual\" to an operation whose source does not use the word for it: [Alon et al. 2026](./#p=alon2026faithfulness) for the hint filter of [Chen et al. 2025](./#p=chen2025reasoning), [Madsen et al. 2024](./#p=madsen2024self) for the Adding Mistakes test of [Lanham et al. 2023](./#p=lanham2023measuring), and [Admoni et al. 2025](./#p=admoni2026aligning) for the input perturbations of [Wiegreffe et al. 2021](./#p=wiegreffe2021measuring).",
+   "papers": [
+    "alon2026faithfulness",
+    "chen2025reasoning",
+    "madsen2024self",
+    "lanham2023measuring",
+    "admoni2026aligning",
+    "wiegreffe2021measuring"
+   ],
+   "evidence": [
+    "admoni2026aligning#8: “counterfactual”",
+    "attr renamed: alon2026faithfulness#3 <- chen2025reasoning; madsen2024self#9 <- lanham2023measuring; admoni2026aligning#8 <- wiegreffe2021measuring"
+   ]
+  },
+  {
+   "n": 242,
+   "text": "Two rename a measure: [Chen et al. 2024](./#p=chen2025consistent) call the simulation precision of [Chen et al. 2023](./#p=pmlr-v235-chen24bl) \"explanation consistency\", and [Tang & Khanna 2026](./#p=tang2026unlearning) call the bias-augmented consistency training of [Chua et al. 2024](./#p=chua2024biasaugmented) \"counterfactual distillation\".",
+   "papers": [
+    "chen2025consistent",
+    "pmlr-v235-chen24bl",
+    "tang2026unlearning",
+    "chua2024biasaugmented"
+   ],
+   "evidence": [
+    "chen2025consistent#5: “explanation consistency”",
+    "tang2026unlearning#1: “counterfactual distillation”",
+    "attr chen2025consistent#5 <- pmlr-v235-chen24bl: renamed",
+    "attr tang2026unlearning#1 <- chua2024biasaugmented: renamed"
+   ]
+  },
+  {
+   "n": 243,
+   "text": "**Three partial verdicts concern a detail of the source.** [Karvonen et al. 2026](./#p=karvonen2026would) place the suggested-answer cue of [Turpin et al. 2023](./#p=turpin2023language) on \"an MMLU question\", but Turpin et al. use BIG-Bench Hard and BBQ.",
+   "papers": [
+    "karvonen2026would",
+    "turpin2023language"
+   ],
+   "evidence": [
+    "karvonen2026would full text: “an MMLU question”",
+    "attr karvonen2026would#6 <- turpin2023language: partial"
+   ]
+  },
+  {
+   "n": 244,
+   "text": "[Arcuschin et al. 2025](./#p=arcuschin2025chain) credit [Hase & Potts 2026](./#p=hase2026counterfactual) with \"$+35$ pp monitoring accuracy using question-inversion counterfactuals\", but Hase & Potts report the 35-point gain in monitor accuracy for cue-based counterfactuals, and a 2-point gain in simulatability for their model-generated counterfactuals, which include inverted questions.",
+   "papers": [
+    "arcuschin2025chain",
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "arcuschin2025chain full text: “$+35$ pp monitoring accuracy using question-inversion counterfactuals”",
+    "attr arcuschin2025chain#23 <- hase2026counterfactual: partial; source: “CST can substantially improve monitor accuracy on cue-based counterfactuals (by 35 accuracy points) as well as simulatability over generic counterfactuals (by 2 points)”"
+   ]
+  },
+  {
+   "n": 245,
+   "text": "[Bhan et al. 2025](./#p=bhan2025did) group [Matton et al. 2025](./#p=matton2025walk) with methods that judge \"a self-NLE to justify its new prediction\", while Matton et al. \"consider only the explanations for original questions\".",
+   "papers": [
+    "bhan2025did",
+    "matton2025walk"
+   ],
+   "evidence": [
+    "bhan2025did#5: “a self-NLE to justify its new prediction”",
+    "matton2025walk full text: “consider only the explanations for original questions”",
+    "attr bhan2025did#5 <- matton2025walk: partial"
+   ]
+  },
+  {
+   "n": 246,
+   "text": "**The biconditional of [Turpin et al. 2025](./#p=turpin2025teaching) is an adaptation, checked against one of three sources.** The check records it as adapted from [Chen et al. 2023](./#p=pmlr-v235-chen24bl), who write that \"a faithful explanation is not necessarily simulatable\".",
+   "papers": [
+    "turpin2025teaching",
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl full text: “a faithful explanation is not necessarily simulatable”",
+    "attr turpin2025teaching#2 <- pmlr-v235-chen24bl: adapted"
+   ]
+  },
+  {
+   "n": 247,
+   "text": "The two other sources Turpin et al. cite for it, Doshi-Velez & Kim 2017 and Hase & Bansal 2020, are outside the map and were not checked.",
+   "papers": [
+    "turpin2025teaching",
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "turpin2025teaching#2 source: Doshi-Velez & Kim 2017; Hase & Bansal 2020; pmlr-v235-chen24bl"
+   ]
+  },
+  {
+   "n": 248,
+   "text": "One misattribution falls outside the checks because the extracted row quotes a different passage.",
+   "papers": [
+    "shen2026detecting",
+    "turpin2023language"
+   ],
+   "evidence": [
+    "shen2026detecting#6 quotes App. C; its source list omits turpin2023language"
+   ]
+  },
+  {
+   "n": 249,
+   "text": "In §1, [Shen et al. 2026](./#p=shen2026detecting) cite [Turpin et al. 2023](./#p=turpin2023language) (their [40], with three other works) for \"counterfactual interventions , where parts of the CoT are perturbed to examine their effect on the final prediction\"; Turpin et al. perturb only the input, comparing predictions on \"unmodified inputs\" with predictions on \"inputs that have a biasing feature applied\".",
+   "papers": [
+    "shen2026detecting",
+    "turpin2023language"
+   ],
+   "evidence": [
+    "shen2026detecting full text: “counterfactual interventions , where parts of the CoT are perturbed to examine their effect on the final prediction”",
+    "turpin2023language full text: “unmodified inputs”",
+    "turpin2023language full text: “inputs that have a biasing feature applied”",
+    "shen2026detecting full text §1: “through counterfactual interventions , where parts of the CoT are perturbed to examine their effect on the final prediction [25, 40, 47, 45]”",
+    "shen2026detecting references: “[40] M. Turpin, J. Michael, E. Perez, and S. R. Bowman (2023)”",
+    "turpin2023language full text: “we compare model predictions on unmodified inputs (‘‘unbiased context’’) against predictions on inputs that have a biasing feature applied”"
+   ]
+  },
+  {
+   "n": 250,
+   "text": "The sources outside the map have no cached text and were not checked: Atanasova et al. 2023 (18 rows), Siegel et al. 2024 (9) and 2025 (4), Pearl (9), Doshi-Velez & Kim 2017 (7), Hase & Bansal 2020 (5) and Wachter et al. 2017 (4).",
+   "papers": [],
+   "evidence": [
+    "source tallies: Atanasova 18, Siegel 2024 9, Siegel 2025 4, Pearl 9, Doshi-Velez & Kim 7, Hase & Bansal 5, Wachter 4; none in index.csv or cache/"
+   ]
+  },
+  {
+   "n": 251,
+   "text": "A flip is part of the definition: the counterfactual explanation requires $f(\\mathbf{x})\\neq f(\\mathbf{x}_{\\text{CE}})$ ([Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can)) or \"a specific alternative output $y^{\\prime}\\neq y$\" ([Mayne et al. 2025](./#p=mayne2025llms)); the counterfactual test keeps only \"intervened instances whose prediction changes compared to the original instance\" ([Wang & Atanasova 2025](./#p=wang2025selfcritique)); [Alon et al. 2026](./#p=alon2026faithfulness) call a pair a counterfactual only when $a_0\\neq a_1=\\text{hint}$; [Han et al. 2026](./#p=han2026rfeval) keep only pairs in which the injected reasoning opposes the model's baseline stance, \"For causal identifiability\".",
+   "papers": [
+    "dehghanighobadi2025can",
+    "mayne2025llms",
+    "wang2025selfcritique",
+    "alon2026faithfulness",
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "mayne2025llms#1: “a specific alternative output $y^{\\prime}\\neq y$”",
+    "wang2025selfcritique#1: “intervened instances whose prediction changes compared to the original instance”",
+    "han2026rfeval#5: “For causal identifiability”",
+    "han2026rfeval#5"
+   ]
+  },
+  {
+   "n": 252,
+   "text": "The output must not change: [Zaman & Srivastava 2025a](./#p=zaman2025causal) build knowledge edits that \"yield the same answer but are based on different reasoning\"; [Jain & Wallace 2019](./#p=jain2019attention) define adversarial attention by \"an equivalent prediction\"; [Akter et al. 2025](./#p=akter2025causal) use null interventions, \"semantics-preserving transformations that should not change the answer\", and count a flip on them as spurious; [Shiromani et al. 2026](./#p=shiromani2026necessary) keep only traces that end \"in the same final answer type\".",
+   "papers": [
+    "zaman2025causal",
+    "jain2019attention",
+    "akter2025causal",
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "zaman2025causal#8: “yield the same answer but are based on different reasoning”",
+    "jain2019attention#4: “an equivalent prediction”",
+    "akter2025causal#13: “semantics-preserving transformations that should not change the answer”",
+    "shiromani2026necessary#4: “in the same final answer type”",
+    "akter2025causal#13 gloss: 'Scored by answer preservation rate and spurious flip rate'",
+    "shiromani2026necessary#4"
+   ]
+  },
+  {
+   "n": 253,
+   "text": "The edit defines the counterfactual and the flip is measured: [Zeng et al. 2026](./#p=zeng2026evaluating) define a perturbation as \"a modification to a prompt that may or may not change the model’s answer\", and [Matton et al. 2025](./#p=matton2025walk), [Zhang et al. 2026](./#p=zhang2026audit) and [Cheah et al. 2026](./#p=cheah2026training) define the counterfactual by the edit alone.",
+   "papers": [
+    "zeng2026evaluating",
+    "matton2025walk",
+    "zhang2026audit",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "zeng2026evaluating#24: “a modification to a prompt that may or may not change the model’s answer”",
+    "matton2025walk#5",
+    "zhang2026audit#3",
+    "cheah2026training#5"
+   ]
+  },
+  {
+   "n": 254,
+   "text": "For the first group a non-flipping edit is not a counterfactual, for [Akter et al. 2025](./#p=akter2025causal) a flipping null edit is an error, and for the third group either outcome is data.",
+   "papers": [
+    "akter2025causal"
+   ],
+   "evidence": [
+    "items in tension 1"
+   ]
+  },
+  {
+   "n": 255,
+   "text": "**Remove the cue or swap it?** [Hase & Potts 2026](./#p=hase2026counterfactual) (\"The counterfactual input is the input without the cue.\"), [Guo et al. 2026](./#p=guo2026introspective) ($x_{\\setminus C}$), [Karvonen et al. 2026](./#p=karvonen2026would) (\"Ground truth comes from removing the cue\"), [Ferreira et al. 2026](./#p=ferreira2026outofsight), [Ferreira et al. 2025](./#p=ferreira2026truthful) and [Bürger et al. 2026](./#p=burger2026chain) compare against the input without the cue.",
+   "papers": [
+    "hase2026counterfactual",
+    "guo2026introspective",
+    "karvonen2026would",
+    "ferreira2026outofsight",
+    "ferreira2026truthful",
+    "burger2026chain"
+   ],
+   "evidence": [
+    "hase2026counterfactual#11: “The counterfactual input is the input without the cue.”",
+    "karvonen2026would#6: “Ground truth comes from removing the cue”",
+    "ferreira2026outofsight#4",
+    "ferreira2026truthful#5",
+    "burger2026chain#27"
+   ]
+  },
+  {
+   "n": 256,
+   "text": "[Shiromani et al. 2026](./#p=shiromani2026necessary) reject that comparison: \"Comparing W to a no-hint prompt would confound the hint’s content with its presence\".",
+   "papers": [
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "shiromani2026necessary#5: “Comparing W to a no-hint prompt would confound the hint’s content with its presence”"
+   ]
+  },
+  {
+   "n": 257,
+   "text": "For them, \"the hint caused the answer\" means that the answer changes when $h$ is swapped for $h'$, and relabeling with a third candidate \"flips 11-23% of verdicts\".",
+   "papers": [
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "shiromani2026necessary#5: “the hint caused the answer”",
+    "shiromani2026necessary#5",
+    "shiromani2026necessary full text: “relabeling with a third candidate flips 11-23% of verdicts”"
+   ]
+  },
+  {
+   "n": 258,
+   "text": "[Zhang et al. 2026](./#p=zhang2026audit) and [Arcuschin et al. 2026](./#p=arcuschin2026biases) also replace a value instead of deleting it.",
+   "papers": [
+    "zhang2026audit",
+    "arcuschin2026biases"
+   ],
+   "evidence": [
+    "zhang2026audit#3",
+    "arcuschin2026biases#5"
+   ]
+  },
+  {
+   "n": 259,
+   "text": "[Li 2026](./#p=li2026monitorability) and [Little 2026](./#p=little2026length) ask for both no-hint and alternate-hint runs, and [Matton et al. 2025](./#p=matton2025walk) use both removal and value-change counterfactuals while warning that correlated concepts are \"especially a risk when we use removal-based counterfactuals\".",
+   "papers": [
+    "li2026monitorability",
+    "little2026length",
+    "matton2025walk"
+   ],
+   "evidence": [
+    "matton2025walk full text: “especially a risk when we use removal-based counterfactuals”",
+    "little2026length#8",
+    "matton2025walk#13",
+    "matton2025walk full text: “This is especially a risk when we use removal-based counterfactuals.”"
+   ]
+  },
+  {
+   "n": 260,
+   "text": "A given answer can count as caused by a hint under removal and not under a swap.",
+   "papers": [
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "shiromani2026necessary#5"
+   ]
+  },
+  {
+   "n": 261,
+   "text": "Yes, per instance: [Alon et al. 2026](./#p=alon2026faithfulness) treat each flip \"as evidence that the hint influenced the model’s decision making\"; [Ferreira et al. 2025](./#p=ferreira2026truthful) \"regard difference in predictions ... as evidence that the protected feature ... exerts causal influence\"; [Ferreira et al. 2026](./#p=ferreira2026outofsight) take the greedy prediction without the hint as \"a per-example target label\"; [Cheah et al. 2026](./#p=cheah2026training) hold that \"any change in behavior can be attributed to\" the intervention.",
+   "papers": [
+    "alon2026faithfulness",
+    "ferreira2026truthful",
+    "ferreira2026outofsight",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "alon2026faithfulness#3: “as evidence that the hint influenced the model’s decision making”",
+    "ferreira2026truthful#6: “regard difference in predictions ... as evidence that the protected feature ... exerts causal influence”",
+    "ferreira2026outofsight#4: “a per-example target label”",
+    "cheah2026training#17: “any change in behavior can be attributed to”",
+    "ferreira2026outofsight#4",
+    "cheah2026training#17"
+   ]
+  },
+  {
+   "n": 262,
+   "text": "No: [Guan et al. 2025](./#p=guan2025monitoring) write that unless the base rate is zero \"we cannot label individual samples as having been causally influenced\"; [Bürger et al. 2026](./#p=burger2026chain) reject the per-response flip criterion; [Angdembay et al. 2026](./#p=angdembay2026two) call their own label \"an observed conditional flip rather than a within-pair counterfactual\"; [Anonymous 2026 (causal bounds)](./#p=anon2026improving) show that \"pairing unrelated control and intervention completions does not identify the coupling\"; [Li 2026](./#p=li2026monitorability) state that their label \"records answer–hint agreement, not a verified causal hint effect\".",
+   "papers": [
+    "guan2025monitoring",
+    "burger2026chain",
+    "angdembay2026two",
+    "anon2026improving",
+    "li2026monitorability"
+   ],
+   "evidence": [
+    "guan2025monitoring full text: “we cannot label individual samples as having been causally influenced”",
+    "angdembay2026two#14: “an observed conditional flip rather than a within-pair counterfactual”",
+    "anon2026improving#16: “pairing unrelated control and intervention completions does not identify the coupling”",
+    "li2026monitorability#6: “records answer–hint agreement, not a verified causal hint effect”",
+    "burger2026chain#28",
+    "li2026monitorability#6"
+   ]
+  },
+  {
+   "n": 263,
+   "text": "In between: [Karvonen et al. 2026](./#p=karvonen2026would) resample and label a claim only when the rate moves by at least 50 points or at most 15; [Zeng et al. 2026](./#p=zeng2026evaluating) count a flip when more than half of $K$ resamples differ.",
+   "papers": [
+    "karvonen2026would",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "karvonen2026would#5",
+    "zeng2026evaluating#20",
+    "zeng2026evaluating#25"
+   ]
+  },
+  {
+   "n": 264,
+   "text": "The second group also disagrees about what the aggregate shows.",
+   "papers": [
+    "guan2025monitoring",
+    "anon2026improving"
+   ],
+   "evidence": [
+    "guan2025monitoring full text",
+    "anon2026improving full text"
+   ]
+  },
+  {
+   "n": 265,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) write that the total effect \"lower bounds the causal influence rate\" and score monitors against it; [Anonymous 2026 (causal bounds)](./#p=anon2026improving) show that the resulting score, $\\mathrm{TPR}_{mc}$, \"upper-bounds the monitor’s recall on intervention-caused outcomes\".",
+   "papers": [
+    "guan2025monitoring",
+    "anon2026improving"
+   ],
+   "evidence": [
+    "guan2025monitoring full text: “lower bounds the causal influence rate”",
+    "anon2026improving full text: “upper-bounds the monitor’s recall on intervention-caused outcomes”",
+    "guan2025monitoring full text: “the total effect lower bounds the causal influence rate”; “scores a monitor by whether it triggers at least as often as the minimum fraction of observed behavior that must be attributable to the intervention”",
+    "anon2026improving full text: “we show that TPRmc upper-bounds the monitor’s recall on intervention-caused outcomes”"
+   ]
+  },
+  {
+   "n": 266,
+   "text": "[Shen et al. 2026](./#p=shen2026detecting) write that CoT intervention analysis \"does not directly determine the faithfulness of a specific generated trace\", yet run five counterfactual tests as baselines for detecting unfaithfulness in individual traces.",
+   "papers": [
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "shen2026detecting full text: “does not directly determine the faithfulness of a specific generated trace”",
+    "shen2026detecting full text: “such analysis does not directly determine the faithfulness of a specific generated trace”",
+    "shen2026detecting#16",
+    "shen2026detecting full text: “Shen et al. [39] formulates CoT faithfulness as an instance-level detection problem”"
+   ]
+  },
+  {
+   "n": 267,
+   "text": "**Isolate one factor, or vary more than one?** [Karvonen et al. 2026](./#p=karvonen2026would) exclude a counterfactual that is \"confounded, editing several variables at once\"; [Arcuschin et al. 2026](./#p=arcuschin2026biases) rate a pair 1, \"Not a valid counterfactual\", for \"Multiple or major changes\"; [Matton et al. 2025](./#p=matton2025walk) assume concepts can each \"be changed without affecting other concepts\"; [Zhang et al. 2026](./#p=zhang2026audit) require edits that \"leave the other factors fixed\".",
+   "papers": [
+    "karvonen2026would",
+    "arcuschin2026biases",
+    "matton2025walk",
+    "zhang2026audit"
+   ],
+   "evidence": [
+    "karvonen2026would#16: “confounded, editing several variables at once”",
+    "arcuschin2026biases#24: “Not a valid counterfactual”",
+    "arcuschin2026biases#24: “Multiple or major changes”",
+    "matton2025walk#15: “be changed without affecting other concepts”",
+    "zhang2026audit#5: “leave the other factors fixed”",
+    "karvonen2026would#16",
+    "arcuschin2026biases#24",
+    "matton2025walk#15",
+    "zhang2026audit#5"
+   ]
+  },
+  {
+   "n": 268,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) count single-factor variation as a pitfall: \"Most prior approaches vary only a single concept at a time (Matton et al., 2025; Siegel et al., 2024). This fails to test whether the explanations capture the complex, non-linear concept interactions\".",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#13: “Most prior approaches vary only a single concept at a time (Matton et al., 2025; Siegel et al., 2024). This fails to test whether the explanations capture the complex, non-linear concept interactions”",
+    "mayne2026positivecasefaithfulnessllm#13"
+   ]
+  },
+  {
+   "n": 269,
+   "text": "Their counterfactual set holds real rows that differ in up to two features.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#3 gloss: 'Real dataset rows within Hamming distance ≤2'"
+   ]
+  },
+  {
+   "n": 270,
+   "text": "The split follows the purpose: the first four papers attribute an effect to one factor, while Mayne et al. test whether an explanation predicts behavior across a region.",
+   "papers": [
+    "karvonen2026would",
+    "arcuschin2026biases",
+    "matton2025walk",
+    "zhang2026audit",
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#2",
+    "matton2025walk#6",
+    "zhang2026audit#9",
+    "arcuschin2026biases#9",
+    "karvonen2026would#4"
+   ]
+  },
+  {
+   "n": 271,
+   "text": "**Edit the reasoning by hand, or resample it?** The Adding Mistakes test of [Lanham et al. 2023](./#p=lanham2023measuring) has \"a language model add a mistake somewhere in the original CoT\"; [Han et al. 2026](./#p=han2026rfeval) insert reasoning written by o3, and [Khanzadeh 2026](./#p=khanzadeh2026project) a step rewritten by a critic model.",
+   "papers": [
+    "lanham2023measuring",
+    "han2026rfeval",
+    "khanzadeh2026project"
+   ],
+   "evidence": [
+    "lanham2023measuring full text: “a language model add a mistake somewhere in the original CoT”",
+    "han2026rfeval full text: “To produce counterfactual reasoning, we prompt OpenAI’s o3-2025-04-16”",
+    "khanzadeh2026project full text: “$\\iota_{\\tau}(s_{k})=f_{\\text{critic}}(s_{k},\\tau,\\theta_{\\text{critic}})$”",
+    "attr shen2026detecting#16 <- lanham2023measuring source evidence: “Adding Mistakes: Have a language model add a mistake somewhere in the original CoT”"
+   ]
+  },
+  {
+   "n": 272,
+   "text": "[Macar et al. 2025](./#p=macar2025thought) describe prior work, Lanham et al. included, as \"inserting or replacing sentences with handwritten text\", define an intervention as off-policy \"if the model would not plausibly produce it itself (e.g., a handwritten sentence or one taken from a different context)\" and report that \"artificial and off-policy edits to CoT common in prior literature generally produce small and unstable changes in behavior, while on-policy resampling produces larger and more reliable effects\".",
+   "papers": [
+    "macar2025thought"
+   ],
+   "evidence": [
+    "macar2025thought full text: “inserting or replacing sentences with handwritten text”",
+    "macar2025thought#10: “if the model would not plausibly produce it itself (e.g., a handwritten sentence or one taken from a different context)”",
+    "macar2025thought full text: “artificial and off-policy edits to CoT common in prior literature generally produce small and unstable changes in behavior, while on-policy resampling produces larger and more reliable effects”",
+    "macar2025thought full text: “Prior work has modified CoTs by inserting or replacing sentences with handwritten text (Lanham et al., 2023; Wang et al., 2025).”",
+    "macar2025thought#10"
+   ]
+  },
+  {
+   "n": 273,
+   "text": "[Madsen et al. 2024](./#p=madsen2024self) raise a related doubt about Lanham et al.'s edited CoTs: \"injecting false facts may create out-of-distribution results or be interpreted as typos by the LLM, thus it’s unclear if this method is completely valid\".",
+   "papers": [
+    "madsen2024self"
+   ],
+   "evidence": [
+    "madsen2024self full text: “injecting false facts may create out-of-distribution results or be interpreted as typos by the LLM, thus it’s unclear if this method is completely valid”"
+   ]
+  },
+  {
+   "n": 274,
+   "text": "The papers also differ on what happens after the edit.",
+   "papers": [
+    "khanzadeh2026project",
+    "macar2025thought"
+   ],
+   "evidence": [
+    "khanzadeh2026project#7",
+    "macar2025thought#2"
+   ]
+  },
+  {
+   "n": 275,
+   "text": "[Khanzadeh 2026](./#p=khanzadeh2026project) re-execute the agent \"from the point of intervention\", so later steps are re-sampled; [Macar et al. 2025](./#p=macar2025thought) argue that their own counterfactual importance \"misses resilience\" and measure importance on rollouts in which the sentence's content never reappears.",
+   "papers": [
+    "khanzadeh2026project",
+    "macar2025thought"
+   ],
+   "evidence": [
+    "khanzadeh2026project#7: “from the point of intervention”",
+    "macar2025thought#3: “misses resilience”",
+    "khanzadeh2026project#7 gloss: 'later steps are re-sampled'",
+    "macar2025thought#3",
+    "macar2025thought#2"
+   ]
+  },
+  {
+   "n": 276,
+   "text": "**Which inputs count as counterfactuals for simulatability?** [Chen et al. 2023](./#p=pmlr-v235-chen24bl) have an LLM write follow-up questions \"that you can confidently guess the robot’s answer to based on its answer to the starter question\".",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#13: “that you can confidently guess the robot’s answer to based on its answer to the starter question”"
+   ]
+  },
+  {
+   "n": 277,
+   "text": "[Hase & Potts 2026](./#p=hase2026counterfactual) rejection-sample generated questions \"to obtain counterfactuals where the task model and simulator disagree on the correct answer\".",
+   "papers": [
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "hase2026counterfactual full text: “to obtain counterfactuals where the task model and simulator disagree on the correct answer”"
+   ]
+  },
+  {
+   "n": 278,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) and [Lewis-Lim et al. 2026](./#p=lewislim2026efficient) use \"similar real inputs from the same dataset rather than synthetic perturbations\", and [Hong & Roth 2026](./#p=hong2026llm) use Gricean manipulations.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm",
+    "lewislim2026efficient",
+    "hong2026llm"
+   ],
+   "evidence": [
+    "lewislim2026efficient#4: “similar real inputs from the same dataset rather than synthetic perturbations”"
+   ]
+  },
+  {
+   "n": 279,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) name the \"unconstrained LLM-generated edits (Chen et al., 2024)\" among approaches that \"often produce counterfactuals that are irrelevant or drift from the natural data distribution\".",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#14: “unconstrained LLM-generated edits (Chen et al., 2024)”",
+    "mayne2026positivecasefaithfulnessllm#14: “often produce counterfactuals that are irrelevant or drift from the natural data distribution”"
+   ]
+  },
+  {
+   "n": 280,
+   "text": "Chen et al.'s generator writes questions it can answer from the explanation, while Hase & Potts keep questions on which the simulator and the task model disagree.",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "hase2026counterfactual"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#13",
+    "hase2026counterfactual full text: “we rejection sample the generated counterfactuals in order to obtain counterfactuals where the task model and simulator disagree on the correct answer”"
+   ]
+  },
+  {
+   "n": 281,
+   "text": "Precision is averaged over the chosen set, so each score is defined relative to its set.",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#4"
+   ]
+  },
+  {
+   "n": 282,
+   "text": "Faithfulness: [Turpin et al. 2023](./#p=turpin2023language) (\"framework of explanation faithfulness\"), [Turpin et al. 2025](./#p=turpin2025teaching) (the \"if and only if\"), [Arcuschin et al. 2025](./#p=arcuschin2025chain) (\"measure faithfulness through the framework of counterfactual simulatability\"), [Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) (\"a faithful explanation ... should help predict its behavior across $C(x)$\") and [Karvonen et al. 2026](./#p=karvonen2026would) (\"A faithful explanation should tell a reader what would change the behavior\").",
+   "papers": [
+    "turpin2023language",
+    "turpin2025teaching",
+    "arcuschin2025chain",
+    "mayne2026positivecasefaithfulnessllm",
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "turpin2023language#2: “framework of explanation faithfulness”",
+    "turpin2025teaching#2: “if and only if”",
+    "arcuschin2025chain#9: “measure faithfulness through the framework of counterfactual simulatability”",
+    "mayne2026positivecasefaithfulnessllm#2: “a faithful explanation ... should help predict its behavior across $C(x)$”",
+    "karvonen2026would full text: “A faithful explanation should tell a reader what would change the behavior”"
+   ]
+  },
+  {
+   "n": 283,
+   "text": "A special case of faithfulness that is not necessary for it: [Chen et al. 2023](./#p=pmlr-v235-chen24bl) (\"a faithful explanation is not necessarily simulatable\").",
+   "papers": [
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl full text: “a faithful explanation is not necessarily simulatable”"
+   ]
+  },
+  {
+   "n": 284,
+   "text": "[Hong & Roth 2026](./#p=hong2026llm) repeat this and study simulatability \"as a way to capture the usefulness of explanations\", adding that \"explanations can improve simulatability while still being post-hoc or persuasive rather than diagnostic\".",
+   "papers": [
+    "hong2026llm"
+   ],
+   "evidence": [
+    "hong2026llm full text: “as a way to capture the usefulness of explanations”",
+    "hong2026llm full text: “explanations can improve simulatability while still being post-hoc or persuasive rather than diagnostic”",
+    "hong2026llm full text: “Following Chen et al. (2024), simulatability can be seen as a special case of faithfulness”"
+   ]
+  },
+  {
+   "n": 285,
+   "text": "Plausibility: [Agarwal et al. 2024](./#p=agarwal2024faithfulness) introduce Chen et al.'s metrics after writing that \"most evaluations of self-explanations focus on plausibility\".",
+   "papers": [
+    "agarwal2024faithfulness"
+   ],
+   "evidence": [
+    "agarwal2024faithfulness full text: “most evaluations of self-explanations focus on plausibility”"
+   ]
+  },
+  {
+   "n": 286,
+   "text": "The biconditional of [Turpin et al. 2025](./#p=turpin2025teaching) makes simulatability necessary for faithfulness, and [Chen et al. 2023](./#p=pmlr-v235-chen24bl) state that it is not.",
+   "papers": [
+    "turpin2025teaching",
+    "pmlr-v235-chen24bl"
+   ],
+   "evidence": [
+    "turpin2025teaching#2",
+    "pmlr-v235-chen24bl full text: “Consequently, a faithful explanation is not necessarily simulatable.”"
+   ]
+  },
+  {
+   "n": 287,
+   "text": "[Karvonen et al. 2026](./#p=karvonen2026would) also restrict what an explanation is: \"a behavioral claim testable by counterfactual experiments, not an explanation of the model’s internal computation\".",
+   "papers": [
+    "karvonen2026would"
+   ],
+   "evidence": [
+    "karvonen2026would#3: “a behavioral claim testable by counterfactual experiments, not an explanation of the model’s internal computation”"
+   ]
+  },
+  {
+   "n": 288,
+   "text": "Yes: [Wang & Atanasova 2025](./#p=wang2025selfcritique), [Alon et al. 2026](./#p=alon2026faithfulness), [Cheah et al. 2026](./#p=cheah2026training), [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought) and [Gema et al. 2026](./#p=gema2026chainofthought) use it as a test of explanation faithfulness.",
+   "papers": [
+    "wang2025selfcritique",
+    "alon2026faithfulness",
+    "cheah2026training",
+    "zaman2025chainofthought",
+    "gema2026chainofthought"
+   ],
+   "evidence": [
+    "wang2025selfcritique#1",
+    "alon2026faithfulness#5",
+    "cheah2026training#22",
+    "zaman2025chainofthought#8",
+    "gema2026chainofthought#6"
+   ]
+  },
+  {
+   "n": 289,
+   "text": "Qualified: [Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring) characterize all the tests they review, Counterfactual Edits included, \"as self-consistency tests instead\"; [Baker et al. 2025](./#p=baker2025monitoring) credit them (their [76]) with the argument that a test relying on \"executing changes to the model’s input and observing changes to the prediction actually measures self-consistency rather than faithfulness\".",
+   "papers": [
+    "parcalabescu2023measuring",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "parcalabescu2023measuring full text: “as self-consistency tests instead”",
+    "baker2025monitoring full text: “executing changes to the model’s input and observing changes to the prediction actually measures self-consistency rather than faithfulness”",
+    "baker2025monitoring full text (App. G.2 footnote): “The authors of [76] make the related but broader argument that any “faithfulness” test which relies on executing changes to the model’s input and observing changes to the prediction actually measures self-consistency rather than faithfulness, with the former a necessary but insufficient condition for the latter.”; reference [76]: Letitia Parcalabescu and Anette Frank",
+    "parcalabescu2023measuring full text: “We clarify the status of faithfulness tests in view of model explainability, characterising them as self-consistency tests instead.”; their CCB includes Counterfactual Edits"
+   ]
+  },
+  {
+   "n": 290,
+   "text": "[Bhan et al. 2025](./#p=bhan2025did) name two limitations, that \"the model might base its new prediction on another part of the input text after intervention\" and that the methods \"treat the model as a black box by only examining input-output relationships\", which \"departs from the commonly adopted definition of explanation faithfulness\"; they still run the test as a comparison.",
+   "papers": [
+    "bhan2025did"
+   ],
+   "evidence": [
+    "bhan2025did full text: “the model might base its new prediction on another part of the input text after intervention”",
+    "bhan2025did full text: “treat the model as a black box by only examining input-output relationships”",
+    "bhan2025did full text: “departs from the commonly adopted definition of explanation faithfulness”",
+    "bhan2025did full text App. F: “we examine how faithfulness as measured by NeuroFaith compares to existing Counterfactual Intervention (CI)”"
+   ]
+  },
+  {
+   "n": 291,
+   "text": "[Matton et al. 2025](./#p=matton2025walk) object that it judges \"explanations given to the counterfactual questions, which may not reflect the faithfulness of the LLM in response to the original questions\".",
+   "papers": [
+    "matton2025walk"
+   ],
+   "evidence": [
+    "matton2025walk#26: “explanations given to the counterfactual questions, which may not reflect the faithfulness of the LLM in response to the original questions”"
+   ]
+  },
+  {
+   "n": 292,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm) list random word insertions among perturbations that \"often produce counterfactuals that are irrelevant or drift from the natural data distribution\".",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#14: “often produce counterfactuals that are irrelevant or drift from the natural data distribution”",
+    "mayne2026positivecasefaithfulnessllm#14"
+   ]
+  },
+  {
+   "n": 293,
+   "text": "[Admoni et al. 2025](./#p=admoni2026aligning) describe the correlational version as \"population-level\".",
+   "papers": [
+    "admoni2026aligning"
+   ],
+   "evidence": [
+    "admoni2026aligning#9: “population-level”",
+    "admoni2026aligning#9"
+   ]
+  },
+  {
+   "n": 294,
+   "text": "**Is the answer's dependence on the reasoning a measure of faithfulness?** [Akter et al. 2025](./#p=akter2025causal) call Counterfactual Sensitivity \"a formal, causally-motivated measure of faithfulness\" and write that \"Higher COS indicates greater faithfulness\"; [Shen et al. 2026](./#p=shen2026detecting) read an unchanged answer after substantial perturbation as \"suggesting potential unfaithfulness\"; [Somov et al. 2026](./#p=somov2026breaking) write that \"A faithful model should shift its output accordingly\".",
+   "papers": [
+    "akter2025causal",
+    "shen2026detecting",
+    "somov2026breaking"
+   ],
+   "evidence": [
+    "akter2025causal full text: “a formal, causally-motivated measure of faithfulness”",
+    "akter2025causal#6: “Higher COS indicates greater faithfulness”",
+    "shen2026detecting#6: “suggesting potential unfaithfulness”",
+    "somov2026breaking#7: “A faithful model should shift its output accordingly”",
+    "akter2025causal full text: “Our approach is grounded in a formal, causally-motivated measure of faithfulness we term Counterfactual Sensitivity.”",
+    "akter2025causal#6",
+    "shen2026detecting full text: “suggesting potential unfaithfulness”",
+    "somov2026breaking#7"
+   ]
+  },
+  {
+   "n": 295,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) (App. G.2) state that their \"definition of faithfulness does not imply any expectations of causality\", that causal CoTs \"are not a necessary condition for monitorability\", and that \"intervention-based proxies for measuring causality are insufficient measures for faithfulness\", because a change after a CoT edit \"will not reveal how much of the complete reasoning is encapsulated in the CoT\".",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "baker2025monitoring#27: “definition of faithfulness does not imply any expectations of causality”",
+    "baker2025monitoring full text: “are not a necessary condition for monitorability”",
+    "baker2025monitoring full text: “intervention-based proxies for measuring causality are insufficient measures for faithfulness”",
+    "baker2025monitoring full text: “will not reveal how much of the complete reasoning is encapsulated in the CoT”",
+    "baker2025monitoring full text App. G.2: “causal CoTs (see Figure 25) are not a necessary condition for monitorability”; “intervention-based proxies for measuring causality are insufficient measures for faithfulness”; “this will not reveal how much of the complete reasoning is encapsulated in the CoT”"
+   ]
+  },
+  {
+   "n": 296,
+   "text": "They still call causal metrics \"valuable and worth measuring\", since \"steerability is a sufficient condition for faithfulness\".",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "baker2025monitoring full text: “Nevertheless, causal faithfulness metrics are still valuable and worth measuring. Since steerability is a sufficient condition for faithfulness, strong steerability with respect to target behaviors we care about would increase our confidence in the faithfulness of CoTs”"
+   ]
+  },
+  {
+   "n": 297,
+   "text": "On Baker et al.'s account, strong steerability raises confidence in faithfulness, but a change after an edit does not show how much of the reasoning the CoT contains; COS and CS read the size of the response as the degree of faithfulness.",
+   "papers": [
+    "baker2025monitoring",
+    "akter2025causal"
+   ],
+   "evidence": [
+    "baker2025monitoring full text: “strong steerability ... would increase our confidence in the faithfulness of CoTs”",
+    "akter2025causal#4",
+    "akter2025causal#6: “Higher COS indicates greater faithfulness.”"
+   ]
+  },
+  {
+   "n": 298,
+   "text": "**Attention counterfactuals.** [Jain & Wallace 2019](./#p=jain2019attention) take the existence of attention weights \"maximally distinct from $\\hat{\\alpha}$ but that nonetheless yields an equivalent prediction\" as evidence against attention as explanation.",
+   "papers": [
+    "jain2019attention"
+   ],
+   "evidence": [
+    "jain2019attention#4: “maximally distinct from $\\hat{\\alpha}$ but that nonetheless yields an equivalent prediction”",
+    "jain2019attention full text title: “Attention is not Explanation”"
+   ]
+  },
+  {
+   "n": 299,
+   "text": "[Wiegreffe & Pinter 2019](./#p=wiegreffe2019attention) accept the counterfactual framework \"as a concept\" but object that \"due to the per-instance nature of the demonstration and the fact that model parameters have not been learned or manipulated directly, Jain and Wallace have not shown the existence of an adversarial model that produces the claimed adversarial distributions\".",
+   "papers": [
+    "wiegreffe2019attention"
+   ],
+   "evidence": [
+    "wiegreffe2019attention#3: “as a concept”",
+    "wiegreffe2019attention full text: “due to the per-instance nature of the demonstration and the fact that model parameters have not been learned or manipulated directly, Jain and Wallace have not shown the existence of an adversarial model that produces the claimed adversarial distributions”"
+   ]
+  },
+  {
+   "n": 300,
+   "text": "On their reading, an alternative attention distribution counts as a counterfactual only if a trained model produces it.",
+   "papers": [
+    "wiegreffe2019attention"
+   ],
+   "evidence": [
+    "wiegreffe2019attention full text: “Jain and Wallace have not shown the existence of an adversarial model that produces the claimed adversarial distributions”"
+   ]
+  }
+ ]
+}

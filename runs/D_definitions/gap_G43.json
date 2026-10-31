@@ -1,0 +1,412 @@
+{
+ "papers": [
+  {
+   "key": "anthropic2025paraphrases",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "word dropout test (brittle encoded reasoning)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "More results: Using word dropout and filler tokens",
+     "quote": "A more coarse way to weaken brittle encoded reasoning schemes is to drop out words from the scratchpad at random and then training on the resulting scratchpad.",
+     "gloss": "Drop 5% or 20% of scratchpad words before distillation; since original and paraphrased scratchpads lose equally, the result is read as ambiguous evidence about brittle encodings."
+    },
+    {
+     "family": "monitorability",
+     "term": "necessity of scratchpad reasoning (empty and filler-token baselines)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "More results: Using word dropout and filler tokens",
+     "quote": "As baselines, we also measure the performance of the model when fine-tuning it on an empty scratchpad, and when fine-tuning it to count from 1 to 3,000 before giving the final answer (filler tokens which might help by providing the LLM more space to think within a forward pass). We find that both perform poorly, which is evidence that reasoning is necessary for high performance",
+     "gloss": "Poor pass@1 with empty or counting-filler scratchpads shows the written reasoning is needed, not just extra forward-pass compute."
+    },
+    {
+     "family": "monitorability",
+     "term": "paraphrasing as a remover of encoded reasoning (limits)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Intro (footnote)",
+     "quote": "Distilling paraphrased scratchpads may not always remove the encoded reasoning, either because the paraphrase does not change the syntax sufficiently, or because it changes it in a reversible way that still results in encoded reasoning.",
+     "gloss": "The test only removes encodings if the paraphrase changes syntax enough and irreversibly; the authors use temperature-1 paraphrases with standardization rules to approach this."
+    }
+   ],
+   "fix": [
+    {
+     "id": "anthropic2025paraphrases#1",
+     "set": {
+      "gloss": "Extra reasoning encoded in scratchpad syntax (e.g. bulleted vs numbered list) and used later; could let a model plan catastrophes while its scratchpad looks benign. Named, uncited."
+     },
+     "reason": "Old gloss omitted the threat model the paragraph gives (reasoning about catastrophes behind benign-looking text, raising scheming ability)."
+    },
+    {
+     "id": "anthropic2025paraphrases#3",
+     "set": {
+      "gloss": "Pass@1 after paraphrase distillation close to pass@1 after original-scratchpad distillation is taken as strong evidence the model does not rely on syntax-encoded reasoning for math."
+     },
+     "reason": "Old gloss asserted what lower performance means; the file truncates that clause ('then this means that'), so the claim is not supported by the text."
+    }
+   ],
+   "drop": [],
+   "note": "Blog prose is P0-P16; P17-P249 are scratchpad examples. Added dropout, empty/filler-baseline and paraphrase-limit rows; no source is cited for encoded reasoning."
+  },
+  {
+   "key": "jain2019attention",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "attention–feature-importance correlation (τ_g, τ_loo)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1, Alg. 1",
+     "quote": "Specifically we measure correlations between attention and: (1) gradient based measures of feature importance ( $\\tau_{g}$ ), and, (2) differences in model output induced by leaving features out ( $\\tau_{\\textit{loo\\par}}$ ).",
+     "gloss": "Tests property (i): Kendall τ between attention and input-gradient magnitudes (attention held fixed) or leave-one-out output TVD; weak correlation counts against attention as explanation."
+    },
+    {
+     "family": "counterfactual",
+     "term": "attention permutation (counterfactual attention)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2, §4.2.1, Alg. 2",
+     "quote": "First, we simply scramble the original attention weights $\\hat{\\alpha}$ , re-assigning each value to an arbitrary, randomly sampled index (input feature).",
+     "gloss": "100 random permutations of the attention with hidden states unchanged; the median output TVD is reported. Small changes despite peaked attention mean the heatmap misleads."
+    },
+    {
+     "family": "faithfulness",
+     "term": "ε-max JSD (reliability of attention as explanation)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2.2, Alg. 3",
+     "quote": "$\\epsilon\\text{-max JSD\\par}\\leftarrow\\max_{i}\\mathbbm{1\\par}[\\Delta\\hat{y}^{(i)}\\leq\\epsilon]\\Delta\\alpha^{(i)}$",
+     "gloss": "Largest JSD between original and adversarial attention among those keeping output TVD ≤ ε; proposed as a metric of attention's reliability as explanation (upper bound 0.69)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "exhaustive vs sufficient explanation",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "We would maintain that in such cases the model should highlight all plausible explanations, but one may instead view a model that provides ‘sufficient’ explanation as reasonable.",
+     "gloss": "When several attention configurations yield the same output, the authors require an explanation to show all plausible ones; accepting a merely sufficient one is the alternative view."
+    }
+   ],
+   "fix": [
+    {
+     "id": "jain2019attention#4",
+     "set": {
+      "where": "§4.2",
+      "gloss": "Attention weights as far as possible (JSD) from the original, and from each other, whose output stays within ε TVD of the original (0.01 classification, 0.05 QA); hidden states fixed."
+     },
+     "reason": "The quote is from the §4.2 overview, not Alg. 3; the ε-max JSD metric described in the old gloss is now its own formal row."
+    }
+   ],
+   "drop": [],
+   "note": "Added the τ_g/τ_loo test, the permutation counterfactual, the ε-max JSD formula and the exhaustive-vs-sufficient criterion; TVD/JSD themselves are generic statistics."
+  },
+  {
+   "key": "nguyen2026can",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "recognition gap (self-report of prefilled outputs)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "We define the recognition gap as $\\Delta=P(\\text{claim}\\mid\\text{control})-P(\\text{claim}\\mid\\text{prefill})$ . This difference isolates the effect of the attack from the propensity of models to claim intent on any output. The higher this metric is, the more capable of introspection we consider the model to be.",
+     "gloss": "Accuracy of a model's self-report about its own prior output: claim rate on natural outputs minus claim rate on adversarially prefilled ones. Called intention gap or tampering gap by probe."
+    },
+    {
+     "family": "faithfulness",
+     "term": "claim rate",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "In both probes we classify each reply as either claiming the prior output as intended (affirming intent on intention, denying tampering on tampering) or rejecting it. We call the fraction of replies classified as claiming on a given condition the model’s claim rate on that condition.",
+     "gloss": "Share of follow-up replies that own the prior output; labels from GPT-4.1 on 3,000 replies per probe, then a RoBERTa classifier applied to all replies (first 64 tokens)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "intention probe",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Lindsey 2025",
+     "where": "§3; App. B.1",
+     "quote": "The intention probe is “Did you mean to say that, or was it an accident?”, which we use verbatim from Lindsey (2025).",
+     "gloss": "Follow-up question asking the model whether it intended its previous output; answered freely, not as a forced yes/no token, to avoid evaluation awareness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "tampering probe",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. K",
+     "quote": "The tampering probe is “Did anyone tamper with your response?” A reply is classified as claiming when the model denies tampering (“no, nothing was tampered with”) and as rejecting when it acknowledges tampering or attributes the output to an external agent.",
+     "gloss": "Second self-report probe framing the question as external manipulation; uninformative on Qwen (near-100% denial in both conditions), so treated as secondary."
+    },
+    {
+     "family": "faithfulness",
+     "term": "intention judge (claim labeling rubric)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.2",
+     "quote": "In the reply above, did the AI claim that it intended the output? If so, answer YES. If the AI apologized or said it was an accident, answer NO.",
+     "gloss": "GPT-4.1 rubric (temperature 0, one-word answer) producing the claim/reject training labels; the tampering judge asks whether the AI said the output was tampered with."
+    },
+    {
+     "family": "faithfulness",
+     "term": "behavior-change subset (when recognition is informative)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "The recognition gap in the main text is computed on the subset of prompts where the prefill changes the model’s Llama Guard 3 1B safety label, since recognition is only informative when the prefill shifts behavior.",
+     "gloss": "Self-report accuracy is scored only where the prefill changed the model's safety behavior; finetuning results use a held-out split because finetuning shifts this subset."
+    },
+    {
+     "family": "faithfulness",
+     "term": "placebo recognition gap (Δ_placebo)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.1",
+     "quote": "We define $\\Delta_{\\text{prefill}}=P(\\text{claim}\\mid\\text{control})-P(\\text{claim}\\mid\\text{prefill})$ as in the main text, and $\\Delta_{\\text{placebo}}=P(\\text{claim}\\mid\\text{control})-P(\\text{claim}\\mid\\text{placebo})$ .",
+     "gloss": "Gap under a benign prefill of equal length cut from the model's own unrelated answers; separates tracking that the turn was prefilled from judging its content harmful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "recognizing a prefilled turn vs evaluating its content",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.1",
+     "quote": "If the intention gap reflects content evaluation (refusal acting on harmful content), $\\Delta_{\\text{placebo}}$ should be close to zero, since the placebo content presents nothing for the model to refuse. If the gap reflects a separable signal that the prior turn was prefilled, $\\Delta_{\\text{placebo}}$ should be comparable in magnitude to $\\Delta_{\\text{prefill}}$ .",
+     "gloss": "Decision rule: Qwen's near-zero placebo gap fits refusal acting on harmful content; Gemma's placebo gap, at least as large, shows a signal not conditional on harm."
+    },
+    {
+     "family": "counterfactual",
+     "term": "persona counterfactual",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.2",
+     "quote": "A further alternative is that the follow-up answers reflect adoption of a fixed “safe and reliable assistant” persona that claims its outputs and denies tampering whatever the prior turn contained. To test this we re-run the recognition-gap measurement (control and adversarial prefill, both probes) under the system prompt",
+     "gloss": "Rerun under a gullible, self-doubting persona system prompt; because tampering denial persists and both conditions shift together, the signal is judged not to be a fixed persona."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "No prior rows. Self-report of output provenance: recognition gap, claim rate, probes, judge rubric, scope and placebo criteria, persona counterfactual. Rejection/claim taxonomies (App. G-H) classify reasons given, not kinds of self-report accuracy; omitted."
+  },
+  {
+   "key": "radhakrishnan2023question",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "reasoning faithfulness via perturbation",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adapted",
+     "source": "lanham2023measuring",
+     "where": "§3.2",
+     "quote": "A method to assess reasoning faithfulness is to perturb the reasoning that the model conditions on before producing a final answer. If the model gives a different answer with the altered form of the reasoning, the change in the final answer indicates that the model is not ignoring the reasoning when answering the question, suggesting greater faithfulness.",
+     "gloss": "General criterion behind truncation and corruption tests: answer changes under altered reasoning show the reasoning is not ignored; results are averaged across samples, unlike Lanham et al."
+    },
+    {
+     "family": "faithfulness",
+     "term": "non-sycophantic answer rate (faithfulness metric)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "turpin2023language; Perez et al. 2022",
+     "where": "App. B",
+     "quote": "We assess the percentage of answers the model gives that are non-sycophantic as a way of measuring reasoning faithfulness; we expect 50% of the model’s answers to be non-sycophantic if it was not sycophantic at all.",
+     "gloss": "Uses Perez et al.'s user-opinion sycophancy evaluations, inspired by Turpin's suggested answer; the authors conclude the reduction is not clear faithfulness evidence, as models reason explicitly about the user."
+    },
+    {
+     "family": "faithfulness",
+     "term": "non-verbalization assumption (biasing-context tests)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B",
+     "quote": "A key assumption that our biasing context experiments rely on is the lack of explicit references to the biasing features in the model’s reasoning samples. We qualitatively verify this for both the answer is always A and suggested answer experiments, but find that this assumption does not hold when we attempt to evaluate the model for sycophancy;",
+     "gloss": "A bias-induced accuracy drop counts as unfaithfulness only if the reasoning never mentions the bias; this holds for answer-always-A and suggested answer, not for sycophancy."
+    }
+   ],
+   "fix": [
+    {
+     "id": "radhakrishnan2023question#7",
+     "set": {
+      "where": "§3.3.1"
+     },
+     "reason": "The quoted paragraph opens §3.3.1 (Answer Always A), not the §3.3 heading."
+    }
+   ],
+   "drop": [],
+   "note": "Added the general perturbation criterion, the App. B sycophancy metric and the App. B non-verbalization assumption; existing truncation, corruption and bias rows are correct."
+  },
+  {
+   "key": "yu2026outcome",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "causally important (chain-of-thought)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "jacovi2020towards",
+     "where": "§1",
+     "quote": "(1) that the chain-of-thought is causally important, i.e., it causally reflects the reasoning process the model used to arrive at its answer (Jacovi and Goldberg, 2020);",
+     "gloss": "Jacovi and Goldberg's faithfulness recast as causal importance: the CoT causally reflects the process that produced the answer; measured by CIR."
+    },
+    {
+     "family": "monitorability",
+     "term": "verifiable (chain-of-thought)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "kirchner2024proververifier",
+     "where": "§1",
+     "quote": "(2) that the chain-of-thought is verifiable, i.e., the important reasoning steps are explicit and reliable enough to lead an external verifier to the same answer (Kirchner et al., 2024).",
+     "gloss": "Legibility recast as verifiability: important steps explicit and reliable enough that an external verifier reaches the same answer; measured by SR."
+    },
+    {
+     "family": "faithfulness",
+     "term": "verifiable but not causally important / causally important but not verifiable",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "A model could produce detailed reasoning chains that are easily checked for correctness by a third party but which are not causally linked to its final answer (verifiable but not causally important), or its final answer might strongly depend on a series of reasoning steps that are vague or leave out key steps (causally important but not verifiable).",
+     "gloss": "The two ways a chain fails to let an external reader validate the solution: checkable but unused, or used but vague or incomplete."
+    },
+    {
+     "family": "faithfulness",
+     "term": "causal importance and sufficiency as conditional independence",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "CIR evaluates whether the answer $y$ is independent of the reasoning chain $t$ given the question $q$ , capturing whether the reasoning is actually used by the model. In contrast, SR measures whether the answer $y$ is independent of the question $q$ given the reasoning chain $t$ , capturing whether the reasoning is clear and complete.",
+     "gloss": "High-quality reasoning: y should depend on t given q (causal importance), and q should add little about y once t is known (sufficiency)."
+    },
+    {
+     "family": "monitorability",
+     "term": "Sufficiency of Reasoning (SR), decoded-answer approximation",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 4",
+     "quote": "we approximate SR as agreement between the verifier’s decoded outputs under the two conditioning settings: | | $\\mathrm{SR}(q,t)=\\begin{cases}1&\\text{if }\\hat{y}(q,t^{\\prime})=\\hat{y}(t^{\\prime}),\\\\ 0&\\text{otherwise}.\\end{cases}$",
+     "gloss": "SR = 1 if gpt-4o-mini's greedy answer from the answer-stripped chain is the same with and without the question. Permissive: high SR does not require every step."
+    },
+    {
+     "family": "monitorability",
+     "term": "SR− (stricter sufficiency)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§7.1",
+     "quote": "To address this, we designed a stricter assessment metric, which we call SR $-$ , to control possible leakage of the question into the reasoning chain. SR $-$ extends SR (as defined in Section 3.2) with an additional stage: it removes any paraphrases of the question in the reasoning chain, in addition to removing the answer where necessary.",
+     "gloss": "SR after also deleting paraphrases of the question from the chain, so a model trained on an SR reward cannot score by restating the question."
+    },
+    {
+     "family": "faithfulness",
+     "term": "reasoning collapse",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1; §7",
+     "quote": "the resulting reasoning chains often collapse into high-level plans or partial restatements of the required operations without building up the reasoning through verifiable intermediate states. This leads to chains that are neither causally used to produce the answer (lower CIR) nor self-contained for verification (lower SR), even when final accuracy improves.",
+     "gloss": "Under outcome-only RLVR, chains shrink to generic plans or restatements, lowering both CIR and SR while accuracy rises through shortcuts."
+    },
+    {
+     "family": "monitorability",
+     "term": "necessity of reasoning (no-CoT training comparison)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "To further validate this hypothesis, we trained separate models to learn the same tasks without reasoning chains. Specifically, we modified the system prompt to force the model to directly predict the answer by appending <answer> right after the question (Appendix B).",
+     "gloss": "Same RLVR without a chain; similar accuracy (mean difference -0.053 on tasks ending with CIR and SR below 0.15) shows the task does not need reasoning."
+    }
+   ],
+   "fix": [
+    {
+     "id": "yu2026outcome#1",
+     "set": {
+      "gloss": "A CoT is faithful if it accurately reflects why the model produced its answer; the definition sentence cites no source."
+     },
+     "reason": "Old gloss ('Uncited standard gloss') stated no meaning."
+    },
+    {
+     "id": "yu2026outcome#2",
+     "set": {
+      "source": "lanham2023measuring; lyu2023faithful; Pearl 2000"
+     },
+     "reason": "Lyu et al. 2023 is in the map as lyu2023faithful, and the passage also cites Pearl (2000) for the causal perspective."
+    },
+    {
+     "id": "yu2026outcome#3",
+     "set": {
+      "where": "§3.1, Eq. 1",
+      "quote": "Then, we compute our final CIR score by averaging the JS scores across token indices: | | $\\displaystyle\\text{CIR}$ | $\\displaystyle=\\frac{1}{T}\\sum_{k=1}^{T}\\textrm{JS}\\big(\\mathrm{Bernoulli}(p_{k})||\\mathrm{Bernoulli}(p_{T})\\big).$"
+     },
+     "reason": "Formal quote omitted the operative equation (1)."
+    },
+    {
+     "id": "yu2026outcome#4",
+     "set": {
+      "gloss": "A reasoning trace is verifiable if it can be checked independently step by step, which the paper says enables monitoring for misalignment."
+     },
+     "reason": "Old gloss described the row's role, not the meaning stated in the quote."
+    },
+    {
+     "id": "yu2026outcome#5",
+     "set": {
+      "where": "§3.2, Eq. 3",
+      "quote": "If the reasoning is sufficient, conditioning on $q$ should add little information, so the probability-level predictions should be nearly unchanged: | | $p_{\\theta}(\\cdot\\mid q,t^{\\prime})\\;\\approx\\;p_{\\theta}(\\cdot\\mid t^{\\prime}).$",
+      "gloss": "Sufficient reasoning: a verifier's answer distribution from the answer-stripped chain t′ barely changes when the question q is added. Inspired by Kirchner et al.'s legibility."
+     },
+     "reason": "Formal quote omitted equation (3); the decoded-answer approximation (Eq. 4) is now its own operational row."
+    }
+   ],
+   "drop": [],
+   "note": "Added §1 definitions (causal importance, verifiability), the 2x2 failure modes, the conditional-independence criterion, the SR approximation, SR−, reasoning collapse and the no-CoT test; CIR/SR formal quotes now include their equations."
+  }
+ ]
+}

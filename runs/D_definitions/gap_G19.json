@@ -1,0 +1,390 @@
+{
+ "papers": [
+  {
+   "key": "chen2025consistent",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "follow-up questions (related vs. rephrased)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adapted",
+     "source": "pmlr-v235-chen24bl",
+     "where": "§4.3",
+     "quote": "We evaluate consistency on two types of followup questions: related questions and rephrased questions. We prompt GPT-4 to generate related questions (see Appendix A.3 for prompts) and exact paraphrases of the original questions.",
+     "gloss": "The inputs on which explanation consistency (Chen et al.'s counterfactual simulatability precision) is scored: GPT-4-written related questions, and exact paraphrases of the original question."
+    },
+    {
+     "family": "counterfactual",
+     "term": "simulated human expectation (follow-up answer from the explanation)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "pmlr-v235-chen24bl",
+     "where": "App. A.1, A.3, Table A7",
+     "quote": "read a follow-up question and judge whether the starter QA directly helps choosing a single answer for the follow-up question. If not, end your answer with \"So the answer is unknown.\". If yes, use the starter QA to answer the follow-up question, explain your reasoning as clearly and as detailed as possible using all relevant information in the starter QA",
+     "gloss": "Prompt captioned as simulating a human's expectation: the LLM answers a follow-up only from the starter explanation, or 'unknown'. Claude-2 plays the human after matching human agreement (73.5% vs 73.8%)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "chen2025consistent#5",
+     "set": {
+      "where": "§4.3, App. A.1"
+     },
+     "reason": "The metric's validity checks (stability, hackability, Claude-2 as human simulator) are in App. A.1."
+    }
+   ],
+   "drop": [],
+   "note": "Added the follow-up question types (the inputs consistency is scored on) and the simulator prompt from Table A7; existing rows were correct."
+  },
+  {
+   "key": "macar2025thought",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "counterfactual resampling",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Bogdan et al. 2025",
+     "where": "§2.1.1",
+     "quote": "We can establish baseline importance using counterfactual resampling. For each sentence $S_{i}$ in a CoT, we generate a distribution over outcomes by resampling from position $i$ onward, keeping $S_{1},\\ldots,S_{i-1}$ as prefix.",
+     "gloss": "The intervention behind both importance metrics: keep the prefix before sentence i and regenerate the rest of the CoT from the model (100 rollouts per sentence)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "on-policy intervention (vs. off-policy)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "We call an intervention on-policy if the model could have plausibly produced the new text from the upstream CoT. To generate on-policy replacements for a given sentence, we condition the CoT on its upstream context and resample to find new sentences that express the targeted meaning. An intervention is off-policy if the model would not plausibly produce it itself (e.g., a handwritten sentence or one taken from a different context).",
+     "gloss": "Valid CoT edits are ones the model could have written itself; handwritten, cross-model or other-context insertions are off-policy and are found to understate causal effects."
+    },
+    {
+     "family": "counterfactual",
+     "term": "transplant resampling",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1.1",
+     "quote": "Our analyses generate a CoT for a question while a hint is presented and then transplant portions of said CoT into a model prompted with the same question but without any hint. This is a form of causal mediation analysis, whereby we enable or disable the effects of a hint on a specific portion of the CoT and examine the effects on a final answer.",
+     "gloss": "Prefixes S_1..S_i of a hinted, unfaithful CoT are placed after the unhinted question and resampled 100 times; the hinted-answer rate measures how much of the hint's effect the CoT carries."
+    },
+    {
+     "family": "counterfactual",
+     "term": "sentence-cluster causal effect",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2.1, Eq. 3",
+     "quote": "$\\text{Effect}(C)=\\mathbb{E}_{s_{i}\\in C}\\left[p(A_{\\text{yes}}\\mid\\text{CoT}_{1\\dots i})-p(A_{\\text{yes}}\\mid\\text{CoT}_{1\\dots i-1})\\right]$",
+     "gloss": "Effect of a sentence cluster C: mean change in the resampled interview (yes) rate after versus before such a sentence; a signed difference replaces KL because the decision is binary."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithfulness (unmentioned demographic bias)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "Much of this work has focused on how answer rates change based a candidate’s ethnicity or gender. Such biases are virtually never mentioned in a CoT, making this a form of unfaithfulness.",
+     "gloss": "Extends unfaithfulness beyond hints: ethnicity or gender cues that change hiring decisions but are never mentioned in the CoT count as unfaithful."
+    },
+    {
+     "family": "monitorability",
+     "term": "necessity of explicit reasoning (CoT–internals correspondence)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "emmons2025chain",
+     "where": "§6",
+     "quote": "Consistency is particularly common for cases where a model is reasoning about a complex scenario, where explicit mentioning of goals and conclusions is necessary for a model to perform computations beyond what is doable in a single forward pass (Emmons et al., 2025).",
+     "gloss": "Internal representations and the legible CoT tend to correspond when the task needs explicit reasoning beyond one forward pass; used to argue the black-box resampling results are informative."
+    }
+   ],
+   "fix": [
+    {
+     "id": "macar2025thought#1",
+     "set": {
+      "quote": "$\\text{importance}(S_{i})=D_{KL}[p(A^{\\prime}_{S_{i}}|T_{i}\\not\\approx S_{i})\\hskip 1.42262pt\\|\\hskip 1.42262ptp(A_{S_{i}})]$",
+      "where": "§2.1.1, Eq. 1",
+      "gloss": "KL divergence between the outcome distribution after resampling sentence i to semantically different content (cosine similarity below median) and the distribution with S_i present."
+     },
+     "reason": "Formal row quoted the resampling procedure but not Eq. 1; the procedure now has its own row (counterfactual resampling)."
+    },
+    {
+     "id": "macar2025thought#2",
+     "set": {
+      "quote": "$\\text{importance++}(S_{i})=D_{KL}[p(A^{\\prime}_{S_{i}}|\\forall j\\geq i:T_{j}\\not\\approx S_{i})\\hskip 1.42262pt\\|\\hskip 1.42262ptp(A_{S_{i}})]$",
+      "where": "§2.1.2, Eq. 2",
+      "gloss": "As Eq. 1, but only on rollouts where neither position i nor any later sentence is semantically similar to S_i, so the content is absent from the whole trace."
+     },
+     "reason": "Formal row omitted the operative equation (Eq. 2)."
+    },
+    {
+     "id": "macar2025thought#3",
+     "set": {
+      "where": "§2.1.2, App. B.1",
+      "gloss": "Number of resampling iterations a sentence's content survives (best-match cosine similarity above τ, the median) before it is abandoned (Algorithm 1); low = transient, high = persistent."
+     },
+     "reason": "Algorithm 1 and the threshold that define the score are in App. B.1."
+    },
+    {
+     "id": "macar2025thought#6",
+     "set": {
+      "stance": "adapted",
+      "source": "chua2025deepseek",
+      "quote": "we identified 40 problems where the hint was effective, increasing the model’s likelihood of responding with the hinted answer by at least 10%: $p(answer=X|hint=X)-p(answer=X|no$ $hint)>10\\%$ . For each question, we manually identified one unfaithful CoT, where the model gave the hinted answer but did not mention the hint.",
+      "gloss": "Labeling rule on Chua & Evans's professor-hinted MMLU prompts: keep items where the hint raises the hinted answer by >10 points; hand-pick one hinted-answer CoT not mentioning the hint."
+     },
+     "reason": "Chua & Evans is cited only for the prompts; the hint-effectiveness filter and manual labeling are this paper's own, so adapted; quote now includes the selection condition."
+    }
+   ],
+   "drop": [],
+   "note": "Formal rows now quote Eqs. 1-2; added resampling, on/off-policy intervention, transplant resampling, Eq. 3 cluster effect, bias-as-unfaithfulness and the CoT-necessity criterion."
+  },
+  {
+   "key": "macdermott2025reasoning",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "monitorability (controlling for reasoner accuracy)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "If a training incentive substantially reduced or improved performance, this might affect monitorability by changing the reasoner’s own awareness of the value of the latent variable rather than by changing how transparent the latent is made to the monitor.",
+     "gloss": "Monitorability should change only through how transparently the CoT exposes the latent, not the reasoner's knowledge; so checkpoints stay within ±5% of baseline accuracy (actual max 2.1%)."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitorability when the latent is not necessary (Function Correctness)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "This lets us test monitorability in a slightly different setting, i.e., when there is a natural and intuitively important variable (correctness) closely related to the task at hand, but not strictly necessary to think about, does the reasoner make it explicit?",
+     "gloss": "In Diamond Vault the reasoner must track the latent; in Function Correctness it can just check tests, so monitorability measures whether it states correctness anyway."
+    },
+    {
+     "family": "monitorability",
+     "term": "Eliciting Latent Knowledge (ELK)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Christiano et al. 2021",
+     "where": "§2",
+     "quote": "ELK (Christiano et al., 2021), is the problem of extracting predictions about latent variables from models trained to predict observable variables, especially in cases where the observable variables might be misleading about the value of the latents.",
+     "gloss": "The problem the monitorability measure is modeled on; here the elicitor is a fixed LM monitor reading the CoT, not a probe on activations."
+    },
+    {
+     "family": "monitorability",
+     "term": "less-is-more effect (monitor information)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "arike2026information",
+     "where": "§2",
+     "quote": "Arike et al. (2025) demonstrate a “less-is-more” effect, whereby, monitors perform better with less information, e.g., pre-filtered CoT.",
+     "gloss": "Restated finding about monitoring scope: giving a monitor less, filtered information can improve its detection."
+    },
+    {
+     "family": "monitorability",
+     "term": "model organisms difficult to monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "Hubinger et al. 2023",
+     "where": "§1",
+     "quote": "By intentionally reducing models’ monitorability while maintaining task performance, we can approximate an upper bound on how difficult-to-monitor models could become. This provides us with “model organisms” which are difficult to monitor, enabling further study into effective monitoring (Hubinger et al., 2023).",
+     "gloss": "Reasoners trained against the monitor (or for KL) at fixed accuracy, used to bound how unmonitorable models can get and to stress-test monitors."
+    },
+    {
+     "family": "monitorability",
+     "term": "sabotage evaluations",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "Kutasov et al. 2025; Ward et al. 2025",
+     "where": "§6",
+     "quote": "Alternatively, sabotage evaluations (Kutasov et al., 2025; Ward et al., 2025) may be used—in these evaluations, monitors must predict whether an agent is attempting to pursue a malicious task or not—and the model’s “intention” in these evaluations can act as the latent variable.",
+     "gloss": "Monitors judge whether an agent pursues a hidden malicious task; proposed as further settings, with the agent's intention as the latent the monitor must recover."
+    }
+   ],
+   "fix": [
+    {
+     "id": "macdermott2025reasoning#3",
+     "set": {
+      "quote": "We add a term to the reward function that measures whether a monitor can successfully predict the latent variable given the reasoner’s CoT: $r_{\\text{monitorability}}(\\text{reasoning})=1\\;\\;\\text{if the monitor is correct, otherwise}-1$ ."
+     },
+     "reason": "Formal row stopped at the colon and omitted the reward equation."
+    },
+    {
+     "id": "macdermott2025reasoning#2",
+     "set": {
+      "where": "§3, §4, App. B.1"
+     },
+     "reason": "App. B.1 gives the scoring rule (proportion of samples where the monitor's prediction matches the latent)."
+    }
+   ],
+   "drop": [],
+   "note": "Reward row now quotes its equation; added the accuracy-control criterion, the non-necessary-latent setting, ELK lineage, less-is-more, model organisms and sabotage evaluations."
+  },
+  {
+   "key": "roger2023preventing",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "text steganography",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Petitcolas et al. 1999",
+     "where": "§2.1",
+     "quote": "Text steganography is the problem of sending messages that look like they don’t contain any information without getting caught. For example, such techniques might be used by criminals to exchange illegal information through messages which don’t look suspicious (Petitcolas et al.,, 1999).",
+     "gloss": "Background notion that LLM steganography and encoded reasoning build on: hidden messages in innocuous-looking text that escapes detection."
+    },
+    {
+     "family": "monitorability",
+     "term": "encoded reasoning (paraphrase-sensitivity criterion)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§2.2",
+     "quote": "However, if LLMs were using encoded reasoning to increase their performance, then using defenses against steganography should reduce LLM performance. Lanham et al., (2023) showed that current language models are not sensitive to the exact phrasing of their generations when solving math and logic problems with CoT reasoning.",
+     "gloss": "Test for encoded reasoning: if performance does not drop when the CoT's phrasing is paraphrased away, the model is not relying on hidden encodings."
+    },
+    {
+     "family": "monitorability",
+     "term": "encoded reasoning (random-introduction control)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "As a control, we also fine-tuned a model to start with an introduction randomly chosen among the 18 introductions used for the encoded CoT (instead of an introduction matching the election year), and we find that it doesn’t perform better than the model answering questions directly.",
+     "gloss": "How the demonstration attributes the sycophancy gain to encoded reasoning: an introduction encoding the election year helps, a random introduction does not, so filler or prompting cannot explain it."
+    },
+    {
+     "family": "monitorability",
+     "term": "steganographic encoding (defense evaluation)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "Steganographic encoding: the encoder should answer a user query $Q$ with an answer $A$ while encoding a random bit string M into it. The steganography scheme specifies the encoder and the (fixed) length of the bit string. The encoder returns $E(Q,M)=A_{1}$ , the answer with the steganographically encoded message.",
+     "gloss": "First step of the evaluation game: then a paraphraser rewrites A_1, a decoder recovers M̂ = D(Q, A_2), and a judge scores answer quality."
+    },
+    {
+     "family": "monitorability",
+     "term": "paraphrasing (defense)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1",
+     "quote": "Paraphrasing: the defender tries to paraphrase and standardize the answer $P(Q,A_{1})=A_{2}$ , such that the hidden information is removed, while the useful semantic information is kept intact.",
+     "gloss": "Defense against encoded reasoning: a trusted, weaker model (GPT-3.5-Turbo) rewrites the output so hidden bits are lost but useful content survives."
+    },
+    {
+     "family": "monitorability",
+     "term": "context-aware paraphrasing",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.5, App. D",
+     "quote": "Context-aware paraphrasing also includes $Q$ in the prompt: it asks GPT-3.5-Turbo to paraphrase $A_{1}$ while only keeping the information relevant to answering $Q$ .",
+     "gloss": "Stronger paraphraser variant that sees the question and drops information irrelevant to it; the default paraphraser keeps all semantic information."
+    },
+    {
+     "family": "monitorability",
+     "term": "capacity estimate (perfect-decode frequency)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3.1",
+     "quote": "In practice, we measure the frequency $f$ at which the message is perfectly decoded. If we model the channel as a channel which sometimes perfectly transmits the message, and sometimes scrambles it entirely, then the capacity is $C=n-f\\log_{2}\\frac{1}{f}-(1-f)\\log_{2}\\frac{2^{n}-1}{1-f}$ .",
+     "gloss": "Main estimator of hidden bits per answer: from the exact-decode rate f of n-bit messages; about f·n for large n and an underestimate of true capacity."
+    },
+    {
+     "family": "monitorability",
+     "term": "capacity estimate (independent channels)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. J",
+     "quote": "Independent channels: This assumes the channel is composed of independent 1-bit channels which flip the bit they transmit a fraction $f_{i}$ of the time: $C=n-\\sum_{i}H_{2}(f_{i})$ , where $H_{2}(x)=-x\\log_{2}x-(1-x)\\log_{2}(1-x)$ .",
+     "gloss": "Alternative capacity estimator from per-bit flip rates; the paper says it drastically underestimates some methods."
+    },
+    {
+     "family": "monitorability",
+     "term": "capacity estimate (flip counts)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. J",
+     "quote": "Flip counts: This assumes that the channel preserve the signal on a fraction $f_{0}$ of inputs, flips one bit on a fraction $f_{1}$ of inputs, …, and maximally scrambles messages otherwise: $C=n+1/N\\sum_{k}\\#\\{M_{j}|M_{j}\\,\\text{and}\\,\\hat{M}_{j}\\,\\text{are}\\,k\\,\\text{bits apart}\\}\\log_{2}(f_{k}/{n\\choose k})$ .",
+     "gloss": "Alternative estimator from how many bits each decoded message is off by; highest numbers, mostly from overfitting. Results are said to be insensitive to the estimator."
+    },
+    {
+     "family": "monitorability",
+     "term": "suspiciousness evaluation",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A, App. F",
+     "quote": "The answer is the answer provided by a language model, and the goal is to determine if there is anything which could have been steganographically encoded in it. So look out for suspicious strings which aren’t very useful for answering the question, but could be useful for encoding a message.",
+     "gloss": "GPT-3.5-Turbo suspicion monitor for steganography: answers scored above 0.5 (App. A; the prompt asks for 1-100) are penalized, ruling out blatant schemes such as acronyms."
+    },
+    {
+     "family": "monitorability",
+     "term": "eval-aware (steganography scheme)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A",
+     "quote": "Steganography schemes can avoid looking too suspicious at the expense of their capacity by checking if their answers are considered suspicious by the suspiciousness evaluator, and then regenerate those answers using a benign task answerer (which doesn’t try to encode any message into its answers). We use this strategy for the two techniques that are judged the most suspicious: acronyms and scratchpads, and we say that these schemes are now eval-aware.",
+     "gloss": "Evasion of the suspicion monitor: the scheme pre-checks its own outputs and falls back to a benign answer when flagged, trading capacity for stealth."
+    },
+    {
+     "family": "monitorability",
+     "term": "explicit intermediate reasoning (serial-computation bound)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§7.3",
+     "quote": "Both of these capabilities would undermine the monitoring of the advanced AI systems that will be developed in the coming years: instead of having to make their intermediate reasoning step explicit every #layers steps of serial computation, LLMs mastering steganography could in principle think for $\\text{\\#layers}\\times\\text{\\#tokens}$ steps of plans and actions human readers wouldn’t approve of.",
+     "gloss": "Why monitoring works without steganography: serial reasoning beyond one forward pass must surface in text every #layers steps; steganography removes that constraint."
+    }
+   ],
+   "fix": [
+    {
+     "id": "roger2023preventing#4",
+     "set": {
+      "gloss": "Capacity of the encoder–paraphraser–decoder channel: mutual information between the hidden message M and the decoded message M̂ after paraphrasing; estimators are separate rows."
+     },
+     "reason": "The perfect-decode estimator in the gloss is now its own operational row with its equation; gloss narrowed to the quoted definition."
+    }
+   ],
+   "drop": [],
+   "note": "Added text steganography, two encoded-reasoning tests, the encode/paraphrase protocol, three capacity estimators (incl. App. J), the suspicion monitor, eval-aware evasion and the serial-computation criterion."
+  }
+ ]
+}

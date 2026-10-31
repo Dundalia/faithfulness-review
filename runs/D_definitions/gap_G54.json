@@ -1,0 +1,486 @@
+{
+ "papers": [
+  {
+   "key": "bhan2025did",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unlearning-based self-NLE faithfulness",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "tutek2025measuring",
+     "where": "§2",
+     "quote": "One approach (Tutek et al., 2025) assesses the effect of unlearning (Liu et al., 2025) the parametric knowledge encoded in the reasoning steps of the self-NLE. The higher the change in prediction between the original model and the model having unlearned the reasoning steps, the more faithful the self-NLE.",
+     "gloss": "Faithfulness as the prediction change after unlearning the knowledge encoded in the self-NLE reasoning steps; a larger change means a more faithful self-NLE."
+    },
+    {
+     "family": "faithfulness",
+     "term": "probing-based concept attribution I_Γ(c)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Denoting $h^{\\ell}_{k}$ the hidden state at token $k$ and layer $\\ell$ , we define $\\texttt{I}_{\\Gamma}(c)=\\max_{(k,\\ell)\\in\\Gamma}\\texttt{I}(h^{\\ell}_{k})$ , assessing $c$ as important if detected in at least one hidden state from $\\Gamma$ .",
+     "gloss": "A concept cited by the explanation counts as important if a probe or decoder (Patchscopes, Selfie, linear probe) detects it in at least one hidden state of circuit Γ."
+    },
+    {
+     "family": "faithfulness",
+     "term": "importance-based concept attribution I_Γ(c) (concept erasure)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "Applying this intervention across circuit $\\Gamma$ , we measure the resulting probability score: $p_{\\hat{y}}(x,\\left\\{\\text{do}(H^{\\ell}_{k}=h^{\\ell}_{k}-\\lambda\\times\\overrightarrow{c_{\\ell}})\\right\\}_{(k,\\ell)\\in\\Gamma})$ , where the $\\text{do}(X=x)$ operator (Pearl, 2009) represents an intervention that sets variable $X$ to value $x$ . We model this relationship as linear: $p_{\\hat{y}}(\\cdot)=\\beta_{0}+\\beta_{1}\\times\\lambda$ , where the concept importance score is $\\texttt{I}_{\\Gamma}(c)=\\beta_{1}$ (i.e. the marginal effect of intervention on probability score). $\\texttt{I}_{\\Gamma}(c)$ is set to 0 when its significance $t$ -test shows $p>0.01$ .",
+     "gloss": "Concept importance = slope β1 of the predicted-label probability against erasure strength λ of the concept's CAV across Γ (a do-intervention); set to 0 when not significant."
+    },
+    {
+     "family": "faithfulness",
+     "term": "gradient-based (TCAV) concept importance (alternative)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Kim et al. 2018",
+     "where": "App. D.2, Eq. 2",
+     "quote": "$\\texttt{I}_{\\Gamma}(c)=\\underset{(k,\\ell)\\in\\Gamma}{\\bigodot}\\langle\\overrightarrow{c},\\nabla f^{\\ell}_{\\hat{y},k}(h^{\\ell}_{k})\\rangle$",
+     "gloss": "Alternative importance score: CAV–gradient dot products aggregated over Γ, with the aggregator (min, max or mean) chosen for the desired strictness of the faithfulness measure."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness linear probe",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.1",
+     "quote": "To ensure clear class separation, we focus on polarized cases where $F(x,e)\\in\\left\\{0,1\\right\\}$ for clear separation. We construct input sequences as $x_{nle}=[x,f(x),e(x)]$ and extract hidden states from final token positions across all layers. We train diff-mean linear probes on these states, yielding layer-wise faithfulness representations $\\overrightarrow{F_{\\ell}}$ .",
+     "gloss": "Detects unfaithful self-NLEs from activations: diff-mean probes on hidden states of [x, f(x), e(x)], labelled by NeuroFaith (F=0 vs 1), with a majority vote across layers."
+    },
+    {
+     "family": "faithfulness",
+     "term": "concept extraction judge (concepts cited by the self-NLE)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.1",
+     "quote": "Analyze whether a given concept has a meaningful impact on predicting a specific category from the provided text explanation. Instructions: (1) Answer with exactly ”YES” if the concept is clearly mentioned in the given text and relevant to the category prediction, (2) Answer with exactly ”NO” if the concept is neither mentioned nor relevant in the given text",
+     "gloss": "NeuroFaith step 1 for classification: an auxiliary LLM (Qwen3-32B) labels which task concepts the explanation cites; for 2-hop it extracts the bridge object instead."
+    },
+    {
+     "family": "faithfulness",
+     "term": "valid faithfulness measure (diagnostic-utility criterion)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.2",
+     "quote": "The key hypothesis is that if a faithfulness measure accurately captures the model’s internal reasoning, then explanations deemed faithful should better localize reasoning failures and identify non-canonical reasoning pathways.",
+     "gloss": "Test of faithfulness metrics: explanations a metric labels faithful should better localize first- or second-hop failures and flag non-canonical reasoning pathways."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Compound Accuracy Score (CAS)",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "zaman2025causal",
+     "where": "App. F.2, Eq. 5",
+     "quote": "$CAS(A,B,hint1)=\\log\\Bigl(\\frac{PR(A,B,hint1,faithful)}{PR(A,B,hint1,unfaithful)}\\Bigr)$",
+     "gloss": "Meta-metric: log ratio of hint-induced accuracy ratios (category A vs B) for explanations deemed faithful versus unfaithful; positive means the faithfulness measure better localizes errors."
+    },
+    {
+     "family": "faithfulness",
+     "term": "taxonomy of self-NLE in 2-hop reasoning (ten cases)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "The correctness of the prediction combined with both the faithfulness and the correctness of the self-NLE and the correctness of the first hop of the latent reasoning enables to precisely characterize $e(x)$ . In this subsection, we focus on ten disjoint cases of interest to characterize the behavior of $f$ with respect to $e(x)$ .",
+     "gloss": "Ten disjoint cases crossing prediction correctness, self-NLE faithfulness F, self-NLE correctness (bridge equals ground truth) and whether the true bridge is decoded in the circuit."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C1 complete reasoning failure",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{1}$ ) Complete reasoning failure. $\\widehat{o_{3}}\\neq o_{3}$ , $F(x,e)=0$ , $\\widehat{o_{2}}\\neq o_{2}$ and $\\forall(k,\\ell)\\in\\Gamma,o_{2}\\notin\\tilde{h^{\\ell}_{k}}$ . Observation: Wrong prediction, incorrect unfaithful explanation, ground-truth bridge object undetected in circuit $\\Gamma$ .",
+     "gloss": "Wrong answer, unfaithful and incorrect explanation, ground-truth bridge absent from the circuit: read as a first-hop failure."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C2 internal-external reasoning mismatch",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{2}$ ) Internal-external reasoning mismatch. $\\widehat{o_{3}}\\neq o_{3}$ , $F(x,e)=0$ , $\\widehat{o_{2}}\\neq o_{2}$ and $\\exists(k,\\ell)\\in\\Gamma,o_{2}\\in\\tilde{h^{\\ell}_{k}}$ . Observation: Wrong prediction, incorrect unfaithful explanation, but ground-truth bridge object detected in circuit $\\Gamma$ . Interpretation: The model appears to have correct internal knowledge but generates inconsistent explanations, indicating potential reasoning-explanation dissociation because of either deceptiveness or hallucination.",
+     "gloss": "Wrong answer and an unfaithful, incorrect explanation although the true bridge is decoded internally; attributed to reasoning–explanation dissociation from deceptiveness or hallucination."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C3 explanation-prediction association",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{3}$ ) Explanation-prediction association. $\\widehat{o_{3}}\\neq o_{3}$ , $F(x,e)=0$ and $\\widehat{o_{2}}=o_{2}$ . Observation: Wrong prediction with unfaithful but correct explanation. Interpretation: The model associates the correct bridge object with incorrect prediction during explanation generation, suggesting superficial pattern matching without genuinely resolving the first hop of the 2-hop reasoning.",
+     "gloss": "Wrong answer with an unfaithful but correct explanation: it names the right bridge the model did not compute, read as superficial pattern matching."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C4 first-hop reasoning failure",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{4}$ ) First-hop reasoning failure. $\\widehat{o_{3}}\\neq o_{3}$ , $F(x,e)=1$ and $\\widehat{o_{2}}\\neq o_{2}$ . Observation: Wrong prediction with faithful but incorrect explanation.",
+     "gloss": "Faithful but incorrect explanation of a wrong answer: the explanation reflects the wrong bridge the model actually used."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C5 second-hop reasoning failure",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{5}$ ) Second-hop reasoning failure. $\\widehat{o_{3}}\\neq o_{3}$ , $F(x,e)=1$ and $\\widehat{o_{2}}=o_{2}$ . Observation: Wrong prediction with faithful and correct explanation.",
+     "gloss": "Faithful and correct explanation of a wrong answer: the first hop succeeded and the error lies in the second hop."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C6 shortcut learning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{6}$ ) Shortcut learning. $\\widehat{o_{3}}=o_{3}$ , $F(x,e)=0$ , $\\widehat{o_{2}}\\neq o_{2}$ and $\\forall(k,\\ell)\\in\\Gamma,o_{2}\\notin\\tilde{h^{\\ell}_{k}}$ . Observation: Correct prediction with unfaithful incorrect explanation, ground-truth bridge object undetected. Interpretation: Evidence suggests direct $o_{1}\\rightarrow o_{3}$ association, consistent with shortcut learning behavior that bypasses intermediate reasoning steps.",
+     "gloss": "Correct answer, unfaithful incorrect explanation and no ground-truth bridge decoded: a direct o1→o3 association bypassing the intermediate step."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C7 deceptiveness or hallucination (not honest in self-NLE)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{7}$ ) Deceptiveness or hallucination. $\\widehat{o_{3}}=o_{3}$ , $F(x,e)=0$ , $\\widehat{o_{2}}\\neq o_{2}$ and $\\exists(k,\\ell)\\in\\Gamma,o_{2}\\in\\tilde{h^{\\ell}_{k}}$ . Observation: Correct prediction with unfaithful incorrect explanation, but ground-truth bridge object detected internally. Interpretation: The model possesses correct internal knowledge but generates deceptive (or hallucinated) explanations, suggesting reasoning-explanation dissociation or alternative reasoning pathways. This case is expected to be rare, otherwise highlighting a case where $f$ is not honest in its self-NLE while ”knowing” the ground truth bridge object, raising a problem in $f$ alignment.",
+     "gloss": "Correct answer with an unfaithful, incorrect explanation while the true bridge is decoded internally: a deceptive or hallucinated explanation, the model not honest while 'knowing' the bridge."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C8 explainer parrot (post-hoc explanation)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{8}$ ) Explainer parrot. $\\widehat{o_{3}}=o_{3}$ , $F(x,e)=0$ and $\\widehat{o_{2}}=o_{2}$ . Observation: Correct prediction with unfaithful but correct explanation. Interpretation: The model generates the expected explanation without corresponding detectable internal reasoning, suggesting post-hoc explanation generation (i.e. ”explainer parrot” behavior).",
+     "gloss": "Correct answer with a correct but unfaithful explanation: the expected explanation has no matching internal reasoning, i.e. post-hoc 'explainer parrot' generation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C9 alternative reasoning pathway",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{9}$ ) Alternative reasoning pathway. $\\widehat{o_{3}}=o_{3}$ , $F(x,e)=1$ and $\\widehat{o_{2}}\\neq o_{2}$ . Observation: Correct prediction with faithful but incorrect explanation.",
+     "gloss": "Correct answer with a faithful but incorrect explanation: it reflects a non-canonical internal pathway that still reaches the right answer."
+    },
+    {
+     "family": "faithfulness",
+     "term": "C10 reliable oracle",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. E",
+     "quote": "( $C_{10}$ ) Reliable oracle. $\\widehat{o_{3}}=o_{3}$ , $F(x,e)=1$ and $\\widehat{o_{2}}=o_{2}$ . Observation: Correct prediction with faithful and correct explanation.",
+     "gloss": "Correct answer with a faithful and correct explanation: the expected canonical reasoning pathway, the most reliable case."
+    },
+    {
+     "family": "faithfulness",
+     "term": "deceptiveness and hallucination (opposed to faithfulness)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.1",
+     "quote": "Given that faithful self-NLE should reflect model reasoning while hallucination and deceptiveness involve misrepresentation of information, we expect their neural representations to exhibit inverse correlations.",
+     "gloss": "Hallucination and deceptiveness framed as misrepresentation of information, opposite to faithful self-NLE; tested by cosine similarity with the Rimsky and Goldowsky-Dill linear directions."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added unlearning baseline, both interpreter definitions (probing max, erasure β1, TCAV alternative), concept-extraction judge, faithfulness probe, CAS meta-metric and criterion, App. E taxonomy with its ten cases, deceptiveness framing."
+  },
+  {
+   "key": "madsen2024self",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "mathematical counterfactual (edited CoT)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§6",
+     "quote": "Self-consistency checks have also been used to measure the faithfulness of mathematical counterfactuals. In particular, Lanham et al. (2023) applies self-consistency checks to Chain-of-Thought (CoT) self-explanations from LLMs, where the CoTs provide mathematical context (e.g. “2 + 3 = 5”) to a mathematical question. Lanham et al. (2023) then edits the CoT to contain false information (e.g. “2 + 3 = 6”) and checks that the prediction follows.",
+     "gloss": "Counterfactual = a CoT edited to contain a false step; faithful if the answer follows it. Madsen et al. doubt validity: edits may be out-of-distribution or read as typos."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plausibility",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "pmlr-v235-chen24bl",
+     "where": "§6.1",
+     "quote": "Chen et al. (2023) find that self-explanations are very convincing to humans (plausibility) but there is no correlation with simulatability.",
+     "gloss": "Plausibility = how convincing explanations are to humans; reported as uncorrelated with simulatability, so plausible self-explanations can mislead."
+    },
+    {
+     "family": "faithfulness",
+     "term": "rationalizations",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jacovi2020towards; Camburu et al. 2018",
+     "where": "§6.1",
+     "quote": "These are explanations by humans (e.g., e-SNLI (Camburu et al., 2018)) or by a model that has learned from human explanations. Rationalizations should not be used to explain the model (Jacovi and Goldberg, 2020) but may help convince humans of a prediction.",
+     "gloss": "Explanations written by humans or by models trained on human explanations; not to be used to explain the model, though they may persuade humans."
+    },
+    {
+     "family": "faithfulness",
+     "term": "interpretability-faithfulness (graded, not binary)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "jacovi2020towards",
+     "where": "Limitations",
+     "quote": "Jacovi and Goldberg (2020) argue that the interpretability-faithfulness field should move towards a more nuanced view on interpretability-faithfulness, where the metric is not if an explanation is faithful or not, but how much faithfulness it has. We agree with this notion, but because the LLMs are designed to provide discrete outputs (a sequence of tokens), we have not been able to do that.",
+     "gloss": "Faithfulness should be a degree, not yes/no; the authors agree but score each observation binarily and average over observations."
+    },
+    {
+     "family": "faithfulness",
+     "term": "removal-based self-consistency check (feature attribution, prior work)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Samek et al. 2017; Hooker et al. 2019; Madsen et al. 2022",
+     "where": "§6",
+     "quote": "Using self-consistency checks to measure faithfulness is not a new idea. One of the earliest uses was with feature attribution, where allegedly important information was removed from the input, and it was then checked that this removal altered the prediction (Samek et al., 2017; Hooker et al., 2019; Madsen et al., 2022a).",
+     "gloss": "Earlier erasure tests: remove allegedly important input and check the prediction changes; used external explanation algorithms and logit differences rather than discrete self-explanations."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful self-explanation (self-consistency suffices; self-modeling not necessary)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "That being said, it is possible that self-model capabilities are helpful but not necessary for generating self-explanations. If the LLM reproduces human behavior sufficiently well in both the classification and counterfactual case, then the explanations would be self-consistent and thus faithful.",
+     "gloss": "If the model reproduces human behaviour in both classification and counterfactual generation, its explanations are self-consistent and therefore faithful, even without self-model capabilities."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-model capabilities",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Kadavath et al. 2022",
+     "where": "§2",
+     "quote": "In principle, because the weights are the same, the explanation generation can access or simulate the classification behavior; a property known as self-model capabilities. Kadavath et al. (2022) explores the self-model capabilities of LLMs using a self-consistency check and find that LLMs have poor self-modeling capabilities.",
+     "gloss": "Ability of the explanation-generating pass to access or simulate the model's own classification behaviour; Kadavath et al. measured it with a self-consistency check."
+    },
+    {
+     "family": "faithfulness",
+     "term": "self-consistency faithfulness metric (assumption: prompts interpreted correctly)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "Limitations",
+     "quote": "Our work is based on a fundamental assumption that the prompts are interpreted correctly by the model. This is not possible to completely verify.",
+     "gloss": "The metric assumes the model understands the explanation and classification prompts; failures from misreading them are counted as limitations of the model's comprehension."
+    }
+   ],
+   "fix": [
+    {
+     "id": "madsen2024self#5",
+     "set": {
+      "stance": "adapted",
+      "gloss": "Redacting the words the model listed as important must leave it unable to classify (predicts 'unknown'); adapted from logit-based erasure tests on external explanations; assumes the model understands [REDACTED]."
+     },
+     "reason": "§6 (P115) says the cited erasure tests used external explanation algorithms and logit differences; here the test is discrete with an unknown class on self-explanations, so the criterion is modified, not adopted."
+    }
+   ],
+   "drop": [],
+   "note": "Added Lanham edited-CoT counterfactual, plausibility, rationalizations, graded faithfulness, prior removal test, self-consistency-suffices criterion, self-model capabilities, prompt-interpretation assumption; feature-attribution criterion is adapted."
+  },
+  {
+   "key": "mohammadi2025evaluating",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithful CoT (misleading justifications, unacknowledged cues)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "chen2025reasoning; lanham2023measuring",
+     "where": "§1",
+     "quote": "Recent work shows that CoT explanations can mislead. Models sometimes produce fluent but unfaithful justifications or change answers when exposed to hidden cues without acknowledging them [1, 6].",
+     "gloss": "Unfaithfulness shows as fluent but unfaithful justifications, or answers that shift under hidden cues (e.g. XML-metadata hints) that the CoT never acknowledges."
+    }
+   ],
+   "fix": [
+    {
+     "id": "mohammadi2025evaluating#2",
+     "set": {
+      "stance": "adapted",
+      "gloss": "Faithfulness scored as whether the generated CoT entails the GSM8K reference explanation under a pretrained NLI model; §3.2 reads it as reasoning logically supporting conclusions."
+     },
+     "reason": "MENLI (Chen & Eger 2022) is an NLI metric for generation evaluation; the paper repurposes it as a CoT faithfulness metric (new object), so adapted. Old gloss added an evaluative claim the paper does not make."
+    }
+   ],
+   "drop": [],
+   "note": "Thin paper; added the unacknowledged-cue failure mode (cites Chen 2025, Lanham 2023); NLI metric is an adapted MENLI."
+  },
+  {
+   "key": "oota2026llm",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "plan adherence (fraction of declared units completed)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Jia et al. 2025",
+     "where": "Table 2 (§5)",
+     "quote": "Adherence is the fraction of declared executable plan units completed within the allocated budget; Full Plan is the percentage of tasks for which all declared units were completed.",
+     "gloss": "Plan adherence counted as the share of declared executable plan units completed within the budget; Full Plan = share of tasks completing all declared units."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plan adherence (LLM-judge GPA-style rubric)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Jia et al. 2025",
+     "where": "§4",
+     "quote": "Plan quality and adherence are scored separately with an LLM-as-judge pipeline using a 0–3 GPA-style rubric (Jia et al., 2025); full prompts and judge configurations are provided in Appendix F.",
+     "gloss": "Adherence also scored 0–3 by a fixed LLM judge (Gemma-4-26B, or DeepSeek-V4-Flash for Gemma runs) so no model judges its own trajectories."
+    },
+    {
+     "family": "faithfulness",
+     "term": "executable planning (declared structure reflected in control flow)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. M",
+     "quote": "Planning should be executable, such that a declared structure is reflected in the agent’s control flow; adaptive, such that the planning mechanism can vary across environments and task settings; and process-evaluable, such that failures can be attributed separately to plan selection, planner–executor handoff, and execution.",
+     "gloss": "Desideratum: a declared plan structure should appear in the agent's control flow, and failures should be attributable separately to plan selection, planner–executor handoff and execution."
+    }
+   ],
+   "fix": [
+    {
+     "id": "oota2026llm#4",
+     "set": {
+      "gloss": "Whether executed actions complete the declared plan steps; kept separate from plan-order/structural faithfulness, which checks order and organization. Operationalized by an LLM judge and a completion fraction."
+     },
+     "reason": "Old gloss tied the definition only to the LLM judge; the paper also measures adherence as the fraction of declared units completed (Table 2, App. H)."
+    }
+   ],
+   "drop": [],
+   "note": "Added both adherence operationalizations (completion fraction, GPA-style judge) and the executable-planning desideratum; existing gap, order-faithfulness and dispatch/selection rows kept."
+  },
+  {
+   "key": "wang2025causallyenhanced",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithful or spurious reasoning traces (correct answer, shortcut reasoning)",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Wen et al. 2024; Arjovsky et al. 2020",
+     "where": "§1",
+     "quote": "As a result, models routinely learn to “game” reward signals (e.g., by exploiting length, format, or lexical overlap) and to pair correct answers with unfaithful or spurious reasoning traces (Wen et al., 2024; Arjovsky et al., 2020).",
+     "gloss": "Outcome-only RL lets models game rewards and pair correct answers with unfaithful or spurious CoT; the abstract adds that such reasoning degrades under small causal perturbations."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Jacobian direct-causal-effect (DCE) proxy J_AB",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Pearl 2001",
+     "where": "§2.1",
+     "quote": "We use the Jacobian as a local, direct causal effect proxy: for any upstream–downstream pair $(A,B)\\in\\{(Z,X),(X,Y),(Z,Y)\\}$ , with mediators held at their observed values, $J_{AB}=\\partial s_{B}/\\partial E(A)$ quantifies how an infinitesimal perturbation to $A$ ’s embeddings shifts the downstream log-likelihood $s_{B}$ —i.e., which directions in $A$ immediately move $B$ , and by how much. Crucially, $J_{AB}$ is not equal to a causal DCE in the mediation sense; it is the first-order Taylor approximation around the observed point (Pearl, 2001).",
+     "gloss": "Influence of span A on span B = Jacobian of B's log-likelihood with respect to A's embeddings, mediators fixed; explicitly a first-order approximation, not a mediation-sense DCE."
+    },
+    {
+     "family": "faithfulness",
+     "term": "validity of causal-coherence signals S(A,B)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3",
+     "quote": "We evaluate whether higher $S(A,B)$ scores align with factual correctness, as validity of these causal signals requires separation under strict accuracy criteria. As in Table 3, all three metrics show significantly higher means for the correct group ( $p<0.01$ ), confirming that $S(A,B)$ faithfully tracks reasoning–answer validity beyond surface outputs, and by statistically aligns with cognitive accuracy.",
+     "gloss": "Coherence scores count as valid if they separate judge-labelled correct from incorrect responses (Welch t-tests on 1000 Llama-3-8B samples, p<0.01)."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Amodei et al. 2016; Everitt et al. 2017; Zhou et al. 2025",
+     "where": "App. A.1",
+     "quote": "Reward hacking occurs when models exploit imperfections in reward functions rather than achieving the intended objective [Amodei et al., 2016, Everitt et al., 2017, Zhou et al., 2025].",
+     "gloss": "Exploiting flaws in the reward function instead of reaching the intended objective; for LLMs includes persuasive wrong answers, sycophancy and exploiting LLM-judge biases."
+    },
+    {
+     "family": "monitorability",
+     "term": "length-driven reward hacking",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "Fig. 2 (§2.1)",
+     "quote": "Non-CF-GRPO curves plateau as generations approach the token limit, indicating length-driven reward hacking, while CE-GRPO doesn’t.",
+     "gloss": "Detected when minimum and mean generation length plateau at the token cap during training, as under raw (non-counterfactual) Jacobian rewards."
+    }
+   ],
+   "fix": [
+    {
+     "id": "wang2025causallyenhanced#3",
+     "set": {
+      "kind": "operational",
+      "where": "§2.1"
+     },
+     "reason": "The quote gives the construction procedure (token permutation) in prose without Eq. 4, so the row is operational rather than formal; the equation sits in a separate paragraph."
+    }
+   ],
+   "drop": [],
+   "note": "Added DCE-proxy Jacobian, validity criterion for S(A,B), unfaithful/spurious reasoning failure mode, reward hacking definition and length-driven reward-hacking indicator."
+  }
+ ]
+}

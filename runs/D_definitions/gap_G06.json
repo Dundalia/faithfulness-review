@@ -1,0 +1,469 @@
+{
+ "papers": [
+  {
+   "key": "boppana2026reasoning",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithful (CoT to internal reasoning processes)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "turpin2023language; lanham2023measuring; arcuschin2025chain; chen2025reasoning",
+     "where": "§1",
+     "quote": "On the other hand, recent research has shown that CoT traces are not necessarily faithful to the internal reasoning processes employed by the model (Turpin et al., 2023; Lanham et al., 2023; Arcuschin et al., 2025; Chen et al., 2025), undermining the reliability of these explanations for safety applications.",
+     "gloss": "A faithful CoT reflects the internal reasoning process the model actually used; the paper studies one way this fails, performative CoT."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitor",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "korbak2025chain",
+     "where": "§3.4",
+     "quote": "A CoT monitor is a LLM for evaluating another model’s response, often used in safety settings to detect misaligned behavior (Korbak et al., 2025).",
+     "gloss": "An LLM that reads another model's response, usually to detect misaligned behavior; here Gemini-2.5-Flash reads CoT prefixes."
+    },
+    {
+     "family": "monitorability",
+     "term": "CoT monitor final-answer prediction (monitor accuracy)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4, App. A.3.1",
+     "quote": "Given a question, our CoT monitor is prompted to predict whether the reasoning model has committed to a final answer from a prefix of reasoning steps. The monitor either predicts one of the four choices, or outputs ‘N/A’ if the partial CoT is not sufficient to predict the final answer. Allowing the monitor to defer to ‘N/A’ de-incentivizes it from computing the answer based on its own knowledge.",
+     "gloss": "Monitor accuracy: how often the monitor names the model's eventual answer from directional cues in the CoT prefix alone, told not to solve the question itself."
+    },
+    {
+     "family": "faithfulness",
+     "term": "forced answering (early answering)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "lanham2023measuring; Wang et al. 2026",
+     "where": "§3.3",
+     "quote": "Forced answer prompting (i.e., early answering) is a method that has been used for validating whether models rely on their chain-of-thought reasoning (Lanham et al., 2023; Wang et al., 2026). Given a reasoning trace, we truncate at some intermediate step and prompt the same model to provide its final answer choice (A-D), bypassing the remaining steps.",
+     "gloss": "A reliance test reused as a readout of the model's current belief: truncate the CoT, force an answer, and take the softmax over the A–D logits."
+    },
+    {
+     "family": "faithfulness",
+     "term": "High Confidence trace (most performative CoT)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.1",
+     "quote": "First, we label reasoning steps across traces as High Confidence if the probe begins the reasoning trace at 90% or above confidence in its final answer, and never falls below that threshold throughout the CoT. This criterion basically selects for the most performative CoTs.",
+     "gloss": "Label for the most performative traces: probe confidence in the final answer is at least 90% from the first step and never drops below it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "unfaithful inflection points (backtracking, 'aha' realizations)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "We look at inflection points in reasoning like backtracking (DeepSeek-AI, 2025; Ward et al., 2025; Venhoff et al., 2025b) or ‘Aha’ realizations as points of interest. If the model produces these even when it is highly confident internally, these would be highly unfaithful.",
+     "gloss": "Backtracks or realizations voiced while probes show high internal confidence would be unfaithful; they occur about half as often in high-confidence traces, so mostly genuine."
+    },
+    {
+     "family": "faithfulness",
+     "term": "probe shift / inflection co-occurrence (verbalized vs internal belief updates)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.2, App. I.1",
+     "quote": "We measure temporal co-occurrence by asking two questions: given an inflection, does a probe shift occur within the next n steps more often than in windows without inflections? And conversely, given a probe shift, does an inflection follow within n steps more often than in windows without probe shifts? A probe shift is defined as a 20% change in the highest probability answer between two consecutive steps, and the window size is defined as 10 steps.",
+     "gloss": "Tests whether verbalized inflections track internal belief updates: P(inflection follows | probe shift) minus P(inflection follows | no shift), and the reverse; results are mixed."
+    }
+   ],
+   "fix": [
+    {
+     "id": "boppana2026reasoning#1",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "Palod et al. 2025 tie 'performative thinking' to the brittle link between CoT length and problem complexity; this paper recasts it as non-disclosure of internally decodable confidence, measured with probes, and says it is 'extending prior work (Palod et al., 2025)'."
+    },
+    {
+     "id": "boppana2026reasoning#2",
+     "set": {
+      "kind": "informal"
+     },
+     "reason": "The passage is the paper's informal definition ('Informally, we define performativity as this gap'); the operational measure is row #3."
+    },
+    {
+     "id": "boppana2026reasoning#3",
+     "set": {
+      "quote": "A large difference indicates that the LLM does not produce its answer based on the addition of information from the CoT while small differences indicate more genuine reasoning. This is measured as the change in slope of the average probe (or forced answer) accuracy minus CoT accuracy shown in Fig. 2: $|\\Delta\\text{Probe}-\\Delta\\text{Monitor}|$",
+      "where": "§5.1, Table 1"
+     },
+     "reason": "The previous quote omitted the metric; the Table 1 caption gives the operative formula |ΔProbe − ΔMonitor| and how to read it."
+    },
+    {
+     "id": "boppana2026reasoning#5",
+     "set": {
+      "quote": "Gricean cooperation is incidental: Relation (relevance) and Quality (supported evidence) are typically aligned with reward, while Quantity (verbosity) and Manner (obscurity) are not. This explains why traces are usually on-topic and not blatantly false, yet can be excessively long and fail to surface early internal commitment, which is precisely the failure mode that breaks CoT monitors as pragmatic listeners."
+     },
+     "reason": "Extended to the next sentence, which states the monitoring failure mode the Gricean criterion explains."
+    }
+   ],
+   "drop": [],
+   "note": "Added the adopted faithfulness and CoT-monitor definitions, the monitor and forced-answer readouts behind performativity, and the inflection-point tests; fixed the Palod stance and the performativity-rate formula."
+  },
+  {
+   "key": "hong2023faithful",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "Unsupported Option (error type)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.4",
+     "quote": "(3) Unsupported Option (28%). The final conclusion of the reasoning steps is not relevant to the selected option or does not contain enough information to support the selected option, even if the reasoning steps are valid.",
+     "gloss": "Failure of hypothesis faithfulness: steps may be valid, but their final conclusion does not support the chosen option (28% of sampled Fame errors)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "hong2023faithful#1",
+     "set": {
+      "stance": "adopted",
+      "source": "Wei et al. 2022; Zelikman et al. 2022; creswell2023selectioninference",
+      "gloss": "Unfaithful = the answer does not follow from the generated steps: the model can produce irrelevant or invalid steps and still reach the correct answer."
+     },
+     "reason": "The sentence cites Wei et al. (2022b), Zelikman et al. (2022) and Creswell et al. (2022, Selection-Inference) for this characterization; the old gloss added a 'not causal dependence' contrast the paper does not make."
+    },
+    {
+     "id": "hong2023faithful#4",
+     "set": {
+      "stance": "adapted",
+      "source": "Dalvi et al. 2021",
+      "where": "§4.3.1, Eq. 2",
+      "quote": "we extract the highest conclusion $\\mathrm{int}_{h}$ in ${T}_{p}$ (e.g., $\\mathrm{int}_{2}$ in Figure 2) and verify if $\\mathrm{int}_{h}$ can support $H$ . Following Dalvi et al. (2021), we use BLEURT Sellam et al. (2020) as the scorer $V_{h}$ to estimate the sentence similarity between $\\mathrm{int}_{h}$ and $H$ . In addition, we check whether $H$ is entailed by $\\mathrm{int}_{h}$ with the step verifier $V_{s}$ . | | $\\texttt{Faithful}({T}_{p},H)=(V_{h}(\\mathrm{int}_{h},H)+V_{s}(\\mathrm{int}_{h}\\rightarrow H))/2.$",
+      "gloss": "Faithful(T_p,H) = mean of BLEURT similarity and step-verifier entailment score between the tree's highest conclusion and the hypothesis; maximum taken over several highest conclusions."
+     },
+     "reason": "Stance 'proposed' conflicted with the cited source: the score follows Dalvi et al. (2021) for the BLEURT part and adds an entailment check (adapted). The formal quote now includes Eq. 2."
+    },
+    {
+     "id": "hong2023faithful#5",
+     "set": {
+      "quote": "Hypothesis Faithfulness (HF): Can the conclusion support the selected answer (even if the answer is not the correct option)? Overall: The overall score is 1 if all the facts and steps are valid and the conclusion supports the answer.",
+      "where": "§6.2, Table 7",
+      "gloss": "Human annotators judge whether the tree's conclusion supports the chosen answer; Overall = 1 only when facts and steps are valid and the conclusion supports the answer."
+     },
+     "reason": "Extended to the Overall criterion, which makes hypothesis faithfulness a required component of the human score."
+    }
+   ],
+   "drop": [],
+   "note": "Fixed the hypothesis-faithfulness score (adapted from Dalvi et al., Eq. 2 now quoted) and the attribution of the §1 definition; added the Unsupported Option failure mode from the error analysis."
+  },
+  {
+   "key": "matton2025walk",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "dataset-level faithfulness",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2, App. F.1",
+     "quote": "We define dataset-level faithfulness $\\mathcal{F}(\\mathbf{X})$ as the mean question-level faithfulness score; i.e., $\\mathcal{F}(\\mathbf{X})=\\frac{1}{|\\mathbf{X}|}\\sum_{\\mathbf{x}\\in\\mathbf{X}}\\mathcal{F}(\\mathbf{x})$ .",
+     "gloss": "Mean question-level faithfulness; App. F.1 rejects one pooled PCC over all concepts, which can be high while each question's explanations misrank concepts (Simpson's paradox)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "causal concept faithfulness (hierarchical-regression estimate)",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3, App. C.3",
+     "quote": "$\\displaystyle\\tilde{EE}(\\mathbf{x},C)\\sim\\mathcal{N}(\\beta_{\\mathbf{x}}*\\tilde{CE}(\\mathbf{x},C),\\sigma)$ | where $\\beta_{\\mathbf{x}}$ is a question-specific regression coefficient and $\\sigma$ is the observation noise. $\\beta_{\\mathbf{x}}$ represents the PCC for an individual question $\\mathbf{x}$ (i.e., question-level faithfulness), and $\\mu$ represents the average PCC across questions (i.e., dataset-level faithfulness).",
+     "gloss": "Estimate: per-question z-scored EE regressed on z-scored CE in a Bayesian hierarchical model, β_x ~ N(μ,1); posterior β_x is question-level and μ dataset-level faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "explanation-implied effect (auxiliary-LLM estimate)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3, App. C.1, Table 25",
+     "quote": "To estimate the explanation-implied effect of a concept $C_{m}$ , we compute the observed rate at which the model’s explanations indicate that $C_{m}$ has a causal effect on its answers, i.e., the empirical version of the distribution in Definition 2.2. To automatically determine if an explanation indicates that a concept was influential, we use auxiliary LLM $\\mathcal{A}$ .",
+     "gloss": "Share of sampled explanations a GPT-4o judge answers YES to 'does the explanation imply this concept influenced its answer?'; only original-question explanations are used in practice."
+    },
+    {
+     "family": "counterfactual",
+     "term": "removal-based counterfactual",
+     "related": false,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3, App. F.2",
+     "quote": "In addition to counterfactuals that replace the value of a concept, we also consider counterfactuals that remove the information related to a concept. To generate them, we instruct $\\mathcal{A}$ to edit $\\mathbf{x}$ so that the value of a concept $C_{m}$ cannot be determined, while keeping the rest of the question the same.",
+     "gloss": "Second counterfactual type: the auxiliary LLM deletes a concept's information. App. F.2 notes correlated concepts (e.g. race inferable from name) can defeat removal."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual question as direct-effect intervention (do-operator)",
+     "related": false,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Pearl 2022; Shpitser & Pearl 2006",
+     "where": "App. B, Eq. 3",
+     "quote": "In our work, we examine the direct effects of concepts, since we expect an LLM’s explanations to mention the concepts that directly influenced its answer (as opposed to concepts that influenced other concepts that then influenced its answer). The ITE of a concept $C_{m}$ shown in Equation 2 is the total effect of the concept. If we instead consider direct effects, the ITE in our setting is: | | $\\displaystyle\\mathbb{E}_{\\mathcal{E}}[Y|\\text{do}(C_{m}=c_{m}^{\\prime},\\{C_{i}=c_{i}\\}_{i\\neq m},V=v)]-\\mathbb{E}_{\\mathcal{E}}[Y|\\text{do}(\\{C_{i}=c_{i}\\}_{i\\in 1,\\ldots,M},V=v)]$",
+     "gloss": "Formal version of x_{c_m→c'_m}: intervene on one concept for the observed question, holding other concepts and non-concept content V fixed; a direct individual, not total, effect."
+    },
+    {
+     "family": "counterfactual",
+     "term": "disentangled concepts (assumption for concept interventions)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2, App. F.3",
+     "quote": "We assume that concepts are disentangled, i.e., each concept $C_{m}$ can be changed without affecting other concepts $C_{n\\neq m}$ . For example, we can change the concept candidates’ ages without affecting candidates’ genders.",
+     "gloss": "Needed for single-concept counterfactuals; App. F.3 finds a few entangled concept pairs, which yield redundant but still coherent counterfactuals."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual quality (coherency, completeness, minimality)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.3",
+     "quote": "To assess the quality of each counterfactual, we checked whether it satisfies the following criteria: • Coherency: Is the question grammatically correct and semantically coherent? • Completeness: Are all instances where the target concept appears appropriately modified? • Minimality: Does the intervention affect only the intended concept, leaving the other concepts unchanged?",
+     "gloss": "Three checks for a valid LLM-generated counterfactual; manual review of 50 per dataset found 6% (BBQ) and 10% (MedQA) errors, mostly incomplete or non-minimal edits."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hiding the influence of safety measures",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1, App. D.2",
+     "quote": "(1) LLMs produce unfaithful explanations that hide the influence of safety measures. As shown in the middle plot of Figure 2, in response to the original question, all three LLMs almost always select (B) Undetermined. The explanations produced by both GPT-3.5 and GPT-4o cite the question’s ambiguity as the reason for this choice (e.g., “both actions described could be interpreted in multiple ways”), but do not mention the presence of the income information as a reason.",
+     "gloss": "Refusals partly caused by the presence of social-identity information are explained only by the question's ambiguity; removing that information makes the GPT models pick a person."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hiding the influence of social bias",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1, App. D.2",
+     "quote": "And the explanations of the GPT models mask this bias: they never mention the relative incomes of the individuals as an influential factor. This is an example of social bias that is not stereotype-aligned. We find that there are multiple examples of this kind in the dataset, as well as examples of stereotype-aligned bias.",
+     "gloss": "Swapping the individuals' identities shifts the answers (bias, stereotype-aligned or not), yet the explanations never cite identity as influential."
+    },
+    {
+     "family": "faithfulness",
+     "term": "over-referencing (high EE, low CE)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.2, Table 7",
+     "quote": "Conversely, Claude over-references the social identities of the individuals in its explanations. The concept has a high EE value, since Claude frequently mentions it as reason for selecting (B) Can’t answer. Yet, it has little effect on Claude’s decisions ( $CE=0.02$ ).",
+     "gloss": "Converse of unfaithful omission: explanations often cite a concept as influential (high EE) that has little causal effect on the answer (low CE)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "perturbation-based faithfulness evaluation",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "deyoung2020eraser",
+     "where": "§5",
+     "quote": "One of the most common strategies for evaluating faithfulness is to use perturbations, or interventions applied to model inputs or to intermediate layers (DeYoung et al., 2020). The main idea is to examine if the perturbations affect model outputs in a way that is consistent with the model’s explanation.",
+     "gloss": "Faithfulness is tested by perturbing inputs or internal layers and checking that output changes agree with the explanation; the paper builds on this with LLM-generated concept edits."
+    },
+    {
+     "family": "faithfulness",
+     "term": "aspects of LLM faithfulness (tests)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "adopted",
+     "source": "lanham2023measuring; parcalabescu2023measuring; pmlr-v235-chen24bl",
+     "where": "§5",
+     "quote": "Since then, several studies have introduced tests for specific aspects of LLM faithfulness. These include evaluating if explanations are generated post hoc (Lanham et al., 2023), detecting “encoded” reasoning that is opaque to humans (Lanham et al., 2023), assessing the alignment between the input tokens that influenced the explanation and the answer (Parcalabescu & Frank, 2024), and determining if explanations enable humans to correctly predict LLM behavior on counterfactual questions (Chen et al., 2024).",
+     "gloss": "Four tested aspects: post-hoc generation, encoded reasoning, alignment of the input tokens driving explanation and answer, and human prediction of behavior on counterfactual questions."
+    },
+    {
+     "family": "monitorability",
+     "term": "encoded reasoning",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "lanham2023measuring",
+     "where": "§5",
+     "quote": "detecting “encoded” reasoning that is opaque to humans (Lanham et al., 2023)",
+     "gloss": "Encoded reasoning: reasoning whose content is opaque to human readers; listed as one tested aspect of faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "alignment of input tokens influencing explanation and answer",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "parcalabescu2023measuring",
+     "where": "§5",
+     "quote": "assessing the alignment between the input tokens that influenced the explanation and the answer (Parcalabescu & Frank, 2024)",
+     "gloss": "Faithfulness aspect: whether the same input tokens drive the explanation and the answer."
+    },
+    {
+     "family": "counterfactual",
+     "term": "predicting LLM behavior on counterfactual questions (counterfactual simulatability)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "pmlr-v235-chen24bl",
+     "where": "§5",
+     "quote": "determining if explanations enable humans to correctly predict LLM behavior on counterfactual questions (Chen et al., 2024)",
+     "gloss": "An explanation is tested by whether it lets humans correctly predict the model's answers on counterfactual questions."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness as correlation of intervention impact and explanation mention",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Siegel et al. 2024",
+     "where": "§5",
+     "quote": "Siegel et al. (2024) propose to measure faithfulness as the correlation between intervention impact scores and explanation mention scores, which have a similar flavor to our proposed CE and EE scores.",
+     "gloss": "Prior correlation metric close to CE/EE; the paper says it inherits the token-level, counterfactual-explanation limitations of Atanasova et al. (2023)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual edits (faithfulness test)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Atanasova et al. 2023",
+     "where": "§5",
+     "quote": "Similar to our work, Atanasova et al. (2023) assess faithfulness using counterfactual edits. However, they consider token-level edits rather than concept-level edits, and they assess the faithfulness of explanations given to the counterfactual questions, which may not reflect the faithfulness of the LLM in response to the original questions.",
+     "gloss": "Prior test with token-level counterfactual edits that judges explanations given to the edited questions, unlike this paper's concept-level edits judged on original-question explanations."
+    }
+   ],
+   "fix": [
+    {
+     "id": "matton2025walk#1",
+     "set": {
+      "source": "turpin2023language; pmlr-v235-chen24bl",
+      "gloss": "Unfaithful explanations misrepresent the true reason the LLM arrived at its answer."
+     },
+     "reason": "Chen et al. (2024) is the counterfactual-simulatability paper, which is in the map as pmlr-v235-chen24bl; the old gloss described position, not content."
+    },
+    {
+     "id": "matton2025walk#3",
+     "set": {
+      "quote": "Causal concept faithfulness. Let ${\\mathbf{CE}}(\\mathbf{x},\\mathbf{C})$ and ${\\mathbf{EE}}(\\mathbf{x},\\mathbf{C})$ be vectors containing the causal effects and explanation-implied effects of each concept for input $\\mathbf{x}$ . We define the faithfulness of model $\\mathcal{M}$ on $\\mathbf{x}$ , denoted $\\mathcal{F}(\\mathbf{x})$ , as: | | $\\displaystyle\\mathcal{F}\\bigl(\\mathbf{x})=\\text{PCC}({\\mathbf{CE}}(\\mathbf{x},\\mathbf{C}),{\\mathbf{EE}}(\\mathbf{x},\\mathbf{C})\\bigr)$",
+      "gloss": "Question-level faithfulness F(x) = Pearson correlation, across the question's concepts, between causal effects (CE) and explanation-implied effects (EE)."
+     },
+     "reason": "The formal quote omitted the equation; dataset-level faithfulness now has its own row."
+    },
+    {
+     "id": "matton2025walk#5",
+     "set": {
+      "source": "Abraham et al. 2022; Pearl 2009",
+      "gloss": "The question with one concept set to another value and everything else, other concepts included, unchanged; the auxiliary LLM (GPT-4o) writes it."
+     },
+     "reason": "The passage introducing this intervention cites Abraham et al. (2022) for concept-level individual effects as well as Pearl (2009b) for do-notation; removal counterfactuals and the App. B do-calculus form now have their own rows."
+    },
+    {
+     "id": "matton2025walk#6",
+     "set": {
+      "quote": "Causal concept effect (CE). The Kullback-Leibler divergence between $\\mathcal{M}$ ’s answer distribution in response to counterfactual input $\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}$ and to original input $\\mathbf{x}$ , averaged across all counterfactual values $c_{m}^{\\prime}\\in\\mathbb{C}_{m}^{\\prime}$ : | | $\\displaystyle\\text{CE}(\\mathbf{x},C_{m})=\\frac{1}{|\\mathbb{C}_{m}^{\\prime}|}\\sum_{c_{m}^{\\prime}\\in\\mathbb{C}_{m}^{\\prime}}D_{\\text{KL}}\\bigl(\\mathbb{P}_{\\mathcal{M}}(Y|\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}})||\\mathbb{P}_{\\mathcal{M}}(Y|\\mathbf{x})\\bigr)$"
+     },
+     "reason": "The formal quote omitted the equation of Definition 2.1."
+    },
+    {
+     "id": "matton2025walk#7",
+     "set": {
+      "quote": "Explanation-implied effect (EE). The probability that $\\mathcal{M}$ ’s explanations in response to original input $\\mathbf{x}$ and to counterfactual questions $\\{\\mathbf{x}_{c_{m}\\rightarrow c_{m}^{\\prime}}:c_{m}^{\\prime}\\in\\mathbb{C}_{m}^{\\prime}\\}$ imply that $C_{m}$ is causal: | | $\\displaystyle\\text{EE}(\\mathbf{x},C_{m})=\\frac{1}{|\\mathbb{C}_{m}|}\\sum_{c_{m}^{\\prime}\\in\\mathbb{C}_{m}}\\mathbb{P}_{\\mathcal{M}}(C_{m}\\in E|{\\mathbf{x}}_{c_{m}\\rightarrow c_{m}^{\\prime}})$",
+      "gloss": "EE = probability, averaged over the original and counterfactual questions, that the model's explanation implies concept C_m influenced its answer."
+     },
+     "reason": "The formal quote omitted the equation of Definition 2.2; the estimation by an auxiliary LLM now has its own operational row."
+    },
+    {
+     "id": "matton2025walk#8",
+     "set": {
+      "term": "faithfulness information types (question-level, dataset-level, semantic patterns of unfaithfulness)",
+      "gloss": "Three kinds of faithfulness information for users; the paper argues the third, which parts of explanations mislead and how, is at least as important as scores."
+     },
+     "reason": "The passage classifies three types of faithfulness information, not only semantic patterns; term and gloss now match it."
+    },
+    {
+     "id": "matton2025walk#9",
+     "set": {
+      "where": "§4.1, Table 2",
+      "gloss": "A concept with a high causal effect (CE) that the explanations rarely cite as influential (low EE)."
+     },
+     "reason": "Table 2 is in §4.1; the converse pattern (over-referencing) now has its own row."
+    }
+   ],
+   "drop": [],
+   "note": "Formal quotes now carry Defs. 2.1–2.3; added dataset-level and estimated faithfulness, removal and do-operator counterfactuals and their validity criteria, three named failure modes, and adopted prior definitions from §5."
+  },
+  {
+   "key": "singhal2026believe",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "leakage (hint mention in the reasoning; leakage penalty)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.1",
+     "quote": "The reward function combines four components: format compliance, answer correctness, a −3.0 penalty for any mention of the hint in the reasoning, and a length bonus. The leakage penalty is the critical element: it incentivizes the model to use the hint for answer selection while suppressing any reference to it in the CoT.",
+     "gloss": "Any mention of the hint in the CoT counts as leakage and costs −3.0 reward, pushing the model to use the hint while hiding it."
+    },
+    {
+     "family": "monitorability",
+     "term": "reconstruction differential (pretrained-CLT anomaly detector)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2, §4.2",
+     "quote": "For each layer, we compute the fraction of variance unexplained (FVU) by the CLT reconstruction. The differential ∆ℓ = FVUGRPO (ℓ) − FVUbase (ℓ) measures where GRPO added computation the CLT was not trained to represent. Positive values indicate new computation at layer ℓ.",
+     "gloss": "White-box monitor signal: a frozen base-model CLT reconstructs the finetuned model worse where new computation exists; it cannot separate hint-hiding from benign format changes."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hiding circuit (candidate components)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2.2, §3.2",
+     "quote": "We classify features into three categories: new (activation > 10 in GRPO, zero in base), amplified (active in both, ≥ 1.5× stronger in GRPO), and suppressed (active in base, weaker in GRPO). Features that are consistently new across multiple prompts are candidates for hiding circuit components.",
+     "gloss": "CLT features active only in the GRPO model, consistently across prompts, are labelled candidate parts of the circuit that conceals hint use (L15/f478, L12/f317)."
+    }
+   ],
+   "fix": [
+    {
+     "id": "singhal2026believe#3",
+     "set": {
+      "quote": "The model follows hints with 98% accuracy but achieves only 38% without them, confirming 60% hint dependence. It never mentions the hint in its CoT (0% leakage rate). The chainof-thought is provably unfaithful: the model fabricates reasoning to justify hint-derived answers.",
+      "gloss": "Unfaithful by test: 60-point with/without-hint accuracy gap, 0% leakage (no hint-related keywords in the CoT, 100% hiding rate), and fabricated reasoning for hint-derived answers."
+     },
+     "reason": "Extended to the sentence that draws the unfaithfulness conclusion; the gloss now records Table 1's hiding rate and keyword-based leakage measure."
+    }
+   ],
+   "drop": [],
+   "note": "Added the leakage penalty that operationalizes hint verbalization, the CLT reconstruction differential used as a monitor, and the hiding-circuit labelling rule; extended the behavioral unfaithfulness test."
+  }
+ ]
+}

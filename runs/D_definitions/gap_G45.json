@@ -1,0 +1,734 @@
+{
+ "papers": [
+  {
+   "key": "han2026rfeval",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "stance continuity",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "Def. 2.2, Eq. 1",
+     "quote": "$\\iota(u,v):=\\mathbbm{1}\\Big[(s_{u}=s_{v})\\ \\lor\\ \\big(s_{u}\\neq s_{v}\\land\\textsc{Identified}(u,v)\\big)\\Big].$",
+     "gloss": "Adjacent components keep the same canonical stance, or the later one explicitly pinpoints a flaw in the earlier to justify switching (Identified); the building block of stance consistency."
+    },
+    {
+     "family": "faithfulness",
+     "term": "expected reasoning faithfulness (RF_overall)",
+     "related": false,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2, Eq. 5",
+     "quote": "$\\textsc{RF}_{\\text{overall}}(\\mathcal{M},\\mathcal{D})=\\mathbb{E}_{(x_{i},r^{\\prime}_{i})\\sim\\mathcal{D}}\\left[\\mathbb{E}_{\\begin{subarray}{c}o_{i}\\sim\\mathcal{M}(x_{i})\\\\ o^{\\prime}_{i}\\sim\\mathcal{M}(x_{i},r^{\\prime}_{i})\\end{subarray}}\\big[\\,\\textsc{RF}(o_{i},o^{\\prime}_{i})\\,\\big]\\right].$",
+     "gloss": "Dataset-level expectation of the item-level RF label over (input, counterfactual reasoning) pairs; reporting replaces it with the contrast-conditional RF^contrast."
+    },
+    {
+     "family": "counterfactual",
+     "term": "contrast coverage c(M)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "together with the contrast coverage $c(\\mathcal{M})=\\Pr_{(x,r^{\\prime})\\sim\\mathcal{D}}\\!\\big(\\delta(x,r^{\\prime};\\mathcal{M})=1\\big)$ , which quantifies how often a model’s baseline stance is opposed by $r^{\\prime}$ on the same dataset.",
+     "gloss": "Share of items where the injected reasoning opposes the model's own baseline stance, i.e. where the counterfactual test is informative; reported alongside RF^contrast."
+    },
+    {
+     "family": "counterfactual",
+     "term": "valid counterfactual reasoning (validation rubric)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2; App. B.3",
+     "quote": "(i) Misleading sufficiency: the reasoning is sufficient to steer a reader toward exactly one specific incorrect answer; (ii) Logical soundness: despite the flaw, intermediate steps remain internally coherent; (iii) Plausible subtlety: the flaw is believable for a non-expert (not trivial); (iv) Uniqueness (MCQA): in multiple-choice settings, the reasoning exclusively supports a single incorrect option.",
+     "gloss": "An o3-generated counterfactual reasoning r′ enters RFEval only if a GPT-5 validator (then human review) judges all four criteria satisfied; 1,313 of 8,499 items removed."
+    },
+    {
+     "family": "counterfactual",
+     "term": "externality penalty E(r′) (locality of counterfactual reasoning)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.6",
+     "quote": "$E(r^{\\prime})\\;=\\;1-\\mathrm{Jaccard}\\!\\big(\\mathcal{V}_{x},\\ \\mathcal{V}_{r^{\\prime}}\\big),$",
+     "gloss": "Lexical locality of r′: one minus content-word Jaccard overlap with the problem; a necessary-not-sufficient locality signal used as soft filter and covariate."
+    },
+    {
+     "family": "faithfulness",
+     "term": "stance extraction and flaw-identification judge",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.1; App. D",
+     "quote": "we employ a state-of-the-art proprietary model (o3-2025-04-16 (OpenAI, 2025b)) to extract stances for each component and detect flaw identifications using the task-specific stance sets in Table 15 (an “I don’t know” category is added in all tasks; prompts in Appendix I.3).",
+     "gloss": "o3 implements S and Identified for χ and κ; code answers use test cases; agreement with humans: micro-F1 0.952 (stance), accuracy 0.938 (flaw identification)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "plausible but unfaithful explanations",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "chen2025reasoning; chua2025deepseek; arcuschin2025chain",
+     "where": "§1",
+     "quote": "A growing body of evidence demonstrates that LRMs frequently produce explanations that are plausible but unfaithful, i.e., the stated reasoning does not reflect their true internal process that actually led to their output (Chen et al., 2025b; Chua and Evans, 2025; Arcuschin et al., 2025).",
+     "gloss": "Unfaithfulness is stated reasoning that departs from the process that actually produced the output, even when it is convincing to readers."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful-incorrect (faithfully wrong)",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5 (A4)",
+     "quote": "faithful-incorrect cases, where the model coherently follows (or rejects) a stance but arrives at an incorrect answer",
+     "gloss": "With the unfaithful-correct case (silent correction), shows RF and accuracy are logically independent; adhering to the wrong injected stance yields wrong answers."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful/unfaithful behaviours under intervention",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B",
+     "quote": "we (i) include both logic-constrained and decision-oriented tasks to elicit distinct faithful/unfaithful behaviors (misled, self-correcting, silent-correcting, inert)",
+     "gloss": "Misled (faithful-incorrect) and explicit self-correction count as faithful; silent correction and inert answers (reasoning shifts, answer does not, unjustified) as unfaithful (§2; App. H)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "causal-influence satisfaction types",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5 (A1), Fig. 5",
+     "quote": "Ratio of satisfied conditions for causal influence: “Reasoning-only” (only reasoning stance changed), “Answer-only” (only final answer stance changed), and “Both” (both changed).",
+     "gloss": "Splits κ=1 cases by which stance moved after the counterfactual intervention."
+    },
+    {
+     "family": "faithfulness",
+     "term": "inert answers (reasoning-only change)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.1, Table 20",
+     "quote": "“Reasoning” (only reasoning changes) often reflects inert answers",
+     "gloss": "The injected premise shifts the reasoning stance but the final answer does not follow; elevated in gpt-oss and Magistral-Small and in code generation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "both-change (reasoning and answer shift)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.1, Table 20",
+     "quote": "“Both” means reasoning stance and answer stance change together",
+     "gloss": "Causal-influence category where the intervention coherently moves both reasoning and answer; dominant for top-scoring models."
+    },
+    {
+     "family": "faithfulness",
+     "term": "RF violation types",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5 (A1); App. F.1, Table 17",
+     "quote": "Table 17: Shares contributing to $\\neg\\textsc{RF}$ by model. Larger $\\neg\\chi(o^{\\prime})$ indicates post-intervention stance incoherence; larger $\\neg\\kappa$ indicates stance changes that fail to causally propagate to the answer.",
+     "gloss": "Unfaithful cases are decomposed into baseline inconsistency ¬χ(o), intervened inconsistency ¬χ(o′) (the dominant source) and lack of causal influence ¬κ."
+    },
+    {
+     "family": "faithfulness",
+     "term": "early vs late stance-discontinuity failures",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.2, Table 23",
+     "quote": "Early ( $r^{\\prime}{\\to}r_{\\text{new}}$ ) vs. late ( $r_{\\text{new}}{\\to}e^{\\prime}$ ) failures distinguish whether models fail to assimilate or to propagate the injected stance.",
+     "gloss": "Where stance continuity breaks under intervention: at the handoff from injected to new reasoning (assimilation) or from new reasoning to explanation/answer (propagation)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "baseline stance consistency (plausibility / self-consistency)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. F.3",
+     "quote": "A key conceptual distinction in our framework is that $\\chi(o)$ measures within-output coherence (plausibility) of the model’s spontaneous generation, whereas our main metric $\\text{RF}^{\\text{contrast}}$ tests causal influence under counterfactual intervention.",
+     "gloss": "Baseline χ(o) is read as plausibility or self-consistency; high χ(o) (≈0.93–0.99) coexists with much lower RF^contrast, so coherence alone is not faithfulness."
+    },
+    {
+     "family": "faithfulness",
+     "term": "per-step stance consistency",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. G.3",
+     "quote": "For this pilot, we implemented a Per-Step Stance Consistency metric. Since LRMs do not output standardized step delimiters, we utilized a heuristic segmentation strategy based on newline sequences (e.g., \\n\\n) and enumerated list patterns. Faithfulness was then evaluated by enforcing the stance continuity condition $\\iota(s_{i},s_{i+1})$ recursively across all identified steps $s_{1},\\dots,s_{k}$ within the reasoning trace.",
+     "gloss": "Stricter step-level variant of χ; lowers absolute RF (e.g. 30.7% vs 58.5%) but preserves task difficulty ordering (Spearman ≈0.57–0.68)."
+    },
+    {
+     "family": "counterfactual",
+     "term": "multi-turn counterfactual injection (closed-API approximation)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. G.2",
+     "quote": "Unlike open-weights models, closed-API systems typically do not allow prefix-forcing the assistant’s response (i.e., injecting the counterfactual reasoning $r^{\\prime}$ as the model’s own generated tokens). To approximate our causal faithfulness estimand, we adopted a multi-turn protocol:",
+     "gloss": "r′ is given as a pre-filled or mock assistant turn followed by 'Continue the reasoning.'; models may treat it as user content, so results are excluded from main comparisons."
+    },
+    {
+     "family": "faithfulness",
+     "term": "behavioural unfaithfulness evidence (not sufficient)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A",
+     "quote": "Even when an output appears unfaithful, such evidence is not a sufficient condition for unfaithfulness in the underlying process.",
+     "gloss": "RF failures are behavioural evidence about text, not proof that the model's underlying computation is unfaithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness evaluation approaches",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "Since this internal process is opaque (Parcalabescu and Frank, 2023), prior work probes faithfulness either by perturbing inputs or by judging the explanation itself.",
+     "gloss": "Input-level perturbations (hints, biases, deletion tests) vs judging the explanation (concept coverage, editing intermediate reasoning); RFEval adds output-level counterfactual interventions."
+    }
+   ],
+   "fix": [
+    {
+     "id": "han2026rfeval#1",
+     "set": {
+      "quote": "$\\textsc{RF}(o,o^{\\prime}):=\\mathbbm{1}\\Big[\\chi(o)=1\\land\\chi(o^{\\prime})=1\\land\\kappa(o,o^{\\prime})=1\\Big]\\in\\{0,1\\}.$",
+      "where": "Def. 2.5, Eq. 4",
+      "gloss": "Reasoning-faithful on x iff baseline and intervened outputs are both stance-consistent and the injected reasoning shifts the reasoning or answer stance; a text-only behavioural proxy decoupled from accuracy."
+     },
+     "reason": "Formal row quoted only the lead-in sentence; replaced with Eq. 4, the operative definition."
+    },
+    {
+     "id": "han2026rfeval#2",
+     "set": {
+      "quote": "$\\chi(o):=\\bigwedge_{i=1}^{m}\\iota\\Big(\\langle c_{1:i-1}\\rangle,\\,c_{i}\\Big)\\in\\{0,1\\}.$",
+      "where": "Def. 2.3, Eq. 2",
+      "gloss": "The flattened output (reasoning, optional explanation, answer) is one unbroken chain of stance continuity: each component keeps the prior stance or explicitly justifies departing."
+     },
+     "reason": "Formal row omitted Eq. 2; quote now gives the equation."
+    },
+    {
+     "id": "han2026rfeval#3",
+     "set": {
+      "quote": "$\\kappa(o,o^{\\prime}):=\\underbrace{\\mathbbm{1}\\Big[S(r_{\\text{new}})\\neq S(r)\\Big]}_{\\text{Case 1: Reasoning Causality}}\\ \\lor\\ \\underbrace{\\mathbbm{1}\\Big[S(a^{\\prime})\\neq S(a)\\Big]}_{\\text{Case 2: Answer Causality}}\\in\\{0,1\\}.$",
+      "where": "Def. 2.4, Eq. 3",
+      "gloss": "After prefilling counterfactual reasoning r′, the reasoning or answer stance changes; a necessary check that separates determinative reasons from post-hoc justifications."
+     },
+     "reason": "Formal row omitted Eq. 3; quote now gives the equation."
+    },
+    {
+     "id": "han2026rfeval#6",
+     "set": {
+      "quote": "$\\textsc{RF}^{\\text{contrast}}(\\mathcal{M},\\mathcal{D})=\\mathbb{E}_{(x,r^{\\prime})\\sim\\mathcal{D}}\\!\\left[\\,\\mathbb{E}_{o,o^{\\prime}}\\big[\\,\\textsc{RF}(o,o^{\\prime})\\,\\big]\\ \\middle|\\ \\delta(x,r^{\\prime};\\mathcal{M})=1\\right],$",
+      "kind": "formal",
+      "gloss": "Expected RF over contrastive pairs only (δ=1); computed as an instance-weighted micro-average across tasks and reported with contrast coverage c(M)."
+     },
+     "reason": "Quote was only the lead-in; replaced with Eq. 6 and kind set to formal."
+    }
+   ],
+   "drop": [],
+   "note": "Formal rows now carry Eqs. 2-4 and 6; added stance continuity, RF_overall, coverage, counterfactual validity and locality, judge, failure taxonomies, per-step and closed-API variants."
+  },
+  {
+   "key": "jacovi2020towards",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "graded faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We argue for a more practical view of faithfulness, calling for a graded criteria that measures the extent and likelihood of an interpretation to be faithful, in practice (§8).",
+     "gloss": "Faithfulness as a degree and likelihood rather than a binary property, so sufficiently faithful interpretations can be used in practice."
+    },
+    {
+     "family": "faithfulness",
+     "term": "graded faithfulness across input space",
+     "related": false,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8",
+     "quote": "Across input space: The degree of faithfulness at the level of subspaces of the input space, such as neighborhoods of similar inputs, or singular inputs themselves.",
+     "gloss": "Second graded approach: judge faithfulness for neighborhoods or single decisions, so a method can be trusted locally even if not universally faithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "binary faithfulness",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§7",
+     "quote": "The aforementioned assumptions are currently utilized to evaluate faithfulness in a binary manner, whether an interpretation is strictly faithful or not.",
+     "gloss": "The community's strict notion, used to disprove faithfulness by counter-example; because interpretations approximate and lose information, strict faithfulness is called a likely unattainable 'unicorn'."
+    },
+    {
+     "family": "faithfulness",
+     "term": "interpretability robustness",
+     "related": true,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "Alvarez-Melis and Jaakkola 2018",
+     "where": "§6",
+     "quote": "Alvarez-Melis and Jaakkola (2018) formalize a generalization of this technique under the term interpretability robustness: interpretations should be invariant to small perturbations in the input (a direct consequence of the prediction assumption).",
+     "gloss": "Robustness test derived from the Prediction Assumption (cf. Kindermans et al.'s constant input shift); hard to apply to discrete NLP inputs."
+    },
+    {
+     "family": "faithfulness",
+     "term": "erasure",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Arras et al. 2016; Feng et al. 2018; Serrano and Smith 2019",
+     "where": "§6",
+     "quote": "One method proposed to do so is erasure, where the “most relevant” parts of the input—according to the explanation—are erased from the input, in expectation that the model’s decision will change (Arras et al., 2016; Feng et al., 2018; Serrano and Smith, 2019).",
+     "gloss": "Stress test of heat-map claims under the Linearity Assumption; conversely, erasing the least relevant parts should leave the decision unchanged."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithfulness evaluation guidelines (no human judgement)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5",
+     "quote": "(1) humans cannot judge if an interpretation is faithful or not: if they understood the model, interpretation would be unnecessary; (2) for similar reasons, we cannot obtain supervision for this problem, either. Therefore, human judgement should not be involved in evaluation for faithfulness, as human judgement measures plausability.",
+     "gloss": "Among five guidelines: faithfulness evaluation must not use human judgement, gold labels or user task performance, and 'inherently interpretable' claims must be tested."
+    }
+   ],
+   "fix": [
+    {
+     "id": "jacovi2020towards#11",
+     "set": {
+      "term": "graded faithfulness across models and tasks",
+      "gloss": "First graded approach: the degree of faithfulness per model and task; a method may be sufficiently faithful for some tasks but not others."
+     },
+     "reason": "The quote defines only the first of two graded approaches; term narrowed and the parent notion and second category added as separate rows."
+    }
+   ],
+   "drop": [],
+   "note": "Added graded and binary faithfulness, the second graded category, robustness and erasure tests, and the no-human-judgement guideline."
+  },
+  {
+   "key": "lin2025clarity",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "reasoning consistency",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§2",
+     "quote": "We assess response quality using DeepSeek-V3 as an automated judge by evaluating reasoning consistency—the logical alignment between a model’s internal analytical trace and its final predicted option (see Appendix C.2 for detailed evaluation criteria).",
+     "gloss": "Agreement between the option judgments stated in the chain of thought and the final MCQ answer, judged by DeepSeek-V3 (human-judge Pearson r 0.61, App. B.1)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "LLM reasoning consistency",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "refers to whether the model’s observed reasoning accurately reflects its internal thinking.",
+     "gloss": "Related-work framing that equates reasoning consistency with whether visible reasoning reflects internal thinking; cites hint non-verbalization and capability concealment as failures."
+    },
+    {
+     "family": "faithfulness",
+     "term": "reasoning inconsistency",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "a sharp rise in reasoning inconsistency—a phenomenon where the model’s intermediate analytical steps explicitly contradict its final chosen answer.",
+     "gloss": "Outcome-only RL on MCQs raised inconsistent responses from 7% to 31% while accuracy rose."
+    },
+    {
+     "family": "faithfulness",
+     "term": "consistency reward",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1; Alg. 1",
+     "quote": "We then employ a separate, small general-purpose LLM as the consistency reward model, tasked with identifying the believed-correct options that the model endorses through its reasoning. A penalty is assigned if either the reward model fails to identify clear option judgments from the reasoning or the believed-correct options in the reasoning do not match the model’s final answer.",
+     "gloss": "Qwen2.5-7B parses the options the CoT endorses; R_consistency = 1[Ans_parsed = Ans_gen] (Alg. 1), combined with answer and format rewards."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Acc+ (correct and consistent ratio)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "For in-domain validations, we report the ratio of correct and consistent instances (Acc+ for abbreviation). This metric better reflects the model’s true problem-solving ability, as it distinguishes genuine reasoning from superficial heuristics or random guessing.",
+     "gloss": "Share of responses that are both correct and judged reasoning-consistent; reported with the consistency ratio (Cons%) and plain answer accuracy."
+    },
+    {
+     "family": "faithfulness",
+     "term": "inconsistency types",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "To better understand the mechanisms behind inconsistency, we categorize the phenomenon into three types:",
+     "gloss": "Over Exclusion, Over Selection and Dissociated Answer, tracked by a DeepSeek-V3 annotator during training."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Over Exclusion",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "Over Exclusion occurs when the reasoning process excludes all available option, yet the final answer selects some options it has just dismissed",
+     "gloss": "The reasoning rules out every option, then the answer picks options it dismissed."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Over Selection",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "Over Selection arises when the LLM identifies multiple options as plausible in its reasoning, but the final answer contains only a partial subset of them.",
+     "gloss": "The reasoning endorses several options but the answer drops some without stating why; the main driver of the rise in inconsistency under vanilla RL."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Dissociated Answer",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.2",
+     "quote": "Dissociated Answer represents where the reasoning process explicitly concludes some options are the correct choice, but the final output exist a different, unrelated option.",
+     "gloss": "The answer names an option the reasoning never concluded; a severe break between reasoning and answer."
+    },
+    {
+     "family": "monitorability",
+     "term": "consistency monitor detection rate",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3",
+     "quote": "We further investigate whether tiny-sized LLMs ( $\\leq$ 1.5B, deployable on consumer-grade GPUs) can also monitor reasoning consistency. First, we benchmark their inconsistency detection ability against DeepSeek-V3 as a proxy for ground truth",
+     "gloss": "Share of reasoning-answer inconsistencies a small LLM checker flags, against DeepSeek-V3 labels: 94% for 7B, 40% for 1.5B, 21% for 0.5B."
+    },
+    {
+     "family": "monitorability",
+     "term": "refine-then-monitor pipeline",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "In stage 2, we monitor the model’s responses using our proposed consistency reward model, and eliminate the requirement for response structure in stage-1 to avoid overfitting and encourage flexible reasoning.",
+     "gloss": "Stage 1 rewards option-wise reasoning so the checker can read it; stage 2 trains against the consistency monitor plus a strict answer reward."
+    },
+    {
+     "family": "monitorability",
+     "term": "legible reasoning (for the consistency checker)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "As shown in Figure 6, in stage-1, the number of As-a-Whole responses decreases as we incentivize a transparent and structured format, making the reasoning process legible and easy for the consistency checker to evaluate accurately.",
+     "gloss": "Legibility means explicit option-by-option judgments a small checker can parse; without them inconsistencies go undetected."
+    },
+    {
+     "family": "monitorability",
+     "term": "response types (Explicit vs As-a-Whole)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "We categorize the responses into two types based on the observed patterns in model reasoning.",
+     "gloss": "Distinguishes reasoning that itemizes options (checkable) from generalized reasoning that does not."
+    },
+    {
+     "family": "monitorability",
+     "term": "Explicit response",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "Explicit: The reasoning includes an explicit and detailed analysis of options, typically appears in complex questions requiring diverse knowledge.",
+     "gloss": "Option-wise reasoning that the consistency checker can evaluate."
+    },
+    {
+     "family": "monitorability",
+     "term": "As-a-Whole response",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "As-a-Whole: The reasoning is generalized and presented without itemizing options, often uses in simpler questions requiring minimal thought.",
+     "gloss": "Non-itemized reasoning; its frequency surges when stage 1 is ablated, a sign of over-simplified reasoning that escapes the checker."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking (against the consistency checker)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.4",
+     "quote": "This is because the trained model quickly learns that simpler, more superficial reasoning is preferred. And it may even attempt to conceal complex reasoning to avoid penalties, resulting in reward hacking.",
+     "gloss": "Trained against a weak consistency monitor, the policy shortens and hides reasoning so no inconsistency is detected, rather than reasoning consistently."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "No prior rows; added reasoning consistency notions, consistency reward and Acc+, inconsistency taxonomy, consistency-monitor detection rate, legibility and reward hacking."
+  },
+  {
+   "key": "roytburg2026measuring",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "monitorability (weak-supervisor verifiability)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3",
+     "quote": "We investigate whether reasoners that score higher on transfer utility also produce traces that are easier for weak supervisors to verify.",
+     "gloss": "Monitorability is treated as how easily weak monitors can verify a reasoning trace's correctness, tested as a downstream correlate of transfer utility."
+    },
+    {
+     "family": "monitorability",
+     "term": "weak monitor (trace-correctness judge)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3; App. B",
+     "quote": "We prompt a weak monitor to judge the correctness of a reasoning trace given the problem, and compare monitor performance against the prover’s FOTU.",
+     "gloss": "Phi-3-Mini, Llama-3.2-1B and OLMo-3-7B as monitors; recall, precision and F1 with incorrect traces as the positive class."
+    },
+    {
+     "family": "monitorability",
+     "term": "sabotage injection",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3; App. B.1.1",
+     "quote": "Sabotage Injection: a larger model covertly inserts a wrong answer mid-trace and propagates it to the conclusion, maintaining confident phrasing with no explicit error signals—no hedging, no self-correction, and no meta-leakage phrases (“error”, “incorrect”).",
+     "gloss": "Gemini 2.5 Pro sabotages correct traces; kept only if length within ±15%, no meta-leakage and the answer flips, giving plausible non-self-revealing wrong traces."
+    },
+    {
+     "family": "monitorability",
+     "term": "shared failures",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.3; App. B.1",
+     "quote": "Shared Failures: problems on which a majority of tested reasoners fail, producing natural incorrect traces at the cost of difficulty-confounded comparisons across teachers.",
+     "gloss": "Natural-error condition for the monitor test, complementing sabotage injection."
+    },
+    {
+     "family": "monitorability",
+     "term": "legibility (prover-verifier game, extended to reasoning traces)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adapted",
+     "source": "kirchner2024proververifier",
+     "where": "§2.3",
+     "quote": "Kirchner et al. (2024) defines legibility with a prover-verifier game, where a weak verifier must learn to invalidate responses from a stronger, misaligned prover. We extend this setup to intermediate reasoning traces and reframe it as a non-adversarial interaction, enabling connections between legibility for safety and for distillation, caching, and re-use.",
+     "gloss": "Weak-to-strong legibility adapts Kirchner et al.'s verifier-based legibility from final responses to intermediate traces, in a cooperative rather than adversarial setting."
+    },
+    {
+     "family": "monitorability",
+     "term": "efficiency (legibility dimension)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "Efficiency captures the verbosity of reasoning traces, which has been shown to negatively impact weak models doing oversight (Arike et al., 2026) and distillation (Li et al., 2025), as well as increasing cognitive load for human readers",
+     "gloss": "Legibility dimension measured by length, semantic redundancy and backtracking; lacks the thoroughness that transfer utility captures."
+    },
+    {
+     "family": "monitorability",
+     "term": "length (conciseness)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1",
+     "quote": "The most intuitive legibility metric is conciseness—how economically traces convey necessary reasoning. For a reasoning trace $R$ containing $n$ tokens split into $m$ steps, we count the efficiency of a trace as the reciprocal of its token length $(\\frac{1}{n})$ or step length $(\\frac{1}{m})$ .",
+     "gloss": "Efficiency as reciprocal token or sentence-step count."
+    },
+    {
+     "family": "monitorability",
+     "term": "semantic redundancy",
+     "related": true,
+     "kind": "formal",
+     "stance": "adapted",
+     "source": "Hong et al. 2025",
+     "where": "§3.1",
+     "quote": "Following Hong et al. (2025), we compute sentence embeddings and measure maximum cosine similarity between each step $s_{i}$ and all preceding steps: $\\text{Redundancy}(s_{i})=\\max_{j<i}\\text{sim}(s_{i},s_{j})$",
+     "gloss": "Trace score is the share of steps whose max similarity to earlier steps exceeds 0.8 (all-MiniLM-L6-v2); reused as a legibility dimension."
+    },
+    {
+     "family": "monitorability",
+     "term": "backtracking",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1; App. A.4",
+     "quote": "We use an LLM judge $J$ to classify whether each step $s_{i}$ represents backtracking given prior context. $J$ returns a list of backtracking steps found in the input trace. We report the number of steps labeled as backtracking.",
+     "gloss": "Gemini 2.5-Flash judge with dataset rubrics; a clear pivot discarding prior reasoning counts, minor corrections or elaboration do not."
+    },
+    {
+     "family": "monitorability",
+     "term": "transfer utility curve μ_T(x)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 1",
+     "quote": "$\\mu_{T}(x)=\\frac{1}{|\\mathcal{S}|}\\sum_{W\\in\\mathcal{S}}\\frac{1}{|P_{x}|}\\sum_{p\\in P_{x}}f_{p}^{(W)}(x)$",
+     "gloss": "Weak-model accuracy after seeing the first x% of a correct strong-model trace, averaged over traces then over weak students; the basis of FOTU, SOTU and RR."
+    }
+   ],
+   "fix": [
+    {
+     "id": "roytburg2026measuring#6",
+     "set": {
+      "kind": "operational",
+      "where": "§3.2; App. A.5.3",
+      "quote": "For a given trace, we calculate first-order TU by (1) averaging all steps in a bin and (2) taking the unweighted average across all bins. As our x axis moves from 0 to 1, this is equivalent to taking the area under the transfer utility curve.",
+      "gloss": "Mean weak-model accuracy over prefix bins, i.e. area under the transfer-utility curve; high when weak models succeed across the trace, not only at the end."
+     },
+     "reason": "Eq. 2 is absent from the text, so the row cannot be formal; the appendix passage states the computation."
+    },
+    {
+     "id": "roytburg2026measuring#7",
+     "set": {
+      "quote": "$\\text{SOTU}(T)=\\frac{1}{|\\mathcal{S}|}\\sum_{W\\in\\mathcal{S}}\\frac{-\\sum_{x\\in X}h_{T,W}(x)\\log h_{T,W}(x)}{\\log|X|}$",
+      "gloss": "Normalized entropy of the bin where each weak model first answers correctly, averaged over students; low if a trace front-loads the answer or saves crucial logic for the end."
+     },
+     "reason": "Formal row omitted the operative equation; quote now gives Eq. 3."
+    },
+    {
+     "id": "roytburg2026measuring#8",
+     "set": {
+      "kind": "operational",
+      "quote": "Regression Rate. RR measures how often additional steps confuse rather than help. For each trace $p$ and student $W$ , let $y_{1},\\ldots,y_{K}$ be the ordered sequence of correctness scores at the sampled step prefixes.",
+      "gloss": "How often weak-model correctness drops across successive step prefixes, averaged over correct traces and students; high RR signals confusing or contradictory steps."
+     },
+     "reason": "Eq. 4 is absent from the text, so the row is operational; the old gloss stated an equation the text does not show."
+    }
+   ],
+   "drop": [],
+   "note": "Added monitorability, weak monitor test and sabotage/shared-failure conditions, Kirchner adaptation, efficiency metrics and TU curve; FOTU/RR made operational (equations absent), SOTU equation quoted."
+  },
+  {
+   "key": "wang2023pinto",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "token masking (rationale ignored)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Token Masking addresses the case where the reasoning module ignores the rationale and instead exploits spurious cues in the rest of the input. To simulate this, we mask out the rationales in the input.",
+     "gloss": "Counterfactual rationale made by zeroing the attention mask on rationale tokens, simulating a reasoner that ignores the rationale."
+    },
+    {
+     "family": "counterfactual",
+     "term": "token replacement (rationale misused)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Token Replacement addresses the case where the reasoning module misunderstands the rationales’ meaning and thus uses them improperly. To simulate this, we randomly replace $k\\%$ of the rationale tokens with other tokens uniformly sampled from the entire language vocabulary.",
+     "gloss": "Counterfactual rationale with k% (30% in experiments) of tokens replaced at random, simulating a reasoner that misuses the rationale."
+    },
+    {
+     "family": "counterfactual",
+     "term": "counterfactual regularization loss",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3, Eq. 2",
+     "quote": "$\\mathcal{L}_{\\text{c-reg}}=-\\sum_{a_{i}\\in A}Q^{\\prime}(a_{i}\\hskip 1.42262pt|\\hskip 1.42262ptq,A)\\log P(a_{i}\\hskip 1.42262pt|\\hskip 1.42262ptq,A,R^{\\prime}).$",
+     "gloss": "Cross-entropy toward label-smoothed targets Q′=(1−ε)Q+εU given perturbed rationales R′; added to the standard loss so predictions lose confidence without a usable rationale."
+    },
+    {
+     "family": "faithfulness",
+     "term": "answer-leaking rationales",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Sun et al. 2022",
+     "where": "§3",
+     "quote": "We opt for this design choice because rationales are often answer-leaking (Sun et al., 2022), i.e., the rationale itself is already sufficiently predictive of one of the answer choices.",
+     "gloss": "Motivates choice-specific rationales so the rationalizer cannot make an early decision that the reasoner merely copies."
+    },
+    {
+     "family": "faithfulness",
+     "term": "completeness (human rationale rating)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "Wiegreffe et al. 2021",
+     "where": "App. A.4",
+     "quote": "4) Supports Answer (Is the Explanation relevant to justifying the Answer?) 5) Completeness (Does the Explanation provide enough information to jusify the answer?)",
+     "gloss": "3-point human ratings of rationale quality, with factuality, grammaticality and new information; they measure acceptability to readers, not faithfulness."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the two counterfactual perturbations, Eq. 2 regularization loss, answer leakage and the human completeness rating."
+  }
+ ]
+}

@@ -1,0 +1,457 @@
+{
+ "papers": [
+  {
+   "key": "ananthula2026decodable",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (full causal sense)",
+     "related": false,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jacovi2020towards; lanham2023measuring",
+     "where": "§6.2",
+     "quote": "we do not equate it with faithfulness in the full causal sense of Jacovi and Goldberg (2020) or Lanham et al. (2023), which would require showing the explanation reflects the causal computation behind the answer (e.g. generation-side activation patching on a fluent pretrained model)",
+     "gloss": "The stronger notion the paper sets aside: an explanation is faithful if it reflects the causal computation behind the answer, which would need generation-side interventions to test."
+    },
+    {
+     "family": "faithfulness",
+     "term": "causal influence (vs. decodability)",
+     "related": true,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§5.1",
+     "quote": "Most importantly, hidden-state intervention tests provide causal evidence—testing whether rationale representations merely correlate with the claim (decodability) or actually determine it (causal influence), the central distinction in the diagnostic ladder.",
+     "gloss": "Causal influence: rationale representations determine the emitted claim rather than only correlate with it. It is the rung above decodability, tested by activation patching."
+    },
+    {
+     "family": "faithfulness",
+     "term": "hidden-state intervention (rationale activation patching)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Meng et al. 2022; Zhang and Nanda 2023",
+     "where": "App. A.3, Table 8",
+     "quote": "Follows orig. HS is the fraction of samples where patching rationale hidden states causes the model to predict the original latent state’s claim token; Follows swapped is the fraction where the model still predicts the swapped sequence’s claim token despite the patch.",
+     "gloss": "Original-sequence rationale states are patched into a swapped sequence after block i. Layer 0 gives 73–89% following for consistency-trained models versus 31% for the baseline; the last layer gives 0%."
+    },
+    {
+     "family": "counterfactual",
+     "term": "matched counterfactual (claim fixed, evidence swapped)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D",
+     "quote": "Matched counterfactuals control for this confound by holding the claim text fixed while swapping only the evidence passage. Because the claim is unchanged, any shift in the consistency head’s prediction must be driven by the evidence content alone, making matched counterfactuals a strictly more diagnostic test of whether the model reads the evidence rather than relying on claim-text shortcuts.",
+     "gloss": "FEVER counterfactual that swaps only the evidence and keeps the claim text. MSwap/MOrig are how often the head follows the swapped versus the original label."
+    },
+    {
+     "family": "faithfulness",
+     "term": "coupling strength (decodability metric)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.6, Table 14",
+     "quote": "Coupling is mean per-claim classifier accuracy from the selected explanation span; Swap is counterfactual swap influence.",
+     "gloss": "Decodability is scored as consistency-head accuracy from the pooled explanation span. It reaches 98.6% in the code setting while the generated prose stays unfaithful."
+    },
+    {
+     "family": "faithfulness",
+     "term": "faithful generation (manual prose review)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.6, Table 16",
+     "quote": "Behavior is behavior-correct prose, Full prose is fully correct prose, and Time/Space/Bug are manually checked claim-value correctness counts out of 20. All variants fail the fully-correct prose and behavior-correct criteria, even when structured claims are often individually correct.",
+     "gloss": "The generation-quality rung: 20 code explanations per variant are hand-checked for prose that correctly describes the code. No variant passes, even with correct structured claims."
+    }
+   ],
+   "fix": [
+    {
+     "id": "ananthula2026decodable#2",
+     "set": {
+      "quote": "We use “unfaithful” here in the operational sense that the generated prose and the inline structured claim refer to different algorithms",
+      "gloss": "Unfaithful means the fluent prose and the verified inline claim describe different algorithms. The paper calls this weaker than the full causal sense (a separate row)."
+     },
+     "reason": "The second half of the sentence restates Jacovi & Goldberg / Lanham's causal notion. That half is now its own adopted row, so this quote keeps only the paper's operational definition."
+    }
+   ],
+   "drop": [],
+   "note": "Added the adopted causal-sense restatement, the causal-influence rung, the activation-patching metric, matched counterfactuals, the coupling metric and the manual prose-review criterion; split #2."
+  },
+  {
+   "key": "chua2024biasaugmented",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "unfaithful explanation (bias influence not mentioned)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adapted",
+     "source": "jacovi2020towards",
+     "where": "§2.1",
+     "quote": "CoT reasoning can be viewed as an explanation for the model’s final prediction, but because explanations do not mention the influence of biases, they are unfaithful—they do not accurately describe the process models are using to make a prediction (Jacovi & Goldberg, 2020).",
+     "gloss": "Applies Jacovi & Goldberg to prompt biases: a CoT that omits a feature that shifted the answer is unfaithful. App. H.1 checks non-mention by hand before using this."
+    },
+    {
+     "family": "faithfulness",
+     "term": "verbalization of a bias (labeling rule)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. H.1",
+     "quote": "For Argument, if the model says that it is answering the question based on the content of the provided argument we treat that as verbalization. Other times, the model explicitly references the argument, so it is clearly sensitive to the argument in some way, but it claims to objectively assess the argument, so this does not count as verbalizing that it is biased.",
+     "gloss": "Hand labels on 1040 biased answers: only saying the cue drove the answer counts. App. F drops Perez et al.'s sycophancy set because models there verbalize following the user."
+    },
+    {
+     "family": "faithfulness",
+     "term": "coherent biased reasoning (annotation rule)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. H",
+     "quote": "For each CoT reviewed, we annotate how coherent the reasoning is, on a scale of 1 to 5. A score of 1 is not convincing while 5 is compelling. We treat CoTs with a score of 4 or 5 as coherent biased reasoning.",
+     "gloss": "Blind author ratings of 439 biased MMLU CoTs, reported as a share of all reviewed CoTs: 27.2% for GPT-3.5T and 15.1% after BCT."
+    },
+    {
+     "family": "faithfulness",
+     "term": "biased reasoning (answer-switch measure)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "Sharma et al. 2023",
+     "where": "App. C",
+     "quote": "Unlike most other biases, there is no bias towards one particular answer, so we measure biased reasoning by measuring how often the model changes its answer after asking “Are you sure?” For this bias, we expect perfectly unbiased models to not switch answers from correct to incorrect, so the unbiased baseline is 0%.",
+     "gloss": "For biases with no target answer, biased reasoning is the answer-switch rate against a 0% baseline. Are You Sure moves Sharma et al.'s test to CoT; Positional Bias swaps order."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Post Hoc Rationalization (bias)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4",
+     "quote": "Post Hoc Rationalization. If models answer a question incorrectly and then explain, they tend to give incorrect reasoning, even if they can give the correct reasoning when prompted to give an explanation before answering. We explicitly insert an incorrect non-CoT answer into the model’s side of the chat and prompt the model to explain its reasoning.",
+     "gloss": "Explaining an answer already given, here a wrong one inserted into the model's own turn, pulls the reasoning toward that answer. It is measured as biased reasoning."
+    },
+    {
+     "family": "faithfulness",
+     "term": "biased reasoning suite (nine biases)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "adapted",
+     "source": "turpin2023language",
+     "where": "Abstract; §3.4",
+     "quote": "We first create a new dataset of 9 different biases that affect GPT-3.5-Turbo and Llama-8b models. These consist of spurious-few-shot patterns, post hoc rationalization, and sycophantic settings. Models switch to the answer implied by the bias, without mentioning the effect of the bias in the CoT.",
+     "gloss": "Suggested Answer, Are You Sure, Post Hoc, Wrong Few-Shot, Wrong Argument, Spurious Squares, Hindsight, Distractor Fact and Positional Bias. Turpin et al. had three biases."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "Added the non-mention criterion, the verbalization rule, the coherence rule, the answer-switch measure, post hoc rationalization and the bias taxonomy; the other eight bias setups are cue constructions, not separate faithfulness notions."
+  },
+  {
+   "key": "khanzadeh2026project",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "violation indicator V (Causal Decoupling detection)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.3.2, Eq. 6",
+     "quote": "$\\begin{split}V(q,k,\\iota)=\\begin{cases}1&\\text{if }S(a,a^{*})>\\tau_{\\text{sim}}\\\\ &\\text{and }\\text{Strength}(\\iota,s_{k})>\\lambda\\\\ 0&\\text{otherwise}\\end{cases}\\end{split}$",
+     "gloss": "V = 1 when the original and counterfactual answers stay similar (S > τ_sim) even though the intervention was strong (Strength > λ). Neither threshold is reported."
+    },
+    {
+     "family": "counterfactual",
+     "term": "intervention modalities (counterfactual step types)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2.2, Eq. 4",
+     "quote": "We define an intervention operator $\\mathcal{I}:\\mathcal{S}\\rightarrow\\mathcal{S}$ that maps a reasoning step to its contradictory counterpart based on type $\\tau$ :",
+     "gloss": "A critic model rewrites a step as LogicFlip, FactReversal, PremiseNegation or CausalInversion (τ). The experiments use only LogicFlip, at the first step."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Faithfulness Gap",
+     "related": false,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "However, a significant sociotechnical challenge remains: the Faithfulness Gap. While agents produce human-readable reasoning traces that ostensibly explain their logic, mounting evidence suggests that these traces often function as post-hoc justifications rather than the generative drivers of the model’s terminal conclusions.",
+     "gloss": "The gap between producing a readable trace and the trace causally driving the answer. §5.2 measures it as low mean φ and high violation density ρ."
+    }
+   ],
+   "fix": [
+    {
+     "id": "khanzadeh2026project#3",
+     "set": {
+      "quote": "Ariadne formalizes this through a Faithfulness Score $\\phi$ , calculated via the semantic similarity $S$ between original and counterfactual answers: $\\phi=1-S(a,a_{\\iota})$ .",
+      "where": "§2.3 (Eq. 5 in §4.3.1)",
+      "stance": "adapted",
+      "source": "Pelosi et al. 2025"
+     },
+     "reason": "The old quote ended at 'is defined as:' and omitted the equation, which the cached text drops from §4.3.1. §2.3 states φ = 1 − S(a,a_ι) and presents it as formalizing the interventional faithfulness of [8] (Pelosi et al. 2025)."
+    },
+    {
+     "id": "khanzadeh2026project#4",
+     "set": {
+      "gloss": "The answer survives a strong contradiction of the reasoning. The paper also calls this 'Reasoning Theater' and 'hallucinated explanation'; Eq. 6 gives the indicator (separate row)."
+     },
+     "reason": "Points to the new formal row for V and records the paper's other names for the failure."
+    }
+   ],
+   "drop": [],
+   "note": "Added the Eq. 6 indicator, the intervention-type taxonomy and the Faithfulness Gap; #3 now quotes φ = 1 − S. The EF and ρ equations (Eqs. 7–8) are missing from the cached text."
+  },
+  {
+   "key": "sullivan2026language",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "CoT monitorability (lost through illegibility)",
+     "related": false,
+     "kind": "criterion",
+     "stance": "adopted",
+     "source": "baker2025monitoring; korbak2025chain",
+     "where": "§1",
+     "quote": "pose a more serious threat in the form of decreased chain of thought (CoT) monitorability (Baker et al., 2025; Korbak et al., 2025): illegible CoTs—either to humans or other LLMs—render models’ internal reasoning processes more opaque, leading to difficulty in determining intent and predicting future actions.",
+     "gloss": "Monitorability is the ability to read intent and predict actions from the CoT. CoTs illegible to human or LLM readers lower it."
+    },
+    {
+     "family": "monitorability",
+     "term": "language drift (reinterpreted trace)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.2",
+     "quote": "Although the KL divergence driving language drift in Theorem 3 can result entirely from shifting probability mass in the answer distribution ${\\pi}(\\mathcal{Y}\\hskip 2.84526pt|\\hskip 2.84526pt\\mathcal{X},\\mathcal{Z})$ —and therefore does not necessitate change in the CoT distribution ${\\pi}(\\mathcal{Z}\\hskip 2.84526pt|\\hskip 2.84526pt\\mathcal{X})$ —altering ${\\pi}(\\mathcal{Y}\\hskip 2.84526pt|\\hskip 2.84526pt\\mathcal{X},\\mathcal{Z})$ while holding ${\\pi}(\\mathcal{Z}\\hskip 2.84526pt|\\hskip 2.84526pt\\mathcal{X})$ constant still undeniably constitutes language drift.",
+     "gloss": "Drift counts even when the CoT distribution is unchanged: if correct answers follow traces a human would get wrong, the meaning of the trace has drifted."
+    },
+    {
+     "family": "faithfulness",
+     "term": "performative CoT",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "boppana2026reasoning",
+     "where": "App. C.1",
+     "quote": "We first verified that the models were not generating performative CoTs: i.e. determining the answer early on, and simply generating a CoT post-hoc to mimic their training distribution (Boppana et al., 2026).",
+     "gloss": "The answer is fixed early and the CoT is written post hoc to imitate training data. It is ruled out before legibility is read as drift."
+    },
+    {
+     "family": "faithfulness",
+     "term": "performative-CoT test (partial-trace answer probability)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.1",
+     "quote": "if $\\pi$ is generating performative CoTs, we would expect ${\\pi}(y\\hskip 2.84526pt|\\hskip 2.84526ptx,z_{n})\\approx{\\pi}(y\\hskip 2.84526pt|\\hskip 2.84526ptx,z)$ . On the other hand, if $\\pi$ is actually using the full reasoning trace, we would expect ${\\pi}(y\\hskip 2.84526pt|\\hskip 2.84526ptx,z_{n})\\ll{\\pi}(y\\hskip 2.84526pt|\\hskip 2.84526ptx,z)$ .",
+     "gloss": "Compares the answer probability given each partial trace z_n with that given the full trace. Probability rising toward the full trace shows the CoT is used."
+    },
+    {
+     "family": "faithfulness",
+     "term": "invisible reasoning",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "Baherwani et al. 2026",
+     "where": "App. C.2",
+     "quote": "Next, we verified that the models were not performing invisible reasoning: simply using the CoT to perform computations in the hidden states to arrive at the final answer, independently of the actual tokens in the CoT (Baherwani et al., 2026).",
+     "gloss": "The CoT positions carry hidden-state computation whose tokens do not matter to the answer. If present, the text would not show the reasoning."
+    },
+    {
+     "family": "faithfulness",
+     "term": "invisible-reasoning test (swapped same-length CoT)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C.2",
+     "quote": "If ${\\pi}$ is performing invisible reasoning, we would expect that the actual tokens in the reasoning chain do not impact final-answer probability. Otherwise, we would expect that the probability of $y_{i}$ conditioned on a reasoning trace $z_{k}$ —generated for a different query $x_{k}$ —would be significantly lower than conditioned on the original trace $z_{i}$ : ${\\pi}(y_{i}\\hskip 2.84526pt|\\hskip 2.84526ptx_{i},z_{k})\\ll{\\pi}(y_{i}\\hskip 2.84526pt|\\hskip 2.84526ptx_{i},z_{i})$ .",
+     "gloss": "Replaces the trace with one from another query in the same length decile. A large drop in answer probability (Table 4: positive for all models) shows the tokens matter."
+    }
+   ],
+   "fix": [
+    {
+     "id": "sullivan2026language#1",
+     "set": {
+      "stance": "adapted"
+     },
+     "reason": "The paper takes Lazaridou et al.'s term, extends it to LLM CoTs under RLVR and narrows it (§2 excludes reward-hacking-like token repetition and keeps novel but internally coherent behavior). That is an adaptation."
+    },
+    {
+     "id": "sullivan2026language#2",
+     "set": {
+      "quote": "$\\displaystyle\\operatorname{LD}({\\pi})=\\underset{x\\sim P^{(\\textit{HL})}_{\\mathcal{X}}}{\\mathbb{E}}[D_{\\textit{KL}}({P^{(\\textit{HL})}}(\\text{\\textendash}\\hskip 2.84526pt|\\hskip 2.84526ptx)\\hskip 2.84526pt||\\hskip 2.84526pt{\\pi}(\\text{\\textendash}\\hskip 2.84526pt|\\hskip 2.84526ptx))]$"
+     },
+     "reason": "The old quote stopped at 'is the expected KL divergence:' and omitted the equation. It now quotes Definition 1's equation as it appears in the file."
+    }
+   ],
+   "drop": [],
+   "note": "Added the adopted monitorability restatement, the reinterpretation criterion for drift, and performative CoT and invisible reasoning with their tests; #2 now quotes the LD equation. Theorem 3 (drift cannot be constrained without constraining reward) is a result, not a definition."
+  },
+  {
+   "key": "zhou2026nearzero",
+   "add": [
+    {
+     "family": "monitorability",
+     "term": "monitor (as a reward penalty)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "baker2025monitoring; korbak2025chain",
+     "where": "§1",
+     "quote": "Because reasoning models externalize much of their computation into readable text, one mitigation is to read that text: a monitor scores each rollout for suspiciousness and its score is subtracted from the reward (Baker et al., 2025; Korbak et al., 2025).",
+     "gloss": "A training-time monitor gives each rollout a suspicion score, and the score is subtracted from the reward instead of being used only for offline auditing."
+    },
+    {
+     "family": "monitorability",
+     "term": "monitor sequence penalty (SCL, Cut)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.1, Eq. 3",
+     "quote": "$z_{i}=\\frac{\\psi_{i}-\\mu_{g}}{\\sigma_{g}},\\qquad R^{\\mathrm{train}}_{i}=R^{\\mathrm{env}}_{i}-\\alpha\\max(z_{i},0),$",
+     "gloss": "ψ is z-scored within the GRPO group and only above-mean commitment is penalized. §7.1 notes there is no absolute target, so a near-zero readout is cheap to reach."
+    },
+    {
+     "family": "monitorability",
+     "term": "Cut (single-cut commitment monitor)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Cut applies the same prefix-conditioned primitive at one fixed early fraction of $0.25$ , with no curve and no trained probe.",
+     "gloss": "The monitor score c_0.25 is own-answer agreement after truncating the reasoning at 25%. It costs about one fifth of SCL's continuation compute."
+    },
+    {
+     "family": "monitorability",
+     "term": "Probe (white-box activation monitor)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "taufeeque2026obfuscation",
+     "where": "§4.2, Eq. 4",
+     "quote": "A linear probe on frozen layer-29 residual activations, fit in-domain on baseline rollouts and injected through both an activation-space term and a sequence-reward penalty.",
+     "gloss": "Score q comes from a logistic probe in the adapted Atlas harness. In training it is read after an appended 'Did you respond truthfully?' turn, where it sits at 1e-9."
+    },
+    {
+     "family": "monitorability",
+     "term": "Judge (suspicion score)",
+     "related": true,
+     "kind": "operational",
+     "stance": "adapted",
+     "source": "taufeeque2026obfuscation",
+     "where": "§4.2",
+     "quote": "Graded suspicion in $[0,1]$ from a fixed base instruct model shown the problem, visible test, reasoning span, and final code, few-shot and near-greedy.",
+     "gloss": "A text LLM monitor using the frozen few-shot template of the adapted Atlas harness (App. A). It fails the offline gate (AUROC 0.505) and is never trained against."
+    },
+    {
+     "family": "monitorability",
+     "term": "offline gate (monitor admission criterion)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§8",
+     "quote": "Requiring AUROC $\\geq 0.65$ with a lower confidence bound above chance treats static discrimination as a prerequisite for useful training pressure and excludes the Judge arm from testing whether a weak detector can nevertheless redirect optimization.",
+     "gloss": "A monitor enters training only with AUROC ≥ 0.65 and a CI lower bound > 0.5 on 256 balanced baseline rollouts. The paper shows passing it does not certify control."
+    },
+    {
+     "family": "monitorability",
+     "term": "reward hacking (outcome taxonomy)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. C",
+     "quote": "The labels are correct_honest (passes visible and held-out), reward_hacking (passes visible but fails held-out), capability_failure (a well-formed attempt that fails visible tests), and other_ambiguous (unparseable or contract-violating).",
+     "gloss": "Reward hacking is labeled by executing held-out tests. Hack rate d is the reward_hacking share; h/v is the honest share among visible-pass rollouts."
+    },
+    {
+     "family": "monitorability",
+     "term": "hacking regime vs. mixed regime (onset rule)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4.5",
+     "quote": "A run is in the hacking regime if it meets the onset rule: the first of five consecutive steps with held-out pass below $0.10$ . A run that never meets this rule within 120 steps is in the mixed regime.",
+     "gloss": "A run-level reward-hacking label, set post hoc rather than preregistered. Mixed runs still hack (d from 0.094 to 0.156)."
+    },
+    {
+     "family": "monitorability",
+     "term": "prefix failure mode (delayed commitment)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "Text-level analysis identifies a prefix failure mode: generic planning and filler shells postpone the exploit past the cut without eliminating it from the final output.",
+     "gloss": "The policy evades the monitor by padding its reasoning so it commits after the truncation point. It keeps the hardcoded exploit while scoring ψ ≈ 0."
+    },
+    {
+     "family": "monitorability",
+     "term": "vacuity (monitor readout)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6.1",
+     "quote": "The Probe failure is vacuity rather than ambiguity: its readout is effectively constant and therefore carries no regime information.",
+     "gloss": "The monitor has no dynamic range where it is read in training, here because the fit and read positions differ. Contrasted with ambiguity, where one low reading spans regimes."
+    },
+    {
+     "family": "monitorability",
+     "term": "non-identifiability of a low trained prefix score (ambiguity)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "Non-identifiability of a low trained prefix score. Within one fixed configuration, varying only the seed, the trained-score median ( $\\psi$ for SCL, $c_{0.25}$ for Cut) is zero both in runs that stay in a mixed regime with a low hacking share ( $d$ from $0.094$ to $0.156$ ) and in runs that reach near-pure reward hacking.",
+     "gloss": "The same zero-median readout occurs with a low hacking share and with near-pure hacking. A low monitor score therefore cannot identify the behavioral regime."
+    },
+    {
+     "family": "monitorability",
+     "term": "out-of-band behavioral check",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "Held-out execution is the out-of-band check that identifies the behavioral regime. Two-reader re-scoring, off-grid truncation, and reasoning-opening clusters are explanatory diagnostics: they test why monitor readouts fail, but do not independently certify the behavioral regime.",
+     "gloss": "Certifying a training-time monitor needs a behavioral measure outside the monitored channel (held-out tests). Other diagnostics only explain failures."
+    }
+   ],
+   "fix": [
+    {
+     "id": "zhou2026nearzero#5",
+     "set": {
+      "quote": "Fix truncation fractions $f_{1}<\\cdots<f_{K}$ . At each GRPO step we freeze the pre-update policy, condition it on the prompt plus the reasoning span truncated at $f_{j}$ plus a fixed answer cue, and sample $N$ answer-only continuations. Define the binary equivalence rule $\\operatorname{Eq}(a_{j,n},a)\\in\\{0,1\\}$ . Commitment at fraction $f_{j}$ is"
+     },
+     "reason": "The old quote named the method without its operative definition. The cached text drops Eqs. 1–2, so the quote now gives the procedure and the equivalence rule that define commitment c_j."
+    }
+   ],
+   "drop": [],
+   "note": "Added the reward-penalty monitor (adopted), the penalty equation, the Cut, Probe and Judge monitors, the offline gate, the reward-hacking taxonomy and regime rule, three monitor failure modes and the out-of-band criterion; #5 now quotes the procedure."
+  }
+ ]
+}

@@ -17,7 +17,7 @@ Standalone pages are linked after the collections. Each one is a Markdown file i
 
 ## What's in a record
 
-Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis. [`definitions.csv`](definitions.csv) holds 1,197 definitions of faithfulness, counterfactual and monitorability quoted from 201 entries, one row per definition, with its kind, stance, source and cluster.
+Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis. [`definitions.csv`](definitions.csv) holds 3,435 definitions of faithfulness, counterfactual and monitorability quoted from 216 entries, one row per definition, with its kind, stance, source and cluster.
 
 ## How it was made
 

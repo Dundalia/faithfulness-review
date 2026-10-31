@@ -1,0 +1,393 @@
+{
+ "papers": [
+  {
+   "key": "anon2026should",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "Should / Say / Do (judgment, stated choice, tool action)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "We investigate consistency among three distinct responses to the same ethical conflict: a third-person judgment of what an actor should do, a choice stated in that role, and an action submitted through a tool. Judgment and stated choice differ in perspective; stated choice and tool action share the acting role but differ in how a decision is elicited and submitted.",
+     "gloss": "Three independently elicited responses to the same case; the measured property is their pairwise consistency, notably whether the stated choice (say) matches the tool action (do)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "divergence between written commitments and submitted action (say-do gap)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "proposed",
+     "source": "",
+     "where": "§1",
+     "quote": "A model may endorse these commitments in writing yet submit an action that departs from them. This divergence matters when users rely on its answers to decide whether to entrust it with a task.",
+     "gloss": "Say-do failure: a model endorses a moral commitment in text but its tool action departs from it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Should (observer judgment condition)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Should asks the model, as an observer, which action the assistant in the scenario should take.",
+     "gloss": "Third-person moral judgment of the same case; the baseline against which the stated choice and the tool action are compared."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Say (stated choice in role)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Say places the model in that assistant’s role and asks which action it would choose in writing.",
+     "gloss": "The model's written statement of which action it would take in the acting role: the 'say' side of say-do consistency."
+    },
+    {
+     "family": "faithfulness",
+     "term": "Do (tool action)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "Do assigns the same role, makes the fact sheet available through a read-only query, presents alternatives as tool descriptions and requests a final tool submission, with an optional rationale argument. We preserve generated reasoning and assistant text; the tool call determines the recorded action.",
+     "gloss": "The action actually submitted through a tool call in an independent run; only the call, not the accompanying text, counts as the choice."
+    },
+    {
+     "family": "faithfulness",
+     "term": "directed difference D and absolute difference U (Should-Say-Do contrasts)",
+     "related": true,
+     "kind": "formal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2, Eq. 1",
+     "quote": "Let pci be the fraction of A/B decisions choosing semantic A on item i in condition c, and Icd the items with at least one A/B decision in both conditions. For each of the three condition pairs, we report 1 X c 1 X c (pi − pdi ), Ucd = |pi − pdi |. (1) Dcd = |Icd | |Icd | i∈Icd",
+     "gloss": "D_cd = mean over items of p_i^c − p_i^d (net loss of reference agreement); U_cd = mean |p_i^c − p_i^d| (case-level choice change; used on dilemmas)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "agreement gain with Do (∆a)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.6",
+     "quote": "Table 17 reports ∆a = a(Say, Do) − a(Should, Do). A positive value means that Say agrees with Do more often than Should does on the same items and within the same display order.",
+     "gloss": "Tests whether the stated choice predicts the tool action better than the observer judgment does; a(c,d) is the agreement of repeat pairs within an order (Eq. 4)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "response configurations (all agree, only Should/Say/Do differs)",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. B.8",
+     "quote": "There are eight binary patterns in Should/Say/Do order. We group them into four mutually exclusive classes: all agree (AAA, BBB); only Should differs (ABB, BAA); only Say differs (ABA, BAB); and only Do differs (AAB, BBA).",
+     "gloss": "Classifies each Should/Say/Do triple by which condition, if any, departs from the other two."
+    },
+    {
+     "family": "faithfulness",
+     "term": "mismatch case (text frame vs. tool frame)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "A mismatch case selects the reference in both orders of the text frame but the alternative in both orders of the tool frame; a retention case selects the reference in both frames and orders.",
+     "gloss": "In the no-reasoning direct-choice task, a case where the lettered text answer picks the reference but the tool call picks the alternative, in both presentation orders."
+    },
+    {
+     "family": "faithfulness",
+     "term": "roles of stated moral considerations in rationales",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "Separate requests for Say and Do then classify each frozen consideration as load-bearing, backgrounded (mentioned without bearing on the choice), overridden (explicitly outweighed) or absent, with unclear reserved for distinctions the text does not support.",
+     "gloss": "Each moral consideration Qwen3.5-27B raised under Should is coded by its role in the Say and Do rationales; the coding describes generated text, not the computation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "load-bearing (consideration role)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.2",
+     "quote": "load_bearing: explicitly present and used to support the final decision.",
+     "gloss": "The consideration is stated and used to justify the choice."
+    },
+    {
+     "family": "faithfulness",
+     "term": "backgrounded (consideration role)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.2",
+     "quote": "backgrounded: explicitly present but only descriptive, without contributing to the final decision.",
+     "gloss": "The consideration is mentioned but does not support the choice: mentioning is distinguished from using."
+    },
+    {
+     "family": "faithfulness",
+     "term": "overridden (consideration role)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.2",
+     "quote": "overridden: explicitly present and explicitly given less weight than a competing reason. A different final choice alone does NOT establish this.",
+     "gloss": "The rationale acknowledges the consideration and explicitly outweighs it; requires quoted evidence of both the consideration and the outweighing."
+    },
+    {
+     "family": "faithfulness",
+     "term": "absent (consideration role)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.2",
+     "quote": "absent: the specific consideration is not expressed anywhere in the complete target reasoning or answer. This code does not claim it is absent from internal computation.",
+     "gloss": "Omission: a consideration raised under Should is not mentioned in the Say or Do rationale; says nothing about internal representation."
+    },
+    {
+     "family": "faithfulness",
+     "term": "rationale faithfulness (omitted influences)",
+     "related": true,
+     "kind": "failure-mode",
+     "stance": "adopted",
+     "source": "turpin2023language",
+     "where": "§2",
+     "quote": "Generated rationales can omit influences on the answer (Turpin et al., 2023), so our paired annotation describes expressed reasons while activation interventions test a separate computational question.",
+     "gloss": "Rationales may leave out what influenced the answer, so the paper treats its rationale coding as describing expressed reasons, not as a faithfulness measure."
+    },
+    {
+     "family": "monitorability",
+     "term": "test-related language (verbalized test recognition)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. D.2",
+     "quote": "Test-related language. The split in Appendix C.2 applies the following case-insensitive patterns to the concatenated reasoning and response text from every reply in an observation. Any match must begin at a word boundary; | denotes alternatives, and ? an optional group or character. The flag is a lexical proxy with unknown recall for implicit test recognition.",
+     "gloss": "Regex flag for phrases such as 'this is a test' or 'being tested' in reasoning and responses; found in 17.9%, 29.1% and 3.0% of Qwen3.5-27B Should, Say and Do observations."
+    }
+   ],
+   "fix": [],
+   "drop": [],
+   "note": "No prior rows. Say-do consistency benchmark: added the three conditions, D/U and agreement contrasts, mismatch cases, the rationale-role coding (the 'unclear' code is left out as residual), the adopted Turpin unfaithfulness notion, and a verbalized test-awareness flag."
+  },
+  {
+   "key": "senatorov2026structural",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "faithfulness (answer derived from the generated graph)",
+     "related": false,
+     "kind": "informal",
+     "stance": "proposed",
+     "source": "",
+     "where": "§6",
+     "quote": "Accuracy alone cannot distinguish a model that derives its answer from the generated graph from one that emits a plausible graph and answers by another route.",
+     "gloss": "Faithful = the emitted answer is derived from the generated computational graph, not reached by another route such as a memorized answer."
+    }
+   ],
+   "fix": [
+    {
+     "id": "senatorov2026structural#3",
+     "set": {
+      "quote": "We score each model twice: internally, by executing the generated graph and taking its final node, and externally, by reading the answer the model emits in its ANSWER field. A small gap $\\Delta$ between the two is necessary – though not sufficient – for the graph to be the source of the answer.",
+      "gloss": "Δ = absolute gap between internal (graph-executed) and external (emitted-answer) accuracy; a small Δ is necessary but not sufficient, correlational evidence that the graph produced the answer."
+     },
+     "reason": "Quote omitted how internal and external answers are scored."
+    },
+    {
+     "id": "senatorov2026structural#4",
+     "set": {
+      "kind": "operational",
+      "quote": "which treats the generated graph as a mediator $M$ with a deterministic executor $C(\\cdot)$ mapping any graph to the answer it implies. $F_{\\mathrm{ID}}$ asks whether the model’s answer matches $C(\\hat{M})$ for its own graph; $F_{\\mathrm{OOD}}$ asks whether, after editing the graph ( $\\hat{M}\\!\\rightarrow\\!M^{\\star}$ by some kind of structural edit – node or operation replacement) and re-prompting, the new answer should also match $C(M^{\\star})$ ; $F_{\\mathrm{strong}}$ requires both $F_{\\mathrm{ID}}$ and $F_{\\mathrm{OOD}}$ to be true.",
+      "gloss": "F_ID: answer = C(M̂) for the model's own graph; F_OOD: after a node or operation edit M̂→M*, the re-prompted answer = C(M*); F_strong requires both."
+     },
+     "reason": "Quote omitted the F_ID/F_OOD/F_strong conditions; these are evaluation metrics (percentages), so operational."
+    }
+   ],
+   "drop": [],
+   "note": "Added the paper's own graph-derivation notion of faithfulness; extended the agreement and intervention rows to include their operative conditions."
+  },
+  {
+   "key": "wang2026case",
+   "add": [
+    {
+     "family": "counterfactual",
+     "term": "counterfactual question (for CDE)",
+     "related": false,
+     "kind": "operational",
+     "stance": "adopted",
+     "source": "paul2024making",
+     "where": "App. A.11, Table S-XIV",
+     "quote": "You are a helpful assistant in generating counterfactual questions. We will provide you with a commonsense question, along with a correct answer and your task is to generate a counterfactual question that would yield a different answer.",
+     "gloss": "Counterfactual question = an LLM-edited question that should yield a different answer; used with the CoT held fixed to measure the direct Z→Y effect (CDE)."
+    },
+    {
+     "family": "faithfulness",
+     "term": "CoT-answer consistency rate (CAC)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.3",
+     "quote": "Second, we compute the CoT-answer consistency rate (CAC), which checks whether the generated answer can be inferred from the question and the generated CoT. Let $V_{\\mathrm{ans}}(z,x)$ denote the answer predicted by the independent LLM verifier when given the question $z$ and the CoT $x$ .",
+     "gloss": "Share of generated training pairs (original and counterfactual) where an independent verifier (GPT-5.5), given question and CoT, recovers the generated answer; a training-data audit."
+    },
+    {
+     "family": "faithfulness",
+     "term": "LLM-judge support rate (SR)",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "App. A.3",
+     "quote": "Third, we compute the LLM-judge support rate (SR), which checks whether the reasoning chain supports the predicted answer. Let $V_{\\mathrm{sup}}(z,x,y)\\in\\{\\mathrm{Yes},\\mathrm{No}\\}$ denote the LLM verifier’s judgment on whether CoT $x$ supports answer $y$ for question $z$ .",
+     "gloss": "Share of generated CoT-answer pairs that an LLM judge says the reasoning supports (Yes/No); used to audit training data, not to score models."
+    }
+   ],
+   "fix": [
+    {
+     "id": "wang2026case#1",
+     "set": {
+      "quote": "A CoT-based decision process is faithful if the instruction influences the final answer only through the generated CoT. Formally, the generation process factorizes as | | $p_{\\theta}(x,y\\mid z)=p_{\\theta}(x\\mid z)\\,p_{\\theta}(y\\mid x),$ | or equivalently, the answer mechanism satisfies | | $p_{\\theta}(y\\mid z,x)=p_{\\theta}(y\\mid x).$"
+     },
+     "reason": "Formal quote omitted the operative factorization."
+    },
+    {
+     "id": "wang2026case#3",
+     "set": {
+      "kind": "formal",
+      "quote": "$\\displaystyle\\max I(X;Y),$ | | | | $\\displaystyle\\max I(X;Y\\mid Z),$ | | | | $\\displaystyle\\min I(Y;Z\\mid X).$ | The first criterion requires the CoT to be predictive of the answer. The second requires the answer to remain dependent on the CoT even under the same instruction. These two criteria strengthen $X\\rightarrow Y$ . The third suppresses the residual direct shortcut from instruction to answer after conditioning on the CoT.",
+      "gloss": "Three information-theoretic faithfulness criteria: maximize I(X;Y) and I(X;Y|Z), minimize I(Y;Z|X); intractable, so surrogate losses and an attention mask are used."
+     },
+     "reason": "Criteria are stated as equations that the quote omitted; formal."
+    },
+    {
+     "id": "wang2026case#9",
+     "set": {
+      "quote": "After converting all metrics into the higher-is-better form, we define | | $\\text{G-mean}_{Faith}=\\sqrt[4]{FT\\times EA\\times CIE\\times(1-CDE)}.$"
+     },
+     "reason": "Quote omitted the defining formula."
+    }
+   ],
+   "drop": [],
+   "note": "Added the counterfactual-question notion used for CDE and the CAC/SR CoT-answer audit metrics; put equations into Def. 1, the information criteria and G-mean."
+  },
+  {
+   "key": "wiegreffe2019attention",
+   "add": [
+    {
+     "family": "faithfulness",
+     "term": "tests of attention as explanation",
+     "related": true,
+     "kind": "taxonomy",
+     "stance": "proposed",
+     "source": "",
+     "where": "Abstract",
+     "quote": "We propose four alternative tests to determine when/whether attention can be used as explanation: a simple uniform-weights baseline; a variance calibration based on multiple random seed runs; a diagnostic framework using frozen weights from pretrained models; and an end-to-end adversarial attention training protocol.",
+     "gloss": "Four tests of whether attention can serve as explanation: uniform baseline, seed-variance calibration, frozen-weight MLP diagnostic, model-consistent adversarial training."
+    },
+    {
+     "family": "faithfulness",
+     "term": "uniform-attention baseline (precondition for attention as explanation)",
+     "related": true,
+     "kind": "criterion",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.2",
+     "quote": "We argue that if attention models are not useful compared to very simple baselines, i.e. their parameter capacity is not being used, there is no point in using their outcomes for any type of explanation to begin with.",
+     "gloss": "Precondition: attention must beat a model with attention frozen to uniform weights before its weights are worth testing as explanation ('attention is not explanation if you don't need it')."
+    },
+    {
+     "family": "faithfulness",
+     "term": "random-seed variance baseline",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.3",
+     "quote": "The variance introduced in the attention distributions represents a baseline amount of variance that would be considered normal.",
+     "gloss": "Attention divergence between models retrained with different seeds calibrates how unusual adversarial divergences are."
+    },
+    {
+     "family": "faithfulness",
+     "term": "diagnostic MLP guided by attention weights",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§3.4",
+     "quote": "If pre-trained scores from an attention model perform well, we take this to mean they are helpful and consistent, fulfilling a certain sense of explainability. In addition, this setup serves as an effective diagnostic tool for assessing the utility of adversarial attention distributions: if such distributions are truly alternative, they should be equally useful as guides as their base equivalent, and thus perform comparably.",
+     "gloss": "Frozen attention weights guide a non-contextual MLP; good F1 means they encode model-agnostic token importance; truly alternative (adversarial) weights should perform comparably."
+    },
+    {
+     "family": "faithfulness",
+     "term": "TVD/JSD trade-off curve (test of 'attention is not explanation')",
+     "related": true,
+     "kind": "operational",
+     "stance": "proposed",
+     "source": "",
+     "where": "§4",
+     "quote": "When this interaction is plotted on a two-dimensional axis, the shape of the plot can be interpreted to either support the ‘attention is not explanation’ hypothesis if it is convex (JSD is easily manipulable), or oppose it if it is concave (early increase in JSD comes at a high cost in prediction precision).",
+     "gloss": "Decision rule over the adversary's λ sweep: a convex TVD/JSD curve supports 'attention is not explanation', a concave one opposes it."
+    },
+    {
+     "family": "faithfulness",
+     "term": "explanation as token responsibility",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "jain2019attention",
+     "where": "§5",
+     "quote": "Jain and Wallace define attention and explanation as measuring the “responsibility” each input token has on a prediction. This aligns more closely with the more rigorous (Lipton, 2016, §3.1.1) definition of transparency, or Rudin (2018)’s definition of interpretability: human understanding of the model as a whole rather than of its respective parts.",
+     "gloss": "Jain & Wallace's notion: an explanation measures how responsible each input token is for the prediction; the paper equates it with a stricter, whole-model notion of transparency."
+    },
+    {
+     "family": "faithfulness",
+     "term": "functionally-grounded evaluation (of explanations)",
+     "related": true,
+     "kind": "informal",
+     "stance": "adopted",
+     "source": "Doshi-Velez and Kim 2017",
+     "where": "§5",
+     "quote": "In the terminology of Doshi-Velez and Kim (2017), our proposed methods provide a functionally-grounded evaluation of attention as explanation, i.e. an analysis conducted on proxy tasks without human evaluation.",
+     "gloss": "Evaluation of explanations through proxy tasks without human evaluation; the paper's four tests are of this kind."
+    }
+   ],
+   "fix": [
+    {
+     "id": "wiegreffe2019attention#4",
+     "set": {
+      "kind": "formal",
+      "where": "§4",
+      "quote": "Given the base model $\\mathcal{M}_{\\text{b}}$ , we train a model $\\mathcal{M}_{\\text{a}}$ whose explicit goal is to provide similar prediction scores for each instance, while distancing its attention distributions from those of $\\mathcal{M}_{\\text{b}}$ . Formally, we train the adversarial model using stochastic gradient updates based on the following loss formula (summed over instances in the minibatch): | | $\\mathcal{L}(\\mathcal{M}_{a},\\mathcal{M}_{b})^{(i)}=\\TVD(\\hat{y}^{(i)}_{a},\\hat{y}^{(i)}_{b})-\\lambda\\penalty\\ \\KL(\\boldsymbol{\\alpha}^{\\textbf{(i)}}_{a}\\parallel\\boldsymbol{\\alpha}^{\\textbf{(i)}}_{b}),$",
+      "gloss": "One adversary trained across all instances to keep predictions close to the base model (low TVD) while pushing attention away (high KL); proposed as a by-construction test of faithful explainability."
+     },
+     "reason": "The defining content is the §4 loss; the §1 quote only motivated it. Formal with the equation."
+    },
+    {
+     "id": "wiegreffe2019attention#7",
+     "set": {
+      "source": "Lipton 2016"
+     },
+     "reason": "The quoted passage cites only Lipton (2016); Rudin is cited elsewhere."
+    }
+   ],
+   "drop": [],
+   "note": "Added the four tests (taxonomy plus each test), the TVD/JSD decision rule, Jain & Wallace's responsibility notion and functionally-grounded evaluation; made the adversary row formal with its loss."
+  }
+ ]
+}

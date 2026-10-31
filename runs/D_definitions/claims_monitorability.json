@@ -1,0 +1,2156 @@
+{
+ "claims": [
+  {
+   "n": 1,
+   "text": "The monitorability family holds 1,169 definition rows from 108 papers.",
+   "papers": [],
+   "evidence": [
+    "computed: 1169 rows, 108 distinct keys in dump"
+   ]
+  },
+  {
+   "n": 2,
+   "text": "By kind: 450 operational, 268 informal, 133 failure-mode, 119 criterion, 105 taxonomy, 94 formal; by stance: 787 proposed, 258 adopted, 124 adapted.",
+   "papers": [],
+   "evidence": [
+    "computed from dump: {\"criterion\": 119, \"taxonomy\": 105, \"operational\": 450, \"formal\": 94, \"informal\": 268, \"failure-mode\": 133} {\"proposed\": 787, \"adopted\": 258, \"adapted\": 124}"
+   ]
+  },
+  {
+   "n": 3,
+   "text": "The second pass over full texts raised the family from 328 rows in 82 papers: 327 of the earlier rows remain, one moved to the faithfulness family, and 842 rows are new.",
+   "papers": [
+    "joglekar2025training"
+   ],
+   "evidence": [
+    "previous synth_monitorability.json: 328 entries",
+    "327 still in family; joglekar2025training#1 now in faithfulness family",
+    "842 ids not in previous clusters"
+   ]
+  },
+  {
+   "n": 4,
+   "text": "127 rows, from 47 papers, define monitorability itself or a direct measure of it (123 of them name monitorability in the term); the other 1,042 define companion notions: monitors and their scores, failure modes, and the behaviors monitors look for (deception, scheming, reward hacking, evaluation awareness).",
+   "papers": [],
+   "evidence": [
+    "computed: related=false rows"
+   ]
+  },
+  {
+   "n": 5,
+   "text": "Two definitions compete.",
+   "papers": [
+    "anon2026chainofthought",
+    "anon2026reward",
+    "burger2026chain",
+    "emmons2025chain",
+    "kaufmann2026aligned",
+    "korbak2025chain",
+    "lewislim2026efficient",
+    "openai2026gpt6astra",
+    "yang2025investigating"
+   ],
+   "evidence": [
+    "computed: cluster sizes predictive and verbalization",
+    "papers in both: anon2026chainofthought, anon2026reward, burger2026chain, emmons2025chain, kaufmann2026aligned, korbak2025chain, lewislim2026efficient, openai2026gpt6astra, yang2025investigating"
+   ]
+  },
+  {
+   "n": 6,
+   "text": "42 rows from 24 papers make monitorability a monitor's ability to predict a property of the model's behavior, and 69 rows from 34 papers make it depend on the trace verbalizing what drove the answer; 9 papers have rows in both clusters.",
+   "papers": [
+    "anon2026chainofthought",
+    "anon2026reward",
+    "burger2026chain",
+    "emmons2025chain",
+    "kaufmann2026aligned",
+    "korbak2025chain",
+    "lewislim2026efficient",
+    "openai2026gpt6astra",
+    "yang2025investigating"
+   ],
+   "evidence": [
+    "computed: cluster sizes predictive and verbalization",
+    "papers in both: anon2026chainofthought, anon2026reward, burger2026chain, emmons2025chain, kaufmann2026aligned, korbak2025chain, lewislim2026efficient, openai2026gpt6astra, yang2025investigating"
+   ]
+  },
+  {
+   "n": 7,
+   "text": "The 18 clusters below place every row in exactly one cluster.",
+   "papers": [],
+   "evidence": [
+    "synth_monitorability.json: every id in exactly one cluster"
+   ]
+  },
+  {
+   "n": 8,
+   "text": "42 rows from 24 papers (24 informal, 13 criterion, 3 formal, 1 operational, 1 taxonomy; 21 proposed, 17 adopted, 4 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster predictive"
+   ]
+  },
+  {
+   "n": 9,
+   "text": "These rows make monitorability a relation among a model, a target property and a reader: a model is monitorable for a property to the degree that a monitor reading what the model exposes predicts that property.",
+   "papers": [
+    "guan2025monitoring",
+    "macdermott2025reasoning",
+    "anon2026implementation",
+    "openai2026gpt6astra",
+    "lewislim2026efficient"
+   ],
+   "evidence": [
+    "guan2025monitoring#1",
+    "macdermott2025reasoning#1",
+    "anon2026implementation#1",
+    "openai2026gpt6astra#2",
+    "lewislim2026efficient#6"
+   ]
+  },
+  {
+   "n": 10,
+   "text": "The reader is part of the definition: [Guan et al. 2025](./#p=guan2025monitoring) call monitorability \"a two-sided property\", [Algaba et al. 2026](./#p=algaba2026reasoning) \"a joint property of the display and the reader\", and [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought) \"a property of both the task model and monitor\".",
+   "papers": [
+    "guan2025monitoring",
+    "algaba2026reasoning",
+    "anon2026chainofthought"
+   ],
+   "evidence": [
+    "guan2025monitoring#1",
+    "algaba2026reasoning#1",
+    "anon2026chainofthought#13"
+   ]
+  },
+  {
+   "n": 11,
+   "text": "Seven rows from six papers set the definition against a requirement that the trace reproduce the computation: [Guan et al. 2025](./#p=guan2025monitoring) (\"does not require a model's externalized reasoning to faithfully reflect its internal reasoning process\"), [Baker et al. 2025](./#p=baker2025monitoring) (two rows, \"not faithfulness in isolation\" and \"causal CoTs ... are not a necessary condition for monitorability\"), [Korbak et al. 2025](./#p=korbak2025chain) (\"CoT does not need to completely represent the actual reasoning process\"), [MacDermott et al. 2025](./#p=macdermott2025reasoning), [Kaufmann et al. 2026](./#p=kaufmann2026aligned) and [Young 2026](./#p=young2026why).",
+   "papers": [
+    "guan2025monitoring",
+    "baker2025monitoring",
+    "korbak2025chain",
+    "macdermott2025reasoning",
+    "kaufmann2026aligned",
+    "young2026why"
+   ],
+   "evidence": [
+    "guan2025monitoring#2",
+    "baker2025monitoring#3",
+    "baker2025monitoring#9",
+    "korbak2025chain#17",
+    "macdermott2025reasoning#6",
+    "kaufmann2026aligned#2",
+    "young2026why#3"
+   ]
+  },
+  {
+   "n": 12,
+   "text": "The cluster also holds [Fareed 2026](./#p=fareed2026plan)'s premise of plan-based monitoring, \"that reading the plan tells an overseer which irreversible actions the model will take\", which the previous version filed under necessity and the independent audit placed here, since it defines usefulness to an overseer rather than necessity.",
+   "papers": [
+    "fareed2026plan"
+   ],
+   "evidence": [
+    "fareed2026plan#1",
+    "codex_review_1.md A: fareed2026plan#1 MINOR, predictive is the better cluster",
+    "previous synth_monitorability.json: fareed2026plan#1 in necessity"
+   ]
+  },
+  {
+   "n": 13,
+   "text": "[Anonymous 2026 (implementation)](./#p=anon2026implementation), Informal Def. 1: property $P$ of actor $A$ is monitorable on task distribution $D_t$ with respect to monitor $M$ if $P(A,t,\\pi)\\approx M(\\pi)$ with high probability over $t\\sim D_t$, $\\pi\\sim A(t)$.",
+   "papers": [
+    "anon2026implementation"
+   ],
+   "evidence": [
+    "anon2026implementation#1"
+   ]
+  },
+  {
+   "n": 14,
+   "text": "[Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing), Def. 3.6 and Props. 3.7 and 3.10: the uplift from reading the CoT $Z$ is $\\delta:=\\alpha_{\\text{CoT}}-\\alpha_{\\text{Prompt}}$, the accuracy gain of the Bayes-optimal CoT monitor over the Bayes-optimal prompt-only monitor; $0\\le\\delta\\le\\sqrt{2I(Y;Z\\mid X)}$, and $\\delta>0$ requires $I(O;Z\\mid X)>0$, where $O$ is the output.",
+   "papers": [
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "anwar2026analyzing#3",
+    "anwar2026analyzing#15",
+    "anwar2026analyzing#4"
+   ]
+  },
+  {
+   "n": 15,
+   "text": "69 rows from 34 papers (24 criterion, 14 operational, 14 informal, 8 formal, 5 failure-mode, 4 taxonomy; 51 proposed, 16 adopted, 2 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster verbalization"
+   ]
+  },
+  {
+   "n": 16,
+   "text": "These rows make monitorability depend on what the trace verbalizes: monitoring presupposes that the CoT states the factors and steps that produced the answer, and monitorability falls when it does not.",
+   "papers": [
+    "chen2025reasoning",
+    "bhupatiraju2026stated",
+    "shiromani2026necessary",
+    "skaf2025large",
+    "wang2026monitorbench"
+   ],
+   "evidence": [
+    "chen2025reasoning#5",
+    "bhupatiraju2026stated#1",
+    "shiromani2026necessary#1",
+    "skaf2025large#1",
+    "wang2026monitorbench#1"
+   ]
+  },
+  {
+   "n": 17,
+   "text": "They split on how much must be verbalized.",
+   "papers": [
+    "burger2026chain",
+    "kaufmann2026aligned",
+    "xiong2026monitorability",
+    "jia2026faithfulness"
+   ],
+   "evidence": [
+    "burger2026chain#4",
+    "kaufmann2026aligned#5",
+    "xiong2026monitorability#1",
+    "jia2026faithfulness#19"
+   ]
+  },
+  {
+   "n": 18,
+   "text": "[Bürger et al. 2026](./#p=burger2026chain) require only \"the key influential factors and reasoning steps that shaped the answer\" and [Kaufmann et al. 2026](./#p=kaufmann2026aligned) only \"the specific computations the monitor needs to detect\", while [Xiong et al. 2026](./#p=xiong2026monitorability) require traces that \"faithfully reflect the model’s internal decision-making path\" and [Jia et al. 2026](./#p=jia2026faithfulness) a trace that \"faithfully reflects the computation that produces the final answer\".",
+   "papers": [
+    "burger2026chain",
+    "kaufmann2026aligned",
+    "xiong2026monitorability",
+    "jia2026faithfulness"
+   ],
+   "evidence": [
+    "burger2026chain#4",
+    "kaufmann2026aligned#5",
+    "xiong2026monitorability#1",
+    "jia2026faithfulness#19"
+   ]
+  },
+  {
+   "n": 19,
+   "text": "Two rows score monitorability from verbalization rates rather than from a monitor's predictions: [Meek et al. 2025](./#p=meek2025measuring) average a cue-acknowledgment (faithfulness) rate and a verbosity rate, and [Occhipinti et al. 2026](./#p=occhipinti2026probing) count every trace where the hint's influence is visible.",
+   "papers": [
+    "meek2025measuring",
+    "occhipinti2026probing"
+   ],
+   "evidence": [
+    "meek2025measuring#3",
+    "occhipinti2026probing#7"
+   ]
+  },
+  {
+   "n": 20,
+   "text": "99 rows from 36 papers (59 operational, 35 formal, 4 criterion, 1 informal; 68 proposed, 19 adopted, 12 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster measurement"
+   ]
+  },
+  {
+   "n": 21,
+   "text": "These rows turn monitorability into a number: the agreement between a monitor's verdict $Z$ and a label $Y$ for the target property, summarized by g-mean², AUROC, binned MSE, recall at a fixed false-positive rate, or accuracy.",
+   "papers": [
+    "guan2025monitoring",
+    "ferreira2026outofsight",
+    "anon2026implementation",
+    "arike2026information",
+    "macdermott2025reasoning"
+   ],
+   "evidence": [
+    "guan2025monitoring#3",
+    "ferreira2026outofsight#2",
+    "anon2026implementation#8",
+    "arike2026information#8",
+    "macdermott2025reasoning#2"
+   ]
+  },
+  {
+   "n": 22,
+   "text": "For intervention evaluations, [Guan et al. 2025](./#p=guan2025monitoring) replace the true-positive rate by a minimal-criterion rate that credits the monitor only up to the share of positives the intervention must have caused, $R_{\\text{effect}}$, and six papers reuse that rate: [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought), [Anonymous 2026 (improving monitorability)](./#p=anon2026improving), [Anonymous 2026 (reward misspecification)](./#p=anon2026reward), [Lewis-Lim et al. 2026](./#p=lewislim2026efficient), [Wang et al. 2026](./#p=wang2026monitorbench) and [Xiong et al. 2026](./#p=xiong2026monitorability).",
+   "papers": [
+    "guan2025monitoring",
+    "anon2026chainofthought",
+    "anon2026improving",
+    "anon2026reward",
+    "lewislim2026efficient",
+    "wang2026monitorbench",
+    "xiong2026monitorability"
+   ],
+   "evidence": [
+    "guan2025monitoring#4",
+    "anon2026chainofthought#14",
+    "anon2026improving#3",
+    "anon2026reward#10",
+    "lewislim2026efficient#9",
+    "wang2026monitorbench#23",
+    "xiong2026monitorability#10"
+   ]
+  },
+  {
+   "n": 23,
+   "text": "[Anonymous 2026 (improving monitorability)](./#p=anon2026improving) prove (Theorem 1) that this rate is the upper end of the interval that the observed arms leave for causal recall, so it bounds causal recall from above and does not identify it; [Bürger et al. 2026](./#p=burger2026chain) keep the same form but put the CoT's articulation rate where the monitor's flag rate was.",
+   "papers": [
+    "anon2026improving",
+    "burger2026chain"
+   ],
+   "evidence": [
+    "anon2026improving#13",
+    "burger2026chain#6"
+   ]
+  },
+  {
+   "n": 24,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring): $\\text{g-mean}^2=\\mathrm{TPR}\\cdot\\mathrm{TNR}$; in the intervention setting $\\mathrm{TPR}_{\\mathrm{mc}}=\\min\\{1,\\Pr(Z=1\\mid X=1,Y=1)/R_{\\text{effect}}\\}$ with $R_{\\text{effect}}=\\mathrm{TE}/\\Pr(Y=1\\mid X=1)$, and $\\text{g-mean}^2=\\mathrm{TPR}_{\\mathrm{mc}}\\sqrt{\\mathrm{TNR}_{X=1}\\,\\mathrm{TNR}_{X=0}}$.",
+   "papers": [
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "guan2025monitoring#3",
+    "guan2025monitoring#4",
+    "guan2025monitoring#21"
+   ]
+  },
+  {
+   "n": 25,
+   "text": "[Anonymous 2026 (improving monitorability)](./#p=anon2026improving): causal recall $r_c:=\\Pr(Z(1)=1\\mid U=1)$ with $U:=\\mathbf{1}\\{Y(1)=1,Y(0)=0\\}$; with $R=(p_1-p_0)/p_1$, $\\max\\{0,(\\mathrm{TPR}_{ob}+R-1)/R\\}\\le r_c\\le\\min\\{1,\\mathrm{TPR}_{ob}/R\\}$.",
+   "papers": [
+    "anon2026improving"
+   ],
+   "evidence": [
+    "anon2026improving#2",
+    "anon2026improving#13"
+   ]
+  },
+  {
+   "n": 26,
+   "text": "[Bürger et al. 2026](./#p=burger2026chain): $M_0:=\\min(1,\\pi_Z/R)$ with $R=\\max(0,p_{11}-p_{01})/p_{11}$, where $\\pi_Z$ is the articulation rate; $M_1$ is the same score restricted to CoT-necessary answers.",
+   "papers": [
+    "burger2026chain"
+   ],
+   "evidence": [
+    "burger2026chain#6",
+    "burger2026chain#23",
+    "burger2026chain#25"
+   ]
+  },
+  {
+   "n": 27,
+   "text": "[Anonymous 2026 (implementation)](./#p=anon2026implementation): $\\hat\\mu:=s(M(\\pi),\\hat P(e(A),t_{\\hat P},\\pi))$, with the binned MSE $\\mathrm{BMSE}(X,Y)$ over non-empty bins of $Y$ as default $s$.",
+   "papers": [
+    "anon2026implementation"
+   ],
+   "evidence": [
+    "anon2026implementation#3",
+    "anon2026implementation#8"
+   ]
+  },
+  {
+   "n": 28,
+   "text": "[Hase & Potts 2026](./#p=hase2026counterfactual) use the unsquared $\\sqrt{\\mathrm{TPR}\\cdot\\mathrm{TNR}}$; [Yang et al. 2025](./#p=yang2025investigating) score false negatives $\\Pr(M=0\\mid Y_{\\text{cue}}=1)$ and false positives $\\Pr(M=1\\mid Y_{\\text{cue}}=0)$ against a causal label.",
+   "papers": [
+    "hase2026counterfactual",
+    "yang2025investigating"
+   ],
+   "evidence": [
+    "hase2026counterfactual#8",
+    "yang2025investigating#8"
+   ]
+  },
+  {
+   "n": 29,
+   "text": "84 rows from 22 papers (34 operational, 20 informal, 20 taxonomy, 5 criterion, 4 formal, 1 failure-mode; 47 proposed, 28 adopted, 9 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster evaldesign"
+   ]
+  },
+  {
+   "n": 30,
+   "text": "These rows define how an evaluation produces the label a monitor is scored against.",
+   "papers": [
+    "guan2025monitoring",
+    "anon2026chainofthought",
+    "burger2026chain",
+    "duzan2026chainofthought",
+    "openai2026gpt6astra",
+    "wang2026monitorbench"
+   ],
+   "evidence": [
+    "guan2025monitoring#5",
+    "anon2026chainofthought#7",
+    "burger2026chain#2",
+    "duzan2026chainofthought#3",
+    "openai2026gpt6astra#4",
+    "wang2026monitorbench#3"
+   ]
+  },
+  {
+   "n": 31,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) distinguish intervention, process and outcome-property archetypes, and five papers restate or rename them: [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought), [Bürger et al. 2026](./#p=burger2026chain) (\"monitorability types\"), [Duzan & Cooper Stickland 2026](./#p=duzan2026chainofthought), [OpenAI 2026](./#p=openai2026gpt6astra) and [Wang et al. 2026](./#p=wang2026monitorbench) (\"dimensions\").",
+   "papers": [
+    "guan2025monitoring",
+    "anon2026chainofthought",
+    "burger2026chain",
+    "duzan2026chainofthought",
+    "openai2026gpt6astra",
+    "wang2026monitorbench"
+   ],
+   "evidence": [
+    "guan2025monitoring#5",
+    "anon2026chainofthought#7",
+    "burger2026chain#2",
+    "duzan2026chainofthought#3",
+    "openai2026gpt6astra#4",
+    "wang2026monitorbench#3"
+   ]
+  },
+  {
+   "n": 32,
+   "text": "A second axis separates default from adversarial regimes: [Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic) measure \"default monitorability\", [OpenAI 2026](./#p=openai2026gpt6astra) splits non-adversarial from adversarial conditions, [Google DeepMind 2026](./#p=google2026gemini4argon) default from worst-case transparency, and [Duzan & Cooper Stickland 2026](./#p=duzan2026chainofthought) explicit from implicit influence.",
+   "papers": [
+    "emmons2025pragmatic",
+    "openai2026gpt6astra",
+    "google2026gemini4argon",
+    "duzan2026chainofthought"
+   ],
+   "evidence": [
+    "emmons2025pragmatic#9",
+    "openai2026gpt6astra#10",
+    "openai2026gpt6astra#11",
+    "google2026gemini4argon#2",
+    "duzan2026chainofthought#2"
+   ]
+  },
+  {
+   "n": 33,
+   "text": "[Anonymous 2026 (implementation)](./#p=anon2026implementation) separate monitorability from \"the procedures we use to estimate it\", note that evaluations score a proxy $\\hat P$ computed from side information hidden from the monitor, and call an evaluation untrustworthy when it is sensitive \"to implementation-level details which we do not expect to change evaluations\".",
+   "papers": [
+    "anon2026implementation"
+   ],
+   "evidence": [
+    "anon2026implementation#2",
+    "anon2026implementation#20",
+    "anon2026implementation#33"
+   ]
+  },
+  {
+   "n": 34,
+   "text": "64 rows from 29 papers (21 operational, 20 criterion, 9 informal, 9 failure-mode, 4 taxonomy, 1 formal; 43 proposed, 16 adopted, 5 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster necessity"
+   ]
+  },
+  {
+   "n": 35,
+   "text": "These rows ground monitorability in the CoT being needed: if a model cannot do a task without externalizing its reasoning, the reasoning has to appear in the trace.",
+   "papers": [
+    "emmons2025chain",
+    "korbak2025chain"
+   ],
+   "evidence": [
+    "emmons2025chain#2",
+    "korbak2025chain#2",
+    "korbak2025chain#3"
+   ]
+  },
+  {
+   "n": 36,
+   "text": "[Emmons et al. 2025 (necessity)](./#p=emmons2025chain) define necessity as \"the model cannot succeed without it\", and [Korbak et al. 2025](./#p=korbak2025chain) separate the necessity from the propensity to think out loud.",
+   "papers": [
+    "emmons2025chain",
+    "korbak2025chain"
+   ],
+   "evidence": [
+    "emmons2025chain#2",
+    "korbak2025chain#2",
+    "korbak2025chain#3"
+   ]
+  },
+  {
+   "n": 37,
+   "text": "Later rows grade the notion: [Bürger et al. 2026](./#p=burger2026chain) into levels 0, 1, 2 and 3.m, [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought) into \"CoT reliance\" (with-CoT minus no-CoT performance), and [Google DeepMind 2026](./#p=google2026gemini4argon) and [OpenAI 2026](./#p=openai2026gpt6astra) into no-CoT capability measures (serial depth, the NCRI index, a no-CoT math time horizon).",
+   "papers": [
+    "burger2026chain",
+    "anon2026chainofthought",
+    "google2026gemini4argon",
+    "openai2026gpt6astra"
+   ],
+   "evidence": [
+    "burger2026chain#3",
+    "anon2026chainofthought#5",
+    "google2026gemini4argon#42",
+    "google2026gemini4argon#43",
+    "openai2026gpt6astra#33"
+   ]
+  },
+  {
+   "n": 38,
+   "text": "The cluster also holds the failure side (latent-space reasoning, filler tokens, no-CoT ability) and [Fareed 2026](./#p=fareed2026plan)'s plan analogue, a plan \"with no causal effect\" detected by seed-invariance.",
+   "papers": [
+    "fareed2026plan"
+   ],
+   "evidence": [
+    "emmons2025chain#22",
+    "emmons2025chain#23",
+    "openai2026gpt6astra#8",
+    "fareed2026plan#2",
+    "fareed2026plan#4"
+   ]
+  },
+  {
+   "n": 39,
+   "text": "108 rows from 22 papers (36 operational, 27 informal, 14 failure-mode, 12 criterion, 11 taxonomy, 8 formal; 75 proposed, 19 adapted, 14 adopted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster legibility"
+   ]
+  },
+  {
+   "n": 40,
+   "text": "These rows ask whether a designated reader can follow, check or continue the trace, and they name four readers: a verifier that must accept correct and reject sneaky solutions ([Kirchner et al. 2024](./#p=kirchner2024proververifier)), a human with the prompter's language and expertise ([Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic)), a weaker model that continues or predicts the trace ([Jiao et al. 2026](./#p=jiao2026tandem), [Roytburg et al. 2026](./#p=roytburg2026measuring), [Sullivan & Koller 2026](./#p=sullivan2026language)), and the monitor itself ([Baker et al. 2025](./#p=baker2025monitoring)).",
+   "papers": [
+    "kirchner2024proververifier",
+    "emmons2025pragmatic",
+    "jiao2026tandem",
+    "roytburg2026measuring",
+    "sullivan2026language",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "kirchner2024proververifier#4",
+    "emmons2025pragmatic#4",
+    "jiao2026tandem#1",
+    "roytburg2026measuring#1",
+    "sullivan2026language#4",
+    "baker2025monitoring#4"
+   ]
+  },
+  {
+   "n": 41,
+   "text": "[Roytburg et al. 2026](./#p=roytburg2026measuring) state the split directly: \"Prior work defines legibility inconsistently.\"",
+   "papers": [
+    "roytburg2026measuring"
+   ],
+   "evidence": [
+    "roytburg2026measuring#3"
+   ]
+  },
+  {
+   "n": 42,
+   "text": "The failure side is illegibility under outcome-based RL: language drift ([Sullivan & Koller 2026](./#p=sullivan2026language), [MacDermott et al. 2025](./#p=macdermott2025reasoning)), compressed and vestigial reasoning ([Jose 2025](./#p=jose2025reasoning)), \"legibility collapse\" ([Guan et al. 2025](./#p=guan2025monitoring)) and non-standard dialect ([Schoen et al. 2025](./#p=schoen2025stress)).",
+   "papers": [
+    "sullivan2026language",
+    "macdermott2025reasoning",
+    "jose2025reasoning",
+    "guan2025monitoring",
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "sullivan2026language#1",
+    "macdermott2025reasoning#7",
+    "jose2025reasoning#5",
+    "jose2025reasoning#6",
+    "guan2025monitoring#9",
+    "schoen2025stress#2"
+   ]
+  },
+  {
+   "n": 43,
+   "text": "84 rows from 22 papers (28 operational, 23 failure-mode, 15 informal, 9 criterion, 5 taxonomy, 4 formal; 59 proposed, 19 adopted, 6 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster encoded"
+   ]
+  },
+  {
+   "n": 44,
+   "text": "These rows define information that the trace carries and a reader cannot read.",
+   "papers": [
+    "lanham2023measuring",
+    "schulz2026monitor",
+    "skaf2025large"
+   ],
+   "evidence": [
+    "lanham2023measuring#5",
+    "schulz2026monitor#5",
+    "skaf2025large#2"
+   ]
+  },
+  {
+   "n": 45,
+   "text": "They differ on the reader: [Lanham et al. 2023](./#p=lanham2023measuring) define encoded reasoning as \"not understandable to human readers\" and [Schulz 2026](./#p=schulz2026monitor) requires that it be \"hidden from humans\", while [Skaf et al. 2025](./#p=skaf2025large) define steganography as information \"hidden to an external monitor\".",
+   "papers": [
+    "lanham2023measuring",
+    "schulz2026monitor",
+    "skaf2025large"
+   ],
+   "evidence": [
+    "lanham2023measuring#5",
+    "schulz2026monitor#5",
+    "skaf2025large#2"
+   ]
+  },
+  {
+   "n": 46,
+   "text": "[Mathew et al. 2024](./#p=mathew2025hidden) and [Zhou & May 2026](./#p=zhou2026conceptual) frame steganography as a game between a colluding sender and receiver and an overseer or paraphrasing defender, measured by bypass rates, decode accuracy and channel capacity; [Roger & Greenblatt 2023](./#p=roger2023preventing) and [Roger 2025](./#p=anthropic2025paraphrases) define paraphrasing tests for whether a model relies on encoded reasoning.",
+   "papers": [
+    "mathew2025hidden",
+    "zhou2026conceptual",
+    "roger2023preventing",
+    "anthropic2025paraphrases"
+   ],
+   "evidence": [
+    "mathew2025hidden#2",
+    "mathew2025hidden#4",
+    "mathew2025hidden#5",
+    "zhou2026conceptual#6",
+    "roger2023preventing#4",
+    "roger2023preventing#7",
+    "anthropic2025paraphrases#2"
+   ]
+  },
+  {
+   "n": 47,
+   "text": "95 rows from 33 papers (41 failure-mode, 13 operational, 12 taxonomy, 11 formal, 10 informal, 8 criterion; 64 proposed, 20 adopted, 11 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster obfuscation"
+   ]
+  },
+  {
+   "n": 48,
+   "text": "These rows define the case in which the evidence of a behavior leaves the trace while the behavior continues.",
+   "papers": [
+    "baker2025monitoring",
+    "drori2025output",
+    "kaufmann2026aligned",
+    "taufeeque2026obfuscation"
+   ],
+   "evidence": [
+    "baker2025monitoring#6",
+    "drori2025output#2",
+    "drori2025output#5",
+    "kaufmann2026aligned#11",
+    "taufeeque2026obfuscation#2",
+    "taufeeque2026obfuscation#3"
+   ]
+  },
+  {
+   "n": 49,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) named it for training against a CoT monitor (\"obfuscated reward hacking\"); [Drori et al. 2025](./#p=drori2025output) show that penalties on the output alone can produce it (\"feedback spillover\"); [Kaufmann et al. 2026](./#p=kaufmann2026aligned) predict it from reward pairs that are \"in-conflict\"; and [Taufeeque et al. 2026](./#p=taufeeque2026obfuscation) split it into obfuscated policies and obfuscated activations when the monitor is a probe.",
+   "papers": [
+    "baker2025monitoring",
+    "drori2025output",
+    "kaufmann2026aligned",
+    "taufeeque2026obfuscation"
+   ],
+   "evidence": [
+    "baker2025monitoring#6",
+    "drori2025output#2",
+    "drori2025output#5",
+    "kaufmann2026aligned#11",
+    "taufeeque2026obfuscation#2",
+    "taufeeque2026obfuscation#3"
+   ]
+  },
+  {
+   "n": 50,
+   "text": "The rows disagree on whether omitting the evidence counts as obfuscation and on whether obfuscation is intentional (see Tensions).",
+   "papers": [
+    "wang2026monitorbench",
+    "schulz2026monitor",
+    "anwar2026analyzing",
+    "mao2026taming",
+    "haskins2026training"
+   ],
+   "evidence": [
+    "wang2026monitorbench#33",
+    "schulz2026monitor#7",
+    "anwar2026analyzing#7",
+    "mao2026taming#1",
+    "haskins2026training#5"
+   ]
+  },
+  {
+   "n": 51,
+   "text": "81 rows from 21 papers (38 operational, 20 failure-mode, 13 taxonomy, 6 informal, 4 criterion; 60 proposed, 12 adopted, 9 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster evasion"
+   ]
+  },
+  {
+   "n": 52,
+   "text": "These rows define what it takes for a model or attacker to defeat a monitor: stress tests in which an actor tries to finish a side task while avoiding detection, the strategies that succeed (jailbreaking the monitor, burying evidence, reframing, camouflage, collusion between a monitor and the agent), and the rates that score them.",
+   "papers": [
+    "emmons2025chain",
+    "schulz2026monitor",
+    "lee2026training",
+    "xiao2026bootstrapped",
+    "openai2026gpt6astra"
+   ],
+   "evidence": [
+    "emmons2025chain#15",
+    "schulz2026monitor#6",
+    "lee2026training#11",
+    "xiao2026bootstrapped#3",
+    "openai2026gpt6astra#25"
+   ]
+  },
+  {
+   "n": 53,
+   "text": "CoT controllability, \"a reasoning model’s ability to control properties of its CoT\" ([OpenAI 2026](./#p=openai2026gpt6astra)), is measured by [OpenAI 2026](./#p=openai2026gpt6astra), [Anthropic 2026](./#p=anthropic2026opus55) and [Google DeepMind 2026](./#p=google2026gemini4argon) as a capability that bears on evasion, and [Haskins et al. 2026](./#p=haskins2026training) report it \"closely correlated with obfuscation success across the eight models studied\".",
+   "papers": [
+    "openai2026gpt6astra",
+    "anthropic2026opus55",
+    "google2026gemini4argon",
+    "haskins2026training"
+   ],
+   "evidence": [
+    "openai2026gpt6astra#5",
+    "anthropic2026opus55#3",
+    "google2026gemini4argon#8",
+    "haskins2026training#7"
+   ]
+  },
+  {
+   "n": 54,
+   "text": "138 rows from 46 papers (54 informal, 46 operational, 17 taxonomy, 14 formal, 7 criterion; 99 proposed, 26 adopted, 13 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster monitors"
+   ]
+  },
+  {
+   "n": 55,
+   "text": "These rows define the reader: an automated system, usually an LLM and sometimes a probe, a regex or the monitored policy itself, that reads the trace and other observations and flags misbehavior; its scope (CoT-only, action-only, all messages, activations); and the protocol it sits in (trusted, untrusted, bootstrapped, training-time).",
+   "papers": [
+    "korbak2025chain",
+    "skaf2025large",
+    "anwar2026analyzing",
+    "guan2025monitoring",
+    "xiao2026bootstrapped",
+    "anthropic2026opus55"
+   ],
+   "evidence": [
+    "korbak2025chain#1",
+    "skaf2025large#9",
+    "anwar2026analyzing#20",
+    "guan2025monitoring#6",
+    "xiao2026bootstrapped#2",
+    "anthropic2026opus55#40"
+   ]
+  },
+  {
+   "n": 56,
+   "text": "8 rows in this cluster cite [Korbak et al. 2025](./#p=korbak2025chain) and 9 cite [Baker et al. 2025](./#p=baker2025monitoring).",
+   "papers": [
+    "korbak2025chain",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "computed: rows in cluster monitors citing korbak2025chain = 8, baker2025monitoring = 9"
+   ]
+  },
+  {
+   "n": 57,
+   "text": "45 rows from 28 papers (41 operational, 3 criterion, 1 taxonomy; 36 proposed, 6 adapted, 3 adopted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster rubrics"
+   ]
+  },
+  {
+   "n": 58,
+   "text": "These rows are the prompts and rules that turn a monitor's reading into a verdict.",
+   "papers": [
+    "lewislim2026efficient",
+    "chidambaram2026corrupted",
+    "guan2025monitoring",
+    "li2026monitorability",
+    "emmons2025chain",
+    "li2026spilling",
+    "shiromani2026false"
+   ],
+   "evidence": [
+    "lewislim2026efficient#10",
+    "chidambaram2026corrupted#18",
+    "guan2025monitoring#38",
+    "li2026monitorability#8",
+    "emmons2025chain#18",
+    "li2026spilling#2",
+    "shiromani2026false#7"
+   ]
+  },
+  {
+   "n": 59,
+   "text": "They fix what counts as positive (a cue that \"meaningfully influenced\" the answer, a goal \"clearly not intended by the human user\", committed action rather than \"mere contemplation\"), the scale (binary, 0 to 10, 1 to 10, 0 to 100, 0 to 1) and the threshold.",
+   "papers": [
+    "lewislim2026efficient",
+    "chidambaram2026corrupted",
+    "guan2025monitoring",
+    "li2026monitorability",
+    "emmons2025chain",
+    "li2026spilling",
+    "shiromani2026false"
+   ],
+   "evidence": [
+    "lewislim2026efficient#10",
+    "chidambaram2026corrupted#18",
+    "guan2025monitoring#38",
+    "li2026monitorability#8",
+    "emmons2025chain#18",
+    "li2026spilling#2",
+    "shiromani2026false#7"
+   ]
+  },
+  {
+   "n": 60,
+   "text": "32 rows from 8 papers (13 failure-mode, 9 operational, 4 informal, 3 taxonomy, 2 formal, 1 criterion; 31 proposed, 1 adopted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster monitorfail"
+   ]
+  },
+  {
+   "n": 61,
+   "text": "These rows place the failure in the monitor rather than in the trace: monitors that degenerate to surface correlations ([Guan et al. 2025](./#p=guan2025monitoring), with nine hand-labeled classes to test for it), monitors that do better with less information ([Arike et al. 2026](./#p=arike2026information)'s \"less-is-more effect\"), monitors that over-flag deliberation or rationalize cue use ([Yang et al. 2025](./#p=yang2025investigating)), and the information gap and elicitation error by which a practical monitor falls short of the Bayes-optimal one ([Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing)).",
+   "papers": [
+    "guan2025monitoring",
+    "arike2026information",
+    "yang2025investigating",
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "guan2025monitoring#45",
+    "guan2025monitoring#49",
+    "arike2026information#3",
+    "yang2025investigating#16",
+    "yang2025investigating#17",
+    "anwar2026analyzing#18",
+    "anwar2026analyzing#19"
+   ]
+  },
+  {
+   "n": 62,
+   "text": "[Yang et al. 2025](./#p=yang2025investigating) state the point as \"a gap between being monitorable and being monitored correctly\".",
+   "papers": [
+    "yang2025investigating"
+   ],
+   "evidence": [
+    "yang2025investigating#20"
+   ]
+  },
+  {
+   "n": 63,
+   "text": "25 rows from 10 papers (16 operational, 4 informal, 2 failure-mode, 2 taxonomy, 1 criterion; 22 proposed, 3 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster selfreport"
+   ]
+  },
+  {
+   "n": 64,
+   "text": "These rows make the model's own reports, or the agreement between what it says and what it does, an oversight channel.",
+   "papers": [
+    "lee2026training",
+    "golchin2026monitorability",
+    "joglekar2025training"
+   ],
+   "evidence": [
+    "lee2026training#3",
+    "golchin2026monitorability#1",
+    "joglekar2025training#3"
+   ]
+  },
+  {
+   "n": 65,
+   "text": "[Lee et al. 2026](./#p=lee2026training) train \"a robust propensity to report misbehavior when it is committed\", [Golchin & Wetter 2026](./#p=golchin2026monitorability) define \"a model’s willingness to make itself monitorable\", and [Joglekar et al. 2025](./#p=joglekar2025training) treat a confessing model as a monitor with \"access not only to the chain-of-thought but also to the exact internal activations of the actor model\".",
+   "papers": [
+    "lee2026training",
+    "golchin2026monitorability",
+    "joglekar2025training"
+   ],
+   "evidence": [
+    "lee2026training#3",
+    "golchin2026monitorability#1",
+    "joglekar2025training#3"
+   ]
+  },
+  {
+   "n": 66,
+   "text": "[Shiromani & Richter 2026](./#p=shiromani2026false) and [Lin et al. 2025](./#p=lin2025clarity) define monitors that check the narration or reasoning against the actions or the answer.",
+   "papers": [
+    "shiromani2026false",
+    "lin2025clarity"
+   ],
+   "evidence": [
+    "shiromani2026false#17",
+    "lin2025clarity#10",
+    "faithfulness family rows anon2026measuring#1, anon2026what#4, joglekar2025training#1"
+   ]
+  },
+  {
+   "n": 67,
+   "text": "The say-do and confession definitions that are framed as properties of self-explanation are in the [Faithfulness](#faithfulness) section; the 25 rows here are those framed as monitoring.",
+   "papers": [
+    "shiromani2026false",
+    "lin2025clarity"
+   ],
+   "evidence": [
+    "shiromani2026false#17",
+    "lin2025clarity#10",
+    "faithfulness family rows anon2026measuring#1, anon2026what#4, joglekar2025training#1"
+   ]
+  },
+  {
+   "n": 68,
+   "text": "26 rows from 10 papers (14 operational, 9 informal, 1 failure-mode, 1 taxonomy, 1 formal; 18 proposed, 6 adopted, 2 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster honesty"
+   ]
+  },
+  {
+   "n": 69,
+   "text": "These rows define deception as the monitored property and the detectors aimed at it: deception as \"behavior that induces false beliefs\" ([Bu et al. 2026](./#p=bu2026spadebench)), lie detection as classifying which responses \"are dishonest\" ([Wang et al. 2025 (lie detection)](./#p=wang2025evaluating)), white-box deception probes and honesty adapters ([Taufeeque et al. 2026](./#p=taufeeque2026obfuscation), [Anonymous 2026 (honesty adapters)](./#p=anon2026traininghonesty)), and labels for deceptive transcripts.",
+   "papers": [
+    "bu2026spadebench",
+    "wang2025evaluating",
+    "taufeeque2026obfuscation",
+    "anon2026traininghonesty"
+   ],
+   "evidence": [
+    "bu2026spadebench#5",
+    "wang2025evaluating#18",
+    "taufeeque2026obfuscation#13",
+    "anon2026traininghonesty#4",
+    "anon2026traininghonesty#2"
+   ]
+  },
+  {
+   "n": 70,
+   "text": "None of the 26 rows defines honesty itself; honesty enters as the reference behavior (\"The honest reference\", \"an objective that conflicts with honesty\"), and the definitions of honesty (MASK honesty, honest reporting) are in the [Faithfulness](#faithfulness) section.",
+   "papers": [
+    "anon2026improving",
+    "wang2026monitorbench"
+   ],
+   "evidence": [
+    "anon2026improving#24",
+    "wang2026monitorbench#16",
+    "faithfulness family rows anthropic2026opus55#10, chang2026catalyzing#9, dietz2026split#7"
+   ]
+  },
+  {
+   "n": 71,
+   "text": "90 rows from 33 papers (42 operational, 39 informal, 4 criterion, 4 taxonomy, 1 failure-mode; 41 proposed, 35 adopted, 14 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster scheming"
+   ]
+  },
+  {
+   "n": 72,
+   "text": "These rows define the covert misbehaviors monitors are built to catch: scheming, covert actions, sabotage and side tasks, sandbagging, alignment faking, and the stealth needed to carry them out.",
+   "papers": [
+    "schoen2025stress",
+    "google2026gemini4argon",
+    "lee2026training",
+    "openai2026gpt6astra",
+    "jose2026strategic"
+   ],
+   "evidence": [
+    "schoen2025stress#5",
+    "schoen2025stress#6",
+    "google2026gemini4argon#13",
+    "lee2026training#4",
+    "openai2026gpt6astra#29",
+    "jose2026strategic#6"
+   ]
+  },
+  {
+   "n": 73,
+   "text": "[Schoen et al. 2025](./#p=schoen2025stress) define scheming and covert actions and state that \"the definition of covert actions does not rely on intent on the AI system’s part\", in contrast to deception; the definitions of scheming itself differ across papers (see Tensions).",
+   "papers": [
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "schoen2025stress#5",
+    "schoen2025stress#6",
+    "schoen2025stress#7"
+   ]
+  },
+  {
+   "n": 74,
+   "text": "47 rows from 28 papers (18 operational, 18 informal, 4 taxonomy, 3 failure-mode, 2 criterion, 2 formal; 28 proposed, 12 adopted, 7 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster rewardhack"
+   ]
+  },
+  {
+   "n": 75,
+   "text": "These rows define reward hacking: exploiting \"flaws or misspecifications in learning objectives\" ([Baker et al. 2025](./#p=baker2025monitoring)), achieving high reward \"in a way the system designer would not want if they understood\" ([Farquhar et al. 2025](./#p=farquhar2025mona)), and operational labels such as passing visible tests while failing held-out ones ([Zhou & Tao 2026](./#p=zhou2026nearzero)) or a misspecified reward exceeding the true reward ([Anonymous 2026 (reward misspecification)](./#p=anon2026reward)).",
+   "papers": [
+    "baker2025monitoring",
+    "farquhar2025mona",
+    "zhou2026nearzero",
+    "anon2026reward"
+   ],
+   "evidence": [
+    "baker2025monitoring#17",
+    "farquhar2025mona#3",
+    "zhou2026nearzero#12",
+    "anon2026reward#8"
+   ]
+  },
+  {
+   "n": 76,
+   "text": "31 rows from 9 papers (19 operational, 6 informal, 3 taxonomy, 2 criterion, 1 formal; 20 proposed, 10 adopted, 1 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster awareness"
+   ]
+  },
+  {
+   "n": 77,
+   "text": "These rows define a model's recognition that it is being evaluated, graded or monitored; 12 rows from 6 papers put \"verbalized\" in the term itself, and the classifier of [Schoen et al. 2025](./#p=schoen2025stress) \"only counts reasoning that explicitly considers being evaluated for alignment\".",
+   "papers": [
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "schoen2025stress#23",
+    "computed: awareness rows with verbalized in term = 12 from anon2026should, anthropic2026opus55, anwar2026training, google2026gemini4argon, openai2026gpt6astra, schoen2025stress"
+   ]
+  },
+  {
+   "n": 78,
+   "text": "[Anwar et al. 2026 (evaluation awareness)](./#p=anwar2026training) separate the latent belief $b(c)$ from its verbalization $v(z)$, [Anthropic 2026](./#p=anthropic2026opus55) reads awareness from internals when it is not verbalized, and [OpenAI 2026](./#p=openai2026gpt6astra) separates verbalized metagaming from \"oversight gaming\", which is metagaming that the model acts on.",
+   "papers": [
+    "anwar2026training",
+    "anthropic2026opus55",
+    "openai2026gpt6astra"
+   ],
+   "evidence": [
+    "anwar2026training#4",
+    "anthropic2026opus55#20",
+    "openai2026gpt6astra#35",
+    "openai2026gpt6astra#36"
+   ]
+  },
+  {
+   "n": 79,
+   "text": "9 rows from 9 papers (8 informal, 1 operational; 4 proposed, 4 adopted, 1 adapted).",
+   "papers": [],
+   "evidence": [
+    "computed: cluster tax"
+   ]
+  },
+  {
+   "n": 80,
+   "text": "These rows name the cost of keeping a model monitorable or legible, and the payer and the unit change from paper to paper.",
+   "papers": [
+    "guan2025monitoring",
+    "baker2025monitoring",
+    "kirchner2024proververifier",
+    "google2026gemini4argon",
+    "li2026monitorability",
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "guan2025monitoring#7",
+    "baker2025monitoring#7",
+    "kirchner2024proververifier#7",
+    "google2026gemini4argon#11",
+    "li2026monitorability#4",
+    "anwar2026analyzing#36"
+   ]
+  },
+  {
+   "n": 81,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) measure the capability lost by switching to a smaller model at the same compute; [Baker et al. 2025](./#p=baker2025monitoring) describe costs that \"frontier model developers may be required to pay\"; [Kirchner et al. 2024](./#p=kirchner2024proververifier) report the test performance lost to legibility training; [Google DeepMind 2026](./#p=google2026gemini4argon) names a \"capability tax\" that evasion imposes on the model; [Li 2026](./#p=li2026monitorability) calls the oversight cost of compressing the CoT \"a mechanism-dependent tax\"; and [Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) measure an alignment tax of the MI reward.",
+   "papers": [
+    "guan2025monitoring",
+    "baker2025monitoring",
+    "kirchner2024proververifier",
+    "google2026gemini4argon",
+    "li2026monitorability",
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "guan2025monitoring#7",
+    "baker2025monitoring#7",
+    "kirchner2024proververifier#7",
+    "google2026gemini4argon#11",
+    "li2026monitorability#4",
+    "anwar2026analyzing#36"
+   ]
+  },
+  {
+   "n": 82,
+   "text": "382 of the 1,169 rows (33%), from 88 papers, name at least one source for their definition.",
+   "papers": [],
+   "evidence": [
+    "computed from source field of dump"
+   ]
+  },
+  {
+   "n": 83,
+   "text": "They cite 179 distinct sources: 33 are papers in the map, cited 281 times, and 146 are outside it, cited 254 times.",
+   "papers": [],
+   "evidence": [
+    "computed from source field of dump"
+   ]
+  },
+  {
+   "n": 84,
+   "text": "288 rows cite one source and 94 cite two or more.",
+   "papers": [],
+   "evidence": [
+    "computed from source field of dump"
+   ]
+  },
+  {
+   "n": 85,
+   "text": "Four papers in the map supply 182 of the 535 row-source citations, and they are borrowed for different things.",
+   "papers": [
+    "guan2025monitoring",
+    "baker2025monitoring",
+    "korbak2025chain",
+    "emmons2025chain"
+   ],
+   "evidence": [
+    "computed from source field and cluster assignment"
+   ]
+  },
+  {
+   "n": 86,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) is cited for its apparatus: 31 of its 74 citing rows are in the evaluation-design cluster and 24 in the metrics cluster.",
+   "papers": [
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "computed from source field and cluster assignment"
+   ]
+  },
+  {
+   "n": 87,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) is cited for concepts and reaches the most papers (39): 17 of its 51 citing rows are in the obfuscation cluster.",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "computed from source field and cluster assignment"
+   ]
+  },
+  {
+   "n": 88,
+   "text": "[Korbak et al. 2025](./#p=korbak2025chain) (29 rows, 27 papers) is cited across monitors, verbalization and predictive rows, and [Emmons et al. 2025 (necessity)](./#p=emmons2025chain) (28 rows, 17 papers) for necessity (12 rows).",
+   "papers": [
+    "korbak2025chain",
+    "emmons2025chain"
+   ],
+   "evidence": [
+    "computed from source field and cluster assignment"
+   ]
+  },
+  {
+   "n": 89,
+   "text": "Baker et al.'s definition travels in two directions.",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "anon2026chainofthought#3",
+    "anon2026crisp#28",
+    "anon2026one#2",
+    "anon2026reward#1",
+    "emmons2025chain#1",
+    "emmons2025pragmatic#2",
+    "guan2025monitoring#25",
+    "gurarieh2026faithfulness#9",
+    "haskins2026training#1",
+    "kaufmann2026aligned#2",
+    "little2026length#2",
+    "occhipinti2026probing#6",
+    "reddy2025principled#1",
+    "wang2026monitorbench#1",
+    "xiong2026monitorability#1",
+    "yang2025investigating#1"
+   ]
+  },
+  {
+   "n": 90,
+   "text": "7 rows in the predictive cluster cite it for prediction of a property ([Kaufmann et al. 2026](./#p=kaufmann2026aligned): \"independent of the model’s “true reasoning process”\"), and 9 rows in the verbalization cluster cite it for a faithfulness requirement ([Occhipinti et al. 2026](./#p=occhipinti2026probing): \"Faithfulness is a prerequisite for CoT monitorability\"; [Xiong et al. 2026](./#p=xiong2026monitorability): \"faithfully reflect the model’s internal decision-making path\").",
+   "papers": [
+    "kaufmann2026aligned",
+    "occhipinti2026probing",
+    "xiong2026monitorability"
+   ],
+   "evidence": [
+    "anon2026chainofthought#3",
+    "anon2026crisp#28",
+    "anon2026one#2",
+    "anon2026reward#1",
+    "emmons2025chain#1",
+    "emmons2025pragmatic#2",
+    "guan2025monitoring#25",
+    "gurarieh2026faithfulness#9",
+    "haskins2026training#1",
+    "kaufmann2026aligned#2",
+    "little2026length#2",
+    "occhipinti2026probing#6",
+    "reddy2025principled#1",
+    "wang2026monitorbench#1",
+    "xiong2026monitorability#1",
+    "yang2025investigating#1"
+   ]
+  },
+  {
+   "n": 91,
+   "text": "The attribution check marks 13 of these 16 restatements supported, 1 adapted and 2 partial, because Baker's text holds both readings: monitorability is \"the ability to monitor for specific properties of agents actions or outputs (monitorability), and not faithfulness in isolation\", and \"If a monitor $M$ can accurately predict property $v$ from latent $z$, then $z$ must be faithful with respect to $v$ and legible to $M$\".",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "baker2025monitoring#3",
+    "attr haskins2026training#1 <- baker2025monitoring source_evidence: \"If a monitor $M$ can accurately predict property $v$ from latent $z$ , then $z$ must be faithful with respect to $v$ and legible to $M$\""
+   ]
+  },
+  {
+   "n": 92,
+   "text": "The two partial verdicts are the restatements that extend faithfulness from the monitored property to the whole reasoning process: [Xiong et al. 2026](./#p=xiong2026monitorability) and [Reddy et al. 2025](./#p=reddy2025principled) (\"the ability to inspect and evaluate a model’s internal reasoning process\").",
+   "papers": [
+    "xiong2026monitorability",
+    "reddy2025principled"
+   ],
+   "evidence": [
+    "attr xiong2026monitorability#1 <- baker2025monitoring: partial",
+    "attr reddy2025principled#1 <- baker2025monitoring: partial"
+   ]
+  },
+  {
+   "n": 93,
+   "text": "Guan et al.'s definition changes in smaller steps.",
+   "papers": [
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "burger2026chain#1",
+    "anon2026improving#1",
+    "lewislim2026efficient#6",
+    "openai2026gpt6astra#2",
+    "li2026monitorability#2",
+    "attr li2026monitorability#2 <- guan2025monitoring: partial"
+   ]
+  },
+  {
+   "n": 94,
+   "text": "[Bürger et al. 2026](./#p=burger2026chain) quote it verbatim; [Anonymous 2026 (improving monitorability)](./#p=anon2026improving) widen the reader to \"the monitoring setup\"; [Lewis-Lim et al. 2026](./#p=lewislim2026efficient) and [OpenAI 2026](./#p=openai2026gpt6astra) replace \"predict\" with \"recovered\" and \"infer\"; and [Li 2026](./#p=li2026monitorability) adds that \"monitorability is fragile under scaling and training pressure\", which the check marks partial because Guan et al. report that \"RL optimization does not materially decrease monitorability even at the current frontier scale\".",
+   "papers": [
+    "guan2025monitoring",
+    "burger2026chain",
+    "anon2026improving",
+    "lewislim2026efficient",
+    "openai2026gpt6astra",
+    "li2026monitorability"
+   ],
+   "evidence": [
+    "burger2026chain#1",
+    "anon2026improving#1",
+    "lewislim2026efficient#6",
+    "openai2026gpt6astra#2",
+    "li2026monitorability#2",
+    "attr li2026monitorability#2 <- guan2025monitoring: partial"
+   ]
+  },
+  {
+   "n": 95,
+   "text": "Its archetypes are renamed in five checked rows: [Bürger et al. 2026](./#p=burger2026chain) call them \"monitorability types\" and the intervention archetype \"influence\", [Wang et al. 2026](./#p=wang2026monitorbench) turn intervention and process into the axes \"input intervention\" and \"solution process\", and [Xiong et al. 2026](./#p=xiong2026monitorability)'s \"Grader Hacking Hint\" is the category Guan et al. call reward hacking.",
+   "papers": [
+    "burger2026chain",
+    "wang2026monitorbench",
+    "xiong2026monitorability",
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "attr renamed: burger2026chain#2, burger2026chain#10, wang2026monitorbench#10, wang2026monitorbench#12, xiong2026monitorability#13"
+   ]
+  },
+  {
+   "n": 96,
+   "text": "No row extracted from [Korbak et al. 2025](./#p=korbak2025chain) defines monitorability itself: its 21 rows define the CoT monitor, the necessity and the propensity to think out loud, the externalized reasoning property, evaluations of and threats to monitorability, and state that \"CoT does not need to completely represent the actual reasoning process\".",
+   "papers": [
+    "korbak2025chain"
+   ],
+   "evidence": [
+    "korbak2025chain#1",
+    "korbak2025chain#2",
+    "korbak2025chain#3",
+    "korbak2025chain#4",
+    "korbak2025chain#6",
+    "korbak2025chain#13",
+    "korbak2025chain#17"
+   ]
+  },
+  {
+   "n": 97,
+   "text": "Of the 12 rows in the two definitional clusters that cite Korbak et al., the check marks 9 supported and 3 adapted, including the faithfulness wordings of [Xiong et al. 2026](./#p=xiong2026monitorability), [Haskins et al. 2026](./#p=haskins2026training) and [Anonymous 2026 (one draw)](./#p=anon2026one), which match Korbak's threat that optimization \"might make this chain of thought less faithfully reflect how models arrive at their decisions\".",
+   "papers": [
+    "korbak2025chain",
+    "xiong2026monitorability",
+    "haskins2026training",
+    "anon2026one"
+   ],
+   "evidence": [
+    "anon2026crisp#28",
+    "anon2026one#2",
+    "anon2026reward#1",
+    "drori2025output#1",
+    "ferreira2026outofsight#1",
+    "gurarieh2026faithfulness#9",
+    "haskins2026training#1",
+    "lewislim2026efficient#6",
+    "little2026length#2",
+    "reddy2025principled#1",
+    "xiong2026monitorability#1",
+    "yang2025investigating#1",
+    "attr source_evidence korbak2025chain: \"Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions\""
+   ]
+  },
+  {
+   "n": 98,
+   "text": "Emmons et al.'s necessity reaches the citing rows under its own terms (\"CoT uplift\", the with-CoT minus no-CoT pass rate, and \"CoT-as-computation\", which [Jose et al. 2026](./#p=jose2026strategic) and [Golechha et al. 2026](./#p=golechha2026preliminary) adopt) and under two new names: \"CoT reliance\" in [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought) (renamed, per the check) and \"load-bearing\" reasoning in [Duzan & Cooper Stickland 2026](./#p=duzan2026chainofthought).",
+   "papers": [
+    "emmons2025chain",
+    "anon2026chainofthought",
+    "duzan2026chainofthought",
+    "jose2026strategic",
+    "golechha2026preliminary"
+   ],
+   "evidence": [
+    "emmons2025chain#14",
+    "emmons2025chain full text: \"necessitates CoT-as-computation\"",
+    "anon2026chainofthought#5",
+    "attr anon2026chainofthought#5 <- emmons2025chain: renamed",
+    "duzan2026chainofthought#6",
+    "jose2026strategic#2",
+    "golechha2026preliminary#8"
+   ]
+  },
+  {
+   "n": 99,
+   "text": "It is also cited for an instrument it does not contain: [MacDermott et al. 2025](./#p=macdermott2025reasoning) attribute the legibility and coverage autorater to it, and the check finds the autorater in [Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic).",
+   "papers": [
+    "macdermott2025reasoning",
+    "emmons2025chain",
+    "emmons2025pragmatic"
+   ],
+   "evidence": [
+    "attr macdermott2025reasoning#8 <- emmons2025chain: misdirected"
+   ]
+  },
+  {
+   "n": 100,
+   "text": "Outside the map, Kutasov et al. 2025 (15 rows, 9 papers) and Greenblatt et al. 2024 (15 rows, 12 papers) are the most cited, with 6 and 8 of their citing rows in the scheming cluster.",
+   "papers": [],
+   "evidence": [
+    "computed from source field"
+   ]
+  },
+  {
+   "n": 101,
+   "text": "In the four behavior clusters (deception, scheming, reward hacking, evaluation awareness), 87 rows name a source and 10 of them cite a paper in the map, so 77 borrowed behavior definitions fall outside the attribution check.",
+   "papers": [],
+   "evidence": [
+    "computed: rows with source and with in-map source in clusters honesty, scheming, rewardhack, awareness"
+   ]
+  },
+  {
+   "n": 102,
+   "text": "Every row whose source list includes a paper in the map was checked against that paper: 281 entry-source pairs on 216 rows from 70 papers.",
+   "papers": [],
+   "evidence": [
+    "computed from attr_*.json filtered to family"
+   ]
+  },
+  {
+   "n": 103,
+   "text": "The other 166 rows that name a source cite only sources outside the map and are not checked.",
+   "papers": [],
+   "evidence": [
+    "computed from attr_*.json filtered to family"
+   ]
+  },
+  {
+   "n": 104,
+   "text": "237 of the 281 checks (84%) find the definition in the cited source, as stated (169) or adapted (68); the other 44 fall on 39 rows from 28 papers.",
+   "papers": [],
+   "evidence": [
+    "computed"
+   ]
+  },
+  {
+   "n": 105,
+   "text": "Six checks find that the cited source does not give the definition at all.",
+   "papers": [
+    "chidambaram2026corrupted",
+    "lanham2023measuring",
+    "chen2025reasoning",
+    "jose2025reasoning",
+    "mathew2025hidden",
+    "zhou2026nearzero",
+    "taufeeque2026obfuscation",
+    "macdermott2025reasoning",
+    "emmons2025chain",
+    "emmons2025pragmatic",
+    "xiong2026monitorability",
+    "chua2025deepseek"
+   ],
+   "evidence": [
+    "attr chidambaram2026corrupted#3 <- lanham2023measuring: unsupported",
+    "attr jose2025reasoning#4 <- mathew2025hidden: unsupported",
+    "attr zhou2026nearzero#10 <- taufeeque2026obfuscation: unsupported",
+    "attr macdermott2025reasoning#8 <- emmons2025chain: misdirected",
+    "attr xiong2026monitorability#13, #14 <- chua2025deepseek: misdirected"
+   ]
+  },
+  {
+   "n": 106,
+   "text": "Three are unsupported: [Chidambaram et al. 2026](./#p=chidambaram2026corrupted) cite [Lanham et al. 2023](./#p=lanham2023measuring) for a hint setting that comes from the co-cited [Chen et al. 2025](./#p=chen2025reasoning); [Jose 2025](./#p=jose2025reasoning) cites [Mathew et al. 2024](./#p=mathew2025hidden) for compression of reasoning under outcome-based RL, which Mathew et al. do not discuss; and [Zhou & Tao 2026](./#p=zhou2026nearzero) cite [Taufeeque et al. 2026](./#p=taufeeque2026obfuscation) for a graded-suspicion text judge that paper does not describe.",
+   "papers": [
+    "chidambaram2026corrupted",
+    "lanham2023measuring",
+    "chen2025reasoning",
+    "jose2025reasoning",
+    "mathew2025hidden",
+    "zhou2026nearzero",
+    "taufeeque2026obfuscation"
+   ],
+   "evidence": [
+    "attr chidambaram2026corrupted#3 <- lanham2023measuring: unsupported",
+    "attr jose2025reasoning#4 <- mathew2025hidden: unsupported",
+    "attr zhou2026nearzero#10 <- taufeeque2026obfuscation: unsupported",
+    "attr macdermott2025reasoning#8 <- emmons2025chain: misdirected",
+    "attr xiong2026monitorability#13, #14 <- chua2025deepseek: misdirected"
+   ]
+  },
+  {
+   "n": 107,
+   "text": "Three are misdirected: [MacDermott et al. 2025](./#p=macdermott2025reasoning) cite [Emmons et al. 2025 (necessity)](./#p=emmons2025chain) for the autorater of [Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic), and [Xiong et al. 2026](./#p=xiong2026monitorability) cite [Chua & Evans 2025](./#p=chua2025deepseek) for two hints that come from [Chen et al. 2025](./#p=chen2025reasoning).",
+   "papers": [
+    "chen2025reasoning",
+    "macdermott2025reasoning",
+    "emmons2025chain",
+    "emmons2025pragmatic",
+    "xiong2026monitorability",
+    "chua2025deepseek"
+   ],
+   "evidence": [
+    "attr chidambaram2026corrupted#3 <- lanham2023measuring: unsupported",
+    "attr jose2025reasoning#4 <- mathew2025hidden: unsupported",
+    "attr zhou2026nearzero#10 <- taufeeque2026obfuscation: unsupported",
+    "attr macdermott2025reasoning#8 <- emmons2025chain: misdirected",
+    "attr xiong2026monitorability#13, #14 <- chua2025deepseek: misdirected"
+   ]
+  },
+  {
+   "n": 108,
+   "text": "[Chen et al. 2025](./#p=chen2025reasoning) is the paper that does give the definition in three of the six cases.",
+   "papers": [
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "attr chidambaram2026corrupted#3 finding",
+    "attr xiong2026monitorability#13 finding",
+    "attr xiong2026monitorability#14 finding"
+   ]
+  },
+  {
+   "n": 109,
+   "text": "Among the 12 sources checked at least five times, the highest shares of failed checks belong to [Schoen et al. 2025](./#p=schoen2025stress) (3 of 5, all renamed) and [Chua & Evans 2025](./#p=chua2025deepseek) (3 of 6: 2 misdirected, 1 renamed); [Korbak et al. 2025](./#p=korbak2025chain) has 1 in 29, and [Turpin et al. 2023](./#p=turpin2023language) and [Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic) have none in 5 each.",
+   "papers": [
+    "schoen2025stress",
+    "chua2025deepseek",
+    "korbak2025chain",
+    "turpin2023language",
+    "emmons2025pragmatic"
+   ],
+   "evidence": [
+    "computed per-source verdicts"
+   ]
+  },
+  {
+   "n": 110,
+   "text": "For [Baker et al. 2025](./#p=baker2025monitoring), 9 of 51 checks fail, and the 5 partial ones concern what Baker et al. found more than what they defined: [Drori et al. 2025](./#p=drori2025output) write that Baker et al. trained frontier models against a CoT monitor, while the agent trained against it was a non-frontier model; [Singhal & Kumar 2026](./#p=singhal2026believe) write that the pressure made models obfuscate \"rather than\" change their behavior, while the pressured agent also hacked less; [Zhou & Tao 2026](./#p=zhou2026nearzero) describe a suspiciousness score subtracted from the reward, while Baker et al.'s reward requires passing the tests and not triggering the monitor; and [Xiong et al. 2026](./#p=xiong2026monitorability) and [Reddy et al. 2025](./#p=reddy2025principled) extend faithfulness to the whole reasoning process.",
+   "papers": [
+    "baker2025monitoring",
+    "drori2025output",
+    "singhal2026believe",
+    "zhou2026nearzero",
+    "xiong2026monitorability",
+    "reddy2025principled"
+   ],
+   "evidence": [
+    "attr drori2025output#2, singhal2026believe#4, zhou2026nearzero#6, xiong2026monitorability#1, reddy2025principled#1 <- baker2025monitoring: partial"
+   ]
+  },
+  {
+   "n": 111,
+   "text": "The 15 renamed verdicts mark a citing paper that gives a source's notion a new name: [Korbak et al. 2025](./#p=korbak2025chain) call [Lanham et al. 2023](./#p=lanham2023measuring)'s perturbation test \"causal relevance\"; [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought) call [Emmons et al. 2025 (necessity)](./#p=emmons2025chain)'s CoT uplift \"CoT reliance\"; [Cui et al. 2026](./#p=cui2026behavior) and [Ferreira et al. 2025](./#p=ferreira2026truthful) rename [Baker et al. 2025](./#p=baker2025monitoring)'s obfuscated reward hacking; and [MacDermott et al. 2025](./#p=macdermott2025reasoning), [Kaufmann et al. 2026](./#p=kaufmann2026aligned) and [Lee et al. 2026](./#p=lee2026training) rename notions of [Schoen et al. 2025](./#p=schoen2025stress) (\"linguistic drift\" in MacDermott et al. and a semantic drift in Kaufmann et al. for what Schoen et al. call unusual terminology, and covert misbehavior in Lee et al. for their scheming and covert actions).",
+   "papers": [
+    "korbak2025chain",
+    "lanham2023measuring",
+    "anon2026chainofthought",
+    "emmons2025chain",
+    "cui2026behavior",
+    "ferreira2026truthful",
+    "baker2025monitoring",
+    "macdermott2025reasoning",
+    "kaufmann2026aligned",
+    "lee2026training",
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "attr renamed: korbak2025chain#7, anon2026chainofthought#5, cui2026behavior#4, ferreira2026truthful#14, macdermott2025reasoning#7, kaufmann2026aligned#28, lee2026training#2"
+   ]
+  },
+  {
+   "n": 112,
+   "text": "In 11 checks on rows that the extraction marked adopted, the check finds the definition adapted: the citing paper presents a definition as borrowed while changing it.",
+   "papers": [
+    "schulz2026monitor",
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "computed: adopted rows with adapted verdict = schulz2026monitor#3, chen2025reasoning#5, xiong2026monitorability#11, burger2026chain#11, duzan2026chainofthought#5, zhou2026nearzero#3, gurarieh2026faithfulness#9, lewislim2026efficient#6, xiong2026monitorability#11, farquhar2025mona#7, schulz2026monitor#4",
+    "schulz2026monitor#3",
+    "codex_review_1.md: schulz2026monitor#3 MINOR, adapted would be more precise"
+   ]
+  },
+  {
+   "n": 113,
+   "text": "One of them is [Schulz 2026](./#p=schulz2026monitor)'s encoded reasoning, which extends Lanham et al.'s human reader to \"a human or LLM monitor\", the change the independent audit had flagged.",
+   "papers": [
+    "schulz2026monitor",
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "computed: adopted rows with adapted verdict = schulz2026monitor#3, chen2025reasoning#5, xiong2026monitorability#11, burger2026chain#11, duzan2026chainofthought#5, zhou2026nearzero#3, gurarieh2026faithfulness#9, lewislim2026efficient#6, xiong2026monitorability#11, farquhar2025mona#7, schulz2026monitor#4",
+    "schulz2026monitor#3",
+    "codex_review_1.md: schulz2026monitor#3 MINOR, adapted would be more precise"
+   ]
+  },
+  {
+   "n": 114,
+   "text": "These verdicts replace the 15 mismatch records of the previous version of this section, and the independent audit's corrections hold.",
+   "papers": [
+    "korbak2025chain",
+    "anon2026one",
+    "haskins2026training",
+    "xiong2026monitorability",
+    "young2026why",
+    "meek2025measuring",
+    "yu2026outcome",
+    "guan2025monitoring",
+    "macdermott2025reasoning",
+    "chidambaram2026corrupted"
+   ],
+   "evidence": [
+    "previous synth_monitorability.json mismatches",
+    "codex_review_1.md C: xiong2026monitorability#1 OVERSTATED",
+    "attr anon2026one#2, haskins2026training#1, xiong2026monitorability#1 <- korbak2025chain: supported"
+   ]
+  },
+  {
+   "n": 115,
+   "text": "The previous version called 7 records confirmed mismatches; 3 of them, the claims that [Korbak et al. 2025](./#p=korbak2025chain) state the opposite of the faithfulness requirement in [Anonymous 2026 (one draw)](./#p=anon2026one), [Haskins et al. 2026](./#p=haskins2026training) and [Xiong et al. 2026](./#p=xiong2026monitorability), are now supported, since Korbak et al. reject only a complete representation of the reasoning and list optimization that makes the CoT less faithful as a threat.",
+   "papers": [
+    "korbak2025chain",
+    "anon2026one",
+    "haskins2026training",
+    "xiong2026monitorability"
+   ],
+   "evidence": [
+    "previous synth_monitorability.json mismatches",
+    "codex_review_1.md C: xiong2026monitorability#1 OVERSTATED",
+    "attr anon2026one#2, haskins2026training#1, xiong2026monitorability#1 <- korbak2025chain: supported"
+   ]
+  },
+  {
+   "n": 116,
+   "text": "2 are now partial ([Young 2026](./#p=young2026why) on [Meek et al. 2025](./#p=meek2025measuring), [Yu et al. 2026](./#p=yu2026outcome) on [Guan et al. 2025](./#p=guan2025monitoring)) and 2 stand ([MacDermott et al. 2025](./#p=macdermott2025reasoning), misdirected; [Chidambaram et al. 2026](./#p=chidambaram2026corrupted), unsupported).",
+   "papers": [
+    "young2026why",
+    "meek2025measuring",
+    "yu2026outcome",
+    "guan2025monitoring",
+    "macdermott2025reasoning",
+    "chidambaram2026corrupted"
+   ],
+   "evidence": [
+    "previous synth_monitorability.json mismatches",
+    "codex_review_1.md C: xiong2026monitorability#1 OVERSTATED",
+    "attr anon2026one#2, haskins2026training#1, xiong2026monitorability#1 <- korbak2025chain: supported"
+   ]
+  },
+  {
+   "n": 117,
+   "text": "The two records that called [Baker et al. 2025](./#p=baker2025monitoring) only partial support for [Kaufmann et al. 2026](./#p=kaufmann2026aligned) and [Occhipinti et al. 2026](./#p=occhipinti2026probing) are now supported; the audit judged the Kaufmann record wrong because requiring information about the monitored property does not reinstate a requirement to reproduce the reasoning process.",
+   "papers": [
+    "baker2025monitoring",
+    "kaufmann2026aligned",
+    "occhipinti2026probing"
+   ],
+   "evidence": [
+    "attr kaufmann2026aligned#2, occhipinti2026probing#6 <- baker2025monitoring: supported",
+    "codex_review_1.md C: kaufmann2026aligned#2 WRONG"
+   ]
+  },
+  {
+   "n": 118,
+   "text": "Of the four records left unsettled, [Jose 2025](./#p=jose2025reasoning) on [Baker et al. 2025](./#p=baker2025monitoring) is other-claim (the citation points to the CoT excerpts Baker et al. reproduce, which show the dropped-word style, not to a definition), [Lee et al. 2026](./#p=lee2026training) on [Schoen et al. 2025](./#p=schoen2025stress) is renamed, [Mao et al. 2026](./#p=mao2026taming) is adapted for [Guan et al. 2025](./#p=guan2025monitoring) and [Drori et al. 2025](./#p=drori2025output) and partial for [Haskins et al. 2026](./#p=haskins2026training), and [Skaf et al. 2025](./#p=skaf2025large)'s source is outside the map.",
+   "papers": [
+    "jose2025reasoning",
+    "baker2025monitoring",
+    "lee2026training",
+    "schoen2025stress",
+    "mao2026taming",
+    "guan2025monitoring",
+    "drori2025output",
+    "haskins2026training",
+    "skaf2025large"
+   ],
+   "evidence": [
+    "attr jose2025reasoning#6 <- baker2025monitoring: other-claim",
+    "attr lee2026training#2 <- schoen2025stress: renamed",
+    "attr mao2026taming#1: guan adapted, drori adapted, haskins partial",
+    "skaf2025large#8 source Greenblatt et al. 2024",
+    "codex_review_1.md C: jose2025reasoning#6 WRONG as alleged mismatch"
+   ]
+  },
+  {
+   "n": 119,
+   "text": "The last two records also change: [Korbak et al. 2025](./#p=korbak2025chain)'s use of faithfulness evaluations as a proxy for monitorability, previously partially supported, is now supported for [Lanham et al. 2023](./#p=lanham2023measuring), [Turpin et al. 2023](./#p=turpin2023language) and [Chen et al. 2025](./#p=chen2025reasoning) and renamed for [Roger 2025](./#p=anthropic2025paraphrases), and [Zhou & Tao 2026](./#p=zhou2026nearzero)'s default monitorability, previously a misattributed term, is adapted from [Guan et al. 2025](./#p=guan2025monitoring).",
+   "papers": [
+    "korbak2025chain",
+    "lanham2023measuring",
+    "turpin2023language",
+    "chen2025reasoning",
+    "anthropic2025paraphrases",
+    "zhou2026nearzero",
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "attr korbak2025chain#5: lanham supported, turpin supported, chen supported, anthropic2025paraphrases renamed",
+    "attr zhou2026nearzero#3 <- guan2025monitoring: adapted",
+    "previous mismatches korbak2025chain#5, zhou2026nearzero#3"
+   ]
+  },
+  {
+   "n": 120,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) reject the requirement: their notion \"does not require a model’s externalized reasoning to faithfully reflect its internal reasoning process\".",
+   "papers": [
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "guan2025monitoring#2"
+   ]
+  },
+  {
+   "n": 121,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) reject causal faithfulness as a requirement (\"causal CoTs (see Figure 25) are not a necessary condition for monitorability\") but keep faithfulness relative to the monitored property: \"If a monitor $M$ can accurately predict property $v$ from latent $z$, then $z$ must be faithful with respect to $v$ and legible to $M$\".",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "baker2025monitoring#9",
+    "attr haskins2026training#1 <- baker2025monitoring source_evidence"
+   ]
+  },
+  {
+   "n": 122,
+   "text": "[Korbak et al. 2025](./#p=korbak2025chain) reject only completeness: \"CoT does not need to completely represent the actual reasoning process in order to be a valuable additional safety layer\".",
+   "papers": [
+    "korbak2025chain"
+   ],
+   "evidence": [
+    "korbak2025chain#17"
+   ]
+  },
+  {
+   "n": 123,
+   "text": "On the other side, three papers state the requirement without restricting it to the monitored property: [Jia et al. 2026](./#p=jia2026faithfulness) (CoT is \"useful for monitoring language models only when the reasoning trace faithfully reflects the computation that produces the final answer\"), [Xiong et al. 2026](./#p=xiong2026monitorability) (traces \"should faithfully reflect the model’s internal decision-making path\") and [Anonymous 2026 (one draw)](./#p=anon2026one) (\"useful for safety only if the reasoning reflects what drives the model’s answers\").",
+   "papers": [
+    "jia2026faithfulness",
+    "xiong2026monitorability",
+    "anon2026one"
+   ],
+   "evidence": [
+    "jia2026faithfulness#19",
+    "xiong2026monitorability#1",
+    "anon2026one#2"
+   ]
+  },
+  {
+   "n": 124,
+   "text": "[Bhupatiraju & Nyaupane 2026](./#p=bhupatiraju2026stated) and [Shiromani et al. 2026](./#p=shiromani2026necessary) attribute it to CoT monitoring as an assumption (\"assumes that the reasoning a model writes reflects the computation that directly produces its answer\"; \"assumes that a model’s written reasoning is informative about the factors that actually influenced its answer\") without endorsing it.",
+   "papers": [
+    "bhupatiraju2026stated",
+    "shiromani2026necessary"
+   ],
+   "evidence": [
+    "bhupatiraju2026stated#1",
+    "shiromani2026necessary#1"
+   ]
+  },
+  {
+   "n": 125,
+   "text": "[Bürger et al. 2026](./#p=burger2026chain) and [Kaufmann et al. 2026](./#p=kaufmann2026aligned) take Baker et al.'s middle position, requiring the factors or computations the monitor needs and no more.",
+   "papers": [
+    "burger2026chain",
+    "kaufmann2026aligned",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "burger2026chain#4",
+    "kaufmann2026aligned#5"
+   ]
+  },
+  {
+   "n": 126,
+   "text": "The direct disagreement is between Guan et al. and these three papers; Korbak et al. reject a complete representation, not faithfulness, and the check marks Korbak et al. supported for the faithfulness wordings of [Xiong et al. 2026](./#p=xiong2026monitorability), [Haskins et al. 2026](./#p=haskins2026training) and [Anonymous 2026 (one draw)](./#p=anon2026one).",
+   "papers": [
+    "guan2025monitoring",
+    "korbak2025chain",
+    "xiong2026monitorability",
+    "haskins2026training",
+    "anon2026one"
+   ],
+   "evidence": [
+    "attr xiong2026monitorability#1, haskins2026training#1, anon2026one#2 <- korbak2025chain: supported"
+   ]
+  },
+  {
+   "n": 127,
+   "text": "[Xiong et al. 2026](./#p=xiong2026monitorability) write that \"”monitorability” refers to the intrinsic properties of the evaluated model, independent of the monitor’s specific capabilities\", and [Wang et al. 2026](./#p=wang2026monitorbench) give the monitor \"exact decision-critical factors to look for\", which they say \"ensures monitorability reflects the properties of the evaluated LLM and is independent of the monitor’s specific capabilities\".",
+   "papers": [
+    "xiong2026monitorability",
+    "wang2026monitorbench"
+   ],
+   "evidence": [
+    "xiong2026monitorability#2",
+    "wang2026monitorbench#25"
+   ]
+  },
+  {
+   "n": 128,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring), whose minimal-criterion score both papers use, call monitorability \"a two-sided property\" that depends on \"the capacity of the monitor to extract useful information\", and [Algaba et al. 2026](./#p=algaba2026reasoning), [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought), [Anonymous 2026 (improving monitorability)](./#p=anon2026improving) and [Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic) make the monitor part of the definition.",
+   "papers": [
+    "guan2025monitoring",
+    "algaba2026reasoning",
+    "anon2026chainofthought",
+    "anon2026improving",
+    "emmons2025pragmatic"
+   ],
+   "evidence": [
+    "guan2025monitoring#1",
+    "xiong2026monitorability#10",
+    "wang2026monitorbench#2",
+    "algaba2026reasoning#1",
+    "anon2026chainofthought#13",
+    "anon2026improving#1",
+    "emmons2025pragmatic#11"
+   ]
+  },
+  {
+   "n": 129,
+   "text": "Xiong et al.'s own score cuts against their statement: the same section defines g-mean² \"with a higher score indicating better monitorability with respect to the applied monitor\".",
+   "papers": [
+    "xiong2026monitorability"
+   ],
+   "evidence": [
+    "xiong2026monitorability#3"
+   ]
+  },
+  {
+   "n": 130,
+   "text": "[Emmons et al. 2025 (necessity)](./#p=emmons2025chain) enforce necessity by making the bad behavior harder and state that \"this forces the model to expose its reasoning, making it monitorable\", while finding that models \"can learn to obscure their intentions, but only when given significant help\".",
+   "papers": [
+    "emmons2025chain"
+   ],
+   "evidence": [
+    "emmons2025chain full text, Abstract: \"we increase the difficulty of the bad behavior to enforce this necessity condition; this forces the model to expose its reasoning, making it monitorable\"",
+    "emmons2025chain full text, Abstract: \"models can learn to obscure their intentions, but only when given significant help\""
+   ]
+  },
+  {
+   "n": 131,
+   "text": "[Schulz 2026](./#p=schulz2026monitor) draws the same consequence (\"When the CoT is necessary for performing a task, the model must externalize its reasoning in some form.\"), and [Turpin et al. 2025](./#p=turpin2025teaching) a stronger one: where CoT is necessary, \"a lack of verbalization would indicate the model is not reward hacking\".",
+   "papers": [
+    "schulz2026monitor",
+    "turpin2025teaching"
+   ],
+   "evidence": [
+    "schulz2026monitor#2",
+    "turpin2025teaching#16"
+   ]
+  },
+  {
+   "n": 132,
+   "text": "[Korbak et al. 2025](./#p=korbak2025chain) hold that \"The externalized reasoning property does not guarantee monitorability\", and [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought) find that \"monitorability errors can arise in other ways besides non-verbalization, including burying the verbalization within a long CoT that is difficult for the monitor to follow\".",
+   "papers": [
+    "korbak2025chain",
+    "anon2026chainofthought"
+   ],
+   "evidence": [
+    "attr anon2026one#2 <- korbak2025chain source_evidence",
+    "anon2026chainofthought#8"
+   ]
+  },
+  {
+   "n": 133,
+   "text": "[Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) give the information-theoretic version of the gap: the necessary condition $I(O;Z\\mid X)>0$ \"is implied by CoT being necessary for solving the task\" but \"can also be fulfilled in other cases, such as when CoT is a post-hoc explanation of the model output\".",
+   "papers": [
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "anwar2026analyzing#16"
+   ]
+  },
+  {
+   "n": 134,
+   "text": "[Wang et al. 2026](./#p=wang2026monitorbench) separate the two: they expected models to \"obscure decision-critical factors through strategies such as paraphrasing, switching languages, or unconventional encoding\", and found that \"the model largely omits explicit references to the decision-critical factors in its CoT, rather than obfuscating them\".",
+   "papers": [
+    "wang2026monitorbench"
+   ],
+   "evidence": [
+    "wang2026monitorbench#7",
+    "wang2026monitorbench#33"
+   ]
+  },
+  {
+   "n": 135,
+   "text": "[Schulz 2026](./#p=schulz2026monitor) calls omission obfuscation (models that \"still reward hack while not reasoning about it in their CoT\" show \"obfuscated reasoning\"), and so do [Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) (\"obfuscation via suppression: they learn to omit critical reasoning steps\").",
+   "papers": [
+    "schulz2026monitor",
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "schulz2026monitor#7",
+    "anwar2026analyzing#7"
+   ]
+  },
+  {
+   "n": 136,
+   "text": "[Haskins et al. 2026](./#p=haskins2026training) draw the line elsewhere: they count it as obfuscation only when the monitor-aware model's undetected rate exceeds a no-reasoning baseline, so that \"the model is actively using its CoT to perform the behavior while evading the monitor\".",
+   "papers": [
+    "haskins2026training"
+   ],
+   "evidence": [
+    "haskins2026training#5"
+   ]
+  },
+  {
+   "n": 137,
+   "text": "[Mao et al. 2026](./#p=mao2026taming) define CoT obfuscation as \"an operational, non-intentional training outcome\" and cite [Guan et al. 2025](./#p=guan2025monitoring), [Drori et al. 2025](./#p=drori2025output) and [Haskins et al. 2026](./#p=haskins2026training) for it.",
+   "papers": [
+    "mao2026taming",
+    "guan2025monitoring",
+    "drori2025output",
+    "haskins2026training"
+   ],
+   "evidence": [
+    "mao2026taming#1"
+   ]
+  },
+  {
+   "n": 138,
+   "text": "The check marks the Haskins citation partial: Haskins et al. report that \"models with both the means (CoT control) and motive (monitor knowledge) can obfuscate their reasoning, even without optimization pressure\".",
+   "papers": [
+    "haskins2026training"
+   ],
+   "evidence": [
+    "attr mao2026taming#1 <- haskins2026training: partial, source_evidence"
+   ]
+  },
+  {
+   "n": 139,
+   "text": "[Korbak et al. 2025](./#p=korbak2025chain) write that \"Future models may become able to avoid detection by overriding their propensity to think out loud, and, when reasoning is required, to deliberately obfuscate it\", and [Jose et al. 2026](./#p=jose2026strategic) find that \"intrinsic motivation to obfuscate leads to far better performance at evading a monitor than following instructions\".",
+   "papers": [
+    "korbak2025chain",
+    "jose2026strategic"
+   ],
+   "evidence": [
+    "korbak2025chain#8",
+    "jose2026strategic#12"
+   ]
+  },
+  {
+   "n": 140,
+   "text": "[Lanham et al. 2023](./#p=lanham2023measuring) define encoded reasoning as \"not understandable to human readers\", and [Schulz 2026](./#p=schulz2026monitor) excludes from it reasoning that fools an LLM monitor but stays readable: \"This does not fit the definition of encoded reasoning, as the reasoning is not hidden from humans\".",
+   "papers": [
+    "lanham2023measuring",
+    "schulz2026monitor"
+   ],
+   "evidence": [
+    "lanham2023measuring#5",
+    "schulz2026monitor#5"
+   ]
+  },
+  {
+   "n": 141,
+   "text": "[Skaf et al. 2025](./#p=skaf2025large) define steganography as information \"hidden to an external monitor\" and require that \"The monitor cannot decode the encodings, nor detect their presence\", and [Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) call a CoT whose mistakes \"the model knows to ignore ... but the monitor does not\" \"a weak form of steganography\".",
+   "papers": [
+    "skaf2025large",
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "skaf2025large#2",
+    "skaf2025large#5",
+    "anwar2026analyzing#8"
+   ]
+  },
+  {
+   "n": 142,
+   "text": "Under Skaf et al.'s definition a load-bearing encoding that humans can read and the monitor cannot decode is steganographic; under Schulz's it is not encoded reasoning.",
+   "papers": [
+    "skaf2025large",
+    "schulz2026monitor"
+   ],
+   "evidence": [
+    "skaf2025large#5",
+    "schulz2026monitor#5"
+   ]
+  },
+  {
+   "n": 143,
+   "text": "[Kirchner et al. 2024](./#p=kirchner2024proververifier) make legibility checkability by a verifier, with completeness and soundness both required: outputs are legible \"if humans accept them as correct and can’t be fooled by similar-looking incorrect outputs\".",
+   "papers": [
+    "kirchner2024proververifier"
+   ],
+   "evidence": [
+    "kirchner2024proververifier#4",
+    "kirchner2024proververifier#3"
+   ]
+  },
+  {
+   "n": 144,
+   "text": "[Emmons et al. 2025 (pragmatic)](./#p=emmons2025pragmatic) make it readability by \"a human with the same language capabilities as the user asking the model\", so that switching languages \"results in a Legibility score of 0\", while [Baker et al. 2025](./#p=baker2025monitoring) make it relative to the monitor: \"if an agent’s CoT tokens are in French but the monitor only understands English, the monitor will fail due to illegibility\", and \"a different bilingual monitor would find it plausible\".",
+   "papers": [
+    "emmons2025pragmatic",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "emmons2025pragmatic#4",
+    "emmons2025pragmatic#14",
+    "baker2025monitoring full text App. G [P101], [P190]"
+   ]
+  },
+  {
+   "n": 145,
+   "text": "[Jiao et al. 2026](./#p=jiao2026tandem) replace checking by continuation (\"whether a designated weaker generator can take over the senior’s partial trajectory and still complete the task successfully\"), and [Roytburg et al. 2026](./#p=roytburg2026measuring) write that \"Prior work defines legibility inconsistently\"; the check marks Roytburg et al.'s restatement of Kirchner et al. partial, because Kirchner et al. call a prover legible only when completeness also holds.",
+   "papers": [
+    "jiao2026tandem",
+    "roytburg2026measuring",
+    "kirchner2024proververifier"
+   ],
+   "evidence": [
+    "jiao2026tandem#5",
+    "roytburg2026measuring#3",
+    "attr roytburg2026measuring#3 <- kirchner2024proververifier: partial"
+   ]
+  },
+  {
+   "n": 146,
+   "text": "[Schoen et al. 2025](./#p=schoen2025stress) define covert actions so that \"the definition of covert actions does not rely on intent on the AI system’s part\", \"in contrast to the related concept of deception (Ward et al., 2023)\", while [Bu et al. 2026](./#p=bu2026spadebench) define deception by its effect, \"behavior that induces false beliefs in humans or other intelligent systems\", citing the same Ward et al. (2023).",
+   "papers": [
+    "schoen2025stress",
+    "bu2026spadebench"
+   ],
+   "evidence": [
+    "schoen2025stress#7",
+    "schoen2025stress full text §3.1 [P100]",
+    "bu2026spadebench#5"
+   ]
+  },
+  {
+   "n": 147,
+   "text": "The scheming definitions differ in what they require: Schoen et al. \"the covert pursuit of misaligned goals while hiding true capabilities and objectives\"; [Google DeepMind 2026](./#p=google2026gemini4argon) a model that \"knowingly and covertly pursues objectives misaligned with its developer's intention\"; [Betley et al. 2025](./#p=betley2025tell) \"strategically deceiving humans in order to further their goals\"; [Emmons et al. 2025 (necessity)](./#p=emmons2025chain) models that \"might strategically subvert human control\"; and [Bu et al. 2026](./#p=bu2026spadebench) \"long-horizon strategic goal pursuit, persistent hidden objectives, or coordinated planning across multiple episodes\".",
+   "papers": [
+    "schoen2025stress",
+    "google2026gemini4argon",
+    "betley2025tell",
+    "emmons2025chain",
+    "bu2026spadebench"
+   ],
+   "evidence": [
+    "schoen2025stress#5",
+    "google2026gemini4argon#12",
+    "betley2025tell#11",
+    "emmons2025chain#24",
+    "bu2026spadebench#13"
+   ]
+  },
+  {
+   "n": 148,
+   "text": "Betley et al.'s gloss puts deceiving humans at the core, Google DeepMind's makes knowledge a condition, and Schoen et al. require covertness but not intent for the actions they measure; [Li et al. 2025](./#p=li2026spilling) treat the same notion as a capability, \"the model’s ability to covertly pursue its own objective\".",
+   "papers": [
+    "betley2025tell",
+    "google2026gemini4argon",
+    "schoen2025stress",
+    "li2026spilling"
+   ],
+   "evidence": [
+    "betley2025tell#11",
+    "google2026gemini4argon#12",
+    "schoen2025stress#7",
+    "li2026spilling#1"
+   ]
+  },
+  {
+   "n": 149,
+   "text": "Reward hacking sits on both sides of the deception line.",
+   "papers": [
+    "taufeeque2026obfuscation",
+    "anon2026traininghonesty"
+   ],
+   "evidence": [
+    "taufeeque2026obfuscation#16",
+    "taufeeque2026obfuscation#9",
+    "anon2026traininghonesty#12"
+   ]
+  },
+  {
+   "n": 150,
+   "text": "[Taufeeque et al. 2026](./#p=taufeeque2026obfuscation) list it among \"Deceptive behaviors\" and call reward-hacking policies that the probe catches \"Blatant deception\", and [Anonymous 2026 (honesty adapters)](./#p=anon2026traininghonesty) use School of Reward Hacks, where the assistant \"either games an explicitly stated, gameable evaluation criterion or answers honestly\", as a deception benchmark.",
+   "papers": [
+    "taufeeque2026obfuscation",
+    "anon2026traininghonesty"
+   ],
+   "evidence": [
+    "taufeeque2026obfuscation#16",
+    "taufeeque2026obfuscation#9",
+    "anon2026traininghonesty#12"
+   ]
+  },
+  {
+   "n": 151,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) and [Farquhar et al. 2025](./#p=farquhar2025mona) define reward hacking without reference to beliefs (\"Exploiting flaws or misspecifications in learning objectives\"; \"achieves a high reward in a way the system designer would not want if they understood\"), and Schoen et al. file it among the behavioral tags that \"describe the type of scheming behavior being tested\".",
+   "papers": [
+    "baker2025monitoring",
+    "farquhar2025mona",
+    "schoen2025stress"
+   ],
+   "evidence": [
+    "baker2025monitoring#17",
+    "farquhar2025mona#3",
+    "schoen2025stress#11",
+    "schoen2025stress#13"
+   ]
+  },
+  {
+   "n": 152,
+   "text": "Obfuscation joins the three in the same experiments: in Taufeeque et al. a model trained against a deception detector \"either remains honest, or becomes deceptive via two possible obfuscation strategies\"; in [Haskins et al. 2026](./#p=haskins2026training) the behavior hidden from the monitor is deception about known product defects, and \"detection is only counted over deceptive responses\"; in [Jose et al. 2026](./#p=jose2026strategic) it is alignment-faking reasoning; and [Lee et al. 2026](./#p=lee2026training) train self-incrimination to make \"covert misbehavior observable\".",
+   "papers": [
+    "taufeeque2026obfuscation",
+    "haskins2026training",
+    "jose2026strategic",
+    "lee2026training"
+   ],
+   "evidence": [
+    "taufeeque2026obfuscation#1",
+    "haskins2026training#13",
+    "haskins2026training#15",
+    "jose2026strategic#4",
+    "lee2026training#3"
+   ]
+  },
+  {
+   "n": 153,
+   "text": "[Meek et al. 2025](./#p=meek2025measuring) score monitorability as \"the average between the faithfulness and verbosity metrics\", a score built from verbalization rates rather than from a monitor's predictions, and [Occhipinti et al. 2026](./#p=occhipinti2026probing) count as monitorable \"all traces where the hint’s influence is visible\".",
+   "papers": [
+    "meek2025measuring",
+    "occhipinti2026probing"
+   ],
+   "evidence": [
+    "meek2025measuring#3",
+    "occhipinti2026probing#7"
+   ]
+  },
+  {
+   "n": 154,
+   "text": "[Yang et al. 2025](./#p=yang2025investigating) report \"a gap between being monitorable and being monitored correctly\": \"Even when CoT is always faithful, the monitor itself may fail to strike the right balance.\"",
+   "papers": [
+    "yang2025investigating"
+   ],
+   "evidence": [
+    "yang2025investigating#20",
+    "yang2025investigating#15"
+   ]
+  },
+  {
+   "n": 155,
+   "text": "[Young 2026](./#p=young2026why) restates Meek et al. as showing reasoning \"monitorable (detectable by a judge) without being faithful\"; the check marks this partial, because Meek et al. show the reverse divergence: \"models can appear faithful yet remain hard to monitor when they leave out key factors\".",
+   "papers": [
+    "young2026why",
+    "meek2025measuring"
+   ],
+   "evidence": [
+    "young2026why#3",
+    "attr young2026why#3 <- meek2025measuring: partial, source_evidence"
+   ]
+  },
+  {
+   "n": 156,
+   "text": "[Guan et al. 2025](./#p=guan2025monitoring) define the minimal-criterion rate from the requirement that \"the monitor should trigger at least as often as this rate in the intervention arm\", and six papers reuse it.",
+   "papers": [
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "guan2025monitoring#4",
+    "anon2026chainofthought#14",
+    "anon2026reward#10",
+    "lewislim2026efficient#9",
+    "wang2026monitorbench#23",
+    "xiong2026monitorability#10",
+    "anon2026improving#3"
+   ]
+  },
+  {
+   "n": 157,
+   "text": "[Anonymous 2026 (improving monitorability)](./#p=anon2026improving) prove that it is the upper end of the bounds on causal recall, so it bounds causal recall from above and does not give its value, and they drop the control-arm specificity from Guan et al.'s composite ($\\text{g-mean}^2_{\\text{int}}:=\\mathrm{TPR}_{\\mathrm{mc}}\\cdot\\mathrm{TNR}_{X=1}$).",
+   "papers": [
+    "anon2026improving",
+    "guan2025monitoring"
+   ],
+   "evidence": [
+    "anon2026improving#13",
+    "anon2026improving#12"
+   ]
+  },
+  {
+   "n": 158,
+   "text": "[Duzan & Cooper Stickland 2026](./#p=duzan2026chainofthought) keep both specificities but multiply them with the plain detection rate on behavioral-shift cases, and [Xiong et al. 2026](./#p=xiong2026monitorability) warn of a \"false sense of monitorability\": \"a model might achieve a high $\\text{g-mean}^{2}$ score simply by overfitting to the prompt’s constraints\".",
+   "papers": [
+    "duzan2026chainofthought",
+    "xiong2026monitorability"
+   ],
+   "evidence": [
+    "duzan2026chainofthought#5",
+    "duzan2026chainofthought#4",
+    "xiong2026monitorability#4"
+   ]
+  }
+ ]
+}

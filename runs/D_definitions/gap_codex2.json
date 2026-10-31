@@ -1,0 +1,37 @@
+{
+ "note": "Fixes from the sampled Codex audit of rows added by the second pass (scratchpad codex_check2_A/B).",
+ "papers": [
+  {
+   "key": "naphade2026me",
+   "drop": [
+    {
+     "id": "naphade2026me#8",
+     "reason": "pure short-term policy introspection, out of scope"
+    }
+   ]
+  },
+  {
+   "key": "burger2026chain",
+   "fix": [
+    {
+     "id": "burger2026chain#11",
+     "set": {
+      "stance": "adapted"
+     }
+    }
+   ]
+  },
+  {
+   "key": "nguyen2026generalization",
+   "fix": [
+    {
+     "id": "nguyen2026generalization#9",
+     "set": {
+      "stance": "adopted",
+      "source": "meek2025measuring"
+     }
+    }
+   ]
+  }
+ ]
+}

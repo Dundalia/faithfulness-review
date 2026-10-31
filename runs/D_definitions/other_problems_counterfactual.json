@@ -1,0 +1,22 @@
+[
+ {
+  "where": "Section 6, third bullet, \"a population effect\" (claim 83)",
+  "problem": "The bullet classifies Matton et al.'s causal concept effect as a population effect, although matton2025walk [P69] explicitly focuses on \"individual treatment effects\" for a specific question \"rather than average treatment effects\".",
+  "fix": "Separate the question-specific concept effect from the population effects: [Matton et al. 2025](./#p=matton2025walk) average KL divergence over alternative values of a concept while holding the original question fixed."
+ },
+ {
+  "where": "Tensions, item 1, \"A flip is part of the definition\" and \"For the first group a non-flipping edit is not a counterfactual\"",
+  "problem": "Including Han et al. in this group conflates an opposing injected stance with an observed change in the model's output. han2026rfeval [P624] explicitly says the contrast precondition \"must not be conflated with causal non-response\".",
+  "fix": "Give [Han et al. 2026](./#p=han2026rfeval) a separate category: the injected reasoning must oppose the baseline stance, while a resulting change in generated reasoning or answer is measured separately by $\\kappa(o,o')$."
+ },
+ {
+  "where": "Section 6, third bullet beginning \"a population effect\"",
+  "problem": "This description incorrectly groups Matton’s concept effects and Bürger’s total effects as population effects across inputs. Matton explicitly studies effects for a specific question [P69], and Bürger estimates probabilities separately for each dataset sample and attribute [P113].",
+  "fix": "Replace \"a population effect\" with \"a distributional effect\", and clarify that such effects can be estimated for individual questions or sample–attribute pairs."
+ },
+ {
+  "where": "Section 10 table, Ferreira et al. row labelled 'counterfactual-augmented reward model (strategies D and C)'",
+  "problem": "The definition column states only strategy D's condition despite naming both strategies. Strategy C also requires cue alignment of the original prediction and its absence in the counterfactual prediction.",
+  "fix": "State both rules: D appends the disclaimer whenever predictions differ; C appends it when the original prediction is cued (correct or stereotypical) and the counterfactual prediction is not."
+ }
+]

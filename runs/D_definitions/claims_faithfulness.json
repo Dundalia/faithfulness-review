@@ -1,0 +1,1931 @@
+{
+ "claims": [
+  {
+   "n": 1,
+   "text": "The faithfulness family holds 1,973 definition rows from 204 of the 217 papers: by kind, 685 rows are operational, 371 informal, 304 criteria, 231 failure modes, 215 formal and 167 taxonomies; by stance, 1,258 are proposed, 486 adopted and 229 adapted.",
+   "papers": [],
+   "evidence": [
+    "faith_stats.md: 1974 rows from 204 papers; index.csv: 217 papers",
+    "faith_stats.md: By kind operational 686, informal 371, criterion 304, failure-mode 231, formal 215, taxonomy 167",
+    "faith_stats.md: By stance proposed 1259, adopted 486, adapted 229"
+   ]
+  },
+  {
+   "n": 2,
+   "text": "628 rows define faithfulness or unfaithfulness itself, and 1,345 define a companion notion that the paper ties to it, such as plausibility, simulatability, self-consistency, post-hoc rationalization, a cue-verbalization rate, a self-report or a lie.",
+   "papers": [],
+   "evidence": [
+    "dump faithfulness: related=False 628, related=True 1346",
+    "e.g. pmlr-v235-chen24bl#8 (simulatability), parcalabescu2023measuring#3 (self-consistency), wang2025evaluating#2 (lie)"
+   ]
+  },
+  {
+   "n": 3,
+   "text": "The second pass over the full texts added 1,234 rows and 36 papers to the 739 first-pass rows that remain (it dropped one), and 1,026 of the added rows define companion notions.",
+   "papers": [],
+   "evidence": [
+    "faith_stats.md: 739 first-pass rows still valid; dropped [sun2026refine#5]; 1235 rows in faith_new_rows.tsv",
+    "papers: 168 in first pass, 204 now (36 new)",
+    "new rows: related=True 1027, related=False 208"
+   ]
+  },
+  {
+   "n": 4,
+   "text": "The rows fall into the 11 clusters below; clusters 5, 7 and 10 are new, and 62 first-pass rows moved between clusters, 57 of them into the new ones.",
+   "papers": [],
+   "evidence": [
+    "synth_faithfulness.json: 11 clusters; new ids say-do-consistency, self-report-accuracy, honesty-dishonesty",
+    "first-pass rows moved: A->S 27, P->SR 20, M->SR 7, X->H 3 (57 into new clusters), P->X 3, C->R 1, A->R 1 (62 total)"
+   ]
+  },
+  {
+   "n": 5,
+   "text": "[Jacovi & Goldberg 2020](./#p=jacovi2020towards) define a faithful interpretation as one that \"accurately represents the reasoning process behind the model’s prediction\"; 79 rows from 55 papers cite them, and 53 of those rows are in cluster 1, which names this target without a test.",
+   "papers": [
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "jacovi2020towards#1: “accurately represents the reasoning process behind the model’s prediction”",
+    "Jacovi & Goldberg 2020 borrowed by 79 rows from 55 papers (faith_stats most-borrowed table); 53 of those rows in reflects-reasoning (cluster count by python)"
+   ]
+  },
+  {
+   "n": 6,
+   "text": "Rows in other clusters depart from the definition explicitly: [Viteri et al. 2024](./#p=viteri2026markovian) do not insist that \"the CoT mirrors the model’s entire internal process\", [Baker et al. 2025](./#p=baker2025monitoring) call a latent faithful with respect to a property $v$ if \"$z$ is a sufficient statistic for $v$\", and [Zeng et al. 2026](./#p=zeng2026evaluating) score self-reports against behavior whatever their source (\"our evaluation does not distinguish among these\").",
+   "papers": [
+    "viteri2026markovian",
+    "baker2025monitoring",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "viteri2026markovian#2: “the CoT mirrors the model’s entire internal process”",
+    "baker2025monitoring#2: “$z$ is a sufficient statistic for $v$”",
+    "zeng2026evaluating#5: “our evaluation does not distinguish among these”",
+    "viteri2026markovian#2 in answer-depends-on-reasoning",
+    "baker2025monitoring#2 in predicts-behaviour",
+    "zeng2026evaluating#5 in self-report-accuracy"
+   ]
+  },
+  {
+   "n": 7,
+   "text": "Clusters 2 to 10 each fix a different relation: what the trace discloses (2), whether the answer depends on it (3) or agrees with it (4), whether an action matches what was said (5), whether the explanation predicts the model (6), whether a self-report matches behavior (7), whether the marked inputs matter (8), whether the trace matches internal computation (9), and whether a statement matches the model's belief (10).",
+   "papers": [],
+   "evidence": [
+    "synth_faithfulness.json cluster descriptions 2-10"
+   ]
+  },
+  {
+   "n": 8,
+   "text": "On the same traces these relations can disagree: [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought) find that hint-verbalization results \"do not align with two other prominent faithfulness metrics\", Filler Tokens and FUR, and the three classifiers of [Young 2026a](./#p=young2026measuring) give \"On identical data\" overall faithfulness rates of 74.4%, 82.6% and 69.7%.",
+   "papers": [
+    "zaman2025chainofthought",
+    "young2026measuring"
+   ],
+   "evidence": [
+    "zaman2025chainofthought full text: “do not align with two other prominent faithfulness metrics”",
+    "young2026measuring full text: “On identical data”",
+    "young2026measuring full text: “On identical data, these classifiers produce overall faithfulness rates of 74.4%, 82.6%, and 69.7%, respectively.”"
+   ]
+  },
+  {
+   "n": 9,
+   "text": "This is the umbrella answer: an explanation or CoT is faithful when it accurately represents, reflects or describes the process by which the model reached its output.",
+   "papers": [],
+   "evidence": [
+    "jacovi2020towards#1",
+    "lanham2023measuring#1",
+    "agarwal2024faithfulness#2"
+   ]
+  },
+  {
+   "n": 10,
+   "text": "Of the 191 rows, 103 are informal, 108 adopted and 15 operational.",
+   "papers": [],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: reflects-reasoning 191 rows; kind informal 103, operational 15; stance adopted 108"
+   ]
+  },
+  {
+   "n": 11,
+   "text": "The cluster also holds the 40 taxonomies that divide the umbrella into kinds of test (contextual vs parametric, behavioral vs mechanistic, external vs internal) and the conditions papers set on any faithfulness measure: that it be graded rather than binary ([Jacovi & Goldberg 2020](./#p=jacovi2020towards)), that humans cannot judge it ([Madsen et al. 2023](./#p=madsen2023faithfulness)), or that it rank a faithful explanation above an unfaithful one ([Zaman & Srivastava 2025a](./#p=zaman2025causal)).",
+   "papers": [
+    "jacovi2020towards",
+    "madsen2023faithfulness",
+    "zaman2025causal",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: reflects-reasoning kind taxonomy 40",
+    "sun2026investigating#2 (contextual vs parametric)",
+    "malladi2026directly#3 (behavioral vs mechanistic)",
+    "wang2026verbalising#12, wang2026verbalising#13 (external vs internal)",
+    "jacovi2020towards#11, jacovi2020towards#14 (graded vs binary)",
+    "madsen2023faithfulness#14",
+    "zaman2025causal#10, zaman2025causal#11 (diagnosticity)"
+   ]
+  },
+  {
+   "n": 12,
+   "text": "[Zaman & Srivastava 2025a](./#p=zaman2025causal) define a faithfulness metric as a real-valued function $\\mathcal{F}(\\boldsymbol{x},\\boldsymbol{y},\\boldsymbol{\\varepsilon},M)\\in\\mathbb{R}$ of an input, output, explanation and model, and score a metric by its diagnosticity $D(\\mathcal{F})$, the mean over pairs of explanations from two knowledge-edited models of $d=1$ when the explanation faithful to the evaluated model scores higher, $0.5$ on a tie and $0$ otherwise.",
+   "papers": [
+    "zaman2025causal",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "zaman2025causal#2",
+    "zaman2025causal#10",
+    "zaman2025causal#11"
+   ]
+  },
+  {
+   "n": 13,
+   "text": "[Sun et al. 2026](./#p=sun2026investigating) define faithfulness gain transfer $\\delta(f_i,f_j)=f_j(c')-f_j(c)$, the change on metric $f_j$ from a base model's CoT $c$ to the CoT $c'$ of a model optimized on metric $f_i$.",
+   "papers": [
+    "sun2026investigating"
+   ],
+   "evidence": [
+    "sun2026investigating#13"
+   ]
+  },
+  {
+   "n": 14,
+   "text": "Here a trace is faithful when it states the factors that moved the answer, and the standard test inserts a cue (a suggested answer, a metadata hint, a planted bias), keeps the cases where the answer moves to the cued option, and asks whether the CoT mentions the cue and, in stricter versions, whether it presents the cue as a reason.",
+   "papers": [],
+   "evidence": [
+    "turpin2023language#3",
+    "chen2025reasoning#3",
+    "chen2025reasoning#11",
+    "anon2026one#15"
+   ]
+  },
+  {
+   "n": 15,
+   "text": "Of the 433 rows, 168 are operational (judge rubrics, keyword detectors, cue taxonomies, noise corrections) and 72 are failure modes (silent re-derivation of the cued answer, laundering of the cue's argument, unverbalized reward hacks), and variants move the factor from planted cues to concepts ([Matton et al. 2025](./#p=matton2025walk); [Arcuschin et al. 2026](./#p=arcuschin2026biases)), to factor-level reports ([Zhang et al. 2026](./#p=zhang2026audit)) and to pairs of logically opposite questions ([Arcuschin et al. 2025](./#p=arcuschin2025chain)).",
+   "papers": [
+    "matton2025walk",
+    "arcuschin2026biases",
+    "zhang2026audit",
+    "arcuschin2025chain"
+   ],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: discloses-influences 433 rows; operational 168; failure-mode 72",
+    "dhoot2026hintfollowing#6 (silent re-derivation)",
+    "anon2026one#17 (laundering)",
+    "jia2026faithfulness#17 (silent reward hacking)",
+    "chen2025reasoning#10, anon2026one#14 (noise corrections)",
+    "matton2025walk#2",
+    "arcuschin2026biases#1",
+    "zhang2026audit#1",
+    "arcuschin2025chain#3"
+   ]
+  },
+  {
+   "n": 16,
+   "text": "[Chen et al. 2025](./#p=chen2025reasoning), over pairs of an unhinted prompt $x_u$ and a hinted prompt $x_h$ with answers $a_u,a_h$ and hinted CoT $c_h$: $\\mathrm{Faith}(M)=\\mathbb{E}\\big[\\mathbb{1}[c_h\\text{ verbalizes the hint }h]\\;\\big|\\;a_u\\neq h,\\ a_h=h\\big]$, divided by $\\alpha=1-q/((n-2)p)$ to discount answer changes that random switching would produce, and clipped at 1.",
+   "papers": [
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "chen2025reasoning#2",
+    "chen2025reasoning#10: “clip the maximum at 1”"
+   ]
+  },
+  {
+   "n": 17,
+   "text": "[Matton et al. 2025](./#p=matton2025walk): causal concept faithfulness $\\mathcal{F}(\\mathbf{x})=\\mathrm{PCC}\\big(\\mathrm{CE}(\\mathbf{x},\\mathcal{C}),\\,\\mathrm{EE}(\\mathbf{x},\\mathcal{C})\\big)$, the Pearson correlation between each concept's causal effect on the answer and its explanation-implied effect, averaged over questions for the dataset score.",
+   "papers": [
+    "matton2025walk"
+   ],
+   "evidence": [
+    "matton2025walk#3",
+    "matton2025walk#10"
+   ]
+  },
+  {
+   "n": 18,
+   "text": "[Little 2026](./#p=little2026length): the target $F=\\mathbb{P}(c_h\\text{ verbalizes the hint}\\mid\\text{hint-caused switch})$ is not identified when random switches to the hint (mass $b$ out of switch mass $p$) verbalize it at an unknown rate $\\nu$; with observed verbalized-switch mass $r$, Little derives $F\\in\\big[\\max(0,\\frac{r-b}{p-b}),\\min(1,\\frac{r}{p-b})\\big]$, whose upper endpoint ($\\nu=0$) \"equals the normalized faithfulness score of Chen et al. (2025)\".",
+   "papers": [
+    "little2026length",
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "little2026length full text: “equals the normalized faithfulness score of Chen et al. (2025)”",
+    "little2026length#10",
+    "little2026length#11"
+   ]
+  },
+  {
+   "n": 19,
+   "text": "[Arcuschin et al. 2026](./#p=arcuschin2026biases): a concept $c$ is an unverbalized bias if, over discordant pairs of $+/-$ variants of the concept, $|D^{+}|\\neq|D^{-}|$ by a McNemar test, and the verbalization rate on those pairs is at most $\\tau$ ($\\tau=0.3$).",
+   "papers": [
+    "arcuschin2026biases"
+   ],
+   "evidence": [
+    "arcuschin2026biases#2"
+   ]
+  },
+  {
+   "n": 20,
+   "text": "Here a trace is faithful to the extent that the answer depends on it: truncating it, inserting a mistake, paraphrasing it, replacing it with filler, unlearning a step from the weights or patching in another chain should change the answer.",
+   "papers": [],
+   "evidence": [
+    "lanham2023measuring#7",
+    "lanham2023measuring#8",
+    "tutek2025measuring#4",
+    "paul2024making#3",
+    "swaroop2025lift#1"
+   ]
+  },
+  {
+   "n": 21,
+   "text": "Post-hoc reasoning, produced after the answer is fixed, is the central failure, and 63 of the 402 rows are failure modes (post-hoc rationalization, reasoning theater, decorative and performative CoT).",
+   "papers": [],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: answer-depends-on-reasoning 402 rows; failure-mode 63",
+    "cox2026posthoc#2",
+    "parekh2026drop#1",
+    "basu2026measuring#10",
+    "sullivan2026language#8"
+   ]
+  },
+  {
+   "n": 22,
+   "text": "[Lanham et al. 2023](./#p=lanham2023measuring)'s tests are the template; later rows recast them in mediation terms, move the intervention into the weights ([Tutek et al. 2025](./#p=tutek2025measuring)), locate the answer before the CoT with probes ([Kudo et al. 2024](./#p=kudo2024llms); [Cox et al. 2026](./#p=cox2026posthoc)), or set validity conditions that an intervention must pass before its effect is read as faithfulness ([Anonymous 2026 (CRISP)](./#p=anon2026crisp)).",
+   "papers": [
+    "lanham2023measuring",
+    "tutek2025measuring",
+    "kudo2024llms",
+    "cox2026posthoc",
+    "anon2026crisp"
+   ],
+   "evidence": [
+    "lanham2023measuring#11",
+    "wang2026case#1, jia2026faithfulness#1 (mediation)",
+    "tutek2025measuring#4",
+    "kudo2024llms#8",
+    "cox2026posthoc#8",
+    "anon2026crisp#6, anon2026crisp#7, anon2026crisp#21, anon2026crisp#25"
+   ]
+  },
+  {
+   "n": 23,
+   "text": "[Jia et al. 2026](./#p=jia2026faithfulness) split the requirement on a trace $(P,C,A)$ (prompt, CoT, answer) into *sufficiency*, $H(A\\mid C)$ is low; *completeness*, $I(P;A\\mid C)\\approx 0$, so that $C$ screens off $P$ from $A$ (an unverbalized hint is a completeness failure, which ties this cluster to cluster 2); and *necessity*, perturbing $C$ changes $A$.",
+   "papers": [
+    "jia2026faithfulness"
+   ],
+   "evidence": [
+    "jia2026faithfulness#2",
+    "jia2026faithfulness#3",
+    "jia2026faithfulness#4",
+    "jia2026faithfulness#5"
+   ]
+  },
+  {
+   "n": 24,
+   "text": "[Wang et al. 2026a](./#p=wang2026case), with instruction $Z$, CoT $X$ and answer $Y$: the process is faithful if $p(x,y\\mid z)=p(x\\mid z)\\,p(y\\mid x)$, equivalently $Y\\perp Z\\mid X$.",
+   "papers": [
+    "wang2026case"
+   ],
+   "evidence": [
+    "wang2026case#1"
+   ]
+  },
+  {
+   "n": 25,
+   "text": "[Tutek et al. 2025](./#p=tutek2025measuring): $\\mathrm{ff}_{\\text{hard}}=\\mathbb{1}\\big[\\exists\\,r_i:\\ y\\neq y^{(i)*}\\big]$ and $\\mathrm{ff}^{(i)}_{\\text{soft}}=p(y\\mid M)-p(y\\mid M^{(i)*})$, where $M^{(i)*}$ is the model after unlearning step $r_i$ and $y^{(i)*}$ its prediction.",
+   "papers": [
+    "tutek2025measuring"
+   ],
+   "evidence": [
+    "tutek2025measuring#4",
+    "tutek2025measuring#5"
+   ]
+  },
+  {
+   "n": 26,
+   "text": "[Kudo et al. 2024](./#p=kudo2024llms): $t^{*}(v_i)=\\min\\{t\\mid\\max_l\\mathrm{acc}(t,l,v_i)>\\tau\\}$, the first token position at which a probe at some layer decodes the value $v_i$ with accuracy above $\\tau=0.9$; positions are counted from the start of the CoT, so a negative $t^*$ means the value \"is computed before CoT begins\".",
+   "papers": [
+    "kudo2024llms"
+   ],
+   "evidence": [
+    "kudo2024llms#8: “is computed before CoT begins”",
+    "kudo2024llms#8",
+    "kudo2024llms full text: positions relative to CoT, negative within the input"
+   ]
+  },
+  {
+   "n": 27,
+   "text": "Here faithfulness is read off the output (the answer follows from, is entailed by or agrees with what the reasoning says), and rows build systems in which a solver or a selection-inference pipeline derives the answer from the stated chain (faithful by construction), measure reasoning–answer consistency with judges or NLI, or also require the reasoning to be valid, so that a correct answer reached through a flawed chain counts as unfaithful.",
+   "papers": [],
+   "evidence": [
+    "tafjord2022entailer#1",
+    "lyu2023faithful#5",
+    "pan2023logiclm#2",
+    "creswell2023selectioninference#1",
+    "zhao2026robustness#1",
+    "lin2025clarity#1 (judge)",
+    "angdembay2026two#10 (NLI)",
+    "xu2024faithful#1"
+   ]
+  },
+  {
+   "n": 28,
+   "text": "121 of the 147 rows are proposed, and the 27 first-pass rows on whether an agent's action follows its stated reasoning or plan now form cluster 5.",
+   "papers": [],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: answer-follows-reasoning 147 rows, 121 proposed",
+    "27 first-pass rows moved from answer-follows-reasoning to say-do-consistency (wang2026doing, oota2026llm, bu2026spadebench, dong2025say, anon2026what, schoen2025stress#1, shiromani2026false#2, hu2026faithful)"
+   ]
+  },
+  {
+   "n": 29,
+   "text": "[Somov et al. 2026](./#p=somov2026breaking), with a deterministic map $C$ from the generated mediator to a decision: $F_{\\mathrm{ID}}=\\frac1N\\sum_i\\mathbb{1}[C(\\hat m_i)=\\hat y_i]$; their interventional score $F_{\\mathrm{Strong}}$, which also requires $C(m^{*}_i)=\\hat y^{*}_i$ for an intervened mediator $m^{*}_i$, is filed under cluster 3.",
+   "papers": [
+    "somov2026breaking"
+   ],
+   "evidence": [
+    "somov2026breaking#3",
+    "somov2026breaking#5 (in answer-depends-on-reasoning)"
+   ]
+  },
+  {
+   "n": 30,
+   "text": "[Han et al. 2026b](./#p=han2026rfeval): $\\mathrm{RF}(o,o')=\\mathbb{1}[\\chi(o)=1\\wedge\\chi(o')=1\\wedge\\kappa(o,o')=1]$, where stance consistency $\\chi$ requires each component of the output to keep the prior stance or identify a flaw in it before switching, and causal influence $\\kappa$ requires the reasoning or the answer to change after counterfactual reasoning $r'$ is prefilled; the definition is a conjunction of this cluster's property and cluster 3's.",
+   "papers": [
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "han2026rfeval#1",
+    "han2026rfeval#2",
+    "han2026rfeval#10"
+   ]
+  },
+  {
+   "n": 31,
+   "text": "[Zhao & Daumé 2025](./#p=zhao2025necessary), prediction–explanation consistency: $C(e)=\\log\\dfrac{M(e\\mid q,a)}{M(e\\mid q,\\lnot a)}$, how much better the explanation supports the prediction than its negation.",
+   "papers": [
+    "zhao2025necessary"
+   ],
+   "evidence": [
+    "zhao2025necessary#5"
+   ]
+  },
+  {
+   "n": 32,
+   "text": "Here the comparison is between what a model says it will do, has decided or has done, and what it does.",
+   "papers": [],
+   "evidence": [
+    "bu2026spadebench#1",
+    "anon2026what#1",
+    "anon2026measuring#1"
+   ]
+  },
+  {
+   "n": 33,
+   "text": "Rows compare a declared plan with the executed steps ([Oota et al. 2026](./#p=oota2026llm)), the action a reasoning step implies with the action taken ([Hu et al. 2026](./#p=hu2026faithful); [Dong et al. 2025](./#p=dong2025say)), a claim about a completed action with the tool log ([Anonymous 2026 (say-do traceability)](./#p=anon2026measuring)), a written moral choice with a tool action ([Anonymous 2026 (should-say-do)](./#p=anon2026should)), and a declared code edit with the edit the answer realizes ([Anonymous 2026 (do what you say)](./#p=anon2026what)).",
+   "papers": [
+    "oota2026llm",
+    "hu2026faithful",
+    "dong2025say",
+    "anon2026measuring",
+    "anon2026should",
+    "anon2026what"
+   ],
+   "evidence": [
+    "oota2026llm#1",
+    "hu2026faithful#4",
+    "dong2025say#2",
+    "anon2026measuring#2",
+    "anon2026should#2",
+    "anon2026what#1"
+   ]
+  },
+  {
+   "n": 34,
+   "text": "89 of the 99 rows are proposed, and 3 of the 18 papers are system cards that score false reports of completed actions ([Anthropic 2026](./#p=anthropic2026opus55); [Google DeepMind 2026](./#p=google2026gemini4argon); [OpenAI 2026](./#p=openai2026gpt6astra)).",
+   "papers": [
+    "anthropic2026opus55",
+    "google2026gemini4argon",
+    "openai2026gpt6astra"
+   ],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: say-do-consistency 99 rows, 89 proposed, 18 papers",
+    "anthropic2026opus55#8",
+    "google2026gemini4argon#62",
+    "openai2026gpt6astra#38"
+   ]
+  },
+  {
+   "n": 35,
+   "text": "[Dong et al. 2025](./#p=dong2025say): with $f(c_n)$ the action implied by the CoT at step $n$ and $a^*_n$ the gold action, $\\mathrm{GTA}_n=\\mathbf{1}\\{f(c_n)=a^*_n\\}$; the execution gap $\\mathrm{EG}=\\frac1N\\sum_n\\mathbf{1}\\{\\mathrm{GTA}_n=1\\wedge\\mathrm{EM}_n=0\\}$ counts steps where the CoT implies the correct action and the executed action is wrong, and the reasoning gap $\\mathrm{RG}$ ($\\mathrm{GTA}_n=0\\wedge\\mathrm{EM}_n=1$) counts steps where the action is correct and the CoT implies another.",
+   "papers": [
+    "dong2025say"
+   ],
+   "evidence": [
+    "dong2025say#3",
+    "dong2025say#6",
+    "dong2025say#7"
+   ]
+  },
+  {
+   "n": 36,
+   "text": "[Bu et al. 2026](./#p=bu2026spadebench): deception is a pair of (plan, action) outcomes in a regular and a pressure setting with $A_1=A_2=Int$, $P_1\\in\\{Int,Mod\\}$, $P_2\\in\\{Mod,Ext\\}$ and $P_2\\neq P_1$, so the action stays the same while the stated plan shifts.",
+   "papers": [
+    "bu2026spadebench"
+   ],
+   "evidence": [
+    "bu2026spadebench#2"
+   ]
+  },
+  {
+   "n": 37,
+   "text": "[Hu et al. 2026](./#p=hu2026faithful): training reward $r_{i,t}=\\lambda R_{\\mathrm{AM}}(o_{i,t})+(1-\\lambda)R_{\\mathrm{Cons}}(o_{i,t})$, a convex combination of action match and thought–action consistency, with weights $0.85$ and $0.15$ in their experiments.",
+   "papers": [
+    "hu2026faithful"
+   ],
+   "evidence": [
+    "hu2026faithful#14",
+    "hu2026faithful full text: “we weight action match by $0.85$ and consistency by $0.15$”"
+   ]
+  },
+  {
+   "n": 38,
+   "text": "Here an explanation is faithful if a reader (a human, a simulator model or a listener model) can use it to predict what the model does on the same input or on related ones, from forward simulation and leakage-adjusted simulatability to counterfactual simulatability, normalized simulatability gain and rationale-utility measures such as Rev ([Chen et al. 2022](./#p=chen2022rev)).",
+   "papers": [
+    "chen2022rev",
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "hase2020leakageadjusted#2",
+    "sivakumaran2026balancing#1",
+    "pmlr-v235-chen24bl#8",
+    "mayne2026positivecasefaithfulnessllm#5",
+    "chen2022rev#6"
+   ]
+  },
+  {
+   "n": 39,
+   "text": "When the related inputs are counterfactuals of the original input, papers call the property counterfactual simulatability; definitions of it as such are catalogued in the [Counterfactual](#counterfactual) section, and the rows here state it as faithfulness.",
+   "papers": [],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#1",
+    "karvonen2026would#7",
+    "synth_counterfactual.md cluster 2 (counterfactual simulatability)"
+   ]
+  },
+  {
+   "n": 40,
+   "text": "The 20 first-pass rows on a model's reports about its own behavior moved to cluster 7, and 3 rows on consistency across related inputs moved to cluster 11.",
+   "papers": [],
+   "evidence": [
+    "first-pass rows moved: P->SR 20 (guo2026introspective#4-#7, pres2026selfctrl#1,#2,#4,#7, yoshida2026introspecting#1, atkinson2026identifying#1,#4, pres2026consistency#4,#5, sherburn2024language#1,#3,#4, song2025language#1,#2, plunkett2025self#2, betley2025tell#1); P->X 3 (pres2026consistency#1-#3)"
+   ]
+  },
+  {
+   "n": 41,
+   "text": "[Hase et al. 2020](./#p=hase2020leakageadjusted), with leakage indicator $k_i=\\mathbb{1}[\\hat y_i\\mid\\hat e_i]$ (the simulator recovers the label from the explanation alone): $\\mathrm{LAS}_k=\\operatorname*{mean}_{i:\\,k_i=k}\\big(\\mathbb{1}[\\hat y_i\\mid x_i,\\hat e_i]-\\mathbb{1}[\\hat y_i\\mid x_i]\\big)$ and $\\mathrm{LAS}=\\tfrac12(\\mathrm{LAS}_0+\\mathrm{LAS}_1)$.",
+   "papers": [
+    "hase2020leakageadjusted"
+   ],
+   "evidence": [
+    "hase2020leakageadjusted#3",
+    "hase2020leakageadjusted#4"
+   ]
+  },
+  {
+   "n": 42,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm): $\\mathrm{NSG}=\\dfrac{\\mathrm{Acc}_{\\text{with}}-\\mathrm{Acc}_{\\text{without}}}{1-\\mathrm{Acc}_{\\text{without}}}$, the predictor's accuracy gain from the explanation on related inputs, normalized by the largest possible gain.",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm"
+   ],
+   "evidence": [
+    "mayne2026positivecasefaithfulnessllm#5"
+   ]
+  },
+  {
+   "n": 43,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring): a latent $z$ (e.g. a CoT) is faithful with respect to an output property $v$ if $z$ is a sufficient statistic for $v$, a definition that makes no claim about the causal role of $z$.",
+   "papers": [
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "baker2025monitoring#2",
+    "baker2025monitoring full text G.2: “our definition of faithfulness does not imply any expectations of causality”"
+   ]
+  },
+  {
+   "n": 44,
+   "text": "Here the object is a model's report about itself (its policy, dispositions, learned behaviors, confidence, internal states, or whether an edit would change its answer), and the report is faithful when it matches what the model does or what is inside it.",
+   "papers": [],
+   "evidence": [
+    "betley2025tell#2",
+    "atkinson2026identifying#1",
+    "binder2024looking#4",
+    "naphade2026me#2",
+    "guo2026introspective#9"
+   ]
+  },
+  {
+   "n": 45,
+   "text": "Rows divide on what else is required: agreement alone ([Zeng et al. 2026](./#p=zeng2026evaluating)'s self-modeling), privileged access, shown when a model predicts itself better than another model trained on the same data ([Binder et al. 2024](./#p=binder2024looking); 12 rows define privileged access), or grounding, a shared causal mechanism between report and behavior ([Atkinson et al. 2026](./#p=atkinson2026identifying)), and 27 of the 213 rows come from clusters 6 and 9 of the first pass.",
+   "papers": [
+    "zeng2026evaluating",
+    "binder2024looking",
+    "atkinson2026identifying"
+   ],
+   "evidence": [
+    "zeng2026evaluating#5",
+    "binder2024looking#3",
+    "binder2024looking#5",
+    "atkinson2026identifying#2",
+    "atkinson2026identifying#5",
+    "self-report-accuracy rows with \"privileged\" in term: 12",
+    "27 first-pass rows moved into self-report-accuracy (P->SR 20, M->SR 7); cluster has 214 rows"
+   ]
+  },
+  {
+   "n": 46,
+   "text": "[Binder et al. 2024](./#p=binder2024looking): a model $M1$ accesses a fact $F$ by introspection if $M1$ correctly reports $F$ when queried and a stronger model $M2$, given $M1$'s training data and the same query, does not report $F$.",
+   "papers": [
+    "binder2024looking"
+   ],
+   "evidence": [
+    "binder2024looking#3"
+   ]
+  },
+  {
+   "n": 47,
+   "text": "[Zeng et al. 2026](./#p=zeng2026evaluating): $\\mathrm{skill}_t(M;\\mathcal{D})=s_t(M;\\mathcal{D})-b_t(M;\\mathcal{D})$, the agreement between self-reports and the model's own measured behavior minus the score of the best dummy predictor on the same model's targets.",
+   "papers": [
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "zeng2026evaluating#8",
+    "zeng2026evaluating#10"
+   ]
+  },
+  {
+   "n": 48,
+   "text": "[Nguyen et al. 2026a](./#p=nguyen2026can): recognition gap $\\Delta=P(\\text{claim}\\mid\\text{control})-P(\\text{claim}\\mid\\text{prefill})$, the drop in how often a model claims a prior output as intended when that output was prefilled.",
+   "papers": [
+    "nguyen2026can"
+   ],
+   "evidence": [
+    "nguyen2026can#1"
+   ]
+  },
+  {
+   "n": 49,
+   "text": "This is the feature-attribution answer carried over from pre-LLM interpretability: an explanation is faithful if the input parts it marks as important are the ones whose removal or alteration changes the prediction (erasure, comprehensiveness, sufficiency), or if the inputs that drive the prediction also drive the explanation (attribution agreement, CC-SHAP).",
+   "papers": [],
+   "evidence": [
+    "deyoung2020eraser#3",
+    "deyoung2020eraser#4",
+    "wiegreffe2021measuring#5",
+    "parcalabescu2023measuring#4",
+    "parcalabescu2023measuring#5"
+   ]
+  },
+  {
+   "n": 50,
+   "text": "Self-explanation work applies the same logic by editing the input according to the model's own attribution, redaction or counterfactual explanation and checking whether the prediction flips ([Madsen et al. 2024](./#p=madsen2024self); [Doi et al. 2025](./#p=doi2025investigating)), and [Madsen et al. 2023](./#p=madsen2023faithfulness) add that erasure scores are valid only if the masked input is in-distribution.",
+   "papers": [
+    "madsen2024self",
+    "doi2025investigating",
+    "madsen2023faithfulness"
+   ],
+   "evidence": [
+    "madsen2024self#6",
+    "doi2025investigating#2",
+    "madsen2023faithfulness#12"
+   ]
+  },
+  {
+   "n": 51,
+   "text": "The CoT literature reaches this cluster mainly through [Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring)'s CC-SHAP: 15 of the 31 rows that borrow from Parcalabescu & Frank are here.",
+   "papers": [
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "Parcalabescu & Frank 2023 borrowed by 31 rows (faith_stats); 15 of them in input-importance (python count)"
+   ]
+  },
+  {
+   "n": 52,
+   "text": "[DeYoung et al. 2020](./#p=deyoung2020eraser), with $m(\\cdot)_j$ the predicted probability of class $j$ and $r_i$ the rationale for $x_i$: $\\mathrm{comprehensiveness}=m(x_i)_j-m(x_i\\setminus r_i)_j$ and $\\mathrm{sufficiency}=m(x_i)_j-m(r_i)_j$; [Akter et al. 2025](./#p=akter2025causal) apply KL versions to CoT tokens, $\\mathrm{COMP}=\\mathrm{KL}\\big(p(Y\\mid x,T)\\,\\|\\,p(Y\\mid x,T\\setminus R)\\big)$ and $\\mathrm{SUFF}=\\mathrm{KL}\\big(p(Y\\mid x,T)\\,\\|\\,p(Y\\mid x,R)\\big)$.",
+   "papers": [
+    "deyoung2020eraser",
+    "akter2025causal"
+   ],
+   "evidence": [
+    "deyoung2020eraser#3",
+    "deyoung2020eraser#4",
+    "akter2025causal#5"
+   ]
+  },
+  {
+   "n": 53,
+   "text": "[Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring): $\\text{CC-SHAP}=1-\\mathrm{DIV}\\big(C(P)\\,\\|\\,C(E)\\big)$, with $C(P)$ and $C(E)$ the per-token Shapley contribution ratios of the input to the prediction and to the explanation; the authors call it a self-consistency measure, not a faithfulness measure.",
+   "papers": [
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "parcalabescu2023measuring#5"
+   ]
+  },
+  {
+   "n": 54,
+   "text": "Here faithfulness is checked against the model's internals: a CoT step is faithful if it describes a process that took place in the model, as shown by probes, attribution graphs, circuits, SAE concepts or activation readouts, and [Jia & Mu 2026](./#p=jia2026decorative) and [Anonymous 2026 (GRACE)](./#p=anon2026grace) present this as the full notion that behavioral tests only approximate.",
+   "papers": [
+    "jia2026decorative",
+    "anon2026grace"
+   ],
+   "evidence": [
+    "gurarieh2026faithfulness#2",
+    "bhan2025did#9",
+    "wang2026concept#2",
+    "anthropic2026opus55#14",
+    "jia2026decorative#2",
+    "anon2026grace#2"
+   ]
+  },
+  {
+   "n": 55,
+   "text": "[Hong et al. 2026](./#p=hong2026making) score the agreement between probe-detected and verbalized strategy use and call a verbalized but unused strategy \"parametric unfaithfulness\", and [Anthropic 2026](./#p=anthropic2026opus55) audit \"places where the model’s internal representations differ from what it verbalized\".",
+   "papers": [
+    "hong2026making",
+    "anthropic2026opus55"
+   ],
+   "evidence": [
+    "hong2026making#19: “parametric unfaithfulness”",
+    "anthropic2026opus55#14: “places where the model’s internal representations differ from what it verbalized”"
+   ]
+  },
+  {
+   "n": 56,
+   "text": "One row applies the word to a different object: [Lindsey et al. 2025](./#p=lindsey2025biology) ask whether a transcoder replacement is a causally faithful model of the MLP it replaces.",
+   "papers": [
+    "lindsey2025biology"
+   ],
+   "evidence": [
+    "lindsey2025biology#6"
+   ]
+  },
+  {
+   "n": 57,
+   "text": "[Bhan et al. 2025](./#p=bhan2025did), NeuroFaith: for an explanation $e(x)$ containing concepts $c_1,\\dots,c_p$ and an interpreter attribution $I_\\Gamma$ along circuit $\\Gamma$, $F(x,e)=\\frac1p\\sum_{i=1}^{p}\\mathbb{1}_{I_\\Gamma(c_i)>0}$.",
+   "papers": [
+    "bhan2025did"
+   ],
+   "evidence": [
+    "bhan2025did#2"
+   ]
+  },
+  {
+   "n": 58,
+   "text": "[Anonymous 2026 (computation alignment)](./#p=anon2026computation), computation alignment of a sample $s$: $A(s)=\\dfrac{|N^{*}_{r}\\cap N^{*}_{y}|}{|N^{*}_{r}\\cup N^{*}_{y}|}$, the node overlap between attribution circuits traced from a reasoning-critical and an answer-critical token.",
+   "papers": [
+    "anon2026computation"
+   ],
+   "evidence": [
+    "anon2026computation#3"
+   ]
+  },
+  {
+   "n": 59,
+   "text": "[Wang et al. 2026b](./#p=wang2026concept): $\\Delta p=P(\\hat y\\mid\\mathbf r_{\\text{pred}})-P(\\hat y\\mid\\mathbf r'_{\\text{pred}})$, the drop in answer probability when the SAE concepts shared by the CoT pass and the direct-prediction pass are removed from the direct pass.",
+   "papers": [
+    "wang2026concept"
+   ],
+   "evidence": [
+    "wang2026concept#5",
+    "wang2026concept#2"
+   ]
+  },
+  {
+   "n": 60,
+   "text": "Here a statement is judged against what the model itself believes or knows: a lie is a statement the model believes to be false ([Wang et al. 2025b](./#p=wang2025evaluating)), and the MASK design (Ren et al. 2025, outside the map), adopted or adapted by 10 rows from 5 papers, reads belief from a neutral prompt and dishonesty from a contradicting answer under pressure.",
+   "papers": [
+    "wang2025evaluating"
+   ],
+   "evidence": [
+    "wang2025evaluating#2",
+    "rows borrowing Ren et al. 2025 (faith_stats: 10 rows, 5 papers): anthropic2026opus55#10, #11, blandfort2026strangers#22, chang2026catalyzing#10, #11, tang2026unlearning#3, #4, #5, #7, wang2025evaluating#8",
+    "chang2026catalyzing#10"
+   ]
+  },
+  {
+   "n": 61,
+   "text": "The cluster also holds confessions, post-answer self-reports trained and scored for honesty (29 rows from [Joglekar et al. 2025](./#p=joglekar2025training)), and admissions under interrogation ([Li et al. 2025c](./#p=li2026spilling)).",
+   "papers": [
+    "joglekar2025training",
+    "li2026spilling"
+   ],
+   "evidence": [
+    "joglekar2025training: 29 rows, all in honesty-dishonesty",
+    "joglekar2025training#1",
+    "li2026spilling#6",
+    "li2026spilling#7"
+   ]
+  },
+  {
+   "n": 62,
+   "text": "122 of the 123 rows define a companion notion, and [Tafjord et al. 2022](./#p=tafjord2022entailer), [Bhan et al. 2025](./#p=bhan2025did), [Turpin et al. 2023](./#p=turpin2023language), [Sherburn et al. 2024](./#p=sherburn2024language) and [Walden & Wanner 2026](./#p=walden2026reasoning) tie it to faithfulness explicitly.",
+   "papers": [
+    "tafjord2022entailer",
+    "bhan2025did",
+    "turpin2023language",
+    "sherburn2024language",
+    "walden2026reasoning"
+   ],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: honesty-dishonesty 123 rows, related=False 1",
+    "tafjord2022entailer#2",
+    "bhan2025did#27",
+    "turpin2023language#17",
+    "sherburn2024language#7",
+    "walden2026reasoning#6"
+   ]
+  },
+  {
+   "n": 63,
+   "text": "[Wang et al. 2025b](./#p=wang2025evaluating): in the Harm Pressure and Password Lock settings an intervened model $M_H$ is honest on $x$ if $\\mathrm{Acc}_{M_H}(x_p)\\geq\\mathrm{Acc}_M(x_n)-0.2$, and the honesty rate is the fraction of such $x$ among those with $\\mathrm{Acc}_M(x_n)\\geq0.75$.",
+   "papers": [
+    "wang2025evaluating"
+   ],
+   "evidence": [
+    "wang2025evaluating#11"
+   ]
+  },
+  {
+   "n": 64,
+   "text": "[Tang & Khanna 2026](./#p=tang2026unlearning): with a deception-triggering context $c^{+}$ and a neutral counterpart $c^{-}$ for the same question, a behavior is belief-stable deception when the model contradicts under $c^{+}$ a truth it reliably asserts under $c^{-}$.",
+   "papers": [
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "tang2026unlearning#4"
+   ]
+  },
+  {
+   "n": 65,
+   "text": "[Taufeeque et al. 2026](./#p=taufeeque2026obfuscation): the training target is $\\arg\\max_{\\theta\\in\\Theta_H}\\mathbb{E}_{x,y\\sim\\pi_\\theta(x)}[R(x,y)]$, where $\\Theta_H$ is the set of parameters whose policies produce honest responses with high probability.",
+   "papers": [
+    "taufeeque2026obfuscation"
+   ],
+   "evidence": [
+    "taufeeque2026obfuscation#7"
+   ]
+  },
+  {
+   "n": 66,
+   "text": "These rows define a companion term in order to say what faithfulness is not: of the 61 rows, 32 define plausibility, how convincing an explanation is to humans, and 22 a form of consistency (2 rows define both): 11 define or restate self-consistency in [Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring)'s sense, agreement between explanation and prediction at the output level, which they argue is all that input- and CoT-perturbation tests measure, and 6 rows of [Pres et al. 2026a](./#p=pres2026consistency) define consistency across related inputs.",
+   "papers": [
+    "parcalabescu2023measuring",
+    "pres2026consistency"
+   ],
+   "evidence": [
+    "`definitions.py dump faithfulness` + synth_faithfulness.json: contrast-notions 61 rows; term matches \"plausib\" 32, \"consisten\" 22, both 2 (ramnath2024tailoring#5, chen2025consistent#1)",
+    "Parcalabescu-sense self-consistency (11): anon2026crisp#10, tutek2025measuring#2, baker2025monitoring#11, admoni2026aligning#2, wang2026concept#3, bhan2025did#7, parcalabescu2023measuring#2, #3, #16, anon2026improving#30, arcuschin2025chain#24",
+    "pres2026consistency#1, #2, #3, #8, #9, #10 (consistency across related inputs)"
+   ]
+  },
+  {
+   "n": 67,
+   "text": "The remainder define effectiveness, truthfulness, informativeness, interpretability, monitorability, mechanistic relevance and human ratings of rationales; the monitorability definitions themselves are in the [Monitorability](#monitorability) section.",
+   "papers": [],
+   "evidence": [
+    "li2025better#2",
+    "chuang2026faithlm#8",
+    "viteri2026markovian#10",
+    "wiegreffe2019attention#7",
+    "ferreira2026outofsight#5",
+    "macar2025thought#5",
+    "wang2023pinto#10",
+    "wang2023scott#12"
+   ]
+  },
+  {
+   "n": 68,
+   "text": "[Pres et al. 2026a](./#p=pres2026consistency) place model faithfulness among instance-level consistency constraints, invariance $f(g(x))=f(x)$ and equivariance $f(g(x))=g'(f(x))$ for input and output transformations $g$ and $g'$.",
+   "papers": [
+    "pres2026consistency"
+   ],
+   "evidence": [
+    "pres2026consistency#3",
+    "pres2026consistency#9",
+    "pres2026consistency#10"
+   ]
+  },
+  {
+   "n": 69,
+   "text": "715 of the 1,973 rows are borrowed (486 adopted, 229 adapted), from 179 papers: 514 cite at least one source in the map, 200 cite only sources outside it, and one names no source.",
+   "papers": [],
+   "evidence": [
+    "dump faithfulness: stance adopted 486 + adapted 229 = 715 rows from 179 papers; 514 cite a source in index.csv, 200 only outside sources, 1 no source"
+   ]
+  },
+  {
+   "n": 70,
+   "text": "Four sources are each borrowed by 48 or more papers, and the majority of each one's borrowing rows fall in one cluster: [Turpin et al. 2023](./#p=turpin2023language) (58 of 102 rows) and [Chen et al. 2025](./#p=chen2025reasoning) (74 of 91) feed cluster 2, [Lanham et al. 2023](./#p=lanham2023measuring) (83 of 127) cluster 3, and [Jacovi & Goldberg 2020](./#p=jacovi2020towards) (53 of 79) cluster 1.",
+   "papers": [
+    "turpin2023language",
+    "chen2025reasoning",
+    "lanham2023measuring",
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "faith_stats most-borrowed: Turpin 76 papers, Lanham 70, Jacovi & Goldberg 55, Chen 2025 48, next Arcuschin 2025 21",
+    "clusters of borrowing rows (python): Turpin disclosure 58/102, Chen 2025 disclosure 74/91, Lanham causal dependence 83/127, Jacovi umbrella 53/79"
+   ]
+  },
+  {
+   "n": 71,
+   "text": "Of the new clusters, cluster 7 descends from [Binder et al. 2024](./#p=binder2024looking) (11 of 12 rows) and cluster 10 from MASK (all 10 rows that borrow from Ren et al. 2025), while no source of cluster 5 is borrowed by more than one paper.",
+   "papers": [
+    "binder2024looking"
+   ],
+   "evidence": [
+    "Binder 2024: 12 borrowing rows, 11 in self-report-accuracy",
+    "Ren et al. 2025: 10 borrowing rows, all in honesty-dishonesty",
+    "say-do-consistency borrowed sources each cited by 1 paper (Jia et al. 2025, Advani 2026, dong2025say, ...)"
+   ]
+  },
+  {
+   "n": 72,
+   "text": "65 rows from 54 papers cite [Jacovi & Goldberg 2020](./#p=jacovi2020towards) outside cluster 11, where 14 more rows cite them for a companion term.",
+   "papers": [
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "Jacovi & Goldberg borrowing rows: 79; outside contrast-notions 65 rows from 54 papers; in contrast-notions 14"
+   ]
+  },
+  {
+   "n": 73,
+   "text": "Jacovi & Goldberg word the definition two ways, \"accurately represents the reasoning process behind the model’s prediction\" and \"how accurately it reflects the true reasoning process of the model\"; 21 of the 65 rows keep \"reasoning process\" and 8 keep \"accurately represent\", and the substitutions in the others point toward different clusters:",
+   "papers": [
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "jacovi2020towards#1: “accurately represents the reasoning process behind the model’s prediction”",
+    "jacovi2020towards#2: “how accurately it reflects the true reasoning process of the model”",
+    "jacovi2020towards#1: “reasoning process”",
+    "jacovi2020towards#1: “accurately represent”",
+    "among the 65 rows: quote contains \"reasoning process\" 21, \"accurately represent\" 8 (python count)"
+   ]
+  },
+  {
+   "n": 74,
+   "text": "toward internal computation: \"the reasoning accurately describe the models internal computation\" ([Lewis-Lim et al. 2026](./#p=lewislim2026efficient)), \"the degree to which its reasoning traces reflect its internal decision-making\" ([Cheah et al. 2026](./#p=cheah2026training));",
+   "papers": [
+    "lewislim2026efficient",
+    "cheah2026training"
+   ],
+   "evidence": [
+    "lewislim2026efficient#1: “the reasoning accurately describe the models internal computation”",
+    "cheah2026training#1: “the degree to which its reasoning traces reflect its internal decision-making”",
+    "lewislim2026efficient#1",
+    "cheah2026training#1"
+   ]
+  },
+  {
+   "n": 75,
+   "text": "toward behavior: \"explanations should reflect how the model actually behaves, not just sound plausible\" ([Malladi & Srivastava 2026](./#p=malladi2026directly)), \"whether explanations support actual model behavior\" ([Hase et al. 2020](./#p=hase2020leakageadjusted));",
+   "papers": [
+    "malladi2026directly",
+    "hase2020leakageadjusted"
+   ],
+   "evidence": [
+    "malladi2026directly#1: “explanations should reflect how the model actually behaves, not just sound plausible”",
+    "hase2020leakageadjusted#1: “whether explanations support actual model behavior”",
+    "malladi2026directly#1",
+    "hase2020leakageadjusted#1"
+   ]
+  },
+  {
+   "n": 76,
+   "text": "toward causal role: \"the degree to which a model’s stated reasoning genuinely causes its final prediction, rather than merely accompanying it\" ([Somov et al. 2026](./#p=somov2026breaking));",
+   "papers": [
+    "somov2026breaking"
+   ],
+   "evidence": [
+    "somov2026breaking#1: “the degree to which a model’s stated reasoning genuinely causes its final prediction, rather than merely accompanying it”",
+    "somov2026breaking#1"
+   ]
+  },
+  {
+   "n": 77,
+   "text": "toward factors: \"An explanation is faithful if it reflects the factors behind a model’s prediction\" ([Anonymous 2026 (one draw)](./#p=anon2026one)).",
+   "papers": [
+    "anon2026one"
+   ],
+   "evidence": [
+    "anon2026one#1: “An explanation is faithful if it reflects the factors behind a model’s prediction”",
+    "anon2026one#1"
+   ]
+  },
+  {
+   "n": 78,
+   "text": "[Chen et al. 2025](./#p=chen2025reasoning) adapt the sentence in two ways at once (the attribution check marks it adapted): they relax it to \"the key decision factors and reasoning chains\" and add that these should \"enable us to predict how it would process similar inputs during deployment\", and their operational test uses only the first part.",
+   "papers": [
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "chen2025reasoning#1: “the key decision factors and reasoning chains”",
+    "chen2025reasoning#1: “enable us to predict how it would process similar inputs during deployment”",
+    "chen2025reasoning#1",
+    "attr chen2025reasoning#1 <- jacovi2020towards: adapted",
+    "chen2025reasoning#2 (score uses only hint verbalization)"
+   ]
+  },
+  {
+   "n": 79,
+   "text": "For Jacovi & Goldberg plausibility is \"how convincing the interpretation is to humans\", and [Lyu et al. 2023](./#p=lyu2023faithful) keep that sense (\"a.k.a. persuasiveness or understandability\").",
+   "papers": [
+    "lyu2023faithful",
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "jacovi2020towards#2: “how convincing the interpretation is to humans”",
+    "lyu2023faithful#3: “a.k.a. persuasiveness or understandability”",
+    "jacovi2020towards#2",
+    "lyu2023faithful#3"
+   ]
+  },
+  {
+   "n": 80,
+   "text": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) write instead that \"Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence\", citing Herman 2017, Lage et al. 2019 and Jacovi & Goldberg; the same sentence recurs in [Chen et al. 2024](./#p=chen2025consistent), [Chen et al. 2025](./#p=chen2025reasoning) have \"the factual correctness of a CoT and how convincingly it justifies the model’s response\", and [Cahlik et al. 2025](./#p=cahlik2025reasoninggrounded) reduce plausibility to whether \"the explanations are logically sound\"; the attribution check marks these four restatements partial against Jacovi & Goldberg.",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "chen2025consistent",
+    "chen2025reasoning",
+    "cahlik2025reasoninggrounded",
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#6: “Plausibility evaluates humans’ preference of an explanation based on its factual correctness and logical coherence”",
+    "chen2025reasoning#6: “the factual correctness of a CoT and how convincingly it justifies the model’s response”",
+    "cahlik2025reasoninggrounded#1: “the explanations are logically sound”",
+    "pmlr-v235-chen24bl#6",
+    "chen2025consistent#3",
+    "chen2025reasoning#6",
+    "cahlik2025reasoninggrounded#2",
+    "attr partial: pmlr-v235-chen24bl#6, chen2025consistent#3, chen2025reasoning#6, cahlik2025reasoninggrounded#2 <- jacovi2020towards"
+   ]
+  },
+  {
+   "n": 81,
+   "text": "Once plausibility means correctness, it can no longer be told apart from the validity-based definitions of cluster 4, such as [Xu et al. 2024](./#p=xu2024faithful)'s \"’faithful’ if both the answer and the process are correct and logical\".",
+   "papers": [
+    "xu2024faithful"
+   ],
+   "evidence": [
+    "xu2024faithful#1: “’faithful’ if both the answer and the process are correct and logical”",
+    "xu2024faithful#1",
+    "lyu2023faithful#7"
+   ]
+  },
+  {
+   "n": 82,
+   "text": "[Lanham et al. 2023](./#p=lanham2023measuring) report early answering and adding mistakes as task-level measures of post-hoc reasoning, read them with a hedge (\"the model is likely not ignoring the CoT\") and state that \"Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.\"",
+   "papers": [
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "lanham2023measuring#7: “the model is likely not ignoring the CoT”",
+    "lanham2023measuring#3: “Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness”",
+    "lanham2023measuring#6",
+    "lanham2023measuring#7",
+    "lanham2023measuring#3"
+   ]
+  },
+  {
+   "n": 83,
+   "text": "Borrowers apply the tests to single traces: [Tanneru et al. 2024](./#p=tanneru2024hardness) compute the area over the curve per instance, and [Tutek et al. 2025](./#p=tutek2025measuring) write \"If the prediction of the model changes, the CoT is considered faithful\"; the check marks these restatements adapted and supported.",
+   "papers": [
+    "tanneru2024hardness",
+    "tutek2025measuring"
+   ],
+   "evidence": [
+    "tutek2025measuring#8: “If the prediction of the model changes, the CoT is considered faithful”",
+    "tanneru2024hardness#3",
+    "tutek2025measuring#8",
+    "attr tanneru2024hardness#3 <- lanham: adapted; tutek2025measuring#8 <- lanham: supported"
+   ]
+  },
+  {
+   "n": 84,
+   "text": "The filler-tokens test changes its question: Lanham et al. ask whether filler accounts for CoT's accuracy gain (\"If the filler tokens provide a significant performance improvement, then the CoT may be unfaithful\"), while [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought) call a CoT \"unfaithful if this corruption does not change the original prediction\", and the check marks this partial.",
+   "papers": [
+    "zaman2025chainofthought",
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "lanham2023measuring#8: “If the filler tokens provide a significant performance improvement, then the CoT may be unfaithful”",
+    "zaman2025chainofthought#3: “unfaithful if this corruption does not change the original prediction”",
+    "lanham2023measuring#8",
+    "zaman2025chainofthought#3",
+    "attr zaman2025chainofthought#3 <- lanham: partial"
+   ]
+  },
+  {
+   "n": 85,
+   "text": "Nine rows in cluster 2 cite Lanham et al., and the check marks 4 supported, 3 partial and 2 other-claim, the last five because the cue evidence or cue test they credit to Lanham et al. is not in that paper, which runs no cue tests.",
+   "papers": [
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "attr Lanham checks on discloses-influences rows: supported anwar2026analyzing#29, ferreira2026truthful#10, #12, mohammadi2025evaluating#4; partial duzan2026chainofthought#28, golchin2026monitorability#4, jose2026strategic#1; other-claim ferreira2026truthful#2, macdermott2025reasoning#5"
+   ]
+  },
+  {
+   "n": 86,
+   "text": "[Turpin et al. 2023](./#p=turpin2023language) framed unfaithfulness predictively, as reasoning that can be \"misleading about how the system will make predictions on other examples (in which case we also call it unfaithful)\", and measured it by accuracy drops and by prediction pairs that change when the biasing feature is added.",
+   "papers": [
+    "turpin2023language"
+   ],
+   "evidence": [
+    "turpin2023language#6: “misleading about how the system will make predictions on other examples (in which case we also call it unfaithful)”",
+    "turpin2023language#5",
+    "turpin2023language#13"
+   ]
+  },
+  {
+   "n": 87,
+   "text": "[Chen et al. 2025](./#p=chen2025reasoning) made verbalization itself the score and required both mention and dependence, and [Chua & Evans 2025](./#p=chua2025deepseek) required the CoT to \"describe the switching effect of the cue\".",
+   "papers": [
+    "chen2025reasoning",
+    "chua2025deepseek"
+   ],
+   "evidence": [
+    "chua2025deepseek#4: “describe the switching effect of the cue”",
+    "chen2025reasoning#2",
+    "chen2025reasoning#3",
+    "chua2025deepseek#4"
+   ]
+  },
+  {
+   "n": 88,
+   "text": "Downstream the requirement splits: [Meek et al. 2025](./#p=meek2025measuring) score \"the presence of the given cue in a model’s reasoning trace\", [Little 2026](./#p=little2026length) calls a chain faithful \"when an LLM monitor can tell from it that the hint influenced the answer\" (the check marks Little's restatement of Chen et al. partial, since Chen et al. score an abrupt switch to the hint answer as not verbalized), and [Walden & Wanner 2026](./#p=walden2026reasoning) turn Chen et al.'s score into an \"intent-based honesty score\".",
+   "papers": [
+    "meek2025measuring",
+    "little2026length",
+    "walden2026reasoning",
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "meek2025measuring#5: “the presence of the given cue in a model’s reasoning trace”",
+    "little2026length#1: “when an LLM monitor can tell from it that the hint influenced the answer”",
+    "walden2026reasoning#3: “intent-based honesty score”",
+    "meek2025measuring#5",
+    "little2026length#1",
+    "attr little2026length#4 <- chen2025reasoning: partial",
+    "walden2026reasoning#3"
+   ]
+  },
+  {
+   "n": 89,
+   "text": "[Young 2026a](./#p=young2026measuring) concludes that the resulting numbers form \"a family of related constructs whose values depend critically on the measurement instrument\".",
+   "papers": [
+    "young2026measuring"
+   ],
+   "evidence": [
+    "young2026measuring#4: “a family of related constructs whose values depend critically on the measurement instrument”"
+   ]
+  },
+  {
+   "n": 90,
+   "text": "Forward simulation (Doshi-Velez & Kim 2017, outside the map) leads to [Hase et al. 2020](./#p=hase2020leakageadjusted)'s leakage-adjusted simulatability, which [Wang et al. 2023](./#p=wang2023scott), [Wang et al. 2022](./#p=wang2023pinto), [Paul et al. 2024](./#p=paul2024making) and [Chen et al. 2022](./#p=chen2022rev) use as the faithfulness of rationales (\"To evaluate the faithfulness of the rationales generated by the student, we use LAS\").",
+   "papers": [
+    "hase2020leakageadjusted",
+    "wang2023scott",
+    "wang2023pinto",
+    "paul2024making",
+    "chen2022rev",
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "wang2023scott#6: “To evaluate the faithfulness of the rationales generated by the student, we use LAS”"
+   ]
+  },
+  {
+   "n": 91,
+   "text": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) place simulatability under faithfulness, \"a special case of faithfulness, which requires the output predictor to be humans\", and [Chen et al. 2025](./#p=chen2025reasoning) call it \"a stricter form of faithfulness\".",
+   "papers": [
+    "pmlr-v235-chen24bl",
+    "chen2025reasoning"
+   ],
+   "evidence": [
+    "pmlr-v235-chen24bl#8: “a special case of faithfulness, which requires the output predictor to be humans”",
+    "chen2025reasoning#7: “a stricter form of faithfulness”"
+   ]
+  },
+  {
+   "n": 92,
+   "text": "[Mayne et al. 2026](./#p=mayne2026positivecasefaithfulnessllm)'s normalized simulatability gain is adopted by [Pres et al. 2026b](./#p=pres2026selfctrl), [Luo et al. 2026](./#p=luo2026removal) and [Lewis-Lim et al. 2026](./#p=lewislim2026efficient).",
+   "papers": [
+    "mayne2026positivecasefaithfulnessllm",
+    "pres2026selfctrl",
+    "luo2026removal",
+    "lewislim2026efficient"
+   ],
+   "evidence": [
+    "pres2026selfctrl#5",
+    "luo2026removal#6",
+    "lewislim2026efficient#3 (all cite mayne2026positivecasefaithfulnessllm)"
+   ]
+  },
+  {
+   "n": 93,
+   "text": "[Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring) argue that input- and CoT-perturbation tests measure self-consistency, \"a necessary, but not sufficient test for faithfulness\", and [Tutek et al. 2025](./#p=tutek2025measuring) use the argument to motivate parametric faithfulness, an intervention on the weights (unlearning a reasoning step), which [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought) and [Sun et al. 2026](./#p=sun2026investigating) adopt.",
+   "papers": [
+    "parcalabescu2023measuring",
+    "tutek2025measuring",
+    "zaman2025chainofthought",
+    "sun2026investigating"
+   ],
+   "evidence": [
+    "parcalabescu2023measuring#3: “a necessary, but not sufficient test for faithfulness”",
+    "parcalabescu2023measuring#3",
+    "tutek2025measuring#2",
+    "zaman2025chainofthought#4",
+    "sun2026investigating#21"
+   ]
+  },
+  {
+   "n": 94,
+   "text": "[Hong et al. 2026](./#p=hong2026making) keep both words but change both meanings: the check marks their \"parametric faithfulness\" partial against Chen et al., Hase & Potts and Zaman & Srivastava, and their sampling-based self-consistency partial against Parcalabescu & Frank and Tutek et al.",
+   "papers": [
+    "hong2026making",
+    "chen2025reasoning",
+    "parcalabescu2023measuring",
+    "tutek2025measuring",
+    "hase2026counterfactual",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "hong2026making#1: “parametric faithfulness”",
+    "attr hong2026making#1 <- chen2025reasoning, hase2026counterfactual: partial; hong2026making#5 <- chen2025reasoning, zaman2025chainofthought: partial; hong2026making#2 <- parcalabescu2023measuring, tutek2025measuring: partial"
+   ]
+  },
+  {
+   "n": 95,
+   "text": "[Binder et al. 2024](./#p=binder2024looking) define introspection as the ability \"to access facts about themselves that cannot be derived (logically or inductively) from their training data alone\" and test it by cross-prediction; 10 papers borrow from them, and the check marks 7 of the 12 borrowings supported, 4 adapted and 1 other-claim.",
+   "papers": [
+    "binder2024looking"
+   ],
+   "evidence": [
+    "binder2024looking#3: “to access facts about themselves that cannot be derived (logically or inductively) from their training data alone”",
+    "binder2024looking#3",
+    "binder2024looking#5",
+    "Binder borrowers (10 papers): anon2026introspection, betley2025tell, chua2025deepseek, karvonen2026would, li2025training, mayne2026positivecasefaithfulnessllm, plunkett2025self, shenoy2026introspection, song2025language, zeng2026evaluating",
+    "attr binder2024looking: 12 checks, supported 7, adapted 4, other-claim 1"
+   ]
+  },
+  {
+   "n": 96,
+   "text": "The reference model changes along the way: [Song et al. 2025](./#p=song2025language) compare against \"another model with nearly identical internal knowledge\", [Guo et al. 2026](./#p=guo2026introspective) claim that \"a model can model its own behavior better than its training target\", and [Zeng et al. 2026](./#p=zeng2026evaluating) define self-modeling by agreement alone and keep the cross-model comparison as a separate test of introspection.",
+   "papers": [
+    "song2025language",
+    "guo2026introspective",
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "song2025language#2: “another model with nearly identical internal knowledge”",
+    "guo2026introspective#16: “a model can model its own behavior better than its training target”",
+    "song2025language#2",
+    "guo2026introspective#16",
+    "zeng2026evaluating#5",
+    "zeng2026evaluating#29"
+   ]
+  },
+  {
+   "n": 97,
+   "text": "[Betley et al. 2025](./#p=betley2025tell)'s \"behavioral self-awareness\" is adopted by [Kutsyk & Zieliński 2026](./#p=kutsyk2026revealing), [Plunkett et al. 2025](./#p=plunkett2025self) and [Shenoy et al. 2026](./#p=shenoy2026introspection).",
+   "papers": [
+    "betley2025tell",
+    "kutsyk2026revealing",
+    "plunkett2025self",
+    "shenoy2026introspection"
+   ],
+   "evidence": [
+    "betley2025tell#2: “behavioral self-awareness”",
+    "kutsyk2026revealing#2",
+    "plunkett2025self#3",
+    "shenoy2026introspection#1"
+   ]
+  },
+  {
+   "n": 98,
+   "text": "Ren et al. 2025 supply the belief-relative test to [Anthropic 2026](./#p=anthropic2026opus55), [Blandfort & Pawar 2026](./#p=blandfort2026strangers), [Chang et al. 2026](./#p=chang2026catalyzing), [Tang & Khanna 2026](./#p=tang2026unlearning) and [Wang et al. 2025b](./#p=wang2025evaluating).",
+   "papers": [
+    "anthropic2026opus55",
+    "blandfort2026strangers",
+    "chang2026catalyzing",
+    "tang2026unlearning",
+    "wang2025evaluating"
+   ],
+   "evidence": [
+    "Ren et al. 2025 borrowers: anthropic2026opus55#10, blandfort2026strangers#22, chang2026catalyzing#10, tang2026unlearning#3, wang2025evaluating#8"
+   ]
+  },
+  {
+   "n": 99,
+   "text": "[Joglekar et al. 2025](./#p=joglekar2025training)'s confessions are borrowed by four papers, and the check marks [Anonymous 2026 (honesty adapters)](./#p=anon2026traininghonesty)'s description of a confession as a field that \"each assistant response also carries\" partial, because Joglekar et al. request the confession as a separate output after the answer.",
+   "papers": [
+    "joglekar2025training",
+    "anon2026traininghonesty"
+   ],
+   "evidence": [
+    "anon2026traininghonesty#5: “each assistant response also carries”",
+    "Joglekar borrowers: anon2026traininghonesty#5, dietz2026split#3, golchin2026monitorability#16, lee2026training#16",
+    "attr anon2026traininghonesty#5 <- joglekar2025training: partial"
+   ]
+  },
+  {
+   "n": 100,
+   "text": "Every borrowed row that cites a source in the map was checked against that source: 722 entry–source pairs on 514 rows from 163 papers, against 69 sources.",
+   "papers": [],
+   "evidence": [
+    "attr_*.json checks on faithfulness rows: 722 checks on 514 rows from 163 papers against 69 sources (faith_stats: 722 checks)"
+   ]
+  },
+  {
+   "n": 101,
+   "text": "The other 200 borrowed rows cite only sources outside the map, which have no cached text and are not checked; the most borrowed of these sources are Atanasova et al. 2023 and Ren et al. 2025 (10 rows each), then Doshi-Velez & Kim 2017 and Barez et al. 2025 (8 each).",
+   "papers": [],
+   "evidence": [
+    "200 borrowed rows cite only outside sources (python)",
+    "faith_stats: Atanasova et al. 2023 10 rows, Ren et al. 2025 10, Doshi-Velez & Kim 2017 8, Barez et al. 2025 8"
+   ]
+  },
+  {
+   "n": 102,
+   "text": "584 of the 722 checks (81%) find the definition in the cited source, as stated (433) or adapted (151); the other 138 fall on 121 rows from 79 papers.",
+   "papers": [],
+   "evidence": [
+    "faith_stats: supported 433, adapted 151, partial 94, renamed 23, other-claim 11, unsupported 10",
+    "non-supported checks fall on 121 rows from 79 papers (python)"
+   ]
+  },
+  {
+   "n": 103,
+   "text": "Ten checks credit a source with a definition it does not give.",
+   "papers": [],
+   "evidence": [
+    "faith_stats: unsupported 10"
+   ]
+  },
+  {
+   "n": 104,
+   "text": "[Jacovi & Goldberg 2020](./#p=jacovi2020towards) are credited three times: by [Sanyal et al. 2022](./#p=sanyal2022fairr) for whether models are \"actually learning to solve the task or rather depending on some shortcut patterns\", by [Somov et al. 2026](./#p=somov2026breaking) for a causal definition (stated reasoning that \"genuinely causes its final prediction\"), and by [Reddy et al. 2025](./#p=reddy2025principled) for the finding that CoTs \"often omit key steps or fabricate plausible but untrue rationales\", which their 2020 opinion piece predates.",
+   "papers": [
+    "jacovi2020towards",
+    "sanyal2022fairr",
+    "somov2026breaking",
+    "reddy2025principled"
+   ],
+   "evidence": [
+    "sanyal2022fairr#2: “actually learning to solve the task or rather depending on some shortcut patterns”",
+    "somov2026breaking#1: “genuinely causes its final prediction”",
+    "reddy2025principled#10: “often omit key steps or fabricate plausible but untrue rationales”",
+    "attr unsupported: sanyal2022fairr#2, somov2026breaking#1, reddy2025principled#10 <- jacovi2020towards"
+   ]
+  },
+  {
+   "n": 105,
+   "text": "The other seven fall on seven sources once each: [Lanham et al. 2023](./#p=lanham2023measuring) for [Gur-Arieh et al. 2026](./#p=gurarieh2026faithfulness)'s simulatability metric, [Lyu et al. 2023](./#p=lyu2023faithful) for [Yu et al. 2026](./#p=yu2026outcome)'s perturbation test, [Madsen et al. 2024](./#p=madsen2024self) for a simulatability evaluation ([Chuang et al. 2024](./#p=chuang2026faithlm)), [Chua et al. 2024](./#p=chua2024biasaugmented) for training a CoT to acknowledge a cue only when it mattered ([Karvonen et al. 2026](./#p=karvonen2026would)), [Boppana et al. 2026](./#p=boppana2026reasoning) for a sense of \"reasoning theater\" that Boppana et al. do not use ([Nguyen et al. 2026b](./#p=nguyen2026generalization)), [Matton et al. 2025](./#p=matton2025walk) for CoT edits ([Somov et al. 2026](./#p=somov2026breaking)) and [Zhao & Daumé 2025](./#p=zhao2025necessary) for consistency across samples ([Hong et al. 2026](./#p=hong2026making)).",
+   "papers": [
+    "lanham2023measuring",
+    "gurarieh2026faithfulness",
+    "lyu2023faithful",
+    "yu2026outcome",
+    "madsen2024self",
+    "chuang2026faithlm",
+    "chua2024biasaugmented",
+    "karvonen2026would",
+    "boppana2026reasoning",
+    "nguyen2026generalization",
+    "matton2025walk",
+    "somov2026breaking",
+    "zhao2025necessary",
+    "hong2026making"
+   ],
+   "evidence": [
+    "nguyen2026generalization#5: “reasoning theater”",
+    "attr unsupported: gurarieh2026faithfulness#29 <- lanham2023measuring; yu2026outcome#2 <- lyu2023faithful; chuang2026faithlm#7 <- madsen2024self; karvonen2026would#17 <- chua2024biasaugmented; nguyen2026generalization#5 <- boppana2026reasoning; somov2026breaking#18 <- matton2025walk; hong2026making#2 <- zhao2025necessary"
+   ]
+  },
+  {
+   "n": 106,
+   "text": "The partial verdicts concentrate on the most-borrowed sources.",
+   "papers": [],
+   "evidence": [
+    "attr partial by source: lanham2023measuring 18, chen2025reasoning 14, turpin2023language 11, jacovi2020towards 10"
+   ]
+  },
+  {
+   "n": 107,
+   "text": "[Lanham et al. 2023](./#p=lanham2023measuring) receive 18 of their 127 checks as partial, [Chen et al. 2025](./#p=chen2025reasoning) 14 of 91, [Turpin et al. 2023](./#p=turpin2023language) 11 of 102 and [Jacovi & Goldberg 2020](./#p=jacovi2020towards) 10 of 79.",
+   "papers": [
+    "lanham2023measuring",
+    "chen2025reasoning",
+    "turpin2023language",
+    "jacovi2020towards"
+   ],
+   "evidence": [
+    "attr: lanham2023measuring 127 checks (18 partial); chen2025reasoning 91 (14); turpin2023language 102 (11); jacovi2020towards 79 (10)"
+   ]
+  },
+  {
+   "n": 108,
+   "text": "Besides the cue evidence credited to Lanham et al. and the plausibility restatements credited to Jacovi & Goldberg (see Lineage), [Cox et al. 2026](./#p=cox2026posthoc) (\"in less than 20% of samples\") and [Jia & Mu 2026](./#p=jia2026decorative) (\"less than $20\\%$ of the time\") put Chen et al.'s verbalization rate below 20%, where Chen et al. report \"25% for Claude 3.7 Sonnet and 39% for DeepSeek R1\", and [Imrankhan 2026](./#p=imrankhan2026better) credits Turpin et al. with an \"Unfaithful CoT Rate\" that Turpin et al. do not define.",
+   "papers": [
+    "cox2026posthoc",
+    "jia2026decorative",
+    "imrankhan2026better",
+    "jacovi2020towards",
+    "lanham2023measuring",
+    "chen2025reasoning",
+    "turpin2023language"
+   ],
+   "evidence": [
+    "cox2026posthoc#17: “in less than 20% of samples”",
+    "jia2026decorative#16: “less than $20\\%$ of the time”",
+    "chen2025reasoning full text: “25% for Claude 3.7 Sonnet and 39% for DeepSeek R1”",
+    "imrankhan2026better#2: “Unfaithful CoT Rate”",
+    "cox2026posthoc#17",
+    "jia2026decorative#16",
+    "attr cox2026posthoc#17, jia2026decorative#16 <- chen2025reasoning: partial",
+    "attr imrankhan2026better#2 <- turpin2023language: partial"
+   ]
+  },
+  {
+   "n": 109,
+   "text": "Two citing papers account for 15 of the 138.",
+   "papers": [],
+   "evidence": [
+    "non-supported checks by citing paper: sun2026investigating 8, hong2026making 7"
+   ]
+  },
+  {
+   "n": 110,
+   "text": "[Sun et al. 2026](./#p=sun2026investigating) (8) attach a faithful-if-the-answer-changes reading to Lanham et al.'s filler test (2 partial), rename the hint test (2 renamed, point 4), describe Admoni et al.'s post-hoc attribution test as a CoT test (2 partial), and receive one partial each on Turpin et al. and Zaman & Srivastava; [Hong et al. 2026](./#p=hong2026making) (7) misattribute both of their terms.",
+   "papers": [
+    "sun2026investigating",
+    "hong2026making",
+    "lanham2023measuring",
+    "turpin2023language",
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "attr sun2026investigating#5, #18 <- lanham2023measuring: partial (filler test); sun2026investigating#11 <- chen2025reasoning, chua2025deepseek: renamed; sun2026investigating#6, #10 <- admoni2026aligning: partial; sun2026investigating#8 <- turpin2023language: partial; sun2026investigating#14 <- zaman2025causal: partial",
+    "non-supported checks by citing paper: hong2026making 7"
+   ]
+  },
+  {
+   "n": 111,
+   "text": "Hong et al.'s \"parametric faithfulness\" is partial against [Chen et al. 2025](./#p=chen2025reasoning) (twice), [Hase & Potts 2026](./#p=hase2026counterfactual) and [Zaman & Srivastava 2025b](./#p=zaman2025chainofthought), because the term comes from [Tutek et al. 2025](./#p=tutek2025measuring), where it means an intervention on the weights; their self-consistency \"across multiple samples or under paraphrase\" is partial against [Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring) and Tutek et al. and unsupported against [Zhao & Daumé 2025](./#p=zhao2025necessary); the quoted rows keep Hong et al.'s wording, so the error is theirs, not the extraction's.",
+   "papers": [
+    "chen2025reasoning",
+    "hase2026counterfactual",
+    "zaman2025chainofthought",
+    "tutek2025measuring",
+    "parcalabescu2023measuring",
+    "zhao2025necessary",
+    "hong2026making"
+   ],
+   "evidence": [
+    "zaman2025chainofthought#17: “parametric faithfulness”",
+    "hong2026making#2: “across multiple samples or under paraphrase”",
+    "attr hong2026making#1 <- chen2025reasoning partial, <- hase2026counterfactual partial; hong2026making#5 <- chen2025reasoning partial, <- zaman2025chainofthought partial; hong2026making#2 <- parcalabescu2023measuring partial, <- tutek2025measuring partial, <- zhao2025necessary unsupported",
+    "tutek2025measuring#1 (parametric faithfulness)"
+   ]
+  },
+  {
+   "n": 112,
+   "text": "23 checks find a renaming.",
+   "papers": [],
+   "evidence": [
+    "faith_stats: renamed 23"
+   ]
+  },
+  {
+   "n": 113,
+   "text": "[Yang et al. 2025](./#p=yang2025investigating) give the name Scheming to Turpin et al. 2025's \"effective cue influence rate (ECR)\", [Haskins et al. 2026](./#p=haskins2026training) call Emmons et al.'s necessity condition a \"faithfulness floor\", [Sun et al. 2026](./#p=sun2026investigating) give the hint test of Chen et al. and Chua & Evans Turpin et al.'s label \"Biasing Features\", and [Chen et al. 2024](./#p=chen2025consistent) call the simulation precision of [Chen et al. 2023](./#p=pmlr-v235-chen24bl) \"explanation consistency\".",
+   "papers": [
+    "yang2025investigating",
+    "haskins2026training",
+    "sun2026investigating",
+    "chen2025consistent",
+    "pmlr-v235-chen24bl",
+    "chen2025reasoning",
+    "turpin2023language",
+    "emmons2025chain",
+    "chua2025deepseek",
+    "turpin2025teaching"
+   ],
+   "evidence": [
+    "turpin2025teaching full text: “effective cue influence rate (ECR)”",
+    "haskins2026training#3: “faithfulness floor”",
+    "sun2026investigating#10: “Biasing Features”",
+    "chen2025consistent full text: “explanation consistency”",
+    "attr renamed: yang2025investigating#6 <- turpin2025teaching; haskins2026training#3 <- emmons2025chain; sun2026investigating#11 <- chen2025reasoning, chua2025deepseek; chen2025consistent#4 <- pmlr-v235-chen24bl"
+   ]
+  },
+  {
+   "n": 114,
+   "text": "Of the 556 checks on rows the extraction marked adopted, 21 come back adapted and 18 renamed, so these rows present a definition as borrowed while changing it or its name; of the 166 checks on rows marked adapted, 14 come back supported.",
+   "papers": [],
+   "evidence": [
+    "stance x verdict: adopted 556 checks (supported 419, partial 82, adapted 21, renamed 18, unsupported 9, other-claim 7); adapted 166 checks (adapted 130, supported 14, partial 12, renamed 5, other-claim 4, unsupported 1)"
+   ]
+  },
+  {
+   "n": 115,
+   "text": "These verdicts replace the ten mismatch records of the previous version, and the independent audit's corrections hold: 1 record is now unsupported ([Sanyal et al. 2022](./#p=sanyal2022fairr)), 6 partial, 2 renamed ([Haskins et al. 2026](./#p=haskins2026training), [Yang et al. 2025](./#p=yang2025investigating)) and 1 supported ([Höth et al. 2026](./#p=hoth2026atmanrl), whose plausible-but-unfaithful contrast [Agarwal et al. 2024](./#p=agarwal2024faithfulness) state).",
+   "papers": [
+    "sanyal2022fairr",
+    "haskins2026training",
+    "yang2025investigating",
+    "hoth2026atmanrl",
+    "agarwal2024faithfulness"
+   ],
+   "evidence": [
+    "previous synth_faithfulness.json mismatches: 10 records",
+    "attr: sanyal2022fairr#2 <- jacovi unsupported; lobo2024impact#2 <- lanham partial; hong2026making#1 <- chen2025reasoning partial; imrankhan2026better#2 <- turpin partial; pmlr-v235-chen24bl#6 <- jacovi partial; hong2026making#2 <- parcalabescu partial; li2025drift#3 <- parcalabescu partial; haskins2026training#3 <- emmons2025chain renamed; yang2025investigating#6 <- turpin2025teaching renamed; hoth2026atmanrl#5 <- agarwal2024faithfulness supported",
+    "codex_review_1.md §4 (Yang wrong as misattribution; Hong#2 and Höth overstated)"
+   ]
+  },
+  {
+   "n": 116,
+   "text": "[Lobo et al. 2024](./#p=lobo2024impact)'s attribution to Lanham et al. is partial: Lanham et al. contrast reasoning that drives the answer with post-hoc reasoning, but state that post-hoc reasoning neither guarantees nor excludes faithfulness, and the previous version's unsettled case, the per-trace readings of Lanham et al.'s tests by [Tanneru et al. 2024](./#p=tanneru2024hardness) and [Tutek et al. 2025](./#p=tutek2025measuring), is settled as adapted and supported.",
+   "papers": [
+    "lobo2024impact",
+    "tanneru2024hardness",
+    "tutek2025measuring",
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "attr lobo2024impact#2 <- lanham2023measuring: partial",
+    "lanham2023measuring#3",
+    "attr tanneru2024hardness#3 <- lanham adapted; tutek2025measuring#8 <- lanham supported"
+   ]
+  },
+  {
+   "n": 117,
+   "text": "[Lanham et al. 2023](./#p=lanham2023measuring) read an unchanged answer after an inserted mistake as evidence of post-hoc reasoning, with a hedge (\"the model is likely not ignoring the CoT\"), and do not treat post-hoc reasoning as unfaithful: \"Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness.\"",
+   "papers": [
+    "lanham2023measuring"
+   ],
+   "evidence": [
+    "lanham2023measuring#7: “the model is likely not ignoring the CoT”",
+    "lanham2023measuring#3: “Reasoning not being post-hoc does not guarantee faithfulness, nor does being post-hoc exclude faithfulness”",
+    "lanham2023measuring#7",
+    "lanham2023measuring#3"
+   ]
+  },
+  {
+   "n": 118,
+   "text": "Rows that apply the test to single traces drop the hedge: [Tutek et al. 2025](./#p=tutek2025measuring) write \"If the prediction of the model changes, the CoT is considered faithful\", and [Akter et al. 2025](./#p=akter2025causal) require that \"A faithful model, upon processing the logically inconsistent trace, should change its prediction or at least become less certain.\"",
+   "papers": [
+    "tutek2025measuring",
+    "akter2025causal"
+   ],
+   "evidence": [
+    "tutek2025measuring#8: “If the prediction of the model changes, the CoT is considered faithful”",
+    "akter2025causal#2: “A faithful model, upon processing the logically inconsistent trace, should change its prediction or at least become less certain”"
+   ]
+  },
+  {
+   "n": 119,
+   "text": "[Cox et al. 2026](./#p=cox2026posthoc) accept the verdict while noting its cost: answering correctly despite a flawed scratchpad \"is perhaps the preferred behavior, but it would constitute unfaithful reasoning\".",
+   "papers": [
+    "cox2026posthoc"
+   ],
+   "evidence": [
+    "cox2026posthoc#3: “is perhaps the preferred behavior, but it would constitute unfaithful reasoning”"
+   ]
+  },
+  {
+   "n": 120,
+   "text": "[Fareed 2026](./#p=fareed2026plan) rejects it: \"corruption cannot distinguish unfaithfulness from justified correction, since ignoring a broken chain is good behavior\".",
+   "papers": [
+    "fareed2026plan"
+   ],
+   "evidence": [
+    "fareed2026plan#6: “corruption cannot distinguish unfaithfulness from justified correction, since ignoring a broken chain is good behavior”"
+   ]
+  },
+  {
+   "n": 121,
+   "text": "[Jia & Mu 2026](./#p=jia2026decorative) separate silent bypass from self-correction and call a high bypass rate \"consistent with faithful reasoning\" in the computation-to-CoT sense, while [Han et al. 2026b](./#p=han2026rfeval)'s stance consistency accepts a change of stance only when the output identifies the flaw, so that silent correction counts as unfaithful (\"unfaithful-correct cases, such as silent corrections\").",
+   "papers": [
+    "jia2026decorative",
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "jia2026decorative#7: “consistent with faithful reasoning”",
+    "han2026rfeval#8: “unfaithful-correct cases, such as silent corrections”",
+    "jia2026decorative#7",
+    "han2026rfeval#10",
+    "han2026rfeval#8"
+   ]
+  },
+  {
+   "n": 122,
+   "text": "For cluster 2 it is the paradigm case: \"a CoT that does not verbalize the hint while using the hint is clearly unfaithful\" ([Chen et al. 2025](./#p=chen2025reasoning); likewise [Turpin et al. 2023](./#p=turpin2023language), [Chua & Evans 2025](./#p=chua2025deepseek), [Arcuschin et al. 2026](./#p=arcuschin2026biases)).",
+   "papers": [
+    "chen2025reasoning",
+    "turpin2023language",
+    "chua2025deepseek",
+    "arcuschin2026biases"
+   ],
+   "evidence": [
+    "chen2025reasoning#4: “a CoT that does not verbalize the hint while using the hint is clearly unfaithful”"
+   ]
+  },
+  {
+   "n": 123,
+   "text": "[Zaman & Srivastava 2025b](./#p=zaman2025chainofthought) answer that the test \"confuses unfaithfulness with incompleteness, the lossy compression needed to turn distributed transformer computation into a linear natural language narrative\", that it is \"a test of verbalized sensitivity to a known intervention\" which \"is not the same as faithfulness\", and that with more samples the probability of a hint-verbalizing CoT \"increases to up to 90% in some settings\"; they call the analysis \"too strong for drawing conclusions about CoT faithfulness\" and do not claim that the flagged traces are faithful.",
+   "papers": [
+    "zaman2025chainofthought"
+   ],
+   "evidence": [
+    "zaman2025chainofthought#5: “confuses unfaithfulness with incompleteness, the lossy compression needed to turn distributed transformer computation into a linear natural language narrative”",
+    "zaman2025chainofthought#7: “a test of verbalized sensitivity to a known intervention”",
+    "zaman2025chainofthought#7: “is not the same as faithfulness”",
+    "zaman2025chainofthought full text: “increases to up to 90% in some settings”",
+    "zaman2025chainofthought full text: “too strong for drawing conclusions about CoT faithfulness”",
+    "zaman2025chainofthought full text P15, P20, P25, P125"
+   ]
+  },
+  {
+   "n": 124,
+   "text": "[Anonymous 2026 (one draw)](./#p=anon2026one) (\"A trace that omits the cue may be incomplete rather than unfaithful\") and [Nguyen et al. 2026b](./#p=nguyen2026generalization) (\"cue acknowledgment does not establish faithfulness in the conventional sense\") take the same side.",
+   "papers": [
+    "anon2026one",
+    "nguyen2026generalization"
+   ],
+   "evidence": [
+    "anon2026one#9: “A trace that omits the cue may be incomplete rather than unfaithful”",
+    "nguyen2026generalization#3: “cue acknowledgment does not establish faithfulness in the conventional sense”"
+   ]
+  },
+  {
+   "n": 125,
+   "text": "An unchanged answer is faithful for [Turpin et al. 2023](./#p=turpin2023language), whose models must acknowledge biases or \"give predictions unaffected by bias\", and for [Turpin et al. 2025](./#p=turpin2025teaching): \"If the model’s answer does not change between the prompts, we say it is faithful.\"",
+   "papers": [
+    "turpin2023language",
+    "turpin2025teaching"
+   ],
+   "evidence": [
+    "turpin2023language#3: “give predictions unaffected by bias”",
+    "turpin2025teaching#3: “If the model’s answer does not change between the prompts, we say it is faithful”"
+   ]
+  },
+  {
+   "n": 126,
+   "text": "[Chua & Evans 2025](./#p=chua2025deepseek) and [Chen et al. 2025](./#p=chen2025reasoning) score only switches (\"We only test for faithfulness on the switched examples\"), while [Meek et al. 2025](./#p=meek2025measuring) also score non-switches and count a model that does not discuss the cue as \"not being faithful\".",
+   "papers": [
+    "chua2025deepseek",
+    "chen2025reasoning",
+    "meek2025measuring"
+   ],
+   "evidence": [
+    "chua2025deepseek#3: “We only test for faithfulness on the switched examples”",
+    "meek2025measuring#6: “not being faithful”"
+   ]
+  },
+  {
+   "n": 127,
+   "text": "Mention alone suffices for [Meek et al. 2025](./#p=meek2025measuring) and [Nguyen et al. 2026b](./#p=nguyen2026generalization); [Chen et al. 2025](./#p=chen2025reasoning), [egan 2026](./#p=egan2026hint) and [Anonymous 2026 (one draw)](./#p=anon2026one) also require that the CoT present the cue as a reason, and [Young 2026a](./#p=young2026measuring) shows that the two requirements are different constructs (\"mention\" vs \"dependence\").",
+   "papers": [
+    "meek2025measuring",
+    "nguyen2026generalization",
+    "chen2025reasoning",
+    "egan2026hint",
+    "anon2026one",
+    "young2026measuring"
+   ],
+   "evidence": [
+    "meek2025measuring#5",
+    "nguyen2026generalization#9",
+    "chen2025reasoning#3",
+    "egan2026hint#2",
+    "anon2026one#15",
+    "young2026measuring#6",
+    "young2026measuring#7"
+   ]
+  },
+  {
+   "n": 128,
+   "text": "Cluster 4 says yes: \"we use the term faithfulness to mean whether the model’s final answer is consistent with its generated chain-of-thought reasoning\" ([Zhao et al. 2026](./#p=zhao2026robustness); also [Li et al. 2024](./#p=li2025better), [Cahlik et al. 2025](./#p=cahlik2025reasoninggrounded)), and systems whose answer is computed from the chain claim faithfulness by construction ([Lyu et al. 2023](./#p=lyu2023faithful); [Pan et al. 2023](./#p=pan2023logiclm); [Tafjord et al. 2022](./#p=tafjord2022entailer)).",
+   "papers": [
+    "zhao2026robustness",
+    "li2025better",
+    "cahlik2025reasoninggrounded",
+    "lyu2023faithful",
+    "pan2023logiclm",
+    "tafjord2022entailer"
+   ],
+   "evidence": [
+    "zhao2026robustness#1: “we use the term faithfulness to mean whether the model’s final answer is consistent with its generated chain-of-thought reasoning”"
+   ]
+  },
+  {
+   "n": 129,
+   "text": "[Turpin et al. 2023](./#p=turpin2023language) call reasoning that is \"coherent and consistent with its prediction\" merely plausible, and possibly unfaithful, [Somov et al. 2026](./#p=somov2026breaking) write that \"self-consistency alone does not establish causal reliance\", and [Emmons et al. 2025b](./#p=emmons2025pragmatic) list \"thought-response consistency\" as distinct from faithfulness.",
+   "papers": [
+    "turpin2023language",
+    "somov2026breaking",
+    "emmons2025pragmatic",
+    "emmons2025chain"
+   ],
+   "evidence": [
+    "turpin2023language#6: “coherent and consistent with its prediction”",
+    "somov2026breaking#4: “self-consistency alone does not establish causal reliance”",
+    "emmons2025pragmatic#7: “thought-response consistency”"
+   ]
+  },
+  {
+   "n": 130,
+   "text": "[Lyu et al. 2023](./#p=lyu2023faithful) concede the point for unconstrained chains (\"this still does not imply that the reasoning chain is a faithful explanation\"), and [Zhao et al. 2026](./#p=zhao2026robustness) call their own measure weaker than \"the stronger notion of explanation faithfulness in the interpretability literature\".",
+   "papers": [
+    "lyu2023faithful",
+    "zhao2026robustness"
+   ],
+   "evidence": [
+    "lyu2023faithful#6: “this still does not imply that the reasoning chain is a faithful explanation”",
+    "zhao2026robustness#2: “the stronger notion of explanation faithfulness in the interpretability literature”"
+   ]
+  },
+  {
+   "n": 131,
+   "text": "Clusters 2, 3 and 6 judge faithfulness from inputs and outputs, and [Arcuschin et al. 2025](./#p=arcuschin2025chain) (\"behavioural faithfulness\") and [Malladi & Srivastava 2026](./#p=malladi2026directly) (\"behavioral faithfulness\") name their notions accordingly.",
+   "papers": [
+    "arcuschin2025chain",
+    "malladi2026directly"
+   ],
+   "evidence": [
+    "arcuschin2025chain#2: “behavioural faithfulness”",
+    "malladi2026directly#2: “behavioral faithfulness”",
+    "arcuschin2025chain#2",
+    "malladi2026directly#2"
+   ]
+  },
+  {
+   "n": 132,
+   "text": "[Parcalabescu & Frank 2023](./#p=parcalabescu2023measuring) argue that input- and CoT-perturbation tests measure self-consistency, \"a necessary, but not sufficient test for faithfulness\".",
+   "papers": [
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "parcalabescu2023measuring#3: “a necessary, but not sufficient test for faithfulness”"
+   ]
+  },
+  {
+   "n": 133,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) make a narrower claim, that \"intervention-based proxies for measuring causality are insufficient measures for faithfulness\", attribute the broader self-consistency argument to Parcalabescu & Frank, and add that \"causal faithfulness metrics are still valuable and worth measuring\".",
+   "papers": [
+    "baker2025monitoring",
+    "parcalabescu2023measuring"
+   ],
+   "evidence": [
+    "baker2025monitoring full text: “intervention-based proxies for measuring causality are insufficient measures for faithfulness”",
+    "baker2025monitoring full text: “causal faithfulness metrics are still valuable and worth measuring”",
+    "baker2025monitoring full text G.2 P195-P197; reference [76] is Parcalabescu and Frank"
+   ]
+  },
+  {
+   "n": 134,
+   "text": "[Anonymous 2026 (GRACE)](./#p=anon2026grace) write that behavioral tests \"cannot separate a model whose answer is supported by a different mechanism than its CoT suggests from one whose answer is simply robust to perturbation\", and [Han et al. 2026b](./#p=han2026rfeval) that apparent unfaithfulness \"is not a sufficient condition for unfaithfulness in the underlying process\".",
+   "papers": [
+    "anon2026grace",
+    "han2026rfeval"
+   ],
+   "evidence": [
+    "anon2026grace#2: “cannot separate a model whose answer is supported by a different mechanism than its CoT suggests from one whose answer is simply robust to perturbation”",
+    "han2026rfeval#27: “is not a sufficient condition for unfaithfulness in the underlying process”"
+   ]
+  },
+  {
+   "n": 135,
+   "text": "[Macar et al. 2025](./#p=macar2025thought) add the converse case, that CoT text \"can causally impact behavior\" even when it does not explain model internals.",
+   "papers": [
+    "macar2025thought"
+   ],
+   "evidence": [
+    "macar2025thought#5: “can causally impact behavior”",
+    "macar2025thought#5"
+   ]
+  },
+  {
+   "n": 136,
+   "text": "Four cluster 4 definitions tie faithfulness to correct reasoning or answers: [Xu et al. 2024](./#p=xu2024faithful) (\"’unfaithful’ if the answer is correct but the process is not\"), [Wang et al. 2025c](./#p=wang2025enhancing) (\"unfaithful trajectories that guess the correct option after a faulty chain of thought\"), [Li et al. 2024](./#p=li2025better), who compare the CoT with a gold rationale, and [Mohammadi et al. 2025](./#p=mohammadi2025evaluating), who check whether the reasoning \"logically entails the reference explanation\".",
+   "papers": [
+    "xu2024faithful",
+    "wang2025enhancing",
+    "li2025better",
+    "mohammadi2025evaluating"
+   ],
+   "evidence": [
+    "xu2024faithful#1: “’unfaithful’ if the answer is correct but the process is not”",
+    "wang2025enhancing#1: “unfaithful trajectories that guess the correct option after a faulty chain of thought”",
+    "mohammadi2025evaluating#2: “logically entails the reference explanation”"
+   ]
+  },
+  {
+   "n": 137,
+   "text": "Three papers exclude correctness: [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) hold that \"the evaluation of faithfulness should not involve human-provided gold labels\", [Hong et al. 2026](./#p=hong2026making) require agreement \"regardless of whether the answer is correct, since CIA measures faithfulness rather than correctness\", and [Shen et al. 2026](./#p=shen2026detecting) object to correctness-based indicators because \"reasoning correctness and faithfulness are not equivalent\".",
+   "papers": [
+    "dehghanighobadi2025can",
+    "hong2026making",
+    "shen2026detecting"
+   ],
+   "evidence": [
+    "dehghanighobadi2025can#7: “the evaluation of faithfulness should not involve human-provided gold labels”",
+    "hong2026making#4: “regardless of whether the answer is correct, since CIA measures faithfulness rather than correctness”",
+    "shen2026detecting#11: “reasoning correctness and faithfulness are not equivalent”"
+   ]
+  },
+  {
+   "n": 138,
+   "text": "On the stricter reading a trace that accurately reports flawed reasoning is faithful, while the correctness-based definitions count it as unfaithful whenever the answer happens to be right.",
+   "papers": [],
+   "evidence": [
+    "xu2024faithful#1",
+    "hong2026making#4",
+    "dehghanighobadi2025can full text"
+   ]
+  },
+  {
+   "n": 139,
+   "text": "[Turpin et al. 2023](./#p=turpin2023language) tie the two conditionally: if models can recognize the biasing features' influence, \"unfaithful CoT explanations may be a form of model dishonesty, as opposed to a lack of capability\".",
+   "papers": [
+    "turpin2023language"
+   ],
+   "evidence": [
+    "turpin2023language#17: “unfaithful CoT explanations may be a form of model dishonesty, as opposed to a lack of capability”"
+   ]
+  },
+  {
+   "n": 140,
+   "text": "[Walden & Wanner 2026](./#p=walden2026reasoning) adopt \"a lenient notion of honesty\" under which a CoT is honest when it states an intended or actual use of the hint, and note that the stated use \"may or may not correspond\" to how the hint is used \"in a mechanistic sense\", and [Sherburn et al. 2024](./#p=sherburn2024language) frame self-explanation the same way (\"This paper focuses on honesty\").",
+   "papers": [
+    "walden2026reasoning",
+    "sherburn2024language"
+   ],
+   "evidence": [
+    "walden2026reasoning#16: “a lenient notion of honesty”",
+    "walden2026reasoning#16: “may or may not correspond”",
+    "walden2026reasoning#16: “in a mechanistic sense”",
+    "sherburn2024language#7: “This paper focuses on honesty”",
+    "walden2026reasoning#16",
+    "sherburn2024language#7"
+   ]
+  },
+  {
+   "n": 141,
+   "text": "[Gur-Arieh et al. 2026](./#p=gurarieh2026faithfulness) reject this reading for step faithfulness, under which \"the step would be considered faithful unless the model knowingly and deceptively lied\", and adopt the mechanistic one.",
+   "papers": [
+    "gurarieh2026faithfulness"
+   ],
+   "evidence": [
+    "gurarieh2026faithfulness#4: “the step would be considered faithful unless the model knowingly and deceptively lied”",
+    "gurarieh2026faithfulness#4",
+    "gurarieh2026faithfulness#2"
+   ]
+  },
+  {
+   "n": 142,
+   "text": "[Anonymous 2026 (introspective oversight)](./#p=anon2026trainingoversight) and [Joglekar et al. 2025](./#p=joglekar2025training) separate honesty from accuracy: \"models can sincerely describe their actions incorrectly\", and Joglekar et al. claim only that honest confessions are easy to produce, not accurate ones (\"This is not to say that producing accurate confessions is an easy task, only honest ones\").",
+   "papers": [
+    "anon2026trainingoversight",
+    "joglekar2025training"
+   ],
+   "evidence": [
+    "anon2026trainingoversight#7: “models can sincerely describe their actions incorrectly”",
+    "joglekar2025training#6: “This is not to say that producing accurate confessions is an easy task, only honest ones”"
+   ]
+  },
+  {
+   "n": 143,
+   "text": "[Wang et al. 2025b](./#p=wang2025evaluating) call a statement a lie if the model \"believes it to be false\", requiring neither \"Deceptive intent\" nor \"Active awareness of falsehood at generation time\", and note that this \"differs somewhat from the colloquial notion of lying\"; [Tang & Khanna 2026](./#p=tang2026unlearning) call a claim the model does not believe deception \"whether or not an operator instruction asked for it\", while holding that \"Not all context-dependent non-literal behavior is deception\", such as roleplay or fiction.",
+   "papers": [
+    "wang2025evaluating",
+    "tang2026unlearning"
+   ],
+   "evidence": [
+    "wang2025evaluating#2: “believes it to be false”",
+    "wang2025evaluating#13: “Deceptive intent”",
+    "wang2025evaluating#14: “Active awareness of falsehood at generation time”",
+    "wang2025evaluating#3: “differs somewhat from the colloquial notion of lying”",
+    "tang2026unlearning#5: “whether or not an operator instruction asked for it”",
+    "tang2026unlearning#8: “Not all context-dependent non-literal behavior is deception”",
+    "wang2025evaluating#2",
+    "wang2025evaluating#13",
+    "wang2025evaluating#14",
+    "wang2025evaluating#3",
+    "tang2026unlearning#5",
+    "tang2026unlearning#8"
+   ]
+  },
+  {
+   "n": 144,
+   "text": "[Anthropic 2026](./#p=anthropic2026opus55)'s white-box audit requires knowledge, a model that \"Holds a reason or judgment that contradicts what it presents, or knowingly leaves out something the reader needs to know\".",
+   "papers": [
+    "anthropic2026opus55"
+   ],
+   "evidence": [
+    "anthropic2026opus55#16: “Holds a reason or judgment that contradicts what it presents, or knowingly leaves out something the reader needs to know”"
+   ]
+  },
+  {
+   "n": 145,
+   "text": "[Taufeeque et al. 2026](./#p=taufeeque2026obfuscation) define a deceptive response with no statement at all, as \"code specifically designed to pass the visible test cases without solving the general problem\", and [Bu et al. 2026](./#p=bu2026spadebench) as \"a spontaneous inconsistency between an agent’s declared plan (what it says it will do) and its executed action (what it actually does)\".",
+   "papers": [
+    "taufeeque2026obfuscation",
+    "bu2026spadebench"
+   ],
+   "evidence": [
+    "taufeeque2026obfuscation#6: “code specifically designed to pass the visible test cases without solving the general problem”",
+    "bu2026spadebench#1: “a spontaneous inconsistency between an agent’s declared plan (what it says it will do) and its executed action (what it actually does)”",
+    "taufeeque2026obfuscation#6",
+    "bu2026spadebench#1"
+   ]
+  },
+  {
+   "n": 146,
+   "text": "Monitor rubrics call claiming an action not taken \"lying to the user\" ([Anonymous 2026 (implementation)](./#p=anon2026implementation); [Chidambaram et al. 2026](./#p=chidambaram2026corrupted)), while [Dietz et al. 2026](./#p=dietz2026split) note that \"fabrication may occur without the model representing the output as false\" and [Shiromani & Richter 2026](./#p=shiromani2026false) separate action-faithfulness from \"whether the stated intent is honest\".",
+   "papers": [
+    "anon2026implementation",
+    "chidambaram2026corrupted",
+    "dietz2026split",
+    "shiromani2026false"
+   ],
+   "evidence": [
+    "anon2026implementation#25: “lying to the user”",
+    "dietz2026split#9: “fabrication may occur without the model representing the output as false”",
+    "shiromani2026false#2: “whether the stated intent is honest”",
+    "anon2026implementation#25",
+    "chidambaram2026corrupted#17",
+    "dietz2026split#9",
+    "shiromani2026false#2"
+   ]
+  },
+  {
+   "n": 147,
+   "text": "[Zeng et al. 2026](./#p=zeng2026evaluating) count self-modeling as successful \"whenever its self-reports agree with its observed input-output behavior\", whether the report draws \"on internal access, on cues in the prompt, or on general knowledge of how language models behave\".",
+   "papers": [
+    "zeng2026evaluating"
+   ],
+   "evidence": [
+    "zeng2026evaluating#5: “whenever its self-reports agree with its observed input-output behavior”",
+    "zeng2026evaluating#5: “on internal access, on cues in the prompt, or on general knowledge of how language models behave”"
+   ]
+  },
+  {
+   "n": 148,
+   "text": "[Atkinson et al. 2026](./#p=atkinson2026identifying) call such agreement faithfulness and require grounding as well (\"Grounding requires reporting the true cause\"), so that an accurate report through an ungrounded mechanism is \"a correct confabulator\".",
+   "papers": [
+    "atkinson2026identifying"
+   ],
+   "evidence": [
+    "atkinson2026identifying#2: “Grounding requires reporting the true cause”",
+    "atkinson2026identifying#6: “a correct confabulator”",
+    "atkinson2026identifying#1",
+    "atkinson2026identifying#2",
+    "atkinson2026identifying#6"
+   ]
+  },
+  {
+   "n": 149,
+   "text": "[Binder et al. 2024](./#p=binder2024looking) require that a stronger model given the reporter's training data not report the same fact, and [Anonymous 2026 (introspection routes)](./#p=anon2026introspection) write that \"a self-report can be accurate without being introspective\".",
+   "papers": [
+    "binder2024looking",
+    "anon2026introspection"
+   ],
+   "evidence": [
+    "anon2026introspection#2: “a self-report can be accurate without being introspective”",
+    "binder2024looking#3",
+    "anon2026introspection#2"
+   ]
+  },
+  {
+   "n": 150,
+   "text": "Under the privileged-access test the evidence divides: [Blandfort & Pawar 2026](./#p=blandfort2026strangers) find that \"Verbal testimony describes other models about as well as the self\", while [Li et al. 2025b](./#p=li2025training) find that \"the target model is better explained by itself than by other explainer models\".",
+   "papers": [
+    "blandfort2026strangers",
+    "li2025training"
+   ],
+   "evidence": [
+    "blandfort2026strangers#13: “Verbal testimony describes other models about as well as the self”",
+    "li2025training#2: “the target model is better explained by itself than by other explainer models”",
+    "blandfort2026strangers#13",
+    "li2025training#2"
+   ]
+  }
+ ]
+}

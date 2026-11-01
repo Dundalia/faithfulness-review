@@ -1,0 +1,65 @@
+{
+ "fixes": [
+  {
+   "id": "bilodeau2022impossibility#f7",
+   "set": {
+    "formalism": "intervention / flip test"
+   }
+  },
+  {
+   "id": "lindsey2025emergent#f1",
+   "set": {
+    "relation": "Conjunction of the four criteria below; contrasted in Section 9.6 with Kammerer & Frankish, Comşa & Shanahan, Binder et al. and Song et al. (song2025privileged), whose privileged-access definition the paper finds more compelling than the Comşa & Shanahan one."
+   }
+  },
+  {
+   "id": "song2025privileged#f1",
+   "set": {
+    "relation": "Thicker alternative to the Comşa & Shanahan lightweight definition; lindsey2025emergent finds it more compelling than that one and ties it to its internality criterion; resembles resource-bounded definitions such as usable information under computational constraints."
+   }
+  }
+ ],
+ "drops": [
+  "bilodeau2022impossibility#f2"
+ ],
+ "adds": [
+  {
+   "key": "lindsey2025emergent",
+   "term": "introspection (Kammerer & Frankish)",
+   "concepts": [
+    "self-report accuracy and introspection"
+   ],
+   "level": "concept",
+   "formalism": "other",
+   "quote": "Kammerer and Frankish [22] propose the following definition of introspection (applied to the case of LLMs by Long [27]): “Introspection is a process by which a cognitive system represents its own current mental states, in a manner that allows the information to be used for online behavioural control.” This definition aligns with our requirement of metacognitive representations, but leaves aside the questions of grounding and internality.",
+   "formula": "",
+   "assumptions": "A cognitive system with current mental states and an internal representation of them that is available for online behavioural control; borrowed from Kammerer & Frankish (2023), applied to LLMs by Long.",
+   "where": "Section 9.6, [P211]",
+   "gloss": "Introspection is a process by which a system represents its own current mental states so that the information can guide its ongoing behaviour.",
+   "relation": "Borrowed; the paper says it matches its metacognitive-representation criterion but omits grounding and internality; alternative to the Comşa & Shanahan causal-link definition and to the privileged-access definition of song2025privileged."
+  }
+ ],
+ "record_fixes": [
+  {
+   "key": "bilodeau2022impossibility",
+   "old": "authors: \"Bilodeau, Jaques, Koh et al.\"",
+   "new": "authors: \"Bilodeau, Jaques, Koh & Kim\""
+  },
+  {
+   "key": "bilodeau2022impossibility",
+   "old": "scale:small, model:mlp",
+   "new": "scale:small, eval:specificity, model:mlp"
+  },
+  {
+   "key": "song2025privileged",
+   "old": "authors: \"Song, Lederman, Hu et al.\"",
+   "new": "authors: \"Song, Lederman, Hu & Mahowald\""
+  },
+  {
+   "key": "song2025privileged",
+   "old": "**TL;DR** Argues introspection requires privileged self-access: access more reliable than any equally cheap third-party process; LLMs' temperature self-reports track prompt framing and show no self-advantage over other models.",
+   "new": "**TL;DR** Argues introspection requires privileged self-access, more reliable than any third-party process of no greater computational cost; LLMs' temperature self-reports track prompt framing, with no self-advantage over other models."
+  }
+ ],
+ "notes": "All 24 quotes verbatim; formulas match the PDFs (Definition 3.8 does print |f|; Theorem D.1 rate correct). Dropped Bilodeau's generic attribution signature with Gradient/IG (scaffolding, as Geiger's IG row in F2). Lindsey 'more compelling', not 'most'/'adopted'. Added Kammerer & Frankish definition. Records: four-author lists in full; Song TL;DR now states equal-or-lower computational cost; eval:specificity for Bilodeau. Metadata and latest arXiv versions confirmed (Bilodeau v3, PNAS). Note: Bilodeau's quoted f4 sentence swaps type-I/II."
+}

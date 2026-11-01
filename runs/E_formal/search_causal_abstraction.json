@@ -1,0 +1,425 @@
+{
+ "area": "causal_abstraction",
+ "summary": "Causal abstraction formally defines faithfulness of an interpretation: a high-level causal model faithfully explains a network if it is an exact transformation or constructive abstraction of it (Rubenstein 2017; Beckers & Halpern 2019; Geiger 2025). Graded faithfulness is approximate abstraction (d_tau, aggregated similarity, interchange intervention accuracy). Completeness appears only as testing unmapped variables (Meloux 2026). No work applies causal abstraction to CoT or verbalized reasoning; the closest is CAuSE, for natural-language explanations of classifiers. Verbalization is lossy, which needs projected abstractions (Xia & Bareinboim). Unrestricted alignment maps make abstraction trivial (Sutter 2025), and explanations are non-identifiable (Meloux 2025), so a definition must fix the map class. Concept variables are identifiable in LLMs only under sparsity or paired-shift assumptions. Causal abstraction could cover faithfulness, completeness, counterfactual tests and, with an observer model, legibility. It does not cover honesty, scheming or steganography.",
+ "candidates": [
+  {
+   "title": "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+   "authors": "Atticus Geiger, Duligur Ibeling, Amir Zur, Maheep Chaudhary, Sonakshi Chauhan, Jing Huang, Aryaman Arora, Zhengxuan Wu, Noah Goodman, Christopher Potts, Thomas Icard",
+   "year": 2025,
+   "venue": "JMLR 26 (arXiv 2301.04709, first posted 2023 as 'Causal Abstraction for Faithful Model Interpretation')",
+   "url": "https://arxiv.org/abs/2301.04709",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "graded faithfulness",
+    "counterfactuals (interchange interventions)",
+    "post-hoc rationalization (LIME critique)"
+   ],
+   "level": "both",
+   "formalism": "causal abstraction over deterministic causal models with intervention algebras (hard, soft and functional interventionals)",
+   "formal_object": "Exact transformation and constructive abstraction (high-level H faithful to low-level L under alignment); approximate transformation as graded faithfulness (Sec. 3.2); interchange intervention accuracy (Def. 48); LIME read as behavioural-only approximate abstraction.",
+   "key_formula": "\\tau\\big(\\mathrm{Solve}(\\mathcal{M}_{\\mathbf{I}})\\big)=\\mathrm{Solve}\\big(\\mathcal{M}^*_{\\omega(\\mathbf{I})}\\big);\\quad \\mathbb{S}_{\\mathbf{I}\\sim\\mathbb{P}}\\big[\\mathrm{Sim}\\big(\\tau(\\mathrm{Solve}(\\mathcal{M}_{\\mathbf{I}})),\\mathrm{Solve}(\\mathcal{M}^*_{\\omega(\\mathbf{I})})\\big)\\big]\\ge\\eta;\\quad \\mathrm{IIA}=\\mathbb{E}_{i\\sim P}\\,\\mathbb{1}[\\mathrm{Proj}_{X^{Out}_H}(\\tau^\\pi(L_i))=\\mathrm{Proj}_{X^{Out}_H}(H_{\\omega^\\pi(i)})]",
+   "assumptions": "White-box low-level model (full access to internals and the ability to intervene); a proposed high-level model; an alignment (partition plus value maps); a distribution over interventions, a similarity function and a summary statistic for the graded version.",
+   "applies_to_llms": "yes",
+   "relevance": "The reference formal definition of a faithful explanation as a simplification of the computation. It states that graded faithfulness has no single correct metric. A CoT could be cast as the high-level model H.",
+   "verified": "full text",
+   "priority": 1
+  },
+  {
+   "title": "Approximate Causal Abstraction",
+   "authors": "Sander Beckers, Frederick Eberhardt, Joseph Y. Halpern",
+   "year": 2019,
+   "venue": "UAI 2019",
+   "url": "https://arxiv.org/abs/1906.11583",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "graded faithfulness"
+   ],
+   "level": "concept",
+   "formalism": "structural causal models (Halpern-Pearl style deterministic and probabilistic causal models)",
+   "formal_object": "tau-alpha-approximate abstraction: worst-case distance, over allowed low-level interventions and contexts, between lifting the low-level outcome via tau and running the high-level model on the lifted intervention. alpha = 0 recovers exact tau-abstraction.",
+   "key_formula": "d_\\tau(M_L,M_H)=\\min_{\\tau_U}\\max_{\\vec X\\leftarrow\\vec x\\in\\mathcal{I}_L,\\ \\vec u_L\\in\\mathcal{R}_L(\\mathcal{U}_L)} d_{\\mathcal{V}_H}\\big(\\tau(M_L(\\vec u_L,\\vec X\\leftarrow\\vec x)),\\ M_H(\\tau_U(\\vec u_L),\\omega_\\tau(\\vec X\\leftarrow\\vec x))\\big);\\ M_H\\ \\text{is a }\\tau\\text{-}\\alpha\\text{ approximate abstraction iff } d_\\tau\\le\\alpha",
+   "assumptions": "Known low- and high-level causal models; a surjective state map tau; a metric on high-level states; extended to probabilistic models with a distance over distributions.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Gives a worst-case graded faithfulness grounded in the Halpern-Pearl causal-model formalism. It is the most direct bridge to the user's actual-causality plans.",
+   "verified": "full text",
+   "priority": 1
+  },
+  {
+   "title": "Abstracting Causal Models",
+   "authors": "Sander Beckers, Joseph Y. Halpern",
+   "year": 2019,
+   "venue": "AAAI 2019",
+   "url": "https://arxiv.org/abs/1812.03789",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations"
+   ],
+   "level": "concept",
+   "formalism": "structural causal models (Halpern-Pearl)",
+   "formal_object": "A hierarchy: exact transformation, then uniform transformation, then tau-abstraction (the intervention map omega is induced by the state map tau), then strong and constructive tau-abstraction. These are binary relations stating when a coarse model faithfully abstracts a fine one.",
+   "key_formula": "(M_H,\\mathcal{I}_H)\\ \\text{is a }\\tau\\text{-abstraction of }(M_L,\\mathcal{I}_L)\\ \\text{iff }\\tau\\ \\text{surjective},\\ \\exists\\,\\tau_U\\ \\text{surjective with}\\ \\tau(M_L(\\vec u_L,\\vec Y\\leftarrow\\vec y))=M_H(\\tau_U(\\vec u_L),\\omega_\\tau(\\vec Y\\leftarrow\\vec y))\\ \\forall\\,\\vec Y\\leftarrow\\vec y\\in\\mathcal{I}_L,\\ \\text{and}\\ \\mathcal{I}_H=\\omega_\\tau(\\mathcal{I}_L)",
+   "assumptions": "Known deterministic or probabilistic causal models; the set of allowed low-level interventions; a surjective state map.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Supplies the exact (binary) faithfulness relation in Halpern's framework. It is what any approximate notion reduces to at zero error, and it composes with HP actual causality.",
+   "verified": "full text",
+   "priority": 1
+  },
+  {
+   "title": "Causal Consistency of Structural Equation Models",
+   "authors": "Paul K. Rubenstein, Sebastian Weichwald, Stephan Bongers, Joris M. Mooij, Dominik Janzing, Moritz Grosse-Wentrup, Bernhard Schölkopf",
+   "year": 2017,
+   "venue": "UAI 2017",
+   "url": "https://arxiv.org/abs/1707.00819",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations"
+   ],
+   "level": "concept",
+   "formalism": "structural equation models, interventional distributions",
+   "formal_object": "Exact (tau-omega) transformation between SEMs: two models are causally consistent if they agree on the effects of all (well-specified) interventions after mapping states and interventions.",
+   "key_formula": "",
+   "assumptions": "Probabilistic SEMs; a state map tau and an order-preserving intervention map omega; a chosen set of interventions.",
+   "applies_to_llms": "adaptable",
+   "relevance": "The original consistency criterion on which every later abstraction-based faithfulness definition builds. Geiger's exact transformation is a variant of it.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Causal Abstraction Inference under Lossy Representations",
+   "authors": "Kevin Xia, Elias Bareinboim",
+   "year": 2025,
+   "venue": "ICML 2025 (per arXiv comment)",
+   "url": "https://arxiv.org/abs/2509.21607",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "counterfactuals"
+   ],
+   "level": "concept",
+   "formalism": "structural causal models, Pearl's causal hierarchy, graphical identification",
+   "formal_object": "Projected abstractions, which drop the abstract invariance condition so that many low-level interventions with different effects may map to one high-level intervention. Includes translation of observational, interventional and counterfactual queries and a graphical criterion for identifying them.",
+   "key_formula": "",
+   "assumptions": "A low-level SCM or limited low-level data; a (lossy) abstraction function; graphical assumptions for identification.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Verbalizing reasoning is lossy: many internal states map to one CoT step. Standard abstraction is ill-defined there, so this is the needed extension for a CoT-as-abstraction definition.",
+   "verified": "abstract",
+   "priority": 1
+  },
+  {
+   "title": "The Non-Linear Representation Dilemma: Is Causal Abstraction Enough for Mechanistic Interpretability?",
+   "authors": "Denis Sutter, Julian Minder, Thomas Hofmann, Tiago Pimentel",
+   "year": 2025,
+   "venue": "NeurIPS 2025 (Spotlight)",
+   "url": "https://arxiv.org/abs/2507.08802",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations"
+   ],
+   "level": "concept",
+   "formalism": "causal abstraction with arbitrary alignment maps; impossibility result",
+   "formal_object": "Proves that, under reasonable assumptions and with unrestricted (non-linear) alignment maps, any network can be mapped to any algorithm. It reaches 100% IIA even on randomly initialised LMs.",
+   "key_formula": "",
+   "assumptions": "Arbitrarily powerful alignment maps; the paper's stated regularity assumptions.",
+   "applies_to_llms": "yes",
+   "relevance": "Any causal-abstraction definition of CoT faithfulness must restrict the class of alignment maps (an information-encoding assumption). Otherwise faithfulness is vacuous.",
+   "verified": "abstract",
+   "priority": 1
+  },
+  {
+   "title": "Everything, Everywhere, All at Once: Is Mechanistic Interpretability Identifiable?",
+   "authors": "Maxime Méloux, Silviu Maniu, François Portet, Maxime Peyrard",
+   "year": 2025,
+   "venue": "ICLR 2025",
+   "url": "https://arxiv.org/abs/2502.20914",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "identifiability of explanations"
+   ],
+   "level": "concept",
+   "formalism": "statistical identifiability applied to causal-alignment explanations (exhaustive enumeration)",
+   "formal_object": "Asks whether a unique explanation exists under mechanistic-interpretability criteria. Shows systematic non-identifiability: several circuits, several interpretations per circuit, several algorithms per network and several subspaces per algorithm.",
+   "key_formula": "",
+   "assumptions": "Small MLPs on Boolean functions; full enumeration of candidate circuits and alignments.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Faithfulness defined as abstraction does not single out one explanation. A CoT could be faithful alongside incompatible rival explanations, so the definition must say whether it requires uniqueness.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Validating Causal Abstraction Metrics on Simulated Complex Systems",
+   "authors": "Maxime Méloux, Tiago Pimentel, François Portet, Maxime Peyrard",
+   "year": 2026,
+   "venue": "arXiv preprint",
+   "url": "https://arxiv.org/abs/2607.00267",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "completeness of explanations"
+   ],
+   "level": "measurement",
+   "formalism": "causal abstraction; benchmark of more than 30 observational, information-theoretic and causal metrics",
+   "formal_object": "Causal Abstraction Error (CAE): a continuous validity metric for a high-level explanation that includes an explicit faithfulness test over unmapped low-level variables.",
+   "key_formula": "",
+   "assumptions": "Systems with ground-truth high-level explanations; the ability to intervene on mapped and unmapped variables.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Finds that only causal metrics separate valid from invalid abstractions, and only if unmapped variables are tested. That test is a formal handle on explanation completeness, the part a CoT leaves out.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Compositional Abstraction Error and a Category of Causal Models",
+   "authors": "Eigil F. Rischel, Sebastian Weichwald",
+   "year": 2021,
+   "venue": "UAI 2021",
+   "url": "https://arxiv.org/abs/2103.15758",
+   "in_map": "",
+   "concepts": [
+    "graded faithfulness"
+   ],
+   "level": "concept",
+   "formalism": "category theory (enriched categories) over finite interventional causal models",
+   "formal_object": "A category of finite interventional causal models whose abstraction errors compose: the error of an M to M'' abstraction is bounded by the sum of the step errors.",
+   "key_formula": "",
+   "assumptions": "Finite interventional causal models; a chosen distance between distributions.",
+   "applies_to_llms": "adaptable",
+   "relevance": "A compositionality desideratum for graded faithfulness. It is useful if CoT faithfulness is defined through a chain of abstractions (network to features to verbal steps).",
+   "verified": "abstract",
+   "priority": 3
+  },
+  {
+   "title": "CAuSE: Decoding Multimodal Classifiers using Faithful Natural Language Explanation",
+   "authors": "Dibyanayan Bandyopadhyay, Soham Bhattacharjee, Mohammed Hasanuzzaman, Asif Ekbal",
+   "year": 2025,
+   "venue": "TACL (accepted; arXiv 2512.06814)",
+   "url": "https://arxiv.org/abs/2512.06814",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of natural-language explanations"
+   ],
+   "level": "both",
+   "formalism": "causal abstraction via interchange intervention training (IIT)",
+   "formal_object": "A natural-language explainer trained by interchange intervention against a frozen classifier. Theorem 1: under idealized conditions (identical weights and an injective encoder) the explainer is a causal abstraction of the classifier and vice versa. Also a causal-faithfulness metric.",
+   "key_formula": "",
+   "assumptions": "White-box access to the classifier; an idealized two-neuron linear setting for the Lemma; an injective encoder.",
+   "applies_to_llms": "adaptable",
+   "relevance": "The only work found that ties natural-language explanations to causal abstraction formally. It does so for classifiers, not for an LLM's own CoT.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "Position: Causality is Key for Interpretability Claims to Generalise",
+   "authors": "Shruti Joshi, Aaron Mueller, David Klindt, Wieland Brendel, Patrik Reizinger, Dhanya Sridhar",
+   "year": 2026,
+   "venue": "arXiv preprint (seed list says ICML; the arXiv page gives no venue)",
+   "url": "https://arxiv.org/abs/2602.16698",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "counterfactuals",
+    "identifiability"
+   ],
+   "level": "concept",
+   "formalism": "Pearl's causal hierarchy; identifiability up to equivalence class; causal representation learning",
+   "formal_object": "Informally defines estimand, equivalence class and identifiability (estimand constant within a class, varying across classes). Maps interpretability claims to rungs L1-L3. Separates ontological faithfulness from instrumental adequacy (App. B.5). No theorem.",
+   "key_formula": "",
+   "assumptions": "A stated estimand and intervention class; CRL assumptions for recovering variables from activations.",
+   "applies_to_llms": "yes",
+   "relevance": "Gives the vocabulary for a CoT-faithfulness definition. Faithfulness claims about what the model would have output are rung-3 counterfactuals, mostly unverifiable without controlled supervision. Also separates ontological from instrumental faithfulness.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "Causal Differentiating Concepts: Interpreting LM Behavior via Causal Representation Learning",
+   "authors": "Navita Goyal, Hal Daumé III, Alexandre Drouin, Dhanya Sridhar",
+   "year": 2025,
+   "venue": "NeurIPS 2025",
+   "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/5faf0f518f39e4d6b2b595e3ca2fe0c4-Abstract-Conference.html",
+   "in_map": "",
+   "concepts": [
+    "counterfactuals (interchange interventions)",
+    "identifiability of concept variables"
+   ],
+   "level": "concept",
+   "formalism": "causal representation learning; interchange interventions; identifiability theory",
+   "formal_object": "Causal differentiating concept (Def. 2): a latent whose interchange intervention is necessary and sufficient to switch behaviour k to l. Latents identified up to affine maps (logit-linear assumption), and up to permutation and scaling with 1-sparsity.",
+   "key_formula": "\\text{(nec.) } \\forall x_k\\in C_k,x_l\\in C_l:\\ M_{z_k^s\\leftarrow z_l^s}(x_k)\\neq c_l\\ (s\\neq r);\\quad \\text{(suff.) } \\exists x_k\\in C_k,x_l\\in C_l:\\ M_{z_k^r\\leftarrow z_l^r}(x_k)=c_l",
+   "assumptions": "Access to LM activations; behaviour logit-linear in the latent concepts; 1-sparse concept differences between behaviour groups.",
+   "applies_to_llms": "yes",
+   "relevance": "Gives a necessary-and-sufficient interchange criterion and conditions under which behaviour-driving concept variables are identifiable in LMs. These are the ground-truth variables a faithful CoT would have to mention.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "Sparse Shift Autoencoders for Identifying Concepts from Large Language Model Activations",
+   "authors": "Shruti Joshi, Andrea Dittadi, Sébastien Lachapelle, Dhanya Sridhar",
+   "year": 2025,
+   "venue": "arXiv preprint (cited by the position paper as 'Identifiable steering via sparse autoencoding of multi-concept shifts')",
+   "url": "https://arxiv.org/abs/2502.12179",
+   "in_map": "",
+   "concepts": [
+    "identifiability of concept variables"
+   ],
+   "level": "concept",
+   "formalism": "causal representation learning; identifiability from paired observations",
+   "formal_object": "Sparse Shift Autoencoders: sparse representations of embedding differences. Proved identifiable from paired observations that differ in multiple unknown concepts, but not all.",
+   "key_formula": "",
+   "assumptions": "Paired prompts differing in a sparse, unknown subset of concepts; access to activations.",
+   "applies_to_llms": "yes",
+   "relevance": "Gives identifiability conditions for concept variables in real LLM activations. These are needed before 'the CoT reports the concepts the model used' can have a well-defined truth value.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Unsupervised Causal Abstractions Discovery",
+   "authors": "Théo Saulus, Simon Lacoste-Julien, Dhanya Sridhar",
+   "year": 2026,
+   "venue": "arXiv preprint (seed list says UAI 2026 workshop)",
+   "url": "https://arxiv.org/abs/2606.19594",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "identifiability of concept variables"
+   ],
+   "level": "concept",
+   "formalism": "causal abstraction; low-rank causal discovery; factor SCMs",
+   "formal_object": "Thm 1: latents of a low-rank (factor) graph form a uniform transformation (abstraction) of the low-level SCM. Thms 2-3: factor graph and linear mechanisms identifiable up to permutation and affine maps. Thm 4 bounds approximate-transformation error.",
+   "key_formula": "\\mathbb{E}_{i\\sim P,\\,u\\sim\\Pr}\\big[d_H\\big(\\tau(\\mathrm{Solve}(L_i;u)),\\mathrm{Solve}(H_{\\omega(i)};u)\\big)\\big]\\le\\eta",
+   "assumptions": "Low-level data generated by a factor SCM with a bipartite, strongly acyclic graph; anchors; linear parent mechanisms; Lipschitz mechanisms for the bound.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Learns the high-level model rather than testing a proposed one, with identifiability guarantees. This is a route to a reference abstraction against which a CoT could be compared.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "Interpretability is in the Mind of the Beholder: A Causal Framework for Human-interpretable Representation Learning",
+   "authors": "Emanuele Marconato, Andrea Passerini, Stefano Teso",
+   "year": 2023,
+   "venue": "Entropy 25(12):1574 (per citing bibliography; arXiv 2309.07742)",
+   "url": "https://arxiv.org/abs/2309.07742",
+   "in_map": "",
+   "concepts": [
+    "legibility",
+    "simulatability",
+    "faithfulness of explanations"
+   ],
+   "level": "concept",
+   "formalism": "causal representation learning with the human as an external observer; information-theoretic reformulation",
+   "formal_object": "Alignment between a machine representation and the human's concept vocabulary, linked to interpretability through a 'name transfer' game. Disentanglement, concept leakage and content-style separation are recast information-theoretically.",
+   "key_formula": "",
+   "assumptions": "A causal model of the human's concepts and of the machine's representation; an observer model.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Adds the human receiver to the causal picture. This is needed to extend an abstraction-based faithfulness definition to legibility and simulatability, where the CoT must be readable by the reader as well as faithful.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Causal Abstractions of Neural Networks",
+   "authors": "Atticus Geiger, Hanson Lu, Thomas Icard, Christopher Potts",
+   "year": 2021,
+   "venue": "NeurIPS 2021",
+   "url": "https://arxiv.org/abs/2106.02997",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of explanations",
+    "counterfactuals (interchange interventions)"
+   ],
+   "level": "both",
+   "formalism": "causal abstraction; interchange interventions",
+   "formal_object": "Aligns neural representations with variables of an interpretable causal model and uses interchange interventions to verify that they have the causal properties of the aligned variables.",
+   "key_formula": "",
+   "assumptions": "White-box network; a candidate high-level causal model; a hand-chosen alignment.",
+   "applies_to_llms": "yes",
+   "relevance": "The first operational use of causal abstraction for neural networks. It is superseded formally by Geiger et al. 2025 and listed for completeness.",
+   "verified": "abstract",
+   "priority": 3
+  },
+  {
+   "title": "From Isolation to Entanglement: When Do Interpretability Methods Identify and Disentangle Known Concepts?",
+   "authors": "Aaron Mueller, Andrew Lee, Shruti Joshi, Ekdeep Singh Lubana, Dhanya Sridhar, Patrik Reizinger",
+   "year": 2026,
+   "venue": "ACL 2026",
+   "url": "https://arxiv.org/abs/2512.15134",
+   "in_map": "",
+   "concepts": [
+    "identifiability of concept variables"
+   ],
+   "level": "measurement",
+   "formalism": "identifiability metrics (MCC, DCI-ES); steering selectivity",
+   "formal_object": "An empirical multi-concept evaluation. It uses standard identifiability definitions (weak identifiability, identifiability up to elementwise nonlinearity, App. C) and tests whether SAEs and probes recover and selectively steer correlated concepts. No new concept definition.",
+   "key_formula": "",
+   "assumptions": "Known ground-truth concepts with controlled correlations; access to activations.",
+   "applies_to_llms": "yes",
+   "relevance": "Shows that features look disentangled correlationally but steering is not selective. Concept-level faithfulness claims therefore need interventional, multi-concept tests.",
+   "verified": "full text",
+   "priority": 3
+  },
+  {
+   "title": "Who Guards the Guardians? The Challenges of Evaluating Identifiability of Learned Representations",
+   "authors": "Shruti Joshi, Théo Saulus, Wieland Brendel, Philippe Brouillard, Dhanya Sridhar, Patrik Reizinger",
+   "year": 2026,
+   "venue": "arXiv preprint (seed list says UAI 2026)",
+   "url": "https://arxiv.org/abs/2602.24278",
+   "in_map": "",
+   "concepts": [
+    "identifiability of concept variables"
+   ],
+   "level": "measurement",
+   "formalism": "identifiability theory; metric validity analysis",
+   "formal_object": "Defines identifiability up to a transformation class G (permutation-scaling, affine, elementwise nonlinear) and extends it to dimension mismatch. Proves that MCC and DCI give false positives or negatives outside their implicit assumptions (Props. 1-3).",
+   "key_formula": "f\\circ g=h,\\quad h\\in\\mathcal{G}",
+   "assumptions": "Known data-generating process and encoder geometry; m = d for the basic definition.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Warns that identifiability metrics are themselves misspecified outside their assumptions. This matters for any empirical check of a concept-level faithfulness definition.",
+   "verified": "full text",
+   "priority": 3
+  },
+  {
+   "title": "Three Desiderata for Faithfulness in Machine Learning Explanations: The Case for Causal Abstraction",
+   "authors": "Mette Friis Andersen, Maria Heuss, Ana Lucic",
+   "year": 2025,
+   "venue": "Mech Interp Workshop (NeurIPS 2025), poster",
+   "url": "https://openreview.net/forum?id=b0rXC856Sm",
+   "in_map": "",
+   "concepts": [
+    "faithfulness"
+   ],
+   "level": "concept",
+   "formalism": "causal abstraction (position)",
+   "formal_object": "Three desiderata for faithfulness (reverse-engineering specific behaviors, interventionist causal relations, appropriate model decomposition), argued to be met by causal abstraction.",
+   "key_formula": "",
+   "assumptions": "Adopts the causal abstraction framework; no new formal definition.",
+   "applies_to_llms": "adaptable",
+   "relevance": "States explicitly that there is no agreed definition of faithfulness and argues for causal abstraction as the evaluation framework.",
+   "verified": "abstract (opened in a browser; OpenReview blocks automated fetches)",
+   "priority": 2
+  }
+ ],
+ "gaps": [
+  "Faithfulness of CoT or verbalized reasoning: no paper defines it as a causal abstraction between the reasoning text and the model's computation (CAuSE covers natural-language explanations of classifiers only).",
+  "Completeness and soundness of an explanation: formalized only operationally, as testing unmapped variables (Meloux 2026), not as a concept.",
+  "Post-hoc rationalization and plausibility: no abstraction-based definition. Geiger 2025 only notes that behavioural fidelity (LIME) is not internal faithfulness.",
+  "Lossy verbalization: projected abstractions exist (Xia & Bareinboim) but have not been applied to text-level explanations.",
+  "Monitorability, legibility, obfuscation, steganography, honesty, deception, scheming, sandbagging, introspection and self-report accuracy: no causal-abstraction definition found.",
+  "Seed 'Faithfulness through Causal Abstraction' (openreview.net/pdf?id=b0rXC856Sm) could not be opened (OpenReview browser challenge) and was not found by exact-title web search, so it is not listed."
+ ],
+ "searches": [
+  "arXiv API id_list=2301.04709,2106.02997,1812.03789,1707.00819,2509.21607 (seed abstracts)",
+  "curl https://openreview.net/pdf?id=b0rXC856Sm (403 challenge); api2.openreview.net/notes?id=b0rXC856Sm (403); WebFetch openreview forum and pdf (browser gate)",
+  "curl https://www.dsridhar.com/publications (selected list, stale; no 2025-26 interpretability papers)",
+  "arXiv API ti: 'Causality is Key for Interpretability' / 'Causal Differentiating Concepts' (no hit) / 'From Isolation to Entanglement' / 'Who Guards the Guardians' / 'Unsupervised Causal Abstraction'",
+  "WebSearch: \"Causal Differentiating Concepts\" Interpreting LM Behavior via Causal Representation Learning",
+  "WebSearch: \"Faithfulness through Causal Abstraction\"",
+  "WebFetch NeurIPS 2025 proceedings abstract page for Goyal et al.",
+  "Semantic Scholar search 'faithfulness through causal abstraction' (429 rate limited)",
+  "arXiv API abs:\"causal abstraction\" AND (abs:chain-of-thought OR abs:\"natural language explanation\" OR abs:self-explanation OR abs:verbalized)",
+  "arXiv API abs:\"causal abstraction\" AND (abs:faithful OR abs:faithfulness OR abs:explanation), 40 results",
+  "arxiv.org/abs pages: 2607.00267, 2503.11429, 2303.02536, 2605.08012, 2508.11214, 2512.06814, 2502.20914, 2507.08802, 1906.11583, 2103.15758, 2502.12179, 2309.07742, 2402.09236",
+  "Full-text PDFs (pdftotext, grep for definitions and theorems): 2301.04709, 1812.03789, 1906.11583, 2602.16698, 2512.15134, 2602.24278, 2606.19594, Goyal et al. (users.umiacs.umd.edu/~hal3/docs/daume25causal.pdf), 2512.06814",
+  "WebSearch (extended): causal abstraction chain-of-thought faithfulness interchange intervention reasoning trace high-level causal model verbalized reasoning",
+  "WebSearch: \"causal abstraction\" LLM \"natural language explanations\" OR \"self-explanations\" OR \"chain-of-thought\" faithful definition",
+  "grep -i of index.csv and definitions.csv for each candidate title and arXiv id"
+ ]
+}

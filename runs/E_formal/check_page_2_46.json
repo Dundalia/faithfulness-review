@@ -1,0 +1,214 @@
+{
+ "results": [
+  {
+   "n": 46,
+   "verdict": "supported"
+  },
+  {
+   "n": 47,
+   "verdict": "supported"
+  },
+  {
+   "n": 48,
+   "verdict": "supported"
+  },
+  {
+   "n": 49,
+   "verdict": "supported"
+  },
+  {
+   "n": 50,
+   "verdict": "supported"
+  },
+  {
+   "n": 51,
+   "verdict": "supported"
+  },
+  {
+   "n": 52,
+   "verdict": "supported"
+  },
+  {
+   "n": 53,
+   "verdict": "supported"
+  },
+  {
+   "n": 54,
+   "verdict": "supported"
+  },
+  {
+   "n": 55,
+   "verdict": "supported"
+  },
+  {
+   "n": 56,
+   "verdict": "supported"
+  },
+  {
+   "n": 57,
+   "verdict": "supported"
+  },
+  {
+   "n": 58,
+   "verdict": "supported"
+  },
+  {
+   "n": 59,
+   "verdict": "supported"
+  },
+  {
+   "n": 60,
+   "verdict": "supported"
+  },
+  {
+   "n": 61,
+   "verdict": "supported"
+  },
+  {
+   "n": 62,
+   "verdict": "supported"
+  },
+  {
+   "n": 63,
+   "verdict": "supported"
+  },
+  {
+   "n": 64,
+   "verdict": "supported"
+  },
+  {
+   "n": 65,
+   "verdict": "supported"
+  },
+  {
+   "n": 66,
+   "verdict": "supported"
+  },
+  {
+   "n": 67,
+   "verdict": "supported"
+  },
+  {
+   "n": 68,
+   "verdict": "supported"
+  },
+  {
+   "n": 69,
+   "verdict": "supported"
+  },
+  {
+   "n": 70,
+   "verdict": "supported"
+  },
+  {
+   "n": 71,
+   "verdict": "supported"
+  },
+  {
+   "n": 72,
+   "verdict": "supported"
+  },
+  {
+   "n": 73,
+   "verdict": "supported"
+  },
+  {
+   "n": 74,
+   "verdict": "supported"
+  },
+  {
+   "n": 75,
+   "verdict": "understated",
+   "reason": "Vague. The paper uses conditional predictive V-information only in Appendix E: it defines it for a hypothesis class of monitors (Definition E.3) and uses it in a sufficient condition for a practical CoT monitor to beat a practical output monitor (Proposition E.5). Its monitorability measure is the Shannon-based uplift (Definition 3.6), so \"use its conditional form for monitorability\" can be misread as a definition of monitorability. The evidence supports the more precise statement.",
+   "evidence": [
+    "anwar2026analyzing (Definition E.3): \"Let $\\mathcal{V}$ denote a hypothesis class for monitors under a proper scoring rule $\\ell$ .\"",
+    "anwar2026analyzing (Proposition E.5): \"then the practical CoT monitor outperforms the practical output monitor by at least $\\gamma$ in expected log-loss.\"",
+    "definitions.csv anwar2026analyzing#3 (Def. 3.6): \"Monitorability as accuracy gain of the Bayes-optimal CoT monitor over the Bayes-optimal prompt-only monitor; bounded by sqrt(2 I(Y;Z|X))\""
+   ],
+   "replacement": "[Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) define its conditional form for a hypothesis class of monitors, $I_{\\mathcal V}(Y;Z\\mid X)$, and use it in a sufficient condition for a practical CoT monitor to outperform a practical output monitor (Definition E.3 and Proposition E.5)."
+  },
+  {
+   "n": 76,
+   "verdict": "supported"
+  },
+  {
+   "n": 77,
+   "verdict": "supported"
+  },
+  {
+   "n": 78,
+   "verdict": "supported"
+  },
+  {
+   "n": 79,
+   "verdict": "supported"
+  },
+  {
+   "n": 80,
+   "verdict": "supported"
+  },
+  {
+   "n": 81,
+   "verdict": "supported"
+  },
+  {
+   "n": 82,
+   "verdict": "supported"
+  },
+  {
+   "n": 83,
+   "verdict": "supported"
+  },
+  {
+   "n": 84,
+   "verdict": "supported"
+  },
+  {
+   "n": 85,
+   "verdict": "supported"
+  },
+  {
+   "n": 86,
+   "verdict": "supported"
+  },
+  {
+   "n": 87,
+   "verdict": "supported"
+  },
+  {
+   "n": 88,
+   "verdict": "supported"
+  },
+  {
+   "n": 89,
+   "verdict": "supported"
+  },
+  {
+   "n": 90,
+   "verdict": "supported"
+  }
+ ],
+ "coherence": [],
+ "other_problems": [
+  {
+   "where": "Structural causal models, What it cannot express: \"Agents' beliefs and intentions need the game extension below, and a monitor's computational limits need the information-theoretic family.\"",
+   "problem": "Overstated and inconsistent with the page's own table, which lists \"Structural causal models with an epistemic state: intention ([Halpern & Kleiman-Weiner 2018](https://arxiv.org/abs/1810.05903))\". search_agency_honesty.json records that paper's intention definitions (Defs. 4.1, 4.4, 4.8) in \"Halpern-Pearl structural causal models with an epistemic state (probability over causal models and a utility)\". Only belief, and belief, intention and deception together, need the game extension.",
+   "fix": "Intention needs an epistemic state over causal models ([Halpern & Kleiman-Weiner 2018](https://arxiv.org/abs/1810.05903)), belief and deception need the game extension below, and a monitor's computational limits need the information-theoretic family."
+  },
+  {
+   "where": "Structural causal models, Concepts covered: \"with mediation, faithfulness as complete mediation by the CoT and, as a proposed reading, post-hoc rationalization as a null indirect effect.\"",
+   "problem": "Only the second half is labeled as a proposal. No formal.csv row in this family defines CoT faithfulness as complete mediation by the CoT (Pearl 2001 defines mediation in general, and Remark 53 of Geiger et al. concerns hidden vectors, not a CoT). The page's Conjectures paragraph proposes this same reading (a null natural direct effect of the instruction on the answer, with the CoT as mediator) alongside the post-hoc rationalization reading.",
+   "fix": "with mediation, and as proposed readings, faithfulness as complete mediation by the CoT and post-hoc rationalization as a null indirect effect."
+  },
+  {
+   "where": "Claim 84 (Observer-relative information, What it defines)",
+   "problem": "The claim is supported, but \"require only that ... but that ...\" can read as if Kim & Lee's checkability were weaker overall. It relaxes completeness, but its soundness quantifies over every proof ($\\forall z'\\in\\mathcal Z$), whereas Kirchner et al. quantify over provers from the same family ($\\forall\\pi'\\in\\mathcal H$) (definitions.csv kim2026mitigating#2, kirchner2024proververifier#3).",
+   "fix": "Optional rewording of the second half: \"while [Kim & Lee 2026](./#p=kim2026mitigating) require only that the verifier accept the prover's correct answers, and that \"there exists no adversarial proof that can trick the verifier into accepting an incorrect answer\", over every proof rather than over provers from one family.\""
+  },
+  {
+   "where": "Observer-relative information, Assumptions (claim 85)",
+   "problem": "The list gives an assumption for every definition in the section except checkability, defined just above. Kirchner et al.'s soundness is relative to a model family $\\mathcal H$ of provers (definitions.csv kirchner2024proververifier#3: \"no adversarial / \\\"sneaky\\\" prover from the same model family $\\mathcal{H}$\").",
+   "fix": "Optionally append: \"; for checkability, a verifier and ground-truth correctness labels, and in Kirchner et al. 2024 a model family of provers\"."
+  }
+ ]
+}

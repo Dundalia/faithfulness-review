@@ -1,0 +1,131 @@
+{
+ "fixes": [
+  {
+   "id": "geiger2025causal#f7",
+   "set": {
+    "formula": "(\\Lambda,\\oplus)\\text{ is an intervention algebra}\\iff\\exists\\Sigma\\;(\\Lambda,\\oplus)\\simeq(\\Phi_\\Sigma,\\circ)"
+   }
+  },
+  {
+   "id": "geiger2025causal#f9",
+   "set": {
+    "relation": "Deterministic variant of Rubenstein et al.'s exact transformation (cf. Beckers and Halpern's uniform transformation, Def. 3.5), generalized to interventionals; bijective translation and constructive abstraction are special cases."
+   }
+  },
+  {
+   "id": "geiger2025causal#f28",
+   "set": {
+    "quote": "The following are equivalent: 1. The hidden vector H completely mediate the causal effect of inputs on outputs:",
+    "relation": "Remark 53: equivalent to the high-level model obtained by variable merge and marginalization of L having no direct edge from input X to output Y (a chain X→Z→Y)."
+   }
+  },
+  {
+   "id": "geiger2025causal#f30",
+   "set": {
+    "concepts": [
+     "causal abstraction",
+     "other: concept erasure"
+    ]
+   }
+  },
+  {
+   "id": "beckers2019approximate#f2",
+   "set": {
+    "quote": "In the formal definition, we need two additional functions: τU : RL (UL ) → RH (UH ), which maps exogenous states of ML to exogenous states of MH , and ωτ : IL → IH , which maps low-level interventions to high-level interventions."
+   }
+  },
+  {
+   "id": "beckers2019approximate#f4",
+   "set": {
+    "formula": "\\exists\\tau_U:\\mathcal R_L(\\mathbf U_L)\\twoheadrightarrow\\mathcal R_H(\\mathbf U_H)\\;\\forall\\mathbf u_L,i\\in\\mathcal I_L,\\quad\\tau(M_L(\\mathbf u_L,i))=M_H(\\tau_U(\\mathbf u_L),\\omega_\\tau(i))"
+   }
+  },
+  {
+   "id": "beckers2019approximate#f5",
+   "set": {
+    "relation": "Restated from Beckers and Halpern (2019); supplies the constructive special case in which an approximate abstraction decomposes into an approximation followed by an exact abstraction (Thm. 5.6)."
+   }
+  },
+  {
+   "id": "beckers2019approximate#f10",
+   "set": {
+    "quote": "Definition 4.1: Define a distance function dmax on pairs of similar probabilistic causal models by taking"
+   }
+  },
+  {
+   "id": "beckers2019approximate#f15",
+   "set": {
+    "quote": "MH is a probabilistic τ -αapproximate abstraction of ML if the distance between the expectations of these distributions is less than α.",
+    "level": "both",
+    "where": "§4, Definition 4.8, [P45]–[P46]; quote from the Fig. 4 caption, [P45]"
+   }
+  },
+  {
+   "id": "xia2025causal#f17",
+   "set": {
+    "relation": "Borrowed from Beckers and Halpern (2019, Def. 3.15) as restated here (without requiring the induced low-level intervention set); strengthens τ-abstraction; required by constructive τ-abstraction."
+   }
+  },
+  {
+   "id": "sutter2025non#f14",
+   "set": {
+    "formula": "c_{\\psi'}=f_N^{\\psi'}(\\mathbf x')\\quad\\text{or}\\quad c_{\\eta'}=f_A^{:\\eta'}\\!\\left(\\mathbf x',\\left(v_{\\eta''}\\leftarrow f_A^{:\\eta''}(\\mathbf x'')\\right)\\right)\\quad\\text{(intervention values produced by other input-restricted computations)}"
+   }
+  }
+ ],
+ "drops": [
+  "geiger2025causal#f25",
+  "beckers2019approximate#f6",
+  "beckers2019approximate#f16",
+  "beckers2019approximate#f17",
+  "xia2025causal#f2",
+  "xia2025causal#f24",
+  "xia2025causal#f25",
+  "xia2025causal#f26",
+  "sutter2025non#f8",
+  "sutter2025non#f9",
+  "sutter2025non#f10",
+  "sutter2025non#f19",
+  "sutter2025non#f20",
+  "sutter2025non#f21"
+ ],
+ "adds": [],
+ "record_fixes": [
+  {
+   "key": "geiger2025causal",
+   "old": "tags: [source:formal-sweep-2026-11-01, contribution:theory, motivation:explainability, domain:synthetic, domain:logic]",
+   "new": "tags: [source:formal-sweep-2026-11-01, reveals:internal-strategy, signal:interp-tool, contribution:theory, motivation:explainability, domain:synthetic, domain:logic]"
+  },
+  {
+   "key": "geiger2025causal",
+   "old": "**Limits** Deterministic setting; faithfulness depends on intervention coverage, similarity and aggregation choices; does not establish that an abstraction is uniquely explanatory.",
+   "new": "**Limits** Deterministic models only (probabilistic aspects set aside); graded faithfulness leaves the similarity function, intervention distribution and aggregation statistic to the use case; no experiments beyond hand-built worked examples."
+  },
+  {
+   "key": "geiger2025causal",
+   "old": "formalizes its requirement that faithfulness be graded and sensitive to the evaluation setting",
+   "new": "adopts its definition of faithfulness and formalizes its call for a graded notion as approximate transformation"
+  },
+  {
+   "key": "beckers2019abstracting",
+   "old": "tags: [source:formal-sweep-2026-11-01, contribution:theory, motivation:explainability]",
+   "new": "tags: [source:formal-sweep-2026-11-01, contribution:theory]"
+  },
+  {
+   "key": "sutter2025non",
+   "old": "authors: \"Sutter, Minder, Hofmann et al.\"",
+   "new": "authors: \"Sutter, Minder, Hofmann & Pimentel\""
+  },
+  {
+   "key": "sutter2025non",
+   "old": "tags: [source:formal-sweep-2026-11-01, contribution:theory,",
+   "new": "tags: [source:formal-sweep-2026-11-01, reveals:internal-strategy, signal:interp-tool, contribution:theory,"
+  },
+  {
+   "key": "sutter2025non",
+   "old": "**Method** Existence proof; identity, orthogonal and reversible nonlinear alignments; equality, Boolean-law and indirect-object tasks.",
+   "new": "**Method** Existence proof under five assumptions; DAS with identity, orthogonal and RevNet alignment maps; hierarchical-equality and distributive-law tasks on MLPs, IOI on Pythia 31M–410M, trained and at initialization."
+  }
+ ],
+ "notes": "All quotes verify. Dropped background or out-of-scope rows: integrated gradients (Geiger); 'similar models', SHD and SID (Beckers et al.); observational valuation, NCM architectures and projected sampling (Xia); verbal representation hypotheses and theorem assumptions (Sutter). Fixed weak quotes, trailing-comma formulas and some relations. Records: Geiger's 'uniquely explanatory' limit is unsupported; Sutter has four authors; Beckers-Halpern never mention explainability; added internal-strategy/interp-tool tags where interchange interventions supply ground truth."
+}

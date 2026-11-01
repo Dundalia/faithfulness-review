@@ -1,0 +1,55 @@
+{
+ "fixes": [
+  {
+   "id": "marquessilva2022logic#f18",
+   "set": {
+    "formula": "P_{\\mathrm{axp}}(S;\\mathcal T,F,\\kappa,\\mathbf v):=\\neg\\operatorname{CO}\\!\\left(\\llbracket\\left(\\bigwedge_{i\\in S}x_i=v_i\\right)\\land(\\kappa(\\mathbf x)\\ne c)\\rrbracket_{\\mathcal T}\\right)."
+   }
+  },
+  {
+   "id": "marquessilva2022logic#f19",
+   "set": {
+    "formula": "P_{\\mathrm{cxp}}(S;\\mathcal T,F,\\kappa,\\mathbf v):=\\operatorname{CO}\\!\\left(\\llbracket\\left(\\bigwedge_{i\\in F\\setminus S}x_i=v_i\\right)\\land(\\kappa(\\mathbf x)\\ne c)\\rrbracket_{\\mathcal T}\\right)."
+   }
+  },
+  {
+   "id": "cachin1998information#f1",
+   "set": {
+    "formula": "D(P_C\\|P_S)\\le\\varepsilon",
+    "quote": "The security of a steganographic system is quantified in terms of the relative entropy (or discrimination) between the distributions of C and S, which yields bounds on the detection capability of any adversary.",
+    "where": "Definition 1, Section 2, [P25]; abstract [P1]",
+    "relation": "Restated in anwar2026decision (App. D, Proposition D.1) with the arguments of the divergence reversed, as D_KL(P_1||P_0) <= epsilon; there the binary-detection special case of the steganographic gap satisfies normalized gap = 1 - TV >= 1 - sqrt(epsilon/2)."
+   }
+  },
+  {
+   "id": "cachin1998information#f2",
+   "set": {
+    "formula": "D(P_C\\|P_S)=0",
+    "quote": "In a perfectly secure stegosystem, Eve cannot distinguish the two distributions and has no information at all about the presence of an embedded message.",
+    "where": "Definition 1 and remark 1, Section 2, [P25]"
+   }
+  },
+  {
+   "id": "yin2026opacity#f1",
+   "set": {
+    "relation": "Umbrella for current-state, initial-state, initial-final, K-step, infinite-step and pre-opacity; the paper contrasts its infinite-step form ('always not know') with diagnosability ('always eventually know'); related to noninterference; several classes expressed as hyperproperties (HyperLTL)."
+   }
+  },
+  {
+   "id": "yin2026opacity#f6",
+   "set": {
+    "relation": "Limit of K-step opacity as K goes to infinity; an 'always not know' requirement, which the paper contrasts with diagnosability ('always eventually know')."
+   }
+  },
+  {
+   "id": "yin2026opacity#f13",
+   "set": {
+    "relation": "Contrasted in the paper with infinite-step opacity ('always eventually know' against 'always not know'); related to detectability, observability and prognosability. The paper does not mention monitorability: the analogy (a monitor inferring misbehavior from partial observations) is the map's."
+   }
+  }
+ ],
+ "drops": [],
+ "adds": [],
+ "record_fixes": [],
+ "notes": "KaTeX cannot size \\llbracket with \\left; same formula without the sizing. Cachin rows checked against the author's revised full text (cachin.com, 2004): divergence is D(P_C||P_S). Yin never calls diagnosability a dual."
+}

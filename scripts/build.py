@@ -1,6 +1,6 @@
 """Regenerate every view from papers/ and tags.yaml:
 index.csv, tags.csv, relations.csv, index.md, corpus.txt and site/data.json (the dashboard's data)."""
-import csv, datetime, json, re
+import csv, sys, datetime, json, re
 from records import MAP, all_records, sections
 
 
@@ -58,6 +58,37 @@ def definitions():
     return defs, clusters
 
 
+def formal(defs, clusters):
+    """Formal definitions: the formal rows of definitions.csv (labeled in runs/E_formal/formal_labels.json)
+    and the formal-framework papers' definitions in formal.csv (built by formal.py)."""
+    sys.path.insert(0, str(MAP / "scripts"))
+    from formal import concept_of
+    labels_path = MAP / "runs" / "E_formal" / "formal_labels.json"
+    labels = {l["id"]: l for l in json.loads(labels_path.read_text())["labels"]} if labels_path.exists() else {}
+    names = {c["id"]: c["name"] for c in clusters}
+    out = []
+    for d in defs:
+        if d["kind"] != "formal":
+            continue
+        l, name = labels.get(d["id"], {}), names.get(d["cluster"], "")
+        specific = {"self-report and introspection", "honesty, lying and deception", "scheming and hidden objectives",
+                    "legibility and checkability", "obfuscation", "steganography and encoded reasoning", "simulatability"}
+        concept = concept_of(name) if concept_of(name) in specific else \
+            {"faithfulness": "faithfulness", "monitorability": "monitorability", "counterfactual": "counterfactuals"}[d["family"]]
+        if d["family"] == "faithfulness" and "predict" in name.lower():
+            concept = "simulatability"
+        out.append({"id": d["id"], "key": d["key"], "collection": "catalogue", "concept": concept, "concepts": name,
+                    "term": d["term"], "level": l.get("level", ""), "formalism": l.get("formalism", ""), "quote": d["quote"],
+                    "formula": "", "assumptions": "", "where": d["where"], "gloss": d["gloss"], "relation": "", "verbatim": "yes"})
+    path = MAP / "formal.csv"
+    if path.exists():
+        with open(path, newline="") as f:
+            out += [{**{k: r[k] for k in ("id", "key", "concept", "concepts", "term", "level", "formalism", "quote", "formula",
+                                          "assumptions", "where", "gloss", "relation", "verbatim")}, "collection": "frameworks"}
+                    for r in csv.DictReader(f)]
+    return out
+
+
 def main():
     recs = all_records()
     rows = []
@@ -102,7 +133,7 @@ def main():
     (MAP / "site").mkdir(exist_ok=True)
     defs, clusters = definitions()
     data = {"generated": datetime.date.today().isoformat(), "namespaces": vocabulary(), "papers": papers,
-            "definitions": defs, "clusters": clusters}
+            "definitions": defs, "clusters": clusters, "formal": formal(defs, clusters)}
     (MAP / "site" / "data.json").write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     print(f"built views and site/data.json for {len(recs)} papers and {len(defs)} definitions")
 

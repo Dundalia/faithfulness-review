@@ -1,0 +1,340 @@
+[
+ {
+  "key": "halpern2025causality",
+  "title": "Causality Without Causal Models",
+  "authors": "Joseph Y. Halpern, Rafael Pass",
+  "year": 2025,
+  "venue": "EPTCS 437 (2025), pp. 160-174",
+  "url": "https://arxiv.org/abs/2511.21260",
+  "pdf": "https://arxiv.org/pdf/2511.21260",
+  "area": "actual_causation",
+  "concepts": [
+   "actual causation",
+   "explanation"
+  ]
+ },
+ {
+  "key": "beckers2022causal",
+  "title": "Causal Explanations and XAI",
+  "authors": "Sander Beckers",
+  "year": 2022,
+  "venue": "CLeaR 2022 (Causal Learning and Reasoning)",
+  "url": "https://arxiv.org/abs/2201.13169",
+  "pdf": "https://arxiv.org/pdf/2201.13169",
+  "area": "actual_causation",
+  "concepts": [
+   "explanation",
+   "completeness of explanation",
+   "counterfactuals as used to test explanations",
+   "actual causation"
+  ]
+ },
+ {
+  "key": "beckers2025large",
+  "title": "Large Language Models as Nondeterministic Causal Models",
+  "authors": "Sander Beckers",
+  "year": 2025,
+  "venue": "KR 2026 (accepted; arXiv 2509.22297)",
+  "url": "https://arxiv.org/abs/2509.22297",
+  "pdf": "https://arxiv.org/pdf/2509.22297",
+  "area": "actual_causation",
+  "concepts": [
+   "counterfactuals as used to test explanations"
+  ]
+ },
+ {
+  "key": "yu2025causal",
+  "title": "Causal Sufficiency and Necessity Improves Chain-of-Thought Reasoning",
+  "authors": "Xiangning Yu, Zhuohan Wang, Linyi Yang, Haoxuan Li, Anjie Liu, Xiao Xue, Jun Wang, Mengyue Yang",
+  "year": 2025,
+  "venue": "NeurIPS 2025",
+  "url": "https://arxiv.org/abs/2506.09853",
+  "pdf": "https://arxiv.org/pdf/2506.09853",
+  "area": "actual_causation",
+  "concepts": [
+   "faithfulness of reasoning",
+   "completeness of explanation",
+   "counterfactuals as used to test explanations"
+  ]
+ },
+ {
+  "key": "ward2023honesty",
+  "title": "Honesty Is the Best Policy: Defining and Mitigating AI Deception",
+  "authors": "Francis Rhys Ward, Francesco Belardinelli, Francesca Toni, Tom Everitt",
+  "year": 2023,
+  "venue": "NeurIPS 2023 (spotlight)",
+  "url": "https://arxiv.org/abs/2312.01350",
+  "pdf": "https://arxiv.org/pdf/2312.01350",
+  "area": "agency_honesty",
+  "concepts": [
+   "deception",
+   "belief",
+   "intention",
+   "honesty"
+  ]
+ },
+ {
+  "key": "ward2024reasons",
+  "title": "The Reasons that Agents Act: Intention and Instrumental Goals",
+  "authors": "Francis Rhys Ward, Matt MacDermott, Francesco Belardinelli, Francesca Toni, Tom Everitt",
+  "year": 2024,
+  "venue": "AAMAS 2024",
+  "url": "https://arxiv.org/abs/2402.07221",
+  "pdf": "https://arxiv.org/pdf/2402.07221",
+  "area": "agency_honesty",
+  "concepts": [
+   "intention",
+   "instrumental goals",
+   "hidden objectives"
+  ]
+ },
+ {
+  "key": "hammond2023reasoning",
+  "title": "Reasoning about Causality in Games",
+  "authors": "Lewis Hammond, James Fox, Tom Everitt, Ryan Carey, Alessandro Abate, Michael Wooldridge",
+  "year": 2023,
+  "venue": "Artificial Intelligence (2023)",
+  "url": "https://arxiv.org/abs/2301.02324",
+  "pdf": "https://arxiv.org/pdf/2301.02324",
+  "area": "agency_honesty",
+  "concepts": [
+   "framework for belief, intention and deception",
+   "multi-agent causal reasoning"
+  ]
+ },
+ {
+  "key": "geiger2025causal",
+  "title": "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+  "authors": "Atticus Geiger, Duligur Ibeling, Amir Zur, Maheep Chaudhary, Sonakshi Chauhan, Jing Huang, Aryaman Arora, Zhengxuan Wu, Noah Goodman, Christopher Potts, Thomas Icard",
+  "year": 2025,
+  "venue": "JMLR 26 (arXiv 2301.04709, first posted 2023 as 'Causal Abstraction for Faithful Model Interpretation')",
+  "url": "https://arxiv.org/abs/2301.04709",
+  "pdf": "https://arxiv.org/pdf/2301.04709",
+  "area": "causal_abstraction",
+  "concepts": [
+   "faithfulness of explanations",
+   "graded faithfulness",
+   "counterfactuals (interchange interventions)",
+   "post-hoc rationalization (LIME critique)"
+  ]
+ },
+ {
+  "key": "beckers2019approximate",
+  "title": "Approximate Causal Abstraction",
+  "authors": "Sander Beckers, Frederick Eberhardt, Joseph Y. Halpern",
+  "year": 2019,
+  "venue": "UAI 2019",
+  "url": "https://arxiv.org/abs/1906.11583",
+  "pdf": "https://arxiv.org/pdf/1906.11583",
+  "area": "causal_abstraction",
+  "concepts": [
+   "faithfulness of explanations",
+   "graded faithfulness"
+  ]
+ },
+ {
+  "key": "beckers2019abstracting",
+  "title": "Abstracting Causal Models",
+  "authors": "Sander Beckers, Joseph Y. Halpern",
+  "year": 2019,
+  "venue": "AAAI 2019",
+  "url": "https://arxiv.org/abs/1812.03789",
+  "pdf": "https://arxiv.org/pdf/1812.03789",
+  "area": "causal_abstraction",
+  "concepts": [
+   "faithfulness of explanations"
+  ]
+ },
+ {
+  "key": "xia2025causal",
+  "title": "Causal Abstraction Inference under Lossy Representations",
+  "authors": "Kevin Xia, Elias Bareinboim",
+  "year": 2025,
+  "venue": "ICML 2025 (per arXiv comment)",
+  "url": "https://arxiv.org/abs/2509.21607",
+  "pdf": "https://arxiv.org/pdf/2509.21607",
+  "area": "causal_abstraction",
+  "concepts": [
+   "faithfulness of explanations",
+   "counterfactuals"
+  ]
+ },
+ {
+  "key": "sutter2025non",
+  "title": "The Non-Linear Representation Dilemma: Is Causal Abstraction Enough for Mechanistic Interpretability?",
+  "authors": "Denis Sutter, Julian Minder, Thomas Hofmann, Tiago Pimentel",
+  "year": 2025,
+  "venue": "NeurIPS 2025 (Spotlight)",
+  "url": "https://arxiv.org/abs/2507.08802",
+  "pdf": "https://arxiv.org/pdf/2507.08802",
+  "area": "causal_abstraction",
+  "concepts": [
+   "faithfulness of explanations"
+  ]
+ },
+ {
+  "key": "anwar2026decision",
+  "title": "A Decision-Theoretic Formalisation of Steganography With Applications to LLM Monitoring",
+  "authors": "Usman Anwar, Julianna Piskorz, David D. Baek, David Africa, Jim Weatherall, Max Tegmark, Christian Schroeder de Witt, Mihaela van der Schaar, David Krueger",
+  "year": 2026,
+  "venue": "arXiv preprint (v3)",
+  "url": "https://arxiv.org/html/2602.23163v3",
+  "pdf": "https://arxiv.org/pdf/2602.23163",
+  "area": "information_verification",
+  "concepts": [
+   "steganography",
+   "encoded reasoning",
+   "monitorability",
+   "legibility"
+  ]
+ },
+ {
+  "key": "xu2020theory",
+  "title": "A Theory of Usable Information Under Computational Constraints",
+  "authors": "Yilun Xu, Shengjia Zhao, Jiaming Song, Russell Stewart, Stefano Ermon",
+  "year": 2020,
+  "venue": "ICLR 2020 (talk)",
+  "url": "https://arxiv.org/abs/2002.10689",
+  "pdf": "https://arxiv.org/pdf/2002.10689",
+  "area": "information_verification",
+  "concepts": [
+   "monitorability",
+   "legibility",
+   "steganography",
+   "encoded reasoning"
+  ]
+ },
+ {
+  "key": "mohammadkhani2026hidden",
+  "title": "Hidden Reasoning Must Leak, but Need Not Be Readable: Fundamental Opportunities and Limits for Chain-of-Thought Monitoring",
+  "authors": "Mohammadali Mohammadkhani, Madhava Krishna, Yash Sarrof, Michael Hahn",
+  "year": 2026,
+  "venue": "arXiv preprint",
+  "url": "https://arxiv.org/pdf/2609.37312v1",
+  "pdf": "https://arxiv.org/pdf/2609.37312",
+  "area": "information_verification",
+  "concepts": [
+   "encoded reasoning",
+   "steganography",
+   "monitorability",
+   "obfuscation"
+  ]
+ },
+ {
+  "key": "cachin1998information",
+  "title": "An Information-Theoretic Model for Steganography",
+  "authors": "Christian Cachin",
+  "year": 1998,
+  "venue": "Information Hiding Workshop 1998; revised version in Information and Computation (2004)",
+  "url": "https://eprint.iacr.org/2000/028",
+  "pdf": "https://eprint.iacr.org/2000/028.pdf",
+  "area": "information_verification",
+  "concepts": [
+   "steganography",
+   "encoded reasoning"
+  ]
+ },
+ {
+  "key": "yin2026opacity",
+  "title": "Opacity in Discrete Event Systems: A Perspective and Overview",
+  "authors": "Xiang Yin",
+  "year": 2026,
+  "venue": "arXiv preprint",
+  "url": "https://arxiv.org/html/2602.22713v1",
+  "pdf": "https://arxiv.org/pdf/2602.22713",
+  "area": "information_verification",
+  "concepts": [
+   "monitorability",
+   "obfuscation",
+   "steganography"
+  ]
+ },
+ {
+  "key": "dasgupta2022framework",
+  "title": "Framework for Evaluating Faithfulness of Local Explanations",
+  "authors": "Sanjoy Dasgupta, Nave Frost, Michal Moshkovitz",
+  "year": 2022,
+  "venue": "ICML 2022 (per Semantic Scholar); arXiv 2202.00734",
+  "url": "https://arxiv.org/abs/2202.00734",
+  "pdf": "https://arxiv.org/pdf/2202.00734",
+  "area": "xai_faithfulness_theory",
+  "concepts": [
+   "faithfulness of explanations",
+   "simulatability",
+   "checkability"
+  ]
+ },
+ {
+  "key": "bilodeau2022impossibility",
+  "title": "Impossibility Theorems for Feature Attribution",
+  "authors": "Blair Bilodeau, Natasha Jaques, Pang Wei Koh, Been Kim",
+  "year": 2024,
+  "venue": "Proceedings of the National Academy of Sciences 121(2)",
+  "url": "https://arxiv.org/abs/2212.11870",
+  "pdf": "https://arxiv.org/pdf/2212.11870",
+  "area": "xai_faithfulness_theory",
+  "concepts": [
+   "faithfulness of explanations",
+   "counterfactuals as used to test explanations"
+  ]
+ },
+ {
+  "key": "lindsey2025emergent",
+  "title": "Emergent Introspective Awareness in Large Language Models",
+  "authors": "Jack Lindsey",
+  "year": 2026,
+  "venue": "arXiv preprint 2601.01828",
+  "url": "https://arxiv.org/abs/2601.01828",
+  "pdf": "https://arxiv.org/pdf/2601.01828",
+  "area": "xai_faithfulness_theory",
+  "concepts": [
+   "introspection",
+   "self-report accuracy"
+  ]
+ },
+ {
+  "key": "song2025privileged",
+  "title": "Privileged Self-Access Matters for Introspection in AI",
+  "authors": "Siyuan Song, Harvey Lederman, Jennifer Hu, Kyle Mahowald",
+  "year": 2025,
+  "venue": "arXiv preprint 2508.14802",
+  "url": "https://arxiv.org/abs/2508.14802",
+  "pdf": "https://arxiv.org/pdf/2508.14802",
+  "area": "xai_faithfulness_theory",
+  "concepts": [
+   "introspection",
+   "self-report accuracy"
+  ]
+ },
+ {
+  "key": "marquessilva2022logic",
+  "title": "Logic-Based Explainability in Machine Learning",
+  "authors": "Joao Marques-Silva",
+  "year": 2022,
+  "venue": "Reasoning Web 2022 lecture notes (per Semantic Scholar); arXiv 2211.00541",
+  "url": "https://arxiv.org/abs/2211.00541",
+  "pdf": "https://arxiv.org/pdf/2211.00541",
+  "area": "xai_faithfulness_theory",
+  "concepts": [
+   "faithfulness of explanations",
+   "soundness of explanations",
+   "counterfactuals as used to test explanations"
+  ]
+ },
+ {
+  "key": "pearl2001direct",
+  "title": "Direct and Indirect Effects",
+  "authors": "Judea Pearl",
+  "year": 2001,
+  "venue": "UAI 2001 (arXiv 1301.2300)",
+  "url": "https://arxiv.org/abs/1301.2300",
+  "pdf": "https://arxiv.org/pdf/1301.2300",
+  "area": "critic",
+  "concepts": [
+   "faithfulness of reasoning",
+   "post-hoc rationalization",
+   "counterfactuals as used to test explanations",
+   "introspection (internality criterion)"
+  ]
+ }
+]

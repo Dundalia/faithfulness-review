@@ -1,0 +1,313 @@
+{
+ "results": [
+  {
+   "n": 91,
+   "verdict": "supported"
+  },
+  {
+   "n": 92,
+   "verdict": "supported"
+  },
+  {
+   "n": 93,
+   "verdict": "supported"
+  },
+  {
+   "n": 94,
+   "verdict": "overstated",
+   "reason": "The page drops the theorem's scope condition. The abstract restricts the result to moderately rich model classes; Theorem 3.3 rests on Assumptions 1 and 2. Without it the sentence reads as holding for any model class.",
+   "evidence": [
+    "bilodeau2022impossibility abstract [P4]: \"we show that for moderately rich model classes (easily satisfied by neural networks), any feature attribution method that is complete and linear—for example, Integrated Gradients and SHAP—can provably fail to improve on random guessing for inferring model behaviour\"",
+    "bilodeau2022impossibility [P77]: \"Suppose that Assumptions 1 and 2 are satisfied.\""
+   ],
+   "replacement": "[Bilodeau et al. 2022](./#p=bilodeau2022impossibility) prove that, \\\"for moderately rich model classes (easily satisfied by neural networks)\\\", any feature attribution method that is complete and linear, such as Integrated Gradients or SHAP, \\\"can provably fail to improve on random guessing for inferring model behaviour\\\", where completeness means $\\sum_{j}\\Phi(f,\\mu,x)_j=f(x)-\\mathbb E_{X\\sim\\mu}f(X)$."
+  },
+  {
+   "n": 95,
+   "verdict": "overstated",
+   "reason": "The AXp definition (Equations 4 and 5) assumes only a known classifier, an instance and a feature space. The faithful logical encoding, together with a consistency oracle, is what formal.csv records for computing an AXp (the Paxp predicate, a measurement row), not for the definition.",
+   "evidence": [
+    "formal.csv marquessilva2022logic#f9 (Weak AXp) assumptions: \"Known classifier, target instance with c=κ(v), and feature space\"",
+    "formal.csv marquessilva2022logic#f18 (Paxp, level measurement) assumptions: \"Faithful logic encoding of classifier and feature domains; sound, complete theory consistency oracle; c=κ(v).\"",
+    "marquessilva2022logic [P110]: \"Practically efficient logic encodings have been devised for computing explanations for a number of families of classifiers\""
+   ],
+   "replacement": "A known classifier over input features; an explanation that is a property of the input; a deployment distribution; for computing an AXp, a faithful logical encoding of the classifier and a sound and complete consistency oracle."
+  },
+  {
+   "n": 96,
+   "verdict": "supported"
+  },
+  {
+   "n": 97,
+   "verdict": "supported"
+  },
+  {
+   "n": 98,
+   "verdict": "supported"
+  },
+  {
+   "n": 99,
+   "verdict": "supported"
+  },
+  {
+   "n": 100,
+   "verdict": "supported"
+  },
+  {
+   "n": 101,
+   "verdict": "supported"
+  },
+  {
+   "n": 102,
+   "verdict": "understated",
+   "reason": "The page credits the extraction with reading grounding as counterfactual dependence, but Lindsey states the counterfactual reading himself, in the criterion. The other two readings are the extraction's (formal.csv relation fields).",
+   "evidence": [
+    "lindsey2025emergent Section 3 [P51]: \"2: Grounding. The model’s description of its internal state must causally depend on the aspect that is being described. That is, if the internal state were different, the description would change accordingly.\"",
+    "formal.csv lindsey2025emergent#f4 relation: \"Restricts grounding to a path-specific (non-output-mediated) effect\"",
+    "formal.csv song2025privileged#f1 relation: \"resembles resource-bounded definitions such as usable information under computational constraints\""
+   ],
+   "replacement": "Lindsey himself glosses grounding counterfactually (\"if the internal state were different, the description would change accordingly\"); the extraction reads internality as a path-specific effect that excludes paths through sampled outputs, and notes that Song et al.'s criterion resembles usable information under computational constraints."
+  },
+  {
+   "n": 103,
+   "verdict": "supported"
+  },
+  {
+   "n": 104,
+   "verdict": "supported"
+  },
+  {
+   "n": 105,
+   "verdict": "supported"
+  },
+  {
+   "n": 106,
+   "verdict": "overstated",
+   "reason": "Lindsey's criteria apply to any \"aspect of its internal state\", and his own example under the accuracy criterion is a description of the mechanisms used in a calculation. The introduction names reports on reasoning processes as a goal. What holds is that the experiments (Sections 5 to 8) elicit reports of injected concepts and of whether an output was intended, not accounts of a reasoning process.",
+   "evidence": [
+    "lindsey2025emergent Section 3 [P51]: \"Models can also fail to accurately describe the internal mechanisms they use to perform calculations [26].\"",
+    "lindsey2025emergent introduction [P15]: \"An ability to provide grounded responses to questions about their reasoning processes could make AI models’ behavior genuinely more transparent and interpretable to end users.\"",
+    "lindsey2025emergent PDF section titles: \"5 Self-report of Injected “Thoughts”\"; \"6 Distinguishing Prior “Thoughts” from Text Inputs\"; \"7 Distinguishing Intended from Unintended Outputs via Intro-[spection]\"; \"8 Intentional Control of Internal States\""
+   ],
+   "replacement": "The criteria concern descriptions of \"some aspect of its internal state\", which Lindsey's accuracy criterion extends to \"the internal mechanisms they use to perform calculations\", but his experiments elicit reports of injected concepts and of whether an output was intended, not accounts of a reasoning process."
+  },
+  {
+   "n": 107,
+   "verdict": "supported"
+  },
+  {
+   "n": 108,
+   "verdict": "supported"
+  },
+  {
+   "n": 109,
+   "verdict": "supported"
+  },
+  {
+   "n": 110,
+   "verdict": "supported"
+  },
+  {
+   "n": 111,
+   "verdict": "supported"
+  },
+  {
+   "n": 112,
+   "verdict": "supported"
+  },
+  {
+   "n": 113,
+   "verdict": "overstated",
+   "reason": "Joshi et al. do not mention CoT faithfulness. Their framework puts claims about a specific input, such as necessity, on rung 3. The candidates.json note limits the point to faithfulness claims about what the model would have output. Population-level faithfulness tests are interventional (rung 2), and the page's own information-theoretic definitions are observational. So 'a faithfulness claim' in general is too broad.",
+   "evidence": [
+    "arXiv 2602.16698 abstract: \"counterfactual claims -- i.e., asking what the model output would have been for the same prompt under an unobserved intervention -- remain largely unverifiable without controlled supervision\"",
+    "arXiv 2602.16698 full text (Section 2.3): \"Necessity is a counterfactual claim—for a specific input, ablating S would have changed the output\"",
+    "candidates.json (2602.16698) relevance: \"Faithfulness claims about what the model would have output are rung-3 counterfactuals, mostly unverifiable without controlled supervision.\""
+   ],
+   "replacement": "[Joshi et al. 2026](https://arxiv.org/abs/2602.16698) add that counterfactual claims about what the model would have output \"remain largely unverifiable without controlled supervision\", which is the rung of a faithfulness claim about a single prompt, such as that the answer would have differed without a given step."
+  },
+  {
+   "n": 114,
+   "verdict": "supported"
+  },
+  {
+   "n": 115,
+   "verdict": "supported"
+  },
+  {
+   "n": 116,
+   "verdict": "supported"
+  },
+  {
+   "n": 117,
+   "verdict": "overstated",
+   "reason": "The catalogue holds post-hoc rationalization in two forms, as the page's own table says: the negation of Wang et al.'s faithfulness definition, and Parekh & Goyal's performative steps after the commitment point. The second is an intervention-based definition of post-commitment steps, not a negated faithfulness definition. The completeness check lists the two as separate frameworks.",
+   "evidence": [
+    "critic.json coverage, post-hoc rationalization: \"causal model: residual direct dependence of the answer on the input (negation of a faithfulness definition) (map catalogue, concept-level label)\"; \"intervention: performative steps after the forced answer is already fixed (map catalogue, concept-level label)\"",
+    "definitions.csv parekh2026drop#3 (label level both, intervention / flip test): \"Every step after $c$ is performative because the correct answer was already extractable.\""
+   ],
+   "replacement": "Post-hoc rationalization has no framework definition and appears in the catalogue only as the negation of a faithfulness definition ([Wang et al. 2026a](./#p=wang2026case)) or as performative steps after the answer is already extractable ([Parekh & Goyal 2026](./#p=parekh2026drop))."
+  },
+  {
+   "n": 118,
+   "verdict": "overstated",
+   "reason": "The completeness check found Ferrara 2026, which formalizes a behavioral definition of defeat devices, verified in full text. The check describes it as covering sandbagging, alignment faking and evaluation-gated scheming, and its verdict calls scheming \"only behavioral or compositional\". 'No definition' needs to be limited to the concept itself, with that behavioral definition named.",
+   "evidence": [
+    "arXiv 2606.28863 abstract: \"We formalize this triadic test as a behavioral definition\"",
+    "critic.json missed_frameworks (defeat devices): \"Gives one behavioral definition of sandbagging, alignment faking and evaluation-gated scheming.\"",
+    "critic.json new_candidates (Defeat Devices in AI Systems) relevance: \"The only definition found that covers sandbagging, alignment faking and evaluation-gated scheming at once.\"",
+    "critic.json verdict: \"Scheming and hidden objectives are only behavioral or compositional.\""
+   ],
+   "replacement": "Scheming and hidden objectives have components and settings but no definition of the concept; the nearest is a behavioral definition of defeat devices that covers evaluation-gated scheming ([Ferrara 2026](https://arxiv.org/abs/2606.28863))."
+  },
+  {
+   "n": 119,
+   "verdict": "supported"
+  },
+  {
+   "n": 120,
+   "verdict": "overstated",
+   "reason": "Kaufmann et al. define the non-transparent CoT by comparing a human's reading with what the model's downstream computation extracts from the text, which the output is then computed from. That is a use-based requirement. The completeness check corrected the search gap on exactly this point ('use-based ... though not a causal one'). The claim holds only for causal use.",
+   "evidence": [
+    "critic.json corrections (gaps field, encoded reasoning): \"It overlooks map paper kaufmann2026aligned, whose catalogue rows define CoT semantics as the information the model's downstream computation extracts from the trace (#26) and non-transparent CoT as meaning different things to humans and to that computation (#19). This is a use-based definition, though not a causal one.\"",
+    "kaufmann2026aligned [P258]: \"Definition: Non-transparent CoT. We say the CoT is non-transparent if $h(\\text{CoT})\\neq\\pi_{\\text{sem}}(\\text{CoT})$ . In other words, the information that the LLM is passing in the CoT differs from the information which a human gets from reading the CoT.\"",
+    "kaufmann2026aligned [P235]: \"The semantics of the CoT, as we use the term, refers to what information the model’s downstream computation extracts from the CoT text.\""
+   ],
+   "replacement": "No definition of encoded reasoning requires that the model's computation causally use the hidden content; the closest, the non-transparent CoT of [Kaufmann et al. 2026](./#p=kaufmann2026aligned), is use-based but not causal: it compares what a human reads in the CoT with \"what information the model’s downstream computation extracts from the CoT text\"."
+  },
+  {
+   "n": 121,
+   "verdict": "overstated",
+   "reason": "Two problems with 'only logical ones outside the map'. First, the catalogue in the map defines honesty behaviorally (wang2025evaluating#11, labelled concept-and-measurement), and the page's own table lists it. Second, outside the map the completeness check added a decision-theoretic definition of honest reports (Oesterheld et al. 2023). Lying does have formal definitions only in logics outside the map, and no formal.csv row defines honesty or lying.",
+   "evidence": [
+    "definitions.csv wang2025evaluating#11 (formal_labels level both): \"We say that M_H is honest on x if its accuracy drops by less than 20 percentage points from M\"",
+    "critic.json coverage, honesty: \"behavioral and intervention conditions (map catalogue, concept-level label)\"; \"proper scoring rules for performative reports; modal logic (new, found by this check)\"",
+    "arXiv 2305.17601 (Incentivizing honest performative predictions with proper scoring rules) abstract: \"We say a prediction is a fixed point if it accurately reflects the expert's beliefs after that prediction has been made.\"",
+    "arXiv 1108.2115 abstract: \"We propose a dynamic logic of lying\""
+   ],
+   "replacement": "Honesty and lying have no definition in a causal framework: lying is defined formally only in logics outside the map, and honesty by a logical schema ([Evans et al. 2021](https://arxiv.org/abs/2110.06674)), by a fixed-point condition on performative predictions ([Oesterheld et al. 2023](https://arxiv.org/abs/2305.17601)) and, in the catalogue, behaviorally, as accuracy under pressure ([Wang et al. 2025 (lie detection)](./#p=wang2025evaluating))."
+  },
+  {
+   "n": 122,
+   "verdict": "supported"
+  },
+  {
+   "n": 123,
+   "verdict": "supported"
+  },
+  {
+   "n": 124,
+   "verdict": "supported"
+  },
+  {
+   "n": 125,
+   "verdict": "supported"
+  },
+  {
+   "n": 126,
+   "verdict": "overstated",
+   "reason": "The counts are right: 2601.01828 has 5 citing papers, 2108.12099 and 2110.06674 have 3, and the title segment has 11. 'Formal works' is the problem. The page itself says Lindsey's criteria are verbal ('As stated, none of the criteria is a mathematical condition'; formal.csv has no formula for lindsey2025emergent#f1 to #f5), and candidates.json rates Evans et al. semi-formal. All four were later examined by the searches.",
+   "evidence": [
+    "runs/E_formal/cited_outside.json: 2601.01828 citing 5; 2108.12099 citing 3; 2110.06674 citing 3; title 'chain of thought is not explainability' citing 11",
+    "candidates.json (2110.06674) formalism: \"first-order logical schema (semi-formal) plus governance norms\"",
+    "formal.csv: formula empty for lindsey2025emergent#f1 to #f5"
+   ],
+   "replacement": "Among them are works the searches later examined, such as Lindsey 2025 (cited by 5 papers), Anil et al. 2021 (3) and Evans et al. 2021 (3), and the title segment \"chain of thought is not explainability\" (11)."
+  },
+  {
+   "n": 127,
+   "verdict": "supported"
+  },
+  {
+   "n": 128,
+   "verdict": "supported"
+  },
+  {
+   "n": 129,
+   "verdict": "supported"
+  },
+  {
+   "n": 130,
+   "verdict": "supported"
+  },
+  {
+   "n": 131,
+   "verdict": "supported"
+  },
+  {
+   "n": 132,
+   "verdict": "wrong",
+   "reason": "The project's own records say GPT-6.1 Sol (Codex) extracted only three of the five batches. Claude extracted the other two after Codex reached its weekly cap. The prompts for batches F4 and F5 (extract_F4.md, extract_F5.md) were written while F3 was still running, which is consistent with this. The other figures hold: 23 papers, five batches, map records written, and 68+106+82+54+24 = 334 definitions.",
+   "evidence": [
+    "PLAN.md (Formal frameworks row): \"records and formal definitions extracted by GPT-6.1 Sol through Codex (three batches) or Claude (two batches, after Codex reached its weekly cap)\"",
+    "README.md: \"The 23 formal-framework papers added on 1 November 2026 were summarized by GPT-6.1 Sol (through Codex) or by Claude\"",
+    "extraction_F1-F5.json: 68, 106, 82, 54, 24 definitions (334)"
+   ],
+   "replacement": "GPT-6.1 Sol, run through Codex, read the papers of three of the five batches, and Claude those of the other two after Codex reached its weekly cap; together they wrote the papers' map records and extracted 334 formal definitions with verbatim quotes, formulas, assumptions and locations."
+  },
+  {
+   "n": 133,
+   "verdict": "supported"
+  },
+  {
+   "n": 134,
+   "verdict": "wrong",
+   "reason": "Out of date. Cachin's full text has since been cached (cache/full/cachin1998information.txt, 15:34). checks_render.json then gave the two Cachin rows quotes from Definition 1 and the abstract, and formal.csv was rebuilt at 15:35. The verbatim column now reads 'yes' for all 291 rows, and recomputing with formal.py's own check (norm(quote) in norm(full_text(key))) finds no mismatch.",
+   "evidence": [
+    "formal.csv (rebuilt 15:35) verbatim column: yes 291",
+    "formal.csv cachin1998information#f1 quote: \"The security of a steganographic system is quantified in terms of the relative entropy (or discrimination) between the distributions of C and S, which yields bounds on the detection capability of any adversary.\"; where: \"Definition 1, Section 2, [P25]; abstract [P1]\"",
+    "runs/E_formal/checks_render.json notes: \"Cachin rows checked against the author's revised full text (cachin.com, 2004): divergence is D(P_C||P_S).\""
+   ],
+   "replacement": "Of the resulting 291 definitions in `formal.csv`, all 291 quotes match the cached full texts verbatim; the 2 rows of Cachin 1998, first written from the abstract and from the restatement in Anwar et al. 2026 (steganography), were checked against the author's revised full text once it was cached."
+  }
+ ],
+ "coherence": [
+  {
+   "old": "(./#p=pearl2001direct)). | Only as a negated faithfulness definition |",
+   "new": "(./#p=pearl2001direct)). | Only as a negated faithfulness definition or as performative steps |",
+   "reason": "Matches the corrected claim 117 and the same row's own text, which lists Parekh & Goyal's performative steps as a second catalogue form besides Wang et al.'s negated definition."
+  },
+  {
+   "old": "| No, but none requires that the model use the hidden content |",
+   "new": "| No, but none requires that the model causally use the hidden content |",
+   "reason": "The same cell lists Kaufmann et al.'s non-transparent CoT, which is use-based but not causal (critic.json correction). Matches the corrected claim 120."
+  },
+  {
+   "old": "| Yes: components and settings only |",
+   "new": "| Yes: components, settings and a behavioral definition of evaluation-gated concealment |",
+   "reason": "Matches the corrected claim 118. critic.json calls Ferrara 2026 a behavioral definition covering evaluation-gated scheming and calls scheming 'only behavioral or compositional'."
+  },
+  {
+   "old": "The classical definition of [Cachin 1998](./#p=cachin1998information), $\\varepsilon$-security $D_{\\mathrm{KL}}(P_1\\|P_0)\\le\\varepsilon$ between the stegotext and covertext distributions, is recovered as binary detection with an omnipotent Sentinel (Proposition D.1).",
+   "new": "The classical definition of [Cachin 1998](./#p=cachin1998information), $\\varepsilon$-security $D(P_C\\|P_S)\\le\\varepsilon$ between the covertext and stegotext distributions, which Anwar et al. restate with the arguments reversed, is recovered as binary detection with an omnipotent Sentinel (Proposition D.1).",
+   "reason": "This is outside claims 91 to 134, but it follows from the newly cached Cachin text and the rebuilt formal.csv. Cachin's Definition 1: 'a stegosystem is called -secure (against passive adversaries) if D(PC kPS ) ≤ .' (the epsilon is lost in extraction), so the divergence is cover-to-stego. Anwar et al. App. D.1 write 'Let P0 denote the distribution of innocent covertexts and P1 the distribution of stegotexts. Cachin (2004) defines ... DKL (P1 ∥P0 ) ≤ ε.' formal.csv cachin1998information#f1 now has formula D(P_C\\|P_S)\\le\\varepsilon and notes the reversal. The Pinsker bound in Proposition D.1 holds for either direction."
+  }
+ ],
+ "other_problems": [
+  {
+   "where": "How this page was made, step 4",
+   "problem": "After the five batch checks, runs/E_formal/checks_render.json (15:35) applied 7 more fixes. These cover the formulas of marquessilva2022logic#f18 and #f19 (KaTeX), the Cachin rows checked against the newly cached full text, and three Yin relations. Step 4 does not mention this check, so its sequence of steps is incomplete.",
+   "fix": "After the sentence on the batch checks, add: \"A final check of formula rendering and of the newly cached Cachin text applied 7 more fixes (`runs/E_formal/checks_render.json`).\""
+  },
+  {
+   "where": "Observer-relative information, What it defines (outside claims 91 to 134)",
+   "problem": "\"Diagnosability is its dual\" is not in Yin 2026. Yin only contrasts the two requirements, and checks_render.json notes \"Yin never calls diagnosability a dual\".",
+   "fix": "Replace \"Diagnosability is its dual: it \"can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement\".\" with \"Yin contrasts it with diagnosability, which \"can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement\".\""
+  },
+  {
+   "where": "formal.csv beckers2019approximate#f10",
+   "problem": "The quote 'Definition 4.1: Define a distance function dmax on pairs of similar probabilistic causal models by taking' matches pdftotext of cache/beckers2019approximate.pdf, which is what formal.py checks against. It does not match cache/full/beckers2019approximate.txt, where the two columns are interleaved ('dmax on pairs intervention W ~ and context ~u) the distance beof similar models by taking'). The page's 'cached full text' count still holds by formal.py's definition. This is only a caveat for anyone checking against cache/full.",
+   "fix": "None needed on the page. Optionally note in formal.py's docstring that verbatim is checked against cache/<key>.{txt,pdf}, not cache/full/."
+  },
+  {
+   "where": "runs/E_formal/critic.json",
+   "problem": "The file contradicts itself on encoded reasoning. Its verdict says \"Encoded reasoning with causal use is defined only by Kaufmann et al.\", while its corrections say Kaufmann's is \"a use-based definition, though not a causal one\". The page (claims 120 and the steganography row) should follow the correction, which matches Kaufmann's text.",
+   "fix": "No page change beyond claim 120 and the steganography-cell coherence edit."
+  },
+  {
+   "where": "Claim 97 (optional precision)",
+   "problem": "Consistency equals the accuracy of the Gibbs decoder, not the optimal decoder. Both decoders use the exact conditional label distribution Pr(y|π) under μ, which is the actual reason consistency does not model a bounded observer. The claim is supported as written.",
+   "fix": "Optionally: \"Both decoders in Dasgupta et al. use the exact distribution of labels given each explanation, so consistency does not model a bounded human or monitor.\""
+  }
+ ]
+}

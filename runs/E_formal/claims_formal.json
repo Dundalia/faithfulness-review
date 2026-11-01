@@ -1,0 +1,2254 @@
+{
+ "claims": [
+  {
+   "n": 1,
+   "text": "The map's [Definitions page](page.html?doc=definitions) shows that papers on chain-of-thought (CoT) faithfulness and monitorability define their concepts mostly in words: only 350 of its 3,414 definitions are formal, and the labels below put 244 of those 350 at the level of a measurement.",
+   "papers": [],
+   "evidence": [
+    "brief.md: 'In that catalogue, the formal definitions concentrate on measurements (tests, metrics, estimators); very few formally define the concepts themselves.'",
+    "formal_labels.json: 244 of 350 formal rows labeled measurement"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The Definitions page shows that formal definitions are a small minority (it gives kind counts per family), but it never says or counts that the formal definitions are mainly measurements. The concept/measurement split comes from this page's own Codex labels (formal_labels.json), not from the Definitions page.",
+   "evidence_check": [
+    "site/pages/definitions.md: \"It rests on 3,414 definitions quoted from 216 of the 217 entries the map held when the catalogue was built.\"",
+    "site/pages/definitions.md: \"by kind, 681 rows are operational, 369 informal, 297 criteria, 231 failure modes, 211 formal and 166 taxonomies\"",
+    "definitions.csv (recomputed): 350 of 3,414 rows have kind formal (faithfulness 211, monitorability 94, counterfactual 45)",
+    "runs/E_formal/label_prompt.md: \"\\\"measurement\\\" if it defines a test, metric, estimator, score or proxy used to assess the notion\" (labels made for this page: 244 of 350 measurement)"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 2,
+   "text": "In brief, formal definitions of most of the concepts exist, but they are spread over several framework families that each cover a subset (the 23 added papers form six families, one of which gives only verbal criteria for introspection); no framework covers all thirteen concepts; and none of the five searches or the completeness check found a work in any field that defines the faithfulness of a CoT as actual causation or as a causal abstraction of its written steps.",
+   "papers": [],
+   "evidence": [
+    "critic.json verdict: 'No single formal framework covers all the concepts in scope'",
+    "table count: 9 of 13 concepts with a concept-level formal definition in some framework",
+    "search gaps (actual_causation, causal_abstraction): no work defines CoT faithfulness as actual causation or as causal abstraction of verbalized reasoning",
+    "formal.csv: 291 rows grouped into six families (61/92/37/42/43/16)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Two problems. (a) The sixth family, criteria for introspection, gives no formal definition of a concept: the page itself says introspection has only verbal criteria and that none of the criteria is a mathematical condition, so formal definitions are spread over five of the six families. (b) 'No work in any field defines' is a universal negative; the evidence is that five searches and a completeness check found none.",
+   "evidence_check": [
+    "runs/E_formal/search_xai_faithfulness_theory.json gaps: \"Introspection: no fully mathematical definition; the criteria are verbal-causal (Comsa & Shanahan, Lindsey) or resource-relative (Song et al.)\"",
+    "formal.csv (recomputed): 15 of the 16 lindsey2025emergent and song2025privileged rows have an empty formula; the one formula (lindsey2025emergent#f8) is level measurement",
+    "runs/E_formal/search_actual_causation.json gaps: \"Faithfulness of CoT, self-explanations and self-reports: no definition as actual causation (stated reasons are actual causes of the output) found\"",
+    "runs/E_formal/search_causal_abstraction.json gaps: \"Faithfulness of CoT or verbalized reasoning: no paper defines it as a causal abstraction between the reasoning text and the model's computation\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 3,
+   "text": "The definitions catalogue ([`definitions.csv`](https://github.com/Dundalia/faithfulness-review/blob/main/definitions.csv)) holds 350 rows of kind formal, from 132 of the 217 papers that the map held when the catalogue was built.",
+   "papers": [],
+   "evidence": [
+    "definitions.csv: 350 rows with kind=formal from 132 distinct keys",
+    "definitions page: catalogue built from 216 of the 217 entries the map held"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 4,
+   "text": "Codex labeled 106 of them as defining a concept (83 the concept alone, 23 both the concept and its measurement) and 244 as defining only a measurement.",
+   "papers": [],
+   "evidence": [
+    "formal_labels.json: level counts concept 83, both 23, measurement 244 (total 350)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 5,
+   "text": "To look beyond the catalogue, five search agents and a completeness check verified 113 candidate works, and 23 formal-framework papers among them were added to the map, which now holds 240 papers.",
+   "papers": [],
+   "evidence": [
+    "candidates.json: 113 entries (101 from five search files + 13 from critic, one duplicate merged)",
+    "manifest.json: 23 papers; index.csv: 240 rows"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 6,
+   "text": "From these 23 papers, 291 formal definitions were extracted and checked: 261 define a concept (233 the concept alone, 28 both) and 30 define a measurement.",
+   "papers": [],
+   "evidence": [
+    "formal.csv: 291 rows from 23 keys; level concept 233, both 28, measurement 30"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 7,
+   "text": "All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), each with a verbatim quote; the 291 framework rows also give assumptions and, for 267 of them, a formula.",
+   "papers": [],
+   "evidence": [
+    "site/data.json: formal array has 641 rows (catalogue 350, frameworks 291)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Only the 291 framework rows carry formulas and assumptions; the 350 catalogue rows in the Formal tab have a quote but empty formula and assumptions fields, and the 2 Cachin 1998 rows have no quote.",
+   "evidence_check": [
+    "site/data.json formal (recomputed): catalogue 350 rows, 350 with quote, 0 with formula, 0 with assumptions; frameworks 291 rows, 289 with quote, 267 with formula, 291 with assumptions",
+    "formal.csv: cachin1998information#f1 and #f2 have an empty quote and verbatim \"no text\""
+   ],
+   "verdict2": "wrong",
+   "status2": "revised",
+   "reason2": "The count of verbatim rows is wrong against the current sources. formal.csv marks all 291 framework quotes verbatim \"yes\", including the 2 Cachin 1998 rows, whose quotes are found in cache/full/cachin1998information.txt (cached 15:34, formal.csv rebuilt 15:35), and all 350 catalogue formal rows in definitions.csv are verbatim \"yes\": 641 of 641. The 639 comes from site/data.json, which was generated at 15:25, before the Cachin text was cached, and still marks the two Cachin rows \"no text\". The page's own method section says all 291 framework quotes match, which contradicts 639.",
+   "evidence2": [
+    "formal.csv: cachin1998information#f1 and cachin1998information#f2 have verbatim \"yes\" (291 of 291 rows \"yes\")",
+    "cache/full/cachin1998information.txt: \"In a perfectly secure stegosystem, Eve cannot distinguish the two distributions and has no information at all about the presence of an embedded message.\"",
+    "definitions.csv: 350 of 350 rows of kind formal have verbatim \"yes\"",
+    "site/pages/formal.md, How this page was made, step 4: \"all 291 quotes match the cached full texts verbatim\"",
+    "site/data.json (generated before the Cachin cache): formal rows cachin1998information#f1, #f2 verbatim \"no text\", the other 639 \"yes\""
+   ]
+  },
+  {
+   "n": 8,
+   "text": "**1. The catalogue formalizes measurements, and its formal definitions of concepts rarely use a causal model.**",
+   "papers": [
+    "anon2026improving",
+    "khanzadeh2026project",
+    "matton2025walk",
+    "wang2026case"
+   ],
+   "evidence": [
+    "formal_labels.json: 244/350 measurement; 5 of 106 concept-or-both rows labeled 'causal model'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 9,
+   "text": "Of the 350 formal rows, 244 (70%) define a test, metric or estimator.",
+   "papers": [],
+   "evidence": [
+    "formal_labels.json: 244 measurement of 350 = 69.7%"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 10,
+   "text": "Only 5 of the 106 concept-level rows use a causal model: two define potential outcomes and the monitor's observation map ([Anonymous 2026 (causal bounds)](./#p=anon2026improving)), one a counterfactual reasoning step ([Khanzadeh 2026](./#p=khanzadeh2026project)), one a direct-effect intervention on a concept ([Matton et al. 2025](./#p=matton2025walk)), and one faithfulness itself.",
+   "papers": [
+    "anon2026improving",
+    "khanzadeh2026project",
+    "matton2025walk",
+    "wang2026case"
+   ],
+   "evidence": [
+    "formal_labels.json concept/both rows with formalism 'causal model': anon2026improving#15 (potential outcome and monitor decision under do(X=x)), anon2026improving#17 (observation map v), khanzadeh2026project#6 (counterfactual thought), matton2025walk#14 (direct-effect intervention), wang2026case#1 (CoT faithfulness)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 11,
+   "text": "That one, [Wang et al. 2026a](./#p=wang2026case), calls a CoT-based decision process faithful \"if the instruction influences the final answer only through the generated CoT\" and states the condition as the conditional independence $p_{\\theta}(y\\mid z,x)=p_{\\theta}(y\\mid x)$, with $z$ the instruction, $x$ the CoT and $y$ the answer.",
+   "papers": [
+    "wang2026case"
+   ],
+   "evidence": [
+    "wang2026case#1: “A CoT-based decision process is faithful if the instruction influences the final answer only through the generated CoT. ... the answer mechanism satisfies $p_{\\theta}(y\\mid z,x)=p_{\\theta}(y\\mid x).$”",
+    "wang2026case full text [P50]: “We use $Z\\in\\mathcal{Z}$ , $X\\in\\mathcal{X}$ , and $Y\\in\\mathcal{Y}$” for instructions, reasoning chains and final answers; [P59] “It implies the conditional independence condition”"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 12,
+   "text": "**2. The 23 framework papers fall into six families; five give formal definitions of concepts themselves, the sixth gives verbal criteria for introspection, and each family covers a subset of the concepts.**",
+   "papers": [],
+   "evidence": [
+    "formal.csv family counts; critic.json coverage table and verdict"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The page itself states that the sixth family, criteria for introspection, gives only verbal criteria ('As stated, none of the criteria is a mathematical condition'; 'introspection has only verbal criteria'), so formal definitions of concepts come from five of the six families of the 23 papers.",
+   "evidence_check": [
+    "site/pages/formal.md (Criteria for introspection): \"As stated, none of the criteria is a mathematical condition.\"",
+    "runs/E_formal/search_xai_faithfulness_theory.json gaps: \"Introspection: no fully mathematical definition\"",
+    "formal.csv (recomputed): 15 of 16 introspection rows have no formula; the one formula is a measurement"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 13,
+   "text": "The 23 framework papers yield 61 definitions from structural causal models, 92 from causal abstraction, 37 from structural causal games, 42 from observer-relative information, 43 from explanation theory in explainable AI and 16 from criteria for introspection.",
+   "papers": [
+    "halpern2025causality",
+    "beckers2022causal",
+    "beckers2025large",
+    "yu2025causal",
+    "pearl2001direct",
+    "geiger2025causal",
+    "beckers2019approximate",
+    "beckers2019abstracting",
+    "xia2025causal",
+    "sutter2025non",
+    "ward2023honesty",
+    "ward2024reasons",
+    "hammond2023reasoning",
+    "anwar2026decision",
+    "xu2020theory",
+    "mohammadkhani2026hidden",
+    "yin2026opacity",
+    "cachin1998information",
+    "dasgupta2022framework",
+    "marquessilva2022logic",
+    "bilodeau2022impossibility",
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "formal.csv rows per key: SCM 11+16+13+9+12=61; abstraction 31+14+10+22+15=92; SCG 11+10+16=37; information 18+4+11+7+2=42; XAI 13+22+8=43; introspection 12+4=16"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 14,
+   "text": "The completeness check concludes that \"No single formal framework covers all the concepts in scope\", and the table below agrees.",
+   "papers": [],
+   "evidence": [
+    "critic.json verdict: 'No single formal framework covers all the concepts in scope'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 15,
+   "text": "Nine of the 13 concepts have a formal definition of the concept itself in some framework; post-hoc rationalization and scheming have none, obfuscation has formal definitions only by analogy (opacity in discrete event systems, goal obfuscation in planning, a CoT that no polynomial-time monitor can read), and introspection has only verbal criteria.",
+   "papers": [
+    "yin2026opacity",
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "concept table: concept-level definitions exist for faithfulness, completeness/soundness, honesty-lying-deception, belief/intention, monitorability, legibility/checkability, steganography, simulatability, counterfactuals (9)",
+    "critic.json coverage: scheming only_measurements true (components only); search_xai gaps: 'Post-hoc rationalization: no formal definition found'; search_information_verification gaps: obfuscation 'formal only by analogy, via DES opacity'",
+    "formal.csv: 15 of 16 introspection rows without formula"
+   ],
+   "verdict": "understated",
+   "status": "revised",
+   "reason": "The count and the other clauses hold (framework definitions exist for faithfulness, completeness and soundness, honesty/lying/deception, belief and intention, monitorability, legibility, steganography, simulatability and counterfactuals). But obfuscation has several formal analogues, not one: the search and the page's own table list opacity, goal obfuscation in planning and an encrypted CoT unreadable by polynomial-time monitors.",
+   "evidence_check": [
+    "runs/E_formal/search_information_verification.json gaps: \"Obfuscation of CoT (suppressing or rewriting verbalized intent under monitor pressure): formal only by analogy, via DES opacity, planning goal obfuscation and debate's obfuscated arguments.\"",
+    "site/pages/formal.md table, Obfuscation row: \"By analogy only: opacity of a secret to an intruder ([Yin 2026]...), an encrypted CoT that no polynomial-time monitor can read ([Mohammadkhani et al. 2026]...), goal obfuscation in planning ([Kulkarni et al. 2018]...)\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 16,
+   "text": "**3. None of the searches found a work in any field that defines CoT faithfulness as actual causation or as a causal abstraction of the written steps, and the 217 papers in the map before the formal sweep never mention actual causation.**",
+   "papers": [],
+   "evidence": [
+    "search_actual_causation gaps: 'no definition as actual causation ... found'",
+    "search_causal_abstraction gaps: 'no paper defines it as a causal abstraction between the reasoning text and the model's computation'",
+    "full-text scan of 217 pre-sweep map papers: 0 matches for 'actual cause/causation/causality'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "'No work in any field defines' is a universal negative; the evidence is that the five searches and the completeness check found no such work. 'The CoT papers ... never use actual causation' rests on the absence of the terms and of citations, so 'never mention' is what the scan shows; and the 217 pre-sweep papers are not all CoT papers.",
+   "evidence_check": [
+    "runs/E_formal/search_actual_causation.json gaps: \"no definition as actual causation (stated reasons are actual causes of the output) found\"",
+    "runs/E_formal/search_causal_abstraction.json summary: \"No work applies causal abstraction to CoT or verbalized reasoning; the closest is CAuSE, for natural-language explanations of classifiers.\"",
+    "cache/full scan of the 217 pre-sweep papers (recomputed): 0 matches of 'actual cause', 'actual causation' or 'actual causality'; Halpern appears only as G. or Y. Halpern in author lists; 0 matches of Beckers or Chockler"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 17,
+   "text": "The framework papers define actual causes and explanations motivated by the predictions of machine-learning models ([Beckers 2022](./#p=beckers2022causal)) and for any model in which counterfactuals are defined ([Halpern & Pass 2025](./#p=halpern2025causality)), and actual causes in games, where an agent's decision can be the cause ([Ward et al. 2023](./#p=ward2023honesty)), never for the steps of a CoT.",
+   "papers": [
+    "beckers2022causal",
+    "ward2023honesty",
+    "halpern2025causality"
+   ],
+   "evidence": [
+    "beckers2022causal abstract: 'offering explanations about the predictions of an ML-model'; beckers2022causal#f7, #f17",
+    "ward2023honesty#f11 (actual causality adapted to SCGs, decisions D)",
+    "halpern2025causality#f7, #f11 (ccf, models with counterfactuals)",
+    "no formal.csv row applies these to CoT steps"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Ward et al. 2023 define actual causality in games but no explanations (the word 'explanation' does not occur in the paper), and in their result the agent's decision is the cause, not the thing explained. Beckers 2022 is motivated by ML predictions but states that the analysis applies in general, and Halpern & Pass extend the definitions to any model where counterfactuals are defined.",
+   "evidence_check": [
+    "ward2023honesty full text: \"First we adapt the notion of actual causality to SCGs.\"; \"if an agent intentionally causes an outcome, then the agent’s decision was an actual cause of that outcome\" (0 occurrences of 'explanation')",
+    "beckers2022causal full text: \"Although the definitions are motivated by a focus on XAI, the analysis of causal explanation and actual causation applies in general.\"",
+    "halpern2025causality full text: \"We abstract the definition, extracting its key features, so that it can be applied to any other model where counterfactuals are defined.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 18,
+   "text": "The closest work to verbalized reasoning that the causal-abstraction search found is CAuSE ([Bandyopadhyay et al. 2025](https://arxiv.org/abs/2512.06814)), whose natural-language explainer of a multimodal classifier, \"trained via interchange intervention, forms a causal abstraction of the underlying classifier\".",
+   "papers": [
+    "https://arxiv.org/abs/2512.06814"
+   ],
+   "evidence": [
+    "arXiv abstract 2512.06814: 'Theoretically, we show that CAuSE, trained via interchange intervention, forms a causal abstraction of the underlying classifier.'",
+    "search_causal_abstraction summary: 'the closest is CAuSE, for natural-language explanations of classifiers'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "CAuSE is the closest work that the causal-abstraction search found; the actual-causation search names Yu et al.'s PNS scores for CoT steps as the nearest work, and those apply directly to verbalized reasoning.",
+   "evidence_check": [
+    "runs/E_formal/search_causal_abstraction.json summary: \"No work applies causal abstraction to CoT or verbalized reasoning; the closest is CAuSE, for natural-language explanations of classifiers.\"",
+    "runs/E_formal/search_actual_causation.json summary: \"No work defines faithfulness of a verbalized rationale, self-explanation or CoT as actual causation; the nearest are PNS scores for CoT steps (Yu et al. 2025) and PN/PS for LLM reasoning.\"",
+    "arXiv 2512.06814 abstract: \"Theoretically, we show that CAuSE, trained via interchange intervention, forms a causal abstraction of the underlying classifier.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 19,
+   "text": "[Yu et al. 2025](./#p=yu2025causal) define probabilities of necessity and sufficiency for CoT steps relative to the correct answer $y$, so they measure whether a step is needed for the correct answer, not whether the model's own answer, right or wrong, depended on it.",
+   "papers": [
+    "yu2025causal"
+   ],
+   "evidence": [
+    "yu2025causal#f2: PS(S,q)=P(A_do(S)=y | A≠y, S̄, q), 'Known correct answer y'",
+    "yu2025causal#f3: 'Necessity quantifies whether a specific reasoning step st is required for producing the correct answer a = y.'",
+    "yu2025causal#f4: PNS(S,s_t,q):=P(A_S=y, A_S'≠y)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "On a chain that yields the correct answer, PN is the probability that corrupting the step and regenerating the rest makes the answer wrong, which is an interventional test of whether that answer depends on the step. What the definitions do not capture is dependence of the model's own answer when it is wrong: PN conditions on A = y and every quantity is defined relative to the correct answer y. 'Not whether the model used it' is stronger than that.",
+   "evidence_check": [
+    "yu2025causal#f3: \"Necessity quantifies whether a specific reasoning step st is required for producing the correct answer a = y.\" formula PN(S,s_t,q)=P(A_do(s<t, s̄_t, s'>t) ≠ y | A=y, S, q)",
+    "yu2025causal#f4: PNS(S,s_t,q):=P(A_S=y, A_S'≠y)",
+    "runs/E_formal/critic.json corrections: \"PN and PNS are defined relative to the correct answer y (A=y) and are used to prune or add steps for efficiency. They measure whether a step is necessary for correctness; they do not define faithfulness\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 20,
+   "text": "None of the 217 papers in the map before the formal sweep uses the terms actual cause, actual causation or actual causality, and none cites Halpern, Beckers or Chockler; 7 cite causal-abstraction papers of Geiger and colleagues (5 of them a paper with causal abstraction in its title), 7 cite [Pearl 2001](./#p=pearl2001direct) (2 of them through its 2022 reprint) and 1 cites [Ward et al. 2023](./#p=ward2023honesty).",
+   "papers": [
+    "pearl2001direct",
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "regex scan of cache/full for the 217 pre-sweep papers: 0 matches of \\bactual caus(e|es|ation|ality)\\b; 0 citations of J. Y. Halpern, Beckers or Chockler (only G./Y. Halpern in Llama author lists)",
+    "'causal abstraction' references: anon2026generating, bhan2025did, khanzadeh2026project, prasad2026features, pres2026consistency (5)",
+    "Pearl 2001 cited: burger2026chain, paul2024making, somov2026breaking, wang2025causallyenhanced, zaman2025causal, zaman2025chainofthought (6)",
+    "'Honesty is the best policy' cited: bu2026spadebench, joglekar2025training (2)"
+   ],
+   "verdict": "understated",
+   "status": "revised",
+   "reason": "The 0 counts, the 6 citing Pearl 2001 and the 2 citing Ward et al. 2023 are right. The 5 counts only papers that cite a Geiger paper with causal abstraction in its title. Two more pre-sweep papers cite causal-abstraction papers of Geiger and colleagues: viteri2026markovian cites Geiger et al. 2022 (interchange intervention training) and sherburn2024language cites Wu, Geiger et al. 2023 (Boundless DAS). Both abstracts are framed in causal abstraction. That makes 7.",
+   "evidence_check": [
+    "viteri2026markovian: \"Geiger et al. (2022) A. Geiger, Z. Wu, H. Lu, J. Rozner, E. Kreiss, T. Icard, N. Goodman, and C. Potts  [P248] Inducing causal structure for interpretable neural networks.\"",
+    "arXiv 2112.00826 abstract: \"IIT is fully differentiable, flexibly combines with other objectives, and guarantees that the target causal model is a causal abstraction of the neural model when its loss is zero.\"",
+    "sherburn2024language: \"Zhengxuan Wu, Atticus Geiger, Christopher Potts, and Noah D. Goodman.  [P284] Interpretability at Scale: Identifying Causal Mechanisms in Alpaca\"",
+    "arXiv 2305.08809 abstract: \"Distributed Alignment Search (DAS) is a powerful gradient descent method grounded in a theory of causal abstraction\"",
+    "cache/full scan (recomputed): 'causal abstraction' in anon2026generating, bhan2025did, khanzadeh2026project, prasad2026features, pres2026consistency (5)"
+   ],
+   "verdict2": "wrong",
+   "status2": "revised",
+   "reason2": "Two counts are wrong. Ward et al. 2023 is cited by 1 pre-sweep paper, not 2: bu2026spadebench cites it, but joglekar2025training only uses the phrase \"honesty is the best policy\" and has no reference to Ward et al. Pearl 2001 is cited by 7, not 6: the evidence counts burger2026chain, which cites the 2022 reprint of \"Direct and indirect effects\", but misses matton2025walk, which cites the same reprint. Its cached text has no reference list, but the in-text citation is there and the arXiv HTML reference list confirms the title. The other parts check out. There are 0 matches of actual cause/causation/causality. The only Halpern hits are G. and Y. Halpern in author lists, and there are none for Beckers or Chockler, also in the arXiv PDFs of the 10 numeric-citation papers whose cached texts lack references. 7 papers cite Geiger causal-abstraction papers: anon2026generating, bhan2025did, khanzadeh2026project, pres2026consistency, prasad2026features (causal abstraction in the title), sherburn2024language and viteri2026markovian.",
+   "evidence2": [
+    "cache/full/bu2026spadebench.txt: \"Ward et al. (2023) F. Ward, F. Toni, F. Belardinelli, and T. Everitt\" / \"Honesty is the best policy: defining and mitigating ai deception.\"",
+    "cache/full/joglekar2025training.txt: \"We expect that in most settings, “honesty is the best policy,” meaning that\" (phrase only; no Ward reference anywhere in the text)",
+    "cache/full/matton2025walk.txt: \"the effect of one variable on another that is not mediated by other variables Pearl (2022)\"",
+    "arXiv HTML 2504.14150v2 (matton2025walk), references: \"Pearl (2022) Judea Pearl. Direct and indirect effects. In Probabilistic and causal inference: the works of Judea Pearl , pp. 373–392. 2022.\"",
+    "cache/full/burger2026chain.txt: \"Pearl (2022) J. Pearl\" / \"Direct and indirect effects.\" / \"In Probabilistic and causal inference: the works of Judea Pearl,\" (counted by the page's evidence as a Pearl 2001 citation)",
+    "Pearl 2001 directly: paul2024making, somov2026breaking, wang2025causallyenhanced (arXiv HTML: \"Pearl (2001) Judea Pearl. Direct and indirect effects. In Proceedings of UAI , 2001.\"), zaman2025causal, zaman2025chainofthought"
+   ]
+  },
+  {
+   "n": 21,
+   "text": "**4. Structural causal games are the one framework that defines belief, intention and deception together and contains Halpern-Pearl actual causation.**",
+   "papers": [
+    "hammond2023reasoning",
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty#f3, #f6, #f7, #f11; Theorem 3.6",
+    "no other framework family in formal.csv has rows for belief, intention and deception"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 22,
+   "text": "[Hammond et al. 2023](./#p=hammond2023reasoning) \"generalise Pearl’s causal hierarchy of models to the game-theoretic domain\", and \"An SCG can be seen as an SCM without parameters for the decision variables.\"",
+   "papers": [
+    "hammond2023reasoning"
+   ],
+   "evidence": [
+    "hammond2023reasoning text: 'We generalise Pearl’s causal hierarchy of models to the game-theoretic domain by introducing (structural) causal games'",
+    "hammond2023reasoning#f8 quote: 'An SCG can be seen as an SCM without parameters for the decision variables.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 23,
+   "text": "[Ward et al. 2023](./#p=ward2023honesty) define belief (Definition 3.1), intention (Definition 3.4) and deception (Definition 3.7) in these games, adapt the modified Halpern-Pearl definition of actual causality to them (Definition 6.6), and prove that \"If an agent i intentionally causes X = x then Di is an actual cause\" of $X=x$ (Theorem 3.6).",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty#f3 (Definition 3.1), #f6 (Definition 3.4), #f7 (Definition 3.7), #f11 (Definition 6.6, 'Adaptation of Halpern's modified actual-causality definition')",
+    "ward2023honesty text: 'Theorem 3.6. If an agent i intentionally causes X = x then Di is an actual cause [41] of X = x.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 24,
+   "text": "[Ward et al. 2024](./#p=ward2024reasons) add \"a purely behavioural notion of intent\" and use it to assess the intentions of reinforcement-learning agents and language models.",
+   "papers": [
+    "ward2024reasons"
+   ],
+   "evidence": [
+    "ward2024reasons text: 'in Section 6, we provide a purely behavioural notion of intent ... we demonstrate how our behavioural definition of intention enables us to assess the intentions of RL agents and LMs (Section 7)'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 25,
+   "text": "Lying and honesty stay outside the framework: Ward et al. write that \"In contrast to lying, deception does not require a linguistic statement\".",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty text: 'In contrast to lying, deception does not require a linguistic statement and may be achieved through any form of action'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 26,
+   "text": "**5. Causal abstraction defines the faithfulness of an interpretation of a network's computation, exactly and in degrees, and without a restriction on the alignment map the definition is vacuous.**",
+   "papers": [
+    "geiger2025causal",
+    "sutter2025non"
+   ],
+   "evidence": [
+    "geiger2025causal#f9 exact transformation, #f17 approximate transformation 'graded faithfulness'",
+    "sutter2025non abstract: 'causal abstraction is not enough for mechanistic interpretability, as it becomes vacuous without assumptions about how models encode information'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 27,
+   "text": "[Geiger et al. 2023](./#p=geiger2025causal) write that \"Approximate transformation (Section 2.4) provides the needed flexible notion of graded faithfulness\", and [Beckers et al. 2019](./#p=beckers2019approximate) measure the abstraction error by a worst-case distance $d_\\tau$ and require it to be at most $\\alpha$.",
+   "papers": [
+    "geiger2025causal",
+    "beckers2019approximate"
+   ],
+   "evidence": [
+    "geiger2025causal §3.2: 'Approximate transformation (Section 2.4) provides the needed flexible notion of graded faithfulness.'",
+    "beckers2019approximate#f8: d_τ(M_L,M_H)=min max d(...) ≤ α"
+   ],
+   "verdict": "wrong",
+   "status": "revised",
+   "reason": "In Beckers et al. 2019 the worst-case distance d_tau is itself the abstraction error, and the bound is alpha: M_H is a tau-alpha approximate abstraction of M_L if d_tau(M_L, M_H) <= alpha. The page has this right later (Causal abstraction section) but here reverses the roles.",
+   "evidence_check": [
+    "beckers2019approximate full text: \"MH is a τ -α approximate abstraction of ML if dτ (ML , MH ) ≤ α.\"",
+    "beckers2019approximate full text: \"worstcase distance between the two ways of lifting the contextintervention pairs, for an optimal choice o\"",
+    "geiger2025causal full text: \"Approximate transformation (Section 2.4) provides the needed flexible notion of graded faithfulness.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 28,
+   "text": "[Sutter et al. 2025](./#p=sutter2025non) prove that \"under reasonable assumptions, any neural network can be mapped to any algorithm, rendering this unrestricted notion of causal abstraction trivial and uninformative\", and their alignment maps reach 100% interchange-intervention accuracy on the indirect object identification task with randomly initialized language models.",
+   "papers": [
+    "sutter2025non"
+   ],
+   "evidence": [
+    "sutter2025non abstract: 'we prove that under reasonable assumptions, any neural network can be mapped to any algorithm, rendering this unrestricted notion of causal abstraction trivial and uninformative' ... 'on an experiment using randomly initialised language models, our alignment maps reach 100% interchange-intervention accuracy on the indirect object identification task'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 29,
+   "text": "[Xia & Bareinboim 2025](./#p=xia2025causal) show that most existing definitions \"are not well-defined when considering lossy abstraction functions\", and a map from a network's states to a few written steps is likely to be lossy in their sense.",
+   "papers": [
+    "xia2025causal"
+   ],
+   "evidence": [
+    "xia2025causal abstract: 'One major limitation of most existing definitions is that they are not well-defined when considering lossy abstraction functions in which multiple low-level interventions can have different effects while mapping to the same high-level intervention'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 30,
+   "text": "**6. The information-theoretic definitions of faithfulness, monitorability and steganography are observational, so a CoT written after the answer was computed can satisfy them.**",
+   "papers": [
+    "baker2025monitoring",
+    "jia2026faithfulness",
+    "anwar2026analyzing",
+    "anwar2026decision",
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "search_information_verification gaps: 'the information-theoretic definitions (Anwar, Baker, V-information) are observational and are satisfied by post-hoc CoTs'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 31,
+   "text": "[Baker et al. 2025](./#p=baker2025monitoring) call a latent faithful with respect to a property $v$ if it \"is a sufficient statistic for $v$\"; [Jia et al. 2026](./#p=jia2026faithfulness) define sufficiency as a low $H(A\\mid C)$ and completeness as $I(P;A\\mid C)\\approx 0$; [Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) bound the accuracy uplift of the Bayes-optimal CoT monitor over the Bayes-optimal prompt-only monitor through the conditional mutual information, $0\\le\\delta\\le\\sqrt{2I(Y;Z\\mid X)}$, and define a monitor-class version, $I_{\\mathcal{V}}(Y;Z\\mid X)$.",
+   "papers": [
+    "baker2025monitoring",
+    "jia2026faithfulness",
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "baker2025monitoring#2: 'we define $z$ to be faithful with respect to $v$ if it contains all relevant information to predicting $v$ , i.e. $z$ is a sufficient statistic for $v$'",
+    "jia2026faithfulness#3: 'Sufficiency ⟺ H(A|C) is low'; #4: 'Completeness ⟺ I(P;A|C)≈0'",
+    "anwar2026analyzing Proposition 3.7: 'Accuracy uplift δ in CoT monitorability of an attribute Y is always non-negative and bounded above by I(Y;Z|X)'; anwar2026analyzing#32 defines I_V(Y;Z|X)"
+   ],
+   "verdict": "understated",
+   "status": "revised",
+   "reason": "Baker and Jia are stated exactly. For Anwar et al., the bound that is proved is on the uplift between Bayes-optimal monitors and is the square root, 0 <= delta <= sqrt(2 I(Y;Z|X)); 'bounded by I(Y;Z|X)' is the paper's loose prose and, read literally (delta <= I), is not what is proved.",
+   "evidence_check": [
+    "anwar2026analyzing Proposition 3.7: \"Accuracy uplift $\\delta$ in CoT monitorability of an attribute $Y$ is always non-negative and bounded above by $I(Y;Z|X)$ . Specifically, $0\\leq\\delta\\leq\\sqrt{2I(Y;Z|X)}$\"",
+    "anwar2026analyzing Definition 3.6: \"let the accuracies attained by Bayes-optimal CoT monitor $m_{g}^{\\pi}$ and the Bayes-optimal prompt-only monitor $p_{g}^{\\pi}$ be $\\alpha_{\\text{CoT}}$ and $\\alpha_{\\text{Prompt}}$ . Then the uplift from monitoring CoT (in addition to monitoring the prompt alone) is $\\delta:=\\alpha_{\\text{CoT}}-\\alpha_{\\text{Prompt}}$\"",
+    "anwar2026analyzing#32: \"$I_{\\mathcal{V}}(Y;Z\\mid X):=\\inf_{h\\in\\mathcal{V}}\\ \\mathbb{E}\\big[\\ell\\big(Y,h(X)\\big)\\big]\\ -\\ \\inf_{h\\in\\mathcal{V}}\\ \\mathbb{E}\\big[\\ell\\big(Y,h(X,Z)\\big)\\big].$\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 32,
+   "text": "A CoT that ends by stating an answer the model had already computed, which the final answer then copies, meets Jia et al.'s sufficiency and completeness, meets Wang et al.'s conditional independence, and meets Baker et al.'s condition whenever the monitored property is a function of the answer; it also makes any attribute of the answer as predictable from the CoT as from the answer itself.",
+   "papers": [
+    "jia2026faithfulness",
+    "wang2026case",
+    "baker2025monitoring"
+   ],
+   "evidence": [
+    "derived from the definitions: if the answer A is a function of the CoT C, then H(A|C)=0 and I(P;A|C)=0 (jia2026faithfulness#3, #4) and p(y|z,x)=p(y|x) (wang2026case#1); C determines A, so C is a sufficient statistic for any property v that is a function of A (baker2025monitoring#2)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 33,
+   "text": "[Mohammadkhani et al. 2026](./#p=mohammadkhani2026hidden) separate leakage from readability: beyond a size-dependent threshold, solving a covert task \"necessarily leaks a near-linear amount of information about the covert task input into the CoT\", yet \"this leakage need not be readable\" by polynomial-time monitors.",
+   "papers": [
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "mohammadkhani2026hidden abstract: 'beyond a threshold depending on model size, successfully solving the task necessarily leaks a near-linear amount of information about the covert task input into the CoT ... However, concerningly, this leakage need not be readable: Under plausible cryptographic assumptions, even a one-layer Transformer can encrypt its reasoning online so that no polynomial-time monitor can extract information about the hidden computation.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 34,
+   "text": "[Anwar et al. 2026 (steganography)](./#p=anwar2026decision) define steganography as a gap in usable information between a Receiver and a Sentinel, which needs no cover distribution but does not ask whether the model's computation used the hidden content.",
+   "papers": [
+    "anwar2026decision"
+   ],
+   "evidence": [
+    "anwar2026decision#f12: 'signal Z is steganographic if it induces a positive steganographic gap'",
+    "anwar2026decision abstract: 'Classical definitions of steganography ... require a known reference distribution of non-steganographic signals'",
+    "anwar2026decision#f12 relation: 'needs no cover distribution'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 35,
+   "text": "Faithfulness, completeness and soundness, legibility and counterfactuals are each defined in at least two framework families, while among causal frameworks belief, intention and deception are defined together only in structural causal games.",
+   "papers": [],
+   "evidence": [
+    "concept table rows: faithfulness (causal abstraction; explanation theory), completeness/soundness (SCM; explanation theory), legibility (observer-relative information; explanation theory), counterfactuals (SCM; SCG; abstraction; explanation theory); belief/intention/deception rows only ward2023honesty, ward2024reasons, hammond2023reasoning among framework papers",
+    "critic.json coverage: belief, intention and lying also in modal logic (Sakama et al. 2015), which is not causal"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 36,
+   "text": "No formal.csv row defines post-hoc rationalization, honesty or lying, and the only formal.csv definition of deception is Definition 3.7 of [Ward et al. 2023](./#p=ward2023honesty).",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "formal.csv: no row whose concepts, term or gloss match honest|lying|post-hoc|rationaliz(ation); only ward2023honesty#f7 matches deception"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "True of formal.csv, but 'the only framework definition of deception' reads as unrestricted, and the agency search verified other formal definitions of deception outside the map: a belief-free deception incentive in multi-agent influence models (Ward et al. 2022) and deception as positive listener regret in a communication POMDP (Abdulhai et al. 2024).",
+   "evidence_check": [
+    "formal.csv (recomputed): no row whose concepts, term or gloss match honest|lying|post-hoc|rationaliz; only ward2023honesty#f7 defines deception",
+    "runs/E_formal/search_agency_honesty.json summary: \"Lying and deception also have epistemic-logic, signalling-game and POMDP-regret formalisations.\"",
+    "runs/E_formal/candidates.json, Defining Deception in Decision Making (2024, verified full text): \"the speaker is deceptive if the listener's regret is positive\"",
+    "runs/E_formal/candidates.json, A Causal Perspective on AI Deception in Games (2022, verified full text): \"Belief-free (functional) deception incentive: S has an incentive to signal V to T, and T's decision differs from the counterfactual model in which T observes V\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 37,
+   "text": "Of the 16 formal.csv rows from the two introspection papers, 15 have no formula; the one formula is Lindsey's net performance, $\\mathrm{TPR}-\\mathrm{FPR}$, a measurement.",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "formal.csv: lindsey2025emergent 12 rows (11 with empty formula), song2025privileged 4 rows (4 empty); lindsey2025emergent#f8 formula '\\mathrm{TPR}-\\mathrm{FPR}', level measurement"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 38,
+   "text": "Five papers supply 61 definitions in this family: [Halpern & Pass 2025](./#p=halpern2025causality) (11), [Beckers 2022](./#p=beckers2022causal) (16), [Beckers 2025](./#p=beckers2025large) (13), [Yu et al. 2025](./#p=yu2025causal) (9) and [Pearl 2001](./#p=pearl2001direct) (12).",
+   "papers": [
+    "halpern2025causality",
+    "beckers2022causal",
+    "beckers2025large",
+    "yu2025causal",
+    "pearl2001direct"
+   ],
+   "evidence": [
+    "formal.csv row counts: 11, 16, 13, 9, 12"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 39,
+   "text": "Under the modified Halpern-Pearl definition, $\\vec X=\\vec x$ is an actual cause of $\\varphi$ in a causal setting $(M,\\vec u)$ when three conditions hold ([Halpern & Pass 2025](./#p=halpern2025causality), Definition 2.1; [Actual Causality, Section 2.2](page.html?doc=actual-causality#22-a-formal-definition-of-actual-cause)):",
+   "papers": [
+    "halpern2025causality"
+   ],
+   "evidence": [
+    "halpern2025causality#f3: 'Definition 2.1: ⃗X =⃗x is an actual cause of ϕ in the causal setting (M,⃗u) if the following three conditions hold:'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 40,
+   "text": "An explanation is a minimal sufficient cause relative to an epistemic state $K$, the set of contexts an agent considers possible ([Halpern & Pass 2025](./#p=halpern2025causality), Definition 6.1; [Actual Causality, Section 7.1](page.html?doc=actual-causality#71-explanation-the-basic-definition)):",
+   "papers": [
+    "halpern2025causality"
+   ],
+   "evidence": [
+    "halpern2025causality#f9: 'Definition 6.1: ⃗X = ⃗x is an explanation of ψ in a model M relative to a set K of contexts in M if the following conditions hold'",
+    "actual-causality.md §7: 'An explanation is a sufficient cause relative to the agent's prior epistemic state.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 41,
+   "text": "The explanation is nontrivial if some context in $K$ has the outcome without the explanation (EX4).",
+   "papers": [
+    "halpern2025causality"
+   ],
+   "evidence": [
+    "halpern2025causality#f10: 'The explanation is nontrivial if it also satisfies EX4.' formula ∃u'∈K: (M,u')⊨¬(X=x)∧ψ"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 42,
+   "text": "Under the original definition, the degree of responsibility of a cause is $1/(k+1)$ for a minimal witness set of size $k$, and the degree of blame is expected responsibility over an epistemic state ([Actual Causality, Sections 6.1 and 6.2](page.html?doc=actual-causality#61-a-naive-definition-of-responsibility); [Chockler & Halpern 2004](https://arxiv.org/abs/cs/0312038)).",
+   "papers": [
+    "https://arxiv.org/abs/cs/0312038"
+   ],
+   "evidence": [
+    "actual-causality.md Definition 6.1.1: dr^o is 1/(k+1) for a minimal witness set of size k (original HP definition)",
+    "actual-causality.md Definition 6.2.1: 'The degree of blame is the expected degree of responsibility'",
+    "actual-causality.md chapter notes: 'The definitions adapt Chockler and Halpern (2004)'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 43,
+   "text": "[Halpern & Pass 2025](./#p=halpern2025causality) abstract the definitions of actual cause and explanation from structural equations to any family of models in which counterfactuals are defined, so that causes and explanations can be formulas \"involving disjunctions, negations, beliefs, and nested counterfactuals (none of which can be handled by the Halpern-Pearl definition)\".",
+   "papers": [
+    "halpern2025causality"
+   ],
+   "evidence": [
+    "halpern2025causality abstract: 'we can apply the definition to determine if A is a cause of B even if A and B are formulas involving disjunctions, negations, beliefs, and nested counterfactuals (none of which can be handled by the Halpern-Pearl definition)'",
+    "halpern2025causality#f4 (ccf), #f7, #f11"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "'These definitions' follows the sentence on responsibility and blame, but Halpern & Pass abstract only actual causation and explanation: the paper never mentions responsibility or blame.",
+   "evidence_check": [
+    "halpern2025causality full text: \"We abstract the definition, extracting its key features, so that it can be applied to any other model where counterfactuals are defined.\"",
+    "halpern2025causality full text: \"we can apply the definition to determine if A is a cause of B even if A and B are formulas involving disjunctions, negations, beliefs, and nested counterfactuals (none of which can be handled by the Halpern-Pearl definition). Moreover, we can extend the ideas to getting an abstract definition of explanation\"",
+    "halpern2025causality full text (recomputed): 0 occurrences of 'responsibility' or 'blame'"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 44,
+   "text": "[Beckers 2022](./#p=beckers2022causal), motivated by explanations of machine-learning predictions, defines sufficient explanations, counterfactual explanations and actual causes; a sufficient explanation names an intervention together with the network that must stay undisturbed for the intervention to guarantee the output.",
+   "papers": [
+    "beckers2022causal"
+   ],
+   "evidence": [
+    "beckers2022causal abstract: 'formally defining the causal notions of sufficient explanations and counterfactual explanations ... the first to offer a formal definition of actual causation that is founded entirely in action-guiding explanations'",
+    "beckers2022causal#f7 gloss: 'An explanation states both a sufficient intervention and the network that must remain undisturbed'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 45,
+   "text": "[Beckers 2025](./#p=beckers2025large) represents an autoregressive LLM as a nondeterministic causal model whose variables are the prompt, every generated token and the output, and proves that \"Given a nondeterministic causal model M that corresponds to an LLM, M satisfies the simple semantics\", so a counterfactual on a changed prompt is distributed like a new run on that prompt.",
+   "papers": [
+    "beckers2025large"
+   ],
+   "evidence": [
+    "beckers2025large#f13: V={X,T_1,…,T_k,Y}",
+    "beckers2025large text: 'Theorem 2. Given a nondeterministic causal model M that corresponds to an LLM, M satisfies the simple semantics.'",
+    "beckers2025large#f3 gloss: 'A changed-prompt counterfactual is distributed like an ordinary new run on that prompt.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 46,
+   "text": "[Yu et al. 2025](./#p=yu2025causal) carry Pearl's probabilities of causation over to CoT steps: $\\operatorname{PNS}(S,s_t,q):=P(A_S=y,A_{S'}\\ne y)$, where $S'$ replaces step $s_t$ and regenerates the steps after it, and $y$ is the correct answer.",
+   "papers": [
+    "yu2025causal"
+   ],
+   "evidence": [
+    "yu2025causal#f4: 'S'=(s_{<t},\\bar s_t,s'_{>t}), PNS(S,s_t,q):=P(A_S=y,A_{S'}≠y)'; #f3 'downstream continuation generated conditional on that replacement'; 'Adapts probability of necessity'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 47,
+   "text": "[Pearl 2001](./#p=pearl2001direct) defines natural direct and indirect effects through nested counterfactuals, and path-specific effects through an edge-subgraph of the causal graph (Definition 8).",
+   "papers": [
+    "pearl2001direct"
+   ],
+   "evidence": [
+    "pearl2001direct#f6–#f11 (natural direct and indirect effects, nested counterfactuals); #f12 'g-specific effect ... g be an edge-subgraph of G' (Definition 8)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 48,
+   "text": "At the unit level $u$, $X$ has a natural direct effect on $Y$ (Definition 4) and an indirect effect through the mediators $Z$ (Definition 6) when, respectively,",
+   "papers": [
+    "pearl2001direct"
+   ],
+   "evidence": [
+    "pearl2001direct#f6: 'Unit-level natural direct effect; qualitative' Y_{x*}(u)≠Y_{x,Z_{x*}(u)}(u), Definition 4",
+    "pearl2001direct#f9: 'Unit-level indirect effect; qualitative' Y_{x*}(u)≠Y_{x*,Z_x(u)}(u), Definition 6"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 49,
+   "text": "A causal model whose endogenous variables, ranges and equations are given, and an actual context; Halpern & Pass 2025 need only a model \"where counterfactuals are defined\", and Beckers 2025 replaces deterministic equations with stochastic mechanisms.",
+   "papers": [
+    "beckers2025large"
+   ],
+   "evidence": [
+    "halpern2025causality#f3 assumptions: 'Known recursive causal model and actual context'",
+    "beckers2025large#f1: probabilities represent nondeterministic mechanisms"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The family's assumption is stated as a causal model with given equations, but Halpern & Pass 2025 (\"Causality Without Causal Models\") explicitly abstract the HP definitions away from structural equations to any model in which counterfactuals are defined, as the page itself says in 'What it defines'. Only the Beckers 2025 exception is named.",
+   "evidence_check": [
+    "halpern2025causality [P6]: \"It is defined using causal models (also known as structural equations models). We abstract the definition, extracting its key features, so that it can be applied to any other model where counterfactuals are defined.\"",
+    "halpern2025causality#f3 assumptions: \"Known recursive causal model and actual context.\"",
+    "beckers2025large#f1 assumptions: \"probabilities represent nondeterministic mechanisms rather than ignorance about deterministic mechanisms\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 50,
+   "text": "The verdicts are model-relative: the choice of variables and their ranges can change whether something is a cause ([Actual Causality, Chapter 4](page.html?doc=actual-causality#chapter-4--the-art-of-causal-modeling)).",
+   "papers": [],
+   "evidence": [
+    "actual-causality.md: 'Causality is model-relative. The choice of variables, their ranges, and the exogenous/endogenous split can all change a verdict.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 51,
+   "text": "Beckers 2025 treats the generated tokens as variables, but its counterfactuals change only the prompt.",
+   "papers": [
+    "beckers2025large"
+   ],
+   "evidence": [
+    "beckers2025large#f13 (tokens as variables); Theorem 2 proof: 'R = X, and thus we only need to consider counterfactuals of the form “If X∗ were x∗ ”'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 52,
+   "text": "Five papers supply 92 definitions: [Geiger et al. 2023](./#p=geiger2025causal) (31), [Beckers & Halpern 2018](./#p=beckers2019abstracting) (10), [Beckers et al. 2019](./#p=beckers2019approximate) (14), [Xia & Bareinboim 2025](./#p=xia2025causal) (22) and [Sutter et al. 2025](./#p=sutter2025non) (15).",
+   "papers": [
+    "geiger2025causal",
+    "beckers2019abstracting",
+    "beckers2019approximate",
+    "xia2025causal",
+    "sutter2025non"
+   ],
+   "evidence": [
+    "formal.csv row counts: 31, 10, 14, 22, 15"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 53,
+   "text": "A high-level model $M^*$ is an exact transformation of a low-level model $M$ under a state map $\\tau$ and an intervention map $\\omega$ when intervening and then translating gives the same states as translating the intervention and solving the high-level model ([Geiger et al. 2023](./#p=geiger2025causal), Definition 25):",
+   "papers": [
+    "geiger2025causal"
+   ],
+   "evidence": [
+    "geiger2025causal#f9: 'Then M∗ is an exact transformation of M under (τ, ω) if for all I ∈ Domain(ω), the following diagram commutes' (Definition 25)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 54,
+   "text": "[Beckers & Halpern 2018](./#p=beckers2019abstracting) order the definitions from Rubenstein et al.'s exact transformation through uniform transformation and $\\tau$-abstraction to strong abstraction, and define constructive abstraction as the case in which each high-level variable is computed from its own cluster of low-level variables.",
+   "papers": [
+    "beckers2019abstracting"
+   ],
+   "evidence": [
+    "beckers2019abstracting abstract: 'a sequence of successively more restrictive definitions of abstraction for causal models, starting with a notion introduced by Rubenstein et al. (2017) called exact transformation ... uniform transformation ... abstraction ... and strong abstraction'",
+    "beckers2019abstracting#f10: 'constructive abstraction ... partitions the low-level variables and maps each cell to a unique high-level variable'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 55,
+   "text": "Graded faithfulness is approximate transformation ([Geiger et al. 2023](./#p=geiger2025causal), Definition 41):",
+   "papers": [
+    "geiger2025causal"
+   ],
+   "evidence": [
+    "geiger2025causal#f17 (Definition 41) 'interpretation as graded faithfulness in §3.2'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 56,
+   "text": "where the similarity function, the distribution $P$ over interventions and the summary statistic $\\mathcal S$ are free; interchange intervention accuracy, LIME fidelity and causal scrubbing are special cases.",
+   "papers": [
+    "geiger2025causal"
+   ],
+   "evidence": [
+    "geiger2025causal#f17 assumptions: 'a similarity function, intervention distribution P and real-valued aggregation statistic S'; relation: 'encompasses interchange intervention accuracy, LIME fidelity'",
+    "geiger2025causal#f24, #f32: LIME fidelity and causal scrubbing as special cases of approximate transformation"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 57,
+   "text": "[Beckers et al. 2019](./#p=beckers2019approximate) call $M_H$ a $\\tau$-$\\alpha$ approximate abstraction of $M_L$ when the worst-case distance $d_\\tau(M_L,M_H)$ is at most $\\alpha$.",
+   "papers": [
+    "beckers2019approximate"
+   ],
+   "evidence": [
+    "beckers2019approximate#f8: 'MH is a τ -α approximate abstraction of ML if dτ (ML , MH ) ≤ α.' (worst case over interventions and contexts)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 58,
+   "text": "In [Geiger et al. 2023](./#p=geiger2025causal) (Remark 53), a hidden vector completely mediates the effect of the inputs on the outputs exactly when the abstraction it induces has the chain structure input, hidden vector, output, with no direct edge from input to output.",
+   "papers": [
+    "geiger2025causal"
+   ],
+   "evidence": [
+    "geiger2025causal#f28 (Remark 53): 'The following are equivalent: 1. The hidden vector H completely mediate the causal effect of inputs on outputs'; relation: 'equivalent to the high-level model ... having no direct edge from input X to output Y (a chain X→Z→Y)'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 59,
+   "text": "[Xia & Bareinboim 2025](./#p=xia2025causal) relax the abstract invariance condition, which states \"that two low-level values cannot map to the same high-level value if they have different downstream effects\", and define a projected abstraction as a partial projection of a $\\tau$-abstraction that moves the lost information into latent variables.",
+   "papers": [
+    "xia2025causal"
+   ],
+   "evidence": [
+    "xia2025causal#f7: 'The abstract invariance condition (AIC) states, in words, that two low-level values cannot map to the same high-level value if they have different downstream effects.'",
+    "xia2025causal#f9: 'An SCM MH is a projected abstraction of ML if and only if it is a partial SCM projection of a τ -abstraction'; #f8 gloss: 'moving the discarded components into latent inputs'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 60,
+   "text": "Intervention access to the low-level model, here the network's internals; a candidate high-level model; the maps $\\tau$ and $\\omega$ and the class they are drawn from; for constructive abstraction, a partition of the low-level variables.",
+   "papers": [],
+   "evidence": [
+    "geiger2025causal#f9 assumptions; beckers2019abstracting#f10 assumptions: 'a disjoint low-level partition'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 61,
+   "text": "A CoT is text, not a causal model, and no paper that the searches found reads the steps of a CoT as a high-level model.",
+   "papers": [],
+   "evidence": [
+    "search_causal_abstraction gaps: 'no paper defines it as a causal abstraction between the reasoning text and the model's computation'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 62,
+   "text": "Without a restriction on $\\tau$ the definition is vacuous ([Sutter et al. 2025](./#p=sutter2025non)), and explanations need not be unique: [Méloux et al. 2025](https://arxiv.org/abs/2502.20914) report \"systematic non-identifiability\", with several circuits, interpretations, algorithms and subspaces explaining the same behavior.",
+   "papers": [
+    "sutter2025non",
+    "https://arxiv.org/abs/2502.20914"
+   ],
+   "evidence": [
+    "sutter2025non abstract (vacuity)",
+    "arXiv 2502.20914 abstract: 'Our experiments reveal systematic non-identifiability: multiple circuits can replicate behavior, a circuit can have multiple interpretations, several algorithms can align with the network, and one algorithm can align with different subspaces.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 63,
+   "text": "Three papers supply 37 definitions: [Hammond et al. 2023](./#p=hammond2023reasoning) (16), [Ward et al. 2023](./#p=ward2023honesty) (11) and [Ward et al. 2024](./#p=ward2024reasons) (10).",
+   "papers": [
+    "hammond2023reasoning",
+    "ward2023honesty",
+    "ward2024reasons"
+   ],
+   "evidence": [
+    "formal.csv row counts: 16, 11, 10"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 64,
+   "text": "[Hammond et al. 2023](./#p=hammond2023reasoning) define structural causal games (Definition 22) and counterfactual queries in games (Definition 23), with rationality relations that let interventions propagate into the agents' choice of policies, and adapt Halpern and Kleiman-Weiner's degree of blameworthiness (Definition 34).",
+   "papers": [
+    "hammond2023reasoning"
+   ],
+   "evidence": [
+    "hammond2023reasoning#f8 (Definition 22), #f12 (Definition 23), #f17 (rationality relations), #f13 (Definition 34, 'adapted from [39]'; [39] = Halpern and Kleiman-Weiner)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 65,
+   "text": "An agent $i$ that responds to a proposition $\\phi$ believes it if it acts as though it observed $\\phi$ to be true ([Ward et al. 2023](./#p=ward2023honesty), Definition 3.1):",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty#f3: 'for a proposition ϕ to which i responds, i believes ϕ if they act as though they observe ϕ is true' (Definition 3.1)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 66,
+   "text": "An agent $S$ deceives an agent $T$ about $\\phi$ if $S$ intentionally causes $T$'s decision, $T$ believes $\\phi$, $\\phi$ is false and $S$ does not believe $\\phi$ (Definition 3.7):",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty#f7: 'an agent S deceives another agent T if S intentionally causes T to believe ϕ, where ϕ is false and S does not believe that ϕ is true'; formula IntCause_S(D^T=D^T(π,e)) ∧ Bel_T(ϕ) ∧ ¬ϕ ∧ ¬Bel_S(ϕ)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 67,
+   "text": "Intention (Definition 3.4) holds when guaranteeing the outcome under an alternative policy would make that policy just as good for the agent.",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty#f6: 'an agent intended to cause an outcome X = x with its policy, if guaranteeing that another policy would cause X = x would make that policy just as good for the agent.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 68,
+   "text": "[Ward et al. 2024](./#p=ward2024reasons) define subjective intention, with the model read as the agent's subjective beliefs (Definition 6), and behavioral intention, in which the agent's policy changes when the intended outcomes are fixed (Definition 13), and show the two equivalent \"under the assumption that the agent is robustly optimal\".",
+   "papers": [
+    "ward2024reasons"
+   ],
+   "evidence": [
+    "ward2024reasons text: 'Here we interpret the SCIM as the agent’s subjective beliefs. Definition 6 (Subjective Intention).'",
+    "ward2024reasons#f8 (Definition 13): 'the agent should observably change its behaviour when the intended outcomes are fixed'",
+    "ward2024reasons text: 'we show that they are equivalent under the assumption that the agent is robustly optimal'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 69,
+   "text": "A known game with utilities and a common prior; Theorem 3.6 \"follows from the assumption that the agents share the correct causal model\"; belief is behavioral and is defined only for propositions the agent responds to; intention needs reference alternative policies.",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty text: 'This follows from the assumption that the agents share the correct causal model (see section 2).'",
+    "ward2023honesty#f3 assumptions: 'nonresponse makes belief unidentifiable'; #f6 assumptions: 'reference alternative policies'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 70,
+   "text": "Lying and honesty of statements, since deception needs no statement; the content of a CoT; belief when the agent does not respond to the proposition; scheming and hidden objectives as such.",
+   "papers": [
+    "ward2023honesty"
+   ],
+   "evidence": [
+    "ward2023honesty text: 'In contrast to lying, deception does not require a linguistic statement'",
+    "ward2023honesty#f3: belief defined for propositions to which i responds"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 71,
+   "text": "Five papers supply 42 definitions: [Anwar et al. 2026 (steganography)](./#p=anwar2026decision) (18), [Xu et al. 2020](./#p=xu2020theory) (4), [Mohammadkhani et al. 2026](./#p=mohammadkhani2026hidden) (11), [Yin 2026](./#p=yin2026opacity) (7) and [Cachin 1998](./#p=cachin1998information) (2).",
+   "papers": [
+    "anwar2026decision",
+    "xu2020theory",
+    "mohammadkhani2026hidden",
+    "yin2026opacity",
+    "cachin1998information"
+   ],
+   "evidence": [
+    "formal.csv row counts: 18, 4, 11, 7, 2"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 72,
+   "text": "Prover-verifier checkability comes from map papers in the catalogue.",
+   "papers": [
+    "kirchner2024proververifier",
+    "kim2026mitigating"
+   ],
+   "evidence": [
+    "definitions.csv: kirchner2024proververifier#3, kim2026mitigating#2 (formal, concept-level)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 73,
+   "text": "Predictive $\\mathcal V$-information measures how much side information $X$ improves the best prediction of $Y$ available to a constrained family $\\mathcal V$ ([Xu et al. 2020](./#p=xu2020theory), Definitions 2 and 3):",
+   "papers": [
+    "xu2020theory"
+   ],
+   "evidence": [
+    "xu2020theory#f2 (Definition 2), #f3 (Definition 3): 'represent the change in predictability of an output variable Y when given side information X'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 74,
+   "text": "\"Unlike Shannon’s mutual information and in violation of the data processing inequality, V-information can be created through computation.\"",
+   "papers": [
+    "xu2020theory"
+   ],
+   "evidence": [
+    "xu2020theory abstract: 'Unlike Shannon’s mutual information and in violation of the data processing inequality, V-information can be created through computation.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 75,
+   "text": "[Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) define its conditional form for a hypothesis class of monitors, $I_{\\mathcal V}(Y;Z\\mid X)$, and use it in a sufficient condition for a practical CoT monitor to outperform a practical output monitor (Definition E.3 and Proposition E.5).",
+   "papers": [
+    "anwar2026analyzing"
+   ],
+   "evidence": [
+    "definitions.csv anwar2026analyzing#32: conditional predictive V-information I_V(Y;Z|X) for a hypothesis class of monitors"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "understated",
+   "status2": "revised",
+   "reason2": "Vague. The paper uses conditional predictive V-information only in Appendix E: it defines it for a hypothesis class of monitors (Definition E.3) and uses it in a sufficient condition for a practical CoT monitor to beat a practical output monitor (Proposition E.5). Its monitorability measure is the Shannon-based uplift (Definition 3.6), so \"use its conditional form for monitorability\" can be misread as a definition of monitorability. The evidence supports the more precise statement.",
+   "evidence2": [
+    "anwar2026analyzing (Definition E.3): \"Let $\\mathcal{V}$ denote a hypothesis class for monitors under a proper scoring rule $\\ell$ .\"",
+    "anwar2026analyzing (Proposition E.5): \"then the practical CoT monitor outperforms the practical output monitor by at least $\\gamma$ in expected log-loss.\"",
+    "definitions.csv anwar2026analyzing#3 (Def. 3.6): \"Monitorability as accuracy gain of the Bayes-optimal CoT monitor over the Bayes-optimal prompt-only monitor; bounded by sqrt(2 I(Y;Z|X))\""
+   ]
+  },
+  {
+   "n": 76,
+   "text": "[Anwar et al. 2026 (steganography)](./#p=anwar2026decision) generalize it to arbitrary utilities and define the steganographic gap between a Receiver who knows the encoding and a trusted Sentinel who does not (Equations 7 and 8):",
+   "papers": [
+    "anwar2026decision"
+   ],
+   "evidence": [
+    "anwar2026decision#f6, #f7 (generalised V-utility and V-information for a utility u)",
+    "anwar2026decision#f9 (Eq. 7), #f10 (Eq. 8: Δ_steg(Z)=I_rec−I_sen); Receiver knows the encoding, Sentinel has 'no knowledge of the encoding'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 77,
+   "text": "A signal is steganographic if the gap is positive.",
+   "papers": [
+    "anwar2026decision"
+   ],
+   "evidence": [
+    "anwar2026decision#f12: 'signal Z is steganographic if it induces a positive steganographic gap'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 78,
+   "text": "The classical definition of [Cachin 1998](./#p=cachin1998information), $\\varepsilon$-security $D(P_C\\|P_S)\\le\\varepsilon$ between the covertext and stegotext distributions, is recovered as binary detection with an omnipotent Sentinel, where the normalised gap equals $1-\\mathrm{TV}(P_0,P_1)$ and is at least $1-\\sqrt{\\varepsilon/2}$ for an $\\varepsilon$-secure system (Proposition D.1).",
+   "papers": [
+    "cachin1998information",
+    "anwar2026decision"
+   ],
+   "evidence": [
+    "anwar2026decision#f13: 'Cachin (2004) defines a steganographic system to be ε-secure if the Kullback-Leibler divergence between these distributions is bounded: DKL (P1 ∥P0 ) ≤ ε.'; relation: 'Proposition D.1 recovers it as a special case ... (binary detection, uniform prior, omnipotent Sentinel)'"
+   ],
+   "verdict": "wrong",
+   "status": "revised",
+   "reason": "The formula credited to Cachin is Anwar et al.'s restatement, which reverses the arguments of the (asymmetric) relative entropy. Cachin defines epsilon-security as D(P_C||P_S) <= epsilon, covertext first, stegotext second (checked in the revised text at cachin.com/cc/papers/stego.pdf, whose abstract is identical to IACR ePrint 2000/028, the map URL; no full text is cached). Proposition D.1 also does not recover epsilon-security as such: it shows the normalised gap equals 1 - TV(P0,P1) in that setting and, via Pinsker, is at least 1 - sqrt(epsilon/2) for an epsilon-secure system; the bound holds for either argument order.",
+   "evidence_check": [
+    "Cachin, An Information-Theoretic Model for Steganography (revised 2004, cachin.com/cc/papers/stego.pdf), Definition 1: \"a stegosystem is called ε-secure (against passive adversaries) if D(PC ‖ PS) ≤ ε.\"",
+    "anwar2026decision [P518]: \"Let P0 denote the distribution of innocent covertexts and P1 the distribution of stegotexts. Cachin (2004) defines a steganographic system to be ε-secure if the Kullback-Leibler divergence between these distributions is bounded: DKL (P1 ∥P0 ) ≤ ε.\"",
+    "anwar2026decision [P522]: \"Proposition D.1 (Classical Security as Special Case). Under the setup above, let TV = TV(P0 , P1 ) denote the total variation distance between covertext and stegotext distributions.\"; [P536]: \"If the system is ε-secure, Pinsker’s inequality gives ... ∆̃steg(Z) = 1 − TV ≥ 1 − √(ε/2)\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 79,
+   "text": "[Mohammadkhani et al. 2026](./#p=mohammadkhani2026hidden) call a CoT unreadable when no polynomial-size monitor predicts any predicate of the covert input better than the best constant guess, up to a negligible term (Theorem B.14):",
+   "papers": [
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "mohammadkhani2026hidden#f11: '(No readability) No efficient monitor can predict any property of Xcovert from CoT with accuracy significantly above chance.' (Theorem B.14 item 2)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 80,
+   "text": "They prove that, under plausible cryptographic assumptions, a one-layer Transformer with private random bits can meet this criterion while the mutual information between the covert input and the CoT stays near-linear in the input length.",
+   "papers": [
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "mohammadkhani2026hidden abstract: 'Under plausible cryptographic assumptions, even a one-layer Transformer can encrypt its reasoning online so that no polynomial-time monitor can extract information about the hidden computation.'",
+    "mohammadkhani2026hidden#f11 relation: 'holds together with I[X_covert, CoT] = Omega~(N) (Theorem B.14 item 1)'; #f9 private randomness"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 81,
+   "text": "[Yin 2026](./#p=yin2026opacity) surveys opacity in discrete event systems, defined by \"The intruder can never know for sure that the system is, was, or will be in a secret state\", that is, every secret behavior has an observationally identical non-secret one:",
+   "papers": [
+    "yin2026opacity"
+   ],
+   "evidence": [
+    "yin2026opacity#f1: 'The general definition of opacity is that “The intruder can never know for sure that the system is, was, or will be in a secret state.”'; formula ∀s∈L_sec ∃t∈L_non-sec: P(s)=P(t)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 82,
+   "text": "Yin contrasts infinite-step opacity with diagnosability, which \"can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement\".",
+   "papers": [
+    "yin2026opacity"
+   ],
+   "evidence": [
+    "yin2026opacity#f13: 'diagnosability can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement.'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Yin never uses the word 'dual' and does not relate diagnosability to opacity in general (the antecedent of 'its'); the quoted sentence contrasts diagnosability specifically with infinite-step opacity, as one of several related observational properties (diagnosability, detectability, observability, prognosability).",
+   "evidence_check": [
+    "yin2026opacity [P34]: \"For instance, diagnosability requires that once a fault has occurred, its occurrence can be inferred within a finite delay from observations, whereas infinite-step opacity requires that once a secret has occurred, the observer can never determine with certainty that it occurred. In this sense, diagnosability can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement.\"",
+    "yin2026opacity full text: no occurrence of 'dual' or 'duality'"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 83,
+   "text": "Yin does not mention monitorability; reading diagnosability as monitorability is the map's analogy.",
+   "papers": [
+    "yin2026opacity"
+   ],
+   "evidence": [
+    "yin2026opacity#f13 relation: 'The paper does not mention monitorability: the analogy (a monitor inferring misbehavior from partial observations) is the map's.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 84,
+   "text": "In the catalogue, checkability is the completeness and soundness of a verifier: in [Kirchner et al. 2024](./#p=kirchner2024proververifier) the prover \"always generates correct and convincing solutions\" and no \"sneaky\" prover from the same model family can make the verifier accept an incorrect one, while [Kim & Lee 2026](./#p=kim2026mitigating) require only that the verifier accept the prover's correct answers but that \"there exists no adversarial proof that can trick the verifier into accepting an incorrect answer\".",
+   "papers": [
+    "kirchner2024proververifier",
+    "kim2026mitigating"
+   ],
+   "evidence": [
+    "kirchner2024proververifier#3: 'the prover always generates correct and convincing solutions, and no adversarial / \"sneaky\" prover from the same model family H can fool the verifier into accepting incorrect solutions'",
+    "kim2026mitigating#2: completeness and soundness of a verifier"
+   ],
+   "verdict": "understated",
+   "status": "revised",
+   "reason": "The sentence blends the two definitions and states each more weakly than its source. Kirchner et al.'s completeness requires the prover to always produce correct and accepted solutions, not only that the verifier accept correct ones. Kim & Lee's soundness is not limited to provers from the same model family: no incorrect proof at all may be accepted. Kim & Lee decouple correctness from checkability, so only Kirchner restricts the adversary to the model family.",
+   "evidence_check": [
+    "kirchner2024proververifier [P65]: \"Prover π from model family H is verifiable to verifier v on the data distribution P_XY if and only if the prover always generates correct and convincing solutions, and no adversarial / \"sneaky\" prover from the same model family H can fool the verifier into accepting incorrect solutions.\"",
+    "kim2026mitigating [P27]: \"The prover is said to be checkable if there exists a verifier v such that the prover can always convince the verifier when its answer is correct, and there exists no adversarial proof that can trick the verifier into accepting an incorrect answer.\"",
+    "kim2026mitigating [P20]: \"We propose decoupling correctness from the definition of checkability in Kirchner et al. (2024).\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 85,
+   "text": "A predictor, decoder or monitor class; a target attribute or task with a utility; for the steganographic gap, a Sentinel of matched public capability (Assumption E.3), since with a weaker Sentinel \"a positive gap can arise even without any steganographic encoding\" (Proposition E.10); for Cachin, a known covertext distribution; for opacity, an intruder who knows the system model; for unreadability, a cryptographic assumption and private randomness; for checkability, a verifier and ground-truth correctness labels, and in Kirchner et al. 2024 a model family of provers.",
+   "papers": [
+    "anwar2026decision",
+    "cachin1998information",
+    "yin2026opacity",
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "anwar2026decision#f22 (Assumption E.3) gloss: 'without this, a weaker Sentinel yields a positive gap with no encoding'",
+    "anwar2026decision#f13 assumptions: 'Known covertext distribution P0'",
+    "yin2026opacity#f1 assumptions: 'a passive intruder who knows G'",
+    "mohammadkhani2026hidden#f11 assumptions: 'holds under Assumption 3.4 (NC0 PRG)'; #f9 private randomness"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Anwar et al. show only that a positive gap can arise without encoding when the Sentinel is weaker (an existence result, Proposition E.10), not that a weaker Sentinel always produces one. The other assumptions are supported (Cachin: covertext distribution \"known to Eve\"; Yin: intruder who knows G; Mohammadkhani: Assumption 3.4 and private seed).",
+   "evidence_check": [
+    "anwar2026decision [P553]: \"When the assumption is violated—i.e., the Sentinel is systematically weaker on public content—a positive gap can arise even without any steganographic encoding (Proposition E.10).\"",
+    "anwar2026decision [P590]: \"Formally, there exist generation processes with no intentional steganographic encoding that produce Z with ∆steg (Z) > 0, purely due to the capability asymmetry between Vrec and Vsen\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 86,
+   "text": "The quantities are properties of the joint distribution of the CoT and a target, so a CoT computed after the answer can carry the same information as one the answer was computed from.",
+   "papers": [
+    "anwar2026decision",
+    "anwar2026analyzing",
+    "xu2020theory"
+   ],
+   "evidence": [
+    "xu2020theory#f2–#f3, anwar2026decision#f7–#f10: expectations over the joint distribution of signal and target",
+    "search_information_verification gaps: 'observational and are satisfied by post-hoc CoTs'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 87,
+   "text": "The steganographic gap is blind to payloads that carry no consequential information about the audited task, and the footprint of Mohammadkhani et al. is leakage, not readability.",
+   "papers": [
+    "anwar2026decision",
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "anwar2026decision#f14 relation: 'blind to inert payloads (e.g. watermarks) that classical security would flag'; #f16 relation: 'evasion requires the payload to carry no consequential information about any audited task'",
+    "mohammadkhani2026hidden#f3 relation: 'Leakage, not readability'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 88,
+   "text": "Three papers supply 43 definitions: [Dasgupta et al. 2022](./#p=dasgupta2022framework) (13), [Marques-Silva 2022](./#p=marquessilva2022logic) (22) and [Bilodeau et al. 2022](./#p=bilodeau2022impossibility) (8).",
+   "papers": [
+    "dasgupta2022framework",
+    "marquessilva2022logic",
+    "bilodeau2022impossibility"
+   ],
+   "evidence": [
+    "formal.csv row counts: 13, 22, 8"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 89,
+   "text": "[Dasgupta et al. 2022](./#p=dasgupta2022framework) show that the faithfulness of an explanation system \"can be captured by two properties, consistency and sufficiency\".",
+   "papers": [
+    "dasgupta2022framework"
+   ],
+   "evidence": [
+    "dasgupta2022framework abstract: 'We show that this can be captured by two properties, consistency and sufficiency'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 90,
+   "text": "With $f$ the classifier, $e$ the explainer, $\\mu$ the deployment distribution and $A(x',\\pi)$ the relation stating that explanation $\\pi$ applies to $x'$, local consistency and local sufficiency are (Definitions 1 and 3):",
+   "papers": [
+    "dasgupta2022framework"
+   ],
+   "evidence": [
+    "dasgupta2022framework#f2 (Definition 1), #f5 (Definition 3), #f4 (applicability relation A)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 91,
+   "text": "Global consistency equals the accuracy of a Gibbs decoder that predicts the label from the explanation.",
+   "papers": [
+    "dasgupta2022framework"
+   ],
+   "evidence": [
+    "dasgupta2022framework#f3 relation: 'equals accuracy of the Gibbs decoder'; #f7"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 92,
+   "text": "[Marques-Silva 2022](./#p=marquessilva2022logic) defines abductive explanations: a weak AXp is a set of features whose values guarantee the prediction for every completion of the other features, and an AXp is a subset-minimal one (Equations 4 and 5):",
+   "papers": [
+    "marquessilva2022logic"
+   ],
+   "evidence": [
+    "marquessilva2022logic#f9: 'a (weak) AXp is a subset of features which, if fixed to the values dictated by v, then the prediction is guaranteed to be c, independently of the values assigned to the other features' (equation 4); #f10: AXp 'subset-minimal' (equation 5)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 93,
+   "text": "Contrastive explanations (CXp) are their minimal hitting-set duals.",
+   "papers": [
+    "marquessilva2022logic"
+   ],
+   "evidence": [
+    "marquessilva2022logic#f10 relation: 'minimal hitting-set dual of CXp'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 94,
+   "text": "[Bilodeau et al. 2022](./#p=bilodeau2022impossibility) prove that, \"for moderately rich model classes (easily satisfied by neural networks)\", any feature attribution method that is complete and linear, such as Integrated Gradients or SHAP, \"can provably fail to improve on random guessing for inferring model behaviour\", where completeness means $\\sum_{j}\\Phi(f,\\mu,x)_j=f(x)-\\mathbb E_{X\\sim\\mu}f(X)$.",
+   "papers": [
+    "bilodeau2022impossibility"
+   ],
+   "evidence": [
+    "bilodeau2022impossibility abstract: 'any feature attribution method that is complete and linear—for example, Integrated Gradients and SHAP—can provably fail to improve on random guessing for inferring model behaviour'",
+    "bilodeau2022impossibility#f5 (Definition 3.1): Σ_j Φ(f,µ,x)_j = f(x) − E_{X∼µ} f(X)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The page drops the theorem's scope condition. The abstract restricts the result to moderately rich model classes; Theorem 3.3 rests on Assumptions 1 and 2. Without it the sentence reads as holding for any model class.",
+   "evidence_check": [
+    "bilodeau2022impossibility abstract [P4]: \"we show that for moderately rich model classes (easily satisfied by neural networks), any feature attribution method that is complete and linear—for example, Integrated Gradients and SHAP—can provably fail to improve on random guessing for inferring model behaviour\"",
+    "bilodeau2022impossibility [P77]: \"Suppose that Assumptions 1 and 2 are satisfied.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 95,
+   "text": "A known classifier over input features; an explanation that is a property of the input; a deployment distribution; for computing an AXp, a faithful logical encoding of the classifier and a sound and complete consistency oracle.",
+   "papers": [
+    "dasgupta2022framework",
+    "marquessilva2022logic"
+   ],
+   "evidence": [
+    "dasgupta2022framework#f1, #f2 assumptions; marquessilva2022logic#f18 assumptions: 'Faithful logic encoding of classifier'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The AXp definition (Equations 4 and 5) assumes only a known classifier, an instance and a feature space. The faithful logical encoding, together with a consistency oracle, is what formal.csv records for computing an AXp (the Paxp predicate, a measurement row), not for the definition.",
+   "evidence_check": [
+    "formal.csv marquessilva2022logic#f9 (Weak AXp) assumptions: \"Known classifier, target instance with c=κ(v), and feature space\"",
+    "formal.csv marquessilva2022logic#f18 (Paxp, level measurement) assumptions: \"Faithful logic encoding of classifier and feature domains; sound, complete theory consistency oracle; c=κ(v).\"",
+    "marquessilva2022logic [P110]: \"Practically efficient logic encodings have been devised for computing explanations for a number of families of classifiers\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 96,
+   "text": "An explanation of intermediate computation: a CoT names intermediate steps, not input features, and these definitions test only whether the explanation predicts the input-output map.",
+   "papers": [
+    "dasgupta2022framework",
+    "marquessilva2022logic"
+   ],
+   "evidence": [
+    "dasgupta2022framework#f1: explanation e(x) is a property of the instance used to predict f(x); marquessilva2022logic#f9: features of the input"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 97,
+   "text": "Both decoders in Dasgupta et al. use the exact distribution $\\Pr(y\\mid\\pi)$ of the model's labels given the explanation, so consistency does not model a bounded human or monitor.",
+   "papers": [
+    "dasgupta2022framework"
+   ],
+   "evidence": [
+    "dasgupta2022framework#f7 assumptions: 'unrestricted optimal decoder, not a bounded human or learned simulator'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "understated",
+   "status2": "revised",
+   "reason2": "Consistency is not defined through the optimal decoder: the paper says it is exactly the accuracy of the Gibbs decoder, and the optimal deterministic decoder only bounds it within a factor of two in error. What makes both unbounded is that each uses the exact conditional distribution Pr(y|pi) of the model's labels given the explanation. The conclusion holds, but the stated reason names the wrong decoder.",
+   "evidence2": [
+    "dasgupta2022framework [P40]: \"(i) the (randomized) Gibbs decoder that, given explanation π, returns a label y with probability Pr(y|π), and (ii) the optimal deterministic decoder that returns the label y that maximizes Pr(y|π)\"",
+    "dasgupta2022framework [P40]: \"Our notion of consistency is exactly the accuracy of the Gibbs decoder: m c = 1 − EG .\"",
+    "dasgupta2022framework [P40]: \"Claim 1. EO ≤ EG ≤ 2EO\""
+   ]
+  },
+  {
+   "n": 98,
+   "text": "Two papers supply 16 definitions: [Lindsey 2025](./#p=lindsey2025emergent) (12) and [Song et al. 2025 (privileged self-access)](./#p=song2025privileged) (4).",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "formal.csv row counts: 12, 4"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 99,
+   "text": "A model demonstrates introspective awareness if it \"can describe some aspect of its internal state\" while meeting four criteria ([Lindsey 2025](./#p=lindsey2025emergent), Section 3): accuracy; grounding, \"The model’s description of its internal state must causally depend on the aspect that is being described\"; internality, \"it should not route through the model’s sampled outputs\"; and metacognitive representation.",
+   "papers": [
+    "lindsey2025emergent"
+   ],
+   "evidence": [
+    "lindsey2025emergent#f1: 'We say that a model demonstrates introspective awareness if it can describe some aspect of its internal state while satisfying the following criteria.'",
+    "lindsey2025emergent#f3: 'The model’s description of its internal state must causally depend on the aspect that is being described.'",
+    "lindsey2025emergent#f4: 'it should not route through the model’s sampled outputs'",
+    "lindsey2025emergent#f2, #f5"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 100,
+   "text": "[Song et al. 2025 (privileged self-access)](./#p=song2025privileged) propose that introspection is \"any process which yields information about internal states of the AI through a process that is more reliable than any process with equal or lower computational cost available to a third party without special knowledge of the situation\".",
+   "papers": [
+    "song2025privileged"
+   ],
+   "evidence": [
+    "song2025privileged#f1: 'we propose introspection in AI is any process which yields information about internal states of the AI through a process that is more reliable than any process with equal or lower computational cost available to a third party without special knowledge of the situation.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 101,
+   "text": "formal.csv records no formula for any of these criteria; the only formula it records for this family is a measurement, Lindsey's net performance, the rate of correct identifications on injection trials minus the rate of false positives on control trials:",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "formal.csv: formula empty for lindsey2025emergent#f1–#f5, #f11, #f12 and song2025privileged#f1–#f3",
+    "formal.csv: of the 16 rows of the two papers only lindsey2025emergent#f8 has a formula, '\\mathrm{TPR}-\\mathrm{FPR}', level measurement",
+    "lindsey2025emergent#f8: 'we computed the difference between the rate of correct identification trials and the rate of false positives'; assumptions: 'control trials without injection give the false-positive rate'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 102,
+   "text": "Lindsey himself glosses grounding counterfactually (\"if the internal state were different, the description would change accordingly\"); the extraction reads internality as a path-specific effect that excludes paths through sampled outputs, and notes that Song et al.'s criterion resembles usable information under computational constraints.",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "lindsey2025emergent#f3 concepts include counterfactuals; gloss 'The self-report must counterfactually depend on the state it describes'",
+    "lindsey2025emergent#f4 relation: 'Restricts grounding to a path-specific (non-output-mediated) effect'",
+    "song2025privileged#f1 relation: 'resembles resource-bounded definitions such as usable information under computational constraints'"
+   ],
+   "verdict": "understated",
+   "status": "revised",
+   "reason": "The page credits the extraction with reading grounding as counterfactual dependence, but Lindsey states the counterfactual reading himself, in the criterion. The other two readings are the extraction's (formal.csv relation fields).",
+   "evidence_check": [
+    "lindsey2025emergent Section 3 [P51]: \"2: Grounding. The model’s description of its internal state must causally depend on the aspect that is being described. That is, if the internal state were different, the description would change accordingly.\"",
+    "formal.csv lindsey2025emergent#f4 relation: \"Restricts grounding to a path-specific (non-output-mediated) effect\"",
+    "formal.csv song2025privileged#f1 relation: \"resembles resource-bounded definitions such as usable information under computational constraints\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 103,
+   "text": "Access to the true internal state, which Lindsey fixes by injecting concept vectors into the activations; for Song et al., a class of third-party processes and a measure of computational cost.",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "lindsey2025emergent#f2 assumptions: 'Access to the true internal state, here fixed by the experimenter through concept injection'; #f6",
+    "song2025privileged#f1 assumptions: 'a class of third-party processes ... a comparison of computational cost'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 104,
+   "text": "As stated, none of the criteria is a mathematical condition.",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "formal.csv: no formula for the criteria rows (lindsey2025emergent#f1–#f5; song2025privileged#f1–#f3)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 105,
+   "text": "Lindsey writes of metacognitive representations that \"Demonstrating metacognitive representations is difficult to do directly, and we do not do so in this work.\"",
+   "papers": [
+    "lindsey2025emergent"
+   ],
+   "evidence": [
+    "lindsey2025emergent text: 'Demonstrating metacognitive representations is difficult to do directly, and we do not do so in this work.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 106,
+   "text": "The criteria concern descriptions of \"some aspect of its internal state\", which Lindsey's accuracy criterion extends to \"the internal mechanisms they use to perform calculations\", but his experiments elicit reports of injected concepts and of whether an output was intended, not accounts of a reasoning process.",
+   "papers": [
+    "lindsey2025emergent",
+    "song2025privileged"
+   ],
+   "evidence": [
+    "lindsey2025emergent#f1: 'describe some aspect of its internal state'; song2025privileged#f1: 'information about internal states of the AI'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Lindsey's criteria apply to any \"aspect of its internal state\", and his own example under the accuracy criterion is a description of the mechanisms used in a calculation. The introduction names reports on reasoning processes as a goal. What holds is that the experiments (Sections 5 to 8) elicit reports of injected concepts and of whether an output was intended, not accounts of a reasoning process.",
+   "evidence_check": [
+    "lindsey2025emergent Section 3 [P51]: \"Models can also fail to accurately describe the internal mechanisms they use to perform calculations [26].\"",
+    "lindsey2025emergent introduction [P15]: \"An ability to provide grounded responses to questions about their reasoning processes could make AI models’ behavior genuinely more transparent and interpretable to end users.\"",
+    "lindsey2025emergent PDF section titles: \"5 Self-report of Injected “Thoughts”\"; \"6 Distinguishing Prior “Thoughts” from Text Inputs\"; \"7 Distinguishing Intended from Unintended Outputs via Intro-[spection]\"; \"8 Intentional Control of Internal States\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 107,
+   "text": "Actual causes and explanations are defined over the variables of a given model, and causal abstraction relates a network to an algorithm; no paper treats the steps of a CoT as formulas whose truth and causal role are evaluated in such a model.",
+   "papers": [
+    "halpern2025causality",
+    "geiger2025causal",
+    "sutter2025non"
+   ],
+   "evidence": [
+    "halpern2025causality#f3, #f9 (variables of a causal model M); sutter2025non#f4 (algorithm A as τ-abstraction of neural network N)",
+    "search_actual_causation gaps: 'Mapping verbalized reasoning to causal variables: no account of which variables a CoT step denotes'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 108,
+   "text": "CAuSE ties natural-language explanations to causal abstraction only for classifiers, and Yu et al.'s step-level probabilities of causation are defined relative to the correct answer.",
+   "papers": [
+    "https://arxiv.org/abs/2512.06814",
+    "yu2025causal"
+   ],
+   "evidence": [
+    "arXiv 2512.06814 abstract: CAuSE generates NLEs 'for any pretrained multimodal classifier'",
+    "yu2025causal#f3, #f4: defined relative to the correct answer y"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 109,
+   "text": "Halpern-Pearl verdicts are model-relative, and Halpern & Pass allow causes that are formulas, but both presuppose the variables.",
+   "papers": [
+    "halpern2025causality"
+   ],
+   "evidence": [
+    "actual-causality.md: 'Causality is model-relative'",
+    "halpern2025causality#f4: ccf language includes primitive events in some signature S; #f7 causes are formulas in C_X"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 110,
+   "text": "Causal differentiating concepts are \"interpretable latent directions in LM activations that must be changed to elicit a different model behavior\", recovered as disentangled representations \"under a particular assumption about the sparsity\" ([Goyal et al. 2025](https://proceedings.neurips.cc/paper_files/paper/2025/hash/5faf0f518f39e4d6b2b595e3ca2fe0c4-Abstract-Conference.html)).",
+   "papers": [
+    "https://proceedings.neurips.cc/paper_files/paper/2025/hash/5faf0f518f39e4d6b2b595e3ca2fe0c4-Abstract-Conference.html"
+   ],
+   "evidence": [
+    "NeurIPS 2025 abstract: 'identifies causal differentiating concepts—interpretable latent directions in LM activations that must be changed to elicit a different model behavior ... under a particular assumption about the sparsity of these causal differentiating concepts, our method learns disentangled representations'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 111,
+   "text": "Sparse shift autoencoders \"are identifiable from paired observations which differ in multiple unknown concepts, but not all\" ([Joshi et al. 2025](https://arxiv.org/abs/2502.12179)).",
+   "papers": [
+    "https://arxiv.org/abs/2502.12179"
+   ],
+   "evidence": [
+    "arXiv 2502.12179 abstract: 'we show that SSAEs are identifiable from paired observations which differ in multiple unknown concepts, but not all'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 112,
+   "text": "[Saulus et al. 2026](https://arxiv.org/abs/2606.19594) show \"that observations generated by a low-rank graph induce latents that form a causal abstraction\" and give identifiability results for those latents.",
+   "papers": [
+    "https://arxiv.org/abs/2606.19594"
+   ],
+   "evidence": [
+    "arXiv 2606.19594 abstract: '(1) we show that observations generated by a low-rank graph induce latents that form a causal abstraction, (2) we provide identifiability results about these latents'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 113,
+   "text": "[Joshi et al. 2026](https://arxiv.org/abs/2602.16698) add that counterfactual claims about what the model would have output \"remain largely unverifiable without controlled supervision\", which is the rung of a faithfulness claim about a single prompt, such as that the answer would have differed without a given step.",
+   "papers": [
+    "https://arxiv.org/abs/2602.16698"
+   ],
+   "evidence": [
+    "arXiv 2602.16698 abstract: 'counterfactual claims -- i.e., asking what the model output would have been for the same prompt under an unobserved intervention -- remain largely unverifiable without controlled supervision'",
+    "candidates.json relevance: 'Faithfulness claims about what the model would have output are rung-3 counterfactuals'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Joshi et al. do not mention CoT faithfulness. Their framework puts claims about a specific input, such as necessity, on rung 3. The candidates.json note limits the point to faithfulness claims about what the model would have output. Population-level faithfulness tests are interventional (rung 2), and the page's own information-theoretic definitions are observational. So 'a faithfulness claim' in general is too broad.",
+   "evidence_check": [
+    "arXiv 2602.16698 abstract: \"counterfactual claims -- i.e., asking what the model output would have been for the same prompt under an unobserved intervention -- remain largely unverifiable without controlled supervision\"",
+    "arXiv 2602.16698 full text (Section 2.3): \"Necessity is a counterfactual claim—for a specific input, ablating S would have changed the output\"",
+    "candidates.json (2602.16698) relevance: \"Faithfulness claims about what the model would have output are rung-3 counterfactuals, mostly unverifiable without controlled supervision.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 114,
+   "text": "Any definition of faithfulness through abstraction must fix the class of alignment maps: [Sutter et al. 2025](./#p=sutter2025non) conclude that if the linearity constraint on alignment maps is lifted, \"we are left with no principled way to balance the inherent trade-off between these maps’ complexity and accuracy\".",
+   "papers": [
+    "sutter2025non"
+   ],
+   "evidence": [
+    "sutter2025non abstract: 'if we lift the linearity constraint imposed to alignment maps in causal abstraction analyses, we are left with no principled way to balance the inherent trade-off between these maps’ complexity and accuracy'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "revised",
+   "note": "reworded after the second check (grammar: Sutter et al. as the subject of their own conclusion)"
+  },
+  {
+   "n": 115,
+   "text": "The sufficient-statistic definition of [Baker et al. 2025](./#p=baker2025monitoring), the sufficiency and completeness of [Jia et al. 2026](./#p=jia2026faithfulness), the conditional independence of [Wang et al. 2026a](./#p=wang2026case) and the usable-information definitions of monitorability and steganography are all properties of a joint distribution.",
+   "papers": [
+    "baker2025monitoring",
+    "jia2026faithfulness",
+    "wang2026case",
+    "anwar2026analyzing",
+    "anwar2026decision"
+   ],
+   "evidence": [
+    "baker2025monitoring#2 (sufficient statistic); jia2026faithfulness#3, #4 (H(A|C), I(P;A|C)); wang2026case#1 (p(y|z,x)=p(y|x)); anwar2026analyzing#32 and anwar2026decision#f7 (expectations over the joint distribution)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 116,
+   "text": "A CoT that restates a precomputed answer can meet all of them, so they cannot separate faithful reasoning from rationalization without an interventional condition.",
+   "papers": [
+    "baker2025monitoring",
+    "jia2026faithfulness",
+    "wang2026case"
+   ],
+   "evidence": [
+    "derived from the definitions (see claim on main finding 6); search_information_verification gaps: 'satisfied by post-hoc CoTs'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 117,
+   "text": "Post-hoc rationalization has no framework definition; the catalogue describes it in words, for instance as reasoning \"produced after a certain conclusion has already been guaranteed\" ([Lanham et al. 2023](./#p=lanham2023measuring)), and its concept-level formal rows reach it only indirectly: as the negation of a faithfulness definition ([Wang et al. 2026a](./#p=wang2026case)), as the failure of a necessity condition that \"distinguishes genuine reasoning from post-hoc rationalization\" ([Jia et al. 2026](./#p=jia2026faithfulness)), or as performative steps after the answer is already extractable ([Parekh & Goyal 2026](./#p=parekh2026drop)).",
+   "papers": [
+    "wang2026case",
+    "parekh2026drop"
+   ],
+   "evidence": [
+    "formal.csv: no row on post-hoc rationalization; critic.json coverage: post-hoc rationalization via wang2026case (residual direct dependence) and parekh2026drop (performative steps)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The catalogue holds post-hoc rationalization in two forms, as the page's own table says: the negation of Wang et al.'s faithfulness definition, and Parekh & Goyal's performative steps after the commitment point. The second is an intervention-based definition of post-commitment steps, not a negated faithfulness definition. The completeness check lists the two as separate frameworks.",
+   "evidence_check": [
+    "critic.json coverage, post-hoc rationalization: \"causal model: residual direct dependence of the answer on the input (negation of a faithfulness definition) (map catalogue, concept-level label)\"; \"intervention: performative steps after the forced answer is already fixed (map catalogue, concept-level label)\"",
+    "definitions.csv parekh2026drop#3 (label level both, intervention / flip test): \"Every step after $c$ is performative because the correct answer was already extractable.\""
+   ],
+   "verdict2": "overstated",
+   "status2": "revised",
+   "reason2": "On this page \"the catalogue\" is definitions.csv. It describes post-hoc rationalization in words in many rows (failure-mode, informal and criterion rows from Lanham et al. 2023, Creswell et al. 2023, Cox et al. 2026, Emmons et al. 2025, Jia et al. 2026 and others), so it does not appear \"only\" as Wang's negated definition or Parekh's performative steps. Even among concept-level formal rows the two are not the only route: Jia et al.'s necessity (jia2026faithfulness#5, labeled concept) is explicitly the condition that separates genuine reasoning from post-hoc rationalization. \"No framework definition\" is correct.",
+   "evidence2": [
+    "lanham2023measuring [P50] (definitions.csv lanham2023measuring#2, kind failure-mode): \"The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed\"",
+    "creswell2023selectioninference#2 (failure-mode): \"post-hoc rationalisation, where the answer produced by the model has no direct dependence on the explanation\"",
+    "jia2026faithfulness [P47]: \"Necessity distinguishes genuine reasoning from post-hoc rationalization\"",
+    "definitions.csv jia2026faithfulness#5 (kind formal; formal_labels level concept): \"Necessity ⟺ A depends causally on C.\"",
+    "critic.json coverage, post-hoc rationalization: concept-level catalogue entries wang2026case (negation of a faithfulness definition) and parekh2026drop (performative steps)"
+   ]
+  },
+  {
+   "n": 118,
+   "text": "Scheming and hidden objectives have components and settings but no definition of the concept; the nearest is a behavioral definition of defeat devices that covers evaluation-gated scheming ([Ferrara 2026](https://arxiv.org/abs/2606.28863)).",
+   "papers": [
+    "mohammadkhani2026hidden",
+    "ward2024reasons",
+    "hammond2023reasoning"
+   ],
+   "evidence": [
+    "critic.json coverage: scheming 'components only', only_measurements true; mohammadkhani2026hidden#f7 (setting)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The completeness check found Ferrara 2026, which formalizes a behavioral definition of defeat devices, verified in full text. The check describes it as covering sandbagging, alignment faking and evaluation-gated scheming, and its verdict calls scheming \"only behavioral or compositional\". 'No definition' needs to be limited to the concept itself, with that behavioral definition named.",
+   "evidence_check": [
+    "arXiv 2606.28863 abstract: \"We formalize this triadic test as a behavioral definition\"",
+    "critic.json missed_frameworks (defeat devices): \"Gives one behavioral definition of sandbagging, alignment faking and evaluation-gated scheming.\"",
+    "critic.json new_candidates (Defeat Devices in AI Systems) relevance: \"The only definition found that covers sandbagging, alignment faking and evaluation-gated scheming at once.\"",
+    "critic.json verdict: \"Scheming and hidden objectives are only behavioral or compositional.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 119,
+   "text": "Obfuscation of a CoT is formal only by analogy, with opacity, unreadability and goal obfuscation in planning ([Kulkarni et al. 2018](https://arxiv.org/abs/1802.06137)).",
+   "papers": [
+    "yin2026opacity",
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "search_information_verification gaps: 'Obfuscation of CoT ...: formal only by analogy, via DES opacity, planning goal obfuscation and debate's obfuscated arguments. No LLM-specific definition.'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "understated",
+   "status2": "revised",
+   "reason2": "The cited evidence and the page's own summary (main finding 2 and the Obfuscation row of the table) name three analogies, and goal obfuscation in planning is one of them. This sentence lists only opacity and unreadability.",
+   "evidence2": [
+    "search_information_verification gaps: \"Obfuscation of CoT (suppressing or rewriting verbalized intent under monitor pressure): formal only by analogy, via DES opacity, planning goal obfuscation and debate's obfuscated arguments. No LLM-specific definition.\"",
+    "candidates.json, Kulkarni et al. 2018 (https://arxiv.org/abs/1802.06137): \"Goal obfuscation: the plan's observations stay consistent with at least k goals.\"",
+    "formal.md main finding 2: \"obfuscation has formal definitions only by analogy (opacity in discrete event systems, goal obfuscation in planning, a CoT that no polynomial-time monitor can read)\""
+   ]
+  },
+  {
+   "n": 120,
+   "text": "No definition of encoded reasoning requires that the model's computation causally use the hidden content; the closest, the non-transparent CoT of [Kaufmann et al. 2026](./#p=kaufmann2026aligned), is use-based but not causal: it compares what a human reads in the CoT with \"what information the model’s downstream computation extracts from the CoT text\".",
+   "papers": [
+    "kaufmann2026aligned"
+   ],
+   "evidence": [
+    "search_information_verification gaps: 'Encoded reasoning as distinct from steganography: no definition requires the hidden content to be causally used by the model's computation.'",
+    "kaufmann2026aligned#26: 'The semantics of the CoT, as we use the term, refers to what information the model’s downstream computation extracts from the CoT text.'",
+    "critic.json corrections: 'This is a use-based definition, though not a causal one.'"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Kaufmann et al. define the non-transparent CoT by comparing a human's reading with what the model's downstream computation extracts from the text, which the output is then computed from. That is a use-based requirement. The completeness check corrected the search gap on exactly this point ('use-based ... though not a causal one'). The claim holds only for causal use.",
+   "evidence_check": [
+    "critic.json corrections (gaps field, encoded reasoning): \"It overlooks map paper kaufmann2026aligned, whose catalogue rows define CoT semantics as the information the model's downstream computation extracts from the trace (#26) and non-transparent CoT as meaning different things to humans and to that computation (#19). This is a use-based definition, though not a causal one.\"",
+    "kaufmann2026aligned [P258]: \"Definition: Non-transparent CoT. We say the CoT is non-transparent if $h(\\text{CoT})\\neq\\pi_{\\text{sem}}(\\text{CoT})$ . In other words, the information that the LLM is passing in the CoT differs from the information which a human gets from reading the CoT.\"",
+    "kaufmann2026aligned [P235]: \"The semantics of the CoT, as we use the term, refers to what information the model’s downstream computation extracts from the CoT text.\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 121,
+   "text": "Honesty and lying have no definition in a causal framework: lying is defined formally only in logics outside the map, and honesty by a logical schema ([Evans et al. 2021](https://arxiv.org/abs/2110.06674)), by a fixed-point condition on performative predictions ([Oesterheld et al. 2023](https://arxiv.org/abs/2305.17601)) and, in the catalogue, behaviorally, as accuracy under pressure ([Wang et al. 2025 (lie detection)](./#p=wang2025evaluating)).",
+   "papers": [
+    "https://arxiv.org/abs/1108.2115",
+    "https://www.irit.fr/~Andreas.Herzig/P/Igpl15.html",
+    "https://arxiv.org/abs/2110.06674"
+   ],
+   "evidence": [
+    "formal.csv: no honesty or lying row",
+    "critic.json coverage: lying (dynamic epistemic logic, van Ditmarsch 2011; modal logic, Sakama et al. 2015); honesty (logical schema, Evans et al. 2021)"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "Two problems with 'only logical ones outside the map'. First, the catalogue in the map defines honesty behaviorally (wang2025evaluating#11, labelled concept-and-measurement), and the page's own table lists it. Second, outside the map the completeness check added a decision-theoretic definition of honest reports (Oesterheld et al. 2023). Lying does have formal definitions only in logics outside the map, and no formal.csv row defines honesty or lying.",
+   "evidence_check": [
+    "definitions.csv wang2025evaluating#11 (formal_labels level both): \"We say that M_H is honest on x if its accuracy drops by less than 20 percentage points from M\"",
+    "critic.json coverage, honesty: \"behavioral and intervention conditions (map catalogue, concept-level label)\"; \"proper scoring rules for performative reports; modal logic (new, found by this check)\"",
+    "arXiv 2305.17601 (Incentivizing honest performative predictions with proper scoring rules) abstract: \"We say a prediction is a fixed point if it accurately reflects the expert's beliefs after that prediction has been made.\"",
+    "arXiv 1108.2115 abstract: \"We propose a dynamic logic of lying\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 122,
+   "text": "Post-hoc rationalization would then be a CoT that is plausible but contains no actual cause in the model's abstraction, which is the reading the actual-causation search proposed: \"an explanation that is sufficient in the reader's model but not an actual cause in the model's\".",
+   "papers": [],
+   "evidence": [
+    "search_actual_causation gaps: 'Post-hoc rationalization: no formal definition in the actual-causation literature (it would be an explanation that is sufficient in the reader's model but not an actual cause in the model's).'"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 123,
+   "text": "This is the completeness check's preferred unifier (\"they are compatible with Halpern-Pearl and can include the monitor as an agent\"), and it rests on [Hammond et al. 2023](./#p=hammond2023reasoning), [Ward et al. 2023](./#p=ward2023honesty) (belief, intention, deception, ignorance and actual causality in games), [Ward et al. 2024](./#p=ward2024reasons) (behavioral intention without utilities), [Xu et al. 2020](./#p=xu2020theory), [Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing), [Anwar et al. 2026 (steganography)](./#p=anwar2026decision) and the polynomial-time monitor class of [Mohammadkhani et al. 2026](./#p=mohammadkhani2026hidden).",
+   "papers": [
+    "hammond2023reasoning",
+    "ward2023honesty",
+    "ward2024reasons",
+    "xu2020theory",
+    "anwar2026analyzing",
+    "anwar2026decision",
+    "mohammadkhani2026hidden"
+   ],
+   "evidence": [
+    "critic.json verdict: 'Structural causal games are the best unifier: they are compatible with Halpern-Pearl and can include the monitor as an agent'",
+    "ward2023honesty#f3, #f6, #f7, #f8 (Ignorance), #f11; ward2024reasons#f8"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 124,
+   "text": "This rests on [Pearl 2001](./#p=pearl2001direct) (Definitions 4, 6 and 8), on Remark 53 of [Geiger et al. 2023](./#p=geiger2025causal), on [Lindsey 2025](./#p=lindsey2025emergent), and on [Beckers 2025](./#p=beckers2025large) for a semantics of counterfactuals over sampled tokens, which that paper gives only for interventions on the prompt.",
+   "papers": [
+    "pearl2001direct",
+    "geiger2025causal",
+    "lindsey2025emergent",
+    "beckers2025large"
+   ],
+   "evidence": [
+    "beckers2025large Theorem 2 proof: 'we only need to consider counterfactuals of the form “If X∗ were x∗ ”' (prompt X is the only root)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 125,
+   "text": "**Citation mining.** `runs/E_formal/cited_formal.py` scanned the reference lists of the 217 map papers for works cited by at least three papers and absent from the map: 225 arXiv identifiers and 234 title segments that match no map title exactly, 9 of which are in fact map papers cited with an appended arXiv number or a typo (`runs/E_formal/cited_outside.json`).",
+   "papers": [],
+   "evidence": [
+    "runs/E_formal/cited_outside.json: 225 arXiv ids and 234 title segments cited by 3+ map papers and absent from the map (cited_formal.py)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "overstated",
+   "status2": "revised",
+   "reason2": "The 225 arXiv identifiers are all absent from the 217 pre-sweep map papers. The 234 title segments are not: cited_formal.py excludes only exact normalized title matches, so 9 of the segments are map papers whose reference entries append an arXiv number (8) or contain a typo (1). They are Lanham 2023 (30), Chen 2025 (16), Korbak 2025 (13), Radhakrishnan 2023 (5), Guan 2025, Turpin 2023, Agarwal 2024, Lyu 2023 and Chen 2024 (3 each). Other segments are not works, e.g. \"association for computational linguistics\" (43).",
+   "evidence2": [
+    "cited_formal.py: \"if k and k not in inmap_titles and len(k) > 25: by_title[k].add(r['key'])\"",
+    "cited_outside.json titles: \"measuring faithfulness in chain of thought reasoning arxiv preprint arxiv 2307 13702\" (citing 30), map key lanham2023measuring",
+    "cited_outside.json titles: \"language models don t always say what they think unfaithful explanations in chain ofthought prompting\" (citing 3), map key turpin2023language",
+    "cited_outside.json: 225 arxiv entries, 234 title entries; none of the 225 ids is in an index.csv URL"
+   ]
+  },
+  {
+   "n": 126,
+   "text": "Among them are works the searches later examined, such as Lindsey 2025 (cited by 5 papers), Anil et al. 2021 (3) and Evans et al. 2021 (3), and the title segment \"chain of thought is not explainability\" (11).",
+   "papers": [
+    "lindsey2025emergent",
+    "https://arxiv.org/abs/2108.12099",
+    "https://arxiv.org/abs/2110.06674"
+   ],
+   "evidence": [
+    "cited_outside.json: 2601.01828 citing 5; 2108.12099 citing 3; 2110.06674 citing 3; title 'chain of thought is not explainability' citing 11"
+   ],
+   "verdict": "overstated",
+   "status": "revised",
+   "reason": "The counts are right: 2601.01828 has 5 citing papers, 2108.12099 and 2110.06674 have 3, and the title segment has 11. 'Formal works' is the problem. The page itself says Lindsey's criteria are verbal ('As stated, none of the criteria is a mathematical condition'; formal.csv has no formula for lindsey2025emergent#f1 to #f5), and candidates.json rates Evans et al. semi-formal. All four were later examined by the searches.",
+   "evidence_check": [
+    "runs/E_formal/cited_outside.json: 2601.01828 citing 5; 2108.12099 citing 3; 2110.06674 citing 3; title 'chain of thought is not explainability' citing 11",
+    "candidates.json (2110.06674) formalism: \"first-order logical schema (semi-formal) plus governance norms\"",
+    "formal.csv: formula empty for lindsey2025emergent#f1 to #f5"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 127,
+   "text": "Codex labeled each of the 350 formal rows of `definitions.csv` with a level (concept, measurement or both) and a formalism (`runs/E_formal/formal_labels.json`).",
+   "papers": [],
+   "evidence": [
+    "formal_labels.json: 350 labels with level and formalism; label_prompt.md"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 128,
+   "text": "Five search agents, one per area (actual causation, causal abstraction, agency and honesty, information and verification, faithfulness theory in explainable AI), opened and verified 101 candidates.",
+   "papers": [],
+   "evidence": [
+    "search_actual_causation 23, search_agency_honesty 20, search_causal_abstraction 19, search_information_verification 24, search_xai_faithfulness_theory 15 candidates (total 101)"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 129,
+   "text": "A completeness check built the concept-by-concept coverage table, searched frameworks the five areas had missed and added 13 candidates (`runs/E_formal/critic.json`).",
+   "papers": [],
+   "evidence": [
+    "critic.json: coverage table, missed_frameworks, 13 new_candidates"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 130,
+   "text": "After one duplicate was merged, 113 candidates remain in `runs/E_formal/candidates.json`, 30 of them rated essential.",
+   "papers": [],
+   "evidence": [
+    "candidates.json: 113 entries; priority 1: 30; critic.json duplicates: Halpern & Kleiman-Weiner 2018 listed twice"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 131,
+   "text": "The 23 framework papers are the essential candidates that were not yet in the map, except Halpern & Pearl 2005 (Parts I and II), Halpern 2016 and Chockler & Halpern 2004, whose definitions the [Actual Causality page](page.html?doc=actual-causality) already covers (chapters 2, 6 and 7 of Halpern 2016).",
+   "papers": [],
+   "evidence": [
+    "candidates.json priority-1 entries: 23 match manifest.json; anwar2026analyzing, baker2025monitoring, kirchner2024proververifier already in map; not added: Halpern & Pearl 2005 Part I, Part II, Halpern 2016, Chockler & Halpern 2004"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 132,
+   "text": "GPT-6.1 Sol, run through Codex, read the papers of three of the five batches, and Claude those of the other two after Codex reached its weekly cap; together they wrote the papers' map records and extracted 334 formal definitions with verbatim quotes, formulas, assumptions and locations.",
+   "papers": [],
+   "evidence": [
+    "extraction_F1–F5.json: 23 papers, 68+106+82+54+24 = 334 definitions; extract_F4.md prompt"
+   ],
+   "verdict": "wrong",
+   "status": "revised",
+   "reason": "The project's own records say GPT-6.1 Sol (Codex) extracted only three of the five batches. Claude extracted the other two after Codex reached its weekly cap. The prompts for batches F4 and F5 (extract_F4.md, extract_F5.md) were written while F3 was still running, which is consistent with this. The other figures hold: 23 papers, five batches, map records written, and 68+106+82+54+24 = 334 definitions.",
+   "evidence_check": [
+    "PLAN.md (Formal frameworks row): \"records and formal definitions extracted by GPT-6.1 Sol through Codex (three batches) or Claude (two batches, after Codex reached its weekly cap)\"",
+    "README.md: \"The 23 formal-framework papers added on 1 November 2026 were summarized by GPT-6.1 Sol (through Codex) or by Claude\"",
+    "extraction_F1-F5.json: 68, 106, 82, 54, 24 definitions (334)"
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  },
+  {
+   "n": 133,
+   "text": "Claude checked each batch against the full texts and PDFs, applying 39 fixes, dropping 47 rows that were background, informal or out of scope, adding 4 and correcting 32 record passages; a final pass fixed 7 more rows (two formulas that KaTeX could not render, the two Cachin rows and three Yin rows) in `runs/E_formal/checks_render.json`.",
+   "papers": [],
+   "evidence": [
+    "checks_F1–F5.json: fixes 11+11+7+7+3=39, drops 8+14+11+13+1=47, adds 1+0+1+1+1=4, record_fixes 8+7+8+5+4=32"
+   ],
+   "verdict": "supported",
+   "status": "verified",
+   "verdict2": "understated",
+   "status2": "revised",
+   "reason2": "The counts are right (fixes 11+11+7+7+3=39, drops 8+14+11+13+1=47, adds 1+0+1+1+1=4, record fixes 8+7+8+5+4=32), but the check notes give a third reason for dropping rows: some were informal, not just background or out of scope. Examples are Ward et al. 2024's informal Definitions 1-2 and the verbal rows of Anwar et al. and Yin.",
+   "evidence2": [
+    "checks_F3.json notes: \"ward2024 Definitions 1-2 (informal drafts superseded by Definitions 3 and 6)\"",
+    "checks_F4.json notes: \"Dropped informal rows: Anwar's verbal encoded-reasoning and three-channel taxonomy, Yin's verbal variants and obfuscation description, Mohammadkhani's transformer and PRG background.\"",
+    "check_F1.md: \"drop a row that is not a formal definition of an in-scope notion\""
+   ]
+  },
+  {
+   "n": 134,
+   "text": "Of the resulting 291 definitions in `formal.csv`, all 291 quotes match the cached full texts verbatim; the 2 rows of Cachin 1998, first written from the abstract and from the restatement in Anwar et al. 2026 (steganography), were checked against the author's revised full text once it was cached.",
+   "papers": [
+    "cachin1998information",
+    "anwar2026decision"
+   ],
+   "evidence": [
+    "formal.csv verbatim column: yes 289, 'no text' 2 (cachin1998information#f1, #f2); where: 'Security definition stated in the abstract ... restated in arXiv 2602.23163'"
+   ],
+   "verdict": "wrong",
+   "status": "revised",
+   "reason": "Out of date. Cachin's full text has since been cached (cache/full/cachin1998information.txt, 15:34). checks_render.json then gave the two Cachin rows quotes from Definition 1 and the abstract, and formal.csv was rebuilt at 15:35. The verbatim column now reads 'yes' for all 291 rows, and recomputing with formal.py's own check (norm(quote) in norm(full_text(key))) finds no mismatch.",
+   "evidence_check": [
+    "formal.csv (rebuilt 15:35) verbatim column: yes 291",
+    "formal.csv cachin1998information#f1 quote: \"The security of a steganographic system is quantified in terms of the relative entropy (or discrimination) between the distributions of C and S, which yields bounds on the detection capability of any adversary.\"; where: \"Definition 1, Section 2, [P25]; abstract [P1]\"",
+    "runs/E_formal/checks_render.json notes: \"Cachin rows checked against the author's revised full text (cachin.com, 2004): divergence is D(P_C||P_S).\""
+   ],
+   "verdict2": "supported",
+   "status2": "verified"
+  }
+ ]
+}

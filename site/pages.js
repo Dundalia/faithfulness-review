@@ -4,4 +4,5 @@
 const PAGES = [
   { id: 'actual-causality', label: 'Actual Causality' },
   { id: 'definitions', label: 'Definitions' },
+  { id: 'formal', label: 'Formal frameworks' },
 ];

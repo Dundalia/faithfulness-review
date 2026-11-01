@@ -1,0 +1,235 @@
+{
+ "results": [
+  {
+   "n": 46,
+   "verdict": "supported"
+  },
+  {
+   "n": 47,
+   "verdict": "supported"
+  },
+  {
+   "n": 48,
+   "verdict": "supported"
+  },
+  {
+   "n": 49,
+   "verdict": "overstated",
+   "reason": "The family's assumption is stated as a causal model with given equations, but Halpern & Pass 2025 (\"Causality Without Causal Models\") explicitly abstract the HP definitions away from structural equations to any model in which counterfactuals are defined, as the page itself says in 'What it defines'. Only the Beckers 2025 exception is named.",
+   "evidence": [
+    "halpern2025causality [P6]: \"It is defined using causal models (also known as structural equations models). We abstract the definition, extracting its key features, so that it can be applied to any other model where counterfactuals are defined.\"",
+    "halpern2025causality#f3 assumptions: \"Known recursive causal model and actual context.\"",
+    "beckers2025large#f1 assumptions: \"probabilities represent nondeterministic mechanisms rather than ignorance about deterministic mechanisms\""
+   ],
+   "replacement": "A causal model whose endogenous variables, ranges and equations are given, and an actual context; Halpern & Pass 2025 need only a model \"where counterfactuals are defined\", and Beckers 2025 replaces deterministic equations with stochastic mechanisms."
+  },
+  {
+   "n": 50,
+   "verdict": "supported"
+  },
+  {
+   "n": 51,
+   "verdict": "supported"
+  },
+  {
+   "n": 52,
+   "verdict": "supported"
+  },
+  {
+   "n": 53,
+   "verdict": "supported"
+  },
+  {
+   "n": 54,
+   "verdict": "supported"
+  },
+  {
+   "n": 55,
+   "verdict": "supported"
+  },
+  {
+   "n": 56,
+   "verdict": "supported"
+  },
+  {
+   "n": 57,
+   "verdict": "supported"
+  },
+  {
+   "n": 58,
+   "verdict": "supported"
+  },
+  {
+   "n": 59,
+   "verdict": "supported"
+  },
+  {
+   "n": 60,
+   "verdict": "supported"
+  },
+  {
+   "n": 61,
+   "verdict": "supported"
+  },
+  {
+   "n": 62,
+   "verdict": "supported"
+  },
+  {
+   "n": 63,
+   "verdict": "supported"
+  },
+  {
+   "n": 64,
+   "verdict": "supported"
+  },
+  {
+   "n": 65,
+   "verdict": "supported"
+  },
+  {
+   "n": 66,
+   "verdict": "supported"
+  },
+  {
+   "n": 67,
+   "verdict": "supported"
+  },
+  {
+   "n": 68,
+   "verdict": "supported"
+  },
+  {
+   "n": 69,
+   "verdict": "supported"
+  },
+  {
+   "n": 70,
+   "verdict": "supported"
+  },
+  {
+   "n": 71,
+   "verdict": "supported"
+  },
+  {
+   "n": 72,
+   "verdict": "supported"
+  },
+  {
+   "n": 73,
+   "verdict": "supported"
+  },
+  {
+   "n": 74,
+   "verdict": "supported"
+  },
+  {
+   "n": 75,
+   "verdict": "supported"
+  },
+  {
+   "n": 76,
+   "verdict": "supported"
+  },
+  {
+   "n": 77,
+   "verdict": "supported"
+  },
+  {
+   "n": 78,
+   "verdict": "wrong",
+   "reason": "The formula credited to Cachin is Anwar et al.'s restatement, which reverses the arguments of the (asymmetric) relative entropy. Cachin defines epsilon-security as D(P_C||P_S) <= epsilon, covertext first, stegotext second (checked in the revised text at cachin.com/cc/papers/stego.pdf, whose abstract is identical to IACR ePrint 2000/028, the map URL; no full text is cached). Proposition D.1 also does not recover epsilon-security as such: it shows the normalised gap equals 1 - TV(P0,P1) in that setting and, via Pinsker, is at least 1 - sqrt(epsilon/2) for an epsilon-secure system; the bound holds for either argument order.",
+   "evidence": [
+    "Cachin, An Information-Theoretic Model for Steganography (revised 2004, cachin.com/cc/papers/stego.pdf), Definition 1: \"a stegosystem is called ε-secure (against passive adversaries) if D(PC ‖ PS) ≤ ε.\"",
+    "anwar2026decision [P518]: \"Let P0 denote the distribution of innocent covertexts and P1 the distribution of stegotexts. Cachin (2004) defines a steganographic system to be ε-secure if the Kullback-Leibler divergence between these distributions is bounded: DKL (P1 ∥P0 ) ≤ ε.\"",
+    "anwar2026decision [P522]: \"Proposition D.1 (Classical Security as Special Case). Under the setup above, let TV = TV(P0 , P1 ) denote the total variation distance between covertext and stegotext distributions.\"; [P536]: \"If the system is ε-secure, Pinsker’s inequality gives ... ∆̃steg(Z) = 1 − TV ≥ 1 − √(ε/2)\""
+   ],
+   "replacement": "The classical definition of [Cachin 1998](./#p=cachin1998information), $\\varepsilon$-security $D(P_C\\|P_S)\\le\\varepsilon$ between the covertext and stegotext distributions, is recovered as binary detection with an omnipotent Sentinel, where the normalised gap equals $1-\\mathrm{TV}(P_0,P_1)$ and is at least $1-\\sqrt{\\varepsilon/2}$ for an $\\varepsilon$-secure system (Proposition D.1)."
+  },
+  {
+   "n": 79,
+   "verdict": "supported"
+  },
+  {
+   "n": 80,
+   "verdict": "supported"
+  },
+  {
+   "n": 81,
+   "verdict": "supported"
+  },
+  {
+   "n": 82,
+   "verdict": "overstated",
+   "reason": "Yin never uses the word 'dual' and does not relate diagnosability to opacity in general (the antecedent of 'its'); the quoted sentence contrasts diagnosability specifically with infinite-step opacity, as one of several related observational properties (diagnosability, detectability, observability, prognosability).",
+   "evidence": [
+    "yin2026opacity [P34]: \"For instance, diagnosability requires that once a fault has occurred, its occurrence can be inferred within a finite delay from observations, whereas infinite-step opacity requires that once a secret has occurred, the observer can never determine with certainty that it occurred. In this sense, diagnosability can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement.\"",
+    "yin2026opacity full text: no occurrence of 'dual' or 'duality'"
+   ],
+   "replacement": "Yin contrasts infinite-step opacity with diagnosability, which \"can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement\"."
+  },
+  {
+   "n": 83,
+   "verdict": "supported"
+  },
+  {
+   "n": 84,
+   "verdict": "understated",
+   "reason": "The sentence blends the two definitions and states each more weakly than its source. Kirchner et al.'s completeness requires the prover to always produce correct and accepted solutions, not only that the verifier accept correct ones. Kim & Lee's soundness is not limited to provers from the same model family: no incorrect proof at all may be accepted. Kim & Lee decouple correctness from checkability, so only Kirchner restricts the adversary to the model family.",
+   "evidence": [
+    "kirchner2024proververifier [P65]: \"Prover π from model family H is verifiable to verifier v on the data distribution P_XY if and only if the prover always generates correct and convincing solutions, and no adversarial / \"sneaky\" prover from the same model family H can fool the verifier into accepting incorrect solutions.\"",
+    "kim2026mitigating [P27]: \"The prover is said to be checkable if there exists a verifier v such that the prover can always convince the verifier when its answer is correct, and there exists no adversarial proof that can trick the verifier into accepting an incorrect answer.\"",
+    "kim2026mitigating [P20]: \"We propose decoupling correctness from the definition of checkability in Kirchner et al. (2024).\""
+   ],
+   "replacement": "In the catalogue, checkability is the completeness and soundness of a verifier: in [Kirchner et al. 2024](./#p=kirchner2024proververifier) the prover \"always generates correct and convincing solutions\" and no \"sneaky\" prover from the same model family can make the verifier accept an incorrect one, while [Kim & Lee 2026](./#p=kim2026mitigating) require only that the verifier accept the prover's correct answers but that \"there exists no adversarial proof that can trick the verifier into accepting an incorrect answer\"."
+  },
+  {
+   "n": 85,
+   "verdict": "overstated",
+   "reason": "Anwar et al. show only that a positive gap can arise without encoding when the Sentinel is weaker (an existence result, Proposition E.10), not that a weaker Sentinel always produces one. The other assumptions are supported (Cachin: covertext distribution \"known to Eve\"; Yin: intruder who knows G; Mohammadkhani: Assumption 3.4 and private seed).",
+   "evidence": [
+    "anwar2026decision [P553]: \"When the assumption is violated—i.e., the Sentinel is systematically weaker on public content—a positive gap can arise even without any steganographic encoding (Proposition E.10).\"",
+    "anwar2026decision [P590]: \"Formally, there exist generation processes with no intentional steganographic encoding that produce Z with ∆steg (Z) > 0, purely due to the capability asymmetry between Vrec and Vsen\""
+   ],
+   "replacement": "A predictor, decoder or monitor class; a target attribute or task with a utility; for the steganographic gap, a Sentinel of matched public capability (Assumption E.3), since with a weaker Sentinel \"a positive gap can arise even without any steganographic encoding\" (Proposition E.10); for Cachin, a known covertext distribution; for opacity, an intruder who knows the system model; for unreadability, a cryptographic assumption and private randomness."
+  },
+  {
+   "n": 86,
+   "verdict": "supported"
+  },
+  {
+   "n": 87,
+   "verdict": "supported"
+  },
+  {
+   "n": 88,
+   "verdict": "supported"
+  },
+  {
+   "n": 89,
+   "verdict": "supported"
+  },
+  {
+   "n": 90,
+   "verdict": "supported"
+  }
+ ],
+ "coherence": [],
+ "other_problems": [
+  {
+   "where": "formal.csv rows cachin1998information#f1 and #f2 (and the Method note on the page: \"the 2 rows of Cachin 1998 have no cached text and are taken from the abstract and from the restatement in Anwar et al. 2026 (steganography)\")",
+   "problem": "The formulas D_KL(P_1||P_0) <= epsilon and D_KL(P_1||P_0) = 0 copy Anwar et al.'s restatement, which reverses Cachin's argument order; Cachin's definitions are D(P_C||P_S) <= epsilon and D(P_C||P_S) = 0. The quote field is empty although the definition text is available.",
+   "fix": "Set the formulas to D(P_C\\|P_S)\\le\\varepsilon and D(P_C\\|P_S)=0, fill the quote with \"a stegosystem is called ε-secure (against passive adversaries) if D(PC ‖ PS) ≤ ε\" (Definition 1, revised version at cachin.com/cc/papers/stego.pdf, identical abstract to IACR ePrint 2000/028), and note in anwar2026decision#f13's relation that Anwar et al. write the divergence in the reverse order."
+  },
+  {
+   "where": "formal.csv rows yin2026opacity#f1 (relation: \"its infinite-step form is the paper's dual of diagnosability\"), #f6 and #f13 (\"dual\")",
+   "problem": "Yin never calls diagnosability the dual of opacity; the paper only contrasts diagnosability (\"always eventually know\") with infinite-step opacity (\"always not know\").",
+   "fix": "Reword the relations to \"contrasted with diagnosability ('always eventually know' vs. 'always not know')\" and drop \"the paper's dual\"."
+  },
+  {
+   "where": "claims_formal.json, claim 51 evidence",
+   "problem": "The evidence cites the Theorem 2 proof, which only notes that R = X; the paper states the restriction directly elsewhere.",
+   "fix": "Cite beckers2025large [P19]: \"given that we are not considering any interventions to the inner working of an LLM ... The only counterfactual distribution that we need to consider in the present discussion is the probability of counterfactuals for an intervention R∗ = r∗ on the root variables\"."
+  }
+ ]
+}

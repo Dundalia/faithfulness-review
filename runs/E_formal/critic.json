@@ -1,0 +1,1081 @@
+{
+ "coverage": [
+  {
+   "concept": "faithfulness of reasoning, explanations and self-reports",
+   "concept_level_definitions": [
+    {
+     "framework": "causal abstraction (searches)",
+     "works": [
+      "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability (2025)",
+      "Abstracting Causal Models (2019)",
+      "Approximate Causal Abstraction (2019)",
+      "Causal Consistency of Structural Equation Models (2017)",
+      "Causal Abstraction Inference under Lossy Representations (2025)",
+      "CAuSE: Decoding Multimodal Classifiers using Faithful Natural Language Explanation (2025)"
+     ]
+    },
+    {
+     "framework": "Halpern-Pearl actual causality and explanation, for classifier outputs only (searches)",
+     "works": [
+      "Causes and Explanations: A Structural-Model Approach. Part II: Explanations (2005)",
+      "Actual Causality (2016)",
+      "Causal Explanations and XAI (2022)",
+      "Explaining Image Classifiers (2024)",
+      "Causality Without Causal Models (2025)"
+     ]
+    },
+    {
+     "framework": "probabilities of causation (searches)",
+     "works": [
+      "Local Explanations via Necessity and Sufficiency: Unifying Theory and Practice (2021)",
+      "Towards Trustworthy Explanation: On Causal Rationalization (2023)"
+     ]
+    },
+    {
+     "framework": "logic-based, axiomatic and learning-theoretic XAI, input-output explanations only (searches)",
+     "works": [
+      "Logic-Based Explainability in Machine Learning (2022)",
+      "Axiomatic Foundations of Explainability (2022)",
+      "Framework for Evaluating Faithfulness of Local Explanations (2022)",
+      "Towards a Theory of Faithfulness: Faithful Explanations of Differentiable Classifiers over Continuous Data (2022)",
+      "When Are Concept Bottleneck Model Explanations Faithful and Compact? (2026)"
+     ]
+    },
+    {
+     "framework": "type theory, soundness of CoT steps only (searches)",
+     "works": [
+      "Typed Chain-of-Thought: A Curry-Howard Framework for Verifying LLM Reasoning (2025)"
+     ]
+    },
+    {
+     "framework": "semi-formal verbal conditions, the target for formalization (searches)",
+     "works": [
+      "Chain-of-Thought Is Not Explainability (2025)"
+     ]
+    },
+    {
+     "framework": "information theory: sufficient statistic, conditional entropy, mutual information (map catalogue, concept-level label)",
+     "works": [
+      "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation (2025)",
+      "Faithfulness as Information Flow: Evaluating and Training Faithful Chain-of-Thought Reasoning (2026)",
+      "Measuring and curing reasoning rigidity: from decorative chain-of-thought to genuine faithfulness (2026)"
+     ]
+    },
+    {
+     "framework": "causal model: effect only through the reasoning, direct concept effects (map catalogue, concept-level label)",
+     "works": [
+      "CASE: Causal Alignment and Structural Enforcement for Improving Chain-of-Thought Faithfulness (2026)",
+      "Walk the Talk? Measuring the Faithfulness of Large Language Model Explanations (2025)"
+     ]
+    },
+    {
+     "framework": "intervention conditions (map catalogue, concept-level label)",
+     "works": [
+      "How the Audit Rule Shapes Faithful Factor Explanations in LLMs (2026)",
+      "RFEval: Benchmarking Reasoning Faithfulness under Counterfactual Reasoning Intervention in Large Reasoning Models (2026)",
+      "Measuring Chain of Thought Faithfulness by Unlearning Reasoning Steps (2025)"
+     ]
+    },
+    {
+     "framework": "logical / set-theoretic (map catalogue, concept-level label)",
+     "works": [
+      "Investigating CoT Monitorability in Large Reasoning Models (2025)",
+      "Faithful Reasoning Using Large Language Models (2022)",
+      "Position: It's Time to Optimize LLMs for Self-Consistency (2026)"
+     ]
+    },
+    {
+     "framework": "predictive and probabilistic (map catalogue, concept-level label)",
+     "works": [
+      "Counterfactual Simulation Training for Chain-of-Thought Faithfulness (2026)",
+      "Length Penalties Make Chain-of-Thought Less Monitorable (2026)"
+     ]
+    },
+    {
+     "framework": "mediation and path-specific effects (new, found by this check)",
+     "works": [
+      "Direct and Indirect Effects (2001)",
+      "Identifiability of Path-Specific Effects (2005)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "completeness and soundness of an explanation",
+   "concept_level_definitions": [
+    {
+     "framework": "Halpern-Pearl explanation: sufficiency and minimality (searches)",
+     "works": [
+      "Causes and Explanations: A Structural-Model Approach. Part II: Explanations (2005)",
+      "Actual Causality (2016)",
+      "Causal Explanations and XAI (2022)",
+      "Sufficient, Necessary and Complete Causal Explanations in Image Classification (2025)"
+     ]
+    },
+    {
+     "framework": "logic-based and axiomatic XAI; Sundararajan's completeness is a different, sum-to-output sense (searches)",
+     "works": [
+      "Logic-Based Explainability in Machine Learning (2022)",
+      "Axiomatic Foundations of Explainability (2022)",
+      "Axiomatic Attribution for Deep Networks (2017)"
+     ]
+    },
+    {
+     "framework": "semi-formal (searches)",
+     "works": [
+      "Chain-of-Thought Is Not Explainability (2025)"
+     ]
+    },
+    {
+     "framework": "logical, over the concepts an explanation credits (map catalogue, concept-level label)",
+     "works": [
+      "A Removal Based Approach to Improve LLM Faithfulness at Test-Time (2026)"
+     ]
+    },
+    {
+     "framework": "information theory (map catalogue, concept-level label)",
+     "works": [
+      "Faithfulness as Information Flow: Evaluating and Training Faithful Chain-of-Thought Reasoning (2026)"
+     ]
+    },
+    {
+     "framework": "logical validity of steps, i.e. soundness (map catalogue, concept-level label)",
+     "works": [
+      "Faithful Reasoning Using Large Language Models (2022)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "post-hoc rationalization",
+   "concept_level_definitions": [
+    {
+     "framework": "causal model: residual direct dependence of the answer on the input (negation of a faithfulness definition) (map catalogue, concept-level label)",
+     "works": [
+      "CASE: Causal Alignment and Structural Enforcement for Improving Chain-of-Thought Faithfulness (2026)"
+     ]
+    },
+    {
+     "framework": "intervention: performative steps after the forced answer is already fixed (map catalogue, concept-level label)",
+     "works": [
+      "Drop the Act: Probe-Filtered RL for Faithful Chain-of-Thought Reasoning (2026)"
+     ]
+    },
+    {
+     "framework": "semi-formal (searches)",
+     "works": [
+      "Chain-of-Thought Is Not Explainability (2025)",
+      "Does It Make Sense to Speak of Introspection in Large Language Models? (2025)"
+     ]
+    },
+    {
+     "framework": "mediation: zero natural indirect effect through the CoT (proposed reading) (new, found by this check)",
+     "works": [
+      "Direct and Indirect Effects (2001)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "plausibility (as the contrast to faithfulness)",
+   "concept_level_definitions": [
+    {
+     "framework": "explanation relative to the explainee's epistemic state, proposed reading only (searches)",
+     "works": [
+      "Causes and Explanations: A Structural-Model Approach. Part II: Explanations (2005)"
+     ]
+    },
+    {
+     "framework": "semi-formal (searches)",
+     "works": [
+      "Explanation in Artificial Intelligence: Insights from the Social Sciences (2019)"
+     ]
+    },
+    {
+     "framework": "Bayesian explanatory power, proposed reading only (new, found by this check)",
+     "works": [
+      "The Logic of Explanatory Power (2011)"
+     ]
+    }
+   ],
+   "only_measurements": true
+  },
+  {
+   "concept": "monitorability",
+   "concept_level_definitions": [
+    {
+     "framework": "information theory and V-information (searches; first and third in the map)",
+     "works": [
+      "Analyzing and Improving Chain-of-Thought Monitorability Through Information Theory (2026)",
+      "A Theory of Usable Information Under Computational Constraints (2020)",
+      "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation (2025)"
+     ]
+    },
+    {
+     "framework": "circuit complexity and cryptography (searches)",
+     "works": [
+      "Hidden Reasoning Must Leak, but Need Not Be Readable: Fundamental Opportunities and Limits for Chain-of-Thought Monitoring (2026)",
+      "Quantifying the Necessity of Chain of Thought through Opaque Serial Depth (2026)"
+     ]
+    },
+    {
+     "framework": "runtime verification and discrete-event-system diagnosability (searches)",
+     "works": [
+      "Monitorability of omega-regular languages (2010)",
+      "Opacity in Discrete Event Systems: A Perspective and Overview (2026)"
+     ]
+    },
+    {
+     "framework": "potential outcomes: causal recall (searches; same work as a map paper)",
+     "works": [
+      "Learning to Be Monitored: Causal Bounds and Intervention-Aware Post-Training Recipes for Chain-of-Thought Monitorability (2026)"
+     ]
+    },
+    {
+     "framework": "game theory (searches)",
+     "works": [
+      "Games for AI Control: Models of Safety Evaluations of AI Deployment Protocols (2024)"
+     ]
+    },
+    {
+     "framework": "semantic agreement and transparency; Bayes-optimal monitors; SCM observation map (map catalogue, concept-level label)",
+     "works": [
+      "Aligned, Orthogonal or In-conflict: When can we safely optimize Chain-of-Thought? (2026)",
+      "Analyzing and Improving Chain-of-Thought Monitorability Through Information Theory (2026)",
+      "Improving Chain-of-Thought Monitorability in Large Language Models: Causal Bounds and Post-Training (2026)",
+      "Implementation Matters in Monitorability Evaluations (2026)"
+     ]
+    },
+    {
+     "framework": "quantitative information flow (new, found by this check)",
+     "works": [
+      "Measuring information leakage using generalized gain functions (2012)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "legibility and checkability",
+   "concept_level_definitions": [
+    {
+     "framework": "interactive proofs, prover-verifier games and debate (searches)",
+     "works": [
+      "Prover-Verifier Games improve legibility of LLM outputs (2024)",
+      "Learning to Give Checkable Answers with Prover-Verifier Games (2021)",
+      "Models That Prove Their Own Correctness (2024)",
+      "AI safety via debate (2018)",
+      "Scalable AI Safety via Doubly-Efficient Debate (2023)"
+     ]
+    },
+    {
+     "framework": "observer goal inference (searches)",
+     "works": [
+      "Legibility and Predictability of Robot Motion (2013)",
+      "A Unified Framework for Planning in Adversarial and Cooperative Environments (2018)"
+     ]
+    },
+    {
+     "framework": "monitor-relative recoverability and usable information (searches)",
+     "works": [
+      "Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation (2025)",
+      "A Theory of Usable Information Under Computational Constraints (2020)"
+     ]
+    },
+    {
+     "framework": "causal representation learning with a human observer (searches)",
+     "works": [
+      "Interpretability is in the Mind of the Beholder: A Causal Framework for Human-interpretable Representation Learning (2023)"
+     ]
+    },
+    {
+     "framework": "logical: checkability, non-transparent CoT; probabilistic: language drift (map catalogue, concept-level label)",
+     "works": [
+      "Mitigating Legibility Tax with Decoupled Prover-Verifier Games (2026)",
+      "Aligned, Orthogonal or In-conflict: When can we safely optimize Chain-of-Thought? (2026)",
+      "On Language Drift during RLVR Post-Training (2026)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "obfuscation",
+   "concept_level_definitions": [
+    {
+     "framework": "discrete-event-system opacity (searches)",
+     "works": [
+      "Opacity in Discrete Event Systems: A Perspective and Overview (2026)"
+     ]
+    },
+    {
+     "framework": "goal obfuscation in planning (searches)",
+     "works": [
+      "A Unified Framework for Planning in Adversarial and Cooperative Environments (2018)"
+     ]
+    },
+    {
+     "framework": "obfuscated arguments in debate (searches)",
+     "works": [
+      "Avoiding Obfuscation with Prover-Estimator Debate (2025)"
+     ]
+    },
+    {
+     "framework": "cryptographic unreadability of CoT (searches)",
+     "works": [
+      "Hidden Reasoning Must Leak, but Need Not Be Readable: Fundamental Opportunities and Limits for Chain-of-Thought Monitoring (2026)"
+     ]
+    },
+    {
+     "framework": "learning-theoretic conditions for feedback spillover and reward conflict, mechanisms rather than the concept (map catalogue, concept-level label)",
+     "works": [
+      "Output Supervision Can Obfuscate the Chain of Thought (2025)",
+      "Aligned, Orthogonal or In-conflict: When can we safely optimize Chain-of-Thought? (2026)"
+     ]
+    },
+    {
+     "framework": "noninterference, g-leakage, information design, withholding in modal logic (new, found by this check)",
+     "works": [
+      "Security Policies and Security Models (1982)",
+      "Measuring information leakage using generalized gain functions (2012)",
+      "Bayesian Persuasion (2011)",
+      "A Formal Account of Dishonesty (2015)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "steganography and encoded reasoning",
+   "concept_level_definitions": [
+    {
+     "framework": "information-theoretic and complexity-theoretic steganographic security (searches)",
+     "works": [
+      "An Information-Theoretic Model for Steganography (1998)",
+      "Provably Secure Steganography (2002)",
+      "Perfectly Secure Steganography Using Minimum Entropy Coupling (2022)"
+     ]
+    },
+    {
+     "framework": "decision theory and generalized V-information (searches)",
+     "works": [
+      "A Decision-Theoretic Formalisation of Steganography With Applications to LLM Monitoring (2026)"
+     ]
+    },
+    {
+     "framework": "circuit complexity and information theory (searches)",
+     "works": [
+      "Hidden Reasoning Must Leak, but Need Not Be Readable: Fundamental Opportunities and Limits for Chain-of-Thought Monitoring (2026)"
+     ]
+    },
+    {
+     "framework": "channel capacity (map catalogue, concept-level label)",
+     "works": [
+      "Preventing Language Models From Hiding Their Reasoning (2023)"
+     ]
+    },
+    {
+     "framework": "use-based CoT semantics and non-transparency, the closest to encoded reasoning (map catalogue, concept-level label)",
+     "works": [
+      "Aligned, Orthogonal or In-conflict: When can we safely optimize Chain-of-Thought? (2026)"
+     ]
+    },
+    {
+     "framework": "noninterference (new, found by this check)",
+     "works": [
+      "Security Policies and Security Models (1982)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "honesty",
+   "concept_level_definitions": [
+    {
+     "framework": "structural causal games (searches)",
+     "works": [
+      "Honesty Is the Best Policy: Defining and Mitigating AI Deception (2023)"
+     ]
+    },
+    {
+     "framework": "logical schema, formal once paired with a definition of belief (searches)",
+     "works": [
+      "Truthful AI: Developing and governing AI that does not lie (2021)"
+     ]
+    },
+    {
+     "framework": "adequacy conditions for belief (searches)",
+     "works": [
+      "Standards for Belief Representations in LLMs (2025)"
+     ]
+    },
+    {
+     "framework": "behavioral and intervention conditions (map catalogue, concept-level label)",
+     "works": [
+      "Evaluating honesty and lie detection techniques on a diverse suite of dishonest models (2025)",
+      "The Obfuscation Atlas: Mapping Where Honesty Emerges in RLVR with Deception Probes (2026)"
+     ]
+    },
+    {
+     "framework": "proper scoring rules for performative reports; modal logic (new, found by this check)",
+     "works": [
+      "Incentivizing honest performative predictions with proper scoring rules (2023)",
+      "A Formal Account of Dishonesty (2015)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "lying",
+   "concept_level_definitions": [
+    {
+     "framework": "dynamic epistemic logic (searches)",
+     "works": [
+      "The Ditmarsch Tale of Wonders - The Dynamics of Lying (2011)"
+     ]
+    },
+    {
+     "framework": "logical schema (searches)",
+     "works": [
+      "Truthful AI: Developing and governing AI that does not lie (2021)"
+     ]
+    },
+    {
+     "framework": "behavioral: contradicting under pressure a truth stated in neutral context (map catalogue, concept-level label)",
+     "works": [
+      "Unlearning Deceptive Behaviors in LLMs with Contrastive Forget Sets (2026)"
+     ]
+    },
+    {
+     "framework": "modal logic of belief, intention and communication (new, found by this check)",
+     "works": [
+      "A Formal Account of Dishonesty (2015)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "deception",
+   "concept_level_definitions": [
+    {
+     "framework": "structural causal games and multi-agent influence models (searches)",
+     "works": [
+      "Honesty Is the Best Policy: Defining and Mitigating AI Deception (2023)",
+      "A Causal Perspective on AI Deception in Games (2022)",
+      "Reasoning about Causality in Games (2023)"
+     ]
+    },
+    {
+     "framework": "POMDP regret (searches)",
+     "works": [
+      "Defining Deception in Decision Making (extended abstract) (2024)"
+     ]
+    },
+    {
+     "framework": "signalling games (searches)",
+     "works": [
+      "Toward a Formal Analysis of Deceptive Signaling (2019)"
+     ]
+    },
+    {
+     "framework": "plan-action divergence and utility model (map catalogue, concept-level label)",
+     "works": [
+      "SPADE-Bench: Evaluating Spontaneous Strategic Deception in Agents via Plan-Action Divergence (2026)"
+     ]
+    },
+    {
+     "framework": "information design: misleading with truthful signals (new, found by this check)",
+     "works": [
+      "Bayesian Persuasion (2011)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "intent",
+   "concept_level_definitions": [
+    {
+     "framework": "Halpern-Pearl causal models with an epistemic state and utility (searches)",
+     "works": [
+      "Towards Formal Definitions of Blameworthiness, Intention, and Moral Responsibility (2018)"
+     ]
+    },
+    {
+     "framework": "structural causal games and influence models (searches)",
+     "works": [
+      "Honesty Is the Best Policy: Defining and Mitigating AI Deception (2023)",
+      "The Reasons that Agents Act: Intention and Instrumental Goals (2024)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "scheming, covert goals and hidden objectives",
+   "concept_level_definitions": [
+    {
+     "framework": "components only: incentives, agency and goal-directedness (searches)",
+     "works": [
+      "Agent Incentives: A Causal Perspective (2021)",
+      "Discovering Agents (2022)",
+      "Measuring Goal-Directedness (2024)",
+      "The Reasons that Agents Act: Intention and Instrumental Goals (2024)"
+     ]
+    },
+    {
+     "framework": "components only: higher-order belief about being evaluated (searches)",
+     "works": [
+      "Higher-Order Belief in Incomplete Information MAIDs (2025)"
+     ]
+    },
+    {
+     "framework": "components only: latent evaluation-awareness belief and its verbalization (map catalogue, concept-level label)",
+     "works": [
+      "Training LLMs to Verbalize Evaluation Awareness (2026)"
+     ]
+    },
+    {
+     "framework": "evaluation-conditioned concealed behavior, behavioral (new, found by this check)",
+     "works": [
+      "Defeat Devices in AI Systems (2026)"
+     ]
+    }
+   ],
+   "only_measurements": true
+  },
+  {
+   "concept": "sandbagging and alignment faking",
+   "concept_level_definitions": [
+    {
+     "framework": "behavioral defeat-device definition (new, found by this check)",
+     "works": [
+      "Defeat Devices in AI Systems (2026)"
+     ]
+    },
+    {
+     "framework": "framework only: incomplete-information MAIDs (searches)",
+     "works": [
+      "Higher-Order Belief in Incomplete Information MAIDs (2025)"
+     ]
+    },
+    {
+     "framework": "informal (searches)",
+     "works": [
+      "AI Sandbagging: Language Models can Strategically Underperform on Evaluations (2024)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "self-report accuracy and introspection",
+   "concept_level_definitions": [
+    {
+     "framework": "semi-formal causal criteria (searches)",
+     "works": [
+      "Does It Make Sense to Speak of Introspection in Large Language Models? (2025)",
+      "Emergent Introspective Awareness in Large Language Models (2026)"
+     ]
+    },
+    {
+     "framework": "resource-bounded comparison with third parties (searches)",
+     "works": [
+      "Privileged Self-Access Matters for Introspection in AI (2025)"
+     ]
+    },
+    {
+     "framework": "predictive and probabilistic (map catalogue, concept-level label)",
+     "works": [
+      "Introspective Coupling: Self-Explanation Training Tracks Behavioral Change Despite Fixed Supervision (2026)",
+      "Evaluating and Improving LLM Self-Modeling (2026)",
+      "Introspecting Alignment Shifts Beyond Behaviors Implanted Through Fine-Tuning (2026)",
+      "Training LLMs to Verbalize Evaluation Awareness (2026)"
+     ]
+    },
+    {
+     "framework": "type-2 signal detection theory, measurement-level (new, found by this check)",
+     "works": [
+      "A signal detection theoretic approach for estimating metacognitive sensitivity from confidence ratings (2012)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "counterfactuals as used to test explanations",
+   "concept_level_definitions": [
+    {
+     "framework": "structural counterfactuals (searches)",
+     "works": [
+      "Causes and Explanations: A Structural-Model Approach, Part I: Causes (2005)",
+      "Probabilities of Causation: Bounds and Identification (2000)",
+      "Contrastive Explanation: A Structural-Model Approach (2021)"
+     ]
+    },
+    {
+     "framework": "counterfactual semantics for LLMs (searches)",
+     "works": [
+      "Large Language Models as Nondeterministic Causal Models (2025)",
+      "Gumbel Counterfactual Generation From Language Models (2024)"
+     ]
+    },
+    {
+     "framework": "interchange interventions (searches)",
+     "works": [
+      "Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability (2025)"
+     ]
+    },
+    {
+     "framework": "impossibility results (searches)",
+     "works": [
+      "Impossibility Theorems for Feature Attribution (2024)"
+     ]
+    },
+    {
+     "framework": "do-interventions and potential outcomes on inputs or CoT (map catalogue, concept-level label)",
+     "works": [
+      "Walk the Talk? Measuring the Faithfulness of Large Language Model Explanations (2025)",
+      "Project Ariadne: A Structural Causal Framework for Auditing Faithfulness in LLM Agents (2026)",
+      "Improving Chain-of-Thought Monitorability in Large Language Models: Causal Bounds and Post-Training (2026)",
+      "Breaking the Chain: A Causal Analysis of LLM Faithfulness to Intermediate Structures (2026)",
+      "LLMs Don't Know Their Own Decision Boundaries: The Unreliability of Self-Generated Counterfactual Explanations (2025)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  },
+  {
+   "concept": "simulatability",
+   "concept_level_definitions": [
+    {
+     "framework": "consistency as decoder accuracy, the closest formal analogue (searches)",
+     "works": [
+      "Framework for Evaluating Faithfulness of Local Explanations (2022)"
+     ]
+    },
+    {
+     "framework": "observer models (searches)",
+     "works": [
+      "Interpretability is in the Mind of the Beholder: A Causal Framework for Human-interpretable Representation Learning (2023)",
+      "Legibility and Predictability of Robot Motion (2013)"
+     ]
+    },
+    {
+     "framework": "predictive mental model (map catalogue, concept-level label)",
+     "works": [
+      "Do Models Explain Themselves? Counterfactual Simulatability of Natural Language Explanations (2023)",
+      "Counterfactual Simulation Training for Chain-of-Thought Faithfulness (2026)"
+     ]
+    },
+    {
+     "framework": "computational complexity of explanation queries (new, found by this check)",
+     "works": [
+      "Model Interpretability through the Lens of Computational Complexity (2020)"
+     ]
+    }
+   ],
+   "only_measurements": false
+  }
+ ],
+ "missed_frameworks": [
+  {
+   "framework": "causal mediation analysis and path-specific effects (Pearl 2001; Avin, Shpitser & Pearl 2005; path-specific counterfactual fairness)",
+   "why_relevant": "Faithfulness is naturally 'the input reaches the answer only through the stated reasoning' (zero natural direct effect), and post-hoc rationalization is a zero indirect effect through the CoT. Lindsey's internality criterion is a path-specific condition. Four map papers cite Pearl 2001, and the catalogue's CASE and Walk-the-Talk use it, but none of the five searches did.",
+   "searched": true
+  },
+  {
+   "framework": "information-flow security: noninterference, intransitive noninterference, quantitative information flow (g-leakage)",
+   "why_relevant": "Monitorability is leakage of a hidden attribute through the CoT channel to a monitor whose task is a gain function. Steganography is a covert channel. Intransitive policies state 'information may reach the answer only via the CoT'. The searches found DES opacity and HyperLTL but not this core.",
+   "searched": true
+  },
+  {
+   "framework": "communication theory and information design: Bayesian persuasion, cheap talk, verifiable disclosure",
+   "why_relevant": "Formalizes misleading through true but selected information. This is the gap between honesty (true statements) and faithfulness or obfuscation (which causes are disclosed). Legibility becomes a receiver-optimal signal. Only Lewisian signalling games were found.",
+   "searched": true
+  },
+  {
+   "framework": "mechanism design and information elicitation: proper scoring rules, performative prediction, peer prediction",
+   "why_relevant": "Honesty becomes incentive compatibility of reports. Self-reports and CoTs are performative because they condition later tokens; Oesterheld et al. define an honest report as a fixed point and show proper scoring does not ensure one.",
+   "searched": true
+  },
+  {
+   "framework": "formal philosophy of explanation: probabilistic explanatory power, interventionist explanation (Woodward), statistical relevance",
+   "why_relevant": "Plausibility has no formal definition. Explanatory power relative to the reader's probability (Schupbach & Sprenger) is one, and it contrasts cleanly with a causal faithfulness condition.",
+   "searched": true
+  },
+  {
+   "framework": "epistemic and BDI logics of dishonesty",
+   "why_relevant": "Sakama, Caminada & Herzig define withholding information and half-truths. These are the dishonesty types closest to an incomplete or selective CoT. The agency search found only van Ditmarsch's lying.",
+   "searched": true
+  },
+  {
+   "framework": "cognitive science of self-report and metacognition: type-2 signal detection theory (meta-d'), Ericsson & Simon's protocol analysis, Nisbett & Wilson",
+   "why_relevant": "meta-d' separates the accuracy of a self-report from type-1 accuracy, which LLM introspection tests conflate. Ericsson & Simon's conditions for veridical think-aloud reports are the human analogue of CoT faithfulness, but they are semi-formal (only meta-d' was opened).",
+   "searched": true
+  },
+  {
+   "framework": "computational complexity of interpretability",
+   "why_relevant": "Barceló et al. define 'more interpretable' as lower complexity of explanation queries. This is an observer-free formal handle on simulatability and legibility that complements resource-bounded observer definitions.",
+   "searched": true
+  },
+  {
+   "framework": "evaluation-conditioned behavior: defeat devices from emissions regulation",
+   "why_relevant": "Gives one behavioral definition of sandbagging, alignment faking and evaluation-gated scheming. Its concealment clause, that the swap is undeclared, ties these concepts to verbalization and faithfulness.",
+   "searched": true
+  },
+  {
+   "framework": "program semantics: abstract interpretation and Galois connections, refinement and simulation relations, program slicing, data provenance (why-provenance, provenance semirings, causality in databases)",
+   "why_relevant": "A CoT could be treated as a declared program whose abstract trace must soundly over-approximate the actual computation. Slices and why-provenance formalize sound and complete accounts of what an output depends on. Typed CoT (Perrier) is the only instance found.",
+   "searched": false
+  },
+  {
+   "framework": "computational mechanics: epsilon-machines and causal states",
+   "why_relevant": "Causal states are minimal sufficient statistics of the past for the future. They would sharpen Baker et al.'s faithfulness-as-sufficient-statistic, and they bound what any CoT could faithfully expose about the generating process.",
+   "searched": false
+  },
+  {
+   "framework": "runtime verification beyond omega-regular monitorability: monitorability of hyperproperties, stochastic and predictive monitoring",
+   "why_relevant": "Faithfulness and noninterference are hyperproperties (relations between runs), so their monitorability from single traces is a formal question with known results. The searches covered only trace properties and DES.",
+   "searched": false
+  }
+ ],
+ "new_candidates": [
+  {
+   "title": "Direct and Indirect Effects",
+   "authors": "Judea Pearl",
+   "year": 2001,
+   "venue": "UAI 2001 (arXiv 1301.2300)",
+   "url": "https://arxiv.org/abs/1301.2300",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of reasoning",
+    "post-hoc rationalization",
+    "counterfactuals as used to test explanations",
+    "introspection (internality criterion)"
+   ],
+   "level": "concept",
+   "formalism": "structural causal models; nested counterfactuals (natural direct and indirect effects)",
+   "formal_object": "Natural direct effect: the change in Y when X moves from x* to x while mediator Z keeps the value it would take under x*. The natural indirect effect is the converse; both generalize to path-specific effects.",
+   "key_formula": "NDE(x,x^*;Y)=E\\big(Y_{x,Z_{x^*}}\\big)-E\\big(Y_{x^*}\\big),\\qquad NIE(x,x^*;Y)=E\\big(Y_{x^*,Z_{x}}\\big)-E\\big(Y_{x^*}\\big)",
+   "assumptions": "An SCM with the CoT as mediator Z between an input feature X and the answer Y. Cross-world counterfactuals. Average effects identified under Pearl's no-confounding conditions; CoT editing gives experimental access to Z.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Template for 'the input affects the answer only through the stated reasoning': faithful iff NDE is about 0, post-hoc iff NIE through the CoT is about 0. Four map papers cite it and CASE uses it; no search covered it.",
+   "verified": "full text",
+   "priority": 1
+  },
+  {
+   "title": "Identifiability of Path-Specific Effects",
+   "authors": "Chen Avin, Ilya Shpitser, Judea Pearl",
+   "year": 2005,
+   "venue": "IJCAI 2005 (full version: UCLA technical report R-321-L)",
+   "url": "https://ftp.cs.ucla.edu/pub/stat_ser/r321-L.pdf",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of reasoning",
+    "post-hoc rationalization",
+    "counterfactuals as used to test explanations"
+   ],
+   "level": "concept",
+   "formalism": "structural causal models; path-specific counterfactuals; graphical identification",
+   "formal_object": "Path-specific effect: the effect of one variable on another along a chosen set of causal paths, specified by fixing the parent of each excluded edge at its reference value. Graphical conditions give experimental identifiability.",
+   "key_formula": "",
+   "assumptions": "A known causal graph containing the chosen paths. Controlled experiments on the variables involved.",
+   "applies_to_llms": "adaptable",
+   "relevance": "When the input reaches the answer both through the CoT and through a direct internal route, the effect 'through the stated reasoning' is path-specific. These conditions say when CoT-editing experiments identify it.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Path-Specific Counterfactual Fairness",
+   "authors": "Silvia Chiappa, Thomas P. S. Gillam",
+   "year": 2018,
+   "venue": "arXiv preprint 1802.08139",
+   "url": "https://arxiv.org/abs/1802.08139",
+   "in_map": "",
+   "concepts": [
+    "faithfulness of reasoning",
+    "counterfactuals as used to test explanations"
+   ],
+   "level": "concept",
+   "formalism": "structural causal models; path-specific counterfactuals",
+   "formal_object": "A decision system is fair when it disregards the effect of a sensitive attribute along designated unfair causal pathways while keeping its effect along fair pathways.",
+   "key_formula": "",
+   "assumptions": "A known causal graph with pathways labelled fair or unfair. A latent-variable model to compute corrected counterfactual observations.",
+   "applies_to_llms": "adaptable",
+   "relevance": "A worked template for defining a property of a predictor as counterfactual invariance along specified paths. Replacing 'unfair paths' with 'paths that bypass the CoT' yields a path-specific definition of CoT faithfulness.",
+   "verified": "abstract",
+   "priority": 3
+  },
+  {
+   "title": "Security Policies and Security Models",
+   "authors": "J. A. Goguen, J. Meseguer",
+   "year": 1982,
+   "venue": "1982 IEEE Symposium on Security and Privacy (doi:10.1109/SP.1982.10014)",
+   "url": "https://www.cs.purdue.edu/homes/ninghui/readings/AccessControl/goguen_meseguer_82.pdf",
+   "in_map": "",
+   "concepts": [
+    "steganography and encoded reasoning",
+    "obfuscation",
+    "monitorability",
+    "faithfulness of reasoning"
+   ],
+   "level": "concept",
+   "formalism": "state machines; information-flow security (noninterference, including intransitive policies)",
+   "formal_object": "Noninterference: a group G does not interfere with group G' if deleting every command issued by G leaves all outputs seen by members of G' unchanged. Security policies are sets of such assertions, and intransitive flows are allowed.",
+   "key_formula": "G :| G' \\iff \\forall w\\in(U\\times C)^*,\\ \\forall u\\in G':\\ [\\![w]\\!]_u=[\\![p_G(w)]\\!]_u",
+   "assumptions": "A deterministic state-machine model, a split into sources and observers, and the purge function p_G deleting G's commands.",
+   "applies_to_llms": "adaptable",
+   "relevance": "The canonical formal notion of 'no hidden channel'. Steganography violates noninterference toward a receiver but not toward the monitor. Intransitive policies express 'information may reach the answer only through the CoT'.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "Measuring information leakage using generalized gain functions",
+   "authors": "Mário S. Alvim, Kostas Chatzikokolakis, Catuscia Palamidessi, Geoffrey Smith",
+   "year": 2012,
+   "venue": "IEEE 25th Computer Security Foundations Symposium (CSF 2012), pp. 265-279",
+   "url": "https://researchportal.ip-paris.fr/en/publications/measuring-information-leakage-using-generalized-gain-functions/",
+   "in_map": "",
+   "concepts": [
+    "monitorability",
+    "obfuscation",
+    "steganography and encoded reasoning"
+   ],
+   "level": "concept",
+   "formalism": "quantitative information flow; probabilistic channels; gain functions (g-leakage)",
+   "formal_object": "g-leakage: how much observing a channel's output raises an adversary's expected gain from guessing a secret. A gain function scores guesses, so partial, approximate or property-level guesses count. Bounds relate g-capacity to min- and Shannon capacity.",
+   "key_formula": "",
+   "assumptions": "A prior over secrets, a probabilistic channel from secret to observation, and an adversary-specific gain function.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Monitorability as leakage of a hidden attribute (intent, misbehavior) through the CoT to a monitor whose task is the gain function. Its leakage ordering compares CoTs across all monitors. Complements V-information.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Bayesian Persuasion",
+   "authors": "Emir Kamenica, Matthew Gentzkow",
+   "year": 2011,
+   "venue": "American Economic Review 101(6): 2590-2615",
+   "url": "https://www.aeaweb.org/articles?id=10.1257/aer.101.6.2590",
+   "in_map": "",
+   "concepts": [
+    "obfuscation",
+    "deception",
+    "honesty",
+    "legibility and checkability",
+    "plausibility"
+   ],
+   "level": "concept",
+   "formalism": "game theory / information design (sender commits to a signal; Bayesian receiver)",
+   "formal_object": "A sender chooses a signal, an information structure, to influence a Bayesian receiver's action. The paper gives necessary and sufficient conditions for a signal to benefit the sender and characterizes sender-optimal signals.",
+   "key_formula": "",
+   "assumptions": "Common prior, a Bayesian receiver, sender commitment to the signal, known payoffs.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Formalizes misleading without lying: a CoT can contain only true statements yet be chosen to move a monitor's belief. This separates honesty (truthful content) from faithfulness and obfuscation (what is disclosed).",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Incentivizing honest performative predictions with proper scoring rules",
+   "authors": "Caspar Oesterheld, Johannes Treutlein, Emery Cooper, Rubi Hudson",
+   "year": 2023,
+   "venue": "UAI 2023",
+   "url": "https://arxiv.org/abs/2305.17601",
+   "in_map": "",
+   "concepts": [
+    "honesty",
+    "self-report accuracy and introspection"
+   ],
+   "level": "concept",
+   "formalism": "decision theory; proper scoring rules; fixed points",
+   "formal_object": "A performative prediction is honest (a fixed point) if it accurately reflects the expert's beliefs after the prediction is made. Score-maximizing reports generally are not fixed points; bounds and possibility results follow.",
+   "key_formula": "",
+   "assumptions": "Outcomes that depend on the report through a bounded influence. An expert with beliefs who maximizes expected score.",
+   "applies_to_llms": "adaptable",
+   "relevance": "CoTs and self-reports condition the model's later tokens, so they are performative. This defines honesty for reports that change what they describe, and shows proper scoring, the usual reward form, does not secure it.",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "The Logic of Explanatory Power",
+   "authors": "Jonah N. Schupbach, Jan Sprenger",
+   "year": 2011,
+   "venue": "Philosophy of Science 78(1): 105-127",
+   "url": "https://iris.unito.it/retrieve/e27ce42f-deb4-2581-e053-d805fe0acbaa/Schupbach%20and%20Sprenger%202011%20Explanatory%20Power.pdf",
+   "in_map": "",
+   "concepts": [
+    "plausibility",
+    "explanation"
+   ],
+   "level": "concept",
+   "formalism": "Bayesian probability; axiomatic (conditions of adequacy CA1-CA7)",
+   "formal_object": "Explanatory power of an explanans h over an explanandum e: the unique measure, valued in [-1, 1], that satisfies seven adequacy conditions, computed from the evaluating agent's probabilities.",
+   "key_formula": "\\mathcal{E}(e,h)=\\frac{\\Pr(h\\mid e)-\\Pr(h\\mid\\neg e)}{\\Pr(h\\mid e)+\\Pr(h\\mid\\neg e)}",
+   "assumptions": "A probability function of the evaluating agent over explanans and explanandum. No causal model.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Plausibility has no formal definition. This measures how well an explanation accounts for the outcome by the reader's lights. Paired with a causal faithfulness condition, it isolates plausible but unfaithful rationalizations.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "A Formal Account of Dishonesty",
+   "authors": "Chiaki Sakama, Martin Caminada, Andreas Herzig",
+   "year": 2015,
+   "venue": "Logic Journal of the IGPL 23(2): 259-294 (extends JELIA 2010)",
+   "url": "https://www.irit.fr/~Andreas.Herzig/P/Igpl15.html",
+   "in_map": "",
+   "concepts": [
+    "lying",
+    "deception",
+    "honesty",
+    "obfuscation"
+   ],
+   "level": "concept",
+   "formalism": "propositional multi-modal logic of belief, intention and communication",
+   "formal_object": "Two definitions of lying, lying with objectives, bullshit, withholding information and half-truths, with their logical properties and their relation to deception.",
+   "key_formula": "",
+   "assumptions": "Belief and intention modalities for speaker and hearer. Explicit communicative acts.",
+   "applies_to_llms": "adaptable",
+   "relevance": "The only formal account found of withholding information and half-truths, the dishonesty types closest to an incomplete or selectively verbalized CoT. Complements van Ditmarsch (lying) and Ward (causal deception).",
+   "verified": "abstract",
+   "priority": 2
+  },
+  {
+   "title": "Defeat Devices in AI Systems",
+   "authors": "Emilio Ferrara",
+   "year": 2026,
+   "venue": "Future Internet 18(7), 339 (arXiv 2606.28863)",
+   "url": "https://arxiv.org/abs/2606.28863",
+   "in_map": "",
+   "concepts": [
+    "sandbagging",
+    "alignment faking",
+    "scheming",
+    "hidden objectives",
+    "obfuscation"
+   ],
+   "level": "concept",
+   "formalism": "probabilistic behavioral definition over evaluation and deployment input distributions",
+   "formal_object": "A model has a defeat device if some input property discriminates evaluation from deployment inputs, the output distribution changes with it in a concealed (undeclared) way, and the stated criterion scores higher in evaluation than in deployment.",
+   "key_formula": "(i)\\ P_{eval}(\\pi)\\neq P_{deploy}(\\pi);\\ (ii)\\ M(\\cdot\\mid\\pi=1)\\neq M(\\cdot\\mid\\pi=0),\\ \\pi\\ \\text{not declared};\\ (iii)\\ E_{eval}[\\varphi_{stated}(M)]-E_{deploy}[\\varphi_{stated}(M)]\\geq\\Delta>0",
+   "assumptions": "Evaluation and deployment input distributions, a stated pass criterion, black-box access to input-output behavior. No intent condition, by design.",
+   "applies_to_llms": "yes",
+   "relevance": "The only definition found that covers sandbagging, alignment faking and evaluation-gated scheming at once. Its concealment clause excludes swaps declared in the CoT, which connects scheming to faithfulness. Behavioral, not causal.",
+   "verified": "full text",
+   "priority": 2
+  },
+  {
+   "title": "A signal detection theoretic approach for estimating metacognitive sensitivity from confidence ratings",
+   "authors": "Brian Maniscalco, Hakwan Lau",
+   "year": 2012,
+   "venue": "Consciousness and Cognition 21(1): 422-430",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/22071269/",
+   "in_map": "",
+   "concepts": [
+    "self-report accuracy and introspection"
+   ],
+   "level": "measurement",
+   "formalism": "signal detection theory (type-2 sensitivity, meta-d')",
+   "formal_object": "meta-d': metacognitive (type-2) sensitivity, i.e. how well confidence reports discriminate one's own correct from incorrect decisions, in signal-to-noise units, free of response bias and type-1 sensitivity.",
+   "key_formula": "",
+   "assumptions": "Binary type-1 decisions with graded confidence ratings. An SDT model of the type-1 task.",
+   "applies_to_llms": "adaptable",
+   "relevance": "Cognitive science's standard formal criterion for metacognitive accuracy. It separates report accuracy from task accuracy, which LLM introspection tests conflate, but it is measurement-level and needs adaptation for open-ended answers.",
+   "verified": "abstract",
+   "priority": 3
+  },
+  {
+   "title": "Model Interpretability through the Lens of Computational Complexity",
+   "authors": "Pablo Barceló, Mikaël Monet, Jorge Pérez, Bernardo Subercaseaux",
+   "year": 2020,
+   "venue": "NeurIPS 2020 (arXiv 2010.12265)",
+   "url": "https://arxiv.org/abs/2010.12265",
+   "in_map": "",
+   "concepts": [
+    "simulatability",
+    "legibility and checkability"
+   ],
+   "level": "concept",
+   "formalism": "computational complexity of explanation queries",
+   "formal_object": "A model class C1 is more interpretable than C2 if answering local post-hoc explanation queries, such as minimal sufficient reasons, is computationally harder for C2 than for C1.",
+   "key_formula": "",
+   "assumptions": "Fixed explanation queries, standard complexity assumptions (P != NP), comparisons between model classes rather than individual models.",
+   "applies_to_llms": "adaptable",
+   "relevance": "An observer-free formal reading of simulatability as tractability of explanation queries. It pairs with resource-bounded observer definitions (V-information, Song et al.) for the legibility of reasoning.",
+   "verified": "abstract",
+   "priority": 3
+  },
+  {
+   "title": "The Compliance Gap: Why AI Systems Promise to Follow Process Instructions but Don't",
+   "authors": "Kwan Soo Shin",
+   "year": 2026,
+   "venue": "arXiv preprint 2605.01771",
+   "url": "https://arxiv.org/abs/2605.01771",
+   "in_map": "",
+   "concepts": [
+    "honesty",
+    "faithfulness of self-reports",
+    "monitorability"
+   ],
+   "level": "both",
+   "formalism": "information theory (data processing inequality); RL incentive argument",
+   "formal_object": "Compliance gap: a verbal commitment to a process that the executed behavior does not follow. Theorem 1 says RL that rewards text without observing behavior makes it inevitable. Theorem 2 says no observer can detect it from text alone.",
+   "key_formula": "",
+   "assumptions": "Observers see text only, without tool-call logs. Training rewards text without observing behavior.",
+   "applies_to_llms": "yes",
+   "relevance": "A say-do notion of honesty with a text-only undetectability theorem, the agentic analogue of CoT unfaithfulness. Theorems not checked in the full text; the undetectability result looks close to definitional.",
+   "verified": "abstract",
+   "priority": 3
+  }
+ ],
+ "duplicates": [
+  "Towards Formal Definitions of Blameworthiness, Intention, and Moral Responsibility (Halpern & Kleiman-Weiner 2018, arXiv 1810.05903) is listed in both search_actual_causation.json (priority 2) and search_agency_honesty.json (priority 1).",
+  "Learning to Be Monitored: Causal Bounds and Intervention-Aware Post-Training Recipes for Chain-of-Thought Monitorability (arXiv 2610.31733, search_information_verification.json) is the arXiv version of map paper anon2026improving ('Improving Chain-of-Thought Monitorability in Large Language Models: Causal Bounds and Post-Training'). Both abstracts claim that TPR_mc upper-bounds causal recall, derive a lower bound and compare SFT, RL and on-policy distillation. Its definitions are already concept-level catalogue rows anon2026improving#15 and #17.",
+  "Four search_information_verification.json candidates are map papers whose formal rows are already in the catalogue: anwar2026analyzing, baker2025monitoring, kirchner2024proververifier and roger2023preventing. They are correctly marked in_map, but they are not new finds."
+ ],
+ "corrections": [
+  {
+   "file": "search_information_verification.json",
+   "title": "Learning to Be Monitored: Causal Bounds and Intervention-Aware Post-Training Recipes for Chain-of-Thought Monitorability",
+   "problem": "in_map should be the key 'anon2026improving', not a hedged note. The arXiv abstract and the map's OpenReview abstract describe the same results."
+  },
+  {
+   "file": "search_actual_causation.json",
+   "title": "Causal Sufficiency and Necessity Improves Chain-of-Thought Reasoning",
+   "problem": "PN and PNS are defined relative to the correct answer y (A=y) and are used to prune or add steps for efficiency. They measure whether a step is necessary for correctness; they do not define faithfulness, so the label 'faithfulness of reasoning' at level 'both' overstates it. The venue 'NeurIPS 2025' does not appear on the arXiv page (no comment, no journal ref) and is unconfirmed."
+  },
+  {
+   "file": "search_information_verification.json",
+   "title": "Quantifying the Necessity of Chain of Thought through Opaque Serial Depth",
+   "problem": "Labelled 'measurement', but the abstract says it formalizes the 'CoT is necessary' argument through opaque serial depth. That is a formal definition of the capacity for unexternalized computation, a precondition of monitorability, so the level should be 'concept' or 'both'."
+  },
+  {
+   "file": "search_information_verification.json",
+   "title": "Secret Collusion among AI Agents: Multi-Agent Deception via Steganography",
+   "problem": "Level 'concept', but its own formal_object says the abstract describes no new security definition, and only the abstract was checked. The level is unsupported until the full text is read."
+  },
+  {
+   "file": "search_information_verification.json",
+   "title": "(gaps field) encoded reasoning",
+   "problem": "The gap claims that no definition requires the hidden content to be used by the model's computation. It overlooks map paper kaufmann2026aligned, whose catalogue rows define CoT semantics as the information the model's downstream computation extracts from the trace (#26) and non-transparent CoT as meaning different things to humans and to that computation (#19). This is a use-based definition, though not a causal one."
+  },
+  {
+   "file": "search_xai_faithfulness_theory.json",
+   "title": "(gaps field) completeness of a CoT",
+   "problem": "The claim that no formal definition exists overlooks concept-level catalogue rows luo2026removal#8 and #9 (a complete or sound explanation credits all or only the causally influential concepts) and jia2026faithfulness#4 (information-theoretic completeness)."
+  },
+  {
+   "file": "areas.md (seed list, not edited)",
+   "title": "Position: Causality is Key for Interpretability Claims to Generalise",
+   "problem": "The arXiv title has no 'Position:' prefix and the paper was first posted in February 2026 (2602.16698), so the seed's 'ICML 2025' cannot be right. search_causal_abstraction.json correctly leaves the venue unconfirmed."
+  }
+ ],
+ "verdict": "No single formal framework covers all the concepts in scope; three families each cover a subset. (1) Structural causal models (actual causality, causal abstraction, mediation) define faithfulness, completeness and soundness, counterfactual tests and graded responsibility. With an epistemic state they define explanation and intent, and plausibility by proposed reading only. Mediation reads post-hoc rationalization as a null indirect effect through the CoT. (2) Structural causal games extend this to belief, intention, deception and honesty, and supply components for scheming and sandbagging. (3) Observer-relative information (V-information, g-leakage, steganographic gap, noninterference, opacity, prover-verifier soundness) defines monitorability, legibility, obfuscation and steganography, and resource-bounded introspection and simulatability. Epistemic logic separately defines lying and withholding. Structural causal games are the best unifier: they are compatible with Halpern-Pearl and can include the monitor as an agent, so monitorability becomes monitor-class information about a causally defined variable. Gaps: no definition of CoT faithfulness as actual causation or as an abstraction of verbalized text. Post-hoc rationalization and plausibility exist only as proposed readings. Scheming and hidden objectives are only behavioral or compositional. Encoded reasoning with causal use is defined only by Kaufmann et al. Introspection is semi-formal."
+}

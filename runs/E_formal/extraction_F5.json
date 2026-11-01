@@ -1,0 +1,371 @@
+{
+ "batch": "F5",
+ "papers": [
+  {
+   "key": "bilodeau2022impossibility",
+   "record_markdown": "---\nkey: bilodeau2022impossibility\ntitle: \"Impossibility Theorems for Feature Attribution\"\nauthors: \"Bilodeau, Jaques, Koh et al.\"\nyear: 2022\nvenue: \"Proceedings of the National Academy of Sciences 121(2), 2024\"\nurl: https://arxiv.org/abs/2212.11870v3\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, object:external-expl, reveals:decision-factors, signal:generic-cf, contribution:theory, motivation:explainability, domain:classification, scale:small, model:mlp, model:cnn, metric:specificity-sensitivity]\n---\n**TL;DR** Proves complete, linear feature attributions like SHAP and Integrated Gradients can do no better than random guessing at inferring local counterfactual model behaviour; repeated model queries can.\n**Problem** SHAP and IG, trusted because complete and linear, are used to answer local counterfactual questions (recourse, spurious features). Can they?\n**Method** Inferring counterfactual model behaviour as a worst-case hypothesis test on the attribution (specificity, sensitivity). Counterexample proofs with piecewise-linear models; ROC experiments on 5 tabular and 3 image datasets; query bounds for brute-force evaluation.\n**Findings** If the model class holds piecewise-linear extensions, any test on a complete, linear attribution has Spec ≤ 1 − Sens (random guessing), incl. recourse and spurious features; Gradient succeeds in small enough neighbourhoods. SHAP/IG ROC curves near the diagonal; local methods sometimes better on tabular data. For Lipschitz models, enough random queries give near-perfect tests, at a nearly tight rate.\n**Limits** Worst case over the model class; marginal SHAP only; continuous features; one formalization per end-task; small networks; brute force exponential in the number of features. No language models.\n\n**Relations**\n- (none)\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.\n",
+   "definitions": [
+    {
+     "term": "counterfactual model behaviour",
+     "concepts": [
+      "counterfactuals"
+     ],
+     "level": "concept",
+     "formalism": "intervention / flip test",
+     "quote": "We start by defining counterfactual model behaviour, a simple yet general notion that is closely related to common end-tasks such as recourse and spurious feature detection. Concretely, for a model f , we consider a user who wants to use the output of a feature attribution method to infer the model’s dependence on feature j near an example x (that is, within a δ-neighbourhood of x).",
+     "formula": "\\{\\,f(x') : x'\\in\\mathcal X,\\ x'_j\\in(x_j-\\delta,\\,x_j+\\delta)\\,\\},\\quad f\\in\\mathcal F\\subseteq\\mathcal X\\to\\mathcal Y,\\ \\mathcal X\\subseteq\\mathbb R^p,\\ \\mathcal Y\\subseteq\\mathbb R^q,\\ \\delta>0,\\ j\\in[p];\\qquad \\text{task: decide between } g^{(0)},g^{(1)}:(x_j-\\delta,x_j+\\delta)\\to\\mathcal Y",
+     "assumptions": "A known model class F, an example x, a feature j and a radius δ; the user wants to infer which of two candidate local behaviours g(0), g(1) the model has.",
+     "where": "Section 2.1, [P18]",
+     "gloss": "What a model outputs when one feature of a given example is moved within a small window, which the user hopes an attribution will reveal.",
+     "relation": "Target of the feature-attribution hypothesis test; Definitions 3.7 (Recourse) and 3.8 (Spurious Features) are specific contrasts of such behaviours."
+    },
+    {
+     "term": "feature attribution method",
+     "concepts": [
+      "other: feature attribution (local explanation)"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "Most generally, a feature attribution method is any function Φ : F × P(X ) × X → Rp×q , where for any space Z, P(Z) denotes the set of all probability measures on Z.",
+     "formula": "\\Phi:\\mathcal F\\times\\mathcal P(\\mathcal X)\\times\\mathcal X\\to\\mathbb R^{p\\times q};\\quad \\Phi^{\\mathrm{Grad}}(f,\\mu,x)=\\nabla f(x);\\quad \\Phi^{\\mathrm{IG}}(f,\\mu,x)_j=\\mathbb E_{X\\sim\\mu}\\Big[(x_j-X_j)\\int_0^1\\nabla_j f\\big(X+\\alpha(x-X)\\big)\\,d\\alpha\\Big]",
+     "assumptions": "A model f, a baseline distribution µ over inputs (training data for SHAP, a point mass for IG) and an example x to localize the attribution.",
+     "where": "Section 2.3, [P25]–[P31]; SHAP, IG, SmoothGrad and LIME as Definitions A.1, A.2, A.7, A.8, [P164]–[P257]",
+     "gloss": "Any map from a model, a baseline distribution and an example to one score per feature and output.",
+     "relation": "Domain of the Complete and Linear properties (Definitions 3.1, 3.2); SHAP and IG are instances that satisfy both."
+    },
+    {
+     "term": "feature-attribution hypothesis test",
+     "concepts": [
+      "faithfulness of reasoning, explanations or self-reports",
+      "counterfactuals"
+     ],
+     "level": "measurement",
+     "formalism": "probabilistic / statistical",
+     "quote": "A feature-attribution hypothesis test is any way for the user to draw their conclusion for the hypothesis test solely on the output of a feature attribution method at an example. Formally, this is any function h : Rp×q → [0, 1]. The user may rely on external randomness to decide whether to accept or reject the null hypothesis: the output of h is the probability that the user rejects the null hypothesis.",
+     "formula": "H^{(0)}: f\\in\\mathcal F^{(0)},\\quad H^{(1)}: f\\in\\mathcal F^{(1)},\\quad \\mathcal F^{(0)},\\mathcal F^{(1)}\\subseteq\\mathcal F,\\ \\mathcal F^{(0)}\\cap\\mathcal F^{(1)}=\\emptyset;\\qquad h:\\mathbb R^{p\\times q}\\to[0,1]",
+     "assumptions": "Disjoint null and alternative model sets encoding contrasting counterfactual behaviours; the test sees only the attribution Φ(f, µ, x); randomized tests allowed.",
+     "where": "Section 2.2, [P22]",
+     "gloss": "A rule that decides from an attribution alone which of two contrasting model behaviours holds; an explanation is useful for a task only if such a rule works.",
+     "relation": "Scored by worst-case specificity and sensitivity; generalized by the query hypothesis test of Appendix D."
+    },
+    {
+     "term": "specificity and sensitivity of a hypothesis test (worst case over models); random guessing",
+     "concepts": [
+      "faithfulness of reasoning, explanations or self-reports",
+      "counterfactuals"
+     ],
+     "level": "measurement",
+     "formalism": "probabilistic / statistical",
+     "quote": "Classically [47], the quality of a hypothesis test is determined by its specificity, which is the probability that the user fails to reject the null hypothesis whenever the model satisfies the null hypothesis (a true negative, or 1− probability of a type-II error), and its sensitivity 1 , which is the probability that the user rejects the null hypothesis whenever the model satisfies the alternate hypothesis (a true positive, or 1− probability of a type-I error).",
+     "formula": "\\mathrm{Spec}_{\\Phi,\\mu,x}(h)=\\inf_{f\\in\\mathcal F^{(0)}}\\big[1-h(\\Phi(f,\\mu,x))\\big],\\qquad \\mathrm{Sens}_{\\Phi,\\mu,x}(h)=\\inf_{f\\in\\mathcal F^{(1)}}h(\\Phi(f,\\mu,x));\\qquad \\text{random guessing } (h\\equiv\\tau):\\ \\mathrm{Spec}_{\\Phi,\\mu,x}(h)=1-\\mathrm{Sens}_{\\Phi,\\mu,x}(h)",
+     "assumptions": "Fixed Φ, baseline µ, example x and hypothesis sets; deterministic (the model is already trained), worst case over every model in each set.",
+     "where": "Section 2.3, [P31]–[P37]; random guessing after Theorem 3.3, [P74]",
+     "gloss": "How often the attribution-based test is right in the worst case under each hypothesis; Spec ≤ 1 − Sens means no better than a coin that ignores the model.",
+     "relation": "Theorem 3.3 bounds it for complete and linear methods; Spec⁽ⁿ⁾/Sens⁽ⁿ⁾ (Appendix D) are the analogue for query-based tests."
+    },
+    {
+     "term": "Complete (Definition 3.1)",
+     "concepts": [
+      "faithfulness of reasoning, explanations or self-reports",
+      "other: attribution completeness"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "Definition 3.1 (Complete). A feature attribution method Φ is complete if and only if for all models f ∈ F, baselines µ ∈ P(X ), and examples x ∈ X ,",
+     "formula": "\\sum_{j\\in[p]}\\Phi(f,\\mu,x)_j=f(x)-\\mathbb E_{X\\sim\\mu}f(X)\\qquad\\forall f\\in\\mathcal F,\\ \\mu\\in\\mathcal P(\\mathcal X),\\ x\\in\\mathcal X",
+     "assumptions": "A baseline distribution µ; holds for all models, baselines and examples.",
+     "where": "Section 3, Definition 3.1, [P51]–[P53]; SHAP complete (Proposition A.3), IG complete under differentiability or Lipschitz conditions (Proposition A.4)",
+     "gloss": "Feature scores add up to the gap between the model's output at the example and its average output over the baseline.",
+     "relation": "With Linear (Definition 3.2), the hypothesis of the impossibility Theorem 3.3; the same completeness axiom of Integrated Gradients appears in geiger2025causal. Distinct from completeness of an explanation as coverage of the decision's causes."
+    },
+    {
+     "term": "Linear (Definition 3.2)",
+     "concepts": [
+      "other: attribution linearity"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "Informally, completeness requires that the individual feature attributions sum to the difference of the model output from the baseline, while linearity requires that if the model has no feature interactions then the attributions of a given feature should be equivalent to considering that feature on its own.",
+     "formula": "f(x)=\\sum_{j\\in[p]}f^{(j)}(x_j)\\in\\mathcal F\\ \\Longrightarrow\\ \\Phi(f,\\mu,x)_j=\\Phi(f_j,\\mu_j,x_j)\\qquad\\forall \\mu\\in\\mathcal P(\\mathcal X),\\ x\\in\\mathcal X,\\ j\\in[p]",
+     "assumptions": "Additive (interaction-free) models; µ_j is the j-th marginal of the baseline; the paper writes f_j for f^(j).",
+     "where": "Section 3, Definition 3.2, [P51], [P54]; SHAP and IG linear (Proposition A.6)",
+     "gloss": "For a model with no feature interactions, a feature's score equals the score of that feature's own one-dimensional component.",
+     "relation": "Paired with Complete (Definition 3.1) as the hypothesis of Theorem 3.3."
+    },
+    {
+     "term": "Recourse (Definition 3.7)",
+     "concepts": [
+      "counterfactuals"
+     ],
+     "level": "concept",
+     "formalism": "probabilistic / statistical",
+     "quote": "Then, F (0) corresponds to those models where increasing feature j will increase the model output on average.",
+     "formula": "\\mathcal F^{(0)}=\\Big\\{f\\in\\mathcal F:\\ \\mathbb E_{X\\sim\\nu}\\big[f(x_{[p]\\setminus\\{j\\}},X_j)_k\\mid X_j\\in[x_j,x_j+\\delta]\\big]>\\mathbb E_{X\\sim\\nu}\\big[f(x_{[p]\\setminus\\{j\\}},X_j)_k\\mid X_j\\in[x_j-\\delta,x_j]\\big]\\Big\\},\\qquad \\mathcal F^{(1)}=\\mathcal F\\setminus\\mathcal F^{(0)}",
+     "assumptions": "A perturbation distribution ν (possibly different from the attribution baseline, e.g. uniform or a point mass), feature j, output k and radius δ.",
+     "where": "Section 3.4.2, Definition 3.7, [P100]–[P106]; multivariate Definition C.1 with sign vector σ, [P392]",
+     "gloss": "Hypothesis pair asking whether raising a feature locally raises the model output on average more than lowering it does.",
+     "relation": "Instance of the feature-attribution hypothesis test; Corollary 3.9 (and C.3) shows complete and linear methods do no better than random guessing on it."
+    },
+    {
+     "term": "Spurious Features (Definition 3.8)",
+     "concepts": [
+      "counterfactuals"
+     ],
+     "level": "concept",
+     "formalism": "intervention / flip test",
+     "quote": "F (0) corresponds to those models where the model output does not change from perturbing feature j. Meanwhile, F (1) corresponds to the models that have a “significant” change from perturbing feature j, where significance is encoded by the size of ε.",
+     "formula": "\\mathcal F^{(0)}=\\Big\\{f\\in\\mathcal F:\\ \\sup_{x'_j\\in(x_j,x_j+\\delta]}\\big|f(x_{[p]\\setminus\\{j\\}},x'_j)_k\\big|=0\\Big\\},\\qquad \\mathcal F^{(1)}=\\Big\\{f\\in\\mathcal F:\\ \\sup_{x'_j\\in(x_j,x_j+\\delta]}\\big|f(x_{[p]\\setminus\\{j\\}},x'_j)_k\\big|\\ge\\varepsilon\\Big\\}",
+     "assumptions": "Feature j, output k, radius δ and significance threshold ε; the sets are written in terms of |f| as printed (the multivariate Definition C.2 uses sup f ≤ 0 versus ≥ ε). Experiments replace sup by variance over perturbations.",
+     "where": "Section 3.4.2, Definition 3.8, [P106]–[P116]; multivariate Definition C.2, [P410]; experimental variant [P131]",
+     "gloss": "Hypothesis pair asking whether perturbing a feature leaves the output unchanged or moves it by at least ε.",
+     "relation": "Instance of the feature-attribution hypothesis test; impossible for complete and linear methods (Corollary 3.9, C.4) but solvable by brute-force queries (Theorem 5.1, D.1); related to the local-sensitivity sets of Propositions 3.5–3.6."
+    },
+    {
+     "term": "query hypothesis test; Spec⁽ⁿ⁾ and Sens⁽ⁿ⁾",
+     "concepts": [
+      "counterfactuals"
+     ],
+     "level": "measurement",
+     "formalism": "probabilistic / statistical",
+     "quote": "We now introduce query hypothesis testing, where the user makes a decision using only (random) queries of a feature attribution method. In practice, this is more general than feature-attribution hypothesis testing, since a user can only access the output of a feature attribution method via queries.",
+     "formula": "q=(q^{(t)})_{t\\in\\mathbb N},\\ q^{(t)}:\\mathcal Q^{t-1}\\to\\mathcal P(\\mathcal X),\\ \\mathcal Q=\\mathcal X\\times\\mathcal Y\\times\\mathbb R^{p\\times q};\\quad s:2^{\\mathcal Q}\\to[0,1];\\quad T^{(n)}_{q[f],s}\\mid X^{(1:n)}\\sim\\mathrm{Bernoulli}\\big(s(X^{(1:n)},f(X^{(1:n)}),\\nabla f(X^{(1:n)}))\\big),\\ X^{(1:n)}\\sim q^{(1:n)}[f];\\quad \\mathrm{Spec}^{(n)}(q,s)=\\inf_{f\\in\\mathcal F^{(0)}}\\big[1-\\mathbb E\\,T^{(n)}_{q[f],s}\\big],\\ \\ \\mathrm{Sens}^{(n)}(q,s)=\\inf_{f\\in\\mathcal F^{(1)}}\\mathbb E\\,T^{(n)}_{q[f],s}",
+     "assumptions": "Sequential query algorithm returning model outputs and gradients at chosen points; n queries; the sample-complexity results assume L-Lipschitz models.",
+     "where": "Appendix D.1, [P458]–[P480]; Theorems 5.1, D.1, D.2",
+     "gloss": "Decide the hypothesis from n chosen evaluations of the model (and its gradient) instead of from one attribution, scored by worst-case specificity and sensitivity.",
+     "relation": "Generalizes the feature-attribution hypothesis test and its Spec/Sens; Theorem D.1 shows it solves the Spurious Features task with Spec 1 and Sens 1 − (1 − (2ε/Lδ)^p)^n, nearly tight by Theorem D.2."
+    }
+   ]
+  },
+  {
+   "key": "lindsey2025emergent",
+   "record_markdown": "---\nkey: lindsey2025emergent\ntitle: \"Emergent Introspective Awareness in Large Language Models\"\nauthors: \"Lindsey\"\nyear: 2025\nvenue: \"preprint (arXiv 2601.01828; first published on transformer-circuits.pub, 29 October 2025)\"\nurl: https://arxiv.org/abs/2601.01828v1\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, object:self-interpretation, object:self-report, reveals:internal-state, reveals:output-provenance, signal:interp-tool, contribution:analysis, motivation:explainability, motivation:model-welfare, domain:synthetic, scale:closed, eval:specificity, eval:confound-control, factor:post-training, model:claude-opus-4.1, model:claude-opus-4, model:claude-sonnet-4, model:claude-3.7-sonnet, model:claude-3.5-sonnet, model:claude-3.5-haiku, model:claude-3-opus, model:claude-3-sonnet, model:claude-3-haiku, metric:injected-thought-detection-rate, metric:apology-rate]\n---\n**TL;DR** Injecting concept vectors into Claude models shows they sometimes notice and name the injected 'thought' before voicing it; this introspection is unreliable, strongest in the most capable models.\n**Problem** Self-reports about internal states may be confabulated; conversation alone cannot reveal genuine introspection. Defines introspective awareness by accuracy, grounding, internality and metacognitive representation.\n**Method** Concept injection: mean-difference concept vectors added to the residual stream of nine Claude models (plus helpful-only and base variants), sweeping layer and strength. Tasks: detect and name an injected \"thought\"; keep it apart from text input; disown or accept a prefilled word; \"think about\" a word on request. Claude Sonnet 4 judge.\n**Findings** Opus 4.1 detects and names the concept before voicing it on about 20% of trials at the best layer, with no false positives in production models. Injecting a prefilled word's concept beforehand cuts disavowals, at an earlier layer. Models modulate representations on request. Opus 4 and 4.1 do best; helpful-only variants give false positives; base models fail.\n**Limits** Few prompt templates; unnatural injection; imperfect concept vectors; uncontrolled model differences. Metacognitive representation not shown directly; details beyond detection may be confabulated. Closed models, not peer reviewed.\n\n**Relations**\n- (none)\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.\n- reveals:internal-state: the model's current internal state (activations such as an injected steering concept or an active probe direction, or a generation setting such as its sampling temperature), which the report should causally depend on\n- reveals:output-provenance: whether an output attributed to the model in its context was its own natural generation or was prefilled, inserted or tampered with\n",
+   "definitions": [
+    {
+     "term": "introspective awareness",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "In this work, we focus on the following notion of introspection. We say that a model demonstrates introspective awareness if it can describe some aspect of its internal state while satisfying the following criteria.",
+     "formula": "",
+     "assumptions": "Verbalized self-report about an internal state; the four criteria (accuracy, grounding, internality, metacognitive representation) must all hold. Graded rather than binary and mechanism-agnostic.",
+     "where": "Section 3, [P51]–[P55]",
+     "gloss": "A model shows introspective awareness when it describes part of its own internal state accurately, because of that state, without reading its own outputs, via an internal representation of the state.",
+     "relation": "Conjunction of the four criteria below; contrasted in Section 9.6 with Kammerer & Frankish, Comşa & Shanahan, Binder et al. and Song et al. (song2025privileged), whose privileged-access definition the paper finds most compelling."
+    },
+    {
+     "term": "Accuracy (criterion 1)",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "1: Accuracy. The model’s description of its internal state must be accurate.",
+     "formula": "",
+     "assumptions": "Access to the true internal state, here fixed by the experimenter through concept injection.",
+     "where": "Section 3, criterion 1, [P51]",
+     "gloss": "What the model says about its internal state must be true.",
+     "relation": "First of the four criteria of introspective awareness; not sufficient alone, since accurate reports can be ungrounded (criterion 2)."
+    },
+    {
+     "term": "Grounding (criterion 2)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "faithfulness of reasoning, explanations or self-reports",
+      "counterfactuals"
+     ],
+     "level": "concept",
+     "formalism": "intervention / flip test",
+     "quote": "2: Grounding. The model’s description of its internal state must causally depend on the aspect that is being described. That is, if the internal state were different, the description would change accordingly.",
+     "formula": "",
+     "assumptions": "Interventions on the internal state; tested by concept injection.",
+     "where": "Section 3, criterion 2, [P51]",
+     "gloss": "The self-report must counterfactually depend on the state it describes: change the state and the report changes.",
+     "relation": "Close to the Comşa & Shanahan causal-link definition of introspection restated in song2025privileged; strengthened here by internality and metacognitive representation."
+    },
+    {
+     "term": "Internality (criterion 3)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "direct and indirect effects"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "3: Internality. The causal influence of the internal state on the model’s description must be internal –it should not route through the model’s sampled outputs. If the description the model gives of its internal state can be inferred from its prior outputs, the response does not demonstrate introspective awareness.",
+     "formula": "",
+     "assumptions": "A distinction between causal paths inside the forward pass and paths through the model's sampled outputs; checked by requiring detection before the injected concept is voiced.",
+     "where": "Section 3, criterion 3, [P51]",
+     "gloss": "The state must shape the report through internal processing, not through the model reading what it has already written.",
+     "relation": "Restricts grounding to a path-specific (non-output-mediated) effect; related to the privileged self-access requirement of song2025privileged."
+    },
+    {
+     "term": "Metacognitive Representation (criterion 4)",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "4: Metacognitive Representation. The model’s description of its internal state must not merely reflect a direct translation of the state (e.g., the impulse to say ‘love’) into language. Instead, it must derive from an internal metacognitive representation5 of the state itself (e.g., an internal representation of “a thought about love”).",
+     "formula": "",
+     "assumptions": "An internal higher-order representation of the state, registered before or during the report; not demonstrated directly in the paper, only indirectly via questions that need a step beyond the state itself.",
+     "where": "Section 3, criterion 4, [P55]",
+     "gloss": "The report must come from an internal representation that the model is in that state, not from the state directly pushing out words.",
+     "relation": "Excludes steering-induced mentions; aligned with the Kammerer & Frankish definition (Section 9.6)."
+    },
+    {
+     "term": "concept injection",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "counterfactuals"
+     ],
+     "level": "measurement",
+     "formalism": "intervention / flip test",
+     "quote": "In this work, we evaluate introspection by manipulating the internal activations of a model and observing how these manipulations affect its responses to questions about its mental states. We refer to this technique as concept injection—an application of activation steering [41, 43, 32, 18], where we inject activation patterns associated with specific concepts directly into a model’s activations.",
+     "formula": "",
+     "assumptions": "White-box access to the residual stream; concept vectors from activations on 'Tell me about {word}.' minus the mean over 100 baseline words, recorded and injected at one layer with a chosen strength (1 to 16).",
+     "where": "Section 1, [P11]; Sections 5.1–5.2, [P69], [P76]; Appendix 12.1.1, [P258]–[P261]",
+     "gloss": "Add an activation pattern for a known concept and see whether the model's reports about its own state change accordingly; this fixes the ground truth for accuracy and grounding.",
+     "relation": "Operationalizes the grounding criterion; an application of activation steering."
+    },
+    {
+     "term": "introspective awareness on an injected-thought trial",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "measurement",
+     "formalism": "intervention / flip test",
+     "quote": "Responses that satisfy these criteria can be said to demonstrate introspective awareness.",
+     "formula": "",
+     "assumptions": "Concept injection; an LLM judge (Claude Sonnet 4) checks that the response answers affirmatively, correctly identifies the injected concept, detects the injection before mentioning the word, and is coherent.",
+     "where": "Section 5.4, [P89]–[P92]; grader prompts Appendix 12.1.3, [P288]–[P303]",
+     "gloss": "A trial counts as introspective awareness if the model says it notices an injected thought and names it correctly before saying the word, coherently.",
+     "relation": "Measurement of introspective awareness (Section 3); the detect-before-mention rule operationalizes internality and, indirectly, metacognitive representation."
+    },
+    {
+     "term": "net performance",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "measurement",
+     "formalism": "probabilistic / statistical",
+     "quote": "To summarize model performance, we computed the difference between the rate of correct identification trials and the rate of false positives (Figure 13).",
+     "formula": "\\mathrm{TPR}-\\mathrm{FPR}",
+     "assumptions": "Injection trials scored as above; control trials without injection give the false-positive rate; best layer and strength per model.",
+     "where": "Section 5.7, [P117]",
+     "gloss": "Rate of correct detection and identification on injection trials minus the rate of claimed detections on control trials.",
+     "relation": "Aggregates the injected-thought trial criterion against false positives."
+    },
+    {
+     "term": "distinguishing injected thoughts from text inputs (joint success)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "other: thought-input distinction"
+     ],
+     "level": "measurement",
+     "formalism": "intervention / flip test",
+     "quote": "We repeated the same experiment across different models and compared their performance–the fraction of sentence/concept pairs for which the model answers both prompts correctly.",
+     "formula": "",
+     "assumptions": "Concept injected on the sentence tokens; the 'thought' is scored by an LLM judge picking the related word out of ten (chance 10%), the transcription by exact string match.",
+     "where": "Section 6, [P134]–[P138]; Appendix 12.2, [P313]–[P328]",
+     "gloss": "The model must report the injected concept as its thought while still repeating the input sentence exactly.",
+     "relation": "Checks that injected states are reported as internal rather than confused with perceptual input."
+    },
+    {
+     "term": "apology rate (prefill intention test)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "belief, intention, scheming, sandbagging, hidden objectives"
+     ],
+     "level": "measurement",
+     "formalism": "intervention / flip test",
+     "quote": "We measured the “apology rate” – the fraction of times the model claims the response was accidental or unintentional.",
+     "formula": "",
+     "assumptions": "A prefilled random word; three conditions (no injection, injection of the prefilled word's concept before the prefill, injection of an unrelated concept); LLM judge; effect reported as the maximum reduction against the lower-apology baseline.",
+     "where": "Section 7, [P152]–[P156]; Appendix 12.3, [P335]–[P344]",
+     "gloss": "How often the model disowns a word put in its mouth; injecting that word's concept beforehand lowers it if the model checks its prior intentions.",
+     "relation": "Tests self-attribution of outputs via introspection on prior intentions rather than recomputation from inputs."
+    },
+    {
+     "term": "self-modeling (as distinct from introspection)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "other: self-modeling"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "While referring to such phenomena as introspection is not unreasonable, we prefer the terms self-modeling, self-knowledge, or self-simulation be used for such cases. We suggest that “introspection” be reserved to refer to models’ access to their own internal states.",
+     "formula": "",
+     "assumptions": "Distinguishes reports of facts about one's behaviour ('If I were presented with scenario X, I would respond in manner Y') from access to current internal states.",
+     "where": "Section 9.6, [P211]",
+     "gloss": "Predicting one's own behaviour is self-modeling; introspection should mean access to one's own internal states.",
+     "relation": "Narrows the Binder et al. (binder2024looking) definition, which it finds too weak because it does not exclude inferences from reading one's own outputs."
+    }
+   ]
+  },
+  {
+   "key": "song2025privileged",
+   "record_markdown": "---\nkey: song2025privileged\ntitle: \"Privileged Self-Access Matters for Introspection in AI\"\nauthors: \"Song, Lederman, Hu et al.\"\nyear: 2025\nvenue: \"preprint\"\nurl: https://arxiv.org/abs/2508.14802v1\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, object:self-report, reveals:internal-state, signal:env-label, contribution:position, contribution:analysis, motivation:explainability, domain:synthetic, scale:closed, eval:privileged-access, eval:confound-control, factor:elicitation, model:gpt-4o, model:gpt-4.1, model:gemini-2.0-flash, model:gemini-2.5-flash, metric:temperature-report-accuracy]\n---\n**TL;DR** Argues introspection requires privileged self-access: access more reliable than any equally cheap third-party process; LLMs' temperature self-reports track prompt framing and show no self-advantage over other models.\n**Problem** Comşa & Shanahan's \"lightweight\" definition counts any accurate, causally linked self-report as introspection, even an inference a third party could make the same way.\n**Method** Proposes a thicker definition based on privileged self-access. Study 1: the C&S temperature self-report task on four API models, varying temperature (0 to 2), framing (factual, neutral, crazy) and subject. Study 2: self-reflection vs within- and across-model prediction of the generator's temperature.\n**Findings** Reports follow framing: crazy → HIGH, factual → LOW at any temperature. Study 2 accuracy at chance in all settings; self-reflection no better than across-model prediction → no privileged self-access, so no introspection by the thick definition.\n**Limits** Short proof of concept: one internal state, binary judgments, four closed models, no fine-tuning; original Gemini models unavailable. Reliability and computational cost unquantified.\n\n**Relations**\n- builds-on [[song2025language]]: operationalizes introspection, as there, as privileged self-access tested by comparing a model's report on itself with other models' predictions from the same information\n- builds-on [[binder2024looking]]: takes from it (with song2025language) the requirement that introspection give privileged self-access, tested against other models\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.\n- reveals:internal-state: the model's current internal state (activations such as an injected steering concept or an active probe direction, or a generation setting such as its sampling temperature), which the report should causally depend on\n",
+   "definitions": [
+    {
+     "term": "introspection in AI (thick definition)",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "concept",
+     "formalism": "predictive / simulation",
+     "quote": "Specifically, we propose introspection in AI is any process which yields information about internal states of the AI through a process that is more reliable than any process with equal or lower computational cost available to a third party without special knowledge of the situation.",
+     "formula": "",
+     "assumptions": "A notion of reliability; a class of third-party processes without special knowledge of the situation; a comparison of computational cost (not hardware cost, footnote 3); optionally restricted to internal states that are not too low-level.",
+     "where": "Section 1, [P34]; abstract [P8]; footnote 3 [P35]",
+     "gloss": "A process counts as introspection if it tells the AI about its internal states more reliably than anything an outsider could do at the same or lower computational cost.",
+     "relation": "Thicker alternative to the Comşa & Shanahan lightweight definition; adopted as most compelling by lindsey2025emergent; resembles resource-bounded definitions such as usable information under computational constraints."
+    },
+    {
+     "term": "privileged self-access",
+     "concepts": [
+      "self-report accuracy and introspection"
+     ],
+     "level": "concept",
+     "formalism": "predictive / simulation",
+     "quote": "Unlike C&S’s definition it requires privileged self-access [cf. 3, 11], that is, that introspection gives a system comparatively reliable access to its own workings in a manner not available to a third party. It is compatible with our definition that the process not be perfectly reliable (see [9]); it only requires reliability not available to a third party at comparable computational cost.",
+     "formula": "",
+     "assumptions": "Third-party processes of comparable computational cost; reliability need not be perfect.",
+     "where": "Section 1, [P34]",
+     "gloss": "The system's access to its own workings must be more reliable than what an outsider can get at comparable computational cost, though not necessarily perfect.",
+     "relation": "The defining component of the thick definition of introspection; absent from the Comşa & Shanahan definition."
+    },
+    {
+     "term": "lightweight introspection (Comşa & Shanahan)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "counterfactuals"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "But, in a recent study, Comşa and Shanahan [6] (C&S) propose a “lightweight” definition of introspection in LLMs, defining it as any case in which the model accurately describes an internal state or mechanism via a causal process that links that feature to the report itself.",
+     "formula": "",
+     "assumptions": "Accuracy of the report and a causal process from the internal state or mechanism to the report.",
+     "where": "Section 1, [P34]",
+     "gloss": "Any accurate self-description produced by a causal process linking the described internal feature to the report.",
+     "relation": "Borrowed from Comşa & Shanahan (2025) and criticized: it admits third-party-replicable inferences (the thermometer example); close to the grounding criterion of lindsey2025emergent."
+    },
+    {
+     "term": "privileged-access test (self-reflection vs within- and across-model prediction)",
+     "concepts": [
+      "self-report accuracy and introspection",
+      "simulatability"
+     ],
+     "level": "measurement",
+     "formalism": "predictive / simulation",
+     "quote": "Per our thicker notion of introspection, we argue that if a language model has privileged access to its internal state, then it should be able to perform better than another model presented with the same external information (i.e. a prompt and generated sentence in this experiment) in analyzing and reporting its own state.",
+     "formula": "",
+     "assumptions": "Same external information for every reporter (prompt and generated sentence); the generator's sampling temperature as ground truth, binarized (≤ 0.5 LOW, ≥ 1.5 HIGH); predictors at temperature 0; accuracy = predicted equals actual temperature class.",
+     "where": "Section 3, [P81]–[P83]; Figure 1 [P19]–[P28]; prompts Appendix B, [P95], [P102]",
+     "gloss": "A model has privileged access only if it reports its own state more accurately than another model given the same prompt and output.",
+     "relation": "Operationalizes privileged self-access; same logic as the self- versus cross-model comparisons of binder2024looking and song2025language."
+    }
+   ]
+  }
+ ]
+}

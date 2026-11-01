@@ -1,0 +1,319 @@
+{
+ "results": [
+  {
+   "n": 1,
+   "verdict": "overstated",
+   "reason": "The Definitions page shows that formal definitions are a small minority (it gives kind counts per family), but it never says or counts that the formal definitions are mainly measurements. The concept/measurement split comes from this page's own Codex labels (formal_labels.json), not from the Definitions page.",
+   "evidence": [
+    "site/pages/definitions.md: \"It rests on 3,414 definitions quoted from 216 of the 217 entries the map held when the catalogue was built.\"",
+    "site/pages/definitions.md: \"by kind, 681 rows are operational, 369 informal, 297 criteria, 231 failure modes, 211 formal and 166 taxonomies\"",
+    "definitions.csv (recomputed): 350 of 3,414 rows have kind formal (faithfulness 211, monitorability 94, counterfactual 45)",
+    "runs/E_formal/label_prompt.md: \"\\\"measurement\\\" if it defines a test, metric, estimator, score or proxy used to assess the notion\" (labels made for this page: 244 of 350 measurement)"
+   ],
+   "replacement": "The map's [Definitions page](page.html?doc=definitions) shows that papers on chain-of-thought (CoT) faithfulness and monitorability define their concepts mostly in words: only 350 of its 3,414 definitions are formal, and the labels below put 244 of those 350 at the level of a measurement."
+  },
+  {
+   "n": 2,
+   "verdict": "overstated",
+   "reason": "Two problems. (a) The sixth family, criteria for introspection, gives no formal definition of a concept: the page itself says introspection has only verbal criteria and that none of the criteria is a mathematical condition, so formal definitions are spread over five of the six families. (b) 'No work in any field defines' is a universal negative; the evidence is that five searches and a completeness check found none.",
+   "evidence": [
+    "runs/E_formal/search_xai_faithfulness_theory.json gaps: \"Introspection: no fully mathematical definition; the criteria are verbal-causal (Comsa & Shanahan, Lindsey) or resource-relative (Song et al.)\"",
+    "formal.csv (recomputed): 15 of the 16 lindsey2025emergent and song2025privileged rows have an empty formula; the one formula (lindsey2025emergent#f8) is level measurement",
+    "runs/E_formal/search_actual_causation.json gaps: \"Faithfulness of CoT, self-explanations and self-reports: no definition as actual causation (stated reasons are actual causes of the output) found\"",
+    "runs/E_formal/search_causal_abstraction.json gaps: \"Faithfulness of CoT or verbalized reasoning: no paper defines it as a causal abstraction between the reasoning text and the model's computation\""
+   ],
+   "replacement": "In brief, formal definitions of most of the concepts exist, but they are spread over several framework families that each cover a subset (the 23 added papers form six families, one of which gives only verbal criteria for introspection); no framework covers all thirteen concepts; and none of the five searches or the completeness check found a work in any field that defines the faithfulness of a CoT as actual causation or as a causal abstraction of its written steps."
+  },
+  {
+   "n": 3,
+   "verdict": "supported"
+  },
+  {
+   "n": 4,
+   "verdict": "supported"
+  },
+  {
+   "n": 5,
+   "verdict": "supported"
+  },
+  {
+   "n": 6,
+   "verdict": "supported"
+  },
+  {
+   "n": 7,
+   "verdict": "overstated",
+   "reason": "Only the 291 framework rows carry formulas and assumptions; the 350 catalogue rows in the Formal tab have a quote but empty formula and assumptions fields, and the 2 Cachin 1998 rows have no quote.",
+   "evidence": [
+    "site/data.json formal (recomputed): catalogue 350 rows, 350 with quote, 0 with formula, 0 with assumptions; frameworks 291 rows, 289 with quote, 267 with formula, 291 with assumptions",
+    "formal.csv: cachin1998information#f1 and #f2 have an empty quote and verbatim \"no text\""
+   ],
+   "replacement": "All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), 639 of them with a verbatim quote; the 291 framework rows also give assumptions and, for 267 of them, a formula."
+  },
+  {
+   "n": 8,
+   "verdict": "supported"
+  },
+  {
+   "n": 9,
+   "verdict": "supported"
+  },
+  {
+   "n": 10,
+   "verdict": "supported"
+  },
+  {
+   "n": 11,
+   "verdict": "supported"
+  },
+  {
+   "n": 12,
+   "verdict": "overstated",
+   "reason": "The page itself states that the sixth family, criteria for introspection, gives only verbal criteria ('As stated, none of the criteria is a mathematical condition'; 'introspection has only verbal criteria'), so formal definitions of concepts come from five of the six families of the 23 papers.",
+   "evidence": [
+    "site/pages/formal.md (Criteria for introspection): \"As stated, none of the criteria is a mathematical condition.\"",
+    "runs/E_formal/search_xai_faithfulness_theory.json gaps: \"Introspection: no fully mathematical definition\"",
+    "formal.csv (recomputed): 15 of 16 introspection rows have no formula; the one formula is a measurement"
+   ],
+   "replacement": "**2. The 23 framework papers fall into six families; five give formal definitions of concepts themselves, the sixth gives verbal criteria for introspection, and each family covers a subset of the concepts.**"
+  },
+  {
+   "n": 13,
+   "verdict": "supported"
+  },
+  {
+   "n": 14,
+   "verdict": "supported"
+  },
+  {
+   "n": 15,
+   "verdict": "understated",
+   "reason": "The count and the other clauses hold (framework definitions exist for faithfulness, completeness and soundness, honesty/lying/deception, belief and intention, monitorability, legibility, steganography, simulatability and counterfactuals). But obfuscation has several formal analogues, not one: the search and the page's own table list opacity, goal obfuscation in planning and an encrypted CoT unreadable by polynomial-time monitors.",
+   "evidence": [
+    "runs/E_formal/search_information_verification.json gaps: \"Obfuscation of CoT (suppressing or rewriting verbalized intent under monitor pressure): formal only by analogy, via DES opacity, planning goal obfuscation and debate's obfuscated arguments.\"",
+    "site/pages/formal.md table, Obfuscation row: \"By analogy only: opacity of a secret to an intruder ([Yin 2026]...), an encrypted CoT that no polynomial-time monitor can read ([Mohammadkhani et al. 2026]...), goal obfuscation in planning ([Kulkarni et al. 2018]...)\""
+   ],
+   "replacement": "Nine of the 13 concepts have a formal definition of the concept itself in some framework; post-hoc rationalization and scheming have none, obfuscation has formal definitions only by analogy (opacity in discrete event systems, goal obfuscation in planning, a CoT that no polynomial-time monitor can read), and introspection has only verbal criteria."
+  },
+  {
+   "n": 16,
+   "verdict": "overstated",
+   "reason": "'No work in any field defines' is a universal negative; the evidence is that the five searches and the completeness check found no such work. 'The CoT papers ... never use actual causation' rests on the absence of the terms and of citations, so 'never mention' is what the scan shows; and the 217 pre-sweep papers are not all CoT papers.",
+   "evidence": [
+    "runs/E_formal/search_actual_causation.json gaps: \"no definition as actual causation (stated reasons are actual causes of the output) found\"",
+    "runs/E_formal/search_causal_abstraction.json summary: \"No work applies causal abstraction to CoT or verbalized reasoning; the closest is CAuSE, for natural-language explanations of classifiers.\"",
+    "cache/full scan of the 217 pre-sweep papers (recomputed): 0 matches of 'actual cause', 'actual causation' or 'actual causality'; Halpern appears only as G. or Y. Halpern in author lists; 0 matches of Beckers or Chockler"
+   ],
+   "replacement": "**3. None of the searches found a work in any field that defines CoT faithfulness as actual causation or as a causal abstraction of the written steps, and the 217 papers in the map before the formal sweep never mention actual causation.**"
+  },
+  {
+   "n": 17,
+   "verdict": "overstated",
+   "reason": "Ward et al. 2023 define actual causality in games but no explanations (the word 'explanation' does not occur in the paper), and in their result the agent's decision is the cause, not the thing explained. Beckers 2022 is motivated by ML predictions but states that the analysis applies in general, and Halpern & Pass extend the definitions to any model where counterfactuals are defined.",
+   "evidence": [
+    "ward2023honesty full text: \"First we adapt the notion of actual causality to SCGs.\"; \"if an agent intentionally causes an outcome, then the agent’s decision was an actual cause of that outcome\" (0 occurrences of 'explanation')",
+    "beckers2022causal full text: \"Although the definitions are motivated by a focus on XAI, the analysis of causal explanation and actual causation applies in general.\"",
+    "halpern2025causality full text: \"We abstract the definition, extracting its key features, so that it can be applied to any other model where counterfactuals are defined.\""
+   ],
+   "replacement": "The framework papers define actual causes and explanations motivated by the predictions of machine-learning models ([Beckers 2022](./#p=beckers2022causal)) and for any model in which counterfactuals are defined ([Halpern & Pass 2025](./#p=halpern2025causality)), and actual causes in games, where an agent's decision can be the cause ([Ward et al. 2023](./#p=ward2023honesty)), never for the steps of a CoT."
+  },
+  {
+   "n": 18,
+   "verdict": "overstated",
+   "reason": "CAuSE is the closest work that the causal-abstraction search found; the actual-causation search names Yu et al.'s PNS scores for CoT steps as the nearest work, and those apply directly to verbalized reasoning.",
+   "evidence": [
+    "runs/E_formal/search_causal_abstraction.json summary: \"No work applies causal abstraction to CoT or verbalized reasoning; the closest is CAuSE, for natural-language explanations of classifiers.\"",
+    "runs/E_formal/search_actual_causation.json summary: \"No work defines faithfulness of a verbalized rationale, self-explanation or CoT as actual causation; the nearest are PNS scores for CoT steps (Yu et al. 2025) and PN/PS for LLM reasoning.\"",
+    "arXiv 2512.06814 abstract: \"Theoretically, we show that CAuSE, trained via interchange intervention, forms a causal abstraction of the underlying classifier.\""
+   ],
+   "replacement": "The closest work to verbalized reasoning that the causal-abstraction search found is CAuSE ([Bandyopadhyay et al. 2025](https://arxiv.org/abs/2512.06814)), whose natural-language explainer of a multimodal classifier, \"trained via interchange intervention, forms a causal abstraction of the underlying classifier\"."
+  },
+  {
+   "n": 19,
+   "verdict": "overstated",
+   "reason": "On a chain that yields the correct answer, PN is the probability that corrupting the step and regenerating the rest makes the answer wrong, which is an interventional test of whether that answer depends on the step. What the definitions do not capture is dependence of the model's own answer when it is wrong: PN conditions on A = y and every quantity is defined relative to the correct answer y. 'Not whether the model used it' is stronger than that.",
+   "evidence": [
+    "yu2025causal#f3: \"Necessity quantifies whether a specific reasoning step st is required for producing the correct answer a = y.\" formula PN(S,s_t,q)=P(A_do(s<t, s̄_t, s'>t) ≠ y | A=y, S, q)",
+    "yu2025causal#f4: PNS(S,s_t,q):=P(A_S=y, A_S'≠y)",
+    "runs/E_formal/critic.json corrections: \"PN and PNS are defined relative to the correct answer y (A=y) and are used to prune or add steps for efficiency. They measure whether a step is necessary for correctness; they do not define faithfulness\""
+   ],
+   "replacement": "[Yu et al. 2025](./#p=yu2025causal) define probabilities of necessity and sufficiency for CoT steps relative to the correct answer $y$, so they measure whether a step is needed for the correct answer, not whether the model's own answer, right or wrong, depended on it."
+  },
+  {
+   "n": 20,
+   "verdict": "understated",
+   "reason": "The 0 counts, the 6 citing Pearl 2001 and the 2 citing Ward et al. 2023 are right. The 5 counts only papers that cite a Geiger paper with causal abstraction in its title. Two more pre-sweep papers cite causal-abstraction papers of Geiger and colleagues: viteri2026markovian cites Geiger et al. 2022 (interchange intervention training) and sherburn2024language cites Wu, Geiger et al. 2023 (Boundless DAS). Both abstracts are framed in causal abstraction. That makes 7.",
+   "evidence": [
+    "viteri2026markovian: \"Geiger et al. (2022) A. Geiger, Z. Wu, H. Lu, J. Rozner, E. Kreiss, T. Icard, N. Goodman, and C. Potts  [P248] Inducing causal structure for interpretable neural networks.\"",
+    "arXiv 2112.00826 abstract: \"IIT is fully differentiable, flexibly combines with other objectives, and guarantees that the target causal model is a causal abstraction of the neural model when its loss is zero.\"",
+    "sherburn2024language: \"Zhengxuan Wu, Atticus Geiger, Christopher Potts, and Noah D. Goodman.  [P284] Interpretability at Scale: Identifying Causal Mechanisms in Alpaca\"",
+    "arXiv 2305.08809 abstract: \"Distributed Alignment Search (DAS) is a powerful gradient descent method grounded in a theory of causal abstraction\"",
+    "cache/full scan (recomputed): 'causal abstraction' in anon2026generating, bhan2025did, khanzadeh2026project, prasad2026features, pres2026consistency (5)"
+   ],
+   "replacement": "None of the 217 papers in the map before the formal sweep uses the terms actual cause, actual causation or actual causality, and none cites Halpern, Beckers or Chockler; 7 cite causal-abstraction papers of Geiger and colleagues (5 of them a paper with causal abstraction in its title), 6 cite [Pearl 2001](./#p=pearl2001direct) and 2 cite [Ward et al. 2023](./#p=ward2023honesty)."
+  },
+  {
+   "n": 21,
+   "verdict": "supported"
+  },
+  {
+   "n": 22,
+   "verdict": "supported"
+  },
+  {
+   "n": 23,
+   "verdict": "supported"
+  },
+  {
+   "n": 24,
+   "verdict": "supported"
+  },
+  {
+   "n": 25,
+   "verdict": "supported"
+  },
+  {
+   "n": 26,
+   "verdict": "supported"
+  },
+  {
+   "n": 27,
+   "verdict": "wrong",
+   "reason": "In Beckers et al. 2019 the worst-case distance d_tau is itself the abstraction error, and the bound is alpha: M_H is a tau-alpha approximate abstraction of M_L if d_tau(M_L, M_H) <= alpha. The page has this right later (Causal abstraction section) but here reverses the roles.",
+   "evidence": [
+    "beckers2019approximate full text: \"MH is a τ -α approximate abstraction of ML if dτ (ML , MH ) ≤ α.\"",
+    "beckers2019approximate full text: \"worstcase distance between the two ways of lifting the contextintervention pairs, for an optimal choice o\"",
+    "geiger2025causal full text: \"Approximate transformation (Section 2.4) provides the needed flexible notion of graded faithfulness.\""
+   ],
+   "replacement": "[Geiger et al. 2023](./#p=geiger2025causal) write that \"Approximate transformation (Section 2.4) provides the needed flexible notion of graded faithfulness\", and [Beckers et al. 2019](./#p=beckers2019approximate) measure the abstraction error by a worst-case distance $d_\\tau$ and require it to be at most $\\alpha$."
+  },
+  {
+   "n": 28,
+   "verdict": "supported"
+  },
+  {
+   "n": 29,
+   "verdict": "supported"
+  },
+  {
+   "n": 30,
+   "verdict": "supported"
+  },
+  {
+   "n": 31,
+   "verdict": "understated",
+   "reason": "Baker and Jia are stated exactly. For Anwar et al., the bound that is proved is on the uplift between Bayes-optimal monitors and is the square root, 0 <= delta <= sqrt(2 I(Y;Z|X)); 'bounded by I(Y;Z|X)' is the paper's loose prose and, read literally (delta <= I), is not what is proved.",
+   "evidence": [
+    "anwar2026analyzing Proposition 3.7: \"Accuracy uplift $\\delta$ in CoT monitorability of an attribute $Y$ is always non-negative and bounded above by $I(Y;Z|X)$ . Specifically, $0\\leq\\delta\\leq\\sqrt{2I(Y;Z|X)}$\"",
+    "anwar2026analyzing Definition 3.6: \"let the accuracies attained by Bayes-optimal CoT monitor $m_{g}^{\\pi}$ and the Bayes-optimal prompt-only monitor $p_{g}^{\\pi}$ be $\\alpha_{\\text{CoT}}$ and $\\alpha_{\\text{Prompt}}$ . Then the uplift from monitoring CoT (in addition to monitoring the prompt alone) is $\\delta:=\\alpha_{\\text{CoT}}-\\alpha_{\\text{Prompt}}$\"",
+    "anwar2026analyzing#32: \"$I_{\\mathcal{V}}(Y;Z\\mid X):=\\inf_{h\\in\\mathcal{V}}\\ \\mathbb{E}\\big[\\ell\\big(Y,h(X)\\big)\\big]\\ -\\ \\inf_{h\\in\\mathcal{V}}\\ \\mathbb{E}\\big[\\ell\\big(Y,h(X,Z)\\big)\\big].$\""
+   ],
+   "replacement": "[Baker et al. 2025](./#p=baker2025monitoring) call a latent faithful with respect to a property $v$ if it \"is a sufficient statistic for $v$\"; [Jia et al. 2026](./#p=jia2026faithfulness) define sufficiency as a low $H(A\\mid C)$ and completeness as $I(P;A\\mid C)\\approx 0$; [Anwar et al. 2026 (information theory)](./#p=anwar2026analyzing) bound the accuracy uplift of the Bayes-optimal CoT monitor over the Bayes-optimal prompt-only monitor through the conditional mutual information, $0\\le\\delta\\le\\sqrt{2I(Y;Z\\mid X)}$, and define a monitor-class version, $I_{\\mathcal{V}}(Y;Z\\mid X)$."
+  },
+  {
+   "n": 32,
+   "verdict": "supported"
+  },
+  {
+   "n": 33,
+   "verdict": "supported"
+  },
+  {
+   "n": 34,
+   "verdict": "supported"
+  },
+  {
+   "n": 35,
+   "verdict": "supported"
+  },
+  {
+   "n": 36,
+   "verdict": "overstated",
+   "reason": "True of formal.csv, but 'the only framework definition of deception' reads as unrestricted, and the agency search verified other formal definitions of deception outside the map: a belief-free deception incentive in multi-agent influence models (Ward et al. 2022) and deception as positive listener regret in a communication POMDP (Abdulhai et al. 2024).",
+   "evidence": [
+    "formal.csv (recomputed): no row whose concepts, term or gloss match honest|lying|post-hoc|rationaliz; only ward2023honesty#f7 defines deception",
+    "runs/E_formal/search_agency_honesty.json summary: \"Lying and deception also have epistemic-logic, signalling-game and POMDP-regret formalisations.\"",
+    "runs/E_formal/candidates.json, Defining Deception in Decision Making (2024, verified full text): \"the speaker is deceptive if the listener's regret is positive\"",
+    "runs/E_formal/candidates.json, A Causal Perspective on AI Deception in Games (2022, verified full text): \"Belief-free (functional) deception incentive: S has an incentive to signal V to T, and T's decision differs from the counterfactual model in which T observes V\""
+   ],
+   "replacement": "No formal.csv row defines post-hoc rationalization, honesty or lying, and the only formal.csv definition of deception is Definition 3.7 of [Ward et al. 2023](./#p=ward2023honesty)."
+  },
+  {
+   "n": 37,
+   "verdict": "supported"
+  },
+  {
+   "n": 38,
+   "verdict": "supported"
+  },
+  {
+   "n": 39,
+   "verdict": "supported"
+  },
+  {
+   "n": 40,
+   "verdict": "supported"
+  },
+  {
+   "n": 41,
+   "verdict": "supported"
+  },
+  {
+   "n": 42,
+   "verdict": "supported"
+  },
+  {
+   "n": 43,
+   "verdict": "overstated",
+   "reason": "'These definitions' follows the sentence on responsibility and blame, but Halpern & Pass abstract only actual causation and explanation: the paper never mentions responsibility or blame.",
+   "evidence": [
+    "halpern2025causality full text: \"We abstract the definition, extracting its key features, so that it can be applied to any other model where counterfactuals are defined.\"",
+    "halpern2025causality full text: \"we can apply the definition to determine if A is a cause of B even if A and B are formulas involving disjunctions, negations, beliefs, and nested counterfactuals (none of which can be handled by the Halpern-Pearl definition). Moreover, we can extend the ideas to getting an abstract definition of explanation\"",
+    "halpern2025causality full text (recomputed): 0 occurrences of 'responsibility' or 'blame'"
+   ],
+   "replacement": "[Halpern & Pass 2025](./#p=halpern2025causality) abstract the definitions of actual cause and explanation from structural equations to any family of models in which counterfactuals are defined, so that causes and explanations can be formulas \"involving disjunctions, negations, beliefs, and nested counterfactuals (none of which can be handled by the Halpern-Pearl definition)\"."
+  },
+  {
+   "n": 44,
+   "verdict": "supported"
+  },
+  {
+   "n": 45,
+   "verdict": "supported"
+  }
+ ],
+ "coherence": [
+  {
+   "old": "Outside the map: lying in dynamic epistemic logic ([van Ditmarsch 2011](https://arxiv.org/abs/1108.2115)),",
+   "new": "Outside the map: a belief-free deception incentive in multi-agent influence models ([Ward et al. 2022](https://ceur-ws.org/Vol-3193/paper2CAUSAL.pdf)), deception as positive listener regret in a communication POMDP ([Abdulhai et al. 2024](https://ifaamas.org/Proceedings/aamas2024/pdfs/p2111.pdf)), lying in dynamic epistemic logic ([van Ditmarsch 2011](https://arxiv.org/abs/1108.2115)),",
+   "reason": "The agency search verified these two formal definitions of deception (candidates.json, full text). The table lists only Ward et al. 2023 for deception, which supports the overstated 'only framework definition of deception' (claim 36)."
+  },
+  {
+   "old": "A CoT is text, not a causal model, and no paper reads the steps of a CoT as a high-level model.",
+   "new": "A CoT is text, not a causal model, and no paper that the searches found reads the steps of a CoT as a high-level model.",
+   "reason": "Matches the search-based scope of findings 2 and 3 (claims 2 and 16): the evidence is that no such paper was found."
+  },
+  {
+   "old": "**No definition of CoT faithfulness as actual causation or as an abstraction of the written steps.**",
+   "new": "**No definition of CoT faithfulness as actual causation or as an abstraction of the written steps was found.**",
+   "reason": "Same search-based scope as claims 2 and 16."
+  }
+ ],
+ "other_problems": [
+  {
+   "where": "runs/E_formal/claims_formal.json, claim 20 evidence",
+   "problem": "The evidence lists joglekar2025training as citing Ward et al. 2023. Joglekar only uses the phrase in quotation marks (\"We expect that in most settings, “honesty is the best policy,” meaning that ...\") and does not cite the paper. The second citing paper is schoen2025stress: \"in contrast to the related concept of deception (Ward et al., 2023)\". The count of 2 stands.",
+   "fix": "Replace joglekar2025training with schoen2025stress in the evidence for the Ward et al. 2023 count."
+  },
+  {
+   "where": "site/pages/formal.md, How this page was made, step 4",
+   "problem": "The page says \"GPT-6.1 Sol, run through Codex, read the 23 papers in five batches\". PLAN.md says the records and definitions were \"extracted by GPT-6.1 Sol through Codex (three batches) or Claude (two batches, after Codex reached its weekly cap)\". Step 4 also says the 2 Cachin 1998 rows \"are taken from the abstract and from the restatement in Anwar et al. 2026\", but their quote field is empty in formal.csv and site/data.json; only the formulas are given.",
+   "fix": "Check who extracted batches F4 and F5. If Claude did, write \"GPT-6.1 Sol, run through Codex, read 15 of the 23 papers in three batches and Claude the rest in two\" with the real split. Say that the 2 Cachin rows have a formula but no quote."
+  },
+  {
+   "where": "site/pages/formal.md, paragraph after the table (\"Faithfulness, completeness and soundness, legibility and counterfactuals are each defined in at least two framework families\")",
+   "problem": "The sentence is true, but by the table, belief and intention also span two families: structural causal games, and structural causal models with an epistemic state (Halpern & Kleiman-Weiner 2018 for intention). A reader may take the list as complete.",
+   "fix": "Optionally add \"and intention\" or write \"among them\" before the list."
+  }
+ ]
+}

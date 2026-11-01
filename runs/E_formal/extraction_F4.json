@@ -1,0 +1,810 @@
+{
+ "batch": "F4",
+ "papers": [
+  {
+   "key": "anwar2026decision",
+   "record_markdown": "---\nkey: anwar2026decision\ntitle: \"A Decision-Theoretic Formalisation of Steganography With Applications to LLM Monitoring\"\nauthors: \"Anwar, Piskorz, Baek et al.\"\nyear: 2026\nvenue: \"preprint\"\nurl: https://arxiv.org/abs/2602.23163v3\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, object:cot, reveals:hidden-info, signal:known-payload, signal:implanted-behavior, lever:inference-time, contribution:theory, contribution:metric, motivation:monitoring, domain:math, domain:mcq, domain:synthetic, domain:code, domain:classification, scale:small, scale:mid, scale:closed, eval:adversarial, eval:measure-validation, eval:scaling, factor:monitor-choice, model:qwen2.5-14b, model:qwen2.5-7b, model:qwen2.5-3b, model:qwen3-30b-a3b, model:gpt-4.1, model:gpt-4.1-mini, model:gpt-5, model:gpt-5-mini, metric:steganographic-gap]\n---\n**TL;DR** Defines steganography as the usable-information gap between a Receiver who can decode and a trusted Sentinel who cannot; the gap detects, quantifies and helps mitigate encoded LLM reasoning.\n**Problem** Classical stego security (Cachin; Hopper) needs a known cover distribution → inapplicable to LLM CoT, blind to perfectly secure schemes; LLM-judge \"illegible/suspicious\" checks are unprincipled heuristics.\n**Method** Generalised V-information (best expected task utility over a decoder family, with vs. without Z). Steganographic gap Δsteg = Receiver- minus Sentinel-usable information of trace Z on an auditing task (Y, u); normalised 1 − Isen/Irec. Proofs; tests on Rot13-ciphered traces, codeword RL on CoinFlip, cipher-SFT GPT-4.1 on APPS backdoors, MONA loan task.\n**Findings** Recovers Cachin ε-security as binary-detection special case (normalised gap = 1 − TV); incompleteness theorems (omitted state, finite task families). Normalised gap rises 0→1 with Rot13 rate; 0.92 for codebook vs. no-stego policy, ≈0 for identical; grows with cipher training; task-dependent. Sentinel test-time scaling and gap-trained paraphraser shrink it; public sentiment encoding gives no positive gap. App. A: Roger-style paraphraser leaves 5/6 planted channels; gap flags all 6.\n**Limits** Needs a labelled auditing task and a matched-capability Sentinel; utilities elicited by prompting (false positives/negatives); sandbagging; effects must appear within the audit horizon; blind to payloads irrelevant to the task. Steganography simulated, not observed in the wild.\n\n**Relations**\n- builds-on [[skaf2025large]]: uses its CoinFlip task and process-supervision rewards to train codeword policies\n- builds-on [[farquhar2025mona]]: adapts its loan-application environment for the public-encoding test and the paraphrasing study\n- contradicts [[anthropic2025paraphrases]]: argues its paraphrase-and-distill null result is uninterpretable; an Anthropic-derived paraphraser leaves 5 of 6 planted channels decodable\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.\n- metric:steganographic-gap: Receiver-usable minus Sentinel-usable (generalised V-)information of a signal on an auditing task, often normalised by the Receiver's.",
+   "definitions": [
+    {
+     "term": "steganographic (encoded) reasoning",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "A related but distinct phenomenon is steganographic (encoded) reasoning1 , where a model produces reasoning traces that are unintelligible to a monitor but remain useful to the model itself (Roger & Greenblatt, 2023; Skaf et al., 2025).",
+     "formula": "",
+     "assumptions": "A model whose reasoning trace is read by a monitor; the trace must be useful to the model (the Sender acts as its own Receiver).",
+     "where": "Section 2 (Related Works), [P70]; footnote 1, [P74]",
+     "gloss": "Reasoning whose trace a monitor cannot understand but which still helps the model that wrote it; the paper uses 'steganographic' and 'encoded' reasoning interchangeably.",
+     "relation": "Verbal notion operationalised by the steganographic gap (Eq. 8); distinguished from steganographic communication between separate models."
+    },
+    {
+     "term": "generalised decoder family",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "learning-theoretic / optimization",
+     "quote": "Definition C.4 (Generalised Decoder Family). Let D = {d : Z ∪ {∅} → C} be the space of all decoders, with some output space C.",
+     "formula": "\\mathcal D=\\{d:\\mathcal Z\\cup\\{\\varnothing\\}\\to\\mathcal C\\};\\ \\mathcal V\\subseteq\\mathcal D\\ \\text{is a generalised decoder family iff}\\ \\forall d\\in\\mathcal V,\\ \\forall c\\in\\mathrm{range}(d)\\subseteq\\mathcal C,\\ \\exists d'\\in\\mathcal V\\ \\text{s.t.}\\ \\forall z\\in\\mathcal Z,\\ d'[z]=d'[\\varnothing]=c",
+     "assumptions": "An arbitrary output space C; decoders presumed capacity- and compute-constrained; optional ignorance (any output can be produced while ignoring Z). In the main text decoders map X^aud × (Z ∪ ∅) → C.",
+     "where": "Definition C.4, App. C.2, [P492]-[P496]; Section 3.1, [P71]",
+     "gloss": "The set of decision rules an agent can use, mapping available information to any kind of output, closed under ignoring the extra signal.",
+     "relation": "Generalises the predictive family of Xu et al. (2020) (Definition C.1) from predictive distributions to arbitrary outputs."
+    },
+    {
+     "term": "predictive family",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "learning-theoretic / optimization",
+     "quote": "Intuitively, a predictive family represents the set of models available to an agent, for instance due to architectural, computational, or statistical constraints.",
+     "formula": "\\Omega=\\{f:\\mathcal Z\\cup\\{\\varnothing\\}\\to\\mathcal P(\\mathcal Y)\\};\\ \\mathcal V\\subseteq\\Omega\\ \\text{s.t.}\\ \\forall f\\in\\mathcal V,\\ \\forall P\\in\\mathrm{range}(f),\\ \\exists f'\\in\\mathcal V\\ \\text{s.t.}\\ \\forall z\\in\\mathcal Z,\\ f'[z]=f'[\\varnothing]=P",
+     "assumptions": "Predictors output probability measures over Y; optional ignorance.",
+     "where": "Definition C.1, App. C.1, [P479]-[P483]; Section 3.2, [P71]",
+     "gloss": "A restricted class of probabilistic predictors available to an agent, which must be able to ignore side information when it chooses to.",
+     "relation": "Restates Xu et al. (2020), Definition 1; special case of the generalised decoder family (Definition C.4) with C = P(Y)."
+    },
+    {
+     "term": "predictive V-entropy",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Predictive V-entropy is the minimal expected negative log-likelihood achievable when predicting Y , either with access to side information Z or without it, under the restriction that predictors must belong to the predictive family V.",
+     "formula": "H_{\\mathcal V}(Y\\mid Z)=\\inf_{f\\in\\mathcal V}\\mathbb E_{Y,Z}\\big[-\\log f[Z](Y)\\big],\\quad H_{\\mathcal V}(Y\\mid\\varnothing)=\\inf_{f\\in\\mathcal V}\\mathbb E_{Y}\\big[-\\log f[\\varnothing](Y)\\big];\\ \\text{main text: } H_{\\mathcal V}(Y\\mid X)=\\inf_{d\\in\\mathcal V}\\mathbb E_{X,Y}[-\\log d[X](Y)],\\ H_{\\mathcal V}(Y\\mid X,Z)=\\inf_{d\\in\\mathcal V}\\mathbb E_{X,Y,Z}[-\\log d[X,Z](Y)]",
+     "assumptions": "A predictive family V satisfying optional ignorance; densities or mass functions; log loss.",
+     "where": "Definition C.2, App. C.1, [P483]-[P488]; Eqs. (1)-(2), Section 3.2, [P73]",
+     "gloss": "The lowest average log-loss for predicting Y that models in the allowed family can reach, with or without the extra signal.",
+     "relation": "Restates Xu et al. (2020), Definition 2; equals Shannon (conditional) entropy when V = Omega; special case of generalised V-utility (Definition C.5) with u(y,q) = log q(y), up to sign."
+    },
+    {
+     "term": "predictive V-information",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Predictive V-information quantifies how much observing Z improves the best achievable predictive performance on Y within the family V.",
+     "formula": "I_{\\mathcal V}(Z\\to Y)=H_{\\mathcal V}(Y\\mid\\varnothing)-H_{\\mathcal V}(Y\\mid Z);\\quad I_{\\mathcal V}(Z\\to Y\\mid X)=H_{\\mathcal V}(Y\\mid X)-H_{\\mathcal V}(Y\\mid X,Z)",
+     "assumptions": "A predictive family satisfying optional ignorance.",
+     "where": "Definition C.3, App. C.1, [P488]-[P490]; Eq. (3), Section 3.2, [P78], [P81]",
+     "gloss": "How much seeing Z lowers the best achievable log-loss on Y for a constrained family of predictors; it measures usable rather than total information.",
+     "relation": "Restates Xu et al. (2020), Definition 3, with a conditional version (Eq. 3); recovers Shannon mutual information when V = Omega; special case of generalised V-information (Definition C.6)."
+    },
+    {
+     "term": "generalised V-utility",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Generalised V-utility represents the best achievable expected task utility under u, either with or without access to side information Z, when the decision maker is restricted to decoders in V.",
+     "formula": "U^{u}_{\\mathcal V}(Y\\mid Z)=\\sup_{d\\in\\mathcal V}\\mathbb E_{Y,Z}\\big[u(Y,d[Z])\\big],\\quad U^{u}_{\\mathcal V}(Y\\mid\\varnothing)=\\sup_{d\\in\\mathcal V}\\mathbb E_{Y}\\big[u(Y,d[\\varnothing])\\big]",
+     "assumptions": "A utility function u: Y × C → R and a generalised decoder family V.",
+     "where": "Definition C.5, App. C.2, [P497]-[P498]; Eqs. (4)-(5), Section 3.3, [P85]",
+     "gloss": "The highest expected task score a constrained decision maker can obtain, with or without the extra signal.",
+     "relation": "Strictly generalises predictive V-entropy: with C = P(Y), D = Omega and u(y,q) = log q(y) it reduces to it."
+    },
+    {
+     "term": "generalised V-information",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Generalised V-information quantifies the extent to which access to side information Z improves achievable task performance on Y , relative to a constrained decision maker.",
+     "formula": "I^{u}_{\\mathcal V}(Z\\to Y)=U^{u}_{\\mathcal V}(Y\\mid Z)-U^{u}_{\\mathcal V}(Y\\mid\\varnothing)",
+     "assumptions": "A decoder space D, a utility u: Y × C → R and a generalised decoder family V with optional ignorance (needed for non-negativity and zero value under independence).",
+     "where": "Definition C.6, App. C.2, [P498]-[P499], [P504]; properties in C.2.1, [P506]-[P515]",
+     "gloss": "The gain in best achievable task utility from observing Z, for decoders in V. Z can be rich in Shannon information yet have zero value if no decoder can exploit it.",
+     "relation": "Generalises predictive V-information (log-loss utility) to arbitrary utilities, e.g. accuracy; follows the utilitarian information view of Zhao et al. (2021) and Ermon (2022)."
+    },
+    {
+     "term": "conditional generalised V-information (GVI)",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "The generalised V-information (GVI) is then the gain in utility achievable by the best decoders in V by additionally observing Z:",
+     "formula": "I^{u}_{\\mathcal V}(Z\\to Y\\mid X)=U^{u}_{\\mathcal V}(Y\\mid X,Z)-U^{u}_{\\mathcal V}(Y\\mid X),\\quad U^{u}_{\\mathcal V}(Y\\mid X,Z)=\\sup_{d\\in\\mathcal V}\\mathbb E\\big[u(Y,d[X,Z])\\big],\\ U^{u}_{\\mathcal V}(Y\\mid X)=\\sup_{d\\in\\mathcal V}\\mathbb E\\big[u(Y,d[X])\\big]",
+     "assumptions": "Decoders d: X × (Z ∪ {∅}) → C, with d[X] shorthand for d[X, ∅]; a utility u; optional ignorance.",
+     "where": "Eq. (6), Section 3.3, [P86], [P88]; Definition C.7, App. C.2, [P500]-[P504]",
+     "gloss": "The extra task utility the best decoder in V gains from seeing Z on top of the input X. With accuracy utility it is the accuracy increase attributable to Z.",
+     "relation": "Conditional version of Definition C.6, generalising conditional mutual information; the building block of Receiver- and Sentinel-usable information."
+    },
+    {
+     "term": "Receiver-usable and Sentinel-usable information",
+     "concepts": [
+      "usable information",
+      "steganography and encoded reasoning"
+     ],
+     "level": "measurement",
+     "formalism": "information-theoretic",
+     "quote": "The Receiver-usable information of Z quantifies the utility gain (under u) that the best decoder in Receiver’s decoding class Vrec can obtain from observing Z, relative to decoding from X alone.",
+     "formula": "I_{\\mathrm{rec}}(Z\\to Y)=I^{u}_{\\mathcal V_{\\mathrm{rec}}}(Z\\to Y\\mid X^{\\mathrm{aud}})=U^{u}_{\\mathcal V_{\\mathrm{rec}}}(Y\\mid X^{\\mathrm{aud}},Z)-U^{u}_{\\mathcal V_{\\mathrm{rec}}}(Y\\mid X^{\\mathrm{aud}}),\\quad I_{\\mathrm{sen}}(Z\\to Y)=I^{u}_{\\mathcal V_{\\mathrm{sen}}}(Z\\to Y\\mid X^{\\mathrm{aud}})",
+     "assumptions": "An auditing task (X^aud, u, Y) chosen by the Auditor; decoder families V_rec (knows the encoding) and V_sen (trusted, comparable capability, no knowledge of the encoding); Z ~ P_S(Z | X^gen).",
+     "where": "Eq. (7), Section 4.3, [P104], [P106]-[P116], [P120]",
+     "gloss": "How much the signal improves the best achievable score on the auditing task for the Receiver's decoders, and, analogously, for the trusted Sentinel's.",
+     "relation": "Instances of conditional GVI (Eq. 6) for the two decoder families; their difference is the steganographic gap."
+    },
+    {
+     "term": "steganographic gap",
+     "concepts": [
+      "steganography and encoded reasoning",
+      "monitorability"
+     ],
+     "level": "measurement",
+     "formalism": "information-theoretic",
+     "quote": "The steganographic gap is then defined as ∆steg (Z) = Irec (Z → Y ) − Isen (Z → Y ).",
+     "formula": "\\Delta_{\\mathrm{steg}}(Z)=I_{\\mathrm{rec}}(Z\\to Y)-I_{\\mathrm{sen}}(Z\\to Y)",
+     "assumptions": "Auditing task (Y, u) and context X^aud; Receiver and Sentinel decoder families; Sentinel of matched public capability (Assumption E.3) for a positive gap to indicate hidden content; utilities estimated by eliciting best performance.",
+     "where": "Eq. (8), Section 4.3, [P116]; Section 8.1-8.2, [P249]",
+     "gloss": "How much more usable information a signal gives the Receiver than a trusted Sentinel on an auditing task; it is measured in the utility's units.",
+     "relation": "Built on GVI; generalises Cachin's ε-security, recovered when the auditing task is binary detection with an omnipotent Sentinel (Proposition D.1); alternative to distributional indistinguishability (Cachin 2004; Hopper et al. 2002)."
+    },
+    {
+     "term": "normalised steganographic gap",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "measurement",
+     "formalism": "information-theoretic",
+     "quote": "To avoid this confusion related to units, we define and use normalised steganographic gap which is dimensionless and has a maximum value of 1, making it easier to interpret.",
+     "formula": "\\tilde\\Delta_{\\mathrm{steg}}(Z)=\\frac{\\Delta_{\\mathrm{steg}}(Z)}{I_{\\mathrm{rec}}(Z\\to Y)}=1-\\frac{I_{\\mathrm{sen}}(Z\\to Y)}{I_{\\mathrm{rec}}(Z\\to Y)}",
+     "assumptions": "I_rec(Z → Y) > 0 (the signal must help the Receiver, e.g. tasks with CoT uplift).",
+     "where": "Eq. (9), Section 4.3, [P96], [P98]-[P99], [P121]",
+     "gloss": "The steganographic gap divided by the Receiver's gain: the fraction of the signal's usable information that the Receiver can use but the Sentinel cannot. It is at most 1.",
+     "relation": "Rescaling of the steganographic gap; equals 1 − TV(P0, P1) in the classical special case (Proposition D.1)."
+    },
+    {
+     "term": "steganographic signal (decision-theoretic)",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "In this framework, signal Z is steganographic if it induces a positive steganographic gap, which indicates that there is some information encoded in Z that is operationally accessible to Vrec but comparatively inaccessible to Vsen for the objective (Y, u).",
+     "formula": "Z\\ \\text{is steganographic w.r.t.}\\ (\\mathcal V_{\\mathrm{rec}},\\mathcal V_{\\mathrm{sen}},Y,u,X^{\\mathrm{aud}})\\iff\\Delta_{\\mathrm{steg}}(Z)>0",
+     "assumptions": "Sentinel-relative and task-relative; needs interceptable and replayable signals, recoverable actions and effects within the auditing horizon (Section 4.4).",
+     "where": "Section 4.3, [P124]; Section 8.2 and 8.5, [P249], [P259]",
+     "gloss": "A signal counts as steganographic when decoders that know the encoding can exploit it for the chosen task better than a comparable trusted Sentinel can.",
+     "relation": "Alternative to the classical definition (indistinguishability from a cover distribution, Cachin 2004); unlike it, needs no cover distribution and can flag perfectly secure schemes, but ignores payloads irrelevant to the task."
+    },
+    {
+     "term": "ε-secure steganographic system (Cachin, 2004)",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Cachin (2004) defines a steganographic system to be ε-secure if the Kullback-Leibler divergence between these distributions is bounded: DKL (P1 ∥P0 ) ≤ ε.",
+     "formula": "D_{\\mathrm{KL}}(P_1\\,\\|\\,P_0)\\le\\varepsilon;\\quad \\text{perfectly secure if } \\varepsilon=0\\ (P_1=P_0)",
+     "assumptions": "Known covertext distribution P0 and stegotext distribution P1; a passive Auditor (warden) distinguishing them.",
+     "where": "App. D.1, Eq. (20), [P518]-[P520]; Proposition D.1, [P522]-[P537]",
+     "gloss": "A stegosystem is ε-secure when the KL divergence between stegotext and covertext distributions is at most ε; zero divergence makes the two indistinguishable by any test.",
+     "relation": "Borrowed from Cachin (2004); Proposition D.1 recovers it as a special case of the normalised steganographic gap (binary detection, uniform prior, omnipotent Sentinel): normalised gap = 1 − TV ≥ 1 − sqrt(ε/2)."
+    },
+    {
+     "term": "consequential information",
+     "concepts": [
+      "usable information",
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Our decision-theoretic framework takes a fundamentally different stance: instead of asking whether Z contains hidden information in the abstract, it asks whether Z contains hidden information that is consequential.",
+     "formula": "I^{u^\\star}_{\\mathcal V}(Z\\to Y^\\star\\mid O)>0",
+     "assumptions": "A decision problem (Y*, u*), a decoder family V and an observed context O; Z ⊥ Y* | O suffices for no consequential information (Lemma E.4).",
+     "where": "Definition E.1, App. E.1, [P548]-[P549]",
+     "gloss": "A signal carries consequential information for a decision problem if seeing it raises the best achievable utility beyond what the observed context already allows.",
+     "relation": "Positive conditional GVI; marks the scope of the steganographic gap, which is blind to inert payloads (e.g. watermarks) that classical security would flag."
+    },
+    {
+     "term": "composite signal",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "probabilistic / statistical",
+     "quote": "Definition E.2 (Composite Signal). Let X gen ∈ X gen be the generation context, S ∈ S a payload to be embedded, k ∈ K a shared key known to Sender and Receiver, and ξ an independent source of randomness.",
+     "formula": "Z=G(X^{\\mathrm{gen}},S,k,\\xi);\\quad \\text{in proofs } Z=(Z_0,\\mathrm{Enc}(S,k)),\\ Z_0=G_0(X^{\\mathrm{gen}},\\xi)",
+     "assumptions": "Sender's generation process G; payload S; shared key k; cipher Enc with Shannon perfect secrecy in the incompleteness constructions.",
+     "where": "Definition E.2, App. E.2, [P549]-[P551]",
+     "gloss": "A signal that is both a legitimate information source (the public reasoning) and a covert channel carrying a keyed payload.",
+     "relation": "Setting for the incompleteness results (Theorems E.6-E.7) under Matched Public Capability (Assumption E.3)."
+    },
+    {
+     "term": "evasion-compatible payload set",
+     "concepts": [
+      "steganography and encoded reasoning",
+      "monitorability"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "The evasion-compatible payload set shrinks monotonically as the auditing family grows:",
+     "formula": "\\mathcal E(\\mathcal F)=\\{S:\\ \\Delta^{(Y_k,u_k)}(Z;X^{\\mathrm{aud}})=0\\ \\ \\forall (Y_k,u_k)\\in\\mathcal F\\};\\quad \\mathcal F_1\\subseteq\\mathcal F_2\\Rightarrow\\mathcal E(\\mathcal F_2)\\subseteq\\mathcal E(\\mathcal F_1)",
+     "assumptions": "A finite family F of auditing tasks; composite signals Z = (Z0, Enc(S, k)).",
+     "where": "Proposition E.9, App. E.4, [P585]-[P588]",
+     "gloss": "The payloads that produce a zero steganographic gap on every auditing task in a family; adding tasks can only shrink this set.",
+     "relation": "Complements Corollary E.8 (evasion requires the payload to carry no consequential information about any audited task) and Theorem E.7 (finite-family incompleteness)."
+    },
+    {
+     "term": "empirical steganographic gap",
+     "concepts": [
+      "steganography and encoded reasoning",
+      "usable information"
+     ],
+     "level": "measurement",
+     "formalism": "probabilistic / statistical",
+     "quote": "Hence, in practice we estimate Igen (Z → Y ) and Iaud (Z → Y ) from a finite evaluation set by replacing expectations with empirical averages.",
+     "formula": "\\hat U^{u}(d;X^{\\mathrm{aud}})=\\tfrac1n\\sum_{i=1}^{n}u\\big(y_i,d[x_i^{\\mathrm{aud}}]\\big),\\ \\hat U^{u}(d;X^{\\mathrm{aud}},Z)=\\tfrac{1}{n n_z}\\sum_{i=1}^{n}\\sum_{j=1}^{n_z}u\\big(y_i,d[x_i^{\\mathrm{aud}},z_{i,j}]\\big);\\ \\hat U^{u}_{\\mathcal V}(Y\\mid X^{\\mathrm{aud}})=\\sup_{d\\in\\mathcal V}\\hat U^{u}(d;X^{\\mathrm{aud}}),\\ \\hat U^{u}_{\\mathcal V}(Y\\mid X^{\\mathrm{aud}},Z)=\\max\\big(\\sup_{d\\in\\mathcal V}\\hat U^{u}(d;X^{\\mathrm{aud}},Z),\\ \\hat U^{u}_{\\mathcal V}(Y\\mid X^{\\mathrm{aud}})\\big);\\ \\hat I^{u}_{\\mathcal V}=\\hat U^{u}_{\\mathcal V}(Y\\mid X^{\\mathrm{aud}},Z)-\\hat U^{u}_{\\mathcal V}(Y\\mid X^{\\mathrm{aud}});\\ \\hat\\Delta_{\\mathrm{steg}}=\\hat I^{u}_{\\mathcal V_{\\mathrm{rec}}}-\\hat I^{u}_{\\mathcal V_{\\mathrm{sen}}}",
+     "assumptions": "n tasks, n_z sampled traces per task, n_y decoder samples; prompts p^{x-only} and p^{xz}; suprema approximated by prompting; max with the no-Z utility enforces optional ignorance.",
+     "where": "App. F, Eqs. (40)-(44), [P593]-[P610]",
+     "gloss": "Plug-in estimate: average task utility with and without the trace for Receiver and Sentinel, take the best decoder, and subtract the two gains.",
+     "relation": "Finite-sample estimator of the steganographic gap (Eq. 8); the max step enforces the non-negativity that optional ignorance guarantees in the population definition."
+    },
+    {
+     "term": "paraphrase-and-distill test for encoded reasoning",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "measurement",
+     "formalism": "intervention / flip test",
+     "quote": "If both distilled models achieve comparable performance on held-out problems, the encoding—if any existed—was not load-bearing.",
+     "formula": "",
+     "assumptions": "A paraphraser that removes any encoding while preserving content; the capability is absent from the base model and acquired in RL; distillation of the base model on original vs. paraphrased traces.",
+     "where": "App. A, [P391]",
+     "gloss": "Fine-tune the base model on original and on paraphrased reasoning traces; matching accuracy is read as evidence that no load-bearing encoding was present.",
+     "relation": "Borrowed from Roger (2025); the paper shows it is confounded both ways (paraphrasers miss channels or damage content) and proposes the steganographic gap as an alternative."
+    },
+    {
+     "term": "structural steganography",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "In structural steganography, information is hidden in the formatting or representation of the text—the meaning is unchanged, only how it is rendered differs.",
+     "formula": "",
+     "assumptions": "Natural-language carrier text.",
+     "where": "App. A.1, [P391]",
+     "gloss": "Hiding information in how text is rendered, such as whitespace, zero-width characters, homoglyphs, heading case or list format, without changing its meaning.",
+     "relation": "One of three channel types with syntactic and semantic steganography."
+    },
+    {
+     "term": "syntactic steganography",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "In syntactic steganography, information is hidden in surface-level word or phrase choice while the underlying semantics remain fixed.",
+     "formula": "",
+     "assumptions": "Natural-language carrier text.",
+     "where": "App. A.1, [P391]",
+     "gloss": "Hiding information in word or phrase choice, such as synonym substitution or active vs. passive voice, while meaning stays fixed.",
+     "relation": "Classical 'semantics-preserving' steganography; contrasted with structural and semantic steganography."
+    },
+    {
+     "term": "semantic steganography",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "In semantic steganography, the meaning of the text itself carries the hidden signal—which facts are included, which entities are mentioned, how situations are framed.",
+     "formula": "",
+     "assumptions": "Natural-language carrier text.",
+     "where": "App. A.1, [P393]",
+     "gloss": "Hiding information in what the text says: which facts or entities appear and how situations are framed. A meaning-preserving paraphrase therefore keeps the channel.",
+     "relation": "Contrasted with structural and syntactic steganography; the paper argues paraphrasing cannot remove it by construction."
+    }
+   ]
+  },
+  {
+   "key": "xu2020theory",
+   "record_markdown": "---\nkey: xu2020theory\ntitle: \"A Theory of Usable Information Under Computational Constraints\"\nauthors: \"Xu, Zhao, Song et al.\"\nyear: 2020\nvenue: \"ICLR 2020 (talk)\"\nurl: https://arxiv.org/abs/2002.10689v1\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, contribution:theory, domain:synthetic, domain:classification]\n---\n**TL;DR** Defines predictive V-information, usable information relative to an observer's predictor family: it generalizes mutual information, can be created by computation, is PAC-estimable, and aids structure learning.\n**Problem** Shannon information ignores the observer's computational limits (encrypted text keeps full mutual information with its label) and is hard to estimate in high dimensions.\n**Method** Predictive family V (with optional ignorance); V-entropy = best expected log-loss within V; V-information I_V(X→Y) = H_V(Y|∅) − H_V(Y|X); empirical estimator with Rademacher-complexity PAC bound; directed Chow-Liu structure learning on V-information.\n**Findings** Recovers Shannon MI (V = Ω), trace of covariance, unnormalised R²; non-negative, zero under independence; can violate data processing; asymmetric. Chow-Liu trees beat CPC/NWJ/MINE (≈100 samples recover ground truth in one simulation); better gene-network AUC; recovers video-frame order; fair representations leak to other V.\n**Limits** No general chain rule (H(X,Y) = H(X) + H(Y|X) fails); results hinge on the choice of V (too rich overfits, too simple misses structure); PAC bound assumes bounded log-densities; small-scale experiments.\n\n**Relations**\n- (none)\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.",
+   "definitions": [
+    {
+     "term": "predictive family (optional ignorance)",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "learning-theoretic / optimization",
+     "quote": "A predictive family is a set of predictive models the agent is allowed to use, e.g., due to computational or statistical constraints. We refer to the additional condition in Eq.(1) as optional ignorance. Intuitively, it means that the agent can, in the context of the prediction game we define next, ignore the side information if she chooses to.",
+     "formula": "\\Omega=\\{f:\\mathcal X\\cup\\{\\varnothing\\}\\to\\mathcal P(\\mathcal Y)\\};\\ \\mathcal V\\subseteq\\Omega\\ \\text{is a predictive family iff}\\ \\forall f\\in\\mathcal V,\\ \\forall P\\in\\mathrm{range}(f),\\ \\exists f'\\in\\mathcal V\\ \\text{s.t.}\\ \\forall x\\in\\mathcal X,\\ f'[x]=P,\\ f'[\\varnothing]=P",
+     "assumptions": "Separable sample spaces; distributions with densities or mass functions; the null input ∅ not in X.",
+     "where": "Definition 1, Section 2, [P15]-[P19]",
+     "gloss": "The set of probabilistic predictors a computationally bounded agent may use; whatever prediction it can make with side information it can also make while ignoring that information.",
+     "relation": "Optional ignorance is needed for non-negativity and independence (Proposition 2; App. E); the largest family Omega recovers Shannon quantities."
+    },
+    {
+     "term": "predictive conditional V-entropy (V-entropy)",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Intuitively, V (conditional) entropy is the smallest expected negative log-likelihood that can be achieved predicting Y given observation (side information) X (or no side information ∅), using models from V.",
+     "formula": "H_{\\mathcal V}(Y\\mid X)=\\inf_{f\\in\\mathcal V}\\mathbb E_{x,y\\sim X,Y}\\big[-\\log f[x](y)\\big],\\qquad H_{\\mathcal V}(Y\\mid\\varnothing)=H_{\\mathcal V}(Y)=\\inf_{f\\in\\mathcal V}\\mathbb E_{y\\sim Y}\\big[-\\log f[\\varnothing](y)\\big]",
+     "assumptions": "A predictive family V; random variables X, Y on X × Y; log loss.",
+     "where": "Definition 2, Section 2, [P19]-[P21]",
+     "gloss": "The lowest expected log-loss achievable in predicting Y, with or without side information X, using only models from the allowed family.",
+     "relation": "Generalises Shannon (conditional) entropy (V = Omega, Proposition 1.1); recovers mean absolute deviation, trace of covariance and maximum-entropy values for restricted V (Proposition 1.2-1.4)."
+    },
+    {
+     "term": "predictive V-information",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Here, we will use predictive V-entropy to define an analogous quantity, IV (X → Y ), to represent the change in predictability of an output variable Y when given side information X.",
+     "formula": "I_{\\mathcal V}(X\\to Y)=H_{\\mathcal V}(Y\\mid\\varnothing)-H_{\\mathcal V}(Y\\mid X)",
+     "assumptions": "A predictive family V with optional ignorance.",
+     "where": "Definition 3, Section 2, [P23], [P26]; properties Section 3, [P34]-[P40]",
+     "gloss": "How much side information X improves a constrained agent's best prediction of Y. Unlike mutual information it can be asymmetric and can grow when X is processed, e.g. decrypted.",
+     "relation": "Generalises Shannon mutual information (V = Omega) and the unnormalised maximal coefficient of determination R² · tr(Cov(Y)) for linear-Gaussian V (Proposition 1.5); related to H-entropy/H-information (DeGroot; Grünwald and Dawid) but restricted to low-complexity families."
+    },
+    {
+     "term": "empirical V-information",
+     "concepts": [
+      "usable information"
+     ],
+     "level": "measurement",
+     "formalism": "learning-theoretic / optimization",
+     "quote": "The empirical V-information (under D) is the following V-information under the empirical distribution defined via D:",
+     "formula": "\\hat I_{\\mathcal V}(X\\to Y;\\mathcal D)=\\inf_{f\\in\\mathcal V}\\frac{1}{|\\mathcal D|}\\sum_{y_i\\in\\mathcal D}\\log\\frac{1}{f[\\varnothing](y_i)}-\\inf_{f\\in\\mathcal V}\\frac{1}{|\\mathcal D|}\\sum_{x_i,y_i\\in\\mathcal D}\\log\\frac{1}{f[x_i](y_i)}",
+     "assumptions": "Samples D = {(x_i, y_i)} drawn i.i.d. from the joint distribution; for the PAC bound, log f[x](y) ∈ [−B, B] and the Rademacher complexity of G_V = {log f[x](y) : f ∈ V}.",
+     "where": "Definition 4, Section 4, [P45]; Theorem 1, [P47]",
+     "gloss": "V-information computed on the empirical distribution of a sample; with bounded log-densities its error shrinks with the Rademacher complexity of V and sample size (Theorem 1).",
+     "relation": "Estimator of predictive V-information; Theorem 1 gives |I_V − Î_V| ≤ 4R_|D|(G_V) + 2B sqrt(2 log(1/δ)/|D|) with probability at least 1 − 2δ; contrasted with the CPC and NWJ estimators of Shannon MI (App. B)."
+    }
+   ]
+  },
+  {
+   "key": "mohammadkhani2026hidden",
+   "record_markdown": "---\nkey: mohammadkhani2026hidden\ntitle: \"Hidden Reasoning Must Leak, but Need Not Be Readable: Fundamental Opportunities and Limits for Chain-of-Thought Monitoring\"\nauthors: \"Mohammadkhani, Krishna, Sarrof & Hahn\"\nyear: 2026\nvenue: \"preprint\"\nurl: https://arxiv.org/abs/2609.37312v1\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, contribution:theory, contribution:analysis, object:cot, reveals:hidden-info, reveals:misbehavior, signal:by-construction, signal:implanted-behavior, motivation:monitoring, factor:cot-necessity, domain:math, domain:synthetic, scale:small, scale:mid, scale:large, eval:scaling, eval:confound-control, model:qwen2.5-7b, model:llama-3.1-8b, model:qwen3.5-0.8b, model:qwen3.5-2b, model:qwen3.5-4b, model:qwen3.5-9b, model:qwen3.5-27b, model:qwen3.5-35b-a3b, model:qwen3.5-122b-a10b, model:qwen3.5-397b-a17b, model:ministral-3-3b, model:ministral-3-8b, model:ministral-3-14b, model:mistral-small-3.1, model:mistral-medium-3.5, model:mistral-large-3, model:qwen3-8b, model:qwen3-14b, model:qwen3-32b, model:qwen3-235b-a22b, model:deepseek-v4-flash, model:deepseek-v4-pro, model:kimi-k3, metric:covert-accuracy]\n---\n**TL;DR** Proves that covert computation exceeding a transformer's capacity must leak information about the hidden input into the CoT, yet a single layer can encrypt it against efficient monitors.\n**Problem** Can transformers hide covert computation from CoT monitors, and what can a monitor recover about the hidden input?\n**Method** Fixed-precision transformers as AC0 circuits → lower bounds on I[X_covert; CoT] for parity, S5, multiplication, iterated addition; NC0-PRG on-the-fly encryption construction. LoRA (Qwen2.5-7B, Llama-3.1-8B) and prompting (five families) on five hiding protocols; trained 1-layer encrypted-parity transformer.\n**Findings** Past a capacity threshold (polylog in size and CoT length, exponential in depth), success needs a near-linear footprint; hiding behind a public task costs a length tax unless inputs correlate (piggybacking); sublinear private randomness lets one layer encrypt the CoT against poly-time monitors. No-CoT/filler protocols fail as inputs grow; threshold rises with log model size.\n**Limits** Asymptotic bounds, fixed-precision model, synthetic tasks. Encryption assumes unproven NC0 PRGs, yields random-looking (suspicious) CoTs, needed auxiliary supervision; LoRA on Qwen2.5-7B failed to learn it. Special Tokens channel decodable with its codebook; no monitor attacks tested.\n\n**Relations**\n- builds-on [[skaf2025large]]: parity state-tracking task modeled on its coin-flip task\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.\n",
+   "definitions": [
+    {
+     "term": "hidden reasoning setup (covert input, public CoT, monitor)",
+     "concepts": [
+      "monitorability",
+      "hidden objectives"
+     ],
+     "level": "concept",
+     "formalism": "complexity / cryptographic",
+     "quote": "The reasoning model receives a covert input Xcovert ∈ Σ∗ (with Σ a finite alphabet), produces a public reasoning chain CoT ∈ Γ∗ (Γ ⊇ Σ), and then a private output F (Xcovert ) ∈ Σ∗ , where F : Σ∗ → Σ∗ is a given task. The monitor has access to CoT, but not Xcovert or F (Xcovert ).",
+     "formula": "X_{covert}\\in\\Sigma^{*}\\;\\longrightarrow\\;\\mathrm{CoT}\\in\\Gamma^{*}\\ (\\Gamma\\supseteq\\Sigma)\\;\\longrightarrow\\;F(X_{covert})\\in\\Sigma^{*},\\quad F:\\Sigma^{*}\\to\\Sigma^{*};\\ \\text{the monitor observes CoT but not }X_{covert}\\text{ or }F(X_{covert})",
+     "assumptions": "The monitor knows the task F a priori and tries to extract information about X_covert; the reasoning model is a fixed-precision Transformer; the monitor may be computationally unbounded or polynomial-time. The covert input stands in for a goal that may sit in the prompt, weights or activations.",
+     "where": "Section 2, [P14]; Figure 1, [P10]",
+     "gloss": "A model reasons about an input the monitor cannot see, writes a visible CoT, then a private answer; the monitor knows the task and tries to infer the hidden input from the CoT alone.",
+     "relation": "Base setting for the information-theoretic footprint (Theorem 3.1), the length tax (Corollary 3.2) and the no-readability criterion (Theorem B.14)."
+    },
+    {
+     "term": "T computes F (with a CoT)",
+     "concepts": [
+      "other: chain-of-thought computation"
+     ],
+     "level": "concept",
+     "formalism": "complexity / cryptographic",
+     "quote": "We say that T computes F : Σ≤N → Σ∗ if, given an input X ∈ Σ≤N , it outputs a string CoT ∈ Γ∗ followed by F (X)⟨EOS⟩, where |X| + |CoT| + |F (X)| + 2 ≤ W (T ).",
+     "formula": "T\\text{ outputs }\\Xi\\text{ on }X\\in\\Gamma^{N}\\iff \\forall i=0,\\dots,|\\Xi|-1:\\ T(X\\Xi_{1\\dots i})_{N+i}\\text{ has its unique maximal entry at }\\Xi_{i+1};\\qquad X_1\\dots X_N\\,\\langle\\mathrm{SEP}\\rangle\\,\\mathrm{CoT}_1\\dots\\mathrm{CoT}_K\\,\\langle\\mathrm{SEP}\\rangle\\,F(X)\\,\\langle\\mathrm{EOS}\\rangle,\\quad |X|+|\\mathrm{CoT}|+|F(X)|+2\\le W(T)",
+     "assumptions": "Fixed-precision Transformer (Definition B.1) with context window W(T); greedy deterministic decoding (Remark B.7 sketches stochastic decoding); finite alphabets Sigma within Gamma.",
+     "where": "Section 2.2, Eq. (1), [P19]–[P23]; Appendix B.1, Definitions B.1–B.2, [P310]",
+     "gloss": "A transformer computes a task with a chain of thought if, reading the input, it greedily writes some intermediate string and then the correct answer, all within its context window.",
+     "relation": "Formal object whose length |CoT| and mutual information with the input are bounded in Theorems 3.1–3.3."
+    },
+    {
+     "term": "information-theoretic footprint",
+     "concepts": [
+      "monitorability",
+      "steganography and encoded reasoning"
+     ],
+     "level": "both",
+     "formalism": "information-theoretic",
+     "quote": "Our first result shows that covert computation unavoidably leads to nonzero mutual information between CoT and Xcovert – that is, CoT leaks bits of information about the covert input to the monitor, whenever task complexity exceeds model capacity. We refer to this as an informationtheoretic footprint.",
+     "formula": "I[X_{covert},\\mathrm{CoT}];\\qquad \\text{Thm 3.1: }\\Big(\\log(S)+\\log\\big(1+\\max_{X_{covert}}|\\mathrm{CoT}|\\big)\\Big)^{O(L)}\\times\\big(1+I[X_{covert},\\mathrm{CoT}]\\big)=\\tilde\\Omega\\big(|X_{covert}|\\big)",
+     "assumptions": "X_covert uniform over Sigma^N; deterministic fixed-precision Transformer with S parameters and depth L; F in the task family T (parity, S5 state tracking, middle bit of multiplication, last bit of iterated addition); monitor computationally unbounded.",
+     "where": "Section 3.1, Theorem 3.1, Eqs. (2)–(3), [P28]–[P35]; Appendix B.4–B.5, Lemma B.5, Theorem B.8, [P339]–[P407]",
+     "gloss": "Mutual information between the visible CoT and the hidden input. Theorem 3.1 forces it to grow near-linearly in input length once the task outstrips model capacity and CoT length.",
+     "relation": "Leakage, not readability: a positive footprint need not let an efficient monitor decode anything (no readability, Theorem B.14) or recover any single input bit (Proposition A.1); Theorem 3.3 bounds how far private randomness can lower it."
+    },
+    {
+     "term": "No CoT mode",
+     "concepts": [
+      "monitorability"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "In the No CoT mode, no CoT is needed.",
+     "formula": "|\\mathrm{CoT}|=0,\\quad I[X_{covert},\\mathrm{CoT}]=0;\\qquad \\text{feasible when } |X_{covert}|\\le\\tilde O\\big((\\log S)^{O(L)}\\big)",
+     "assumptions": "Setting of Theorem 3.1 (uniform covert input, fixed-precision Transformer of size S and depth L).",
+     "where": "Section 3.1, [P35]; Figure 2 caption, [P105]",
+     "gloss": "The covert task is solved entirely inside the forward pass, with no CoT; possible only for inputs polylogarithmic in model size.",
+     "relation": "First of three modes defined by CoT length and footprint; alternative to Agnostic and Informative CoT modes."
+    },
+    {
+     "term": "Agnostic CoT mode",
+     "concepts": [
+      "monitorability",
+      "other: filler-token hidden computation"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Second, an Agnostic CoT mode: A CoT that is uninformative about the covert input (|CoT| > 0, I[Xcovert , CoT] = 0) can only mildly increase the range of hidden reasoning: such CoTs need to grow super-polynomially with the covert input length.",
+     "formula": "|\\mathrm{CoT}|>0,\\quad I[X_{covert},\\mathrm{CoT}]=0",
+     "assumptions": "Setting of Theorem 3.1; examples are input-independent filler or padding tokens, or a CoT for an unrelated public task.",
+     "where": "Section 3.1, [P35]; Figure 2 caption, [P105]; Appendix A, FAQ 7, [P304]",
+     "gloss": "The model writes a CoT that carries no information about the hidden input, such as filler dots; Theorem 3.1 implies such CoTs must grow super-polynomially to help.",
+     "relation": "Special case of Theorem 3.1 with zero footprint; covers filler-token and padding CoTs studied in prior expressivity work; contrasted with the Informative CoT mode."
+    },
+    {
+     "term": "Informative CoT mode",
+     "concepts": [
+      "monitorability",
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "Third, an Informative CoT mode: When the input length exceeds the previous modes, a near-linear amount of information about the input needs to information-theoretically leak into the CoT (|CoT| > 0, I[Xcovert , CoT] > 0).",
+     "formula": "|\\mathrm{CoT}|>0,\\quad I[X_{covert},\\mathrm{CoT}]>0;\\qquad |\\mathrm{CoT}|\\ \\text{poly-bounded}\\ \\Rightarrow\\ I[X_{covert},\\mathrm{CoT}]=\\tilde\\Omega(N),\\quad \\mathbb{E}[|\\mathrm{CoT}|]\\ge\\frac{1}{\\log_2|\\Gamma|}\\,I[X_{covert},\\mathrm{CoT}]=\\tilde\\Omega(N)",
+     "assumptions": "Setting of Theorem 3.1 with N := |X_covert|; CoT ends in a separator, so it is a prefix-free code.",
+     "where": "Section 3.1, Eq. (3), [P35]; Figure 2 caption, [P105]",
+     "gloss": "Beyond the capacity threshold, a successful CoT must carry a near-linear amount of information about the hidden input, for example by piggybacking on a related public task or invisible Unicode tokens.",
+     "relation": "The only mode left beyond the Theorem 3.1 threshold; instantiated by the Piggybacking and Special Tokens protocols; its leakage may still be unreadable (no readability, Theorem B.14)."
+    },
+    {
+     "term": "aligned vs. unaligned (misaligned) model computing a covert task behind a public task",
+     "concepts": [
+      "hidden objectives",
+      "monitorability"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "Consider the problem of distinguishing between aligned models that only compute the publicly declared F (Xpublic ), from unaligned models that additionally compute a private F ′ (Xcovert ) (F, F ′ ∈ T do not need to be the same task, though we will assume so for simplicity in our experiments).",
+     "formula": "\\text{aligned: computes only }F(X_{public});\\quad \\text{misaligned: also outputs }F'(X_{covert}),\\ \\text{with }X_{public}=f(\\mathrm{CoT}_{misaligned})\\ \\text{uniquely readable off the CoT},\\ F,F'\\in\\mathcal{T}",
+     "assumptions": "Monitor sees only the visible trace; X_public given in the prompt or chosen by the model conditional on X_covert; X_public uniform marginal; X_covert uniform.",
+     "where": "Section 3.2, [P37]–[P40]; Appendix B.6, Corollary B.9 and Remark B.10, [P410]–[P415]",
+     "gloss": "A misaligned model ostensibly reasons about a declared public task while also secretly computing a private one; the monitor must tell it apart from an aligned model doing only the public task.",
+     "relation": "Setting of the covert computation length tax (Corollary 3.2)."
+    },
+    {
+     "term": "covert computation length tax; piggy-backing benefit",
+     "concepts": [
+      "steganography and encoded reasoning",
+      "monitorability"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "This indicates a tradeoff for the misaligned model: Either one pays a length penalty for a (possibly steganographic) encoding of the private reasoning, or one chooses a public task that is correlated with the private task, so that the private reasoning can ‘piggyback’ off the public reasoning, but at the cost of revealing information about the private input.",
+     "formula": "\\mathbb{E}[|\\mathrm{CoT}_{misaligned}|]\\ge\\frac{\\log_2|\\Sigma|}{\\log_2|\\Gamma|}N_{public}+\\underbrace{\\tilde\\Omega(N_{covert})}_{\\text{Length Tax}}-\\underbrace{\\frac{I[X_{public},X_{covert}]}{\\log_2|\\Gamma|}}_{\\text{Piggy-Backing Benefit}},\\qquad \\mathbb{E}[|\\mathrm{CoT}_{aligned}|]=\\tilde O(N_{public})",
+     "assumptions": "X_covert uniform of length N_covert; X_public of length N_public uniquely readable from the CoT, uniform marginal; F in T; constants depend on model size and depth.",
+     "where": "Section 3.2, Corollary 3.2, Eqs. (4)–(5), [P40]–[P43]; Appendix B.6, Corollary B.9, Eqs. (24)–(25), [P410]–[P421]",
+     "gloss": "Hiding a private computation behind a public one costs extra CoT tokens, unless the public input is correlated with the private one, which itself leaks information about the private input.",
+     "relation": "Corollary of the footprint bound (Theorem 3.1). The tax is measured against minimal-length aligned CoTs only: encodings that bias stochastic token choice can hide bits without exceeding non-minimal aligned CoTs (Appendix A, FAQ 2)."
+    },
+    {
+     "term": "private randomness (private seed)",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "probabilistic / statistical",
+     "quote": "In practical terms, any information that is (i) available to the reasoning model but not the monitor, and (ii) independent from Xcovert , can serve as private randomness.",
+     "formula": "R\\sim\\mathcal{U}_{r(N)}\\ \\text{independent of }X_{covert}\\in\\Sigma^{N};\\ \\mathrm{CoT}\\text{ generated from }(X_{covert},R);\\ \\text{monitor sees CoT, not }X_{covert},R,F(X_{covert});\\qquad \\text{Thm 3.3: }\\mathbb{E}[|\\mathrm{CoT}|]=\\tilde\\Omega(N),\\ I[X_{covert},\\mathrm{CoT}]\\ge\\tilde\\Omega(N)-r",
+     "assumptions": "Seed unknown to the monitor and independent of the covert input (extra context tokens, unused input parts; weights only give a non-probabilistic seed).",
+     "where": "Section 3.3, Theorem 3.3, Eq. (6), [P45]–[P47]; Appendix B.7, Theorem B.11, [P424]–[P441]; Appendix A, FAQ 8, [P304]",
+     "gloss": "Secret random bits available to the reasoning model but not the monitor, independent of the hidden input; they act like an encryption key and can cut the footprint by at most their length.",
+     "relation": "Key for the encrypted CoT (Theorem 3.5); Theorem 3.3 shows it reduces the information-theoretic footprint by at most r bits and never reduces CoT length."
+    },
+    {
+     "term": "encrypted CoT (visible CoT as XOR with a pseudo-random pad)",
+     "concepts": [
+      "steganography and encoded reasoning",
+      "obfuscation",
+      "monitorability"
+     ],
+     "level": "concept",
+     "formalism": "complexity / cryptographic",
+     "quote": "Use the private random bits to seed the pseudo-random generator, which produces a pseudo-random string Y with length matching |CoT|. The visible CoT is then obtained as CoTvisible := CoT ⊕ Y .",
+     "formula": "\\mathrm{CoT}_{visible}:=\\mathrm{CoT}\\oplus Y;\\qquad \\mathrm{CoT}_N(x;R)=\\tau_N(x)\\oplus H_N(R)_{1:L(N)},\\ \\ H_N:\\{0,1\\}^{N^{1/(1+\\epsilon)}}\\to\\{0,1\\}^{N^{1+\\epsilon}}\\ \\text{an NC}^0\\text{ PRG},\\ \\ell(r(N))\\ge L(N)",
+     "assumptions": "Private seed of r = N^{1/(1+epsilon)} bits; an NC0 pseudo-random generator (Assumption 3.4); CoT binarized via an oblivious Turing machine simulation; 1-layer fixed-precision Transformer decrypting and encrypting on the fly.",
+     "where": "Section 3.3, Theorem 3.5 proof sketch, [P49]; Figure 4, [P116]; Appendix B.8.2, Theorem B.14 proof, Eq. (35), [P458]–[P460]; Appendix E, [P3612]",
+     "gloss": "The model writes its reasoning XOR-ed with a pseudo-random one-time pad generated from secret seed bits, decrypting earlier steps internally as it goes.",
+     "relation": "Construction achieving the no-readability criterion; unlike substitution steganography, unreadable even to a monitor that knows the scheme; output looks random rather than natural (not covertext-preserving)."
+    },
+    {
+     "term": "no readability (no efficient monitor predicts any property of the covert input)",
+     "concepts": [
+      "monitorability",
+      "legibility and checkability",
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "complexity / cryptographic",
+     "quote": "(No readability) No efficient monitor can predict any property of Xcovert from CoT with accuracy significantly above chance. Formally: Let DN be any distribution over ΣN independent of R, and let PN : ΣN → {0, 1} be any predicate.",
+     "formula": "\\forall\\,\\mathcal{A}=\\{\\mathcal{A}_N\\}_N\\ \\text{poly-size}:\\quad \\Pr_{X\\sim\\mathcal{D}_N,\\ R\\sim\\mathcal{U}_{r(N)}}\\big[\\mathcal{A}_N(\\mathrm{CoT}_N(X;R))=P_N(X)\\big]\\le\\max_{b\\in\\{0,1\\}}\\Pr_{X\\sim\\mathcal{D}_N}\\big[b=P_N(X)\\big]+\\mathrm{negl}(N)",
+     "assumptions": "Monitors are polynomial-size (non-uniform) circuit families; D_N any distribution over Sigma^N independent of R; P_N any predicate; negl decays faster than any inverse polynomial; holds under Assumption 3.4 (NC0 PRG).",
+     "where": "Appendix B.8.2, Theorem B.14 item 2, Eq. (34), [P453]–[P458]; Section 3.3, Theorem 3.5, [P49]; Theorem B.16, Eq. (43), [P495]–[P500]",
+     "gloss": "A CoT is unreadable if no efficient monitor can guess any yes/no property of the hidden input from it better than always guessing the property's most likely value, up to negligible advantage.",
+     "relation": "Computational counterpart of the footprint: holds together with I[X_covert, CoT] = Omega~(N) (Theorem B.14 item 1); a semantic-security-style criterion, stronger than single-bit non-recoverability (Proposition A.1)."
+    },
+    {
+     "term": "NC0 pseudo-random generator",
+     "concepts": [
+      "steganography and encoded reasoning",
+      "other: pseudo-random generator"
+     ],
+     "level": "concept",
+     "formalism": "complexity / cryptographic",
+     "quote": "We use the following definition of NC0 Pseudo-Random Generators: Definition B.12 (NC0 Pseudo-Random Generator). Let c > 0 be a constant.",
+     "formula": "G=\\{G_n:\\{0,1\\}^n\\to\\{0,1\\}^{\\ell(n)}\\}:\\ (1)\\ \\ell(n)=\\lceil n^c\\rceil;\\ (2)\\ \\text{each output bit of }G_n\\text{ depends on at most }d=d(c)\\text{ input bits};\\ (3)\\ \\big|\\mathbb{E}_{X\\sim\\mathcal{U}_{\\ell(n)}}[F[X]]-\\mathbb{E}_{X\\sim\\mathcal{U}_n}[F[G_n[X]]]\\big|<\\mu_F(n)\\ \\text{for every poly-size-circuit }F,\\ \\mu_F\\text{ negligible}",
+     "assumptions": "Distinguishers are non-uniform polynomial-size circuits; existence for stretch c > 1 is conjectured, not proven; Goldreich's candidate P(x1..x5) = x1 xor x2 xor x3 xor (x4 and x5) on random 5-tuples is the concrete instance.",
+     "where": "Appendix B.8.1, Definition B.12, Eq. (31), Remark B.13, Eqs. (32)–(33), [P446]–[P450]; Assumption 3.4, [P49]",
+     "gloss": "A generator stretching n random bits to about n^c bits, each output bit depending on a constant number of seed bits, whose output no polynomial-size circuit can tell from uniform randomness.",
+     "relation": "Primitive behind Assumption 3.4 and the encrypted CoT; its indistinguishability condition (31) is what yields the no-readability bound (34)."
+    },
+    {
+     "term": "leakage without local recoverability",
+     "concepts": [
+      "monitorability",
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "No: High mutual information between Xcovert and CoT does not ensure recoverability of specific parts of the input: Proposition A.1 (Leakage without local recoverability).",
+     "formula": "S_0:=0,\\quad S_{i+1}=S_i\\oplus X_{2i+1}\\oplus X_{2i+2}\\ \\ (i=0,\\dots,\\tfrac{N}{2}-1);\\qquad I(X,\\mathrm{CoT})=H[X]-1=N-1\\ \\text{(Proposition A.2 construction)}",
+     "assumptions": "Inputs uniform over {0,1}^N; 1-layer Transformer; for Proposition A.2, F computable by a Turing machine in time T(N), CoT length O(T(N) log T(N)).",
+     "where": "Appendix A, FAQ 3, Propositions A.1–A.2, Eq. (10), [P298]–[P301]; Section 3.3, [P45]",
+     "gloss": "A CoT can carry almost all information about the hidden input while no single input bit can be predicted from it better than chance.",
+     "relation": "Shows the footprint (mutual information) does not imply recoverability of specific input parts; weaker hiding notion than no readability (Theorem B.14), which needs private randomness."
+    }
+   ]
+  },
+  {
+   "key": "yin2026opacity",
+   "record_markdown": "---\nkey: yin2026opacity\ntitle: \"Opacity in Discrete Event Systems: A Perspective and Overview\"\nauthors: \"Yin\"\nyear: 2026\nvenue: \"preprint\"\nurl: https://arxiv.org/abs/2602.22713v1\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, contribution:survey]\n---\n**TL;DR** Surveys opacity in discrete event systems, the requirement that an observer never knows for sure the system is in a secret state, with its verification and enforcement methods.\n**Problem** Newcomers lack a compact entry point to discrete-event-system opacity: many notions, observation models and enforcement schemes spread over two decades of literature.\n**Method** Informal overview: DES G = (X, Σ, δ, X0), observation map P, state estimates; notions (current-state, initial-state, initial-final, K-step, infinite-step, pre-opacity); verification by observer constructions; enforcement by supervisory control, sensor activation/information release, obfuscation (insertion/edit functions); stochastic, timed, Petri-net and continuous models; applications.\n**Findings** Verification PSPACE-hard (∀∃ alternation) even under natural projection, EXPSPACE-hard for modular systems; undecidable for general timed automata, Petri nets and belief-threshold stochastic opacity. Supervisory enforcement under incomparable observations open for nearly two decades. Diagnosability = \"always eventually know\"; infinite-step opacity = \"always not know\".\n**Limits** Overview without new results; definitions given in words, formal versions deferred to cited works. Not about LLMs (LLM privacy only flagged as an open direction); intruders mostly passive, worst-case.\n\n**Relations**\n- (none)\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.\n- contribution:survey: headline contribution is an overview or tutorial of an existing literature, without new results.",
+   "definitions": [
+    {
+     "term": "opacity",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "The general definition of opacity is that “The intruder can never know for sure that the system is, was, or will be in a secret state.”",
+     "formula": "\\forall s\\in L_{\\mathrm{sec}},\\ \\exists t\\in L_{\\text{non-sec}}:\\ P(s)=P(t)\\quad(\\text{violated iff}\\ \\exists s\\in L_{\\mathrm{sec}},\\ \\forall t\\in L_{\\text{non-sec}}:\\ P(s)\\neq P(t))",
+     "assumptions": "A DES G = (X, Σ, δ, X0) with language L(G); an information-flow map P: Σ* → O* (e.g. natural projection onto observable events Σo); secret states X_S ⊆ X or a secret sublanguage; a passive intruder who knows G and forms estimates E(α) = P^{-1}(α) ∩ L(G).",
+     "where": "Section 2.1, [P10]; verification form, Section 2.2, [P10]",
+     "gloss": "A system is opaque if an outside observer, knowing the model and seeing only the observation stream, can never be certain that the system is, was or will be in a secret state.",
+     "relation": "Umbrella for current-state, initial-state, initial-final, K-step, infinite-step and pre-opacity; the dual of diagnosability (the DES counterpart of monitorability); related to noninterference and expressible as a hyperproperty (HyperLTL)."
+    },
+    {
+     "term": "current-state opacity (CSO)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "• Current-State Opacity (CSO): Any reachable current state estimate cannot be a subset of the secret state, otherwise the intruder knows for sure that the system is in a secret state [14, 15].",
+     "formula": "",
+     "assumptions": "Current state estimate: the set of states the system can currently be in, given the observation.",
+     "where": "Section 2.1, [P10]",
+     "gloss": "For every possible observation, the set of states the system might currently be in must contain a non-secret state.",
+     "relation": "Instance of opacity; verified with a current-state estimator over 2^X, which also underlies verification of the other notions."
+    },
+    {
+     "term": "initial-state opacity (ISO)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "• Initial-State Opacity (ISO): Any reachable initial state estimate cannot be a subset of the secret state, otherwise the intruder knows for sure that the system started from a secret state [16, 17].",
+     "formula": "",
+     "assumptions": "Initial state estimate: the set of states the system could have started from.",
+     "where": "Section 2.1, [P10]",
+     "gloss": "The observer must never be certain that the system started in a secret state.",
+     "relation": "Reduces to current-state opacity by augmenting the initial state into the state space."
+    },
+    {
+     "term": "initial-and-final-state opacity (IFSO)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "• Initial-and-Final-State Opacity (IFSO): This generalizes the current and initial cases by requiring that the intruder can never determine specific initial-final state pairs [18–20].",
+     "formula": "",
+     "assumptions": "Secrets specified as pairs of initial and final states.",
+     "where": "Section 2.1, [P10]",
+     "gloss": "The observer must never be able to pin down that the system's run started and ended in a secret pair of states.",
+     "relation": "Generalises current-state and initial-state opacity."
+    },
+    {
+     "term": "K-step opacity (KSO)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "• K-Step Opacity (KSO): For any observation, the delayed state estimation within the previous K-steps cannot be a subset of the secret state. This ensures that whenever the system passes through a secret state, the intruder cannot determine for sure that the system was in a secret state (either at a specific instant or along the trajectory) within the next K steps [21, 22].",
+     "formula": "",
+     "assumptions": "Delayed state estimate: states the system could have been in K steps ago (steps counted in observations or events).",
+     "where": "Section 2.1, [P10]",
+     "gloss": "Whenever the system visits a secret state, the observer must stay uncertain about that visit for the next K steps.",
+     "relation": "Bounded-delay version of infinite-step opacity; verified with a two-way observer (original and reversed plant)."
+    },
+    {
+     "term": "infinite-step opacity (InfSO)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "• Infinite-Step Opacity (InfSO): When K in K-step opacity goes to infinity, it means that the intruder can never know for sure that the system is at a secret state, even in the long run [23].",
+     "formula": "",
+     "assumptions": "Delayed state estimates for all delays.",
+     "where": "Section 2.1, [P10]; Section 5.3, [P34]",
+     "gloss": "The observer must never become certain, however much later, that the system was in a secret state.",
+     "relation": "Limit of K-step opacity as K goes to infinity; an 'always not know' requirement, dual to diagnosability ('always eventually know')."
+    },
+    {
+     "term": "pre-opacity (PO)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "• Pre-Opacity (PO): The intruder can never predict the visit to a secret state a certain number of steps ahead of time, before the system actually reaches the secret state [24].",
+     "formula": "",
+     "assumptions": "State prediction: the set of states the system may reach K steps ahead.",
+     "where": "Section 2.1, [P10]",
+     "gloss": "The observer must never be able to predict with certainty, some steps in advance, that the system is about to enter a secret state.",
+     "relation": "Prediction-based counterpart of current-state opacity; verified by state prediction followed by a current-state-type check."
+    },
+    {
+     "term": "opacity under supervisory control (known vs. unknown supervisor)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "Specifically, when the system exhibits secret behavior s ∈ L(S/G) ∩ Lsec , if the intruder does not know the implementation of the supervisor, then it is permissible to provide a non-secret behavior t ∈ L(G) ∩ Lnon-sec from the open-loop system G such that P (s) = P (t). This ensures plausible deniability for the secret behavior, maintaining opacity. However, when the intruder knows the implementation of the supervisor, such non-secret behavior must be taken from the closed-loop system, i.e., t ∈ L(S/G) ∩ Lnon-sec .",
+     "formula": "\\text{unknown supervisor: }\\forall s\\in L(S/G)\\cap L_{\\mathrm{sec}}\\ \\exists t\\in L(G)\\cap L_{\\text{non-sec}}:\\ P(s)=P(t);\\quad\\text{known supervisor: } t\\in L(S/G)\\cap L_{\\text{non-sec}}",
+     "assumptions": "Controllable events Σc ⊆ Σ; a partial-observation supervisor S: M(L(G)) → 2^{Σc} with its own observation map M; closed-loop language L(S/G).",
+     "where": "Section 3.1, [P16]",
+     "gloss": "Every secret run of the controlled system needs an observationally identical non-secret run; if the intruder knows the controller, that alibi must itself be a run of the controlled system.",
+     "relation": "Closed-loop refinement of the language-based opacity condition; the known-supervisor case couples control and estimation and is open under incomparable observations."
+    },
+    {
+     "term": "obfuscation (insertion and edit functions)",
+     "concepts": [
+      "obfuscation",
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "In fact, the system can even manipulate the acquired information and release modified data to the intruder, which is referred to as obfuscation. Along these lines, a basic approach is to use an insertion function, which inserts fictitious events between two consecutive actual events, making them indistinguishable from the intruder’s perspective [103–108].",
+     "formula": "",
+     "assumptions": "The system controls what observation stream the intruder receives; edit functions may also replace actual events; possibly publicly known mechanisms; utility constraints for legitimate users.",
+     "where": "Section 3.3, [P19]",
+     "gloss": "Enforcing opacity by altering the observations released to the intruder, inserting fictitious events or replacing real ones so that secret runs look like non-secret ones.",
+     "relation": "Enforcement alternative to supervisory control and to dynamic sensor activation or information release; when the intruder knows the edit function, publicly known obfuscation mechanisms are needed."
+    },
+    {
+     "term": "probabilistic opacity (secret-revelation probability)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "probabilistic / statistical",
+     "quote": "A simple approach is to ensure that the probability of revealing the secret (which is certain in a logical setting) is smaller than a given threshold.",
+     "formula": "",
+     "assumptions": "Stochastic system (labeled Markov chain, probabilistic automaton, MDP); a threshold.",
+     "where": "Section 4.1, [P23]",
+     "gloss": "The probability that the system's run lets the observer be certain of the secret must stay below a threshold.",
+     "relation": "Probabilistic relaxation of logical opacity; checkable by combining logical verification with probabilistic model checking. Alternative to the belief-threshold formulation."
+    },
+    {
+     "term": "probabilistic opacity (belief threshold)",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "probabilistic / statistical",
+     "quote": "Another, more challenging formulation requires that for any possible observation, the likelihood of being in a secret state must be smaller than a threshold.",
+     "formula": "",
+     "assumptions": "Stochastic system; the observer's posterior belief over states; a threshold.",
+     "where": "Section 4.1, [P23]",
+     "gloss": "After any observation, the observer's posterior probability that the system is in a secret state must stay below a threshold.",
+     "relation": "Stronger alternative to the secret-revelation-probability formulation; often undecidable (linked to probabilistic-automaton emptiness)."
+    },
+    {
+     "term": "approximate opacity",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "other",
+     "quote": "In this formulation, opacity is defined based on an approximation of the intruder’s observations, where the system is considered opaque if the intruder cannot distinguish between behaviors of the system within a certain observational tolerance.",
+     "formula": "",
+     "assumptions": "Continuous or hybrid dynamics; an observational precision (tolerance) of the intruder.",
+     "where": "Section 4.4, [P28]",
+     "gloss": "A continuous system is opaque if, at the intruder's limited observation precision, each secret behavior stays close to some non-secret behavior.",
+     "relation": "Relaxation of exact opacity for continuous state spaces; preserved by opacity-preserving simulation relations and certified by opacity barrier certificates."
+    },
+    {
+     "term": "diagnosability",
+     "concepts": [
+      "monitorability",
+      "other: diagnosability"
+     ],
+     "level": "concept",
+     "formalism": "logical / set-theoretic",
+     "quote": "For instance, diagnosability requires that once a fault has occurred, its occurrence can be inferred within a finite delay from observations, whereas infinite-step opacity requires that once a secret has occurred, the observer can never determine with certainty that it occurred. In this sense, diagnosability can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement.",
+     "formula": "",
+     "assumptions": "Partially observed DES; fault events; an observer with the system model.",
+     "where": "Section 5.3, [P34]",
+     "gloss": "A system is diagnosable if every fault can be inferred with certainty from the observations within a bounded delay after it occurs.",
+     "relation": "Dual of infinite-step opacity; the DES counterpart of monitorability (a monitor detecting misbehavior from partial observations); related to detectability, observability and prognosability."
+    },
+    {
+     "term": "higher-order opacity",
+     "concepts": [
+      "other: opacity"
+     ],
+     "level": "concept",
+     "formalism": "epistemic logic",
+     "quote": "Many of these notions can also be composed to capture multi-level or igher-order inference patterns, for example requirements of the form “the intruder should not know that it knows,” which have been studied in the literature under the name higher-order opacity [214–216].",
+     "formula": "",
+     "assumptions": "Nested inference about the intruder's own knowledge.",
+     "where": "Section 5.3, [P34]",
+     "gloss": "Opacity requirements about the intruder's knowledge of its own knowledge, such as that it should not know that it knows the secret.",
+     "relation": "Nested (epistemic) composition of basic opacity notions."
+    }
+   ]
+  },
+  {
+   "key": "cachin1998information",
+   "record_markdown": "---\nkey: cachin1998information\ntitle: \"An Information-Theoretic Model for Steganography\"\nauthors: \"Cachin\"\nyear: 1998\nvenue: \"Information Hiding Workshop 1998; revised in Information and Computation (2004)\"\nurl: https://eprint.iacr.org/2000/028\nchecked: 2026-11-01\ntags: [source:formal-sweep-2026-11-01, contribution:theory]\n---\n**TL;DR** Models a passive warden's steganalysis as hypothesis testing and measures stegosystem security by the relative entropy between covertext and stegotext distributions, which bounds any detector.\n**Problem** Steganographic security needs a formal model: when can a passive warden not tell stegotext from innocent covertext?\n**Method** Detection framed as hypothesis testing between the covertext (C) and stegotext (S) distributions, under a known covertext distribution and a passive adversary.\n**Findings** Relative entropy between the C and S distributions bounds any detector; ε-secure if at most ε, perfectly secure if zero. Later restated as D_KL(P1‖P0) ≤ ε (arXiv 2602.23163, App. D).\n**Limits** No full text cached (publisher blocks automated download): record and definitions written from a verified note only; constructions, theorems and exact notation not checked. Assumes a known covertext distribution and a passive warden.\n\n**Relations**\n- (none)\n\n**New tags**\n- source:formal-sweep-2026-11-01: added through the formal-definition literature sweep of 1 November 2026.",
+   "definitions": [
+    {
+     "term": "ε-secure stegosystem",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "",
+     "formula": "D_{\\mathrm{KL}}(P_{1}\\|P_{0})\\leq\\varepsilon\\ \\text{(as restated in arXiv 2602.23163, App. D; the abstract states the relative entropy between the distributions of } C \\text{ and } S)",
+     "assumptions": "A known covertext distribution; a passive adversary; the detection task framed as hypothesis testing.",
+     "where": "Security definition (from the verified note; no full text cached); restated in arXiv 2602.23163, App. D.1, Eq. (20)",
+     "gloss": "A stegosystem is ε-secure against a passive warden when the relative entropy between covertext and stegotext distributions is at most ε; this quantity bounds how well any detector can tell them apart.",
+     "relation": "Recovered in anwar2026decision (Proposition D.1) as the binary-detection special case of the steganographic gap (normalised gap = 1 − TV ≥ 1 − sqrt(ε/2)); information-theoretic counterpart of computational security (Hopper et al., 2002)."
+    },
+    {
+     "term": "perfectly secure stegosystem",
+     "concepts": [
+      "steganography and encoded reasoning"
+     ],
+     "level": "concept",
+     "formalism": "information-theoretic",
+     "quote": "",
+     "formula": "D_{\\mathrm{KL}}(P_{1}\\|P_{0})=0",
+     "assumptions": "A known covertext distribution; a passive adversary; the detection task framed as hypothesis testing.",
+     "where": "Security definition (from the verified note; no full text cached); restated in arXiv 2602.23163, App. D.1, [P520]",
+     "gloss": "A stegosystem is perfectly secure when the relative entropy between covertext and stegotext distributions is zero, so the distributions coincide and no test can detect hidden messages.",
+     "relation": "Special case ε = 0 of ε-security; anwar2026decision argues such schemes defeat all distributional detection yet can still yield a positive steganographic gap."
+    }
+   ]
+  }
+ ]
+}

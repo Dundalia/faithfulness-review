@@ -302,3 +302,8 @@ table.matrix { border-collapse: separate; border-spacing: 2px; }
 .def-ref { margin: 6px 0 0; font-size: 13px; }
 .def-src { display: block; margin-top: 2px; color: var(--ink-3); }
 .def-src .goto { font-size: 13px; }
+.formal-formula { margin: 6px 0 0; padding: 6px 10px; max-width: 80ch; overflow-x: auto; border-left: 2px solid var(--accent); font-size: 15px; }
+.formal-formula code { font: 13px var(--mono); white-space: pre-wrap; }
+.formal-meta { margin: 4px 0 0; font-size: 13px; color: var(--ink-2); max-width: 80ch; }
+.formal-meta b { font-weight: 600; color: var(--ink-3); margin-right: 4px; }
+.formal-flag { margin: 4px 0 0; font: 11px var(--mono); color: var(--ink-3); }

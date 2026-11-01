@@ -39,6 +39,12 @@ anon2026trainingoversight,builds-on,li2025training,adopts its privileged-access 
 anthropic2025paraphrases,builds-on,roger2023preventing,uses paraphrasing to scrub encoded reasoning; applies it via distillation
 anwar2026analyzing,builds-on,baker2025monitoring,MBPP test-hacking honeypot and monitor-in-loop obfuscation setup adapted from Baker
 anwar2026analyzing,contradicts,emmons2025chain,"CoT necessity gives only a necessary, not sufficient, condition for monitorability"
+anwar2026decision,builds-on,xu2020theory,restates predictive V-information (its Definitions C.1 to C.3) and generalizes it to the steganographic gap
+anwar2026decision,builds-on,cachin1998information,restates epsilon-security of a stegosystem (App. D) as the classical baseline it departs from
+anwar2026decision,builds-on,skaf2025large,uses its CoinFlip task and process-supervision rewards to train codeword policies
+anwar2026decision,builds-on,farquhar2025mona,adapts its loan-application environment for the public-encoding test and the paraphrasing study
+anwar2026decision,builds-on,anthropic2025paraphrases,adapts its paraphrasing prompt (v1) to loan summaries to test whether paraphrasing removes planted channels
+anwar2026decision,contradicts,anthropic2025paraphrases,"it reads equal accuracy after distilling paraphrased scratchpads as evidence against encoded reasoning; here such null results are confounded, as a paraphraser adapted from its prompt leaves 5 of 6 SFT-planted loan-summary channels decodable"
 arakelyan2025flare,compares-to,lyu2023faithful,F-CoT baseline via its codebase; non-code models score 0 on most sets
 arakelyan2025flare,compares-to,pan2023logiclm,Logic-LM baseline on its ProntoQA/LogicalDeduction/AR-LSAT subsets; adopts its self-refinement
 arcuschin2025chain,extends,turpin2023language,"unverbalized answer bias shown without planted cues, via natural reversed-question pairs"
@@ -98,6 +104,7 @@ ferreira2026outofsight,builds-on,chen2025reasoning,uses its sycophancy-hint form
 ferreira2026outofsight,builds-on,guan2025monitoring,adopts its intervention-based monitorability definition and hint setup
 ferreira2026truthful,builds-on,turpin2023language,Uses its cue-intervention + acknowledgment protocol to measure CoT unfaithfulness
 ferreira2026truthful,builds-on,chen2025reasoning,Follows its cue-acknowledgment evaluation protocol for CoT faithfulness
+geiger2025causal,builds-on,jacovi2020towards,adopts its definition of faithfulness and formalizes its call for a graded notion as approximate transformation
 gema2026chainofthought,extends,turpin2023language,moves the user-message planted-cue test to tool-return and implicit raw-artifact cues
 gema2026chainofthought,builds-on,baker2025monitoring,transcript-monitor design follows Baker's monitor-judge setup (action vs action+reasoning)
 gema2026chainofthought,contradicts,korbak2025chain,Korbak: monitor-awareness disclosure may erode monitorability; one disclosure here shows no erosion
@@ -210,6 +217,7 @@ mayne2026positivecasefaithfulnessllm,builds-on,matton2025walk,adapts its concept
 meek2025measuring,extends,chen2025reasoning,"adopts its cues; scores cue mention without answer switch, adds verbosity"
 meek2025measuring,builds-on,turpin2023language,uses its 13-task BBH subset and cued-vs-baseline prompt paradigm
 meek2025measuring,contradicts,turpin2025teaching,disputes scoring non-switch cases as faithful; unmentioned cues there count as unfaithful
+mohammadkhani2026hidden,builds-on,skaf2025large,parity state-tracking task modeled on its coin-flip task
 naphade2026me,extends,binder2024looking,"applies its self-vs-cross-model prediction test to new tasks, without fine-tuning"
 nguyen2026generalization,extends,occhipinti2026probing,"tests their faithfulness steering across models, cues, datasets and vector constructions"
 occhipinti2026probing,builds-on,chen2025reasoning,reuses its professor/metadata/grader-hacking hints and its faithfulness (verbalization) definition
@@ -250,6 +258,8 @@ sivakumaran2026balancing,builds-on,emmons2025pragmatic,uses its legibility autor
 skaf2025large,extends,baker2025monitoring,CoT-pressure obfuscation shown to be load-bearing steganography that generalizes to unpenalized strings
 song2025language,builds-on,binder2024looking,"adopts self-vs-cross-model prediction comparison, adds control for model similarity"
 song2025language,contradicts,binder2024looking,Binder infers privileged self-access; here none without fine-tuning once similarity is controlled
+song2025privileged,builds-on,song2025language,"operationalizes introspection, as there, as privileged self-access tested by comparing a model's report on itself with other models' predictions from the same information"
+song2025privileged,builds-on,binder2024looking,"takes from it (with song2025language) the requirement that introspection give privileged self-access, tested against other models"
 sullivan2026language,builds-on,roytburg2026measuring,adapts its design of weaker models reading CoT prefixes to measure legibility
 sullivan2026language,builds-on,korbak2025chain,formally proves its informal claim that outcome RL need not preserve legibility
 sun2026investigating,builds-on,tutek2025measuring,FUR step-unlearning as parametric metric and training target; adds continuous ff_cont

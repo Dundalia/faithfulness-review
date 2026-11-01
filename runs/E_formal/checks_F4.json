@@ -1,0 +1,108 @@
+{
+  "fixes": [
+    {
+      "id": "anwar2026decision#f18",
+      "set": {
+        "relation": "Borrowed from Roger (2025; anthropic2025paraphrases) as deployed in Anthropic (2026); the paper argues it is confounded both ways (paraphrasers miss channels or damage content) and proposes the steganographic gap as an alternative."
+      }
+    },
+    {
+      "id": "cachin1998information#f1",
+      "set": {
+        "where": "Security definition stated in the abstract (IACR ePrint 2000/028: relative entropy between the distributions of C and S; no full text cached); restated in arXiv 2602.23163, App. D.1, Eq. (20)"
+      }
+    },
+    {
+      "id": "cachin1998information#f2",
+      "set": {
+        "where": "Security definition stated in the abstract (IACR ePrint 2000/028; no full text cached); restated in arXiv 2602.23163, App. D.1, [P520]"
+      }
+    },
+    {
+      "id": "yin2026opacity#f1",
+      "set": {
+        "relation": "Umbrella for current-state, initial-state, initial-final, K-step, infinite-step and pre-opacity; its infinite-step form is the paper's dual of diagnosability ('always not know' vs. 'always eventually know'); related to noninterference; several classes expressed as hyperproperties (HyperLTL)."
+      }
+    },
+    {
+      "id": "yin2026opacity#f11",
+      "set": {
+        "relation": "More challenging alternative to the secret-revelation-probability formulation; often undecidable (linked to probabilistic-automaton emptiness), hence belief-state abstractions and sufficient conditions."
+      }
+    },
+    {
+      "id": "yin2026opacity#f13",
+      "set": {
+        "gloss": "A system is diagnosable if, once a fault occurs, its occurrence can be inferred with certainty from the observations within a finite delay.",
+        "relation": "Dual of infinite-step opacity; related to detectability, observability and prognosability. The paper does not mention monitorability: the analogy (a monitor inferring misbehavior from partial observations) is the map's."
+      }
+    },
+    {
+      "id": "mohammadkhani2026hidden#f13",
+      "set": {
+        "formula": "\\forall i\\in[N]\\ \\forall g:\\ \\Pr_{X\\sim\\mathcal U(\\{0,1\\}^N)}\\big[g(\\mathrm{CoT}(X))=X_i\\big]\\le\\tfrac12\\ \\text{although}\\ I[X,\\mathrm{CoT}]>0;\\quad \\text{Prop. A.1 (PARITY, }|\\mathrm{CoT}|=N/2\\text{): }S_0:=0,\\ S_{i+1}=S_i\\oplus X_{2i+1}\\oplus X_{2i+2}\\ (i=0,\\dots,\\tfrac N2-1),\\ I=\\tfrac N2;\\quad \\text{Prop. A.2: }I(X,\\mathrm{CoT})=H[X]-1=N-1"
+      }
+    }
+  ],
+  "drops": [
+    "anwar2026decision#f1",
+    "anwar2026decision#f19",
+    "anwar2026decision#f20",
+    "anwar2026decision#f21",
+    "yin2026opacity#f3",
+    "yin2026opacity#f4",
+    "yin2026opacity#f5",
+    "yin2026opacity#f7",
+    "yin2026opacity#f9",
+    "yin2026opacity#f12",
+    "yin2026opacity#f14",
+    "mohammadkhani2026hidden#f2",
+    "mohammadkhani2026hidden#f12"
+  ],
+  "adds": [
+    {
+      "key": "anwar2026decision",
+      "term": "matched public capability (Receiver and Sentinel)",
+      "concepts": [
+        "steganography and encoded reasoning",
+        "monitorability"
+      ],
+      "level": "concept",
+      "formalism": "information-theoretic",
+      "quote": "We assume that Vrec and Vsen have matched public capability: they differ only in their access to the shared key k. Formally, let A be any random variable that does not depend on S or k.",
+      "formula": "\\forall A\\ \\text{not depending on}\\ S\\ \\text{or}\\ k:\\quad U^{u}_{\\mathcal V_{\\mathrm{rec}}}(Y\\mid X^{\\mathrm{aud}},Z_0,A)=U^{u}_{\\mathcal V_{\\mathrm{sen}}}(Y\\mid X^{\\mathrm{aud}},Z_0,A)",
+      "assumptions": "Composite signal Z = (Z0, Enc(S, k)) with public component Z0 and a payload S under a shared key k; Receiver and Sentinel decoder families; an auditing task (Y, u) and context X^aud.",
+      "where": "Assumption E.3, App. E.2, Eq. (30), [P551]-[P553]; Proposition E.10, [P590]",
+      "gloss": "Receiver and Sentinel decoders do equally well on everything except the shared key, so any gap must come from the keyed payload; without this, a weaker Sentinel yields a positive gap with no encoding.",
+      "relation": "Premise of Theorems E.6-E.7 and Corollary E.8; Proposition E.10 shows that violating it gives false positives. Formal version of the main text's trusted Sentinel 'with comparable capabilities'."
+    }
+  ],
+  "record_fixes": [
+    {
+      "key": "anwar2026decision",
+      "old": "- contradicts [[anthropic2025paraphrases]]: argues its paraphrase-and-distill null result is uninterpretable; an Anthropic-derived paraphraser leaves 5 of 6 planted channels decodable",
+      "new": "- builds-on [[anthropic2025paraphrases]]: adapts its paraphrasing prompt (v1) to loan summaries to test whether paraphrasing removes planted channels\n- contradicts [[anthropic2025paraphrases]]: it reads equal accuracy after distilling paraphrased scratchpads as evidence against encoded reasoning; here such null results are confounded, as a paraphraser adapted from its prompt leaves 5 of 6 SFT-planted loan-summary channels decodable"
+    },
+    {
+      "key": "cachin1998information",
+      "old": "perfectly secure if zero. Later restated as",
+      "new": "perfectly secure if zero. Secure schemes exist if the covertext distribution meets certain conditions; a universal stegosystem needs no knowledge of it beyond independently repeated experiments. Restated as"
+    },
+    {
+      "key": "cachin1998information",
+      "old": "record and definitions written from a verified note only; constructions, theorems and exact notation not checked. Assumes a known covertext distribution and a passive warden.",
+      "new": "record and definitions checked only against the IACR ePrint abstract and the restatement in arXiv 2602.23163; constructions, theorems and exact notation (incl. the divergence's direction) not checked. Security is relative to a covertext distribution; passive warden only."
+    },
+    {
+      "key": "yin2026opacity",
+      "old": "undecidable for general timed automata, Petri nets and belief-threshold stochastic opacity.",
+      "new": "undecidable for general timed automata and (generally) Petri nets, often for belief-threshold stochastic opacity."
+    },
+    {
+      "key": "mohammadkhani2026hidden",
+      "old": "no monitor attacks tested.",
+      "new": "leakage audit checks only explicit visible text; no monitor tried to decode the CoTs."
+    }
+  ],
+  "notes": "All quotes verbatim; formulas match the PDFs. anthropic2025paraphrases: kept contradicts (Anwar explicitly calls its null-result inference confounded) with an accurate note, and added builds-on (v1 paraphraser adapts Roger's prompt). Dropped informal rows: Anwar's verbal encoded-reasoning and three-channel taxonomy, Yin's verbal variants and obfuscation description, Mohammadkhani's transformer and PRG background. Added Matched Public Capability. Cachin checked against the ePrint abstract (universal stegosystem). Xu correct."
+}

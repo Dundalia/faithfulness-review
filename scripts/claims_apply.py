@@ -5,7 +5,7 @@ occurs once in runs/D_definitions/synth_<family>.md), coherence fixes are applie
 in claims_<family>.json: first check in verdict/status, second in verdict2/status2 (--pass2), third in
 verdict3/status3 (--pass3).
 
-  python3 scripts/claims_apply.py FAMILY RESULT.json ... [--pass2|--pass3] [--dry]
+  python3 scripts/claims_apply.py FAMILY RESULT.json ... [--pass2|--pass3] [--dry] [--md=PATH --claims=PATH --problems=PATH]
 """
 import json, sys, glob
 from collections import Counter
@@ -14,8 +14,11 @@ P2 = '--pass2' in sys.argv or '--pass3' in sys.argv
 SUF = '3' if '--pass3' in sys.argv else '2'  # second independent check: record in verdict2/status2, keep the first-pass fields
 dry = '--dry' in sys.argv
 R = 'runs/D_definitions'
-md = open(f'{R}/synth_{fam}.md').read()
-cj = json.load(open(f'{R}/claims_{fam}.json')); claims = {c['n']: c for c in cj['claims']}
+opt = dict(a[2:].split('=', 1) for a in sys.argv if a.startswith('--') and '=' in a)
+MD, CL = opt.get('md', f'{R}/synth_{fam}.md'), opt.get('claims', f'{R}/claims_{fam}.json')
+OP = opt.get('problems', f'{R}/other_problems_{fam}.json')
+md = open(MD).read()
+cj = json.load(open(CL)); claims = {c['n']: c for c in cj['claims']}
 res, other = {}, []
 for f in files:
     d = json.load(open(f))
@@ -49,7 +52,7 @@ print('coherence fixes applied', napplied, 'of', len(coh), '| claims no longer v
 print(fam, 'verdicts', dict(Counter(x['verdict'] for x in res.values())), '| unchecked', len(claims) - len(res))
 print('not applied:', miss); print('em dashes fixed in', dash); print('other problems:', len(other))
 if not dry:
-    open(f'{R}/synth_{fam}.md', 'w').write(md)
-    json.dump(cj, open(f'{R}/claims_{fam}.json', 'w'), ensure_ascii=False, indent=1)
-    prev = json.load(open(f'{R}/other_problems_{fam}.json')) if __import__('os').path.exists(f'{R}/other_problems_{fam}.json') else []
-    json.dump(prev + [o for o in other if o not in prev], open(f'{R}/other_problems_{fam}.json', 'w'), ensure_ascii=False, indent=1)
+    open(MD, 'w').write(md)
+    json.dump(cj, open(CL, 'w'), ensure_ascii=False, indent=1)
+    prev = json.load(open(OP)) if __import__('os').path.exists(OP) else []
+    json.dump(prev + [o for o in other if o not in prev], open(OP, 'w'), ensure_ascii=False, indent=1)

@@ -1,6 +1,6 @@
 # CoT Faithfulness and Monitorability
 
-An annotated index of 217 papers and model cards on whether what language models say about their reasoning reflects what actually drives their behavior, and whether that reasoning can be monitored. It covers methods that improve faithfulness, the measurements they are judged by, CoT monitorability, self-reports trained to match behavior, the monitorability sections of frontier model cards, and a few classic explainable-NLP papers as background.
+An annotated index of 240 papers and model cards on whether what language models say about their reasoning reflects what actually drives their behavior, and whether that reasoning can be monitored. It covers methods that improve faithfulness, the measurements they are judged by, CoT monitorability, self-reports trained to match behavior, the monitorability sections of frontier model cards, and a few classic explainable-NLP papers as background.
 
 **Dashboard:** https://dundalia.github.io/faithfulness-review/
 
@@ -10,6 +10,7 @@ The dashboard has collections at the top (training methods, monitorability, meas
 - **Coverage:** a matrix crossing two tag groups (for example what is explained × intervention), where hatched cells mark combinations nothing covers.
 - **Links:** which papers build on, extend, compare to or contradict which.
 - **Definitions:** how the entries define faithfulness, counterfactual and monitorability, as verbatim quotes grouped by cluster of meaning. The filters select the entries; the search matches the definitions.
+- **Formal:** formal definitions grouped by the concept they define, with their formula, formalism and assumptions: the formal rows of the definitions catalogue (each labeled as defining the concept itself or a measurement of it) and the definitions in 23 formal-framework papers (causal abstraction, actual causation, structural causal games, usable information, steganographic security, explanation theory).
 
 Every view's state is in the URL, each entry has a permalink, and the current selection exports as CSV or BibTeX. Keyboard: `/` search, `j`/`k` next and previous entry, `o` open the paper, `Esc` close.
 
@@ -17,11 +18,13 @@ Standalone pages are linked after the collections. Each one is a Markdown file i
 
 ## What's in a record
 
-Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis. [`definitions.csv`](definitions.csv) holds 3,414 definitions of faithfulness, counterfactual and monitorability quoted from 216 entries, one row per definition, with its kind, stance, source, cluster and the verdict of the check against its source.
+Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis. [`definitions.csv`](definitions.csv) holds 3,414 definitions of faithfulness, counterfactual and monitorability quoted from 216 entries, one row per definition, with its kind, stance, source, cluster and the verdict of the check against its source. [`formal.csv`](formal.csv) holds 291 formal definitions from the 23 formal-framework papers, with formula, formalism, level (concept or measurement) and assumptions.
 
 ## How it was made
 
 Records were written by Claude agents from each paper's full text, then checked against the paper by a second agent that corrected errors. Venues and versions were verified against arXiv, OpenReview, ACL Anthology, proceedings, DBLP and Semantic Scholar on 15 October 2026. The tag vocabulary was calibrated on a two-coder pilot ([`pilot/report.md`](pilot/report.md)). The full method, record format and the steps for adding a paper are in [`PLAN.md`](PLAN.md).
+
+The 23 formal-framework papers added on 1 November 2026 were summarized by GPT-6.1 Sol (through Codex) or by Claude, and each batch was checked against the papers by a second Claude agent.
 
 The summaries are compressed and machine-written: check the paper before citing a number.
 
@@ -32,6 +35,7 @@ python3 scripts/build.py              # regenerate index files and site/data.jso
 python3 -m http.server -d site 8000   # preview the dashboard at http://localhost:8000
 python3 scripts/fetch.py              # cache full texts into cache/ (not committed)
 python3 scripts/definitions.py build  # rebuild definitions.csv from runs/D_definitions/ and re-check every quote
+python3 scripts/formal.py build       # rebuild formal.csv from runs/E_formal/ and re-check every quote
 ```
 
 Pushing to `main` rebuilds and deploys the dashboard through GitHub Actions ([`.github/workflows/pages.yml`](.github/workflows/pages.yml)).

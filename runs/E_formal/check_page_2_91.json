@@ -1,0 +1,247 @@
+{
+ "results": [
+  {
+   "n": 91,
+   "verdict": "supported"
+  },
+  {
+   "n": 92,
+   "verdict": "supported"
+  },
+  {
+   "n": 93,
+   "verdict": "supported"
+  },
+  {
+   "n": 94,
+   "verdict": "supported"
+  },
+  {
+   "n": 95,
+   "verdict": "supported"
+  },
+  {
+   "n": 96,
+   "verdict": "supported"
+  },
+  {
+   "n": 97,
+   "verdict": "understated",
+   "reason": "Consistency is not defined through the optimal decoder: the paper says it is exactly the accuracy of the Gibbs decoder, and the optimal deterministic decoder only bounds it within a factor of two in error. What makes both unbounded is that each uses the exact conditional distribution Pr(y|pi) of the model's labels given the explanation. The conclusion holds, but the stated reason names the wrong decoder.",
+   "evidence": [
+    "dasgupta2022framework [P40]: \"(i) the (randomized) Gibbs decoder that, given explanation π, returns a label y with probability Pr(y|π), and (ii) the optimal deterministic decoder that returns the label y that maximizes Pr(y|π)\"",
+    "dasgupta2022framework [P40]: \"Our notion of consistency is exactly the accuracy of the Gibbs decoder: m c = 1 − EG .\"",
+    "dasgupta2022framework [P40]: \"Claim 1. EO ≤ EG ≤ 2EO\""
+   ],
+   "replacement": "Both decoders in Dasgupta et al. use the exact distribution $\\Pr(y\\mid\\pi)$ of the model's labels given the explanation, so consistency does not model a bounded human or monitor."
+  },
+  {
+   "n": 98,
+   "verdict": "supported"
+  },
+  {
+   "n": 99,
+   "verdict": "supported"
+  },
+  {
+   "n": 100,
+   "verdict": "supported"
+  },
+  {
+   "n": 101,
+   "verdict": "supported"
+  },
+  {
+   "n": 102,
+   "verdict": "supported"
+  },
+  {
+   "n": 103,
+   "verdict": "supported"
+  },
+  {
+   "n": 104,
+   "verdict": "supported"
+  },
+  {
+   "n": 105,
+   "verdict": "supported"
+  },
+  {
+   "n": 106,
+   "verdict": "supported"
+  },
+  {
+   "n": 107,
+   "verdict": "supported"
+  },
+  {
+   "n": 108,
+   "verdict": "supported"
+  },
+  {
+   "n": 109,
+   "verdict": "supported"
+  },
+  {
+   "n": 110,
+   "verdict": "supported"
+  },
+  {
+   "n": 111,
+   "verdict": "supported"
+  },
+  {
+   "n": 112,
+   "verdict": "supported"
+  },
+  {
+   "n": 113,
+   "verdict": "supported"
+  },
+  {
+   "n": 114,
+   "verdict": "supported"
+  },
+  {
+   "n": 115,
+   "verdict": "supported"
+  },
+  {
+   "n": 116,
+   "verdict": "supported"
+  },
+  {
+   "n": 117,
+   "verdict": "overstated",
+   "reason": "On this page \"the catalogue\" is definitions.csv. It describes post-hoc rationalization in words in many rows (failure-mode, informal and criterion rows from Lanham et al. 2023, Creswell et al. 2023, Cox et al. 2026, Emmons et al. 2025, Jia et al. 2026 and others), so it does not appear \"only\" as Wang's negated definition or Parekh's performative steps. Even among concept-level formal rows the two are not the only route: Jia et al.'s necessity (jia2026faithfulness#5, labeled concept) is explicitly the condition that separates genuine reasoning from post-hoc rationalization. \"No framework definition\" is correct.",
+   "evidence": [
+    "lanham2023measuring [P50] (definitions.csv lanham2023measuring#2, kind failure-mode): \"The model’s reasoning may be post-hoc, i.e., produced after a certain conclusion has already been guaranteed\"",
+    "creswell2023selectioninference#2 (failure-mode): \"post-hoc rationalisation, where the answer produced by the model has no direct dependence on the explanation\"",
+    "jia2026faithfulness [P47]: \"Necessity distinguishes genuine reasoning from post-hoc rationalization\"",
+    "definitions.csv jia2026faithfulness#5 (kind formal; formal_labels level concept): \"Necessity ⟺ A depends causally on C.\"",
+    "critic.json coverage, post-hoc rationalization: concept-level catalogue entries wang2026case (negation of a faithfulness definition) and parekh2026drop (performative steps)"
+   ],
+   "replacement": "Post-hoc rationalization has no framework definition; the catalogue describes it in words, for instance as reasoning \"produced after a certain conclusion has already been guaranteed\" ([Lanham et al. 2023](./#p=lanham2023measuring)), and its concept-level formal rows reach it only indirectly: as the negation of a faithfulness definition ([Wang et al. 2026a](./#p=wang2026case)), as the failure of a necessity condition that \"distinguishes genuine reasoning from post-hoc rationalization\" ([Jia et al. 2026](./#p=jia2026faithfulness)), or as performative steps after the answer is already extractable ([Parekh & Goyal 2026](./#p=parekh2026drop))."
+  },
+  {
+   "n": 118,
+   "verdict": "supported"
+  },
+  {
+   "n": 119,
+   "verdict": "understated",
+   "reason": "The cited evidence and the page's own summary (main finding 2 and the Obfuscation row of the table) name three analogies, and goal obfuscation in planning is one of them. This sentence lists only opacity and unreadability.",
+   "evidence": [
+    "search_information_verification gaps: \"Obfuscation of CoT (suppressing or rewriting verbalized intent under monitor pressure): formal only by analogy, via DES opacity, planning goal obfuscation and debate's obfuscated arguments. No LLM-specific definition.\"",
+    "candidates.json, Kulkarni et al. 2018 (https://arxiv.org/abs/1802.06137): \"Goal obfuscation: the plan's observations stay consistent with at least k goals.\"",
+    "formal.md main finding 2: \"obfuscation has formal definitions only by analogy (opacity in discrete event systems, goal obfuscation in planning, a CoT that no polynomial-time monitor can read)\""
+   ],
+   "replacement": "Obfuscation of a CoT is formal only by analogy, with opacity, unreadability and goal obfuscation in planning ([Kulkarni et al. 2018](https://arxiv.org/abs/1802.06137))."
+  },
+  {
+   "n": 120,
+   "verdict": "supported"
+  },
+  {
+   "n": 121,
+   "verdict": "supported"
+  },
+  {
+   "n": 122,
+   "verdict": "supported"
+  },
+  {
+   "n": 123,
+   "verdict": "supported"
+  },
+  {
+   "n": 124,
+   "verdict": "supported"
+  },
+  {
+   "n": 125,
+   "verdict": "overstated",
+   "reason": "The 225 arXiv identifiers are all absent from the 217 pre-sweep map papers. The 234 title segments are not: cited_formal.py excludes only exact normalized title matches, so 9 of the segments are map papers whose reference entries append an arXiv number (8) or contain a typo (1). They are Lanham 2023 (30), Chen 2025 (16), Korbak 2025 (13), Radhakrishnan 2023 (5), Guan 2025, Turpin 2023, Agarwal 2024, Lyu 2023 and Chen 2024 (3 each). Other segments are not works, e.g. \"association for computational linguistics\" (43).",
+   "evidence": [
+    "cited_formal.py: \"if k and k not in inmap_titles and len(k) > 25: by_title[k].add(r['key'])\"",
+    "cited_outside.json titles: \"measuring faithfulness in chain of thought reasoning arxiv preprint arxiv 2307 13702\" (citing 30), map key lanham2023measuring",
+    "cited_outside.json titles: \"language models don t always say what they think unfaithful explanations in chain ofthought prompting\" (citing 3), map key turpin2023language",
+    "cited_outside.json: 225 arxiv entries, 234 title entries; none of the 225 ids is in an index.csv URL"
+   ],
+   "replacement": "**Citation mining.** `runs/E_formal/cited_formal.py` scanned the reference lists of the 217 map papers for works cited by at least three papers and absent from the map: 225 arXiv identifiers and 234 title segments that match no map title exactly, 9 of which are in fact map papers cited with an appended arXiv number or a typo (`runs/E_formal/cited_outside.json`)."
+  },
+  {
+   "n": 126,
+   "verdict": "supported"
+  },
+  {
+   "n": 127,
+   "verdict": "supported"
+  },
+  {
+   "n": 128,
+   "verdict": "supported"
+  },
+  {
+   "n": 129,
+   "verdict": "supported"
+  },
+  {
+   "n": 130,
+   "verdict": "supported"
+  },
+  {
+   "n": 131,
+   "verdict": "supported"
+  },
+  {
+   "n": 132,
+   "verdict": "supported"
+  },
+  {
+   "n": 133,
+   "verdict": "understated",
+   "reason": "The counts are right (fixes 11+11+7+7+3=39, drops 8+14+11+13+1=47, adds 1+0+1+1+1=4, record fixes 8+7+8+5+4=32), but the check notes give a third reason for dropping rows: some were informal, not just background or out of scope. Examples are Ward et al. 2024's informal Definitions 1-2 and the verbal rows of Anwar et al. and Yin.",
+   "evidence": [
+    "checks_F3.json notes: \"ward2024 Definitions 1-2 (informal drafts superseded by Definitions 3 and 6)\"",
+    "checks_F4.json notes: \"Dropped informal rows: Anwar's verbal encoded-reasoning and three-channel taxonomy, Yin's verbal variants and obfuscation description, Mohammadkhani's transformer and PRG background.\"",
+    "check_F1.md: \"drop a row that is not a formal definition of an in-scope notion\""
+   ],
+   "replacement": "Claude checked each batch against the full texts and PDFs, applying 39 fixes, dropping 47 rows that were background, informal or out of scope, adding 4 and correcting 32 record passages."
+  },
+  {
+   "n": 134,
+   "verdict": "supported"
+  }
+ ],
+ "coherence": [
+  {
+   "old": "Faithfulness of input-output explanations; completeness and soundness as sufficiency and minimality;",
+   "new": "Faithfulness of input-output explanations; completeness and soundness of an explanation as sufficiency and minimality, distinct from the completeness axiom of feature attributions;",
+   "reason": "Replaced claim 94 now defines Bilodeau et al.'s completeness as attributions summing to f(x) − E f(X). In the next paragraph, the Concepts covered line uses \"completeness\" for explanation completeness. formal.csv bilodeau2022impossibility#f5 notes the two are distinct (\"Distinct from completeness of an explanation as coverage of the decision's causes\")."
+  }
+ ],
+ "other_problems": [
+  {
+   "where": "Claim 94 (Explanation theory, What it defines)",
+   "problem": "The two quotation marks are written as escaped \\\" (\\\"for moderately rich ... networks)\\\" and \\\"can provably fail ... behaviour\\\"). These are the only backslash-escaped quotes on the page. marked renders them as plain quotes, but the source is inconsistent with every other quote and looks like a JSON escaping artifact from the replacement.",
+   "fix": "Replace each \\\" with \" in that sentence; the wording is supported as is."
+  },
+  {
+   "where": "Claim 114 (What is missing, The vacuity of unrestricted abstraction)",
+   "problem": "\"with arbitrary maps, [Sutter et al. 2025] leave 'no principled way ...'\" makes Sutter et al. the subject of what their abstract says the lifted constraint does (\"if we lift the linearity constraint imposed to alignment maps ..., we are left with no principled way\"). The content is supported; the attribution of agency is off.",
+   "fix": "Any definition of faithfulness through abstraction must fix the class of alignment maps: [Sutter et al. 2025](./#p=sutter2025non) conclude that if the linearity constraint on alignment maps is lifted, \"we are left with no principled way to balance the inherent trade-off between these maps’ complexity and accuracy\"."
+  },
+  {
+   "where": "Claim 7 (introduction): \"All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), 639 of them with a verbatim quote\"",
+   "problem": "Out of date, and it contradicts replaced claim 134. Since the Cachin rows were given quotes from the cached text, formal.csv has verbatim 'yes' for all 291 rows, and definitions.csv has verbatim 'yes' and a non-empty quote for all 350 formal rows. Recomputed with norm(quote) in norm(full_text(key)), all 641 quotes match. The formula count of 267 is still correct.",
+   "fix": "All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), all of them with a verbatim quote; the 291 framework rows also give assumptions and, for 267 of them, a formula."
+  },
+  {
+   "where": "Concepts table, Post-hoc rationalization row (line 29), both columns",
+   "problem": "If claim 117 is replaced as proposed, the row's \"Catalogue: only as the negation of faithfulness ... or as performative steps\" and \"Only as a negated faithfulness definition or as performative steps\" would omit the concept-level formal row jia2026faithfulness#5 (necessity), which Jia et al. tie to post-hoc rationalization (\"Necessity distinguishes genuine reasoning from post-hoc rationalization\", [P47]).",
+   "fix": "In the row, after the Wang et al. 2026a citation add \", as the failure of necessity ([Jia et al. 2026](./#p=jia2026faithfulness))\", and in the last column write \"Only as a negated faithfulness or necessity condition or as performative steps\"."
+  }
+ ]
+}

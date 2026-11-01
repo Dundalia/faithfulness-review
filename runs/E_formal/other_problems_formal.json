@@ -1,0 +1,117 @@
+[
+ {
+  "where": "runs/E_formal/claims_formal.json, claim 20 evidence",
+  "problem": "The evidence lists joglekar2025training as citing Ward et al. 2023. Joglekar only uses the phrase in quotation marks (\"We expect that in most settings, “honesty is the best policy,” meaning that ...\") and does not cite the paper. The second citing paper is schoen2025stress: \"in contrast to the related concept of deception (Ward et al., 2023)\". The count of 2 stands.",
+  "fix": "Replace joglekar2025training with schoen2025stress in the evidence for the Ward et al. 2023 count."
+ },
+ {
+  "where": "site/pages/formal.md, How this page was made, step 4",
+  "problem": "The page says \"GPT-6.1 Sol, run through Codex, read the 23 papers in five batches\". PLAN.md says the records and definitions were \"extracted by GPT-6.1 Sol through Codex (three batches) or Claude (two batches, after Codex reached its weekly cap)\". Step 4 also says the 2 Cachin 1998 rows \"are taken from the abstract and from the restatement in Anwar et al. 2026\", but their quote field is empty in formal.csv and site/data.json; only the formulas are given.",
+  "fix": "Check who extracted batches F4 and F5. If Claude did, write \"GPT-6.1 Sol, run through Codex, read 15 of the 23 papers in three batches and Claude the rest in two\" with the real split. Say that the 2 Cachin rows have a formula but no quote."
+ },
+ {
+  "where": "site/pages/formal.md, paragraph after the table (\"Faithfulness, completeness and soundness, legibility and counterfactuals are each defined in at least two framework families\")",
+  "problem": "The sentence is true, but by the table, belief and intention also span two families: structural causal games, and structural causal models with an epistemic state (Halpern & Kleiman-Weiner 2018 for intention). A reader may take the list as complete.",
+  "fix": "Optionally add \"and intention\" or write \"among them\" before the list."
+ },
+ {
+  "where": "formal.csv rows cachin1998information#f1 and #f2 (and the Method note on the page: \"the 2 rows of Cachin 1998 have no cached text and are taken from the abstract and from the restatement in Anwar et al. 2026 (steganography)\")",
+  "problem": "The formulas D_KL(P_1||P_0) <= epsilon and D_KL(P_1||P_0) = 0 copy Anwar et al.'s restatement, which reverses Cachin's argument order; Cachin's definitions are D(P_C||P_S) <= epsilon and D(P_C||P_S) = 0. The quote field is empty although the definition text is available.",
+  "fix": "Set the formulas to D(P_C\\|P_S)\\le\\varepsilon and D(P_C\\|P_S)=0, fill the quote with \"a stegosystem is called ε-secure (against passive adversaries) if D(PC ‖ PS) ≤ ε\" (Definition 1, revised version at cachin.com/cc/papers/stego.pdf, identical abstract to IACR ePrint 2000/028), and note in anwar2026decision#f13's relation that Anwar et al. write the divergence in the reverse order."
+ },
+ {
+  "where": "formal.csv rows yin2026opacity#f1 (relation: \"its infinite-step form is the paper's dual of diagnosability\"), #f6 and #f13 (\"dual\")",
+  "problem": "Yin never calls diagnosability the dual of opacity; the paper only contrasts diagnosability (\"always eventually know\") with infinite-step opacity (\"always not know\").",
+  "fix": "Reword the relations to \"contrasted with diagnosability ('always eventually know' vs. 'always not know')\" and drop \"the paper's dual\"."
+ },
+ {
+  "where": "claims_formal.json, claim 51 evidence",
+  "problem": "The evidence cites the Theorem 2 proof, which only notes that R = X; the paper states the restriction directly elsewhere.",
+  "fix": "Cite beckers2025large [P19]: \"given that we are not considering any interventions to the inner working of an LLM ... The only counterfactual distribution that we need to consider in the present discussion is the probability of counterfactuals for an intervention R∗ = r∗ on the root variables\"."
+ },
+ {
+  "where": "How this page was made, step 4",
+  "problem": "After the five batch checks, runs/E_formal/checks_render.json (15:35) applied 7 more fixes. These cover the formulas of marquessilva2022logic#f18 and #f19 (KaTeX), the Cachin rows checked against the newly cached full text, and three Yin relations. Step 4 does not mention this check, so its sequence of steps is incomplete.",
+  "fix": "After the sentence on the batch checks, add: \"A final check of formula rendering and of the newly cached Cachin text applied 7 more fixes (`runs/E_formal/checks_render.json`).\""
+ },
+ {
+  "where": "Observer-relative information, What it defines (outside claims 91 to 134)",
+  "problem": "\"Diagnosability is its dual\" is not in Yin 2026. Yin only contrasts the two requirements, and checks_render.json notes \"Yin never calls diagnosability a dual\".",
+  "fix": "Replace \"Diagnosability is its dual: it \"can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement\".\" with \"Yin contrasts it with diagnosability, which \"can be viewed as an “always eventually know” requirement, while infinite-step opacity corresponds to an “always not know” requirement\".\""
+ },
+ {
+  "where": "formal.csv beckers2019approximate#f10",
+  "problem": "The quote 'Definition 4.1: Define a distance function dmax on pairs of similar probabilistic causal models by taking' matches pdftotext of cache/beckers2019approximate.pdf, which is what formal.py checks against. It does not match cache/full/beckers2019approximate.txt, where the two columns are interleaved ('dmax on pairs intervention W ~ and context ~u) the distance beof similar models by taking'). The page's 'cached full text' count still holds by formal.py's definition. This is only a caveat for anyone checking against cache/full.",
+  "fix": "None needed on the page. Optionally note in formal.py's docstring that verbatim is checked against cache/<key>.{txt,pdf}, not cache/full/."
+ },
+ {
+  "where": "runs/E_formal/critic.json",
+  "problem": "The file contradicts itself on encoded reasoning. Its verdict says \"Encoded reasoning with causal use is defined only by Kaufmann et al.\", while its corrections say Kaufmann's is \"a use-based definition, though not a causal one\". The page (claims 120 and the steganography row) should follow the correction, which matches Kaufmann's text.",
+  "fix": "No page change beyond claim 120 and the steganography-cell coherence edit."
+ },
+ {
+  "where": "Claim 97 (optional precision)",
+  "problem": "Consistency equals the accuracy of the Gibbs decoder, not the optimal decoder. Both decoders use the exact conditional label distribution Pr(y|π) under μ, which is the actual reason consistency does not model a bounded observer. The claim is supported as written.",
+  "fix": "Optionally: \"Both decoders in Dasgupta et al. use the exact distribution of labels given each explanation, so consistency does not model a bounded human or monitor.\""
+ },
+ {
+  "where": "site/data.json (Formal tab)",
+  "problem": "data.json was generated at 15:25, before cache/full/cachin1998information.txt (15:34) and the rebuilt formal.csv (15:35). The Formal tab therefore still shows the two Cachin 1998 rows as verbatim \"no text\", while formal.csv and the page's method section say all 291 framework quotes are verbatim.",
+  "fix": "Rerun scripts/build.py so the Formal tab shows 641 verbatim rows, matching the replacement for claim 7."
+ },
+ {
+  "where": "Concepts and frameworks table, row 'Self-report and introspection', column 'Only measurements?'",
+  "problem": "The cell says \"Verbal criteria only, no formula\", but the same row lists catalogue rows that are formal and concept-level, with formulas: zeng2026evaluating#7 (behavioral target $g_t(x;M)$) and yoshida2026introspecting#2 (alignment shift $\\delta_{i,c}$), both labeled concept in formal_labels.json.",
+  "fix": "Replace the cell with: \"Verbal criteria only for introspection; the catalogue formalizes only the targets of self-reports\"."
+ },
+ {
+  "where": "Main finding 3, citation counts; How this page was made",
+  "problem": "Many cached full texts of pre-sweep papers have their reference lists cut out (\"[...]\"). matton2025walk is one, and its missing bibliography is why the Pearl 2001 count came out one short. Citation counts made from cache/full alone are lower bounds unless the in-text citations are also checked.",
+  "fix": "Base citation counts on in-text citations as well as reference lists, or check papers whose cache lacks a bibliography against their arXiv HTML. For this page, the claim 20 replacement already includes the one miss found."
+ },
+ {
+  "where": "Main finding 3, CAuSE sentence (claim 18)",
+  "problem": "The sentence is correctly scoped to what the causal-abstraction search found. But the map already holds bhupatiraju2026stated, which patches activations at the token span of each stated CoT step (\"targeted interchange intervention on self-generated reasoning\") and scores whether the answer flips to the predicted target. That is closer to treating written steps as high-level variables than CAuSE is, although it is an operational metric (definitions.csv rows #4 and #7, kinds operational and criterion), not a definition.",
+  "fix": "Optionally add after the CAuSE sentence: \"Within the map, [Bhupatiraju & Nyaupane 2026](./#p=bhupatiraju2026stated) apply targeted interchange interventions at the tokens of each stated step, but as a metric, not as a definition.\""
+ },
+ {
+  "where": "Structural causal models, What it cannot express: \"Agents' beliefs and intentions need the game extension below, and a monitor's computational limits need the information-theoretic family.\"",
+  "problem": "Overstated and inconsistent with the page's own table, which lists \"Structural causal models with an epistemic state: intention ([Halpern & Kleiman-Weiner 2018](https://arxiv.org/abs/1810.05903))\". search_agency_honesty.json records that paper's intention definitions (Defs. 4.1, 4.4, 4.8) in \"Halpern-Pearl structural causal models with an epistemic state (probability over causal models and a utility)\". Only belief, and belief, intention and deception together, need the game extension.",
+  "fix": "Intention needs an epistemic state over causal models ([Halpern & Kleiman-Weiner 2018](https://arxiv.org/abs/1810.05903)), belief and deception need the game extension below, and a monitor's computational limits need the information-theoretic family."
+ },
+ {
+  "where": "Structural causal models, Concepts covered: \"with mediation, faithfulness as complete mediation by the CoT and, as a proposed reading, post-hoc rationalization as a null indirect effect.\"",
+  "problem": "Only the second half is labeled as a proposal. No formal.csv row in this family defines CoT faithfulness as complete mediation by the CoT (Pearl 2001 defines mediation in general, and Remark 53 of Geiger et al. concerns hidden vectors, not a CoT). The page's Conjectures paragraph proposes this same reading (a null natural direct effect of the instruction on the answer, with the CoT as mediator) alongside the post-hoc rationalization reading.",
+  "fix": "with mediation, and as proposed readings, faithfulness as complete mediation by the CoT and post-hoc rationalization as a null indirect effect."
+ },
+ {
+  "where": "Claim 84 (Observer-relative information, What it defines)",
+  "problem": "The claim is supported, but \"require only that ... but that ...\" can read as if Kim & Lee's checkability were weaker overall. It relaxes completeness, but its soundness quantifies over every proof ($\\forall z'\\in\\mathcal Z$), whereas Kirchner et al. quantify over provers from the same family ($\\forall\\pi'\\in\\mathcal H$) (definitions.csv kim2026mitigating#2, kirchner2024proververifier#3).",
+  "fix": "Optional rewording of the second half: \"while [Kim & Lee 2026](./#p=kim2026mitigating) require only that the verifier accept the prover's correct answers, and that \"there exists no adversarial proof that can trick the verifier into accepting an incorrect answer\", over every proof rather than over provers from one family.\""
+ },
+ {
+  "where": "Observer-relative information, Assumptions (claim 85)",
+  "problem": "The list gives an assumption for every definition in the section except checkability, defined just above. Kirchner et al.'s soundness is relative to a model family $\\mathcal H$ of provers (definitions.csv kirchner2024proververifier#3: \"no adversarial / \\\"sneaky\\\" prover from the same model family $\\mathcal{H}$\").",
+  "fix": "Optionally append: \"; for checkability, a verifier and ground-truth correctness labels, and in Kirchner et al. 2024 a model family of provers\"."
+ },
+ {
+  "where": "Claim 94 (Explanation theory, What it defines)",
+  "problem": "The two quotation marks are written as escaped \\\" (\\\"for moderately rich ... networks)\\\" and \\\"can provably fail ... behaviour\\\"). These are the only backslash-escaped quotes on the page. marked renders them as plain quotes, but the source is inconsistent with every other quote and looks like a JSON escaping artifact from the replacement.",
+  "fix": "Replace each \\\" with \" in that sentence; the wording is supported as is."
+ },
+ {
+  "where": "Claim 114 (What is missing, The vacuity of unrestricted abstraction)",
+  "problem": "\"with arbitrary maps, [Sutter et al. 2025] leave 'no principled way ...'\" makes Sutter et al. the subject of what their abstract says the lifted constraint does (\"if we lift the linearity constraint imposed to alignment maps ..., we are left with no principled way\"). The content is supported; the attribution of agency is off.",
+  "fix": "Any definition of faithfulness through abstraction must fix the class of alignment maps: [Sutter et al. 2025](./#p=sutter2025non) conclude that if the linearity constraint on alignment maps is lifted, \"we are left with no principled way to balance the inherent trade-off between these maps’ complexity and accuracy\"."
+ },
+ {
+  "where": "Claim 7 (introduction): \"All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), 639 of them with a verbatim quote\"",
+  "problem": "Out of date, and it contradicts replaced claim 134. Since the Cachin rows were given quotes from the cached text, formal.csv has verbatim 'yes' for all 291 rows, and definitions.csv has verbatim 'yes' and a non-empty quote for all 350 formal rows. Recomputed with norm(quote) in norm(full_text(key)), all 641 quotes match. The formula count of 267 is still correct.",
+  "fix": "All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), all of them with a verbatim quote; the 291 framework rows also give assumptions and, for 267 of them, a formula."
+ },
+ {
+  "where": "Concepts table, Post-hoc rationalization row (line 29), both columns",
+  "problem": "If claim 117 is replaced as proposed, the row's \"Catalogue: only as the negation of faithfulness ... or as performative steps\" and \"Only as a negated faithfulness definition or as performative steps\" would omit the concept-level formal row jia2026faithfulness#5 (necessity), which Jia et al. tie to post-hoc rationalization (\"Necessity distinguishes genuine reasoning from post-hoc rationalization\", [P47]).",
+  "fix": "In the row, after the Wang et al. 2026a citation add \", as the failure of necessity ([Jia et al. 2026](./#p=jia2026faithfulness))\", and in the last column write \"Only as a negated faithfulness or necessity condition or as performative steps\"."
+ }
+]

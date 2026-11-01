@@ -1,0 +1,51 @@
+{
+  "fixes": [
+    {"id": "halpern2025causality#f4", "set": {"formula": "\\forall M\\in\\mathcal M:\\ (M,w)\\models\\varphi\\text{ is defined for every state }w\\text{ of }M\\text{ and every }\\varphi\\in\\mathcal L_{\\mathcal M};\\quad\\mathcal L(\\mathcal S)\\subseteq\\mathcal L_{\\mathcal M};\\quad\\varphi,\\psi\\in\\mathcal L(\\mathcal S)\\Rightarrow(\\varphi\\to\\psi)\\in\\mathcal L_{\\mathcal M}."}},
+    {"id": "halpern2025causality#f8", "set": {"formula": "\\operatorname{Knows}_K(\\varphi)\\iff\\forall\\vec u\\in K:\\ (M,\\vec u)\\models\\varphi."}},
+    {"id": "beckers2022causal#f8", "set": {"gloss": "One sufficient explanation dominates another of the same outcome when its intervened variables and its safeguarded network are subsets of the other's."}},
+    {"id": "beckers2022causal#f9", "set": {"gloss": "An actual sufficient explanation is good when no other actual sufficient explanation of the outcome uses a subset of its intervened variables and a subset of its safeguarded network."}},
+    {"id": "beckers2022causal#f11", "set": {"relation": "Special case of Definition 11 with the largest witness. The paper calls it a deterministic version of the direct effect (Pearl 2001); with the actual value as reference it matches Pearl's unit-level natural direct effect (Definition 4)."}},
+    {"id": "beckers2022causal#f14", "set": {"gloss": "One counterfactual explanation dominates another of the same outcome when its changed variables, witness and safeguarded network are all subsets of the other's."}},
+    {"id": "beckers2022causal#f15", "set": {"gloss": "No other counterfactual explanation of the outcome uses subsets of its changed variables, witness and safeguarded network."}},
+    {"id": "beckers2025large#f1", "set": {"quote": "Definition 1. A nondeterministic causal model M is a 3tuple (V, G, PM ), where V is a set of variables (each with their own domain), G is an acyclic directed graph such that there is one node for each variable in V"}},
+    {"id": "yu2025causal#f2", "set": {"concepts": ["completeness of explanation", "faithfulness of reasoning", "counterfactuals", "other: causal sufficiency"]}},
+    {"id": "yu2025causal#f5", "set": {"concepts": ["completeness of explanation", "other: causal sufficiency"]}},
+    {"id": "pearl2001direct#f2", "set": {"quote": "the total effect measures the probability that response variable Y would take on the value y when X is set to x by external intervention."}}
+  ],
+  "drops": [
+    "halpern2025causality#f1",
+    "beckers2022causal#f1",
+    "beckers2022causal#f2",
+    "beckers2022causal#f3",
+    "beckers2022causal#f20",
+    "beckers2022causal#f21",
+    "yu2025causal#f1",
+    "yu2025causal#f11"
+  ],
+  "adds": [
+    {
+      "key": "beckers2025large",
+      "term": "nondeterministic causal model of an autoregressive LLM",
+      "concepts": ["counterfactuals"],
+      "level": "concept",
+      "formalism": "causal model",
+      "quote": "Therefore we can represent the process with a causal model consisting of variables V = {X, T1 , . . . , Tk , Y} and the following equations and distributions: (T1 , . . . , Tlx ) = X for i ∈ {lx + 1, . . . , k}: P (Ti |T1 , . . . , Ti−1 ) Y = (T1 , . . . , Tk )",
+      "formula": "\\mathbf V=\\{X,T_1,\\ldots,T_k,Y\\};\\quad(T_1,\\ldots,T_{l_x})=X;\\quad T_i\\sim P(T_i\\mid T_1,\\ldots,T_{i-1})\\ \\ (i=l_x+1,\\ldots,k);\\quad Y=(T_1,\\ldots,T_k).",
+      "assumptions": "Fixed length k with an empty token; the prompt X is the only root and Y the only leaf; idealized sampling (each token is a random variable distributed as P(T|s)); sampling parameters held fixed. Only interventions on the prompt are considered.",
+      "where": "Section 4, [P46]–[P47]",
+      "gloss": "Each generated token is a stochastic mechanism whose parents are the prompt and all earlier tokens; the output is the token sequence.",
+      "relation": "Theorem 2: this model satisfies the simple semantics (Definition 3) for changed prompts, because the prompt is a parent of every generated token. Intermediate tokens are variables of the model, but the paper does not treat interventions on them."
+    }
+  ],
+  "record_fixes": [
+    {"key": "halpern2025causality", "old": "recovers modified Halpern–Pearl definitions in specified settings; permits backtracking.", "new": "recovers the modified HP cause and the HP explanation definitions for specified witness languages; permits backtracking; arbitrary disjunctive witnesses make every formula a cause."},
+    {"key": "beckers2025large", "old": "motivation:explainability, motivation:auditing]", "new": "motivation:explainability]"},
+    {"key": "beckers2025large", "old": "**Limits** Depends on the chosen stochastic semantics.", "new": "**Limits** Only prompt (root) counterfactuals; no interventions on intermediate tokens or internals. Depends on the chosen stochastic semantics."},
+    {"key": "yu2025causal", "old": "lever:prompt-pipeline, lever:inference-time, lever:sft", "new": "lever:prompt-pipeline, lever:sft"},
+    {"key": "yu2025causal", "old": "model:qwen-2.5-72b, model:qwen-2.5-7b", "new": "model:qwen2.5-72b, model:qwen2.5-7b"},
+    {"key": "yu2025causal", "old": "difficult tasks and prompts remain sensitive.", "new": "difficult tasks and prompts remain sensitive. PS/PNS target the gold answer and the estimator scores validator-judged coherence: relevance to a correct solution, not faithfulness to the model's own decision process."},
+    {"key": "pearl2001direct", "old": "Total effects generally require reverse-transition decompositions.", "new": "Total effect = NDE minus the indirect effect of the reverse transition; additive only in linear models. Markovian models always satisfy the identification conditions."},
+    {"key": "pearl2001direct", "old": "contribution:theory, motivation:explainability]", "new": "contribution:theory]"}
+  ],
+  "notes": "All 68 quotes verbatim; formulas match the PDFs (Pearl's are images, checked against the printed equations). Dropped background or out-of-scope rows: standard causal-model definitions, Beckers's agreement and Independence assumptions, his fairness definitions, Yu's generic CoT model and validator MAE. Kept the ccf and both model classes of Beckers 2025, where representation is the subject. Beckers's dominance glosses confused subset with fewer. Metadata and latest arXiv versions confirmed; no in-map paper qualifies for a relation."
+}

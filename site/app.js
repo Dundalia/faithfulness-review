@@ -15,7 +15,13 @@ const VERB_LABEL = { contradicts: 'contradicts', 'builds-on': 'builds on', exten
 const PANE_HIDE = ['source:'];
 const FREE_LIMIT = 10;
 const STEPS = 7;
-const TABS = ['list', 'table', 'coverage', 'links', 'definitions'];
+const TABS = ['list', 'table', 'coverage', 'links', 'definitions', 'formal'];
+const FORMAL_CONCEPTS = ['faithfulness', 'completeness and soundness', 'post-hoc rationalization', 'self-report and introspection',
+  'honesty, lying and deception', 'belief and intention', 'scheming and hidden objectives', 'monitorability', 'legibility and checkability',
+  'obfuscation', 'steganography and encoded reasoning', 'simulatability', 'counterfactuals', 'actual causation and explanation',
+  'causal abstraction', 'direct and indirect effects', 'usable information', 'other'];
+const FORMAL_LEVELS = { concept: 'Defines the concept', measurement: 'Defines a measurement', both: 'Both' };
+const FORMAL_SOURCES = { frameworks: 'Formal-framework papers', catalogue: 'Definitions catalogue' };
 const DEF_FAMILIES = { faithfulness: 'Faithfulness', counterfactual: 'Counterfactual', monitorability: 'Monitorability' };
 const DEF_KINDS = ['informal', 'formal', 'operational', 'criterion', 'failure-mode', 'taxonomy'];
 const TRAIN_LEVERS = ['sft', 'preference', 'rl-reward', 'rl-mechanics', 'activation-loss', 'multi-agent-game'];
@@ -42,9 +48,10 @@ const state = {
   tsort: { col: 'year', dir: 'desc' }, key: null, rowNs: 'object', colNs: 'lever',
   verbs: new Set(['contradicts']), showAll: new Set(), facetOpen: new Set(['object', 'lever', 'contribution', 'motivation']),
   dfam: '', dcl: '', dkind: '',
+  fcon: '', fform: '', flev: '', fcol: '',
 };
 let PAPERS = [], BYKEY = new Map(), NS = new Map(), INCOMING = new Map(), YEARS = [], GENERATED = '';
-let DEFS = [], CLUSTERS = [];
+let DEFS = [], CLUSTERS = [], FORMALS = [];
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -74,6 +81,7 @@ async function init() {
   PAPERS.forEach(p => BYKEY.set(p.key, p));
   CLUSTERS = data.clusters || [];
   DEFS = (data.definitions || []).map(d => ({ ...d, text: [d.term, d.quote, d.gloss, d.source, d.key].join(' ').toLowerCase() }));
+  FORMALS = (data.formal || []).map(d => ({ ...d, text: [d.term, d.quote, d.gloss, d.formula, d.assumptions, d.relation, d.concepts, d.key].join(' ').toLowerCase() }));
   PAPERS.forEach(p => p.relations.forEach(r => {
     if (!INCOMING.has(r.target)) INCOMING.set(r.target, []);
     INCOMING.get(r.target).push({ ...r, source: p.key });
@@ -171,6 +179,8 @@ function writeHash() {
   if (state.tab === 'coverage') parts.push(`m=${state.rowNs},${state.colNs}`);
   if (state.tab === 'links') parts.push('vb=' + [...state.verbs].join(','));
   if (state.tab === 'definitions' && (state.dfam || state.dcl || state.dkind)) parts.push(`d=${state.dfam},${state.dcl},${state.dkind}`);
+  if (state.tab === 'formal' && (state.fcon || state.fform || state.flev || state.fcol))
+    parts.push('fm=' + [state.fcon, state.fform, state.flev, state.fcol].map(encodeURIComponent).join('|'));
   if (state.key) parts.push('p=' + encodeURIComponent(state.key));
   lastHash = parts.length ? '#' + parts.join('&') : '';
   if (location.hash !== lastHash) history.replaceState(null, '', lastHash || location.pathname + location.search);
@@ -195,6 +205,11 @@ function readHash() {
   state.dfam = DEF_FAMILIES[df] ? df : '';
   state.dcl = CLUSTERS.some(c => c.id === dc && (!state.dfam || c.family === state.dfam)) ? dc : '';
   state.dkind = DEF_KINDS.includes(dk) ? dk : '';
+  const [fc, ff, fl, fs] = (h.get('fm') || '').split('|').map(decodeURIComponent);
+  state.fcon = FORMAL_CONCEPTS.includes(fc) ? fc : '';
+  state.fform = FORMALS.some(d => d.formalism === ff) ? ff : '';
+  state.flev = FORMAL_LEVELS[fl] ? fl : '';
+  state.fcol = FORMAL_SOURCES[fs] ? fs : '';
   const legacy = (h.get('o') || '').split(',').find(k => BYKEY.has(k));
   state.key = BYKEY.has(h.get('p')) ? h.get('p') : (legacy || null);
   for (const ns of state.sel.keys()) state.facetOpen.add(ns);
@@ -279,6 +294,11 @@ function setupStatic() {
   $('defFam').addEventListener('change', e => { state.dfam = e.target.value; state.dcl = ''; render(); });
   $('defCluster').addEventListener('change', e => { state.dcl = e.target.value; render(); });
   $('defKind').addEventListener('change', e => { state.dkind = e.target.value; render(); });
+  $('formal').addEventListener('click', e => { const go = e.target.closest('button.goto'); if (go) select(go.dataset.key); });
+  $('fCon').addEventListener('change', e => { state.fcon = e.target.value; render(); });
+  $('fForm').addEventListener('change', e => { state.fform = e.target.value; render(); });
+  $('fLev').addEventListener('change', e => { state.flev = e.target.value; render(); });
+  $('fCol').addEventListener('change', e => { state.fcol = e.target.value; render(); });
   $('pane').addEventListener('click', e => {
     const tag = e.target.closest('.tag[data-tag]');
     if (tag) { const [ns, v] = tagParts(tag.dataset.tag); toggleTag(ns, v); state.facetOpen.add(ns); render(); return; }
@@ -385,6 +405,7 @@ function render() {
   if (state.tab === 'coverage') renderMatrix(filtered);
   if (state.tab === 'links') renderLinks(filtered);
   if (state.tab === 'definitions') renderDefs();
+  if (state.tab === 'formal') renderFormal();
   renderPane();
   writeHash();
 }
@@ -623,6 +644,54 @@ function renderDefs() {
       <p class="def-ref">${paperRef(d.key)} <span class="ref-year">${esc(d.where)}</span>${d.source ? `<span class="def-src">From ${sourceRefs(d.source)}</span>` : ''}</p></li>`;
   }
   $('defs').innerHTML = html + '</ol>';
+}
+
+function tex(f) {
+  if (window.katex) { try { return katex.renderToString(f, { throwOnError: false, displayMode: false }); } catch (e) { /* fall through */ } }
+  return `<code>${esc(f)}</code>`;
+}
+function renderFormal() {
+  const keys = new Set(PAPERS.filter(p => match(p, { ignoreQ: true })).map(p => p.key));
+  const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const base = FORMALS.filter(d => keys.has(d.key) && terms.every(t => d.text.includes(t)));
+  const pick = (exceptFn) => base.filter(d => exceptFn(d));
+  const byCon = pick(d => (!state.fform || d.formalism === state.fform) && (!state.flev || d.level === state.flev) && (!state.fcol || d.collection === state.fcol));
+  $('fCon').innerHTML = `<option value="">All concepts (${byCon.length})</option>` + FORMAL_CONCEPTS.filter(c => byCon.some(d => d.concept === c))
+    .map(c => `<option value="${esc(c)}">${esc(c)} (${byCon.filter(d => d.concept === c).length})</option>`).join('');
+  $('fCon').value = state.fcon;
+  const byForm = pick(d => (!state.fcon || d.concept === state.fcon) && (!state.flev || d.level === state.flev) && (!state.fcol || d.collection === state.fcol));
+  const forms = [...new Set(FORMALS.map(d => d.formalism).filter(Boolean))].sort();
+  $('fForm').innerHTML = `<option value="">All formalisms (${byForm.length})</option>` + forms.filter(f => byForm.some(d => d.formalism === f))
+    .map(f => `<option value="${esc(f)}">${esc(f)} (${byForm.filter(d => d.formalism === f).length})</option>`).join('');
+  $('fForm').value = state.fform;
+  $('fLev').innerHTML = '<option value="">Concept or measurement</option>' + Object.entries(FORMAL_LEVELS).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
+  $('fLev').value = state.flev;
+  $('fCol').innerHTML = '<option value="">Both sources</option>' + Object.entries(FORMAL_SOURCES).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
+  $('fCol').value = state.fcol;
+  const shown = byCon.filter(d => !state.fcon || d.concept === state.fcon);
+  $('count').innerHTML = `<b>${shown.length}</b> formal definitions from ${new Set(shown.map(d => d.key)).size} entries`;
+  if (!shown.length) { $('formal').innerHTML = '<p class="empty">No formal definitions match. Remove a filter or clear the search.</p>'; return; }
+  const year = d => BYKEY.get(d.key)?.year || 0;
+  const rank = d => [FORMAL_CONCEPTS.indexOf(d.concept), d.collection === 'frameworks' ? 0 : 1, d.level === 'measurement' ? 1 : 0];
+  shown.sort((a, b) => { const ra = rank(a), rb = rank(b); return ra[0] - rb[0] || ra[1] - rb[1] || ra[2] - rb[2] || year(b) - year(a) || a.id.localeCompare(b.id); });
+  let html = '', cur = null;
+  for (const d of shown) {
+    if (d.concept !== cur) {
+      const n = shown.filter(x => x.concept === d.concept), c = n.filter(x => x.level !== 'measurement').length;
+      html += `${cur === null ? '' : '</ol>'}<h3 class="def-cluster">${esc(d.concept[0].toUpperCase() + d.concept.slice(1))}</h3>` +
+        `<p class="def-cluster-desc">${n.length} formal definition${n.length === 1 ? '' : 's'}, ${c === n.length ? (n.length === 1 ? 'of the concept itself' : 'all of the concept itself') : `${c} of the concept itself`}.</p><ol class="links">`;
+      cur = d.concept;
+    }
+    html += `<li><div><span class="def-term">${highlight(d.term)}</span><span class="verb">${esc(FORMAL_LEVELS[d.level] || d.level)}${d.formalism ? ', ' + esc(d.formalism) : ''}</span><span class="verb">${esc(FORMAL_SOURCES[d.collection])}</span></div>
+      ${d.formula ? `<div class="formal-formula">${tex(d.formula)}</div>` : ''}
+      ${d.quote ? `<blockquote class="def-quote">${highlight(d.quote)}</blockquote>` : ''}
+      ${d.verbatim && d.verbatim !== 'yes' ? `<p class="formal-flag">Quote not checked against the full text (${esc(d.verbatim)})</p>` : ''}
+      <p class="note">${highlight(d.gloss)}</p>
+      ${d.assumptions ? `<p class="formal-meta"><b>Assumes</b> ${esc(d.assumptions)}</p>` : ''}
+      ${d.relation ? `<p class="formal-meta"><b>Relation</b> ${esc(d.relation)}</p>` : ''}
+      <p class="def-ref">${paperRef(d.key)} <span class="ref-year">${esc(d.where)}</span></p></li>`;
+  }
+  $('formal').innerHTML = html + '</ol>';
 }
 
 /* ---------- export ---------- */

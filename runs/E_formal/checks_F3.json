@@ -1,0 +1,122 @@
+{
+ "fixes": [
+  {
+   "id": "ward2024reasons#f11",
+   "set": {
+    "quote": "The agent intends to influence 𝑿 ⊆ 𝑽 with policy 𝜋 w.r.t. alternative policy 𝜋ˆ if there exists a subset-minimal 𝒀 ⊇ 𝑿 satisfying:",
+    "where": "Appendix E.3, Definition 17, equation (9), [P193]"
+   }
+  },
+  {
+   "id": "ward2024reasons#f12",
+   "set": {
+    "where": "§5.2 [P86]; Appendix E.3, Definition 18, [P195]",
+    "assumptions": "Adapted H&KW criterion, utility and alternative policy. Appendix Definition 18 retains multi-agent notation (π = (π^i, π^j)) despite the paper's single-agent setup; the quote is the main-text paraphrase in §5.2 (Definition 18 itself is in the cached text at [P195])."
+   }
+  },
+  {
+   "id": "hammond2023reasoning#f7",
+   "set": {
+    "level": "concept"
+   }
+  },
+  {
+   "id": "hammond2023reasoning#f12",
+   "set": {
+    "level": "concept"
+   }
+  },
+  {
+   "id": "marquessilva2022logic#f1",
+   "set": {
+    "quote": "Let ϕ represent a propositional formula, and let τA,B represent a term. τA,B is a prime implicant of ϕ if,"
+   }
+  },
+  {
+   "id": "marquessilva2022logic#f2",
+   "set": {
+    "quote": "For completeness, we also mention prime implicates. Let ϕ be a propositional formula, and let ωA,B be a clause. ωA,B is a prime implicate of ϕ if,"
+   }
+  },
+  {
+   "id": "marquessilva2022logic#f28",
+   "set": {
+    "assumptions": "Classifier, instance, locality radius ε>0 and a chosen distance. The printed D_h (eq. 36) sums ITE(x_{1i}=x_{2i},1,0), i.e. counts equal coordinates, an apparent typo for standard Hamming distance; the text permits other distance measures."
+   }
+  }
+ ],
+ "drops": [
+  "ward2024reasons#f2",
+  "ward2024reasons#f3",
+  "hammond2023reasoning#f4",
+  "dasgupta2022framework#f14",
+  "marquessilva2022logic#f3",
+  "marquessilva2022logic#f6",
+  "marquessilva2022logic#f8",
+  "marquessilva2022logic#f15",
+  "marquessilva2022logic#f20",
+  "marquessilva2022logic#f24",
+  "marquessilva2022logic#f27"
+ ],
+ "adds": [
+  {
+   "key": "hammond2023reasoning",
+   "term": "Mechanised MAID (rationality relations)",
+   "concepts": [
+    "counterfactuals",
+    "other: strategic policy adaptation"
+   ],
+   "level": "concept",
+   "formalism": "game-theoretic",
+   "quote": "In order to provide values for the decision rule variables, we introduce a set of rationality relations R = {rD }D∈D that describe assumptions about how the agents choose decision rules.",
+   "formula": "mM=(m\\mathcal G,\\theta,R),\\quad m\\mathcal G=(N,\\mathbf V\\cup\\mathbf M,m\\mathcal E),\\quad m\\mathcal E:=\\mathcal E\\cup\\{(M_V,V)\\}_{V\\in\\mathbf V}\\cup\\mathcal E',\\quad \\mathcal E'\\subseteq\\bigcup_{D\\in\\mathbf D}(\\mathbf M\\setminus\\Pi_D)\\times\\Pi_D,\\quad r_D\\subseteq\\operatorname{dom}(\\mathbf{Pa}_{\\Pi_D})\\times\\operatorname{dom}(\\Pi_D)\\text{ serial};\\qquad \\text{e.g. }\\pi_D\\in r^{BR}_D(\\mathbf{pa}_{\\Pi_D})\\iff\\pi_D\\in\\arg\\max_{\\hat\\pi_D\\in\\operatorname{dom}(\\Pi_D)}\\sum_{U\\in\\mathbf U^i}\\mathbb E_{(\\hat\\pi_D,\\pi_{-D})}[U].",
+   "assumptions": "A MAID with known parameters (common prior); mechanism variables Θ_V for parameters and Π_D for decision rules; rationality relations (e.g. best response) stating how each agent picks its rule given the other mechanism variables. The mechanised graph may be cyclic.",
+   "where": "§3.1, Definition 15 and equation (1), [P135]–[P136]",
+   "gloss": "Adds a variable for each parameter and decision rule, plus relations saying how agents choose rules, so interventions can propagate into the agents' policy choices.",
+   "relation": "Substrate for Pre-policy interventions and for the rational outcomes over which Interventional query and Counterfactual query in games quantify; plays the role that the policy oracle plays in Ward et al. (2024)."
+  }
+ ],
+ "record_fixes": [
+  {
+   "key": "ward2023honesty",
+   "old": "authors: \"Ward, Belardinelli, Toni et al.\"",
+   "new": "authors: \"Ward, Belardinelli, Toni & Everitt\""
+  },
+  {
+   "key": "ward2023honesty",
+   "old": "model:gpt-neo-1.3b, model:gpt-4]",
+   "new": "model:gpt-neo-1.3b, model:gpt-3.5, model:gpt-4]"
+  },
+  {
+   "key": "ward2023honesty",
+   "old": " [Metadata](https://arxiv.org/abs/2312.01350).",
+   "new": ""
+  },
+  {
+   "key": "ward2024reasons",
+   "old": "tags: [source:formal-sweep-2026-11-01, contribution:theory,",
+   "new": "tags: [source:formal-sweep-2026-11-01, signal:generic-cf, contribution:theory,"
+  },
+  {
+   "key": "ward2024reasons",
+   "old": " [Metadata](https://arxiv.org/abs/2402.07221).",
+   "new": ""
+  },
+  {
+   "key": "hammond2023reasoning",
+   "old": " [Metadata](https://arxiv.org/abs/2301.02324).",
+   "new": ""
+  },
+  {
+   "key": "dasgupta2022framework",
+   "old": " [Venue](https://proceedings.mlr.press/v162/dasgupta22a.html).",
+   "new": ""
+  },
+  {
+   "key": "marquessilva2022logic",
+   "old": " [Publication](https://link.springer.com/chapter/10.1007/978-3-031-31414-8_2).",
+   "new": ""
+  }
+ ],
+ "notes": "All 82 quotes verbatim; formulas match the PDFs and the extractor's typo flags hold. Drops remove scaffolding that defines no in-scope notion (hitting sets, MSS, problem tuples, Hamming distance, path probability, enumeration, 'break each other', conditional query, uniqueness) and ward2024 Definitions 1-2 (informal drafts superseded by Definitions 3 and 6). Record fixes strip stray metadata links from Limits, complete a four-author list, add two tags. Metadata and URLs confirmed against arXiv; relations correctly empty."
+}

@@ -1,0 +1,226 @@
+{
+ "results": [
+  {
+   "n": 1,
+   "verdict": "supported"
+  },
+  {
+   "n": 2,
+   "verdict": "supported"
+  },
+  {
+   "n": 3,
+   "verdict": "supported"
+  },
+  {
+   "n": 4,
+   "verdict": "supported"
+  },
+  {
+   "n": 5,
+   "verdict": "supported"
+  },
+  {
+   "n": 6,
+   "verdict": "supported"
+  },
+  {
+   "n": 7,
+   "verdict": "wrong",
+   "reason": "The count of verbatim rows is wrong against the current sources. formal.csv marks all 291 framework quotes verbatim \"yes\", including the 2 Cachin 1998 rows, whose quotes are found in cache/full/cachin1998information.txt (cached 15:34, formal.csv rebuilt 15:35), and all 350 catalogue formal rows in definitions.csv are verbatim \"yes\": 641 of 641. The 639 comes from site/data.json, which was generated at 15:25, before the Cachin text was cached, and still marks the two Cachin rows \"no text\". The page's own method section says all 291 framework quotes match, which contradicts 639.",
+   "evidence": [
+    "formal.csv: cachin1998information#f1 and cachin1998information#f2 have verbatim \"yes\" (291 of 291 rows \"yes\")",
+    "cache/full/cachin1998information.txt: \"In a perfectly secure stegosystem, Eve cannot distinguish the two distributions and has no information at all about the presence of an embedded message.\"",
+    "definitions.csv: 350 of 350 rows of kind formal have verbatim \"yes\"",
+    "site/pages/formal.md, How this page was made, step 4: \"all 291 quotes match the cached full texts verbatim\"",
+    "site/data.json (generated before the Cachin cache): formal rows cachin1998information#f1, #f2 verbatim \"no text\", the other 639 \"yes\""
+   ],
+   "replacement": "All 641 formal rows can be filtered in the [Formal tab](./#tab=formal), each with a verbatim quote; the 291 framework rows also give assumptions and, for 267 of them, a formula."
+  },
+  {
+   "n": 8,
+   "verdict": "supported"
+  },
+  {
+   "n": 9,
+   "verdict": "supported"
+  },
+  {
+   "n": 10,
+   "verdict": "supported"
+  },
+  {
+   "n": 11,
+   "verdict": "supported"
+  },
+  {
+   "n": 12,
+   "verdict": "supported"
+  },
+  {
+   "n": 13,
+   "verdict": "supported"
+  },
+  {
+   "n": 14,
+   "verdict": "supported"
+  },
+  {
+   "n": 15,
+   "verdict": "supported"
+  },
+  {
+   "n": 16,
+   "verdict": "supported"
+  },
+  {
+   "n": 17,
+   "verdict": "supported"
+  },
+  {
+   "n": 18,
+   "verdict": "supported"
+  },
+  {
+   "n": 19,
+   "verdict": "supported"
+  },
+  {
+   "n": 20,
+   "verdict": "wrong",
+   "reason": "Two counts are wrong. Ward et al. 2023 is cited by 1 pre-sweep paper, not 2: bu2026spadebench cites it, but joglekar2025training only uses the phrase \"honesty is the best policy\" and has no reference to Ward et al. Pearl 2001 is cited by 7, not 6: the evidence counts burger2026chain, which cites the 2022 reprint of \"Direct and indirect effects\", but misses matton2025walk, which cites the same reprint. Its cached text has no reference list, but the in-text citation is there and the arXiv HTML reference list confirms the title. The other parts check out. There are 0 matches of actual cause/causation/causality. The only Halpern hits are G. and Y. Halpern in author lists, and there are none for Beckers or Chockler, also in the arXiv PDFs of the 10 numeric-citation papers whose cached texts lack references. 7 papers cite Geiger causal-abstraction papers: anon2026generating, bhan2025did, khanzadeh2026project, pres2026consistency, prasad2026features (causal abstraction in the title), sherburn2024language and viteri2026markovian.",
+   "evidence": [
+    "cache/full/bu2026spadebench.txt: \"Ward et al. (2023) F. Ward, F. Toni, F. Belardinelli, and T. Everitt\" / \"Honesty is the best policy: defining and mitigating ai deception.\"",
+    "cache/full/joglekar2025training.txt: \"We expect that in most settings, “honesty is the best policy,” meaning that\" (phrase only; no Ward reference anywhere in the text)",
+    "cache/full/matton2025walk.txt: \"the effect of one variable on another that is not mediated by other variables Pearl (2022)\"",
+    "arXiv HTML 2504.14150v2 (matton2025walk), references: \"Pearl (2022) Judea Pearl. Direct and indirect effects. In Probabilistic and causal inference: the works of Judea Pearl , pp. 373–392. 2022.\"",
+    "cache/full/burger2026chain.txt: \"Pearl (2022) J. Pearl\" / \"Direct and indirect effects.\" / \"In Probabilistic and causal inference: the works of Judea Pearl,\" (counted by the page's evidence as a Pearl 2001 citation)",
+    "Pearl 2001 directly: paul2024making, somov2026breaking, wang2025causallyenhanced (arXiv HTML: \"Pearl (2001) Judea Pearl. Direct and indirect effects. In Proceedings of UAI , 2001.\"), zaman2025causal, zaman2025chainofthought"
+   ],
+   "replacement": "None of the 217 papers in the map before the formal sweep uses the terms actual cause, actual causation or actual causality, and none cites Halpern, Beckers or Chockler; 7 cite causal-abstraction papers of Geiger and colleagues (5 of them a paper with causal abstraction in its title), 7 cite [Pearl 2001](./#p=pearl2001direct) (2 of them through its 2022 reprint) and 1 cites [Ward et al. 2023](./#p=ward2023honesty)."
+  },
+  {
+   "n": 21,
+   "verdict": "supported"
+  },
+  {
+   "n": 22,
+   "verdict": "supported"
+  },
+  {
+   "n": 23,
+   "verdict": "supported"
+  },
+  {
+   "n": 24,
+   "verdict": "supported"
+  },
+  {
+   "n": 25,
+   "verdict": "supported"
+  },
+  {
+   "n": 26,
+   "verdict": "supported"
+  },
+  {
+   "n": 27,
+   "verdict": "supported"
+  },
+  {
+   "n": 28,
+   "verdict": "supported"
+  },
+  {
+   "n": 29,
+   "verdict": "supported"
+  },
+  {
+   "n": 30,
+   "verdict": "supported"
+  },
+  {
+   "n": 31,
+   "verdict": "supported"
+  },
+  {
+   "n": 32,
+   "verdict": "supported"
+  },
+  {
+   "n": 33,
+   "verdict": "supported"
+  },
+  {
+   "n": 34,
+   "verdict": "supported"
+  },
+  {
+   "n": 35,
+   "verdict": "supported"
+  },
+  {
+   "n": 36,
+   "verdict": "supported"
+  },
+  {
+   "n": 37,
+   "verdict": "supported"
+  },
+  {
+   "n": 38,
+   "verdict": "supported"
+  },
+  {
+   "n": 39,
+   "verdict": "supported"
+  },
+  {
+   "n": 40,
+   "verdict": "supported"
+  },
+  {
+   "n": 41,
+   "verdict": "supported"
+  },
+  {
+   "n": 42,
+   "verdict": "supported"
+  },
+  {
+   "n": 43,
+   "verdict": "supported"
+  },
+  {
+   "n": 44,
+   "verdict": "supported"
+  },
+  {
+   "n": 45,
+   "verdict": "supported"
+  }
+ ],
+ "coherence": [],
+ "other_problems": [
+  {
+   "where": "site/data.json (Formal tab)",
+   "problem": "data.json was generated at 15:25, before cache/full/cachin1998information.txt (15:34) and the rebuilt formal.csv (15:35). The Formal tab therefore still shows the two Cachin 1998 rows as verbatim \"no text\", while formal.csv and the page's method section say all 291 framework quotes are verbatim.",
+   "fix": "Rerun scripts/build.py so the Formal tab shows 641 verbatim rows, matching the replacement for claim 7."
+  },
+  {
+   "where": "Concepts and frameworks table, row 'Self-report and introspection', column 'Only measurements?'",
+   "problem": "The cell says \"Verbal criteria only, no formula\", but the same row lists catalogue rows that are formal and concept-level, with formulas: zeng2026evaluating#7 (behavioral target $g_t(x;M)$) and yoshida2026introspecting#2 (alignment shift $\\delta_{i,c}$), both labeled concept in formal_labels.json.",
+   "fix": "Replace the cell with: \"Verbal criteria only for introspection; the catalogue formalizes only the targets of self-reports\"."
+  },
+  {
+   "where": "Main finding 3, citation counts; How this page was made",
+   "problem": "Many cached full texts of pre-sweep papers have their reference lists cut out (\"[...]\"). matton2025walk is one, and its missing bibliography is why the Pearl 2001 count came out one short. Citation counts made from cache/full alone are lower bounds unless the in-text citations are also checked.",
+   "fix": "Base citation counts on in-text citations as well as reference lists, or check papers whose cache lacks a bibliography against their arXiv HTML. For this page, the claim 20 replacement already includes the one miss found."
+  },
+  {
+   "where": "Main finding 3, CAuSE sentence (claim 18)",
+   "problem": "The sentence is correctly scoped to what the causal-abstraction search found. But the map already holds bhupatiraju2026stated, which patches activations at the token span of each stated CoT step (\"targeted interchange intervention on self-generated reasoning\") and scores whether the answer flips to the predicted target. That is closer to treating written steps as high-level variables than CAuSE is, although it is an operational metric (definitions.csv rows #4 and #7, kinds operational and criterion), not a definition.",
+   "fix": "Optionally add after the CAuSE sentence: \"Within the map, [Bhupatiraju & Nyaupane 2026](./#p=bhupatiraju2026stated) apply targeted interchange interventions at the tokens of each stated step, but as a metric, not as a definition.\""
+  }
+ ]
+}

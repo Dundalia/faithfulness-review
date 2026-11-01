@@ -1,0 +1,1245 @@
+{
+ "pairs": [
+  {
+   "n": 1,
+   "verdict": "same"
+  },
+  {
+   "n": 2,
+   "verdict": "different",
+   "problem": "The added explanations of two types are imprecise. The extraction prompt defines a criterion as \"a necessary or sufficient condition, or an assumption, for the property\"; \"conditions that something must meet\" describes only necessary conditions, while this family's criteria include sufficient ones (Madsen et al. 2024: \"If satisfied, the counterfactual is faithful\"). It defines a failure mode as \"a named way the property fails\"; the six failure modes here are flaws of counterfactual edits or sets (confound, residual leakage, too little perturbation, irrelevant or incoherent perturbations, testing external knowledge) and one misleading explanation (Chen et al. 2023, wrong mental model), none of them a way a model goes wrong. Counts are unchanged.",
+   "fix_new": "By type, 109 definitions are operational (they define a procedure or a metric), 84 informal (stated in words), 45 formal (stated mathematically), 29 criteria (necessary or sufficient conditions for a notion, or assumptions it rests on), 19 taxonomies (classifications into types) and 6 failure modes (named ways in which a counterfactual or an explanation goes wrong)."
+  },
+  {
+   "n": 3,
+   "verdict": "same"
+  },
+  {
+   "n": 4,
+   "verdict": "same"
+  },
+  {
+   "n": 5,
+   "verdict": "same"
+  },
+  {
+   "n": 6,
+   "verdict": "same"
+  },
+  {
+   "n": 7,
+   "verdict": "same"
+  },
+  {
+   "n": 8,
+   "verdict": "same"
+  },
+  {
+   "n": 9,
+   "verdict": "same"
+  },
+  {
+   "n": 10,
+   "verdict": "same"
+  },
+  {
+   "n": 11,
+   "verdict": "same"
+  },
+  {
+   "n": 12,
+   "verdict": "same"
+  },
+  {
+   "n": 13,
+   "verdict": "same"
+  },
+  {
+   "n": 14,
+   "verdict": "same"
+  },
+  {
+   "n": 15,
+   "verdict": "same"
+  },
+  {
+   "n": 16,
+   "verdict": "same"
+  },
+  {
+   "n": 17,
+   "verdict": "same"
+  },
+  {
+   "n": 18,
+   "verdict": "same"
+  },
+  {
+   "n": 19,
+   "verdict": "same"
+  },
+  {
+   "n": 20,
+   "verdict": "same"
+  },
+  {
+   "n": 21,
+   "verdict": "same"
+  },
+  {
+   "n": 22,
+   "verdict": "same"
+  },
+  {
+   "n": 23,
+   "verdict": "same"
+  },
+  {
+   "n": 24,
+   "verdict": "same"
+  },
+  {
+   "n": 25,
+   "verdict": "different",
+   "problem": "The facts of \"old\" are kept, but the added explanation of a simulatable counterfactual is imprecise. Chen et al. (§3) define it by whether the observer can infer the model's output from the explanation: \"If the human cannot infer M’s output to input x′ based on x, e_x, o_x, then x′ is unsimulatable\", judged as logical entailment from the explanation. \"Thinks it can predict the output\" drops the dependence on the explanation.",
+   "fix_new": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) define the notion for free-text explanations and give two metrics, precision and generality, both computed over the counterfactuals the observer judges simulatable (those for which the observer can infer the model's output from the explanation): precision is the share of them on which the observer's prediction matches the model's output, and generality is one minus the average similarity between two of them."
+  },
+  {
+   "n": 26,
+   "verdict": "same"
+  },
+  {
+   "n": 27,
+   "verdict": "same"
+  },
+  {
+   "n": 28,
+   "verdict": "same"
+  },
+  {
+   "n": 29,
+   "verdict": "same"
+  },
+  {
+   "n": 30,
+   "verdict": "same"
+  },
+  {
+   "n": 31,
+   "verdict": "same"
+  },
+  {
+   "n": 32,
+   "verdict": "same"
+  },
+  {
+   "n": 33,
+   "verdict": "same"
+  },
+  {
+   "n": 34,
+   "verdict": "same"
+  },
+  {
+   "n": 35,
+   "verdict": "same"
+  },
+  {
+   "n": 36,
+   "verdict": "same"
+  },
+  {
+   "n": 37,
+   "verdict": "same"
+  },
+  {
+   "n": 38,
+   "verdict": "same"
+  },
+  {
+   "n": 39,
+   "verdict": "same"
+  },
+  {
+   "n": 40,
+   "verdict": "same"
+  },
+  {
+   "n": 41,
+   "verdict": "same"
+  },
+  {
+   "n": 42,
+   "verdict": "same"
+  },
+  {
+   "n": 43,
+   "verdict": "same"
+  },
+  {
+   "n": 44,
+   "verdict": "same"
+  },
+  {
+   "n": 45,
+   "verdict": "same"
+  },
+  {
+   "n": 46,
+   "verdict": "same"
+  },
+  {
+   "n": 47,
+   "verdict": "same"
+  },
+  {
+   "n": 48,
+   "verdict": "same"
+  },
+  {
+   "n": 49,
+   "verdict": "same"
+  },
+  {
+   "n": 50,
+   "verdict": "same"
+  },
+  {
+   "n": 51,
+   "verdict": "same"
+  },
+  {
+   "n": 52,
+   "verdict": "same"
+  },
+  {
+   "n": 53,
+   "verdict": "same"
+  },
+  {
+   "n": 54,
+   "verdict": "same"
+  },
+  {
+   "n": 55,
+   "verdict": "same"
+  },
+  {
+   "n": 56,
+   "verdict": "same"
+  },
+  {
+   "n": 57,
+   "verdict": "same"
+  },
+  {
+   "n": 58,
+   "verdict": "same"
+  },
+  {
+   "n": 59,
+   "verdict": "same"
+  },
+  {
+   "n": 60,
+   "verdict": "same"
+  },
+  {
+   "n": 61,
+   "verdict": "same"
+  },
+  {
+   "n": 62,
+   "verdict": "same"
+  },
+  {
+   "n": 63,
+   "verdict": "same"
+  },
+  {
+   "n": 64,
+   "verdict": "same"
+  },
+  {
+   "n": 65,
+   "verdict": "same"
+  },
+  {
+   "n": 66,
+   "verdict": "same"
+  },
+  {
+   "n": 67,
+   "verdict": "same"
+  },
+  {
+   "n": 68,
+   "verdict": "same"
+  },
+  {
+   "n": 69,
+   "verdict": "same"
+  },
+  {
+   "n": 70,
+   "verdict": "same"
+  },
+  {
+   "n": 71,
+   "verdict": "different",
+   "problem": "The facts of \"old\" are kept, but the added explanation of the direct effect is narrower than Matton et al.'s formula, which also holds fixed $V$, \"all aspects of $X$ not accounted for by the concepts (e.g., style)\" (Figure 4); the intervention keeps \"the values of all other concepts and of $V$ fixed\".",
+   "fix_new": "[Matton et al. 2025](./#p=matton2025walk) state the edit with Pearl's do-operator, which denotes setting a variable by intervention, as a direct effect (the effect of changing one concept while all other concepts and all other aspects of the question stay fixed)."
+  },
+  {
+   "n": 72,
+   "verdict": "same"
+  },
+  {
+   "n": 73,
+   "verdict": "same"
+  },
+  {
+   "n": 74,
+   "verdict": "same"
+  },
+  {
+   "n": 75,
+   "verdict": "same"
+  },
+  {
+   "n": 76,
+   "verdict": "same"
+  },
+  {
+   "n": 77,
+   "verdict": "same"
+  },
+  {
+   "n": 78,
+   "verdict": "same"
+  },
+  {
+   "n": 79,
+   "verdict": "same"
+  },
+  {
+   "n": 80,
+   "verdict": "same"
+  },
+  {
+   "n": 81,
+   "verdict": "same"
+  },
+  {
+   "n": 82,
+   "verdict": "same"
+  },
+  {
+   "n": 83,
+   "verdict": "same"
+  },
+  {
+   "n": 84,
+   "verdict": "same"
+  },
+  {
+   "n": 85,
+   "verdict": "same"
+  },
+  {
+   "n": 86,
+   "verdict": "same"
+  },
+  {
+   "n": 87,
+   "verdict": "same"
+  },
+  {
+   "n": 88,
+   "verdict": "same"
+  },
+  {
+   "n": 89,
+   "verdict": "same"
+  },
+  {
+   "n": 90,
+   "verdict": "same"
+  },
+  {
+   "n": 91,
+   "verdict": "same"
+  },
+  {
+   "n": 92,
+   "verdict": "same"
+  },
+  {
+   "n": 93,
+   "verdict": "same"
+  },
+  {
+   "n": 94,
+   "verdict": "same"
+  },
+  {
+   "n": 95,
+   "verdict": "same"
+  },
+  {
+   "n": 96,
+   "verdict": "same"
+  },
+  {
+   "n": 97,
+   "verdict": "same"
+  },
+  {
+   "n": 98,
+   "verdict": "same"
+  },
+  {
+   "n": 99,
+   "verdict": "same"
+  },
+  {
+   "n": 100,
+   "verdict": "same"
+  },
+  {
+   "n": 101,
+   "verdict": "same"
+  },
+  {
+   "n": 102,
+   "verdict": "same"
+  },
+  {
+   "n": 103,
+   "verdict": "same"
+  },
+  {
+   "n": 104,
+   "verdict": "same"
+  },
+  {
+   "n": 105,
+   "verdict": "same"
+  },
+  {
+   "n": 106,
+   "verdict": "same"
+  },
+  {
+   "n": 107,
+   "verdict": "different",
+   "problem": "The added explanation misdescribes specificity. Tutek et al. measure efficacy as \"the reduction in the length-normalized sequence probability of the unlearned CoT step\" and specificity \"on unrelated, but in-domain data\", as \"the proportion of unchanged labels on this held-out set after unlearning\"; general capabilities (MMLU accuracy) are a separate measure (Table 1, \"Gen\"). \"Keeps its general capabilities\" describes that separate measure, not specificity.",
+   "fix_new": "for a parameter edit, efficacy and specificity of unlearning ([Tutek et al. 2025](./#p=tutek2025measuring)): the unlearned reasoning step becomes less likely, and the model's answers on other, unrelated questions from the same dataset do not change."
+  },
+  {
+   "n": 108,
+   "verdict": "same"
+  },
+  {
+   "n": 109,
+   "verdict": "same"
+  },
+  {
+   "n": 110,
+   "verdict": "same"
+  },
+  {
+   "n": 111,
+   "verdict": "same"
+  },
+  {
+   "n": 112,
+   "verdict": "same"
+  },
+  {
+   "n": 113,
+   "verdict": "same"
+  },
+  {
+   "n": 114,
+   "verdict": "same"
+  },
+  {
+   "n": 115,
+   "verdict": "same"
+  },
+  {
+   "n": 116,
+   "verdict": "same"
+  },
+  {
+   "n": 117,
+   "verdict": "same"
+  },
+  {
+   "n": 118,
+   "verdict": "same"
+  },
+  {
+   "n": 119,
+   "verdict": "same"
+  },
+  {
+   "n": 120,
+   "verdict": "same"
+  },
+  {
+   "n": 121,
+   "verdict": "same"
+  },
+  {
+   "n": 122,
+   "verdict": "same"
+  },
+  {
+   "n": 123,
+   "verdict": "same"
+  },
+  {
+   "n": 124,
+   "verdict": "same"
+  },
+  {
+   "n": 125,
+   "verdict": "same"
+  },
+  {
+   "n": 126,
+   "verdict": "same"
+  },
+  {
+   "n": 127,
+   "verdict": "same"
+  },
+  {
+   "n": 128,
+   "verdict": "same"
+  },
+  {
+   "n": 129,
+   "verdict": "same"
+  },
+  {
+   "n": 130,
+   "verdict": "same"
+  },
+  {
+   "n": 131,
+   "verdict": "same"
+  },
+  {
+   "n": 132,
+   "verdict": "same"
+  },
+  {
+   "n": 133,
+   "verdict": "same"
+  },
+  {
+   "n": 134,
+   "verdict": "same"
+  },
+  {
+   "n": 135,
+   "verdict": "same"
+  },
+  {
+   "n": 136,
+   "verdict": "same"
+  },
+  {
+   "n": 137,
+   "verdict": "same"
+  },
+  {
+   "n": 138,
+   "verdict": "same"
+  },
+  {
+   "n": 139,
+   "verdict": "same"
+  },
+  {
+   "n": 140,
+   "verdict": "same"
+  },
+  {
+   "n": 141,
+   "verdict": "same"
+  },
+  {
+   "n": 142,
+   "verdict": "same"
+  },
+  {
+   "n": 143,
+   "verdict": "same"
+  },
+  {
+   "n": 144,
+   "verdict": "same"
+  },
+  {
+   "n": 145,
+   "verdict": "same"
+  },
+  {
+   "n": 146,
+   "verdict": "same"
+  },
+  {
+   "n": 147,
+   "verdict": "same"
+  },
+  {
+   "n": 148,
+   "verdict": "same"
+  },
+  {
+   "n": 149,
+   "verdict": "same"
+  },
+  {
+   "n": 150,
+   "verdict": "same"
+  },
+  {
+   "n": 151,
+   "verdict": "same"
+  },
+  {
+   "n": 152,
+   "verdict": "same"
+  },
+  {
+   "n": 153,
+   "verdict": "same"
+  },
+  {
+   "n": 154,
+   "verdict": "same"
+  },
+  {
+   "n": 155,
+   "verdict": "same"
+  },
+  {
+   "n": 156,
+   "verdict": "same"
+  },
+  {
+   "n": 157,
+   "verdict": "same"
+  },
+  {
+   "n": 158,
+   "verdict": "same"
+  },
+  {
+   "n": 159,
+   "verdict": "same"
+  },
+  {
+   "n": 160,
+   "verdict": "same"
+  },
+  {
+   "n": 161,
+   "verdict": "same"
+  },
+  {
+   "n": 162,
+   "verdict": "same"
+  },
+  {
+   "n": 163,
+   "verdict": "same"
+  },
+  {
+   "n": 164,
+   "verdict": "same"
+  },
+  {
+   "n": 165,
+   "verdict": "same"
+  },
+  {
+   "n": 166,
+   "verdict": "same"
+  },
+  {
+   "n": 167,
+   "verdict": "same"
+  },
+  {
+   "n": 168,
+   "verdict": "same"
+  },
+  {
+   "n": 169,
+   "verdict": "same"
+  },
+  {
+   "n": 170,
+   "verdict": "same"
+  },
+  {
+   "n": 171,
+   "verdict": "same"
+  },
+  {
+   "n": 172,
+   "verdict": "same"
+  },
+  {
+   "n": 173,
+   "verdict": "same"
+  },
+  {
+   "n": 174,
+   "verdict": "same"
+  },
+  {
+   "n": 175,
+   "verdict": "same"
+  },
+  {
+   "n": 176,
+   "verdict": "same"
+  },
+  {
+   "n": 177,
+   "verdict": "same"
+  },
+  {
+   "n": 178,
+   "verdict": "same"
+  },
+  {
+   "n": 179,
+   "verdict": "same"
+  },
+  {
+   "n": 180,
+   "verdict": "same"
+  },
+  {
+   "n": 181,
+   "verdict": "same"
+  },
+  {
+   "n": 182,
+   "verdict": "same"
+  },
+  {
+   "n": 183,
+   "verdict": "same"
+  },
+  {
+   "n": 184,
+   "verdict": "same"
+  },
+  {
+   "n": 185,
+   "verdict": "same"
+  },
+  {
+   "n": 186,
+   "verdict": "same"
+  },
+  {
+   "n": 187,
+   "verdict": "same"
+  },
+  {
+   "n": 188,
+   "verdict": "same"
+  },
+  {
+   "n": 189,
+   "verdict": "same"
+  },
+  {
+   "n": 190,
+   "verdict": "same"
+  },
+  {
+   "n": 191,
+   "verdict": "same"
+  },
+  {
+   "n": 192,
+   "verdict": "same"
+  },
+  {
+   "n": 193,
+   "verdict": "same"
+  },
+  {
+   "n": 194,
+   "verdict": "same"
+  },
+  {
+   "n": 195,
+   "verdict": "same"
+  },
+  {
+   "n": 196,
+   "verdict": "same"
+  },
+  {
+   "n": 197,
+   "verdict": "same"
+  },
+  {
+   "n": 198,
+   "verdict": "same"
+  },
+  {
+   "n": 199,
+   "verdict": "same"
+  },
+  {
+   "n": 200,
+   "verdict": "same"
+  },
+  {
+   "n": 201,
+   "verdict": "same"
+  },
+  {
+   "n": 202,
+   "verdict": "same"
+  },
+  {
+   "n": 203,
+   "verdict": "same"
+  },
+  {
+   "n": 204,
+   "verdict": "same"
+  },
+  {
+   "n": 205,
+   "verdict": "different",
+   "problem": "\"Old\" says only that the check records the biconditional as an adaptation of Chen et al. The added gloss \"Chen et al. give the definition in another form\" says that Chen et al. state the biconditional in some form, which they do not: they write that \"a faithful explanation is not necessarily simulatable\" (same item). The verdict \"adapted\" means that the source states a definition the citing paper visibly modifies (attribution prompt).",
+   "fix_new": "The check of borrowed definitions against their sources (described in the next part) records the biconditional as adapted from Chen et al., meaning that Turpin et al. modify a definition that Chen et al. give."
+  },
+  {
+   "n": 206,
+   "verdict": "same"
+  },
+  {
+   "n": 207,
+   "verdict": "same"
+  },
+  {
+   "n": 208,
+   "verdict": "same"
+  },
+  {
+   "n": 209,
+   "verdict": "same"
+  },
+  {
+   "n": 210,
+   "verdict": "same"
+  },
+  {
+   "n": 211,
+   "verdict": "same"
+  },
+  {
+   "n": 212,
+   "verdict": "same"
+  },
+  {
+   "n": 213,
+   "verdict": "same"
+  },
+  {
+   "n": 214,
+   "verdict": "same"
+  },
+  {
+   "n": 215,
+   "verdict": "same"
+  },
+  {
+   "n": 216,
+   "verdict": "same"
+  },
+  {
+   "n": 217,
+   "verdict": "same"
+  },
+  {
+   "n": 218,
+   "verdict": "same"
+  },
+  {
+   "n": 219,
+   "verdict": "same"
+  },
+  {
+   "n": 220,
+   "verdict": "same"
+  },
+  {
+   "n": 221,
+   "verdict": "different",
+   "problem": "The added gloss of \"base rate\" does not match the quoted condition. Guan et al. (P125) write \"unless the base rate of the measured behavior is $0$ in the intervention arm, we cannot label individual samples as having been causally influenced\", and Figure 4 shows that the intervention can also change the base-rate behavior (scenario 2). The base rate is the behavior (here, the hinted answer) that occurs without being caused by the intervention; \"the rate of the hinted answer without the hint\" describes only the control arm (Figure 4's definition), not the intervention-arm condition in the quoted sentence.",
+   "fix_new": "In the other direction, [Guan et al. 2025](./#p=guan2025monitoring) hold that \"we cannot label individual samples as having been causally influenced\" unless the base rate (the rate at which the model gives the hinted answer without the hint causing it) is zero, while [Ferreira et al. 2026](./#p=ferreira2026outofsight), who cite Guan et al., use \"the counterfactual prediction without the hint\" to get \"a per-example target label\"."
+  },
+  {
+   "n": 222,
+   "verdict": "same"
+  },
+  {
+   "n": 223,
+   "verdict": "same"
+  },
+  {
+   "n": 224,
+   "verdict": "same"
+  },
+  {
+   "n": 225,
+   "verdict": "same"
+  },
+  {
+   "n": 226,
+   "verdict": "same"
+  },
+  {
+   "n": 227,
+   "verdict": "same"
+  },
+  {
+   "n": 228,
+   "verdict": "same"
+  },
+  {
+   "n": 229,
+   "verdict": "same"
+  },
+  {
+   "n": 230,
+   "verdict": "same"
+  },
+  {
+   "n": 231,
+   "verdict": "same"
+  },
+  {
+   "n": 232,
+   "verdict": "same"
+  },
+  {
+   "n": 233,
+   "verdict": "same"
+  },
+  {
+   "n": 234,
+   "verdict": "same"
+  },
+  {
+   "n": 235,
+   "verdict": "same"
+  },
+  {
+   "n": 236,
+   "verdict": "same"
+  },
+  {
+   "n": 237,
+   "verdict": "same"
+  },
+  {
+   "n": 238,
+   "verdict": "same"
+  },
+  {
+   "n": 239,
+   "verdict": "same"
+  },
+  {
+   "n": 240,
+   "verdict": "same"
+  },
+  {
+   "n": 241,
+   "verdict": "same"
+  },
+  {
+   "n": 242,
+   "verdict": "same"
+  },
+  {
+   "n": 243,
+   "verdict": "same"
+  },
+  {
+   "n": 244,
+   "verdict": "same"
+  },
+  {
+   "n": 245,
+   "verdict": "same"
+  },
+  {
+   "n": 246,
+   "verdict": "same"
+  },
+  {
+   "n": 247,
+   "verdict": "same"
+  },
+  {
+   "n": 248,
+   "verdict": "same"
+  },
+  {
+   "n": 249,
+   "verdict": "same"
+  },
+  {
+   "n": 250,
+   "verdict": "same"
+  },
+  {
+   "n": 251,
+   "verdict": "same"
+  },
+  {
+   "n": 252,
+   "verdict": "same"
+  },
+  {
+   "n": 253,
+   "verdict": "same"
+  },
+  {
+   "n": 254,
+   "verdict": "same"
+  },
+  {
+   "n": 255,
+   "verdict": "same"
+  },
+  {
+   "n": 256,
+   "verdict": "same"
+  },
+  {
+   "n": 257,
+   "verdict": "same"
+  },
+  {
+   "n": 258,
+   "verdict": "same"
+  },
+  {
+   "n": 259,
+   "verdict": "same"
+  },
+  {
+   "n": 260,
+   "verdict": "same"
+  },
+  {
+   "n": 261,
+   "verdict": "same"
+  },
+  {
+   "n": 262,
+   "verdict": "same"
+  },
+  {
+   "n": 263,
+   "verdict": "same"
+  },
+  {
+   "n": 264,
+   "verdict": "same"
+  },
+  {
+   "n": 265,
+   "verdict": "different",
+   "problem": "The added gloss names the wrong quantity. $\\mathrm{TPR}_{mc}$ is the \"minimal-criterion sensitivity\" or \"minimal criterion true positive rate\" (Guan et al., P125-P126; Anonymous 2026 (causal bounds), abstract), which scores a monitor against the total-effect lower bound. Anonymous 2026 (causal bounds) also define the plain observed true positive rate, $\\mathrm{TPR}_{ob}=\\Pr(Z(1)=1\\mid Y(1)=1)$, a different quantity used in their bounds, so \"the true positive rate\" is ambiguous and wrong.",
+   "fix_new": "[Guan et al. 2025](./#p=guan2025monitoring) write that the total effect \"lower bounds the causal influence rate\" and score monitors against it; [Anonymous 2026 (causal bounds)](./#p=anon2026improving) show that the resulting score, the minimal-criterion true positive rate $\\mathrm{TPR}_{mc}$, \"upper-bounds the monitor’s recall on intervention-caused outcomes\"."
+  },
+  {
+   "n": 266,
+   "verdict": "same"
+  },
+  {
+   "n": 267,
+   "verdict": "same"
+  },
+  {
+   "n": 268,
+   "verdict": "same"
+  },
+  {
+   "n": 269,
+   "verdict": "same"
+  },
+  {
+   "n": 270,
+   "verdict": "same"
+  },
+  {
+   "n": 271,
+   "verdict": "same"
+  },
+  {
+   "n": 272,
+   "verdict": "same"
+  },
+  {
+   "n": 273,
+   "verdict": "same"
+  },
+  {
+   "n": 274,
+   "verdict": "same"
+  },
+  {
+   "n": 275,
+   "verdict": "same"
+  },
+  {
+   "n": 276,
+   "verdict": "same"
+  },
+  {
+   "n": 277,
+   "verdict": "same"
+  },
+  {
+   "n": 278,
+   "verdict": "same"
+  },
+  {
+   "n": 279,
+   "verdict": "same"
+  },
+  {
+   "n": 280,
+   "verdict": "same"
+  },
+  {
+   "n": 281,
+   "verdict": "same"
+  },
+  {
+   "n": 282,
+   "verdict": "same"
+  },
+  {
+   "n": 283,
+   "verdict": "same"
+  },
+  {
+   "n": 284,
+   "verdict": "same"
+  },
+  {
+   "n": 285,
+   "verdict": "same"
+  },
+  {
+   "n": 286,
+   "verdict": "same"
+  },
+  {
+   "n": 287,
+   "verdict": "same"
+  },
+  {
+   "n": 288,
+   "verdict": "same"
+  },
+  {
+   "n": 289,
+   "verdict": "same"
+  },
+  {
+   "n": 290,
+   "verdict": "same"
+  },
+  {
+   "n": 291,
+   "verdict": "same"
+  },
+  {
+   "n": 292,
+   "verdict": "same"
+  },
+  {
+   "n": 293,
+   "verdict": "same"
+  },
+  {
+   "n": 294,
+   "verdict": "same"
+  },
+  {
+   "n": 295,
+   "verdict": "same"
+  },
+  {
+   "n": 296,
+   "verdict": "same"
+  },
+  {
+   "n": 297,
+   "verdict": "same"
+  },
+  {
+   "n": 298,
+   "verdict": "same"
+  },
+  {
+   "n": 299,
+   "verdict": "same"
+  },
+  {
+   "n": 300,
+   "verdict": "same"
+  }
+ ],
+ "edits": [
+  {
+   "old": "Text without quotation marks is a short paraphrase written when the definitions were collected.",
+   "new": "In the tables of definitions, text without quotation marks is a short paraphrase, not a quote.",
+   "problem": "Item 3, explanation of the old \"extractor's gloss\". It is not accurate: at least two unquoted cells were written for this page, not when the definitions were collected (the Agarwal et al. 2024 cell \"Restates Chen et al.’s simulation generality and simulation precision.\" differs from the collected gloss of agarwal2024faithfulness#6, \"Simulation generality = diversity of counterfactuals ...\", and the Zhang et al. 2026 flip-fraction cell shortens zhang2026audit#9). The rule also fails for the table of failed checks, whose quote columns hold verbatim quotes without quotation marks and whose findings column is the check's own text. The same correction was made in the introduction check (equiv_intro.json, pair 8)."
+  },
+  {
+   "old": "Below each table, the group's other definitions are listed by paper, with the term each one defines in parentheses.",
+   "new": "When a table does not show all of a group's definitions, the others are listed below it by paper, with the term each one defines in parentheses.",
+   "problem": "Item 3, added navigation sentence that is too broad: groups 4, 11 and 12 show all their definitions in the table and have no list of other definitions."
+  },
+  {
+   "old": "*adapted* (the source gives it in another form)",
+   "new": "*adapted* (the source gives a definition that the citing paper modifies, for example by narrowing or extending it)",
+   "problem": "Item 3, imprecise explanation of the verdict: the attribution prompt defines \"adapted\" as \"the source states a definition or measure that the citing paper visibly modifies (narrows, extends, measures differently)\". \"In another form\" also fits \"renamed\", a separate verdict that does not count as holding. Same correction as in equiv_intro.json."
+  },
+  {
+   "old": "*other-claim* (the cited passage supports a different claim)",
+   "new": "*other-claim* (the citation supports a claim other than the definition, such as a finding stated next to it)",
+   "problem": "Item 3, imprecise explanation of the verdict: the attribution prompt defines it as \"the citation supports something other than the definition (e.g. an empirical result next to it)\". Same correction as in equiv_intro.json."
+  },
+  {
+   "old": "The number after each citing paper is the definition's number among that paper's definitions in the full table of definitions.",
+   "new": "The number after each citing paper identifies the definition among all the definitions collected from that paper, under the three terms.",
+   "problem": "Item 3, added explanation that points to a table the reader cannot use: the number is the definition's id in the collected data (for example turpin2023language#2, shen2026detecting#18 in definitions.csv, numbered across all three terms of the paper), and the site's Definitions tab does not display these numbers."
+  }
+ ]
+}

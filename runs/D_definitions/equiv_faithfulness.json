@@ -1,0 +1,634 @@
+{
+ "pairs": [
+  {
+   "n": 1,
+   "verdict": "same"
+  },
+  {
+   "n": 2,
+   "verdict": "same"
+  },
+  {
+   "n": 3,
+   "verdict": "same"
+  },
+  {
+   "n": 4,
+   "verdict": "same"
+  },
+  {
+   "n": 5,
+   "verdict": "same"
+  },
+  {
+   "n": 6,
+   "verdict": "same"
+  },
+  {
+   "n": 7,
+   "verdict": "same"
+  },
+  {
+   "n": 8,
+   "verdict": "same"
+  },
+  {
+   "n": 9,
+   "verdict": "same"
+  },
+  {
+   "n": 10,
+   "verdict": "same"
+  },
+  {
+   "n": 11,
+   "verdict": "same"
+  },
+  {
+   "n": 12,
+   "verdict": "same"
+  },
+  {
+   "n": 13,
+   "verdict": "same"
+  },
+  {
+   "n": 14,
+   "verdict": "same"
+  },
+  {
+   "n": 15,
+   "verdict": "same"
+  },
+  {
+   "n": 16,
+   "verdict": "same"
+  },
+  {
+   "n": 17,
+   "verdict": "same"
+  },
+  {
+   "n": 18,
+   "verdict": "same"
+  },
+  {
+   "n": 19,
+   "verdict": "same"
+  },
+  {
+   "n": 20,
+   "verdict": "same"
+  },
+  {
+   "n": 21,
+   "verdict": "same"
+  },
+  {
+   "n": 22,
+   "verdict": "same"
+  },
+  {
+   "n": 23,
+   "verdict": "same"
+  },
+  {
+   "n": 24,
+   "verdict": "same"
+  },
+  {
+   "n": 25,
+   "verdict": "same"
+  },
+  {
+   "n": 26,
+   "verdict": "same"
+  },
+  {
+   "n": 27,
+   "verdict": "same"
+  },
+  {
+   "n": 28,
+   "verdict": "same"
+  },
+  {
+   "n": 29,
+   "verdict": "same"
+  },
+  {
+   "n": 30,
+   "verdict": "same"
+  },
+  {
+   "n": 31,
+   "verdict": "same"
+  },
+  {
+   "n": 32,
+   "verdict": "same"
+  },
+  {
+   "n": 33,
+   "verdict": "same"
+  },
+  {
+   "n": 34,
+   "verdict": "same"
+  },
+  {
+   "n": 35,
+   "verdict": "same"
+  },
+  {
+   "n": 36,
+   "verdict": "same"
+  },
+  {
+   "n": 37,
+   "verdict": "same"
+  },
+  {
+   "n": 38,
+   "verdict": "same"
+  },
+  {
+   "n": 39,
+   "verdict": "same"
+  },
+  {
+   "n": 40,
+   "verdict": "same"
+  },
+  {
+   "n": 41,
+   "verdict": "same"
+  },
+  {
+   "n": 42,
+   "verdict": "same"
+  },
+  {
+   "n": 43,
+   "verdict": "same"
+  },
+  {
+   "n": 44,
+   "verdict": "same"
+  },
+  {
+   "n": 45,
+   "verdict": "same"
+  },
+  {
+   "n": 47,
+   "verdict": "same"
+  },
+  {
+   "n": 48,
+   "verdict": "same"
+  },
+  {
+   "n": 49,
+   "verdict": "same"
+  },
+  {
+   "n": 50,
+   "verdict": "same"
+  },
+  {
+   "n": 51,
+   "verdict": "same"
+  },
+  {
+   "n": 52,
+   "verdict": "same"
+  },
+  {
+   "n": 53,
+   "verdict": "same"
+  },
+  {
+   "n": 54,
+   "verdict": "same"
+  },
+  {
+   "n": 55,
+   "verdict": "same"
+  },
+  {
+   "n": 56,
+   "verdict": "same"
+  },
+  {
+   "n": 57,
+   "verdict": "same"
+  },
+  {
+   "n": 58,
+   "verdict": "same"
+  },
+  {
+   "n": 59,
+   "verdict": "same"
+  },
+  {
+   "n": 60,
+   "verdict": "same"
+  },
+  {
+   "n": 61,
+   "verdict": "same"
+  },
+  {
+   "n": 62,
+   "verdict": "same"
+  },
+  {
+   "n": 63,
+   "verdict": "same"
+  },
+  {
+   "n": 64,
+   "verdict": "same"
+  },
+  {
+   "n": 65,
+   "verdict": "same"
+  },
+  {
+   "n": 66,
+   "verdict": "same"
+  },
+  {
+   "n": 67,
+   "verdict": "same"
+  },
+  {
+   "n": 68,
+   "verdict": "different",
+   "problem": "\"instance-level consistency constraints\" became \"consistency constraints on single inputs\". In Pres et al. 2026a, instance-level objectives are \"symmetric consistency constraints between model input-output instances, where neither instance refers to other instances\" (as opposed to meta-level objectives about the model's descriptions of its own behavior). They relate several inputs and outputs (invariance itself compares f on x and on g(x)), so \"on single inputs\" misstates the notion.",
+   "fix_new": "[Pres et al. 2026a](./#p=pres2026consistency) place model faithfulness among instance-level consistency constraints, which relate the model's input-output pairs to one another without any of them describing the others: invariance (the output stays the same when the input is transformed), $f(g(x))=f(x)$, and equivariance (the output changes in a matching way), $f(g(x))=g'(f(x))$, for input and output transformations $g$ and $g'$."
+  },
+  {
+   "n": 69,
+   "verdict": "same"
+  },
+  {
+   "n": 70,
+   "verdict": "same"
+  },
+  {
+   "n": 71,
+   "verdict": "same"
+  },
+  {
+   "n": 72,
+   "verdict": "same"
+  },
+  {
+   "n": 73,
+   "verdict": "same"
+  },
+  {
+   "n": 74,
+   "verdict": "same"
+  },
+  {
+   "n": 75,
+   "verdict": "same"
+  },
+  {
+   "n": 76,
+   "verdict": "same"
+  },
+  {
+   "n": 77,
+   "verdict": "same"
+  },
+  {
+   "n": 78,
+   "verdict": "same"
+  },
+  {
+   "n": 79,
+   "verdict": "same"
+  },
+  {
+   "n": 80,
+   "verdict": "same"
+  },
+  {
+   "n": 81,
+   "verdict": "same"
+  },
+  {
+   "n": 82,
+   "verdict": "same"
+  },
+  {
+   "n": 83,
+   "verdict": "same"
+  },
+  {
+   "n": 84,
+   "verdict": "same"
+  },
+  {
+   "n": 85,
+   "verdict": "same"
+  },
+  {
+   "n": 86,
+   "verdict": "same"
+  },
+  {
+   "n": 87,
+   "verdict": "same"
+  },
+  {
+   "n": 88,
+   "verdict": "same"
+  },
+  {
+   "n": 89,
+   "verdict": "same"
+  },
+  {
+   "n": 90,
+   "verdict": "same"
+  },
+  {
+   "n": 91,
+   "verdict": "same"
+  },
+  {
+   "n": 92,
+   "verdict": "same"
+  },
+  {
+   "n": 93,
+   "verdict": "same"
+  },
+  {
+   "n": 94,
+   "verdict": "same"
+  },
+  {
+   "n": 95,
+   "verdict": "same"
+  },
+  {
+   "n": 96,
+   "verdict": "same"
+  },
+  {
+   "n": 97,
+   "verdict": "same"
+  },
+  {
+   "n": 98,
+   "verdict": "same"
+  },
+  {
+   "n": 99,
+   "verdict": "same"
+  },
+  {
+   "n": 100,
+   "verdict": "same"
+  },
+  {
+   "n": 101,
+   "verdict": "same"
+  },
+  {
+   "n": 102,
+   "verdict": "same"
+  },
+  {
+   "n": 103,
+   "verdict": "same"
+  },
+  {
+   "n": 104,
+   "verdict": "same"
+  },
+  {
+   "n": 105,
+   "verdict": "same"
+  },
+  {
+   "n": 106,
+   "verdict": "same"
+  },
+  {
+   "n": 107,
+   "verdict": "same"
+  },
+  {
+   "n": 108,
+   "verdict": "same"
+  },
+  {
+   "n": 109,
+   "verdict": "same"
+  },
+  {
+   "n": 110,
+   "verdict": "same"
+  },
+  {
+   "n": 111,
+   "verdict": "same"
+  },
+  {
+   "n": 112,
+   "verdict": "same"
+  },
+  {
+   "n": 113,
+   "verdict": "same"
+  },
+  {
+   "n": 114,
+   "verdict": "same"
+  },
+  {
+   "n": 115,
+   "verdict": "same"
+  },
+  {
+   "n": 116,
+   "verdict": "same"
+  },
+  {
+   "n": 117,
+   "verdict": "same"
+  },
+  {
+   "n": 118,
+   "verdict": "same"
+  },
+  {
+   "n": 119,
+   "verdict": "same"
+  },
+  {
+   "n": 120,
+   "verdict": "same"
+  },
+  {
+   "n": 121,
+   "verdict": "same"
+  },
+  {
+   "n": 122,
+   "verdict": "same"
+  },
+  {
+   "n": 123,
+   "verdict": "same"
+  },
+  {
+   "n": 124,
+   "verdict": "same"
+  },
+  {
+   "n": 125,
+   "verdict": "same"
+  },
+  {
+   "n": 126,
+   "verdict": "same"
+  },
+  {
+   "n": 127,
+   "verdict": "same"
+  },
+  {
+   "n": 128,
+   "verdict": "same"
+  },
+  {
+   "n": 129,
+   "verdict": "same"
+  },
+  {
+   "n": 130,
+   "verdict": "same"
+  },
+  {
+   "n": 131,
+   "verdict": "same"
+  },
+  {
+   "n": 132,
+   "verdict": "same"
+  },
+  {
+   "n": 133,
+   "verdict": "same"
+  },
+  {
+   "n": 134,
+   "verdict": "same"
+  },
+  {
+   "n": 135,
+   "verdict": "same"
+  },
+  {
+   "n": 136,
+   "verdict": "same"
+  },
+  {
+   "n": 137,
+   "verdict": "same"
+  },
+  {
+   "n": 138,
+   "verdict": "same"
+  },
+  {
+   "n": 139,
+   "verdict": "same"
+  },
+  {
+   "n": 140,
+   "verdict": "same"
+  },
+  {
+   "n": 141,
+   "verdict": "same"
+  },
+  {
+   "n": 142,
+   "verdict": "same"
+  },
+  {
+   "n": 143,
+   "verdict": "same"
+  },
+  {
+   "n": 144,
+   "verdict": "same"
+  },
+  {
+   "n": 145,
+   "verdict": "same"
+  },
+  {
+   "n": 146,
+   "verdict": "same"
+  },
+  {
+   "n": 147,
+   "verdict": "same"
+  },
+  {
+   "n": 148,
+   "verdict": "same"
+  },
+  {
+   "n": 149,
+   "verdict": "same"
+  },
+  {
+   "n": 150,
+   "verdict": "same"
+  }
+ ],
+ "edits": [
+  {
+   "old": "231 are failure modes (named ways of being unfaithful)",
+   "new": "231 are failure modes (named ways in which faithfulness or a related notion fails)",
+   "problem": "Added gloss is too narrow. The 231 failure-mode definitions include failures of related notions that are not unfaithfulness, e.g. 'over-promise', 'Instruction Deviation' and 'persona drift' (say-do), 'confession has honest mistake' and 'not_complied_not_reported' (honesty), 'hallucinated trigger condition' (self-report); intro.md defines the kind as 'a named way in which the notion fails'."
+  },
+  {
+   "old": "297 are criteria (conditions for a notion to apply)",
+   "new": "297 are criteria (necessary or sufficient conditions for a notion, or assumptions it rests on)",
+   "problem": "Added gloss is imprecise. Criterion rows include necessary conditions (e.g. 'a necessary property of faithful explanation'), assumptions ('belief consistency (assumption)', 'assumption: prompts interpreted correctly') and conditions on measures, not only conditions for a notion to apply; intro.md defines the kind as 'a necessary or sufficient condition for the notion, or an assumption it rests on'."
+  },
+  {
+   "old": "self-consistency (whether the model's outputs agree with each other)",
+   "new": "self-consistency (whether the model's outputs, such as an answer and its explanation, agree with each other or rely on the same parts of the input)",
+   "problem": "Added gloss covers only output-level self-consistency. Parcalabescu & Frank 2023, the main source of the term here, also define it on input contributions (CC-SHAP gauges 'how well a model's input contributions align, when it produces a prediction and explanation'), and the page later says CC-SHAP 'measures self-consistency'."
+  },
+  {
+   "old": "the generated mediator (the intermediate representation the model produces)",
+   "new": "the generated mediator (the intermediate structure, such as a checklist or rubric, that the model writes before its decision)",
+   "problem": "Added gloss is misleading: in Somov et al. 2026 the mediator is an explicit written intermediate structure ('rubrics, checklists, or verification queries'), not an internal representation, which is what 'intermediate representation' suggests on a page about internal computation."
+  },
+  {
+   "old": "The paragraphs below also report the verdicts of a check of each borrowed definition against the source it cites, which the next section describes. The check gives one of six verdicts:",
+   "new": "The paragraphs below also report the verdicts of a check of borrowed definitions against the sources they cite in the map, which the next section describes. For the faithfulness definitions, the check gives one of six verdicts:",
+   "problem": "Added sentence overstates the check: only 511 of the 711 borrowed definitions were checked (the 198 citing only sources outside the map and Nguyen et al. 2026b's rubric were not). Also, the page introduction lists a seventh verdict, 'misdirected', which does not occur in this family, so 'one of six verdicts' needs the restriction."
+  },
+  {
+   "old": "There are 718 checks, one for each case in which a paper cites a source in the map for a definition;",
+   "new": "There are 718 checks, one for each pair of a checked definition and a source in the map that it cites;",
+   "problem": "Added explanation contradicts the next sentence: the rubric of Nguyen et al. 2026b cites Meek et al. 2025 (a source in the map) but has no check, so the 718 checks do not cover every case in which a definition cites a source in the map."
+  }
+ ]
+}

@@ -1,0 +1,670 @@
+{
+ "pairs": [
+  {
+   "n": 1,
+   "verdict": "same"
+  },
+  {
+   "n": 2,
+   "verdict": "same"
+  },
+  {
+   "n": 3,
+   "verdict": "same"
+  },
+  {
+   "n": 4,
+   "verdict": "different",
+   "problem": "The rewrite adds a claim about the papers that the old sentence does not make: \"related notions that the papers tie to monitorability\" says the source papers themselves link each of the 1,040 notions (for example the deception and reward-hacking definitions) to monitorability. The old text called them \"companion notions\", a label for the related definitions filed in this section, with no claim about what the papers say.",
+   "fix_new": "127 definitions, from 47 papers, define monitorability itself or a direct measure of it (in 109 of them the defined term contains the word monitorability, and in another 14 the word monitorable or unmonitorable). The other 1,040 define related notions: monitors and their scores, failure modes, and the behaviors monitors look for (deception, scheming, reward hacking, evaluation awareness)."
+  },
+  {
+   "n": 5,
+   "verdict": "same"
+  },
+  {
+   "n": 6,
+   "verdict": "same"
+  },
+  {
+   "n": 7,
+   "verdict": "same"
+  },
+  {
+   "n": 8,
+   "verdict": "same"
+  },
+  {
+   "n": 9,
+   "verdict": "same"
+  },
+  {
+   "n": 10,
+   "verdict": "same"
+  },
+  {
+   "n": 11,
+   "verdict": "same"
+  },
+  {
+   "n": 12,
+   "verdict": "same"
+  },
+  {
+   "n": 13,
+   "verdict": "same"
+  },
+  {
+   "n": 14,
+   "verdict": "same"
+  },
+  {
+   "n": 15,
+   "verdict": "same"
+  },
+  {
+   "n": 16,
+   "verdict": "same"
+  },
+  {
+   "n": 17,
+   "verdict": "same"
+  },
+  {
+   "n": 18,
+   "verdict": "same"
+  },
+  {
+   "n": 19,
+   "verdict": "same"
+  },
+  {
+   "n": 20,
+   "verdict": "same"
+  },
+  {
+   "n": 21,
+   "verdict": "same"
+  },
+  {
+   "n": 22,
+   "verdict": "same"
+  },
+  {
+   "n": 23,
+   "verdict": "same"
+  },
+  {
+   "n": 24,
+   "verdict": "same"
+  },
+  {
+   "n": 25,
+   "verdict": "same"
+  },
+  {
+   "n": 26,
+   "verdict": "same"
+  },
+  {
+   "n": 27,
+   "verdict": "same"
+  },
+  {
+   "n": 28,
+   "verdict": "same"
+  },
+  {
+   "n": 29,
+   "verdict": "same"
+  },
+  {
+   "n": 30,
+   "verdict": "same"
+  },
+  {
+   "n": 31,
+   "verdict": "same"
+  },
+  {
+   "n": 32,
+   "verdict": "same"
+  },
+  {
+   "n": 33,
+   "verdict": "same"
+  },
+  {
+   "n": 34,
+   "verdict": "same"
+  },
+  {
+   "n": 35,
+   "verdict": "same"
+  },
+  {
+   "n": 36,
+   "verdict": "same"
+  },
+  {
+   "n": 37,
+   "verdict": "same"
+  },
+  {
+   "n": 38,
+   "verdict": "same"
+  },
+  {
+   "n": 39,
+   "verdict": "same"
+  },
+  {
+   "n": 40,
+   "verdict": "same"
+  },
+  {
+   "n": 41,
+   "verdict": "same"
+  },
+  {
+   "n": 42,
+   "verdict": "same"
+  },
+  {
+   "n": 43,
+   "verdict": "same"
+  },
+  {
+   "n": 44,
+   "verdict": "same"
+  },
+  {
+   "n": 45,
+   "verdict": "same"
+  },
+  {
+   "n": 46,
+   "verdict": "same"
+  },
+  {
+   "n": 47,
+   "verdict": "same"
+  },
+  {
+   "n": 48,
+   "verdict": "same"
+  },
+  {
+   "n": 49,
+   "verdict": "same"
+  },
+  {
+   "n": 50,
+   "verdict": "same"
+  },
+  {
+   "n": 51,
+   "verdict": "same"
+  },
+  {
+   "n": 52,
+   "verdict": "same"
+  },
+  {
+   "n": 53,
+   "verdict": "same"
+  },
+  {
+   "n": 54,
+   "verdict": "same"
+  },
+  {
+   "n": 55,
+   "verdict": "same"
+  },
+  {
+   "n": 56,
+   "verdict": "same"
+  },
+  {
+   "n": 57,
+   "verdict": "same"
+  },
+  {
+   "n": 58,
+   "verdict": "same"
+  },
+  {
+   "n": 59,
+   "verdict": "same"
+  },
+  {
+   "n": 60,
+   "verdict": "same"
+  },
+  {
+   "n": 61,
+   "verdict": "same"
+  },
+  {
+   "n": 62,
+   "verdict": "same"
+  },
+  {
+   "n": 63,
+   "verdict": "same"
+  },
+  {
+   "n": 64,
+   "verdict": "same"
+  },
+  {
+   "n": 65,
+   "verdict": "same"
+  },
+  {
+   "n": 66,
+   "verdict": "same"
+  },
+  {
+   "n": 67,
+   "verdict": "same"
+  },
+  {
+   "n": 68,
+   "verdict": "same"
+  },
+  {
+   "n": 69,
+   "verdict": "same"
+  },
+  {
+   "n": 70,
+   "verdict": "same"
+  },
+  {
+   "n": 71,
+   "verdict": "same"
+  },
+  {
+   "n": 72,
+   "verdict": "same"
+  },
+  {
+   "n": 73,
+   "verdict": "same"
+  },
+  {
+   "n": 74,
+   "verdict": "same"
+  },
+  {
+   "n": 75,
+   "verdict": "same"
+  },
+  {
+   "n": 76,
+   "verdict": "same"
+  },
+  {
+   "n": 77,
+   "verdict": "same"
+  },
+  {
+   "n": 78,
+   "verdict": "same"
+  },
+  {
+   "n": 79,
+   "verdict": "same"
+  },
+  {
+   "n": 80,
+   "verdict": "same"
+  },
+  {
+   "n": 81,
+   "verdict": "same"
+  },
+  {
+   "n": 82,
+   "verdict": "same"
+  },
+  {
+   "n": 83,
+   "verdict": "same"
+  },
+  {
+   "n": 84,
+   "verdict": "same"
+  },
+  {
+   "n": 85,
+   "verdict": "same"
+  },
+  {
+   "n": 86,
+   "verdict": "same"
+  },
+  {
+   "n": 87,
+   "verdict": "same"
+  },
+  {
+   "n": 88,
+   "verdict": "same"
+  },
+  {
+   "n": 89,
+   "verdict": "same"
+  },
+  {
+   "n": 90,
+   "verdict": "same"
+  },
+  {
+   "n": 91,
+   "verdict": "same"
+  },
+  {
+   "n": 92,
+   "verdict": "same"
+  },
+  {
+   "n": 93,
+   "verdict": "same"
+  },
+  {
+   "n": 94,
+   "verdict": "same"
+  },
+  {
+   "n": 95,
+   "verdict": "same"
+  },
+  {
+   "n": 96,
+   "verdict": "same"
+  },
+  {
+   "n": 97,
+   "verdict": "same"
+  },
+  {
+   "n": 98,
+   "verdict": "same"
+  },
+  {
+   "n": 99,
+   "verdict": "same"
+  },
+  {
+   "n": 100,
+   "verdict": "same"
+  },
+  {
+   "n": 101,
+   "verdict": "same"
+  },
+  {
+   "n": 102,
+   "verdict": "same"
+  },
+  {
+   "n": 103,
+   "verdict": "same"
+  },
+  {
+   "n": 104,
+   "verdict": "same"
+  },
+  {
+   "n": 105,
+   "verdict": "same"
+  },
+  {
+   "n": 106,
+   "verdict": "same"
+  },
+  {
+   "n": 107,
+   "verdict": "same"
+  },
+  {
+   "n": 108,
+   "verdict": "same"
+  },
+  {
+   "n": 109,
+   "verdict": "same"
+  },
+  {
+   "n": 110,
+   "verdict": "same"
+  },
+  {
+   "n": 111,
+   "verdict": "same"
+  },
+  {
+   "n": 112,
+   "verdict": "same"
+  },
+  {
+   "n": 113,
+   "verdict": "same"
+  },
+  {
+   "n": 114,
+   "verdict": "same"
+  },
+  {
+   "n": 115,
+   "verdict": "same"
+  },
+  {
+   "n": 116,
+   "verdict": "same"
+  },
+  {
+   "n": 117,
+   "verdict": "same"
+  },
+  {
+   "n": 118,
+   "verdict": "same"
+  },
+  {
+   "n": 119,
+   "verdict": "same"
+  },
+  {
+   "n": 120,
+   "verdict": "same"
+  },
+  {
+   "n": 121,
+   "verdict": "same"
+  },
+  {
+   "n": 122,
+   "verdict": "same"
+  },
+  {
+   "n": 123,
+   "verdict": "same"
+  },
+  {
+   "n": 124,
+   "verdict": "same"
+  },
+  {
+   "n": 125,
+   "verdict": "same"
+  },
+  {
+   "n": 126,
+   "verdict": "same"
+  },
+  {
+   "n": 127,
+   "verdict": "same"
+  },
+  {
+   "n": 128,
+   "verdict": "same"
+  },
+  {
+   "n": 129,
+   "verdict": "same"
+  },
+  {
+   "n": 130,
+   "verdict": "same"
+  },
+  {
+   "n": 131,
+   "verdict": "same"
+  },
+  {
+   "n": 132,
+   "verdict": "same"
+  },
+  {
+   "n": 133,
+   "verdict": "same"
+  },
+  {
+   "n": 134,
+   "verdict": "same"
+  },
+  {
+   "n": 135,
+   "verdict": "same"
+  },
+  {
+   "n": 136,
+   "verdict": "same"
+  },
+  {
+   "n": 137,
+   "verdict": "same"
+  },
+  {
+   "n": 138,
+   "verdict": "same"
+  },
+  {
+   "n": 139,
+   "verdict": "same"
+  },
+  {
+   "n": 140,
+   "verdict": "same"
+  },
+  {
+   "n": 141,
+   "verdict": "same"
+  },
+  {
+   "n": 142,
+   "verdict": "same"
+  },
+  {
+   "n": 143,
+   "verdict": "same"
+  },
+  {
+   "n": 144,
+   "verdict": "same"
+  },
+  {
+   "n": 145,
+   "verdict": "same"
+  },
+  {
+   "n": 146,
+   "verdict": "same"
+  },
+  {
+   "n": 147,
+   "verdict": "same"
+  },
+  {
+   "n": 148,
+   "verdict": "same"
+  },
+  {
+   "n": 149,
+   "verdict": "same"
+  },
+  {
+   "n": 150,
+   "verdict": "same"
+  },
+  {
+   "n": 151,
+   "verdict": "same"
+  },
+  {
+   "n": 152,
+   "verdict": "same"
+  },
+  {
+   "n": 153,
+   "verdict": "same"
+  },
+  {
+   "n": 154,
+   "verdict": "same"
+  },
+  {
+   "n": 155,
+   "verdict": "same"
+  },
+  {
+   "n": 156,
+   "verdict": "same"
+  },
+  {
+   "n": 157,
+   "verdict": "same"
+  },
+  {
+   "n": 158,
+   "verdict": "same"
+  }
+ ],
+ "edits": [
+  {
+   "old": "criterion (a condition that must hold)",
+   "new": "criterion (a necessary or sufficient condition for the notion, or an assumption about it)",
+   "problem": "Too narrow. The extraction codebook (workflows/lit-map-d-wf_6e2da896-c1e.js) defines criterion as \"a necessary or sufficient condition, or an assumption, for the property\". The rows labeled criterion on this page include statements that something is not required, such as Guan et al.'s \"monitorability without faithfulness\" and Baker et al.'s \"causal CoTs ... are not a necessary condition for monitorability\". \"A condition that must hold\" covers only necessary conditions."
+  },
+  {
+   "old": "In the tables, text in quotation marks is copied from the paper, and text without quotation marks (including all text in italics) is a short paraphrase written when the definitions were collected.",
+   "new": "In the tables, text in quotation marks is copied from the paper. Text without quotation marks is not a quote: it is a formula restating the paper's mathematics, a short paraphrase, or both (all text in italics is paraphrase).",
+   "problem": "Wrong about where the text comes from, and incomplete. None of the 44 unquoted Definition cells in this file's group tables matches the gloss recorded in definitions.csv when the definitions were collected. For example, the italic cell for arike2026information \"TPR@1%FPR (catch rate)\" differs from that row's gloss. So the unquoted text was not written at collection time. Most unquoted cells are also LaTeX formulas (for example $P(A,t,\\pi)\\approx M(\\pi)$ ... for anon2026implementation, $\\text{g-mean}^2=\\mathrm{TPR}\\cdot\\mathrm{TNR}$ for Guan et al.), not paraphrases."
+  },
+  {
+   "old": "they bound causal recall by the observed true-positive rate $\\mathrm{TPR}_{ob}$:",
+   "new": "they bound causal recall using the observed true-positive rate $\\mathrm{TPR}_{ob}$ (the monitor's flag rate on positive cases in the intervention arm) and $R$:",
+   "problem": "Imprecise added explanation (pair 25). \"Bound X by Y\" says that Y is the bound. In Theorem 1 of anon2026improving, the bounds are $(\\mathrm{TPR}_{ob}+R-1)/R$ and $\\mathrm{TPR}_{ob}/R$, clipped to [0,1], not $\\mathrm{TPR}_{ob}$ itself. The paper's Table 1 defines $\\mathrm{TPR}_{ob}=\\Pr(Z=1\\mid X=1,Y=1)$, \"Observed recall among intervention-arm positives\". The fix states this without changing the formula. The other added readings in this pair check out against the paper: $p_x=\\Pr(Y=1\\mid X=x)$ is the \"Target-outcome rate in arm x\", and $Y(1)$, $Y(0)$ and $Z(1)$ are the potential outcomes and the monitor's verdict."
+  },
+  {
+   "old": "### 14. Deception, honesty and lie detection as monitored properties",
+   "new": "### 14. Deception as the monitored property, the detectors aimed at it, and honesty as the reference",
+   "problem": "The added \"as monitored properties\" does not fit two of the three items. The group's own text says that none of the 26 definitions defines honesty, which enters only as the reference behavior, and lie detection is a detector, not a property. The old heading was \"Deception, honesty and lie detection\"."
+  },
+  {
+   "old": "### 17. Evaluation awareness: the model recognizes that it is being evaluated, and says so",
+   "new": "### 17. Evaluation awareness: the model recognizes that it is being evaluated, and whether it says so",
+   "problem": "Too narrow. \"And says so\" makes verbalization part of evaluation awareness. The group separates the two: Anwar et al. (evaluation awareness) define the latent belief b(c) apart from its verbalization v(z), and Anthropic 2026 reads awareness from internals when it is not verbalized. The old heading was \"Evaluation awareness and its verbalization\"."
+  },
+  {
+   "old": "### 18. The cost of keeping models monitorable or legible: monitorability and legibility taxes",
+   "new": "### 18. Monitorability and legibility taxes: the costs of keeping models monitorable or legible, of evading monitors and of compressing the CoT",
+   "problem": "Too narrow. The group's own text lists three kinds of cost: preserving monitorability or legibility, evading detection, and compressing the CoT. Google DeepMind's \"capability tax\" is a cost that evasion imposes on the model, not a cost of keeping it monitorable. The old heading was \"Monitorability and legibility taxes\"."
+  }
+ ]
+}

@@ -1,0 +1,218 @@
+{
+ "pairs": [
+  {
+   "n": 1,
+   "verdict": "same"
+  },
+  {
+   "n": 2,
+   "verdict": "same"
+  },
+  {
+   "n": 3,
+   "verdict": "same"
+  },
+  {
+   "n": 4,
+   "verdict": "same"
+  },
+  {
+   "n": 5,
+   "verdict": "same"
+  },
+  {
+   "n": 6,
+   "verdict": "same"
+  },
+  {
+   "n": 7,
+   "verdict": "same"
+  },
+  {
+   "n": 8,
+   "verdict": "different",
+   "problem": "The rewrite adds a provenance claim that the old sentence does not make and that is not accurate: the unquoted text in the tables was not written when the definitions were collected. The unquoted cells of the definition tables were written by the agents that wrote each term's section (for example \"Restates Chen et al.’s simulation generality and simulation precision.\" in the counterfactual section differs from the gloss of agarwal2024faithfulness#6 in definitions.csv, and the monitorability cells are LaTeX formulas), and the unquoted text of the attribution tables is the checker's finding. The old sentence only says that such text is a gloss, that is, a paraphrase.",
+   "fix_new": "In the tables, text in quotation marks is copied from the paper. Text without quotation marks is a short paraphrase, not a quote."
+  },
+  {
+   "n": 9,
+   "verdict": "same"
+  },
+  {
+   "n": 10,
+   "verdict": "same"
+  },
+  {
+   "n": 11,
+   "verdict": "same"
+  },
+  {
+   "n": 12,
+   "verdict": "same"
+  },
+  {
+   "n": 13,
+   "verdict": "same"
+  },
+  {
+   "n": 14,
+   "verdict": "same"
+  },
+  {
+   "n": 15,
+   "verdict": "same"
+  },
+  {
+   "n": 16,
+   "verdict": "same"
+  },
+  {
+   "n": 17,
+   "verdict": "same"
+  },
+  {
+   "n": 18,
+   "verdict": "same"
+  },
+  {
+   "n": 19,
+   "verdict": "same"
+  },
+  {
+   "n": 20,
+   "verdict": "same"
+  },
+  {
+   "n": 21,
+   "verdict": "same"
+  },
+  {
+   "n": 22,
+   "verdict": "same"
+  },
+  {
+   "n": 23,
+   "verdict": "same"
+  },
+  {
+   "n": 24,
+   "verdict": "same"
+  },
+  {
+   "n": 25,
+   "verdict": "different",
+   "problem": "\"This gives 1,095 checks, one for each pair of a definition and a source it cites\" makes the claim broader: the 803 checked definitions cite 1,280 sources in all (definitions.csv), and only the 1,095 pairs whose source is in the map were checked, as the file itself says later (\"Sources outside the map were not checked\"). The old text counted row-source checks for in-map sources only. In the same pair, the added gloss of cue acknowledgment says \"the response mentions\" while the rubric (nguyen2026generalization#9) says \"whether the reasoning or response explicitly acknowledges the cue/hint\" and the paper scores whether the chain of thought mentions the cue; the fix also corrects that explanation (item 3).",
+   "fix_new": "Borrowed definitions were checked against the sources they cite, when those sources are in the map. Of the 804 borrowed definitions that cite a source in the map, 803 were checked. This gives 1,095 checks, one for each pair of a definition and a source in the map that it cites. The one unchecked definition is the rubric that [Nguyen et al. 2026b](./#p=nguyen2026generalization) give a judge model for cue acknowledgment (whether the model's reasoning or response mentions a cue inserted into the prompt); it cites [Meek et al. 2025](./#p=meek2025measuring)."
+  },
+  {
+   "n": 26,
+   "verdict": "same"
+  },
+  {
+   "n": 27,
+   "verdict": "same"
+  },
+  {
+   "n": 28,
+   "verdict": "same"
+  },
+  {
+   "n": 29,
+   "verdict": "same"
+  },
+  {
+   "n": 30,
+   "verdict": "same"
+  },
+  {
+   "n": 31,
+   "verdict": "same"
+  },
+  {
+   "n": 32,
+   "verdict": "same"
+  },
+  {
+   "n": 33,
+   "verdict": "same"
+  },
+  {
+   "n": 34,
+   "verdict": "same"
+  },
+  {
+   "n": 35,
+   "verdict": "same"
+  },
+  {
+   "n": 36,
+   "verdict": "same"
+  },
+  {
+   "n": 37,
+   "verdict": "same"
+  },
+  {
+   "n": 38,
+   "verdict": "same"
+  },
+  {
+   "n": 39,
+   "verdict": "same"
+  },
+  {
+   "n": 40,
+   "verdict": "same"
+  },
+  {
+   "n": 41,
+   "verdict": "same"
+  },
+  {
+   "n": 42,
+   "verdict": "same"
+  },
+  {
+   "n": 43,
+   "verdict": "same"
+  },
+  {
+   "n": 44,
+   "verdict": "same"
+  },
+  {
+   "n": 45,
+   "verdict": "same"
+  },
+  {
+   "n": 46,
+   "verdict": "same"
+  },
+  {
+   "n": 47,
+   "verdict": "same"
+  }
+ ],
+ "edits": [
+  {
+   "old": "- *criterion*: a condition or assumption that must hold;",
+   "new": "- *criterion*: a necessary or sufficient condition for the notion, or an assumption it rests on;",
+   "problem": "Imprecise. The extraction prompt defines a criterion as \"a necessary or sufficient condition, or an assumption, for the property\"; \"a condition that must hold\" describes only a necessary condition and misses the sufficient conditions in this kind (for example Lyu et al. 2023: \"$C$ is guaranteed to be a faithful model explanation\")."
+  },
+  {
+   "old": "- *failure mode*: a description of a way to fail, such as a type of unfaithful reasoning;",
+   "new": "- *failure mode*: a named way in which the notion fails, such as a type of unfaithful reasoning;",
+   "problem": "Imprecise: \"a way to fail\" does not say what fails. The extraction prompt defines the kind as \"a named way the property fails\" (for example obfuscation or steganography for monitorability)."
+  },
+  {
+   "old": "or in another form (verdict \"adapted\", 251 checks)",
+   "new": "or in a form that the citing paper modifies, for example by narrowing or extending it (verdict \"adapted\", 251 checks)",
+   "problem": "Imprecise explanation of the verdict \"adapted\": the attribution prompt defines it as \"the source states a definition or measure that the citing paper visibly modifies (narrows, extends, measures differently)\". \"In another form\" also fits \"renamed\" (same definition under another name), which is a separate verdict counted among the other 197."
+  },
+  {
+   "old": "\"other-claim\" (13), when the cited passage supports a different claim;",
+   "new": "\"other-claim\" (13), when the citation supports a claim other than the definition, such as a finding stated next to it;",
+   "problem": "Imprecise explanation of the verdict \"other-claim\": the attribution prompt defines it as \"the citation supports something other than the definition (e.g. an empirical result next to it)\", and the 13 findings are of that type (for example Lanham et al. 2023 cited for the preceding sentence on unfaithful explanations). \"The cited passage\" suggests a passage of the source and does not say that the citation backs something other than the definition."
+  }
+ ]
+}

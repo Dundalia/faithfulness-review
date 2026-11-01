@@ -1,0 +1,622 @@
+{
+ "pairs": [
+  {
+   "n": 1,
+   "verdict": "same"
+  },
+  {
+   "n": 2,
+   "verdict": "same"
+  },
+  {
+   "n": 3,
+   "verdict": "different",
+   "problem": "The old claim counts rows in the definitions catalogue (the definitions extracted from the 217 papers). The new sentence opens with \"In the CoT literature, 350 definitions are formal\", which reads as a count of all formal definitions in the literature itself. That is broader: the papers may contain formal definitions that the catalogue did not extract. Elsewhere the page uses the defined term \"the definitions in the CoT literature\", which keeps the scope exact.",
+   "fix_new": "Of the definitions in the CoT literature, 350 are formal, and they come from 132 of the 217 papers that the map held when the definitions were collected (all definitions are listed in [one table](https://github.com/Dundalia/faithfulness-review/blob/main/definitions.csv))."
+  },
+  {
+   "n": 4,
+   "verdict": "same"
+  },
+  {
+   "n": 5,
+   "verdict": "same"
+  },
+  {
+   "n": 6,
+   "verdict": "same"
+  },
+  {
+   "n": 7,
+   "verdict": "same"
+  },
+  {
+   "n": 8,
+   "verdict": "same"
+  },
+  {
+   "n": 9,
+   "verdict": "same"
+  },
+  {
+   "n": 10,
+   "verdict": "same"
+  },
+  {
+   "n": 11,
+   "verdict": "same"
+  },
+  {
+   "n": 12,
+   "verdict": "same"
+  },
+  {
+   "n": 13,
+   "verdict": "same"
+  },
+  {
+   "n": 14,
+   "verdict": "same"
+  },
+  {
+   "n": 15,
+   "verdict": "same"
+  },
+  {
+   "n": 16,
+   "verdict": "same"
+  },
+  {
+   "n": 17,
+   "verdict": "same"
+  },
+  {
+   "n": 18,
+   "verdict": "same"
+  },
+  {
+   "n": 19,
+   "verdict": "same"
+  },
+  {
+   "n": 20,
+   "verdict": "same"
+  },
+  {
+   "n": 21,
+   "verdict": "same"
+  },
+  {
+   "n": 22,
+   "verdict": "same"
+  },
+  {
+   "n": 23,
+   "verdict": "same"
+  },
+  {
+   "n": 24,
+   "verdict": "same"
+  },
+  {
+   "n": 25,
+   "verdict": "same"
+  },
+  {
+   "n": 26,
+   "verdict": "same"
+  },
+  {
+   "n": 27,
+   "verdict": "same"
+  },
+  {
+   "n": 28,
+   "verdict": "same"
+  },
+  {
+   "n": 29,
+   "verdict": "same"
+  },
+  {
+   "n": 30,
+   "verdict": "same"
+  },
+  {
+   "n": 31,
+   "verdict": "same"
+  },
+  {
+   "n": 32,
+   "verdict": "same"
+  },
+  {
+   "n": 33,
+   "verdict": "same"
+  },
+  {
+   "n": 34,
+   "verdict": "same"
+  },
+  {
+   "n": 35,
+   "verdict": "same"
+  },
+  {
+   "n": 36,
+   "verdict": "same"
+  },
+  {
+   "n": 37,
+   "verdict": "same"
+  },
+  {
+   "n": 38,
+   "verdict": "same"
+  },
+  {
+   "n": 39,
+   "verdict": "same"
+  },
+  {
+   "n": 40,
+   "verdict": "same"
+  },
+  {
+   "n": 41,
+   "verdict": "same"
+  },
+  {
+   "n": 42,
+   "verdict": "same"
+  },
+  {
+   "n": 43,
+   "verdict": "same"
+  },
+  {
+   "n": 44,
+   "verdict": "same"
+  },
+  {
+   "n": 45,
+   "verdict": "same"
+  },
+  {
+   "n": 46,
+   "verdict": "same"
+  },
+  {
+   "n": 47,
+   "verdict": "same"
+  },
+  {
+   "n": 48,
+   "verdict": "same"
+  },
+  {
+   "n": 49,
+   "verdict": "same"
+  },
+  {
+   "n": 50,
+   "verdict": "same"
+  },
+  {
+   "n": 51,
+   "verdict": "same"
+  },
+  {
+   "n": 52,
+   "verdict": "same"
+  },
+  {
+   "n": 53,
+   "verdict": "same"
+  },
+  {
+   "n": 54,
+   "verdict": "same"
+  },
+  {
+   "n": 55,
+   "verdict": "same"
+  },
+  {
+   "n": 56,
+   "verdict": "same"
+  },
+  {
+   "n": 57,
+   "verdict": "same"
+  },
+  {
+   "n": 58,
+   "verdict": "same"
+  },
+  {
+   "n": 59,
+   "verdict": "same"
+  },
+  {
+   "n": 60,
+   "verdict": "same"
+  },
+  {
+   "n": 61,
+   "verdict": "same"
+  },
+  {
+   "n": 62,
+   "verdict": "same"
+  },
+  {
+   "n": 63,
+   "verdict": "same"
+  },
+  {
+   "n": 64,
+   "verdict": "same"
+  },
+  {
+   "n": 65,
+   "verdict": "same"
+  },
+  {
+   "n": 66,
+   "verdict": "same"
+  },
+  {
+   "n": 67,
+   "verdict": "same"
+  },
+  {
+   "n": 68,
+   "verdict": "same"
+  },
+  {
+   "n": 69,
+   "verdict": "same"
+  },
+  {
+   "n": 70,
+   "verdict": "same"
+  },
+  {
+   "n": 71,
+   "verdict": "same"
+  },
+  {
+   "n": 72,
+   "verdict": "same"
+  },
+  {
+   "n": 73,
+   "verdict": "same"
+  },
+  {
+   "n": 74,
+   "verdict": "same"
+  },
+  {
+   "n": 75,
+   "verdict": "same"
+  },
+  {
+   "n": 76,
+   "verdict": "same"
+  },
+  {
+   "n": 77,
+   "verdict": "same"
+  },
+  {
+   "n": 78,
+   "verdict": "same"
+  },
+  {
+   "n": 79,
+   "verdict": "same"
+  },
+  {
+   "n": 80,
+   "verdict": "same"
+  },
+  {
+   "n": 81,
+   "verdict": "same"
+  },
+  {
+   "n": 82,
+   "verdict": "same"
+  },
+  {
+   "n": 83,
+   "verdict": "same"
+  },
+  {
+   "n": 84,
+   "verdict": "same"
+  },
+  {
+   "n": 85,
+   "verdict": "same"
+  },
+  {
+   "n": 86,
+   "verdict": "same"
+  },
+  {
+   "n": 87,
+   "verdict": "same"
+  },
+  {
+   "n": 88,
+   "verdict": "same"
+  },
+  {
+   "n": 89,
+   "verdict": "same"
+  },
+  {
+   "n": 90,
+   "verdict": "same"
+  },
+  {
+   "n": 91,
+   "verdict": "same"
+  },
+  {
+   "n": 92,
+   "verdict": "same"
+  },
+  {
+   "n": 93,
+   "verdict": "same"
+  },
+  {
+   "n": 94,
+   "verdict": "same"
+  },
+  {
+   "n": 95,
+   "verdict": "same"
+  },
+  {
+   "n": 96,
+   "verdict": "same"
+  },
+  {
+   "n": 97,
+   "verdict": "same"
+  },
+  {
+   "n": 98,
+   "verdict": "same"
+  },
+  {
+   "n": 99,
+   "verdict": "same"
+  },
+  {
+   "n": 100,
+   "verdict": "same"
+  },
+  {
+   "n": 101,
+   "verdict": "same"
+  },
+  {
+   "n": 102,
+   "verdict": "same"
+  },
+  {
+   "n": 103,
+   "verdict": "same"
+  },
+  {
+   "n": 104,
+   "verdict": "same"
+  },
+  {
+   "n": 105,
+   "verdict": "same"
+  },
+  {
+   "n": 106,
+   "verdict": "same"
+  },
+  {
+   "n": 107,
+   "verdict": "same"
+  },
+  {
+   "n": 108,
+   "verdict": "same"
+  },
+  {
+   "n": 109,
+   "verdict": "same"
+  },
+  {
+   "n": 110,
+   "verdict": "same"
+  },
+  {
+   "n": 111,
+   "verdict": "same"
+  },
+  {
+   "n": 112,
+   "verdict": "same"
+  },
+  {
+   "n": 113,
+   "verdict": "same"
+  },
+  {
+   "n": 114,
+   "verdict": "same"
+  },
+  {
+   "n": 115,
+   "verdict": "same"
+  },
+  {
+   "n": 116,
+   "verdict": "same"
+  },
+  {
+   "n": 117,
+   "verdict": "same"
+  },
+  {
+   "n": 118,
+   "verdict": "same"
+  },
+  {
+   "n": 119,
+   "verdict": "same"
+  },
+  {
+   "n": 120,
+   "verdict": "same"
+  },
+  {
+   "n": 121,
+   "verdict": "same"
+  },
+  {
+   "n": 122,
+   "verdict": "same"
+  },
+  {
+   "n": 123,
+   "verdict": "same"
+  },
+  {
+   "n": 124,
+   "verdict": "same"
+  },
+  {
+   "n": 125,
+   "verdict": "same"
+  },
+  {
+   "n": 126,
+   "verdict": "same"
+  },
+  {
+   "n": 127,
+   "verdict": "same"
+  },
+  {
+   "n": 128,
+   "verdict": "same"
+  },
+  {
+   "n": 129,
+   "verdict": "same"
+  },
+  {
+   "n": 130,
+   "verdict": "same"
+  },
+  {
+   "n": 131,
+   "verdict": "same"
+  },
+  {
+   "n": 132,
+   "verdict": "same"
+  },
+  {
+   "n": 133,
+   "verdict": "same"
+  },
+  {
+   "n": 134,
+   "verdict": "same"
+  }
+ ],
+ "added": [
+  {
+   "old": "These 23 papers come from causal inference, game theory, information theory, cryptography and explainable AI, and they give mathematical definitions.",
+   "verdict": "imprecise",
+   "problem": "Not all 23 papers give mathematical definitions. The two introspection papers (Lindsey 2025; Song et al. 2025) give criteria stated in words: 15 of their 16 extracted definitions have no formula, and the page itself says so in Finding 2 and approach 6. Those two papers are also about language models rather than the fields listed.",
+   "new": "These 23 papers come mostly from causal inference, game theory, information theory, cryptography and explainable AI, and all of them except the two papers on introspection, which state criteria in words, give mathematical definitions."
+  },
+  {
+   "old": "A property holds when an observer with limited abilities (a monitor, a decoder or a class of predictors) can, or cannot,",
+   "verdict": "imprecise",
+   "problem": "Several definitions in this approach use an unbounded observer, not a limited one. Cachin's epsilon-security bounds the detection power of any adversary. Anwar et al. (information theory) bound the uplift of the Bayes-optimal monitor. The footprint theorem of Mohammadkhani et al. (Theorem 3.1) holds against a computationally unbounded monitor. Only some definitions restrict the observer: V-information, the Receiver and Sentinel classes, polynomial-size monitors, and the partial observation of opacity.",
+   "new": "A property holds when an observer (a monitor, a decoder or a class of predictors, often limited in what it can compute or see) can, or cannot,"
+  },
+  {
+   "old": "what an observer with limited abilities can extract",
+   "verdict": "imprecise",
+   "problem": "Same issue as in the approach summary: Cachin's epsilon-security, the Bayes-optimal monitor bound and the information-theoretic footprint involve unbounded observers.",
+   "new": "what an observer can extract"
+  },
+  {
+   "old": "(an outside observer can never be sure that the system is in a secret state)",
+   "verdict": "imprecise",
+   "problem": "This gloss gives only current-state opacity. Yin's general definition, quoted later on the page, reads \"The intruder can never know for sure that the system is, was, or will be in a secret state\", and the page later contrasts infinite-step opacity (past states) with diagnosability.",
+   "new": "(an outside observer can never be sure that the system is, was or will be in a secret state)"
+  },
+  {
+   "old": "where $D^i$ is the decision of agent $i$",
+   "verdict": "imprecise",
+   "problem": "In Ward et al. 2023 the decision variables are partitioned by agent, D = union of D^i, so D^i is the set of agent i's decision variables, not a single decision.",
+   "new": "where $D^i$ denotes the decision variables of agent $i$"
+  },
+  {
+   "old": "(a hidden task computed behind a public one)",
+   "verdict": "imprecise",
+   "problem": "The quoted leakage result (abstract, Theorem 3.1) concerns \"a computational task on a covert input\" that the monitor cannot see. That setting has no public task. A covert task computed behind a public task is the separate misaligned-model scenario (Corollary 3.2, the length tax).",
+   "new": "(a task on an input that the monitor cannot see)"
+  },
+  {
+   "old": "a null indirect effect through the CoT, meaning that none of the effect on the answer passes through the CoT",
+   "verdict": "imprecise",
+   "problem": "A natural indirect effect is always the effect of a particular cause (here the instruction, as in the mediation conjecture below and Wang et al.'s condition). Without naming the cause, the gloss reads as \"the CoT has no effect on the answer at all\", which is a stronger condition.",
+   "new": "a null indirect effect through the CoT, meaning that none of the effect of the instruction on the answer passes through the CoT"
+  },
+  {
+   "old": "Structural causal models with an epistemic state, the set of situations an agent considers possible: intention",
+   "verdict": "imprecise",
+   "problem": "In Halpern & Kleiman-Weiner 2018, the epistemic state is a tuple E = (Pr, K, u): a set of causal settings, a probability over them and a utility function (abstract: \"a probability over causal models and a utility function on outcomes\"). Their intention (Definition 4.1 onward) depends on expected utility, so a bare set of situations is not enough.",
+   "new": "Structural causal models with an epistemic state, here the causal settings an agent considers possible together with a probability over them and a utility function: intention"
+  },
+  {
+   "old": "lying in dynamic epistemic logic, a logic of knowledge and its change",
+   "verdict": "imprecise",
+   "problem": "van Ditmarsch's account of lying works with belief modalities. A lie produces a false belief, and knowledge cannot be false. Dynamic epistemic logic covers knowledge and belief and how they change.",
+   "new": "lying in dynamic epistemic logic, a logic of knowledge and belief and of how they change"
+  },
+  {
+   "old": "where $k$ is the size of a minimal witness set: the smallest set of other variables that must be set to suitable values, as in condition AC2, for the outcome to depend on the cause.",
+   "verdict": "imprecise",
+   "problem": "The AC2 shown on this page is the modified definition's, in which W is held at its actual values. Responsibility 1/(k+1) is defined under the original HP definition (Actual Causality, Definition 6.1.1), where a witness (W, w, x') may set W to non-actual values. \"As in condition AC2\" therefore points to the wrong condition.",
+   "new": "where $k$ is the size of a minimal witness set: the smallest set $\\vec W$ of other variables that must be set to suitable values (which, under the original definition and unlike in the modified AC2 above, need not be their actual values) for the outcome to depend counterfactually on the cause."
+  },
+  {
+   "old": "The formula states this for every sequence $\\mathcal A$ of polynomial-size monitors, one for each $N$, and a predicate $P_N$ of the covert input $X$:",
+   "verdict": "imprecise",
+   "problem": "Theorem B.14 quantifies over every predicate (\"let P_N be any predicate\") and every input distribution D_N independent of the private randomness R. \"A predicate\" can be read as one fixed predicate.",
+   "new": "The formula states this for every sequence $\\mathcal A$ of polynomial-size monitors, one for each $N$, every predicate $P_N$ of the covert input $X$ and every distribution $\\mathcal D_N$ of that input (independent of the private random bits $R$):"
+  },
+  {
+   "old": "A contrastive explanation is a set of features whose change can change the prediction, and the duality means that each minimal CXp is a minimal set of features that shares at least one feature with every AXp, and the reverse.",
+   "verdict": "imprecise",
+   "problem": "In Marques-Silva 2022, a CXp is a subset-minimal set of features which, if allowed to take any value while the other features keep their values (ceteris paribus), can change the prediction. Without minimality the gloss describes a weak CXp. \"Each minimal CXp\" is then redundant, since every CXp is minimal.",
+   "new": "A contrastive explanation is a subset-minimal set of features whose change, with the other features kept at their values, can change the prediction, and the duality means that each CXp is a minimal set of features that shares at least one feature with every AXp, and the reverse."
+  },
+  {
+   "old": "that is, the concepts they learn can be recovered from such data",
+   "verdict": "imprecise",
+   "problem": "Identifiability runs the other way. From such data, the learned representation recovers the ground-truth concept shifts, up to permutation and element-wise rescaling (Joshi et al. 2025, Proposition 2). The current wording says that the learned concepts are what can be recovered.",
+   "new": "that is, from such data they recover the true concepts up to their order and scale"
+  }
+ ]
+}

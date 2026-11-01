@@ -10,7 +10,7 @@ The dashboard has collections at the top (training methods, monitorability, meas
 - **Coverage:** a matrix crossing two tag groups (for example what is explained × intervention), where hatched cells mark combinations nothing covers.
 - **Links:** which papers build on, extend, compare to or contradict which.
 - **Definitions:** how the entries define faithfulness, counterfactual and monitorability, as verbatim quotes grouped by cluster of meaning. The filters select the entries; the search matches the definitions.
-- **Formal:** formal definitions grouped by the concept they define, with their formula, formalism and assumptions: the formal rows of the definitions catalogue (each labeled as defining the concept itself or a measurement of it) and the definitions in 23 formal-framework papers (causal abstraction, actual causation, structural causal games, usable information, steganographic security, explanation theory).
+- **Formal:** mathematical definitions grouped by the notion they define, with the formula, the kind of mathematics and the assumptions. They come from two sets of papers: the 217 papers on chain-of-thought faithfulness and monitorability (each definition marked as defining the notion itself or only a way to measure it), and 23 papers from causal inference, game theory, information theory and explainable AI that define related notions mathematically.
 
 Every view's state is in the URL, each entry has a permalink, and the current selection exports as CSV or BibTeX. Keyboard: `/` search, `j`/`k` next and previous entry, `o` open the paper, `Esc` close.
 
@@ -18,7 +18,7 @@ Standalone pages are linked after the collections. Each one is a Markdown file i
 
 ## What's in a record
 
-Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis. [`definitions.csv`](definitions.csv) holds 3,414 definitions of faithfulness, counterfactual and monitorability quoted from 216 entries, one row per definition, with its kind, stance, source, cluster and the verdict of the check against its source. [`formal.csv`](formal.csv) holds 291 formal definitions from the 23 formal-framework papers, with formula, formalism, level (concept or measurement) and assumptions.
+Each paper is one Markdown file in [`papers/`](papers), with seven bibliographic fields, a flat list of `namespace:value` tags from [`tags.yaml`](tags.yaml), a one-sentence TL;DR, a telegraphic summary (problem, method, findings, limits) and links to related papers in the map. [`index.md`](index.md) lists all of them in one table; `index.csv`, `tags.csv` and `relations.csv` hold the same data for analysis. [`definitions.csv`](definitions.csv) holds 3,414 definitions of faithfulness, counterfactual and monitorability quoted from 216 entries, one row per definition, with its kind, stance, source, cluster and the verdict of the check against its source. [`formal.csv`](formal.csv) holds the 291 mathematical definitions taken from those 23 papers, each with its formula, assumptions and whether it defines a notion or a way to measure it.
 
 ## How it was made
 

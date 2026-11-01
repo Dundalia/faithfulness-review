@@ -20,8 +20,8 @@ const FORMAL_CONCEPTS = ['faithfulness', 'completeness and soundness', 'post-hoc
   'honesty, lying and deception', 'belief and intention', 'scheming and hidden objectives', 'monitorability', 'legibility and checkability',
   'obfuscation', 'steganography and encoded reasoning', 'simulatability', 'counterfactuals', 'actual causation and explanation',
   'causal abstraction', 'direct and indirect effects', 'usable information', 'other'];
-const FORMAL_LEVELS = { concept: 'Defines the concept', measurement: 'Defines a measurement', both: 'Both' };
-const FORMAL_SOURCES = { frameworks: 'Formal-framework papers', catalogue: 'Definitions catalogue' };
+const FORMAL_LEVELS = { concept: 'Defines the notion itself', measurement: 'Defines a way to measure it', both: 'Defines the notion and how to measure it' };
+const FORMAL_SOURCES = { frameworks: 'Formal-theory papers (23)', catalogue: 'CoT faithfulness and monitorability papers (217)' };
 const DEF_FAMILIES = { faithfulness: 'Faithfulness', counterfactual: 'Counterfactual', monitorability: 'Monitorability' };
 const DEF_KINDS = ['informal', 'formal', 'operational', 'criterion', 'failure-mode', 'taxonomy'];
 const TRAIN_LEVERS = ['sft', 'preference', 'rl-reward', 'rl-mechanics', 'activation-loss', 'multi-agent-game'];
@@ -656,21 +656,21 @@ function renderFormal() {
   const base = FORMALS.filter(d => keys.has(d.key) && terms.every(t => d.text.includes(t)));
   const pick = (exceptFn) => base.filter(d => exceptFn(d));
   const byCon = pick(d => (!state.fform || d.formalism === state.fform) && (!state.flev || d.level === state.flev) && (!state.fcol || d.collection === state.fcol));
-  $('fCon').innerHTML = `<option value="">All concepts (${byCon.length})</option>` + FORMAL_CONCEPTS.filter(c => byCon.some(d => d.concept === c))
+  $('fCon').innerHTML = `<option value="">All notions (${byCon.length})</option>` + FORMAL_CONCEPTS.filter(c => byCon.some(d => d.concept === c))
     .map(c => `<option value="${esc(c)}">${esc(c)} (${byCon.filter(d => d.concept === c).length})</option>`).join('');
   $('fCon').value = state.fcon;
   const byForm = pick(d => (!state.fcon || d.concept === state.fcon) && (!state.flev || d.level === state.flev) && (!state.fcol || d.collection === state.fcol));
   const forms = [...new Set(FORMALS.map(d => d.formalism).filter(Boolean))].sort();
-  $('fForm').innerHTML = `<option value="">All formalisms (${byForm.length})</option>` + forms.filter(f => byForm.some(d => d.formalism === f))
+  $('fForm').innerHTML = `<option value="">All approaches (${byForm.length})</option>` + forms.filter(f => byForm.some(d => d.formalism === f))
     .map(f => `<option value="${esc(f)}">${esc(f)} (${byForm.filter(d => d.formalism === f).length})</option>`).join('');
   $('fForm').value = state.fform;
-  $('fLev').innerHTML = '<option value="">Concept or measurement</option>' + Object.entries(FORMAL_LEVELS).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
+  $('fLev').innerHTML = '<option value="">Notion or measurement</option>' + Object.entries(FORMAL_LEVELS).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
   $('fLev').value = state.flev;
-  $('fCol').innerHTML = '<option value="">Both sources</option>' + Object.entries(FORMAL_SOURCES).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
+  $('fCol').innerHTML = '<option value="">All papers</option>' + Object.entries(FORMAL_SOURCES).map(([k, l]) => `<option value="${k}">${l}</option>`).join('');
   $('fCol').value = state.fcol;
   const shown = byCon.filter(d => !state.fcon || d.concept === state.fcon);
-  $('count').innerHTML = `<b>${shown.length}</b> formal definitions from ${new Set(shown.map(d => d.key)).size} entries`;
-  if (!shown.length) { $('formal').innerHTML = '<p class="empty">No formal definitions match. Remove a filter or clear the search.</p>'; return; }
+  $('count').innerHTML = `<b>${shown.length}</b> mathematical definitions from ${new Set(shown.map(d => d.key)).size} papers`;
+  if (!shown.length) { $('formal').innerHTML = '<p class="empty">No definitions match. Remove a filter or clear the search.</p>'; return; }
   const year = d => BYKEY.get(d.key)?.year || 0;
   const rank = d => [FORMAL_CONCEPTS.indexOf(d.concept), d.collection === 'frameworks' ? 0 : 1, d.level === 'measurement' ? 1 : 0];
   shown.sort((a, b) => { const ra = rank(a), rb = rank(b); return ra[0] - rb[0] || ra[1] - rb[1] || ra[2] - rb[2] || year(b) - year(a) || a.id.localeCompare(b.id); });
@@ -679,7 +679,7 @@ function renderFormal() {
     if (d.concept !== cur) {
       const n = shown.filter(x => x.concept === d.concept), c = n.filter(x => x.level !== 'measurement').length;
       html += `${cur === null ? '' : '</ol>'}<h3 class="def-cluster">${esc(d.concept[0].toUpperCase() + d.concept.slice(1))}</h3>` +
-        `<p class="def-cluster-desc">${n.length} formal definition${n.length === 1 ? '' : 's'}, ${c === n.length ? (n.length === 1 ? 'of the concept itself' : 'all of the concept itself') : `${c} of the concept itself`}.</p><ol class="links">`;
+        `<p class="def-cluster-desc">${n.length} mathematical definition${n.length === 1 ? '' : 's'}; ${c === n.length ? (n.length === 1 ? 'it defines' : 'all define') : `${c} define`} the notion itself${c === n.length ? '' : `, ${n.length - c} only a way to measure it`}.</p><ol class="links">`;
       cur = d.concept;
     }
     html += `<li><div><span class="def-term">${highlight(d.term)}</span><span class="verb">${esc(FORMAL_LEVELS[d.level] || d.level)}${d.formalism ? ', ' + esc(d.formalism) : ''}</span><span class="verb">${esc(FORMAL_SOURCES[d.collection])}</span></div>

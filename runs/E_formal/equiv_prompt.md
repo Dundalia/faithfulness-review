@@ -1,0 +1,10 @@
+You are checking a plain-language rewrite of a web page for accuracy. Repository: /Users/davidebaldelli/Developer/faithfulness-review (read only; write only your output file).
+
+The page `site/pages/formal.md` was rewritten so an outside reader can follow it. Before the rewrite, its 134 factual claims had been checked twice against the sources. `runs/E_formal/claims_formal_plain.json` pairs each checked claim ("old") with the sentence(s) of the new page that now state it ("new").
+
+1. For every pair, decide whether "new" states the same facts as "old", at the same strength: the same numbers, the same works credited, no added or dropped qualification, no claim made broader or narrower. Verdict "same" or "different"; for "different", say what changed and give a corrected "new" that is still plain but states exactly what "old" states.
+2. The rewrite also added short explanations of technical terms and approaches (for example what actual causation, abstraction, an alignment map, mediation, a structural causal game, usable information, the steganographic gap, opacity, a prover-verifier game, an abductive explanation or the probability of necessity and sufficiency is). Find every such added explanation in the new page and check that it is correct, using `formal.csv` (definitions with verbatim quotes and formulas from the 23 formal-theory papers), the full texts in `cache/full/<key>.txt`, and `site/pages/actual-causality.md` for Halpern-Pearl notions. Verdict "correct", "imprecise" or "wrong", with an exact replacement for anything not correct (as an exact substring of the page and its replacement).
+
+Write `runs/E_formal/equiv_check.json` and validate it with `python3 -m json.tool`:
+{"pairs": [{"n": 1, "verdict": "same"}, {"n": 2, "verdict": "different", "problem": "...", "fix_new": "..."}], "added": [{"old": "exact substring of the page", "verdict": "imprecise", "problem": "...", "new": "..."}]}
+List every pair. In "added", list only explanations that are imprecise or wrong. Return one line: counts of same/different pairs and of imprecise/wrong explanations.

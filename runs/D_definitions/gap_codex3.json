@@ -1,0 +1,130 @@
+{
+ "note": "Rows judged out of scope by a Codex screen of 130 candidates (pure introspection, source-document faithfulness).",
+ "papers": [
+  {
+   "key": "anon2026introspection",
+   "drop": [
+    {
+     "id": "anon2026introspection#10",
+     "reason": "It characterizes cross-task generality of an introspective capability rather than self-report accuracy or faithfulness."
+    }
+   ]
+  },
+  {
+   "key": "atkinson2026identifying",
+   "drop": [
+    {
+     "id": "atkinson2026identifying#10",
+     "reason": "It defines privileged self-access as an additional introspection requirement rather than report accuracy or faithfulness."
+    }
+   ]
+  },
+  {
+   "key": "betley2025tell",
+   "drop": [
+    {
+     "id": "betley2025tell#12",
+     "reason": "It defines introspection by access to information unavailable from training data rather than by report fidelity."
+    }
+   ]
+  },
+  {
+   "key": "binder2024looking",
+   "drop": [
+    {
+     "id": "binder2024looking#3",
+     "reason": "Its defining criterion is privileged access beyond training data, which is an introspection capability."
+    },
+    {
+     "id": "binder2024looking#5",
+     "reason": "It tests privileged self-access through a self-versus-other prediction advantage rather than defining report fidelity."
+    },
+    {
+     "id": "binder2024looking#12",
+     "reason": "It defines cross-task generalization as evidence of introspective access rather than as a report-faithfulness criterion."
+    }
+   ]
+  },
+  {
+   "key": "gurarieh2026faithfulness",
+   "drop": [
+    {
+     "id": "gurarieh2026faithfulness#22",
+     "reason": "It describes an annotation workflow that applies separately defined labels without defining a scoped notion."
+    }
+   ]
+  },
+  {
+   "key": "naphade2026me",
+   "drop": [
+    {
+     "id": "naphade2026me#2",
+     "reason": "It defines a latent capability to form beliefs about one's policy rather than the accuracy of expressed self-reports."
+    },
+    {
+     "id": "naphade2026me#3",
+     "reason": "It defines accurate computation of output properties as an introspection capability test."
+    },
+    {
+     "id": "naphade2026me#4",
+     "reason": "It classifies introspective computation over policies and parameters rather than faithful self-reporting."
+    },
+    {
+     "id": "naphade2026me#5",
+     "reason": "It defines latent prediction of near-future output properties as a capability."
+    },
+    {
+     "id": "naphade2026me#6",
+     "reason": "It defines long-horizon prediction of policy properties rather than report accuracy or faithfulness."
+    },
+    {
+     "id": "naphade2026me#7",
+     "reason": "It defines inference of hidden inputs from outputs as an inverse-policy capability."
+    },
+    {
+     "id": "naphade2026me#9",
+     "reason": "It benchmarks prediction of future ethical choices as introspective capability rather than faithful reporting."
+    },
+    {
+     "id": "naphade2026me#10",
+     "reason": "It tests prompt reconstruction from an output rather than the faithfulness of a model's explanation or self-report."
+    },
+    {
+     "id": "naphade2026me#11",
+     "reason": "It defines a self-prediction advantage as evidence of privileged internal access."
+    }
+   ]
+  },
+  {
+   "key": "prasad2026features",
+   "drop": [
+    {
+     "id": "prasad2026features#1",
+     "reason": "It describes detection of factual hallucinations in external-world claims without defining reasoning monitorability or a scoped monitored behavior."
+    },
+    {
+     "id": "prasad2026features#2",
+     "reason": "It defines generic hallucination-detector recall rather than monitorability of reasoning or a scoped monitored behavior."
+    }
+   ]
+  },
+  {
+   "key": "shenoy2026introspection",
+   "drop": [
+    {
+     "id": "shenoy2026introspection#2",
+     "reason": "It explicitly distinguishes strict privileged-access introspection from the accuracy of learned behavioral reports."
+    }
+   ]
+  },
+  {
+   "key": "song2025language",
+   "drop": [
+    {
+     "id": "song2025language#5",
+     "reason": "It only restates privileged self-access as a self-versus-other prediction advantage from another study."
+    }
+   ]
+  }
+ ]
+}

@@ -18,5 +18,105 @@
   "where": "Section 10 table, Ferreira et al. row labelled 'counterfactual-augmented reward model (strategies D and C)'",
   "problem": "The definition column states only strategy D's condition despite naming both strategies. Strategy C also requires cue alignment of the original prediction and its absence in the counterfactual prediction.",
   "fix": "State both rules: D appends the disclaimer whenever predictions differ; C appends it when the original prediction is cued (correct or stereotypical) and the counterfactual prediction is not."
+ },
+ {
+  "where": "claims_counterfactual.json, claim 99",
+  "problem": "The papers field is empty, but the sentence cites and quotes han2026rfeval (\"as a soft filter\", verified at han2026rfeval [P553]).",
+  "fix": "Set papers to [\"han2026rfeval\"] and evidence to [\"han2026rfeval [P553]: \\\"We therefore use $E(r^{\\prime})$ as a soft filter and a covariate in analyses\\\"\"]."
+ },
+ {
+  "where": "Cluster 6, bullet list (claim 83)",
+  "problem": "Bullets 1, 2 and 4 are lowercase fragments, but bullet 3 starts with a capital and holds two full sentences. This is a style inconsistency only; the content is supported.",
+  "fix": "Optional: leave as is, or recast bullet 3 as a lowercase fragment ending in ';' when the claim is next edited."
+ },
+ {
+  "where": "Cluster 6, third list item (claim 83, \"Distributional or aggregate quantities include ...\")",
+  "problem": "Claim 80 introduces the list with a colon. Items one, two and four are lowercase noun phrases ending in semicolons or a period, but this item is two full sentences starting with a capital letter, so the list reads unevenly.",
+  "fix": "Recast as a noun phrase, for example: \"distributional or aggregate quantities: differences in target-answer rates (...), the hint-caused switch rate under the uniform-switching assumption (...), the acceptance-rate gap between positive and negative variants (...), or the \"concept effects for a specific question\" of [Matton et al. 2025](./#p=matton2025walk), a KL divergence between counterfactual and original answer distributions averaged over alternative concept values;\""
+ },
+ {
+  "where": "Cluster 6, paragraph after the list (claim 85, \"Three papers explain why a single flip is not enough.\")",
+  "problem": "Four papers follow (Bürger, Angdembay, Anonymous causal bounds, Shiromani), so readers may count four. Shiromani's finding is about label instability, not the single-flip criterion.",
+  "fix": "Either open the Shiromani sentence with a contrastive marker (e.g. \"Relatedly, [Shiromani et al. 2026] find ...\") or change the count if Shiromani is meant to be included."
+ },
+ {
+  "where": "Section 10, claim 144 versus claims 146 and 147",
+  "problem": "The replaced claim 144 repeats, with the same citations, the four items that the bullets then state again: Wang 2023 counterfactual rationale (146), Wang 2022 perturbed rationales and lower confidence (146), Tang & Khanna neutral-context target (147), and Akter maximizing the divergence between original and edited-trace answer distributions (146, 'increase KL divergence'). Every sentence in the paragraph is a claim, so no coherence fix can avoid touching claim text.",
+  "fix": "Optional: delete claim 144 and let claim 143 lead straight into claim 145, or shorten 144 to a one-clause overview without repeating the citations."
+ },
+ {
+  "where": "Section 11, opening of claim 154 and closing count claim 162",
+  "problem": "The replaced claim 154 opens with \"The 11 rows from 8 papers\", and the paragraph ends with claim 162, \"11 rows from 8 papers (8 proposed, 3 adopted).\", which repeats the same count. Both are claims.",
+  "fix": "Optional: in claim 154, change \"The 11 rows from 8 papers cover\" to \"The rows cover\"."
+ },
+ {
+  "where": "Section 9, claims 123 and 125",
+  "problem": "Both replaced claims cite Shen et al. 2026's \"Option Shuffling\" in consecutive sentences: in 123 as evidence that rows do not hold the input fixed, and in 125 as a row outside the eight groups. Both statements are accurate, but the repetition is noticeable.",
+  "fix": "Optional: in claim 125, drop \"\\\"Option Shuffling\\\", \" so that it reads 'additional rows cover \"Removing Steps\" and single-token replacement followed by suffix regeneration'. This is only acceptable if the caller accepts editing claim text."
+ },
+ {
+  "where": "Section 12 table, Nguyen et al. 2026, persona counterfactual, Definition column",
+  "problem": "The cell quotes the fixed-persona hypothesis being tested rather than defining the counterfactual intervention. The intervention assigns a gullible, insecure persona and repeats the recognition-gap measurement, as described in nguyen2026can [P545].",
+  "fix": "Replace the Definition cell with: “re-run the recognition-gap measurement (control and adversarial prefill, both probes)” under a system prompt assigning a gullible, insecure, eager-to-please persona."
+ },
+ {
+  "where": "Tensions, item 7, closing comparison",
+  "problem": "The necessity comparison overlooks different observer requirements. Chen's simulatability requires a human predictor, whereas Turpin's biconditional permits a human or model. Failure of human simulatability therefore does not by itself contradict Turpin's criterion.",
+  "fix": "[Chen et al. 2023](./#p=pmlr-v235-chen24bl) require human simulatability and explain that faithful representations such as model weights may fail it. [Turpin et al. 2025](./#p=turpin2025teaching) allow a “human or model” to predict behavior. Their necessity statements concern different observer requirements, so they do not establish a direct logical contradiction."
+ },
+ {
+  "where": "claim 165 (opening sentence of section 12, before \"The rows cover six behaviors:\")",
+  "problem": "The replacement sentence is supported, but it now previews each of the six bullets almost word for word (Wang 2025b 'verify knowledge before scoring honesty' vs the dishonesty bullet; Dietz 'establish factors' behavioral influence' vs 'verify \"whether specific factors actually influenced behavior\"'; Nguyen 'fixed-persona explanation' vs 'a fixed “safe and reliable assistant” persona'; Schoen 'evaluation awareness's causal effect' vs the evaluation-awareness bullet). The bullets are separate claims, so the repetition cannot be removed by editing a neighbor.",
+  "fix": "If the redundancy matters, shorten claim 165 itself to a general framing the bullets then fill in, e.g. \"These rows use a counterfactual condition as the baseline against which a covert behavior, or an alternative explanation of it, is judged.\""
+ },
+ {
+  "where": "claims_counterfactual.json, claim 165 'papers'",
+  "problem": "The 'papers' field lists only schoen2025stress, farquhar2025mona and haskins2026training, but the text also cites wang2025evaluating, dietz2026split and nguyen2026can; evidence likewise covers only the first three.",
+  "fix": "Add wang2025evaluating, dietz2026split, nguyen2026can to 'papers' and their rows (wang2025evaluating#1, dietz2026split#8, nguyen2026can#9) to 'evidence'."
+ },
+ {
+  "where": "claims 225 and 233",
+  "problem": "Two sections make the same point about Shen et al. 2026 citing Lanham et al. alone for Option Shuffling and Removing Steps. Claim 225 points to the attribution check with \"(see the attribution check)\", so the repetition is deliberate, but 233 restates it at greater length. This is not an error.",
+  "fix": "None needed. Optionally shorten 225 to the cross-reference."
+ },
+ {
+  "where": "claim 238 evidence field",
+  "problem": "The evidence list starts with 'admoni2026aligning#8: \"counterfactual\"', which has nothing to do with Hase et al. 2020's simulator or with the word count.",
+  "fix": "Drop that evidence item; keep the hase2020leakageadjusted source evidence and the zero-occurrence check."
+ },
+ {
+  "where": "claim 202 evidence field",
+  "problem": "The quoted evidence (\"how a model’s prediction would change on counterfactual inputs\", P20) is not the quote used in the text; the text's quote \"predict the model’s outputs on counterfactual variants\" is in hong2026llm [P21], and the with/without comparison is in [P97] (\"comparing Phase 2 (with explanation) against Phase 1 (without explanation)\").",
+  "fix": "Replace the evidence with hong2026llm [P21] and [P97]."
+ },
+ {
+  "where": "Tensions item 4 (renamings), claims 241-242",
+  "problem": "Replacing claim 242 removed the second 'direction', so the heading of claim 241 ('The five renamings run in two directions') refers to a contrast that is no longer drawn. The heading is claim 241 text, so no coherence fix is given here; the replacement proposed for claim 241 fixes it.",
+  "fix": "Apply the replacement given for claim 241."
+ },
+ {
+  "where": "Tensions item 1, closing paragraph (claim 254) versus first bullet (claim 251)",
+  "problem": "The replaced claim 254 almost restates the replaced claim 251: Dehghanighobadi/Mayne flip requirement, Wang & Atanasova and Alon retaining prediction-changing pairs, and Han's 'contrast precondition' allowing unchanged outputs, which is introduced with 'instead' in both. Both sentences are claims, so a coherence fix would touch claim text.",
+  "fix": "Shorten claim 254 to a tension statement that does not restate the bullets, e.g. 'An unchanged output thus makes a generated candidate invalid for [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) and [Mayne et al. 2025](./#p=mayne2025llms), is the required result of a null edit for [Akter et al. 2025](./#p=akter2025causal), and is one admissible outcome for [Han et al. 2026](./#p=han2026rfeval) and the third group.'"
+ },
+ {
+  "where": "Tensions item 3, closing paragraph (claims 264 and 265)",
+  "problem": "The replaced claim 264 ('Guan et al. lower-bound causal influence, while Anonymous 2026 derive bounds on monitor recall') is repeated, with quotes, by the next sentence (claim 265). Both are claims, so no coherence fix is given.",
+  "fix": "Reduce claim 264 to a lead-in such as 'The aggregate analyses bound two different quantities.' and let claim 265 carry the detail."
+ },
+ {
+  "where": "Tensions item 2, claim 255 (Ferreira et al. 2025)",
+  "problem": "Minor: Ferreira et al. 2025 build the cue-free counterfactual by substitution: the leaked solution 'is replaced by one from an unrelated example' and the profession 'is replaced by a neutral term (e.g., \"person\")' (ferreira2026truthful [P60]). The paper's own framing is that the prompts 'no longer contain the protected feature', so the claim stands. Still, the item asks 'Remove the cue or swap it?', and this substitution is a neutral swap.",
+  "fix": "Optionally add after the Ferreira et al. 2025 link: '(which neutralize the cue by substitution)'."
+ },
+ {
+  "where": "Tensions item 2, claim 255 (Karvonen et al. 2026)",
+  "problem": "Minor: the quote 'Ground truth comes from removing the cue' is Karvonen et al.'s description of prior hint-setting work (§4.1). Their own hint setting samples 'the target model 10 times at temperature 1.0 with the cue present and 10 times with the cue removed' (karvonen2026would [P410]). The attribution is correct in substance.",
+  "fix": "Optionally quote their own procedure instead: ('10 times with the cue removed')."
+ },
+ {
+  "where": "item 8, 'Yes:' bullet (claim 288)",
+  "problem": "Zaman & Srivastava 2025b fit the 'Qualified' bullet better than 'Yes', since their critique of mention-based hint tests carries over to Counterfactual Edits, which they describe as working 'similarly'.",
+  "fix": "If the bullets are restructured, move the Zaman & Srivastava 2025b sentence from the replacement for claim 288 into the 'Qualified' bullet; the replacement keeps it in 'Yes' only so as not to touch claim 289."
  }
 ]

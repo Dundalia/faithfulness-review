@@ -1,0 +1,187 @@
+[
+ {
+  "where": "Cluster overview table, rows 7 and 9",
+  "problem": "Both rows contain stale counts.",
+  "fix": "For cluster 7, use 196 rows, 30 papers, and proposed/adopted/adapted counts 153/19/24. For cluster 9, use 107 rows, 21 papers, and 88/9/10. These values were recomputed from the current definition rows."
+ },
+ {
+  "where": "Section 7, “and 199 more” list",
+  "problem": "The residual total and several paper counts disagree with the current rows and the 13 displayed entries.",
+  "fix": "Use “and 183 more”. Set the remaining counts for Anonymous introspection routes to 10, Atkinson to 6, Betley to 8, Binder to 7, Shenoy to 4, and Song to 6; remove Naphade, which has no current rows in this cluster."
+ },
+ {
+  "where": "Section 9, “and 93 more” list",
+  "problem": "The current cluster has 107 rows and 15 displayed entries, leaving 92. Gur-Arieh has 8 remaining rows, not 9.",
+  "fix": "Use “and 92 more” and change Gur-Arieh's remaining count to 8."
+ },
+ {
+  "where": "Lineage table, Binder et al. 2024 row",
+  "problem": "The table reports 12 borrowing rows from 10 papers, including 11 self-report rows.",
+  "fix": "Use 9 borrowing rows from 7 papers, with self-report 8 and prediction 1."
+ },
+ {
+  "where": "Section 6 table, Hase et al. 2020, “non-trivial explanation”",
+  "problem": "The displayed quotation describes label leakage, which Hase identifies as a confound in simulator accuracy, rather than the positive criterion named by the row.",
+  "fix": "Replace the definition with “provide semantic content that informs the simulator of the task model’s output in the context of its input”, from hase2020leakageadjusted [P110]."
+ },
+ {
+  "where": "Section 9 table, Gur-Arieh et al. 2026, “CoT faithfulness”",
+  "problem": "The quotation presents an iff definition but omits its second necessary condition.",
+  "fix": "Use the complete definition from gurarieh2026faithfulness [P43]: “A CoT is faithful iff (1) it contains a complete reasoning path the model followed to reach its answer, and (2) it contains no unfaithful steps.”"
+ },
+ {
+  "where": "Section 9 table, Wang et al. 2026c and Anonymous computation-alignment definitions",
+  "problem": "Both quotations end mid-phrase without an ellipsis, despite the page's stated quotation convention.",
+  "fix": "Complete Wang's quotation with “internal decision-making process” and the computation-alignment quotation with “described in its CoT”, matching their current definition rows."
+ },
+ {
+  "where": "Opening paragraph",
+  "problem": "The totals disagree with both definitions.csv and the current faithfulness dump.",
+  "fix": "Use 1,955 rows from 204 papers: 681 operational, 369 informal, 297 criteria, 231 failure modes, 211 formal and 166 taxonomies; 1,244 proposed, 483 adopted and 228 adapted. There are 628 rows defining faithfulness or unfaithfulness itself and 1,327 companion rows."
+ },
+ {
+  "where": "Cluster summary table",
+  "problem": "Several counts and stance distributions are stale.",
+  "fix": "For cluster 2, use proposed/adopted/adapted counts of 275/95/63. For cluster 7, use 196 rows, 30 papers and 153/19/24. For cluster 9, use 107 rows, 21 papers and 88/9/10."
+ },
+ {
+  "where": "Section 7 introductory paragraph and 'and 199 more' list",
+  "problem": "The section repeats the obsolete 213-row total, and its remainder list disagrees with the current rows after subtracting the 13 displayed table entries.",
+  "fix": "Use 196 rows and 'and 183 more'. In the remainder list, use Betley 8, Binder 7, Anonymous (introspection routes) 10, Atkinson 6, Song 6 and Shenoy 4; remove Naphade, which has no current faithfulness row in this cluster."
+ },
+ {
+  "where": "Section 9 'and 93 more' list",
+  "problem": "The remainder count and Gur-Arieh count are too high.",
+  "fix": "Use 'and 92 more' and 8 remaining Gur-Arieh rows after subtracting its two displayed entries."
+ },
+ {
+  "where": "Section 9 table, Gur-Arieh et al. 2026, 'CoT faithfulness'",
+  "problem": "The quotation omits the second necessary condition without an ellipsis, making completeness alone appear sufficient.",
+  "fix": "Use the complete definition from gurarieh2026faithfulness [P43]: \"A CoT is faithful iff (1) it contains a complete reasoning path the model followed to reach its answer, and (2) it contains no unfaithful steps.\""
+ },
+ {
+  "where": "Overview table, cluster 2",
+  "problem": "The proposed/adopted/adapted distribution is stale.",
+  "fix": "Replace 276 / 94 / 63 with 275 / 95 / 63, as recomputed with Python from the current rows."
+ },
+ {
+  "where": "Overview table, cluster 7",
+  "problem": "The row count, paper count and stance distribution are stale.",
+  "fix": "Use 196 rows, 30 papers and 153 / 19 / 24 proposed/adopted/adapted rows."
+ },
+ {
+  "where": "Overview table, cluster 9",
+  "problem": "The row count and proposed count are stale.",
+  "fix": "Use 107 rows, 21 papers and 88 / 9 / 10 proposed/adopted/adapted rows."
+ },
+ {
+  "where": "Section 7, remainder line below the table",
+  "problem": "The line says 199 more rows and includes outdated per-paper counts and a paper with no remaining rows in this cluster.",
+  "fix": "Use 183 more rows after the 13 displayed entries. Remove Naphade et al. Update the remaining-row counts for Anonymous (introspection routes) to 10, Atkinson et al. to 6, Betley et al. to 8, Binder et al. to 7, Shenoy et al. to 4 and Song et al. to 6."
+ },
+ {
+  "where": "Section 9, remainder line below the table",
+  "problem": "The remainder and Gur-Arieh et al. counts are stale.",
+  "fix": "Replace 93 more with 92 more, and change Gur-Arieh et al.'s remaining-row count from 9 to 8."
+ },
+ {
+  "where": "Section 5 table, Anonymous (do what you say), complete causal faithfulness row",
+  "problem": "The term labels a narrower say–do criterion as complete causal faithfulness, reversing the source's explicit qualification in anon2026what [P1186].",
+  "fix": "Rename the term to say–do consistency and quote: “We do not equate this with complete causal faithfulness; it tests the more specific question of whether the model does what its trace says.”"
+ },
+ {
+  "where": "Section 9 table, Gur-Arieh et al., CoT faithfulness row",
+  "problem": "The quotation presents only the first condition of an if-and-only-if definition, omitting the prohibition on unfaithful steps.",
+  "fix": "Use the complete definition from gurarieh2026faithfulness [P43]: “A CoT is faithful iff (1) it contains a complete reasoning path the model followed to reach its answer, and (2) it contains no unfaithful steps.”"
+ },
+ {
+  "where": "Opening summary paragraph",
+  "problem": "The total, kind, stance, companion-row and second-pass totals disagree with the current merged rows.",
+  "fix": "Use 1,955 rows from 204 papers: 681 operational, 369 informal, 297 criteria, 231 failure modes, 211 formal and 166 taxonomies; 1,244 proposed, 483 adopted and 228 adapted; 628 direct definitions and 1,327 companion rows. There are 739 retained original faithfulness rows, 1,215 newly added rows and 1 row reclassified from monitorability. The latter two groups contain 1,008 companion rows and add 36 papers."
+ },
+ {
+  "where": "Cluster overview table, rows 7 and 9",
+  "problem": "The self-report and internal-computation cluster totals are stale.",
+  "fix": "Cluster 7 has 196 rows from 30 papers, with proposed/adopted/adapted counts 153/19/24. Cluster 9 has 107 rows from 21 papers, with counts 88/9/10. Update corresponding prose totals."
+ },
+ {
+  "where": "Lineage introduction and Binder table row",
+  "problem": "The introduction reports 715 borrowed rows, and the Binder row retains obsolete counts.",
+  "fix": "Report 711 borrowed rows: 483 adopted and 228 adapted, from 179 papers; 512 cite mapped sources, 198 cite only external sources and 1 names no source. Binder has 9 borrowing rows from 7 papers, comprising 8 self-report rows and 1 predictive-value row; change the subsequent 11-of-12 lineage statement to 8 of 9."
+ },
+ {
+  "where": "Attribution check verdict table",
+  "problem": "The supported and total cells disagree with the current attribution records on faithfulness rows.",
+  "fix": "Change supported from 433 to 429 and total from 722 to 718; the other verdict cells are correct."
+ },
+ {
+  "where": "Cluster 6 table, Hase et al. 2020 row for non-trivial explanation",
+  "problem": "The displayed quotation describes label leakage, which Hase identifies as insufficient evidence of explanation quality, rather than the desired non-trivial explanatory content.",
+  "fix": "Use the positive criterion from hase2020leakageadjusted [P110]: “they provide semantic content that informs the simulator of the task model’s output in the context of its input”."
+ },
+ {
+  "where": "Cluster 7 (Self-report accuracy), the 'and 199 more' paper list below the table",
+  "problem": "The list is out of date. The cluster has 196 rows and the table shows 13, so 183 rows remain, not 199, and the listed counts add up to 198. Naphade et al. 2026 (8) has no rows left in the cluster: its only faithfulness row, naphade2026me#12, is in cluster 3. Six counts are also too high: Binder et al. 2024 should be 7 (not 9), Betley et al. 2025 8 (not 9), Anonymous 2026 (introspection routes) 10 (not 11), Atkinson et al. 2026 6 (not 7), Song et al. 2025 6 (not 7) and Shenoy et al. 2026 4 (not 5). As it stands, '199 more' contradicts '27 of the 196 rows' in claim 45.",
+  "fix": "Replace the line with: and 183 more: [Blandfort & Pawar 2026](./#p=blandfort2026strangers) (20), [Kutsyk & Zieliński 2026](./#p=kutsyk2026revealing) (19), [Zeng et al. 2026](./#p=zeng2026evaluating) (16), [Guo et al. 2026](./#p=guo2026introspective) (12), [Anonymous 2026 (introspection routes)](./#p=anon2026introspection) (10), [Pres et al. 2026b](./#p=pres2026selfctrl) (10), [Betley et al. 2025](./#p=betley2025tell) (8), [Nguyen et al. 2026a](./#p=nguyen2026can) (8), [Pres et al. 2026a](./#p=pres2026consistency) (8), [Binder et al. 2024](./#p=binder2024looking) (7), [Li et al. 2025b](./#p=li2025training) (7), [Atkinson et al. 2026](./#p=atkinson2026identifying) (6), [Song et al. 2025](./#p=song2025language) (6), [Anonymous 2026 (honesty adapters)](./#p=anon2026traininghonesty) (5), [Anonymous 2026 (introspective oversight)](./#p=anon2026trainingoversight) (5), [Dietz et al. 2026](./#p=dietz2026split) (5), [Plunkett et al. 2025](./#p=plunkett2025self) (5), [Sherburn et al. 2024](./#p=sherburn2024language) (5), [Yoshida et al. 2026](./#p=yoshida2026introspecting) (5), [Shenoy et al. 2026](./#p=shenoy2026introspection) (4), [Goel et al. 2025](./#p=goel2025learning) (3), [Lee et al. 2026b](./#p=lee2026training) (2), [Anthropic 2026](./#p=anthropic2026opus55) (1), [Cheah et al. 2026](./#p=cheah2026training) (1), [Chua & Evans 2025](./#p=chua2025deepseek) (1), [Golchin & Wetter 2026](./#p=golchin2026monitorability) (1), [Karvonen et al. 2026](./#p=karvonen2026would) (1), [Madsen et al. 2024](./#p=madsen2024self) (1), [Shiromani et al. 2026](./#p=shiromani2026necessary) (1)."
+ },
+ {
+  "where": "Cluster 9 (Correspondence with internal computation), the 'and 93 more' paper list",
+  "problem": "The cluster has 107 rows and the table shows 15, so 92 remain, not 93. Gur-Arieh et al. 2026 has 10 rows in the cluster, 2 of them in the table, so the list should give 8, not 9.",
+  "fix": "Replace 'and 93 more: ' with 'and 92 more: ' and '[Gur-Arieh et al. 2026](./#p=gurarieh2026faithfulness) (9)' with '[Gur-Arieh et al. 2026](./#p=gurarieh2026faithfulness) (8)' in that line."
+ },
+ {
+  "where": "Claim 46 (Binder et al. 2024 formal version) and the Lineage paragraph 'Introspection: privileged access after Binder et al.'; evidence for claims 44 and 45",
+  "problem": "Some evidence rows are no longer in definitions.csv. binder2024looking#3 (introspection definition), binder2024looking#5 (cross-prediction test) and naphade2026me#2 were in the committed catalogue (32c4049) but are missing from the current one. The text is still supported by the paper (binder2024looking [P55], [P57], [P59]), but the formal version and the quote \"cannot be derived (logically or inductively) from their training data alone\" now have no catalogue row behind them.",
+  "fix": "Restore binder2024looking#3 (and #5) in definitions.csv, or cite the paper paragraphs binder2024looking [P55]-[P59] as evidence for claim 46 instead of the removed row."
+ },
+ {
+  "where": "claim 138 (claims_faithfulness.json)",
+  "problem": "The papers list is empty, and the evidence cites 'dehghanighobadi2025can full text', which does not support the sentence, while omitting the rows that do (hong2026making#10 'faithful but wrong (TwoHopFact labeling)', wang2025enhancing#1, li2025better#3).",
+  "fix": "Set papers to ['hong2026making','xu2024faithful','wang2025enhancing','li2025better'] and evidence to hong2026making#10, xu2024faithful#1, wang2025enhancing#1, li2025better#3."
+ },
+ {
+  "where": "claim 138, second sentence (section, tension 6)",
+  "problem": "Mild redundancy: it restates for Xu et al. and Wang et al. what claim 136 already quotes two sentences earlier (correct answer with flawed reasoning = unfaithful). It reads as a deliberate contrast with Hong et al., so it is not an error.",
+  "fix": "Optional: none required."
+ },
+ {
+  "where": "claim 149 (claims_faithfulness.json)",
+  "problem": "Evidence cites binder2024looking#3, which does not exist in definitions.csv. The sentence is supported by binder2024looking [P59]: \"F is not reported by a stronger language model M2 that is provided with M1’s training data and given the same query as M1.\"",
+  "fix": "Replace the evidence id with 'binder2024looking full text P59'."
+ },
+ {
+  "where": "claim 131 (claims_faithfulness.json)",
+  "problem": "The papers list omits tutek2025measuring and kudo2024llms, which the sentence cites. The sentence names no cluster 3 example of a behavioral notion, but the rows support one (e.g. anon2026grace#6 'behavioural CoT faithfulness' and bhupatiraju2026stated#6 'behavioral faithfulness test (text editing)' are in cluster 3).",
+  "fix": "Add tutek2025measuring and kudo2024llms to papers."
+ },
+ {
+  "where": "claim 129 (claims_faithfulness.json)",
+  "problem": "The papers list includes emmons2025chain, which the sentence does not cite.",
+  "fix": "Remove emmons2025chain from papers."
+ },
+ {
+  "where": "cluster summary table, row 2 (Disclosure of the factors that drove the answer)",
+  "problem": "The stance split is stale. definitions.csv and synth_faithfulness.json give 275 proposed / 95 adopted / 63 adapted for discloses-influences, not 276 / 94 / 63.",
+  "fix": "Replace \"| 433 | 87 | 276 / 94 / 63 |\" with \"| 433 | 87 | 275 / 95 / 63 |\""
+ },
+ {
+  "where": "cluster summary table, row 7 (Self-report accuracy)",
+  "problem": "The row is stale. Current data give 196 rows from 30 papers, 153 / 19 / 24. The table says 213 rows from 31 papers, 165 / 23 / 25, which contradicts the section 7 text ('27 of the 196 rows') and makes the table sum to 1,973 instead of 1,955.",
+  "fix": "Replace \"| 213 | 31 | 165 / 23 / 25 |\" with \"| 196 | 30 | 153 / 19 / 24 |\""
+ },
+ {
+  "where": "cluster summary table, row 9 (Correspondence with internal computation)",
+  "problem": "The row is stale. Current data give 107 rows, 88 / 9 / 10. The table says 108 rows, 89 / 9 / 10.",
+  "fix": "Replace \"| 108 | 21 | 89 / 9 / 10 |\" with \"| 107 | 21 | 88 / 9 / 10 |\""
+ },
+ {
+  "where": "runs/D_definitions/claims_faithfulness.json, evidence fields of claims 95, 100, 101, 102 and 114",
+  "problem": "The evidence strings still give the earlier counts (Binder: 10 papers and 12 checks with 7 supported; 722 checks on 514 rows from 163 papers; 200 outside-only rows; supported 433; 556 checks on adopted rows). The current rows and checks give 7 papers and 9 checks with 4 supported, 718 checks on 511 rows from 161 papers, 198 rows, 429, and 552, which is what the replaced sentences say.",
+  "fix": "Regenerate the evidence strings of these claims from the current definitions.py dump and attr_*.json checks."
+ },
+ {
+  "where": "Attribution check, point 2 (claim 108): \"Besides the cue evidence credited to Lanham et al. ... (see Lineage)\"",
+  "problem": "The pointer was written for the old claim 85 (\"the cue evidence or cue test they credit to Lanham et al.\"). The replaced claim 85 now describes the three partial rows as extending Lanham et al.'s findings \"to omitted decision factors\", so the back-reference fits only loosely.",
+  "fix": "If claim 108 is revised, consider \"Besides the omitted-factor evidence credited to Lanham et al.\" so that it matches the Lineage wording."
+ }
+]

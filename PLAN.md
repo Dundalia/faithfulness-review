@@ -74,6 +74,7 @@ Rules:
 | Code + verify (workflow B) | One agent writes each record from the full text; a different agent checks it against the paper and fixes errors (609 edits across 130 records) | 260 |
 | Consolidate (workflow B) | Merge synonym tags, normalize model and metric names, add 34 tags to `tags.yaml` (v1); applied with `apply_records.py` | 1 |
 | Definitions (workflow D, 30 October 2026) | `definitions.py excerpt` keeps the sections of each full text that mention the terms; one agent per batch of ~12 papers quotes every definition of faithfulness, counterfactual or monitorability and checks the quotes verbatim (`definitions.py check`); one agent per term clusters them and checks attributions; `definitions.py build` writes `definitions.csv`. Synthesis in `site/pages/definitions.md` | 21 |
+| Definitions, second pass (31 October to 1 November 2026) | 54 agents re-read every full text, appendices included (`definitions.py fulltext`), and add, fix or drop rows (`runs/D_definitions/gap_*.json`); 10 agents check every borrowed row with an in-map source against that source (`attr_*.json`); GPT-6.1 Sol screens out-of-scope rows (`gap_codex3.json`); one agent per term rewrites its section and lists its claims (`claims_<term>.json`); every claim is checked by GPT-6.1 Sol (Codex) and again, independently, by Claude, and reworded sentences a third time; corrections replace the claim. Introduction checked by GPT-6.1 Sol | ~95 |
 | Build | `python3 scripts/build.py` regenerates every view and `site/data.json` (including the definitions) | script |
 
 ## Adding a paper

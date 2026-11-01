@@ -1,0 +1,73 @@
+{
+  "family": "counterfactual",
+  "range": "sample",
+  "results": [
+    {"n": 18, "verdict": "supported"},
+    {"n": 22, "verdict": "supported"},
+    {"n": 39, "verdict": "supported"},
+    {"n": 57, "verdict": "supported"},
+    {
+      "n": 83,
+      "verdict": "wrong",
+      "reason": "These measures are not uniformly population effects. Matton et al. explicitly define effects for individual questions, and Bürger et al. estimate total effects separately for each sample and attribute.",
+      "evidence": [
+        "matton2025walk [P69]: \"we focus on individual treatment effects (i.e., concept effects for a specific question) rather than average treatment effects.\"",
+        "matton2025walk [P72]: \"averaged across all counterfactual values\"",
+        "burger2026chain [P113]: \"we need to estimate the probabilities $p_{10}$ , $p_{01}$ and $p_{11}$ for each dataset sample and attribute.\""
+      ],
+      "replacement": "effects on output distributions or aggregate rates: the total effect ([Ferreira et al. 2026](./#p=ferreira2026outofsight), [Bürger et al. 2026](./#p=burger2026chain), [Anonymous 2026 (CoT reliance)](./#p=anon2026chainofthought)), the hint-caused switch rate under uniform switching ([Little 2026](./#p=little2026length)), the acceptance-rate difference between paired variants ([Arcuschin et al. 2026](./#p=arcuschin2026biases)), or the concept effect for an individual question, computed with KL divergence and averaged over alternative concept values ([Matton et al. 2025](./#p=matton2025walk)), who explicitly study \"individual treatment effects\";"
+    },
+    {
+      "n": 108,
+      "verdict": "wrong",
+      "reason": "The two quoted results are accurate, but the total omits three other papers in this cluster that quantify filtering losses or retention: Karvonen et al., Li et al. and Fareed.",
+      "evidence": [
+        "arcuschin2026biases [P1566]: \"the quality check filtered $235$ of $556$ concepts ( $42$ %):\"",
+        "han2026rfeval [P115]: \"We started with 8,499 instances and removed 1,313, yielding 7,186 items.\"",
+        "karvonen2026would [P272]: \"which retains $\\sim$ 90% of claims.\"",
+        "karvonen2026would [P273]: \"an LLM judge flags the confounded edits, which retains $\\sim$ 90% of claims.\"",
+        "li2026when [P209]: \"This leaves 942 HotpotQA and 674 MuSiQue edited pairs.\"",
+        "li2026when [P211]: \"Verification keeps 683 HotpotQA and 417 MuSiQue pairs.\"",
+        "fareed2026plan [P104]: \"Retail: 114 tasks → 96 with an outcome pair → 62 canonical (Qwen gates: 17 not ratified, 17 not force-executable).\""
+      ],
+      "replacement": "Five papers quantify exclusions or retention from their checks: [Arcuschin et al. 2026](./#p=arcuschin2026biases) \"filtered $235$ of $556$ concepts\" (42%); [Han et al. 2026](./#p=han2026rfeval) removed 1,313 of 8,499 instances, leaving 7,186; [Karvonen et al. 2026](./#p=karvonen2026would) report that their reproducibility and single-factor checks each retain approximately 90% of claims; [Li et al. 2026](./#p=li2026when) retain 683 of 942 HotpotQA edited pairs and 417 of 674 MuSiQue edited pairs after verification; and [Fareed 2026](./#p=fareed2026plan) reduces 96 retail tasks with an outcome pair to 62 canonical tasks through Qwen gates that exclude 17 unratified and 17 non-executable cases."
+    },
+    {"n": 115, "verdict": "supported"},
+    {"n": 119, "verdict": "supported"},
+    {"n": 128, "verdict": "supported"},
+    {"n": 140, "verdict": "supported"},
+    {"n": 213, "verdict": "supported"},
+    {
+      "n": 233,
+      "verdict": "overstated",
+      "reason": "The sole citation to Lanham occurs in §4.1. Appendix C additionally cites other papers for these methods, so the claim overgeneralizes the citation pattern. The comparisons of the actual tests are supported.",
+      "evidence": [
+        "shen2026detecting [P132]: \"including Adding Mistakes, Option Shuffling, Removing Steps, Early Answering, and Paraphrasing [25].\"",
+        "shen2026detecting [P423]: \"These methods are widely used to probe whether a CoT causally contributes to the final prediction [25, 47, 45, 34, 49, 49].\"",
+        "shen2026detecting [P422]: \"while preserving or slightly altering their semantics\"",
+        "lanham2023measuring [P239]: \"conveying exactly the same information but using different wording.\""
+      ],
+      "replacement": "In §4.1, [Shen et al. 2026](./#p=shen2026detecting) cite [Lanham et al. 2023](./#p=lanham2023measuring) alone for five baselines, including Option Shuffling and Removing Steps, which Lanham et al. do not run; Appendix C adds other citations and describes Paraphrasing as rewriting steps \"while preserving or slightly altering their semantics\", whereas Lanham et al. instruct \"conveying exactly the same information\"."
+    },
+    {
+      "n": 251,
+      "verdict": "overstated",
+      "reason": "Han et al.'s inclusion condition concerns opposition between injected and baseline reasoning stances, not an observed output flip. They subsequently test whether reasoning or the answer changes. Alon et al.'s displayed equality with the hint is stated for their multiple-choice protocol.",
+      "evidence": [
+        "han2026rfeval [P70]: \"where the injected counterfactual reasoning $r^{\\prime}$ asserts a stance opposite to the model’s own baseline stance.\"",
+        "han2026rfeval [P61]: \"The reasoning exhibits causal influence under $r^{\\prime}$ if either the stance of reasoning or answer changes:\"",
+        "alon2026faithfulness [P45]: \"We again sampled examples which the model’s new answer with the hint differs from the original.\""
+      ],
+      "replacement": "A flip is part of the counterfactual explanation definition: $f(\\mathbf{x})\\neq f(\\mathbf{x}_{\\text{CE}})$ in [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can), or \"a specific alternative output $y^{\\prime}\\neq y$\" in [Mayne et al. 2025](./#p=mayne2025llms); [Wang & Atanasova 2025](./#p=wang2025selfcritique) retain \"intervened instances whose prediction changes compared to the original instance\", and [Alon et al. 2026](./#p=alon2026faithfulness) define multiple-choice counterfactuals by $a_0\\neq a_1=\\text{hint}$. [Han et al. 2026](./#p=han2026rfeval) instead select pairs using a \"contrast precondition\" requiring opposing injected and baseline reasoning stances, then test whether the intervention changes the model’s reasoning or answer."
+    },
+    {"n": 271, "verdict": "supported"},
+    {"n": 296, "verdict": "supported"}
+  ],
+  "other_problems": [
+    {
+      "where": "Tensions, item 1, concluding sentence",
+      "problem": "The assertion that a non-flipping edit is not a counterfactual for the entire first group incorrectly includes Han et al. Their contrast precondition selects opposing reasoning stances, and their counterfactual intervention can leave the final answer unchanged (han2026rfeval [P59, P70-P71]).",
+      "fix": "For Dehghanighobadi et al., Mayne et al., Wang & Atanasova and Alon et al., counterfactual validity or selection requires a prediction change. [Han et al. 2026](./#p=han2026rfeval) select opposing injected reasoning stances and then evaluate changes in reasoning or answer; Akter et al. count flips under null edits as errors, while the third group retains either outcome."
+    }
+  ]
+}

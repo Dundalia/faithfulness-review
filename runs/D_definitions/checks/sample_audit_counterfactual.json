@@ -1,0 +1,225 @@
+{
+  "claims": [
+    {
+      "n": 18,
+      "verdict": "supported",
+      "reason": "Python recomputation from the cf-explanation cluster confirms 28 rows, 10 papers, 12 proposed, 13 adopted and 3 adapted, with matching IDs in the CSV and definitions.py dump.",
+      "evidence": [],
+      "replacement": ""
+    },
+    {
+      "n": 22,
+      "verdict": "supported",
+      "reason": "The scoring procedure requires a fraction strictly above 0.5, and the displayed edit request specifies a behavioral change without supplying a target answer label.",
+      "evidence": [
+        "zeng2026evaluating [P807]: \"the example counts as flipped if the fraction of resamples that differ from baseline exceeds $0.5$\"",
+        "zeng2026evaluating [P813]: \"Your task: make minimal edits to the text between the markers so\"",
+        "zeng2026evaluating [P814]: \"that the response would change between refusing and complying.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 39,
+      "verdict": "supported",
+      "reason": "All three papers support the stated sequence from explanation-conditioned follow-up generation to exact paraphrases and a non-pragmatic baseline.",
+      "evidence": [
+        "pmlr-v235-chen24bl [P194]: \"write a follow-up yes or no question that you can confidently guess the robot’s answer to based on its answer to the starter question\"",
+        "chen2025consistent [P40]: \"We prompt GPT-4 to generate related questions (see Appendix A.3 for prompts) and exact paraphrases of the original questions.\"",
+        "hong2026llm [P77]: \"Following Chen et al. (2024), we prompt strong LLMs to generate counterfactual variants of each StrategyQA question. These serve as a non-pragmatic baseline.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 57,
+      "verdict": "supported",
+      "reason": "The training appendix specifies the counterfactual task reward and Jeffreys-smoothed target from ten assistant samples, with endpoints consistent with the stated formula.",
+      "evidence": [
+        "anon2026trainingoversight [P362]: \"For counterfactual questions, the reward was defined as 1−(p−y)2\"",
+        "anon2026trainingoversight [P362]: \"If the behavior occurs in k of n = 10 assistant samples on the edited input\"",
+        "anon2026trainingoversight [P362]: \"This maps k = 0 and k = 10 to 0.045 and 0.955 instead of 0 and 1.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 83,
+      "verdict": "overstated",
+      "reason": "The named quantities exist, but grouping them all as population effects obscures Matton's explicitly question-specific treatment effect and omits the uniform-switching assumption underlying Little's hint-caused rate.",
+      "evidence": [
+        "ferreira2026outofsight [P72]: \"we term the difference in these two rates the total effect\"",
+        "burger2026chain [P85]: \"we only make claims about the monitorability of CoT distributions, not individual CoTs.\"",
+        "anon2026chainofthought [P580]: \"TPRmc overcomes this by taking into account the total effect of the intervention over several CoTs.\"",
+        "little2026length [P48]: \"If random switches land uniformly on the other options, which we call the uniform-switching assumption\"",
+        "matton2025walk [P69]: \"we focus on individual treatment effects (i.e., concept effects for a specific question) rather than average treatment effects.\"",
+        "arcuschin2026biases [P246]: \"the difference between acceptance rates under positive versus negative variations\""
+      ],
+      "replacement": "Distributional or aggregate quantities include differences in target-answer rates ([Ferreira et al. 2026](./#p=ferreira2026outofsight), [Bürger et al. 2026](./#p=burger2026chain), [Anonymous 2026](./#p=anon2026chainofthought)), the hint-caused switch rate under the uniform-switching assumption ([Little 2026](./#p=little2026length)), and the acceptance-rate gap between positive and negative variants ([Arcuschin et al. 2026](./#p=arcuschin2026biases)). [Matton et al. 2025](./#p=matton2025walk) instead define \"concept effects for a specific question\": KL divergence between counterfactual and original answer distributions, averaged over alternative concept values."
+    },
+    {
+      "n": 108,
+      "verdict": "supported",
+      "reason": "Both removal figures are explicitly reported in the papers, and Python confirms that 8,499 minus 1,313 leaves the reported 7,186 instances.",
+      "evidence": [
+        "arcuschin2026biases [P281]: \"an LLM-judge quality check (Appendix L) that removed $42$ % of candidate concepts\"",
+        "han2026rfeval [P115]: \"We started with 8,499 instances and removed 1,313, yielding 7,186 items.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 115,
+      "verdict": "supported",
+      "reason": "Within the surrounding explanation-mention cluster, Python confirms eight rows citing Siegel et al. 2024, and the cited papers describe distributional shifts and correlation with mentions.",
+      "evidence": [
+        "arcuschin2026biases [P274]: \"Siegel et al. (2024) introduce the Correlational Counterfactual Test (CCT), which considers the total shift in predicted label distributions rather than just binary outcomes.\"",
+        "cheah2026training [P40]: \"refined this into a correlational measure, aligning mentions with the graded influence of interventions.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 119,
+      "verdict": "supported",
+      "reason": "Python recomputation from the explanation-mention cluster confirms 17 rows, 12 papers, 2 proposed, 12 adopted and 3 adapted.",
+      "evidence": [],
+      "replacement": ""
+    },
+    {
+      "n": 128,
+      "verdict": "supported",
+      "reason": "Both papers explicitly include paraphrasing among their reasoning perturbations, although GRACE preserves semantics and the answer while Shen also permits slight semantic changes.",
+      "evidence": [
+        "anon2026grace [P12]: \"Paraphrase preserves semantics and answer while rewriting CoT.\"",
+        "shen2026detecting [P422]: \"Paraphrasing: Rewrites reasoning steps while preserving or slightly altering their semantics\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 140,
+      "verdict": "supported",
+      "reason": "The expression matches Equation 3 in §4.2.1, including the expectation over cluster sentences and the signed difference between successive prefix-conditioned interview probabilities.",
+      "evidence": [
+        "macar2025thought [P85]: \"We quantified the effect of uttering a sentence as the change in the yes/no rate after the sentence is uttered:\"",
+        "macar2025thought [P87]: \"$C$ represents a sentence cluster, and $A_{yes}$ represents a decision to interview the candidate. This signed difference could be used, rather than KL divergence, because the decision here is binary.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 213,
+      "verdict": "supported",
+      "reason": "The quoted label is absent from Turpin but appears as the later label in Cheah, so the cross-paper comparison is supported and the quotecheck flag reflects an incomplete claim-paper list.",
+      "evidence": [
+        "cheah2026training [P30]: \"Counterfactual tests involve creating pairs of factual and counterfactual inputs to examine how model decisions and explanations shift under controlled interventions, such as the introduction of biasing hints.\"",
+        "turpin2023language [P61]: \"The counterfactual simulatability framework of explanation faithfulness\"",
+        "turpin2023language [P63]: \"we look at model behavior on inputs with and without biasing features.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 233,
+      "verdict": "overstated",
+      "reason": "Only the main-text baseline list cites Lanham alone; Appendix C adds collective references to other papers. The semantics quote is verbatim in Shen, while \"conveying exactly the same information\" is verbatim in Lanham and absent from Shen.",
+      "evidence": [
+        "shen2026detecting [P132]: \"including Adding Mistakes, Option Shuffling, Removing Steps, Early Answering, and Paraphrasing [25].\"",
+        "shen2026detecting [P423]: \"These methods are widely used to probe whether a CoT causally contributes to the final prediction [25, 47, 45, 34, 49, 49].\"",
+        "shen2026detecting [P422]: \"while preserving or slightly altering their semantics\"",
+        "lanham2023measuring [P46]: \"Early Answering: Truncate the original CoT before answering.\"",
+        "lanham2023measuring [P239]: \"Please rewrite the following text, conveying exactly the same information but using different wording.\""
+      ],
+      "replacement": "The main-text baseline list in [Shen et al. 2026](./#p=shen2026detecting) cites only [Lanham et al. 2023](./#p=lanham2023measuring) for five methods, including Option Shuffling and Removing Steps; Appendix C adds collective references to other papers. Lanham's four tests are Early Answering, Adding Mistakes, Paraphrasing and Filler Tokens, without separate option-shuffling or selected-step-deletion tests. Shen's paraphrasing permits \"preserving or slightly altering their semantics\", whereas Lanham's prompt requires \"conveying exactly the same information\"."
+    },
+    {
+      "n": 251,
+      "verdict": "overstated",
+      "reason": "The first four examples require a changed decision, but Han's inclusion condition contrasts baseline and injected reasoning stances rather than requiring an observed change in the model's intervened output.",
+      "evidence": [
+        "dehghanighobadi2025can [P45]: \"a modified version of the original input\"",
+        "mayne2025llms [P35]: \"a counterfactual explanation is an alternative input\"",
+        "wang2025selfcritique [P104]: \"intervened instances whose prediction changes compared to the original instance.\"",
+        "alon2026faithfulness [P39]: \"we regard this as a counterfactual and treat it as evidence that the hint influenced the model’s decision making.\"",
+        "han2026rfeval [P70]: \"We evaluate faithfulness only on contrastive pairs\"",
+        "han2026rfeval [P59]: \"shows no causal influence\"",
+        "han2026rfeval [P59]: \"because the final stance does not change.\""
+      ],
+      "replacement": "A changed decision defines counterfactual explanations in [Dehghanighobadi et al. 2025](./#p=dehghanighobadi2025can) and [Mayne et al. 2025](./#p=mayne2025llms). [Wang & Atanasova 2025](./#p=wang2025selfcritique) retain prediction-changing instances, and [Alon et al. 2026](./#p=alon2026faithfulness) call a pair counterfactual when a₀ ≠ a₁ = hint. [Han et al. 2026](./#p=han2026rfeval) instead impose a \"contrast precondition\": injected reasoning must oppose the baseline reasoning stance. Whether the model's subsequent reasoning or answer changes is evaluated separately, and unchanged outputs remain possible."
+    },
+    {
+      "n": 271,
+      "verdict": "supported",
+      "reason": "The papers specify model-generated mistake edits, o3-generated counterfactual reasoning and a critic-generated contradictory step respectively.",
+      "evidence": [
+        "lanham2023measuring [P46]: \"Have a language model add a mistake somewhere in the original CoT and then regenerate the rest of the CoT.\"",
+        "lanham2023measuring [P123]: \"we use a pretrained model\"",
+        "han2026rfeval [P113]: \"To produce counterfactual reasoning, we prompt OpenAI’s o3-2025-04-16\"",
+        "khanzadeh2026project [P58]: \"$\\iota_{\\tau}(s_{k})=f_{\\text{critic}}(s_{k},\\tau,\\theta_{\\text{critic}})$"
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 296,
+      "verdict": "supported",
+      "reason": "Both quoted phrases occur together in Appendix G.2, explicitly connecting steerability to increased confidence in faithfulness for the targeted behaviors.",
+      "evidence": [
+        "baker2025monitoring [P197]: \"Nevertheless, causal faithfulness metrics are still valuable and worth measuring. Since steerability is a sufficient condition for faithfulness\""
+      ],
+      "replacement": ""
+    }
+  ],
+  "rows": [
+    {
+      "id": "macar2025thought#12",
+      "ok": true,
+      "problems": "P85–P87 introduce this formal sentence-cluster effect through counterfactual resampling in §4.2.1, Equation 3, supporting the counterfactual family, term, formal kind, proposed stance and empty source.",
+      "fix": {}
+    },
+    {
+      "id": "burger2026chain#28",
+      "ok": true,
+      "problems": "Appendix B.2, P393 explicitly formulates and rejects the per-response counterfactual flip criterion, so the family, term, criterion kind, proposed formulation, empty source and location are appropriate.",
+      "fix": {}
+    },
+    {
+      "id": "tutek2025measuring#12",
+      "ok": true,
+      "problems": "Section 4.2, P61 explicitly adapts Gandikota et al. 2024's efficacy and specificity criteria to the reasoning-step unlearning intervention, supporting all recorded fields.",
+      "fix": {}
+    },
+    {
+      "id": "hong2026llm#15",
+      "ok": true,
+      "problems": "Section 4.2, P79–P87 operationally defines the authors' contextualization transformation, with its example in Table 2, supporting the counterfactual family, term, operational kind, proposed stance and empty source.",
+      "fix": {}
+    },
+    {
+      "id": "madsen2024self#12",
+      "ok": true,
+      "problems": "Limitations, P132–P133 explicitly endorses graded explanation faithfulness from Jacovi and Goldberg 2020, whose P17 also calls for replacing binary faithfulness with a graded notion, supporting the recorded criterion and attribution.",
+      "fix": {}
+    },
+    {
+      "id": "naphade2026me#8",
+      "ok": false,
+      "problems": "The quote is verbatim in §3.1, P61 and accurately describes a proposed operational task, but it tests pure short-term policy introspection rather than explanation or self-report faithfulness, honesty, or say-do consistency.",
+      "fix": {
+        "action": "drop"
+      }
+    }
+  ],
+  "attribution": [
+    {
+      "item": "anon2026one#25 -> guan2025monitoring",
+      "verdict_correct": true,
+      "correct_verdict": "supported",
+      "reason": "Guan P449 samples each instance independently in both arms, while P125 and P133–P136 score monitor triggering against the minimum attributable fraction TE/P(Y=1|X=1), supporting the borrowing and the check's finding."
+    },
+    {
+      "item": "burger2026chain#11 -> guan2025monitoring",
+      "verdict_correct": true,
+      "correct_verdict": "adapted",
+      "reason": "Guan P53 defines process evaluations through known admissible solution paths, while Bürger P50 broadens the category to topics considered and cites Emmons for hiding topics, exactly as the finding explains."
+    },
+    {
+      "item": "parekh2026drop#8 -> prasad2026features",
+      "verdict_correct": true,
+      "correct_verdict": "adapted",
+      "reason": "Prasad P724 supplies the GMHA architecture, P59 defines correction and retraction reward probes, and P47 already uses base-model activations during training; Parekh P47–P50 adapts this machinery to mean step-level performativity, so both the verdict and the finding's correction of Parekh's contrast are supported."
+    }
+  ]
+}

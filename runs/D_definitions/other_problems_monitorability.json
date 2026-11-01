@@ -1,1 +1,122 @@
-[]
+[
+ {
+  "where": "Heading: Obfuscation: the trace stops revealing a behavior that persists",
+  "problem": "The heading excludes obfuscated activations, which the section includes. Deceptive text can remain visible while changed activations prevent probe detection, as described in taufeeque2026obfuscation [P28] and [P60].",
+  "fix": "Obfuscation: behavior persists while detection from text or activations fails"
+ },
+ {
+  "where": "Encoded reasoning and steganography table, Roger 2025, reliance on encoded reasoning",
+  "problem": "The paraphrase declares \"no reliance on syntax-encoded reasoning\" from similar performance. anthropic2025paraphrases [P5] presents this as strong evidence and explicitly discusses incomplete or reversible paraphrasing and distillation confounds; [P6] concludes that encoded reasoning does not play a significant role on MATH.",
+  "fix": "Close MATH pass@1 after distillation on paraphrased versus original scratchpads provides evidence against a significant role for syntax-encoded reasoning, subject to paraphrasing and distillation limitations."
+ },
+ {
+  "where": "Obfuscation table, Haskins et al. 2026, CoT obfuscation versus reasoning suppression",
+  "problem": "The paraphrase omits the behavior-only control. haskins2026training [P45] requires the monitor-aware model's undetected rate to exceed both that control and the no-reasoning baseline.",
+  "fix": "An undetected behavior rate exceeding both the behavior-only control and the no-reasoning baseline indicates active use of the CoT while evading the monitor."
+ },
+ {
+  "where": "Evaluation awareness table, OpenAI 2026, oversight gaming",
+  "problem": "The definition quotes only the first of two required conditions in openai2026gpt6astra [P155], omitting the requirement that the action undermine the evaluation's intended meaning.",
+  "fix": "The model acts on reasoning about grading, rewarding or monitoring in a way that would undermine the intended meaning of the evaluation result."
+ },
+ {
+  "where": "Tensions, “Encoded from whom?”, final sentence",
+  "problem": "Failure to decode an encoding is insufficient for Skaf et al.'s steganography definition. The monitor must also fail to detect its presence. A detectable but undecodable encoding is their overtly encoded CoT.",
+  "fix": "Under [Skaf et al. 2025](./#p=skaf2025large)'s definition, a CoT is steganographic relative to a monitor when it encodes harmful planning in load-bearing tokens and the monitor can neither decode the encoding nor detect its presence, even if humans can read it; a detectable but undecodable encoding is overtly encoded CoT. [Schulz 2026](./#p=schulz2026monitor) excludes human-readable monitor evasion from encoded reasoning."
+ },
+ {
+  "where": "Opening paragraph, stance totals",
+  "problem": "The stated 258 adopted and 124 adapted rows disagree with definitions.csv.",
+  "fix": "Use 787 proposed, 257 adopted and 125 adapted."
+ },
+ {
+  "where": "Opening paragraph, terms naming monitorability",
+  "problem": "Among the 127 direct-definition rows, 109 contain 'monitorability' in the term. The count 123 includes terms containing either 'monitorability' or 'monitorable'.",
+  "fix": "Replace the parenthetical with '(109 name monitorability in the term; 123 name either monitorability or monitorable)'."
+ },
+ {
+  "where": "Evaluation designs: archetypes, regimes and ground-truth labels, count paragraph",
+  "problem": "The stated 28 adopted and 9 adapted rows disagree with the cluster's row data.",
+  "fix": "Use 47 proposed, 27 adopted and 10 adapted."
+ },
+ {
+  "where": "Scheming table, Bu et al. 2026 row",
+  "problem": "The definition cell omits 'typically involves', turning a characterization into an apparent requirement.",
+  "fix": "Use 'typically involves long-horizon strategic goal pursuit, persistent hidden objectives, or coordinated planning across multiple episodes'."
+ },
+ {
+  "where": "Evaluation designs: archetypes, regimes and ground-truth labels, count summary",
+  "problem": "The stance summary reports 28 adopted and 9 adapted rows. Python recount of the current evaldesign cluster gives 27 adopted and 10 adapted rows.",
+  "fix": "84 rows from 22 papers (34 operational, 20 informal, 20 taxonomy, 5 criterion, 4 formal, 1 failure-mode; 47 proposed, 27 adopted, 10 adapted)."
+ },
+ {
+  "where": "Section intro (family totals) and Lineage claim 82 (\"382 of the 1,169 rows (33%)\")",
+  "problem": "The working-tree definitions.csv dropped prasad2026features#1 (monitors) and #2 (measurement), per gap_codex3.json. The family now has 1,167 rows from 108 papers (448 operational, 785 proposed), not 1,169 (450 operational, 787 proposed). The sourced-row share becomes 382 of 1,167 (33%), still from 88 papers.",
+  "fix": "Recompute the intro totals and claim 82 from the current CSV: 1,169 -> 1,167; 450 operational -> 448; 787 proposed -> 785; and check the 842-new-rows figure."
+ },
+ {
+  "where": "Scoring monitorability: metrics, header line \"99 rows from 36 papers (59 operational, 35 formal, 4 criterion, 1 informal; 68 proposed, 19 adopted, 12 adapted)\"",
+  "problem": "After prasad2026features#2 was dropped, the measurement cluster has 98 rows from 35 papers (58 operational, 35 formal, 4 criterion, 1 informal; 67 proposed, 19 adopted, 12 adapted).",
+  "fix": "Replace with \"98 rows from 35 papers (58 operational, 35 formal, 4 criterion, 1 informal; 67 proposed, 19 adopted, 12 adapted).\""
+ },
+ {
+  "where": "\"And N more\" paper lists of the metrics and monitors clusters",
+  "problem": "Both lists still include \"[Prasad et al. 2026](./#p=prasad2026features) (1)\", but that paper no longer has rows in either cluster. The obfuscation list is correct to keep it, because prasad2026features#3 remains. The counts \"And 84 more\" and \"And 123 more\" need to drop by one.",
+  "fix": "Remove \"[Prasad et al. 2026](./#p=prasad2026features) (1), \" from the metrics and monitors lists, and decrement their \"And N more\" counts."
+ },
+ {
+  "where": "Claim 81 (taxes paragraph)",
+  "problem": "Claim 81 repeats the two examples that replaced claim 80 now gives (Google DeepMind's \"capability tax\" and Li's \"mechanism-dependent tax\"). If the coherence fix on claim 80 is not applied, delete the duplicate clauses from claim 81 instead.",
+  "fix": "old: \"; [Google DeepMind 2026](./#p=google2026gemini4argon) names a \\\"capability tax\\\" that evasion imposes on the model; [Li 2026](./#p=li2026monitorability) calls the oversight cost of compressing the CoT \\\"a mechanism-dependent tax\\\"; and [Anwar\" new: \"; and [Anwar\""
+ },
+ {
+  "where": "Opening paragraph (line 1) and the cluster headers of 'Scoring monitorability: metrics' and 'Monitors, monitor scopes and oversight protocols'",
+  "problem": "These counts predate the removal of prasad2026features#1 (monitors) and #2 (measurement) from the working-tree definitions.csv. The section says 1,169 rows; operational 450; proposed 787; 842 new rows; 1,042 companion rows; metrics 99 rows from 36 papers (59 operational, 68 proposed); monitors 138 rows from 46 papers (46 operational, 99 proposed). The CSV and dump now give 1,167 rows from 108 papers; operational 448; proposed 785; metrics 98 rows from 35 papers (58 operational, 67 proposed); monitors 137 rows from 45 papers (45 operational, 98 proposed). Prasad may also still appear in the per-cluster 'And N more' paper lists.",
+  "fix": "Regenerate the family and cluster counts from the current definitions.csv: 1,167 rows; 448 operational; 785 proposed; 840 new rows and 1,040 companion rows (neither removed row defines monitorability itself); metrics 98 rows from 35 papers; monitors 137 rows from 45 papers."
+ },
+ {
+  "where": "Monitorability and legibility taxes, first prose paragraph",
+  "problem": "The paragraph names Google DeepMind's \"capability tax\" and Li's \"mechanism-dependent tax\" twice: once in its first sentence and again in claim 81.",
+  "fix": "Drop the Google DeepMind and Li clauses from one of the two sentences, for example by shortening the first sentence to end at \"with different payers and units.\""
+ },
+ {
+  "where": "Claims 115 and 116 (Attribution check, last paragraph)",
+  "problem": "As written, 116 repeats 115: both say Xiong's Korbak citation is supported and both name the Xiong-on-Emmons partial. All the neighbours of 116 are claims, so the overlap cannot be removed with a non-claim coherence edit.",
+  "fix": "The replacements given for 115 and 116 were written together: 115 keeps the Korbak verdicts and 116 carries the partial checks and the remaining records. Apply both, or neither."
+ },
+ {
+  "where": "Claim 157, sentence after the replaced claim 156 ('[Anonymous 2026 (improving monitorability)](./#p=anon2026improving) prove that it is the upper end of the bounds on causal recall')",
+  "problem": "The replaced claim 156 now ends with 'the CoT's articulation rate', so the 'it' that opens claim 157 can be read as the articulation rate rather than minimal-criterion sensitivity. The substance of 157 is supported (Theorem 1; g-mean²_int). The fix has to touch the text of claim 157, so it is not listed under coherence.",
+  "fix": "Replace 'prove that it is the upper end of the bounds on causal recall' with 'prove that minimal-criterion sensitivity is the upper end of the bounds on causal recall'."
+ },
+ {
+  "where": "Claim 123 ('On the other side, three papers state the requirement without restricting it to the monitored property')",
+  "problem": "Claim 123 itself is accurate. But after the replacement of claim 124, the next sentence adds two more papers on the same side (Bhupatiraju & Nyaupane and Shiromani et al.), so 'three papers' can be read as the full count. The fix proposed for claim 126 names all five papers. If 126 is fixed that way, this is a minor reading issue only.",
+  "fix": "Optional: begin claim 124 with 'Two more papers take the same side: ' so that the count reads as additive."
+ },
+ {
+  "where": "Header of the cluster \"Monitors, monitor scopes and oversight protocols\" (section line 290): \"138 rows from 46 papers (54 informal, 46 operational, 17 taxonomy, 14 formal, 7 criterion; 99 proposed, 26 adopted, 13 adapted).\"",
+  "problem": "Stale after prasad2026features#1 (operational, proposed, monitors) was dropped. The cluster now has 137 rows from 45 papers.",
+  "fix": "137 rows from 45 papers (54 informal, 45 operational, 17 taxonomy, 14 formal, 7 criterion; 98 proposed, 26 adopted, 13 adapted)."
+ },
+ {
+  "where": "Monitors cluster remainder line (section line 316): \"And 123 more: ... [Prasad et al. 2026](./#p=prasad2026features) (1) ...\"",
+  "problem": "137 rows minus 15 table rows leaves 122, and Prasad no longer has a row in this cluster.",
+  "fix": "Change \"And 123 more\" to \"And 122 more\" and delete \"[Prasad et al. 2026](./#p=prasad2026features) (1), \" from that line."
+ },
+ {
+  "where": "Measurement cluster remainder line (section line 106): \"And 84 more: ... [Prasad et al. 2026](./#p=prasad2026features) (1), [Xiao & Phuong 2026](./#p=xiao2026bootstrapped) (1).\"",
+  "problem": "98 rows minus 15 table rows leaves 83, and prasad2026features#2 is no longer in the data.",
+  "fix": "Change \"And 84 more\" to \"And 83 more\" and replace \"[OpenAI 2026](./#p=openai2026gpt6astra) (1), [Prasad et al. 2026](./#p=prasad2026features) (1), [Xiao & Phuong 2026]\" with \"[OpenAI 2026](./#p=openai2026gpt6astra) (1), [Xiao & Phuong 2026]\"."
+ },
+ {
+  "where": "Claim 12: \"which the previous version filed under necessity and the independent audit placed here, since it defines usefulness to an overseer rather than necessity\"",
+  "problem": "The claim is accurate (fareed2026plan#1 was in necessity in commit 5b8b623; codex_review_1.md recommends predictive), but 'the previous version' and 'the independent audit' are pipeline history that a reader of the page cannot see.",
+  "fix": "Replace that clause with \", which defines usefulness to an overseer rather than necessity\"."
+ },
+ {
+  "where": "Tensions, 'Faithfulness: required, required only for the monitored property, or not required?', paragraph beginning 'The direct disagreement'",
+  "problem": "The paragraph also lists Shiromani et al. as directly disagreeing with Guan et al. Shiromani et al.'s requirement to recover a particular influence does not establish that disagreement. Guan et al. explicitly include detecting why behavior changed within intervention monitoring (guan2025monitoring [P51]).",
+  "fix": "Remove Shiromani et al. from the direct-disagreement list and distinguish their requirement for provenance about a particular influence from a requirement that the trace faithfully reflect the internal reasoning process."
+ }
+]

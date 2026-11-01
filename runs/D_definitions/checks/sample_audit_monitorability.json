@@ -1,0 +1,251 @@
+{
+  "claims": [
+    {
+      "n": 12,
+      "verdict": "supported",
+      "reason": "Fareed states this predictive premise in the abstract, and the previous cluster assignment and audit recommendation match the reported history.",
+      "evidence": [
+        "fareed2026plan [P2]: \"reading the plan tells an overseer which irreversible actions the model will take\"",
+        "5b8b623:runs/D_definitions/synth_monitorability.json: fareed2026plan#1 belongs to necessity; the current row belongs to predictive.",
+        "codex_review_1.md, A: \"Quote defines predictive usefulness to an overseer, not necessity.\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 29,
+      "verdict": "supported",
+      "reason": "Python recomputation from the current merged rows reproduces every total.",
+      "evidence": [
+        "Row data, cluster=evaldesign: 84 rows, 22 papers; operational 34, informal 20, taxonomy 20, criterion 5, formal 4, failure-mode 1; proposed 47, adopted 28, adapted 9."
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 42,
+      "verdict": "overstated",
+      "reason": "The sentence combines observed illegibility, a proposed vestigial-reasoning hypothesis, and MacDermott's deliberate drift simulation under a single outcome-based-RL characterization.",
+      "evidence": [
+        "sullivan2026language [P15]: \"language drift specifically arises during RLVR on novel reasoning tasks\"",
+        "macdermott2025reasoning [P45]: \"Rather than outcome-based incentives, which depend only on the model’s final answer, we focus on process-based incentives\"",
+        "macdermott2025reasoning [P153]: \"does not show substantial changes in monitorability or clear qualitative signs of linguistic drift\"",
+        "jose2025reasoning [P18]: \"we observe that it first uses \\\"compressed\\\" reasoning, dropping words and proper sentence form\"",
+        "jose2025reasoning [P114]: \"Under this hypothesis, the illegible tokens that are useful to the model are vestigially useful\"",
+        "guan2025monitoring [P236]: \"Jose [23] has shown in this setup that chains-of-thought partially collapse into mixed-language or nonsensical text\"",
+        "schoen2025stress [P816]: \"the frequency of this unusual terminology increases during capabilities-focused RL training\""
+      ],
+      "replacement": "[Sullivan & Koller 2026](./#p=sullivan2026language) study language drift under outcome-based RLVR. [MacDermott et al. 2025](./#p=macdermott2025reasoning) deliberately simulate drift by rewarding KL divergence, finding no clear qualitative drift while closely preserving accuracy. [Jose 2025](./#p=jose2025reasoning) observes \"compressed\" reasoning and proposes vestigial reasoning as a hypothesis. [Guan et al. 2025](./#p=guan2025monitoring) discuss \"legibility collapse\" by summarizing Jose, while [Schoen et al. 2025](./#p=schoen2025stress) report non-standard terminology that increases during capabilities-focused RL."
+    },
+    {
+      "n": 63,
+      "verdict": "supported",
+      "reason": "Python recomputation reproduces the row count, paper count, and both distributions.",
+      "evidence": [
+        "Row data, cluster=selfreport: 25 rows, 10 papers; operational 16, informal 4, failure-mode 2, taxonomy 2, criterion 1; proposed 22, adapted 3."
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 77,
+      "verdict": "wrong",
+      "reason": "The classifier quotation is verbatim, but only 9 awareness rows from 6 papers contain the word 'verbalized'; even substring matching gives 10, including 'unverbalized'.",
+      "evidence": [
+        "schoen2025stress [P1069]: \"the classifier only counts reasoning that explicitly considers being evaluated for alignment\"",
+        "Row data, Python whole-word case-insensitive match in awareness terms: 9 rows, 6 papers.",
+        "Row data, substring match: 10 rows; anthropic2026opus55#20 contains \"unverbalized\".",
+        "quotecheck_monitorability.txt: the flagged claim-77 span is a quotation-delimiter parsing artifact, not the actual classifier quotation."
+      ],
+      "replacement": "These rows characterize recognition of evaluation, grading or monitoring; 9 rows from 6 papers contain the word \"verbalized\" in the term itself, and the classifier of [Schoen et al. 2025](./#p=schoen2025stress) \"only counts reasoning that explicitly considers being evaluated for alignment\"."
+    },
+    {
+      "n": 87,
+      "verdict": "supported",
+      "reason": "Python confirms 51 citing rows across 39 papers, including 17 obfuscation rows, and no other source reaches as many papers.",
+      "evidence": [
+        "Row data, semicolon-separated source membership: baker2025monitoring has 51 citing monitorability rows, 39 distinct papers, and 17 obfuscation rows.",
+        "baker2025monitoring [P99]: \"the ability to monitor for specific properties of agents actions or outputs (monitorability)\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 91,
+      "verdict": "supported",
+      "reason": "The 16 checks split 13 supported, 1 adapted and 2 partial; both quotations occur, with the second differing only in mathematical spacing, and Baker restricts faithfulness to the monitored property.",
+      "evidence": [
+        "Attribution JSON joined to the predictive and verbalization rows citing Baker: 16 checks; supported 13, adapted 1, partial 2.",
+        "baker2025monitoring [P99]: \"the ability to monitor for specific properties of agents actions or outputs (monitorability), and not faithfulness in isolation\"",
+        "baker2025monitoring [P100]: \"restricted to only a particular aspect, $v$ , of the reasoning\"",
+        "baker2025monitoring [P102]: \"If a monitor $M$ can accurately predict property $v$ from latent $z$ , then $z$ must be faithful with respect to $v$ and legible to $M$ .\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 100,
+      "verdict": "supported",
+      "reason": "Python confirms both citation totals, distinct-paper counts and scheming counts, and these sources tie for the largest external-source row count.",
+      "evidence": [
+        "Row data, source=\"Kutasov et al. 2025\": 15 monitorability rows, 9 papers, 6 scheming rows.",
+        "Row data, source=\"Greenblatt et al. 2024\": 15 monitorability rows, 12 papers, 8 scheming rows.",
+        "External-source ranking against index.csv: both lead with 15 citing rows; the next source has 10."
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 104,
+      "verdict": "supported",
+      "reason": "Python reproduces all counts, and 237/281 rounds to 84%.",
+      "evidence": [
+        "Attribution JSON restricted to current monitorability row IDs: 281 checks; supported 169, adapted 68.",
+        "Remaining verdicts: 44 checks on 39 distinct rows from 28 papers."
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 114,
+      "verdict": "supported",
+      "reason": "The previous JSON contains 15 mismatch records, and the inspected audit corrections correctly distinguish incomplete reasoning traces from rejection of all detection-relevant faithfulness.",
+      "evidence": [
+        "5b8b623:runs/D_definitions/synth_monitorability.json: 15 mismatch records.",
+        "codex_review_1.md, C: \"Korbak’s rejection of complete representation is not the opposite of every claim that traces should faithfully reflect decision-relevant reasoning.\"",
+        "korbak2025chain [P44]: \"CoT does not need to completely represent the actual reasoning process in order to be a valuable additional safety layer\"",
+        "korbak2025chain [P56]: \"there may be other relevant reasoning that does not\"",
+        "korbak2025chain [P72]: \"Such optimization might make this chain of thought less faithfully reflect how models arrive at their decisions\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 116,
+      "verdict": "wrong",
+      "reason": "The four named outcomes are correct, but three previous records have a partial check: Xiong's two-source record also retains partial support for Emmons.",
+      "evidence": [
+        "Previous mismatch JSON: xiong2026monitorability#1 lists both korbak2025chain and emmons2025chain.",
+        "Current attribution checks: xiong2026monitorability#1 -> korbak2025chain is supported; -> emmons2025chain is partial.",
+        "emmons2025chain [P271]: \"detect harmful behavior, even if the CoT is not a perfect representation of the model’s internal reasoning\"",
+        "meek2025measuring [P4]: \"models can appear faithful yet remain hard to monitor when they leave out key factors\"",
+        "guan2025monitoring [P46]: \"a monitor’s ability to accurately predict a specified property of an agent’s actions\"",
+        "emmons2025pragmatic [P19]: \"an autorater prompt that enables any capable LLM to compute the legibility and coverage of existing CoTs\"",
+        "lanham2023measuring [P199]: \"We intervene on the CoT produced by the model rather than few shot prompt examples\""
+      ],
+      "replacement": "Three of the 7 previously confirmed mismatch records now have at least one partial source check: [Young 2026](./#p=young2026why) on [Meek et al. 2025](./#p=meek2025measuring), [Yu et al. 2026](./#p=yu2026outcome) on [Guan et al. 2025](./#p=guan2025monitoring), and [Xiong et al. 2026](./#p=xiong2026monitorability) on [Emmons et al. 2025](./#p=emmons2025chain). Xiong's Korbak citation is marked supported. The warnings for [MacDermott et al. 2025](./#p=macdermott2025reasoning) and [Chidambaram et al. 2026](./#p=chidambaram2026corrupted) remain respectively misdirected and unsupported."
+    },
+    {
+      "n": 125,
+      "verdict": "supported",
+      "reason": "Both papers restrict the required information to relevant factors or computations, consistent with Baker's property-relative account.",
+      "evidence": [
+        "burger2026chain [P73]: \"A CoT cannot, and should not, reflect every detail of the model’s computation.\"",
+        "burger2026chain [P73]: \"it must articulate the key influential factors and reasoning steps that shaped the answer\"",
+        "kaufmann2026aligned [P86]: \"the specific computations the monitor needs to detect\"",
+        "kaufmann2026aligned [P87]: \"only interested in the subset of those computations we need for our monitoring task\"",
+        "baker2025monitoring [P100]: \"restricted to only a particular aspect, $v$ , of the reasoning\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 129,
+      "verdict": "supported",
+      "reason": "The same section explicitly juxtaposes monitor independence with a score interpreted relative to the applied monitor.",
+      "evidence": [
+        "xiong2026monitorability [P73]: \"independent of the monitor’s specific capabilities\"",
+        "xiong2026monitorability [P75]: \"with a higher score indicating better monitorability with respect to the applied monitor\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 136,
+      "verdict": "overstated",
+      "reason": "Haskins gives a sufficient diagnostic for active CoT-based evasion, not an exclusive definition, and requires exceeding both the behavior-only control and the no-reasoning baseline.",
+      "evidence": [
+        "haskins2026training [P44]: \"the fraction of all responses where the model engages in the target deceptive behavior and is also not detected\"",
+        "haskins2026training [P45]: \"If the monitor-aware model’s undetected rate exceeds that of both the behavior-only model and this baseline, the model is actively using its CoT to perform the behavior while evading the monitor.\""
+      ],
+      "replacement": "[Haskins et al. 2026](./#p=haskins2026training) measure successful obfuscation by the fraction of all responses that both perform the target deceptive behavior and escape the monitor. An undetected rate above both the behavior-only control and the no-reasoning baseline indicates that \"the model is actively using its CoT to perform the behavior while evading the monitor\"."
+    },
+    {
+      "n": 138,
+      "verdict": "supported",
+      "reason": "The attribution verdict is partial, and the quotation appears verbatim in Haskins's introduction.",
+      "evidence": [
+        "Attribution JSON: mao2026taming#1 -> haskins2026training is partial.",
+        "haskins2026training [P21]: \"models with both the means (CoT control) and motive (monitor knowledge) can obfuscate their reasoning, even without optimization pressure\"",
+        "haskins2026training [P35]: \"study obfuscation as a consequence of knowledge of a monitor\""
+      ],
+      "replacement": ""
+    },
+    {
+      "n": 150,
+      "verdict": "supported",
+      "reason": "Both papers explicitly place the described reward-hacking behavior within their deception framing.",
+      "evidence": [
+        "taufeeque2026obfuscation [P26]: \"Deceptive behaviors have been observed empirically, including\"",
+        "taufeeque2026obfuscation [P26]: \"reward hacking where models exploit unintended shortcuts in reward functions\"",
+        "taufeeque2026obfuscation [P60]: \"Blatant deception policies reward-hack (e.g., hardcode test cases) and are caught by the probe\"",
+        "anon2026traininghonesty [P65]: \"School of Reward Hacks (Taylor et al., 2025), where the assistant either games an explicitly stated, gameable evaluation criterion or answers honestly\"",
+        "anon2026traininghonesty [P155]: \"School of Reward Hacks, where the deception is visible in the transcript\""
+      ],
+      "replacement": ""
+    }
+  ],
+  "rows": [
+    {
+      "id": "burger2026chain#11",
+      "ok": false,
+      "problems": "The quote genuinely characterizes an in-scope process-monitoring category at §2.1 [P50], but it expands Guan's necessary-solution-step evaluation to topics thought about, so adopted is too strong; the remaining fields fit.",
+      "fix": {
+        "stance": "adapted"
+      }
+    },
+    {
+      "id": "anon2026improving#11",
+      "ok": true,
+      "problems": "At §3 [P20] the paper explicitly restates Guan's composite operational score, matching Guan [P142]; the family, term, kind, adopted stance, source and location are appropriate, and the displaced radical is a PDF extraction artifact.",
+      "fix": {}
+    },
+    {
+      "id": "jiao2026tandem#9",
+      "ok": true,
+      "problems": "§3.3 footnote 2 [P42–43] characterizes the proposed boundary-suppression reward-hacking failure, and Appendix B.1.2 [P352] explains the backstop, supporting the in-scope family, term, failure-mode kind, stance, empty source and location.",
+      "fix": {}
+    },
+    {
+      "id": "anon2026trainingoversight#13",
+      "ok": true,
+      "problems": "§2.3 [P85] explicitly defines activation oracles and credits Pan and Karvonen; their use as behavioral oversight baselines makes this an in-scope monitor characterization rather than pure introspection, and the recorded fields fit.",
+      "fix": {}
+    },
+    {
+      "id": "matton2025walk#23",
+      "ok": true,
+      "problems": "§5 [P158] explicitly characterizes an explanatory-faithfulness aspect through alignment of influential input tokens and credits Parcalabescu and Frank, supporting the informal adopted characterization and its recorded fields.",
+      "fix": {}
+    },
+    {
+      "id": "nguyen2026generalization#9",
+      "ok": false,
+      "problems": "Appendix F.2 [P315–317] supplies the quoted operational rubric, but §2 [P38] explicitly adopts cue acknowledgment from Meek, so proposed with an empty source loses its stated provenance; the other fields fit.",
+      "fix": {
+        "stance": "adopted",
+        "source": "meek2025measuring"
+      }
+    }
+  ],
+  "attribution": [
+    {
+      "item": "lyu2023faithful#1 -> jacovi2020towards",
+      "verdict_correct": true,
+      "correct_verdict": "supported",
+      "reason": "Jacovi [P24] supplies the quoted core definition verbatim, and [P23] confirms the finding's historical and related-fidelity remarks, although this source does not independently supply Lyu's additional 'reliability' alias."
+    },
+    {
+      "item": "jose2025reasoning#3 -> kirchner2024proververifier",
+      "verdict_correct": true,
+      "correct_verdict": "adapted",
+      "reason": "Kirchner [P59] measures legibility through time-limited human correctness judgments, whereas Jose [P32] explicitly substitutes GPT-4o's ordinal 1–9 legibility ratings, exactly as the finding states."
+    },
+    {
+      "item": "radhakrishnan2023question#3 -> turpin2023language",
+      "verdict_correct": true,
+      "correct_verdict": "renamed",
+      "reason": "Turpin [P21, P39, P47] reports stereotype-aligned rationalization without acknowledging the bias, but does not use 'biased reasoning', which Radhakrishnan introduces as its label at [P44]."
+    }
+  ]
+}

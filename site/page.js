@@ -70,14 +70,38 @@ async function init() {
 function setupToc(doc) {
   const heads = [...doc.querySelectorAll('h2, h3')];
   if (heads.length < 3) return;
+  // Group each h3 under the h2 before it; sections with subsections get a toggle and start collapsed.
+  const groups = [];
+  for (const h of heads) {
+    if (h.tagName === 'H3' && groups.length && groups[groups.length - 1].head.tagName === 'H2') groups[groups.length - 1].subs.push(h);
+    else groups.push({ head: h, subs: [] });
+  }
+  const link = h => `<a href="#${h.id}">${h.innerHTML}</a>`;
   const toc = $('toc');
-  toc.innerHTML = `<details><summary class="toc-title">Contents</summary><ol>${heads.map(h =>
-    `<li class="toc-${h.tagName.toLowerCase()}"><a href="#${h.id}">${h.innerHTML}</a></li>`).join('')}</ol></details>`;
+  toc.innerHTML = `<details><summary class="toc-title">Contents</summary><ol>${groups.map((g, i) => g.subs.length
+    ? `<li class="toc-${g.head.tagName.toLowerCase()} toc-group"><div class="toc-row"><button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc-sub-${i}" aria-label="Show subsections"></button>${link(g.head)}</div>` +
+      `<ol class="toc-sub" id="toc-sub-${i}" hidden>${g.subs.map(h => `<li class="toc-h3">${link(h)}</li>`).join('')}</ol></li>`
+    : `<li class="toc-${g.head.tagName.toLowerCase()} toc-leaf">${link(g.head)}</li>`).join('')}</ol></details>`;
   toc.hidden = false;
   const box = toc.querySelector('details');
   const wide = window.matchMedia('(min-width: 1200px)');
   const sync = () => { box.open = wide.matches; };
   sync(); wide.addEventListener('change', sync);
+
+  const pinned = new Set();  // groups the reader opened or closed by hand
+  const setOpen = (li, open) => {
+    const btn = li.querySelector('.toc-toggle');
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Hide subsections' : 'Show subsections');
+    li.querySelector('.toc-sub').hidden = !open;
+  };
+  toc.addEventListener('click', e => {
+    const btn = e.target.closest('.toc-toggle');
+    if (!btn) return;
+    const li = btn.closest('.toc-group');
+    pinned.add(li);
+    setOpen(li, btn.getAttribute('aria-expanded') !== 'true');
+  });
 
   const links = new Map([...toc.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a]));
   let current = null, queued = false;
@@ -90,6 +114,8 @@ function setupToc(doc) {
     current = id;
     const a = links.get(id);
     a.setAttribute('aria-current', 'location');
+    const here = a.closest('.toc-group');
+    for (const li of toc.querySelectorAll('.toc-group')) if (!pinned.has(li)) setOpen(li, li === here);
     if (wide.matches && (a.offsetTop < toc.scrollTop || a.offsetTop > toc.scrollTop + toc.clientHeight - 40)) toc.scrollTop = a.offsetTop - toc.clientHeight / 3;
   };
   window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });

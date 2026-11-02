@@ -252,7 +252,17 @@ table.matrix { border-collapse: separate; border-spacing: 2px; }
 .toc-title { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-3); margin: 0 0 8px 12px; }
 .toc ol { list-style: none; margin: 0; padding: 0; }
 .toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid transparent; color: var(--ink-2); text-decoration: none; }
-.toc .toc-h2 a { margin-top: 6px; font-weight: 500; }
+.toc .toc-h2 { margin-top: 6px; }
+.toc .toc-h2 > a, .toc .toc-row > a { font-weight: 500; }
+.toc-row { display: flex; align-items: baseline; }
+.toc-row > a { flex: 1; min-width: 0; padding-left: 2px; }
+.toc-leaf > a { margin-left: 16px; padding-left: 2px; }
+.toc-toggle { flex: none; width: 16px; padding: 0; border: 0; background: none; color: var(--ink-3); cursor: pointer; font: 10px/1 var(--mono); }
+.toc-toggle::before { content: "\25B8"; display: inline-block; transition: transform 0.15s; }
+.toc-toggle[aria-expanded="true"]::before { transform: rotate(90deg); }
+.toc-toggle:hover { color: var(--ink); }
+.toc-sub { margin-left: 16px !important; }
+.toc .toc-sub .toc-h3 a { padding-left: 12px; }
 .toc .toc-h3 a { padding-left: 20px; font-size: 12.5px; color: var(--ink-3); }
 .toc a:hover { color: var(--ink); }
 .toc a[aria-current="location"] { color: var(--ink); border-left-color: var(--accent); }
